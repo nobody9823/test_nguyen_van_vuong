@@ -1,0 +1,1 @@
+<x-manage.activity_report.show role="talent" :activity_report="$activity_report" />

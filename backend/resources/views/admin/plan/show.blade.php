@@ -1,0 +1,1 @@
+<x-manage.plan.show role="admin" :plan="$plan" />

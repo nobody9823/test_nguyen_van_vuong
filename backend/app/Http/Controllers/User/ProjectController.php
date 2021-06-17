@@ -1,0 +1,232 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Talent;
+use App\Models\Project;
+use App\Models\UserProjectLiked;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class ProjectController extends Controller
+{
+    /**
+     * Display a top page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        // 応援プロジェクト（目標金額の高い順）
+        $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+            ->inRandomOrder()->takeWithRelations(9)->get();
+
+        // 最新のプロジェクト
+        $new_projects = Project::getReleasedProject()->seeking()->orderBy('created_at', 'DESC')
+            ->takeWithRelations(9)->get();
+
+        // 人気のプロジェクト
+        $popularity_projects = Project::getReleasedProject()->seeking()->ordeyByLikedUsers()
+            ->takeWithRelations(9)->get();
+
+        // 募集終了が近いプロジェクト
+        $nearly_deadline_projects = Project::getReleasedProject()->seeking()->orderByNearlyDeadline()
+            ->inRandomOrder()->takeWithRelations(9)->get();
+
+        // もうすぐ公開のプロジェクト
+        $nearly_open_projects = Project::getReleasedProject()->orderByNearlyOpen()
+            ->inRandomOrder()->takeWithRelations(9)->get();
+
+        return view('user.index', compact('new_projects', 'cheer_projects', 'popularity_projects', 'nearly_deadline_projects', 'nearly_open_projects'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Project $project)
+    {
+        return view(
+            'user.project.show',
+            ['project' => $project->load(['plans.users','activityReports.activityReportImages'])]
+        );
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+    /**
+     * Display a project list page searched from any parameter.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $carbon = new Carbon;
+        $projectsQuery = Project::query();
+        if($request->category_id){
+            $categories = Category::pluck("name", "id");
+        } else {
+            $categories = null;
+        }
+
+        //カテゴリ絞り込み
+        if ($request->category_id) {
+            $projectsQuery->Where('category_id', $request->category_id);
+        }
+        //フリーワード絞り込み
+        if ($request->free_word) {
+            // 全角スペースを半角スペースに変換
+            $words = str_replace("　", " ", $request->free_word);
+            // 半角スペースごとに区切って配列に代入
+            $array_words = explode(" ", $words);
+            //この部分今のところタイトルと説明文でしか検索できてないです...アイドル名がなぜかうまくいかなかったのでまたやります...
+            foreach ($array_words as $array_word) {
+                $projectsQuery->where(function ($projectsQuery) use ($array_word) {
+                    $projectsQuery->Where('projects.title', 'like', "%$array_word%")
+                        ->orWhere('explanation', 'like', "%$array_word%")
+                        ->orWhereIn('talent_id', Talent::select('id')
+                        ->where('name', 'like', "%$array_word%"));
+                });
+            }
+        }
+        // sort_typeによって順序変更
+        // 0 => 人気順(募集中のお気に入り数順),   1 => 新着順,   2 => 終了日が近い順,   3 => 支援総額順,   4 => 支援者数順
+        switch ($request->sort_type) {
+            case '0':
+                $projectsQuery->seeking()->ordeyByLikedUsers();
+                break;
+
+            case '1':
+                $projectsQuery->seeking()->orderBy('created_at', 'DESC');
+                break;
+
+            case '2':
+                if(strstr($request->fullUrl(), '/search?sort_type=2')){
+                    // ヘッダーメニューの「募集終了が近いプロジェクトの場合」(現在掲載中且つ、残り1週間で終了)
+                    $projectsQuery->daysLeftSeeking('end_date')->orderByNearlyDeadline();
+                } else {
+                    // 検索画面の「並び替え」にある「終了日が近い順」(現在掲載中のもの)
+                    $projectsQuery->seeking()->orderByNearlyDeadline();
+                }
+                break;
+
+            case '3':
+                $projectsQuery->OrdeyByFundingAmount();
+                break;
+
+            case '4':
+                $projectsQuery->OrdeyByNumberOfSupporters();
+                break;
+        }
+
+        //募集中かどうか確認
+        switch ($request->holding_check) {
+            // 公開前
+            case '0':
+                if (strstr($request->fullUrl(), '/search?holding_check=0')) {
+                    // ユーザーヘッダーメニューの「もうすぐ公開されます」(1週間以内に公開)
+                    $projectsQuery->beforeSeeking()->daysLeftSeeking('start_date');
+                } else {
+                    // 検索画面の「募集状況」にある「公開日前」
+                    $projectsQuery->beforeSeeking();
+                }
+                break;
+            // 支援募集中
+            case '1':
+                $projectsQuery->seeking();
+                break;
+            // 募集終了
+            case '2':
+                $projectsQuery->afterSeeking();
+                break;
+        }
+
+        // ユーザーのログイン機能追加必須？
+        if ($request->cheered_check) {
+            $projectsQuery->OnlyCheeringDisplay();
+        }
+
+        $projects = $projectsQuery->where('release_status', '掲載中')->with(['talent' ,'category'])->paginate(9);
+
+        return view('user.search', [
+            'projects' => $projects,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function ProjectLiked(Request $request)
+    {
+        $userLiked = UserProjectLiked::where('user_id', Auth::id())->where('project_id', $request->project_id)->first();
+
+        if (Auth::id() === null) {
+            return $result = "未ログイン";
+        } elseif ($userLiked !== null) {
+            $userLiked->delete();
+            return $result = "削除";
+        } else {
+            $project_liked = new UserProjectLiked(['user_id' => Auth::id()]);
+            $project_liked->project_id = $request->project_id;
+            $project_liked->save();
+            return $result = "登録";
+        }
+    }
+}

@@ -1,0 +1,164 @@
+@extends($role.'.layouts.base')
+
+@section('title', 'プラン一覧')
+
+@section('content')
+<div class="card-header d-flex align-items-center">
+    <div class="flex-grow-1">プラン一覧</div>
+    <form action="{{ route($role.'.plan.search') }}" class="form-inline pr-3" method="get" style="position: relative">
+        @csrf
+        <p>
+            <a class="btn btn-secondary mt-3 mr-3" data-toggle="collapse" href="#collapseExample" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
+                詳細条件 ▼
+            </a>
+        </p>
+        <div class="collapse" id="collapseExample" style="position: absolute; top: 55px; left: -10px;">
+            <div class="card card-body">
+                <div class="form-group mb-2 flex-column">
+                    <div class="form-check flex-column">
+                        <label>
+                            価格
+                        </label>
+                        <div class="form-group">
+                            <input type="number" class="form-control" value="{{ Request::get('min_price') }}" name="min_price">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">円</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" value="{{ Request::get('max_price') }}" name="max_price">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">円</span>
+                            </div>
+                        </div>
+                        <label>
+                            リターン提供日
+                        </label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" value="{{ Request::get('from_date') }}" name="from_date" id="from_date">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">日から</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" value="{{ Request::get('to_date') }}" name="to_date" id="to_date">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">日まで</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索" value="{{ Request::get('word') }}">
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
+    </form>
+    @if ($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role === "admin"))
+    <form action="{{ route($role.'.plan.create', ['project' => $project]) }}">
+        <button class="btn btn-outline-success" type="submit">新規作成</button>
+        <button class="btn btn-outline-success" type="submit" name="contribution" value="contribution">寄付金プラン作成</button>
+    </form>
+    @endif
+</div>
+@if(Request::get('word'))
+<div class="card-header d-flex align-items-center">
+    <div class="flex-grow-1">{{Request::get('word')}} の検索結果(全{{count($plans)}}件)</div>
+</div>
+@endif
+<div class="card-body">
+    @if($plans->count() <= 0) <p>表示する投稿はありません。</p>
+        @else
+        <table class="table">
+            <tr>
+                <th style="width:10%">プラン名</th>
+                <th style="width:25%">プラン内容</th>
+                <th style="width:8%">価格</th>
+                <th style="width:10%">リターン提供日</th>
+                <th style="width:10%">プレビュー</th>
+                @if($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role === "admin"))
+                <th style="width:10%">編集</th>
+                <th style="width:10%">削除</th>
+                @else
+                <th style="width: 10%">プラン詳細</th>
+                @endif
+            </tr>
+            @foreach($plans as $plan)
+            <tr>
+                <td>
+                    {{ $plan->title }}
+                </td>
+                <td>
+                    <p style="white-space: pre-line;">{{ Str::limit($plan->content, 200) }}</p>
+                </td>
+                <td>
+                    {{ number_format($plan->price) }}円
+                </td>
+                <td>
+                    <!-- 寄付金プラン作成時にリターン提供日はデフォルト値として'0001-01-01'が挿入される。 -->
+                    {{ $plan->estimated_return_date == '0001-01-01' ? "なし" : $plan->estimated_return_date }}
+                </td>
+                <td>
+                    <a href="{{ route($role.'.plan.preview', ['project' => $plan->project, 'plan' => $plan]) }}" class="btn btn-success">
+                        表示
+                    </a>
+                </td>
+                @if($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role === "admin"))
+                <td>
+                    <!-- 寄付金プラン作成時にリターン提供日はデフォルト値として'0001-01-01'が挿入される。 -->
+                    <form action="{{ route($role.'.plan.edit', ['project' => $plan->project, 'plan' => $plan]) }}">
+                        @if($plan->estimated_return_date == '0001-01-01')
+                        <button class="btn btn-primary" name="contribution" value="contribution">編集</button>
+                        @else
+                        <button class="btn btn-primary">編集</button>
+                        @endif
+                    </form>
+                </td>
+                <form action="{{ route($role.'.plan.destroy', ['project' => $project, 'plan' =>$plan]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <td>
+                        <button class="btn btn-danger btn-dell" type="submit">削除</button>
+                    </td>
+                </form>
+                @else
+                <td>
+                    <a class="btn btn-primary" href="{{ route($role.'.plan.show', ['plan' => $plan]) }}">詳細</a>
+                </td>
+                @endif
+            </tr>
+            @endforeach
+        </table>
+        <div class="d-flex justify-content-center">
+            {{ $plans->appends(request()->input())->links() }}
+        </div>
+        @endif
+</div>
+@section('script')
+<script>
+    $(function() {
+        $(".btn-dell").click(function() {
+            if (confirm("本当に削除しますか？")) {
+                //そのままsubmit（削除）
+            } else {
+                //cancel
+                return false;
+            }
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js">
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
+<script>
+    $(function () {
+        $('#from_date').datetimepicker({
+            format: 'Y-m-d'
+        });
+        $('#to_date').datetimepicker({
+            format: 'Y-m-d'
+        });
+    });
+</script>
+@endsection
+@endsection
