@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSnsUsersTable extends Migration
+class CreateProjectTagTaggingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateSnsUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sns_users', function (Blueprint $table) {
+        Schema::create('project_tag_tagging', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->uuid('sns_user_id');
-            $table->enum('sns_service_name', ['google', 'facebook', 'twitter', 'line']);
-            $table->softDeletes();
+            $table->foreignId('project_id')->constrained('projects');
+            $table->foreignId('tag_id')->constrained('tags');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +29,6 @@ class CreateSnsUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sns_users');
+        Schema::dropIfExists('project_tag_tagging');
     }
 }

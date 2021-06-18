@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSnsUsersTable extends Migration
+class CreateUserPlansBillingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateSnsUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sns_users', function (Blueprint $table) {
+        Schema::create('user_plans_billing', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->uuid('sns_user_id');
-            $table->enum('sns_service_name', ['google', 'facebook', 'twitter', 'line']);
-            $table->softDeletes();
+            $table->foreignId('plan_id')->constrained('plans');
+            $table->integer('invitee_id');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateSnsUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sns_users');
+        Schema::dropIfExists('user_plans_billing');
     }
 }
