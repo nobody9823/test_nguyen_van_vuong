@@ -15,9 +15,9 @@ class CreateUserPlansBillingTable extends Migration
     {
         Schema::create('user_plans_billing', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('return_id');
-            $table->integer('invitees_id');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('plan_id')->constrained('plans');
+            $table->integer('invitee_id');
             $table->timestamps();
         });
     }

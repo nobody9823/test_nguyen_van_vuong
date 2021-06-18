@@ -15,8 +15,8 @@ class CreateProjectTagTaggingTable extends Migration
     {
         Schema::create('project_tag_tagging', function (Blueprint $table) {
             $table->id();
-            $table->integer('project_id');
-            $table->integer('tag_id');
+            $table->foreignId('project_id')->constrained('projects');
+            $table->foreignId('tag_id')->constrained('tags');
             $table->timestamps();
             $table->softDeletes();
         });

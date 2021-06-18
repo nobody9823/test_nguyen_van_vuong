@@ -16,7 +16,7 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->integer('project_id');
+            $table->foreignId('project_id')->constrained('projects');
             $table->string('title');
             $table->string('content');
             $table->integer('limit_of_supporters')->nullable();

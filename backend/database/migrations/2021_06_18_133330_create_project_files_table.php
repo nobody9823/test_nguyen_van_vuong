@@ -15,7 +15,7 @@ class CreateProjectFilesTable extends Migration
     {
         Schema::create('project_files', function (Blueprint $table) {
             $table->id();
-            $table->integer('project_id');
+            $table->foreignId('project_id')->constrained('projects');
             $table->string('file_url');
             $table->string('file_content_type');
             $table->timestamps();

@@ -17,7 +17,7 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('title')->default('');
             $table->string('content')->default('');
             $table->integer('target_amount')->default(0);

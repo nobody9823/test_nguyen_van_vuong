@@ -15,7 +15,7 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->integer('project_id');
+            $table->foreignId('project_id')->constrained('projects');
             $table->string('title')->default('');
             $table->string('content')->default('');
             $table->string('image_url')->default('');
