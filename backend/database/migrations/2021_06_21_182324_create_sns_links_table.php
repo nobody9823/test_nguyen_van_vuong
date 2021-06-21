@@ -18,7 +18,7 @@ class CreateSnsLinksTable extends Migration
             $table->string('twitter_url');
             $table->string('instagram_url');
             $table->string('youtube_url');
-            $table->string('tictok_url');
+            $table->string('tiktok_url');
             $table->string('other_url');
             $table->timestamps();
             $table->softDeletes();
