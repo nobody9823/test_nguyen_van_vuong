@@ -38,6 +38,7 @@ class ProjectSeeder extends Seeder
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->create());
                 $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
                 $project->comments()->saveMany(Comment::factory(rand(1, 5))->create());
+                $project->userProjectLiked()->saveMany(UserProjectLiked::factory(random_int(3, 10))->make());
             });
 
     }
