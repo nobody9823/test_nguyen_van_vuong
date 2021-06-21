@@ -22,6 +22,7 @@ class CreateBankAccountsTable extends Migration
             $table->enum('account_type', BankAccountType::getValues());
             $table->string('account_number')->comment('口座番号、０が入る可能性あるのでstring、7桁バリデーション');
             $table->string('account_name')->comment('カタカナで姓名記入');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

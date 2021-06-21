@@ -20,7 +20,7 @@ class CreateAddressesTable extends Migration
             $table->integer('prefecture_id');
             $table->string('city');
             $table->string('block');
-            $table->string('building');
+            $table->string('building')->default("");
             $table->timestamps();
             $table->softDeletes();
         });
