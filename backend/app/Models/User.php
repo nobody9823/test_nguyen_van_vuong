@@ -63,8 +63,9 @@ class User extends Authenticatable
 
         static::deleting(function (User $user) {
             $user->snsUser()->delete();
-            $user->userAddresses()->delete();
+            $user->address()->delete();
             $user->snsLinks()->delete();
+            $user->bankAccount()->delete();
 
             // 中間テーブルの削除
             UserProjectLiked::where('user_id', $user->id)
@@ -130,6 +131,11 @@ class User extends Authenticatable
     public function snsLinks()
     {
         return $this->hasMany('App\Models\SnsLink');
+    }
+
+    public function bankAccount()
+    {
+        return $this->hasOne('App\Models\BankAccount');
     }
 
     //--------------- local scopes -------------
