@@ -96,9 +96,9 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    public function userAddresses()
+    public function address()
     {
-        return $this->hasMany('App\Models\UserAddress');
+        return $this->hasOne('App\Models\Address');
     }
 
     public function userDetail()
