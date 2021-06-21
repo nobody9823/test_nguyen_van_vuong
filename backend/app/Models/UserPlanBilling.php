@@ -21,4 +21,9 @@ class UserPlanBilling extends Model
     {
         return $this->belongsTo('App\Models\Plan');
     }
+
+    public function messageContents()
+    {
+        return $this->hasMany('App\Models\MessageContent');
+    }
 }
