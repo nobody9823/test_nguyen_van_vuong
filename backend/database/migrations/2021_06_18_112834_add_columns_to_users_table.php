@@ -19,6 +19,7 @@ class AddColumnsToUsersTable extends Migration
             $table->string('introduction')->after('gender');
             $table->boolean('birthday_is_published')->after('introduction');
             $table->boolean('gender_is_published')->after('birthday_is_published');
+            $table->string('inviter_code')->after('gender_is_published');
             $table->softDeletes()->after('updated_at');
         });
     }

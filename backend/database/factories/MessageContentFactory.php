@@ -25,7 +25,7 @@ class MessageContentFactory extends Factory
     public function definition()
     {
         return [
-            'user_plan_cheering_id' => random_int(1, 10),
+            'user_plan_billing_id' => random_int(1, 10),
             'content' => Arr::random([
                 'はじめまして',
                 'こんにちは',
@@ -36,7 +36,7 @@ class MessageContentFactory extends Factory
             ]),
             'file_path' => null,
             'file_original_name' => null,
-            'message_contributor' => MessageContributor::getValues()[random_int(0, 3)],
+            'message_contributor' => MessageContributor::getValues()[random_int(0, 2)],
             'is_read' => false,
         ];
     }
