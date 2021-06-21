@@ -62,6 +62,7 @@ class Project extends Model
             // user project liked の論理削除
             UserProjectLiked::where('project_id', $project->id)
                             ->update(array('deleted_at' => Carbon::now()));
+            ProjectTagTagging::where('project_id', $project->id)->delete();
         });
     }
 
@@ -122,6 +123,15 @@ class Project extends Model
         return $this->hasMany('App\Models\SupporterComment');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag', 'App\Models\ProjectTagTagging');
+    }
+
+    public function projectTagTagging()
+    {
+        return $this->hasMany('App\Models\ProjectTagTagging');
+    }
     // FIXME 命名が抽象的すぎるので直したい
     public function scopeGetProjects($query)
     {
