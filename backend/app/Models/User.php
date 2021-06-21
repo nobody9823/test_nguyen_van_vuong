@@ -101,11 +101,6 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Address');
     }
 
-    public function userDetail()
-    {
-        return $this->hasOne('App\Models\UserDetail');
-    }
-
     public function snsUser()
     {
         return $this->hasOne('App\Models\SnsUser');
