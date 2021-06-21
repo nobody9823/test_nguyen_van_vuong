@@ -143,6 +143,11 @@ class Plan extends Model
         }
     }
 
+    public function userPlanBilling()
+    {
+        return $this->hasMany('App\Models\UserPlanBilling');
+    }
+
     public function saveOptions(Request $request): void
     {
         if ($request->optionsToArray() !== null){
