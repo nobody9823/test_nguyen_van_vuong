@@ -42,46 +42,28 @@ class Project extends Model
         parent::boot();
         static::deleting(function(Project $project){
             // プロジェクト画像と動画の論理削除
-            $project->projectImages()->delete();
-            $project->projectVideo()->delete();
+            $project->projectFile()->delete();
+            $project->projectTagTagging()->delete();
             // プランのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
-            UserPlanCheering::whereIn('plan_id', $plan_ids)->delete();
-            Option::whereIn('plan_id', $plan_ids)->delete();
+            UserPlanBilling::whereIn('plan_id', $plan_ids)->delete();
             Plan::destroy($plan_ids);
-            // 支援者コメントのリレーション先も論理削除
-            $supporter_comment_ids = $project->supporterComments()->pluck('id')->toArray();
-            UserSupporterCommentLiked::whereIn('supporter_comment_id', $supporter_comment_ids)->delete();
-            RepliesToSupporterComment::whereIn('supporter_comment_id', $supporter_comment_ids)->delete();
-            SupporterComment::destroy($supporter_comment_ids);
-            // 活動報告のリレーション先も論理削除
-            $activity_report_ids = $project->activityReports()->pluck('id')->toArray();
-            ActivityReportImage::whereIn('activity_report_id', $activity_report_ids)->delete();
-            ActivityReport::destroy($activity_report_ids);
+            // コメントのリレーション先も論理削除
+            $comment_ids = $project->comments()->pluck('id')->toArray();
+            Reply::whereIn('comment_id', $comment_ids)->delete();
+            Comment::destroy($comment_ids);
+            $report_ids = $project->reports()->pluck('id')->toArray();
+            ActivityReportImage::whereIn('report_id', $report_ids)->delete();
+            Report::destroy($report_ids);
             // user project liked の論理削除
             UserProjectLiked::where('project_id', $project->id)
                             ->update(array('deleted_at' => Carbon::now()));
         });
     }
 
-    public function category()
+    public function projectFiles()
     {
-        return $this->belongsTo('App\Models\Category');
-    }
-
-    public function talent()
-    {
-        return $this->belongsTo('App\Models\Talent');
-    }
-
-    public function projectImages()
-    {
-        return $this->hasMany('App\Models\ProjectImage');
-    }
-
-    public function projectVideo()
-    {
-        return $this->hasOne('App\Models\ProjectVideo');
+        return $this->hasMany('App\Models\ProjectFile');
     }
 
     public function plans()
@@ -101,16 +83,25 @@ class Project extends Model
         return $this->hasMany('App\Models\UserProjectLiked');
     }
 
-    public function activityReports()
+    public function reports()
     {
-        return $this->hasMany('App\Models\ActivityReport');
+        return $this->hasMany('App\Models\Report');
     }
 
-    public function supporterComments()
+    public function tags()
     {
-        return $this->hasMany('App\Models\SupporterComment');
+        return $this->belongsToMany('App\Models\Tag', 'App\Models\ProjectTagTagging');
     }
 
+    public function projectTagTagging()
+    {
+        return $this->hasMany('App\Models\ProjectTagTagging');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
     // FIXME 命名が抽象的すぎるので直したい
     public function scopeGetProjects($query)
     {

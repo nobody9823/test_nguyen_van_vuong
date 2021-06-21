@@ -18,8 +18,8 @@ class Plan extends Model
         'title',
         'content',
         'price',
-        'estimated_return_date',
-        'necessary_address',
+        'delivery_date',
+        'limit_of_supporters'
     ];
     protected $guarded = [
         'price',
@@ -33,14 +33,10 @@ class Plan extends Model
     {
         parent::boot();
         static::deleting(function(Plan $plan){
-            $plan->userPlanCheering()->delete();
-            $plan->options()->delete();
+            $plan->userPlanBilling()->delete();
         });
     }
 
-    public function userPlanCheering(){
-        return $this->hasMany('App\Models\UserPlanCheering');
-    }
     // NOTE:scopeGetPlansByCompanyとscopeGetPlansByTalentの処理で、ログインユーザーと同じカンパニー・タレントidのプランを取得する処理を記載しているが、この処理は現状必要ない(もし、無くても正常に動作する)
     // ※return $query->where('project_id', $project_id);   ・・・ 本来はこれだけでも問題ない。
     // しかし、今後の仕様変更によりプロジェクト管理画面を経由せず、個別でプラン管理画面に画面遷移する事になった場合を見据え、そのまま記載している。
@@ -126,14 +122,14 @@ class Plan extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\Models\User', 'user_plan_cheering')
-            ->using('App\Models\UserPlanCheering')
+        return $this->belongsToMany('App\Models\User', 'user_plan_billing')
+            ->using('App\Models\UserPlanBilling')
             ->withTimestamps();
     }
 
-    public function options()
+    public function userPlanBilling()
     {
-        return $this->hasMany(Option::class);
+        return $this->hasMany('App\Models\UserPlanBilling');
     }
 
     public function deleteImage()

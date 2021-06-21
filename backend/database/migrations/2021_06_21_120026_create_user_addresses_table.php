@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserPlansBillingTable extends Migration
+class CreateUserAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateUserPlansBillingTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_plans_billing', function (Blueprint $table) {
+        Schema::create('user_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('plan_id')->constrained('plans');
-            $table->integer('invitee_id');
+            $table->string('postal_code');
+            $table->string('location');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +30,6 @@ class CreateUserPlansBillingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_plans_billing');
+        Schema::dropIfExists('user_addresses');
     }
 }

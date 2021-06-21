@@ -56,17 +56,16 @@ class User extends Authenticatable
         parent::boot();
 
         static::deleting(function (User $user) {
-            $user->supportComments()->delete();
-            $user->userAddresses()->delete();
-            $user->userDetail()->delete();
             $user->snsUser()->delete();
+            $user->userAddresses()->delete();
 
             // 中間テーブルの削除
-            UserSupporterCommentLiked::where('user_id', $user->id)
-                ->update(['deleted_at' => Carbon::now()]);
-            UserPlanCheering::where('user_id', $user->id)
-                ->update(['deleted_at' => Carbon::now()]);
             UserProjectLiked::where('user_id', $user->id)
+                ->update(['deleted_at' => Carbon::now()]);
+            $comment_ids = Comment::where('user_id', $user->id)->pluck('id')->toArray();
+            Reply::whereIn('comment_id', $comment_ids)->delete();
+            Comment::destroy($comment_ids);
+            UserPlanBilling::where('user_id', $user->id)
                 ->update(['deleted_at' => Carbon::now()]);
         });
     }
@@ -111,6 +110,20 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\SnsUser');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    public function userPlanBilling()
+    {
+        return $this->hasMany('App\Models\UserPlanBilling');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Reply');
+    }
 
     //--------------- local scopes -------------
     public function scopeGetUsers()

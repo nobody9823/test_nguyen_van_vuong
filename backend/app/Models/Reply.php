@@ -3,19 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
-class UserProjectLiked extends Pivot
+class Reply extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'user_project_liked';
-
-    public function project()
+    public function comments()
     {
-        return $this->belongsTo('App\Models\Project');
+        return $this->belongsTo('App\Models\Comment');
     }
 
     public function user()

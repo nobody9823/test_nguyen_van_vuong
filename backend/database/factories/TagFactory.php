@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\UserAddress;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserAddressFactory extends Factory
+class TagFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = UserAddress::class;
+    protected $model = Tag::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,7 @@ class UserAddressFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 100),
-            'postal_code' => $this->faker->numberBetween(1000000, 9999999),
-            'location' => $this->faker->prefecture. $this->faker->streetAddress,
+            'name' => $this->faker->realText(10),
         ];
     }
 }
