@@ -132,6 +132,11 @@ class Project extends Model
     {
         return $this->hasMany('App\Models\ProjectTagTagging');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
     // FIXME 命名が抽象的すぎるので直したい
     public function scopeGetProjects($query)
     {

@@ -108,6 +108,10 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\SnsUser');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 
     //--------------- local scopes -------------
     public function scopeGetUsers()

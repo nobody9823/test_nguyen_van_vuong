@@ -16,6 +16,7 @@ use App\Models\UserPlanCheering;
 use App\Models\UserSupporterCommentLiked;
 use App\Models\UserProjectLiked;
 use App\Models\ProjectTagTagging;
+use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -36,6 +37,7 @@ class ProjectSeeder extends Seeder
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->create());
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->create());
                 $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
+                $project->comments()->saveMany(Comment::factory(rand(1, 5))->create());
             });
 
     }
