@@ -18,8 +18,8 @@ class Plan extends Model
         'title',
         'content',
         'price',
-        'estimated_return_date',
-        'necessary_address',
+        'delivery_date',
+        'limit_of_supporters'
     ];
     protected $guarded = [
         'price',

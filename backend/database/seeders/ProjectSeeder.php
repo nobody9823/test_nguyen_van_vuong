@@ -33,6 +33,7 @@ class ProjectSeeder extends Seeder
             ->each(function(Project $project){
                 $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->create());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->create());
+                $project->plans()->saveMany(Plan::factory(rand(1, 10))->create());
             });
 
     }
