@@ -107,6 +107,11 @@ class Project extends Model
         return $this->hasMany('App\Models\UserProjectLiked');
     }
 
+    public function reports()
+    {
+        return $this->hasMany('App\Models\Report');
+    }
+
     public function activityReports()
     {
         return $this->hasMany('App\Models\ActivityReport');

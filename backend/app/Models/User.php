@@ -56,17 +56,14 @@ class User extends Authenticatable
         parent::boot();
 
         static::deleting(function (User $user) {
-            $user->supportComments()->delete();
-            $user->userAddresses()->delete();
-            $user->userDetail()->delete();
             $user->snsUser()->delete();
 
             // 中間テーブルの削除
-            UserSupporterCommentLiked::where('user_id', $user->id)
-                ->update(['deleted_at' => Carbon::now()]);
-            UserPlanCheering::where('user_id', $user->id)
-                ->update(['deleted_at' => Carbon::now()]);
             UserProjectLiked::where('user_id', $user->id)
+                ->update(['deleted_at' => Carbon::now()]);
+            Comment::where('user_id', $user->id)
+                ->update(['deleted_at' => Carbon::now()]);
+            UserPlanBilling::where('user_id', $user->id)
                 ->update(['deleted_at' => Carbon::now()]);
         });
     }

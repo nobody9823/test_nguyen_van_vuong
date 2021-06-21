@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\ActivityReport;
+use App\Models\Report;
 use App\Models\ActivityReportImage;
 use App\Models\Option;
 use App\Models\Plan;
@@ -32,6 +32,7 @@ class ProjectSeeder extends Seeder
         Project::factory(30)->create()
             ->each(function(Project $project){
                 $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->create());
+                $project->reports()->saveMany(Report::factory(rand(1, 10))->create());
             });
 
     }
