@@ -14,7 +14,10 @@ class Address extends Model
 
     protected $fillable = [
         "postal_code",
-        "location"
+        "prefecture_id",
+        "city",
+        "block",
+        "building",
     ];
 
     protected $dates = ['deleted_at'];
