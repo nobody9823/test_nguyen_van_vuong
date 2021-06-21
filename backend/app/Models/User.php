@@ -57,12 +57,14 @@ class User extends Authenticatable
 
         static::deleting(function (User $user) {
             $user->snsUser()->delete();
+            $user->userAddresses()->delete();
 
             // 中間テーブルの削除
             UserProjectLiked::where('user_id', $user->id)
                 ->update(['deleted_at' => Carbon::now()]);
-            Comment::where('user_id', $user->id)
-                ->update(['deleted_at' => Carbon::now()]);
+            $comment_ids = Comment::where('user_id', $user->id)->pluck('id')->toArray();
+            Reply::whereIn('comment_id', $comment_ids)->delete();
+            Comment::destroy($comment_ids);
             UserPlanBilling::where('user_id', $user->id)
                 ->update(['deleted_at' => Carbon::now()]);
         });
