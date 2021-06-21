@@ -12,7 +12,7 @@ class UserPlanBilling extends Model
 
     protected $table = 'user_plan_billing';
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\Models\User');
     }
