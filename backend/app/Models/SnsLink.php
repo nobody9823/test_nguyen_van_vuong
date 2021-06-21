@@ -10,6 +10,14 @@ class SnsLink extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'twitter_url',
+        'instagram_url',
+        'youtube_url',
+        'tiktok_url',
+        'other_url',
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');
