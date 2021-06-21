@@ -18,6 +18,8 @@ class UserSeeder extends Seeder
     {
         $user = User::factory()->valleyin()->create();
 
-        User::factory(100)->create();
+        User::factory(100)->create()->each(function(User $user){
+            $user->userAddresses()->saveMany(UserAddress::factory(random_int(1, 3))->make());
+        });
     }
 }

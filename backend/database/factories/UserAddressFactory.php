@@ -24,7 +24,7 @@ class UserAddressFactory extends Factory
         return [
             'user_id' => $this->faker->numberBetween(1, 100),
             'postal_code' => $this->faker->numberBetween(1000000, 9999999),
-            'address' => $this->faker->prefecture. $this->faker->streetAddress,
+            'location' => $this->faker->prefecture. $this->faker->streetAddress,
         ];
     }
 }

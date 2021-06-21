@@ -10,11 +10,11 @@ class UserAddress extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'user_address';
+    protected $table = 'user_addresses';
 
     protected $fillable = [
         "postal_code",
-        "address"
+        "location"
     ];
 
     protected $dates = ['deleted_at'];
