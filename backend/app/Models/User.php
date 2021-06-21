@@ -90,9 +90,8 @@ class User extends Authenticatable
 
     public function plans()
     {
-        return $this->belongsToMany('App\Models\Plan', 'user_plan_cheering')
-            ->using('App\Models\UserPlanCheering')
-            ->withPivot('selected_option')
+        return $this->belongsToMany('App\Models\Plan', 'user_plan_billing')
+            ->using('App\Models\UserPlanBilling')
             ->withTimestamps();
     }
 
@@ -118,9 +117,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Comment');
     }
 
-    public function userPlanBilling()
+    public function invitedPayments()
     {
-        return $this->hasMany('App\Models\UserPlanBilling');
+        return $this->hasMany('App\Models\UserPlanBilling', 'inviter_id');
     }
 
     public function replies()
