@@ -7,7 +7,7 @@ use App\Models\ActivityReportImage;
 use App\Models\Option;
 use App\Models\Plan;
 use App\Models\Project;
-use App\Models\ProjectImage;
+use App\Models\ProjectFile;
 use App\Models\ProjectVideo;
 use App\Models\RepliesToSupporterComment;
 use App\Models\SupporterComment;
@@ -29,7 +29,10 @@ class ProjectSeeder extends Seeder
     {
         Project::truncate();
 
-        Project::factory(30)->create();
+        Project::factory(30)->create()
+            ->each(function(Project $project){
+                $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->create());
+            });
 
     }
 }

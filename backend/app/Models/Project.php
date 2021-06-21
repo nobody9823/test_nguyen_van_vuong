@@ -44,6 +44,7 @@ class Project extends Model
             // プロジェクト画像と動画の論理削除
             $project->projectImages()->delete();
             $project->projectVideo()->delete();
+            $project->projectFile()->delete();
             // プランのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
             UserPlanCheering::whereIn('plan_id', $plan_ids)->delete();
@@ -82,6 +83,11 @@ class Project extends Model
     public function projectVideo()
     {
         return $this->hasOne('App\Models\ProjectVideo');
+    }
+
+    public function projectFiles()
+    {
+        return $this->hasMany('App\Models\ProjectFile');
     }
 
     public function plans()
