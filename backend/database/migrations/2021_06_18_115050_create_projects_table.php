@@ -19,11 +19,11 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('title')->default('');
-            $table->string('content')->default('');
+            $table->string('content', 15000)->default('');
             $table->integer('target_amount')->default(0);
             $table->date('start_date')->default(Carbon::minValue());
             $table->date('end_date')->default(Carbon::maxValue());
-            $table->enum('project_release_status', ProjectReleaseStatus::getValues())->default('---');
+            $table->enum('release_status', ProjectReleaseStatus::getValues())->default('---');
             $table->timestamps();
             $table->softDeletes();
         });

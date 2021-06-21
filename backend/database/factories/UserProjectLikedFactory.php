@@ -23,7 +23,7 @@ class UserProjectLikedFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1, 100),
-            'project_id' => $this->faker->numberBetween(1, 100),
+            'project_id' => $this->faker->numberBetween(1, 30),
         ];
     }
 }
