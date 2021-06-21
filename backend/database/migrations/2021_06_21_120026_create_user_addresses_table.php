@@ -17,7 +17,10 @@ class CreateUserAddressesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('postal_code');
-            $table->string('location');
+            $table->integer('prefecture_id');
+            $table->string('city');
+            $table->string('block');
+            $table->string('building');
             $table->timestamps();
             $table->softDeletes();
         });
