@@ -23,6 +23,7 @@ class CreatePlansTable extends Migration
             $table->date('delivery_date')->default(Carbon::maxValue());
             $table->integer('price')->default(0);
             $table->string('image_url');
+            $table->boolean('address_is_required')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
