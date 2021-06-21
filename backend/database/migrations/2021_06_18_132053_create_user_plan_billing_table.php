@@ -19,7 +19,6 @@ class CreateUserPlanBillingTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('plan_id')->constrained('plans');
             $table->integer('inviter_id');
-            $table->integer('address_id');
             $table->enum('message_status', MessageStatus::getValues())->default('ステータスなし');
             $table->string('merchant_payment_id')->unique();
             $table->string('pay_jp_id')->unique();
