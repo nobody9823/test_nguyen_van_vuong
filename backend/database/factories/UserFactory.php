@@ -35,6 +35,7 @@ class UserFactory extends Factory
                 'その他'
             ]),
             'introduction' => $this->faker->realText(50),
+            'phone_number' => $this->faker->phoneNumber,
             'birthday_is_published' => $this->faker->boolean(50),
             'gender_is_published' => $this->faker->boolean(50),
             'image_url' => $this->faker->imageUrl,
