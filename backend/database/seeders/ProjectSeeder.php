@@ -2,22 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Models\Report;
-use App\Models\ActivityReportImage;
-use App\Models\Option;
-use App\Models\Plan;
 use App\Models\Project;
+use App\Models\Report;
 use App\Models\ProjectFile;
-use App\Models\ProjectVideo;
-use App\Models\RepliesToSupporterComment;
-use App\Models\SupporterComment;
-use App\Models\User;
-use App\Models\UserPlanCheering;
-use App\Models\UserSupporterCommentLiked;
-use App\Models\UserProjectLiked;
-use App\Models\UserPlanBilling;
 use App\Models\ProjectTagTagging;
+use App\Models\UserProjectLiked;
+use App\Models\Plan;
 use App\Models\Comment;
+use App\Models\User;
+use App\Models\UserPlanBilling;
 use App\Models\Reply;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
