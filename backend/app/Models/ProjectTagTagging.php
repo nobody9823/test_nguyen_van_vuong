@@ -17,7 +17,7 @@ class ProjectTagTagging extends Model
         return $this->belongsTo('App\Models\Project');
     }
 
-    public function tags()
+    public function tag()
     {
         return $this->belongsTo('App\Models\Tag');
     }
