@@ -34,7 +34,8 @@ class PlanFactory extends Factory
             'limit_of_supporters' => $this->faker->numberBetween(50, 100),
             'delivery_date' => $this->faker->dateTimeBetween('+30days', '+90days'),
             'price' => random_int(1, 30) * 1000,
-            'image_url' => 'public/sampleImage/planSample.jpg'
+            'image_url' => 'public/sampleImage/planSample.jpg',
+            'address_is_required' => $this->faker->boolean(50),
         ];
     }
 }
