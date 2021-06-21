@@ -13,6 +13,13 @@ class Comment extends Model
     public static function boot()
     {
         parent::boot();
+        static::deleting(function(Comment $comment){
+            $comment->replies()->delete();
+        });
+    }
 
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Reply');
     }
 }

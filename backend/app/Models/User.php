@@ -118,6 +118,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserPlanBilling');
     }
 
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Reply');
+    }
+
     //--------------- local scopes -------------
     public function scopeGetUsers()
     {

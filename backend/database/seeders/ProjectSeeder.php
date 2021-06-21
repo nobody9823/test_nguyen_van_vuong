@@ -18,6 +18,7 @@ use App\Models\UserProjectLiked;
 use App\Models\UserPlanBilling;
 use App\Models\ProjectTagTagging;
 use App\Models\Comment;
+use App\Models\Reply;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -41,7 +42,10 @@ class ProjectSeeder extends Seeder
                     $plan->userPlanBilling()->saveMany(UserPlanBilling::factory(random_int(3, 10))->make());
                 });
                 $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
-                $project->comments()->saveMany(Comment::factory(rand(1, 5))->create());
+                $project->comments()->saveMany(Comment::factory(rand(1, 5))->create())
+                ->each(function(Comment $comment){
+                    $comment->replies()->saveMany(Reply::factory(rand(1, 5))->create());
+                });
                 $project->userProjectLiked()->saveMany(UserProjectLiked::factory(random_int(3, 10))->make());
             });
 
