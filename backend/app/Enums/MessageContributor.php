@@ -11,9 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class MessageContributor extends Enum
 {
-    // guard名と一致させることにした
-    const web =   '支援者';
-    const talent =   'タレント';
-    // const company =   'タレント';
+    const supporter =   '支援者';
+    const executor =   '実行者';
     const admin =   '管理者';
 }

@@ -39,6 +39,7 @@ class UserFactory extends Factory
             'gender_is_published' => $this->faker->boolean(50),
             'image_url' => $this->faker->imageUrl,
             'remember_token' => Str::random(10),
+            'inviter_code' => $this->faker->numberBetween(10000, 99999)
         ];
     }
 
@@ -60,6 +61,7 @@ class UserFactory extends Factory
                 'birthday_is_published' => $this->faker->boolean(50),
                 'gender_is_published' => $this->faker->boolean(50),
                 'image_url' => $this->faker->imageUrl,
+                'inviter_code' => $this->faker->numberBetween(10000, 99999)
             ];
         });
     }
