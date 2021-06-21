@@ -17,7 +17,7 @@ class UserPlanBilling extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function plans()
+    public function plan()
     {
         return $this->belongsTo('App\Models\Plan');
     }
