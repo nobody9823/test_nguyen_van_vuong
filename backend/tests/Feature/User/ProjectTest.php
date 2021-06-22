@@ -28,7 +28,6 @@ class ProjectTest extends TestCase
     public function test_example()
     {
         $response = $this->get('/');
-        dd($response);
         $response->assertStatus(200);
     }
 }

@@ -66,12 +66,19 @@ class Project extends Model
         return $this->hasMany('App\Models\Plan');
     }
 
-    public function user()
+    public function likedUsers()
     {
         return $this->belongsTo('App\Models\User');
     }
 
-    public function usersProjectLiked()
+    public function billingUsers()
+    {
+        return $this->belongsToMany('App\Models\User', 'user_project_billing')
+            ->using('App\Models\UserProjectBilling')
+            ->withTimestamps();
+    }
+
+    public function userProjectLiked()
     {
         return $this->belongsToMany('App\Models\User', 'user_project_liked')
             ->using('App\Models\UserProjectLiked')
@@ -153,7 +160,7 @@ class Project extends Model
     public function scopeOrdeyByLikedUsers($query)
     {
         // return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
-        return $query->withCount('users')->orderBy('users_count', 'DESC');
+        return $query->withCount('likedUsers')->orderBy('liked_users_count', 'DESC');
     }
 
     public function scopeOrderByNearlyDeadline($query)

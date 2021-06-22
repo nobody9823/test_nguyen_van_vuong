@@ -35,7 +35,7 @@ class ProjectController extends Controller
         $nearly_open_projects = Project::getReleasedProject()->orderByNearlyOpen()
             ->inRandomOrder()->takeWithRelations(9)->get();
 
-        return view('user.project.index', compact(
+        return view('user.index', compact(
             'new_projects',
             'cheer_projects',
             'popularity_projects',
@@ -197,7 +197,7 @@ class ProjectController extends Controller
 
         $projects = $projectsQuery->where('release_status', '掲載中')->with('tags')->paginate(9);
 
-        return view('user.project.search', compact('projects', 'tags'));
+        return view('user.search', compact('projects', 'tags'));
     }
 
     // こちらもデザインにないので一旦コメントアウトしておきます。
