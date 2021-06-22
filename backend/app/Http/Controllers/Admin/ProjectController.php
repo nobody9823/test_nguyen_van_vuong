@@ -77,7 +77,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load('projectImages', 'projectVideo', 'plans', 'plans.users', 'activityReports');
+        $project->load('projectFiles', 'plans', 'plans.users', 'reports');
         return view('admin.project.show', compact('project'));
     }
 
