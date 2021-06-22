@@ -23,9 +23,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'image_url',
         'email_verified_at',
+        'password',
+        'birthday',
+        'gender',
+        'introduction',
+        'phone_number',
+        'birthday_is_published',
+        'gender_is_published',
+        'image_url',
     ];
 
     /**
@@ -57,8 +63,9 @@ class User extends Authenticatable
 
         static::deleting(function (User $user) {
             $user->snsUser()->delete();
-            $user->userAddresses()->delete();
+            $user->address()->delete();
             $user->snsLinks()->delete();
+            $user->bankAccount()->delete();
 
             // 中間テーブルの削除
             UserProjectLiked::where('user_id', $user->id)
@@ -83,9 +90,8 @@ class User extends Authenticatable
 
     public function plans()
     {
-        return $this->belongsToMany('App\Models\Plan', 'user_plan_cheering')
-            ->using('App\Models\UserPlanCheering')
-            ->withPivot('selected_option')
+        return $this->belongsToMany('App\Models\Plan', 'user_plan_billing')
+            ->using('App\Models\UserPlanBilling')
             ->withTimestamps();
     }
 
@@ -101,14 +107,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Project');
     }
 
-    public function userAddresses()
+    public function address()
     {
-        return $this->hasMany('App\Models\UserAddress');
-    }
-
-    public function userDetail()
-    {
-        return $this->hasOne('App\Models\UserDetail');
+        return $this->hasOne('App\Models\Address');
     }
 
     public function snsUser()
@@ -121,9 +122,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Comment');
     }
 
-    public function userPlanBilling()
+    public function invitedPayments()
     {
-        return $this->hasMany('App\Models\UserPlanBilling');
+        return $this->hasMany('App\Models\UserPlanBilling', 'inviter_id');
     }
 
     public function replies()
@@ -134,6 +135,11 @@ class User extends Authenticatable
     public function snsLinks()
     {
         return $this->hasMany('App\Models\SnsLink');
+    }
+
+    public function bankAccount()
+    {
+        return $this->hasOne('App\Models\BankAccount');
     }
 
     //--------------- local scopes -------------

@@ -26,4 +26,11 @@ class UserPlanBilling extends Model
     {
         return $this->hasMany('App\Models\MessageContent');
     }
+
+    public function inviter()
+    {
+        return $this->belongsTo('App\Models\User', 'inviter_id');
+        // 招待者コードから検索する場合
+        // return $this->belongsTo('App\Models\User', 'inviter_code', 'inviter_code');
+    }
 }

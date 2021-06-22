@@ -6,14 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SnsUser extends Model
+class BankAccount extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'bank_accounts';
+
     protected $fillable = [
-        'user_id',
-        'sns_user_id',
-        'sns_service_name',
+        'bank_code',
+        'branch_code',
+        'account_type',
+        'account_number',
+        'account_name',
     ];
 
     protected $dates = ['deleted_at'];

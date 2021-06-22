@@ -26,7 +26,6 @@ class UserPlanBillingFactory extends Factory
             'user_id' => $this->faker->numberBetween(1, 100),
             'inviter_id' => $this->faker->numberBetween(1, 100),
             'plan_id' => $this->faker->numberBetween(1, 30),
-            'address_id' => $this->faker->numberBetween(1, 100),
             'message_status' => 'ステータスなし',
             'merchant_payment_id' => UniqueToken::getToken(),
             'pay_jp_id' => UniqueToken::getToken(),
