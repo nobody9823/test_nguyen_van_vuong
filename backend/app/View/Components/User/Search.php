@@ -4,9 +4,7 @@ namespace App\View\Components\User;
 
 use Illuminate\View\Component;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Project;
-use Carbon\Carbon;
+use App\Models\Tag;
 
 class Search extends Component
 {
@@ -31,10 +29,10 @@ class Search extends Component
         $this->cheered_check = $request->get('cheered_check');
     }
 
-    public function categories()
+    public function tags()
     {
-        $categories = Category::PluckNameAndId();
-        return $categories;
+        $tags = Tag::pluck('name', 'id');
+        return $tags;
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\View\Components\User;
 
 use Illuminate\View\Component;
-use App\Models\Category;
+use App\Models\Tag;
 
 class SubMenu extends Component
 {
@@ -17,10 +17,10 @@ class SubMenu extends Component
         //
     }
 
-    public function categories()
+    public function tags()
     {
-        $categories = Category::PluckNameAndId();
-        return $categories;
+        $tags = Tag::pluck('name', 'id');
+        return $tags;
     }
 
     /**
