@@ -54,7 +54,7 @@
         <table class="table">
             <tr>
                 <th style="width:10%">タイトル</th>
-                <th style="width:10%">タレント名</th>
+                <th style="width:10%">ユーザー名</th>
                 <th style="width:10%">プロジェクト詳細</th>
                 <th style="width:10%">プレビュー</th>
                 <th style="width: 20%">その他一覧</th>
@@ -69,7 +69,7 @@
                 <td>
                     {{ $project->title }}
                 </td>
-                <td>{{ $project->talent->name }}</td>
+                <td>{{ $project->user->name }}</td>
                 <td>
                     <a href="{{ route($role.'.project.show', ['project' => $project]) }}" class="btn btn-primary">確認</a>
                 </td>
