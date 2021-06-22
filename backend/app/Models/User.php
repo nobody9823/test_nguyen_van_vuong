@@ -89,11 +89,16 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    public function projects()
+    public function projectsLiked()
     {
         return $this->belongsToMany('App\Models\Project', 'user_project_liked')
             ->using('App\Models\UserProjectLiked')
             ->withTimestamps();
+    }
+
+    public function projects()
+    {
+        return $this->hasMany('App\Models\Project');
     }
 
     public function userAddresses()
@@ -151,6 +156,12 @@ class User extends Authenticatable
     {
         return $query->where('name', 'like', "%$word%")->pluck('id')->toArray();
     }
+
+    public function scopePluckNameAndId($query)
+    {
+        return $query->pluck('name', 'id');
+    }
+
     //--------------- local scopes -------------
 
 

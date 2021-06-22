@@ -79,7 +79,7 @@
                                         <div class="col-sm-4">
                                             <div class="carousel slide" data-ride="carousel" id="carouselControl">
                                                 <ol class="carousel-indicators">
-                                                    @for($i = 0; $i < $project->projectImages->count(); $i++)
+                                                    @for($i = 0; $i < $project->projectFiles->count(); $i++)
                                                         @if($i === 0)
                                                             <li data-target="#carouselControl" data-slide-to="{{ $i }}"
                                                                 class="active"></li>
@@ -94,17 +94,17 @@
                                                     @endif
                                                 </ol>
                                                 <div class="carousel-inner">
-                                                    @foreach($project->projectImages as $project_image)
+                                                    @foreach($project->projectFiles as $project_file)
                                                         @if($loop->first)
                                                             <div class="carousel-item active">
                                                                 <img
-                                                                    src="{{ asset(Storage::url($project_image->image_url)) }}"
+                                                                    src="{{ asset(Storage::url($project_file->file_url)) }}"
                                                                     style="max-width: 100%" class="d-block w-100">
                                                             </div>
                                                         @else
                                                             <div class="carousel-item">
                                                                 <img
-                                                                    src="{{ asset(Storage::url($project_image->image_url)) }}"
+                                                                    src="{{ asset(Storage::url($project_file->file_url)) }}"
                                                                     style="max-width: 100%" class="d-block w-100">
                                                             </div>
                                                         @endif
@@ -132,7 +132,7 @@
                                             <div class="row">
                                                 <div class="col-sm-8">
                                                     <h3>掲載タレント : </h3>
-                                                    <h5 class="mb-3">{{ $project->talent->name }}</h5>
+                                                    <h5 class="mb-3">{{ $project->user->name }}</h5>
                                                     <h3>自己紹介・挨拶(30文字) : </h3>
                                                     <h5 class="mb-3">{{ Str::limit($project->greeting_and_introduce) }}</h5>
                                                     <h3>プロジェクトを立ち上げたきっかけ(30文字) : </h3>
@@ -180,7 +180,7 @@
                                         @foreach($project->plans as $plan)
                                             <div class="col-4 mb-3">
                                                 <div class="card border-secondary" style="border-width: thick">
-                                                    <img src="/storage/image/planSample.jpg" class="mx-auto d-block"
+                                                    <img src="{{ asset(Storage::url($plan->image_url)) }}" class="mx-auto d-block"
                                                         style="max-width: 70%">
                                                     <ul class="list-group list-group-flush">
                                                         <li class="list-group-item d-flex">
@@ -199,13 +199,6 @@
                                                         <li class="list-group-item">
                                                             <h6 class="font-weight-bold mb-2" style="white-space: pre-line;">プラン内容</h6>
                                                             {{ $plan->content }}
-                                                        </li>
-                                                        <li class="list-group-item">
-                                                            <h6 class="font-weight-bold mb-2" style="white-space: pre-line;">オプション</h6>
-                                                            @foreach($plan->options as $option)
-                                                                <p class="mb-0">{{ $option->name }}</p>
-                                                                <p>個数 : {{ $option->quantity }}</p>
-                                                            @endforeach
                                                         </li>
                                                         <li class="list-group-item">
                                                             <h6 class="font-weight-bold mb-2">お返し予定日</h6>
@@ -232,12 +225,12 @@
                             <div id="activityReportBody" class="collapse"
                                 aria-labelledby="activityReportHeader" data-parent="#projectDetail">
                                 <div class="card-body">
-                                    @foreach($project->activityReports as $activity_report)
+                                    @foreach($project->reports as $report)
                                         <div class="row p-1 mb-1 border-secondary border" style="border-width: thick">
                                             <div class="col-sm-4">
                                                 <div class="carousel slide" data-ride="carousel" id="carouselControl">
                                                     <ol class="carousel-indicators">
-                                                        @for($i = 0; $i < $activity_report->activityReportImages->count(); $i++)
+                                                        @for($i = 0; $i < $project->reports->count(); $i++)
                                                             @if($i === 0)
                                                                 <li data-target="#carouselControl"
                                                                     data-slide-to="{{ $i }}"
@@ -249,21 +242,11 @@
                                                         @endfor
                                                     </ol>
                                                     <div class="carousel-inner">
-                                                        @foreach($activity_report->activityReportImages as $activity_report_image)
-                                                            @if($loop->first)
-                                                                <div class="carousel-item active">
-                                                                    <img
-                                                                        src="{{ asset(Storage::url($activity_report_image->image_url)) }}"
-                                                                        style="max-width: 100%" class="d-block w-100">
-                                                                </div>
-                                                            @else
-                                                                <div class="carousel-item">
-                                                                    <img
-                                                                        src="{{ asset(Storage::url($activity_report_image->image_url)) }}"
-                                                                        style="max-width: 100%" class="d-block w-100">
-                                                                </div>
-                                                            @endif
-                                                        @endforeach
+                                                        <div class="carousel-item active">
+                                                            <img
+                                                                src="{{ asset(Storage::url($report->image_url)) }}"
+                                                                style="max-width: 100%" class="d-block w-100">
+                                                        </div>
                                                     </div>
                                                     <a class="carousel-control-prev" href="#carouselControl"
                                                         role="button"
@@ -283,14 +266,14 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="d-flex">
-                                                    <h3 class="font-weight-bold mb-4 flex-grow-1">{{ $activity_report->title }}</h3>
+                                                    <h3 class="font-weight-bold mb-4 flex-grow-1">{{ $report->title }}</h3>
                                                     <div class="text-right">
-                                                        <a href="{{ route($role.'.activity_report.edit', ['project' => $project, 'activity_report' => $activity_report]) }}"
+                                                        <a href="{{ route($role.'.activity_report.edit', ['project' => $project, 'activity_report' => $report]) }}"
                                                             class="btn btn-primary mb-1">編集</a>
                                                         <div style="display: inline-flex">
                                                             {{--FIXME 削除ボタン上手く動かないから誰か直して、あとプロジェクト詳細に戻したいからメソッド分けるかメソッド内で分岐がいる--}}
                                                             <form
-                                                                action="{{ route($role.'.activity_report.destroy', ['project' => $project, 'activity_report' => $activity_report]) }}"
+                                                                action="{{ route($role.'.activity_report.destroy', ['project' => $project, 'activity_report' => $report]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -302,7 +285,7 @@
                                                     </div>
                                                 </div>
                                                 <h4>報告内容: </h4>
-                                                <h5 class="mb-3">{{ $activity_report->content }}</h5>
+                                                <h5 class="mb-3">{{ $report->content }}</h5>
                                             </div>
                                         </div>
                                     @endforeach
@@ -357,8 +340,8 @@
                                                                 <td>{{ $plan->title }}</td>
                                                                 <td>{{ number_format($plan->price) }}円</td>
                                                                 <td>{{ date_format($user->pivot->created_at, "Y-m-d") }}</td>
-                                                                <td>{{ $plan->estimated_return_date }}</td>
-                                                                <td>{{ $user_address->address }}</td>
+                                                                <td>{{ $plan->delivery_date }}</td>
+                                                                <td>{{ PrefectureHelper::getPrefectures()[$user_address->prefecture_id].$user_address->city.$user_address->block.$user_address->building }}</td>
                                                             </tr>
                                                         @endforeach
                                                     @endforeach

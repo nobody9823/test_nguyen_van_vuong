@@ -4,9 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
-use App\Models\ProjectImage;
+use App\Models\ProjectFile;
 use App\Models\ProjectVideo;
+use App\Models\ProjectTagTagging;
 use App\Rules\ProjectImages;
+use App\Rules\Tags;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use DateTime;
@@ -35,17 +37,14 @@ class ProjectRequest extends FormRequest
         $end_date_limit = ($start_date->modify("+60 day"))->format('Y-m-d H:i:s');
 
         return [
-            'category_id' => ['required', 'integer'],
+            'user_id' => ['required', 'integer'],
             'title' => ['required', 'string', 'max:45'],
-            'greeting_and_introduce' => ['required', 'string', 'max:5000'],
-            'explanation' => ['required', 'string', 'max:5000'],
-            'opportunity' => ['required', 'string', 'max:5000'],
-            'finally' => ['required', 'string', 'max:5000'],
+            'content' => ['required', 'string', 'max:5000'],
             'target_amount' => ['required', 'integer', 'max:99999999'],
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
-            'talent_id' => ['integer',Rule::requiredIf(!$request->is('talent/*'))],
             'start_date' => ['required', 'date_format:Y-m-d H:i:s', $request->isMethod('post') ?'after:1 week':null],
             'end_date' => ['required', 'date_format:Y-m-d H:i:s', 'after:start_date', "before:{$end_date_limit}"],
+            'tags.*' => ['required', 'string', new Tags($request)],
             'images' => [Rule::requiredIf($request->isMethod('post')), new ProjectImages($request)],
             'images.*' => ['image'], //images配列の中身を見る
             'video_url' => ['nullable', 'url', 'regex:#(https?://www.youtube.com/.*)(v=([-\w]{11}))#'],
@@ -55,38 +54,40 @@ class ProjectRequest extends FormRequest
     // requestのImagesから、ProjectImageインスタンスの配列変数として返す
     public function imagesToArray():array
     {
-        $projectImages = array();
+        $projectFiles = array();
         $data = $this->all();
 
         if ($this->file('images') !== null) {
             foreach ($data['images'] as $image) {
-                $projectImages[] = new ProjectImage([
-                    'image_url' => $image
+                $projectFiles[] = new ProjectFile([
+                    'file_url' => $image,
+                    'file_content_type' => 'image_url'
                 ]);
             }
         }
-        return $projectImages;
+        return $projectFiles;
     }
 
-    public function allWithCompanyId()
+    public function tagsToArray()
     {
-        return array_merge($this->all(), array('company_id' => Auth::id()));
-    }
-
-    public function allWithTalentId()
-    {
-        if (strpos(url()->previous(), 'talent') !== false) {
-            return array_merge($this->all(), array('talent_id' => Auth::id()));
+        $tags = [];
+        $data = $this->all();
+        if (!empty($data['tags']) && $data['tags'][0] !== null ){
+            foreach($data['tags'] as $tag){
+                $tags[] = new ProjectTagTagging([
+                    'tag_id' => $tag
+                ]);
+            }
         }
-
-        return $this->all();
+        return $tags;
     }
 
     public function projectVideo()
     {
         if ($this->all()['video_url'] !== null){
-            return new ProjectVideo([
-                'video_url' => $this->all()['video_url']
+            return new ProjectFile([
+                'file_url' => $this->all()['video_url'],
+                'file_content_type' => 'video_url'
             ]);
         }
         return null;

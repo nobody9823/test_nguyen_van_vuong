@@ -43,8 +43,7 @@ class ProjectSeeder extends Seeder
                 ->each(function(Comment $comment){
                     $comment->replies()->saveMany(Reply::factory(rand(1, 5))->create());
                 });
-                $project->userProjectLiked()->saveMany(UserProjectLiked::factory(random_int(3, 10))->make());
+                $project->usersProjectLiked()->attach(User::inRandomOrder()->first()->id);
             });
-
     }
 }

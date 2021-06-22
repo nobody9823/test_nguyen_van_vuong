@@ -2,9 +2,10 @@
 
 namespace App\Rules;
 
+use App\Models\Tag;
 use Illuminate\Contracts\Validation\Rule;
 
-class ProjectImages implements Rule
+class Tags implements Rule
 {
     /**
      * Create a new rule instance.
@@ -17,7 +18,7 @@ class ProjectImages implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
+     * 選択されたタグがDBに存在するか確認
      *
      * @param  string  $attribute
      * @param  mixed  $value
@@ -25,11 +26,8 @@ class ProjectImages implements Rule
      */
     public function passes($attribute, $value)
     {
-        if ($this->request->isMethod('post')) {
-            return count($value) <= 10;
-        } else {
-            return $this->request->route('project')->projectFiles()->where('file_content_type', 'image_url')->count() + count($value) <= 10;
-        }
+        $tag_count = Tag::whereIn('id', $this->request->tags)->get()->count();
+        return $tag_count === count($this->request->tags);
     }
 
     /**
@@ -39,6 +37,6 @@ class ProjectImages implements Rule
      */
     public function message()
     {
-        return '画像は10枚まで登録ができます。';
+        return '選択したタグは存在しません。';
     }
 }

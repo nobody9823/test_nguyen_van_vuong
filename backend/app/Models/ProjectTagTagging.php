@@ -12,6 +12,16 @@ class ProjectTagTagging extends Model
 
     protected $table = 'project_tag_tagging';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'project_id',
+        'tag_id',
+    ];
+
     public function projects()
     {
         return $this->belongsTo('App\Models\Project');
