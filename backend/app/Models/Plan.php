@@ -123,8 +123,7 @@ class Plan extends Model
     public function users()
     {
         return $this->belongsToMany('App\Models\User', 'user_plan_billing')
-            ->using('App\Models\UserPlanBilling')
-            ->withTimestamps();
+                ->withPivot('created_at');
     }
 
     public function userPlanBilling()

@@ -6,11 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LikeCalculationRequest;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Requests\SearchRequest;
-use App\Models\Category;
 use App\Models\Plan;
+use App\Models\Tag;
+use App\Models\User;
 use App\Models\Project;
-use App\Models\ProjectImage;
-use App\Models\Talent;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +25,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::getProjects();
+        $projects = Project::getProjectsWithPaginate();
         return view('admin.project.index', ['projects' => $projects]);
     }
 
@@ -37,12 +36,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluckNameAndId();
-        $talents = Talent::pluckNameAndId();
-
+        $users = User::pluckNameAndId();
+        $tags = Tag::pluckNameAndId();
         return view('admin.project.create', [
-            'categories' => $categories,
-            'talents' => $talents,
+            'tags' => $tags,
+            'users' => $users
         ]);
     }
 
@@ -57,7 +55,8 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            $project->saveProjectImages($request);
+            $project->projectTagTagging()->saveMany($request->tagsToArray());
+            $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
         } catch (\Exception $e) {
@@ -77,7 +76,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load('projectImages', 'projectVideo', 'plans', 'plans.users', 'activityReports');
+        $project->load('projectFiles', 'plans', 'plans.users', 'reports');
         return view('admin.project.show', compact('project'));
     }
 
@@ -89,15 +88,19 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $categories = Category::pluckNameAndId();
-        $talents = Talent::pluckNameAndId();
-        $project_images = $project->projectImages;
+        $users = User::pluckNameAndId();
+        $tags = Tag::pluckNameAndId();
+        $projectTags = $project->tags->pluck('id')->toArray();
+        $projectImages = $project->projectFiles()->where('file_content_type', 'image_url')->get();
+        $projectVideo = $project->projectFiles()->where('file_content_type', 'video_url')->first();
 
         return view('admin.project.edit', [
             'project' => $project,
-            'categories' => $categories,
-            'talents' => $talents,
-            'project_images' => $project_images,
+            'tags' => $tags,
+            'projectTags' => $projectTags,
+            'users' => $users,
+            'projectImages' => $projectImages,
+            'projectVideo' => $projectVideo,
         ]);
     }
 
@@ -113,8 +116,8 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            // トップ画像の情報を一括保存
-            $project->saveProjectImages($request);
+            $project->projectTagTagging()->saveMany($request->tagsToArray());
+            $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
         } catch (\Exception $e) {
@@ -140,7 +143,7 @@ class ProjectController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->withErrors('プロジェクトの更新に失敗しました。管理会社に連絡をお願いします。');
+            return redirect()->back()->withErrors('プロジェクトの削除に失敗しました。管理会社に連絡をお願いします。');
         }
         return redirect()->action([ProjectController::class, 'index'])->with('flash_message', '削除が成功しました。');
     }

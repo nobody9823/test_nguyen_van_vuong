@@ -233,6 +233,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DisplayVideoHelper' => App\Helpers\DisplayVideoHelper::class,
+        'PrefectureHelper' => App\Helpers\PrefectureHelper::class,
         'ProjectReleaseStatus' => App\Enums\ProjectReleaseStatus::class,
         'Slack' => App\Services\Slack\SlackFacade::class,
     ],
