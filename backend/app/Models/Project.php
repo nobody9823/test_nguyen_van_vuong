@@ -66,6 +66,11 @@ class Project extends Model
         return $this->hasMany('App\Models\Plan');
     }
 
+    public function author()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
+
     public function likedUsers()
     {
         return $this->belongsTo('App\Models\User');

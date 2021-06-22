@@ -6,19 +6,17 @@
             <div>
                 <a class="project-banner" href="{{ route('user.project.show', ['project' => $prop]) }}">
                     <div class="project-banner-img">
-                        @if($prop->category)
-                        <span class="project-banner-cat">{{ $prop->category->name }}</span>
-                        @else
-                        <span class="project-banner-cat">no category</span>
-                        @endif
-                        @if ($prop->projectImages->isNotEmpty())
-                        <img src="{{ Storage::url($prop->projectImages[0]->image_url) }}">
+                        @foreach($prop->tags as $tag)
+                        <span class="project-banner-cat">{{ $tag->name }}</span>
+                        @endforeach
+                        @if ($prop->projectFiles->isNotEmpty())
+                        <img src="{{ Storage::url($prop->projectFiles[0]->image_url) }}">
                         @endif
                     </div>
                     <div class="roject-banner-content">
                         <p class="project-banner-ttl">{{ $prop->title }}</p>
                         <div class="project-user">
-                            <img src="{{ Storage::url($prop->talent->image_url) }}">{{ $prop->talent->name }}
+                            <img src="{{ Storage::url($prop->author->image_url) }}">{{ $prop->author->name }}
                         </div>
                         <ul>
                             <li>開始：{{ date($prop->start_date) }}</li>
