@@ -14,16 +14,16 @@
             @csrf
             @method('PUT')
 
-            <x-manage.project.form role="admin" :project="$project" :talents="$talents" :categories="$categories" />
+            <x-manage.project.form role="admin" :project="$project" :projectTags="$projectTags" :tags="$tags" :users="$users" :projectVideo="$projectVideo" />
 
         </form>
 
         <div class="row">
-            @foreach($project->projectImages as $project_image)
+            @foreach($projectImages as $project_image)
             <div class="col-sm-4 p-2 image-card">
                 <span class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <img src="{{asset(Storage::url($project_image->image_url))}}" id='previousImage'
+                        <img src="{{asset(Storage::url($project_image->file_url))}}" id='previousImage'
                             style='height:200px; object-fit: cover;' alt="image" class="col-12 card__img">
                         <button type="button" class="btn btn-danger del-btn" id="{{ $project_image->id }}">削除</button>
                     </div>
