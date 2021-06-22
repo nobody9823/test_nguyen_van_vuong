@@ -22,4 +22,9 @@ class Tag extends Model
     {
         return $this->belongsToMany('App\Models\Project', 'App\Models\ProjectTagTagging');
     }
+
+    public function scopePluckNameAndId($query)
+    {
+        return $query->pluck('name', 'id');
+    }
 }

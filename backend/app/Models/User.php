@@ -156,6 +156,12 @@ class User extends Authenticatable
     {
         return $query->where('name', 'like', "%$word%")->pluck('id')->toArray();
     }
+
+    public function scopePluckNameAndId($query)
+    {
+        return $query->pluck('name', 'id');
+    }
+
     //--------------- local scopes -------------
 
 

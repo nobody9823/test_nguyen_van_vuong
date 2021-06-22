@@ -18,13 +18,9 @@ class Project extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'category_id',
-        'talent_id',
+        'user_id',
         'title',
-        'greeting_and_introduce',
-        'explanation',
-        'opportunity',
-        'finally',
+        'content',
         'target_amount',
         'start_date',
         'end_date',
@@ -42,7 +38,7 @@ class Project extends Model
         parent::boot();
         static::deleting(function(Project $project){
             // プロジェクト画像と動画の論理削除
-            $project->projectFile()->delete();
+            $project->projectFiles()->delete();
             $project->projectTagTagging()->delete();
             // プランのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
@@ -53,7 +49,6 @@ class Project extends Model
             Reply::whereIn('comment_id', $comment_ids)->delete();
             Comment::destroy($comment_ids);
             $report_ids = $project->reports()->pluck('id')->toArray();
-            ActivityReportImage::whereIn('report_id', $report_ids)->delete();
             Report::destroy($report_ids);
             // user project liked の論理削除
             UserProjectLiked::where('project_id', $project->id)
@@ -349,35 +344,35 @@ class Project extends Model
         return $is_cheering;
     }
 
-    public function saveProjectImages(Request $request): void
+    public function saveProjectImages(array $images): void
     {
-        if ($request->images !== null){
-            $this->projectImages()->saveMany($request->imagesToArray());
+        if (!empty($images) && $images[0] !== null){
+            $this->projectFiles()->saveMany($images);
         }
     }
 
     public function saveProjectVideo($projectVideo)
     {
         // ユーザーがURLを入力していないor更新する際にURLが変更されていない場合
-        if (optional($projectVideo)->video_url === null || (optional(optional($this->projectVideo))->video_url === optional($projectVideo)->video_url)) {
+        if (optional($projectVideo)->file_url === null || optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === optional($projectVideo)->file_url) {
             return false;
         // 新規作成の時or更新する際に動画のURLが存在しない場合
-        } elseif(optional(optional($this->projectVideo))->video_url === null && optional($projectVideo)->video_url !== null){
-            $this->projectVideo()->save($projectVideo);
+        } elseif(optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === null && optional($projectVideo)->file_url !== null){
+            $this->projectFiles()->save($projectVideo);
             // プロジェクト更新時に既に埋め込んでいるURLから別のURLに変更した場合
-        } elseif(optional(optional($this->projectVideo))->video_url !== optional($projectVideo)->video_url){
-            $this->projectVideo()->delete();
-            $this->projectVideo()->save($projectVideo);
+        } elseif(optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url !== optional($projectVideo)->file_url){
+            $this->projectFiles()->where('file_content_type', 'video_url')->first()->delete();
+            $this->projectFiles()->save($projectVideo);
         };
     }
 
     public function deleteProjectImages(): void
     {
-        foreach($this->projectImages as $image){
-            if(strpos($image->image_url, 'sampleImage') === false){
-                Storage::delete($image->image_url);
+        foreach($this->projectFiles as $file){
+            if(strpos($file->file_url, 'sampleImage') === false && $file->file_content_type === 'video_url'){
+                Storage::delete($file->file_url);
             };
-            $image->delete();
+            $file->delete();
         }
     }
 }

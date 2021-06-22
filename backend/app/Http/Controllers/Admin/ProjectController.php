@@ -6,11 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LikeCalculationRequest;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Requests\SearchRequest;
-use App\Models\Category;
 use App\Models\Plan;
+use App\Models\Tag;
+use App\Models\User;
 use App\Models\Project;
-use App\Models\ProjectImage;
-use App\Models\Talent;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -37,12 +36,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluckNameAndId();
-        $talents = Talent::pluckNameAndId();
-
+        $users = User::pluckNameAndId();
+        $tags = Tag::pluckNameAndId();
         return view('admin.project.create', [
-            'categories' => $categories,
-            'talents' => $talents,
+            'tags' => $tags,
+            'users' => $users
         ]);
     }
 
@@ -57,7 +55,8 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            $project->saveProjectImages($request);
+            $project->projectTagTagging()->saveMany($request->tagsToArray());
+            $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
         } catch (\Exception $e) {
