@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\RegisterController;
 
 //---------------------projects-----------------------------------------------
-Route::get('/', [ProjectController::class, 'index'])->name('index');
-Route::get('/search', [ProjectController::class, 'search'])->name('search');
+Route::get('/', [ProjectController::class, 'index'])->name('project.index');
+Route::get('/search', [ProjectController::class, 'search'])->name('project.search');
 Route::post('/project/{project}/liked', [ProjectController::class, 'ProjectLiked'])->name('user.project.liked');
-
 Route::resource('project', ProjectController::class)->only('show')->middleware('project.released');
+
 Route::prefix('project/{project}')->middleware('auth', 'project.released')->group(function () {
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
     Route::get('plan/{plan}/address', [PlanController::class, 'address'])->name('plan.address');
