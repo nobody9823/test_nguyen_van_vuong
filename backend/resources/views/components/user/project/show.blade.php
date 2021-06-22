@@ -36,7 +36,7 @@
         </div>
         <h2 class="sec-ttl">{{ $project->title }}</h2>
         <div class="project-user detail-user"><img
-                src="{{ Storage::url($project->author->image_url) }}">{{ $project->author->name }}</div>
+                src="{{ Storage::url($project->user->image_url) }}">{{ $project->user->name }}</div>
         <div class="detail_info">
             <div class="detail_imgs">
                 <div class="detail-slider-for">
@@ -73,15 +73,15 @@
             </div>
             @endif
             <p><i class="fas fa-hands-helping pri_color_f i_icon"></i>現在の支援者数</p>
-            <div><span>{{ $project->getCheeringUsersCount() }}人</span></div>
+            <div><span>{{ $project->getBillingUsersCount() }}人</span></div>
             <p><i class="far fa-clock pri_color_f i_icon"></i>開催期間</p>
             <div>
                 {{ $project->getStartDate() }}～<br>{{ $project->getEndDate() }}
             </div>
             <p><i class="fab fa-itunes-note pri_color_f i_icon"></i>アイドル</p>
             <div class="project-user detail-user">
-                <img src="{{ Storage::url($project->author->image_url) }}">
-                {{ $project->author->name }}
+                <img src="{{ Storage::url($project->user->image_url) }}">
+                {{ $project->user->name }}
             </div>
             <div class="liked_project" id="{{ $project->id }}">
                 @if ($project->likedUsers()->find(Auth::id()) !== null)
@@ -165,9 +165,9 @@
 
         {{--支援者ページ--}}
         <div class="detail_tab_content" id="detail_item_03_content">
-            @if ($project->isCheering() === true)
+            @if ($project->isBilling() === true)
             <div class="detail_tab_content_description">
-                @elseif($project->isCheering() === false)
+                @elseif($project->isBilling() === false)
                 <div class="text-center" style="color:#ff1493">
                     <h2>※応援プランを支援された方のみ閲覧可能です。</h2>
                 </div>
@@ -192,7 +192,7 @@
                                     <div class="form-grpup">
                                         <input type="file" name="image" id="imageUploader">
                                     </div>
-                                    @if ($project->isCheering() === true)
+                                    @if ($project->isBilling() === true)
                                     <div class="plan-btn-wrap" name="image" style="margin-top: 8px;">
                                         <button type="submit" class="plan-btn">支援者ページに投稿する</button>
                                     </div>
@@ -200,7 +200,7 @@
                                 </form> --}}
                             </div>
                             @endif
-                            @if ($project->isCheering() === true)
+                            @if ($project->isBilling() === true)
                             @foreach($project->comments as $comment)
                             <div class="post">
                                 <div class="post-icons">
@@ -240,7 +240,7 @@
                                 </div>
                             </div>
                             @endforeach
-                            @elseif ($project->isCheering() === false)
+                            @elseif ($project->isBilling() === false)
                             <div class="post">
                                 <p class="post-name">これはサンプルです</p>
                                 <div class="post-icons">

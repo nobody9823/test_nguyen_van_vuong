@@ -23,7 +23,7 @@
     <div class="project-content">
         <p class="project-content-ttl"><a href="{{ route('user.project.show', ['project' => $project]) }}">{{ $project->title }}</a></p>
         <div class="project-user">
-            <img src="{{ Storage::url($project->author->image_url) }}">{{ $project->author->name }}
+            <img src="{{ Storage::url($project->user->image_url) }}">{{ $project->user->name }}
         </div>
         <ul>
             <li>開始：{{ date($project->start_date) }}</li>
@@ -45,7 +45,7 @@
             <div class="project-result-02">募集終了</div>
         @endif
 
-        <div class="project-num"><span>支援者数</span>{{ $project->getCheeringUsersCount() }}人</div>
+        <div class="project-num"><span>支援者数</span>{{ $project->getBillingUsersCount() }}人</div>
         <div class="project-num"><span>達成額</span>{{ number_format($project->getAchievementAmount()) }}円</div>
         <div class="project-num"><span>目標金額</span>{{ number_format($project->target_amount) }}円</div>
     </div>

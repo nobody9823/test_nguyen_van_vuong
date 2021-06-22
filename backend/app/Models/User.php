@@ -93,7 +93,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Project');
     }
 
-    public function plans()
+    public function billingPlans()
     {
         return $this->belongsToMany('App\Models\Plan', 'user_plan_billing')
             ->using('App\Models\UserPlanBilling')

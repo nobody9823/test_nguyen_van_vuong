@@ -59,7 +59,7 @@ class ProjectController extends Controller
         return view('user.project.show', ['project' => $project->load([
                 'projectFiles',
                 'plans',
-                'plans.users',
+                'plans.billingUsers',
                 'reports' => function ($query) {
                     $query->orderByDesc('created_at');
                 },

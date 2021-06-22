@@ -16,7 +16,7 @@
                     <div class="roject-banner-content">
                         <p class="project-banner-ttl">{{ $prop->title }}</p>
                         <div class="project-user">
-                            <img src="{{ Storage::url($prop->author->image_url) }}">{{ $prop->author->name }}
+                            <img src="{{ Storage::url($prop->user->image_url) }}">{{ $prop->user->name }}
                         </div>
                         <ul>
                             <li>開始：{{ date($prop->start_date) }}</li>
@@ -38,7 +38,7 @@
                             <div class="project-result-02">募集終了</div>
                         @endif
 
-                        <div class="project-num"><span>支援者数</span>{{ $prop->getCheeringUsersCount() }}人</div>
+                        <div class="project-num"><span>支援者数</span>{{ $prop->getBillingUsersCount() }}人</div>
                         <div class="project-num"><span>達成額</span>{{ number_format($prop->getAchievementAmount()) }}円</div>
                         <div class="project-num"><span>目標金額</span>{{ number_format($prop->target_amount) }}円</div>
                     </div>
