@@ -42,7 +42,7 @@ class Project extends Model
         parent::boot();
         static::deleting(function(Project $project){
             // プロジェクト画像と動画の論理削除
-            $project->projectFile()->delete();
+            $project->projectFiles()->delete();
             $project->projectTagTagging()->delete();
             // プランのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();

@@ -17,6 +17,7 @@ class AddColumnsToUsersTable extends Migration
             $table->date('birthday')->after('password');
             $table->string('gender')->after('birthday');
             $table->string('introduction')->after('gender');
+            $table->string('phone_number')->after('introduction');
             $table->boolean('birthday_is_published')->after('introduction');
             $table->boolean('gender_is_published')->after('birthday_is_published');
             $table->string('inviter_code')->after('gender_is_published');
@@ -35,6 +36,7 @@ class AddColumnsToUsersTable extends Migration
             $table->dropColumn('birthday');
             $table->dropColumn('gender');
             $table->dropColumn('introduction');
+            $table->dropColumn('phone_number');
             $table->dropColumn('birthday_is_published');
             $table->dropColumn('gender_is_published');
             $table->dropColumn('deleted_at');

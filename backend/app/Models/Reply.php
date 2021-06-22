@@ -10,7 +10,7 @@ class Reply extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function comments()
+    public function comment()
     {
         return $this->belongsTo('App\Models\Comment');
     }
