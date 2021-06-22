@@ -11,8 +11,7 @@
         <p>{{ $plan->estimated_return_date }}</p>
     </div>
 
-    @if( date($project->end_date < now()) || ($plan->options->every(function($option){ return $option->quantity === 0;}) 
-    & !$plan->options->isEmpty()) )
+    @if( date($project->end_date < now()) || ($plan->limit_of_supporters === 0) )
         <p class="plan-btn-end">募集終了</p>
     @elseif( date($project->start_date) > now() )
         <p class="plan-btn-pre">公開前</p>

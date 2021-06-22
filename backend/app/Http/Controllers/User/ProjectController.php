@@ -56,10 +56,14 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
-        return view(
-            'user.project.show',
-            ['project' => $project->load(['projectFiles', 'plans', 'plans.users','reports'])]
-        );
+        return view('user.project.show', ['project' => $project->load([
+                'projectFiles',
+                'plans',
+                'plans.users',
+                'reports' => function ($query) {
+                    $query->orderByDesc('created_at');
+                },
+            ])]);
     }
 
     /**

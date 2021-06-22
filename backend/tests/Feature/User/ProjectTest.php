@@ -17,17 +17,21 @@ class ProjectTest extends TestCase
         parent::setUp();
 
         $this->users = User::factory()
-            ->has(Project::factory())
+            ->has(Project::factory()->state([
+                'release_status' => '掲載中'
+            ]))
             ->count(10)->create();
     }
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
+
+    public function testIndexAction()
     {
         $response = $this->get('/');
-        $response->assertStatus(200);
+        $response->assertOk();
+    }
+
+    public function testShowAction()
+    {
+        $response = $this->get(route('user.project.show', ['project' => Project::first()]));
+        $response->assertOk();
     }
 }
