@@ -102,10 +102,10 @@ class Project extends Model
     {
         return $this->hasMany('App\Models\Comment');
     }
-    // FIXME 命名が抽象的すぎるので直したい
-    public function scopeGetProjects($query)
+
+    public function scopeGetProjectsWithPaginate($query)
     {
-        return $query->with('talent')->orderBy('created_at', 'desc')->paginate(10);
+        return $query->with(['user',])->orderBy('created_at', 'desc')->paginate(10);
     }
 
     public function scopeGetReleasedProject()

@@ -26,7 +26,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::getProjects();
+        $projects = Project::getProjectsWithPaginate();
         return view('admin.project.index', ['projects' => $projects]);
     }
 
