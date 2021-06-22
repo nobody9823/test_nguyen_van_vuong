@@ -124,15 +124,15 @@ class Project extends Model
 
     public function scopeTakeWithRelations($query, $int)
     {
-        return $query->take($int)->with(['talent', 'projectImages', 'plans', 'activityReports']);
+        return $query->take($int)->with(['projectFiles', 'plans', 'plans.users', 'reports']);
     }
 
     public function scopeOrdeyByFundingAmount($query)
     {
         return $query
-        // projectsテーブルにplans,user_plan_cheeringテーブルを結合する
+        // projectsテーブルにplans,user_plan_billingテーブルを結合する
         ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('user_plan_cheering', 'plans.id', '=', 'user_plan_cheering.plan_id')
+        ->join('user_plan_billing', 'plans.id', '=', 'user_plan_billing.plan_id')
         // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
         ->select('plans.project_id','projects.*',DB::raw('SUM(plans.price) as funding_amount'))
         ->groupBy('plans.project_id')->orderBy('funding_amount','DESC');
@@ -141,11 +141,11 @@ class Project extends Model
     public function scopeOrdeyByNumberOfSupporters($query)
     {
         return $query
-        // projectsテーブルにplans,user_plan_cheeringテーブルを結合する
+        // projectsテーブルにplans,user_plan_billingテーブルを結合する
         ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('user_plan_cheering', 'plans.id', '=', 'user_plan_cheering.plan_id')
+        ->join('user_plan_billing', 'plans.id', '=', 'user_plan_billing.plan_id')
         // 結合テーブル内のplans.project_idが同じものは、その人数を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('count(user_plan_cheering.user_id) as number_of_user'))
+        ->select('plans.project_id','projects.*',DB::raw('count(user_plan_billing.user_id) as number_of_user'))
         ->groupBy('plans.project_id')
         ->orderBy('number_of_user', 'DESC');
     }
@@ -165,11 +165,11 @@ class Project extends Model
         return $query->where('start_date', '>', Carbon::now())->orderBy(\DB::raw('abs(datediff(CURDATE(), start_date))'), "ASC");
     }
 
-    public function scopeOnlyCheeringDisplay($query)
+    public function scopeOnlyBillingDisplay($query)
     {
         return $query
         ->whereIn('projects.id',Plan::select('project_id')
-        ->whereIn('id',UserPlanCheering::select('plan_id')
+        ->whereIn('id',UserPlanBilling::select('plan_id')
         ->whereIn('user_id',User::select('id')->where('id', Auth::id())
         )));
     }
