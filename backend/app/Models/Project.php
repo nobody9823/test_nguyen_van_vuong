@@ -71,16 +71,16 @@ class Project extends Model
         return $this->hasMany('App\Models\Plan');
     }
 
-    public function users()
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function usersProjectLiked()
     {
         return $this->belongsToMany('App\Models\User', 'user_project_liked')
             ->using('App\Models\UserProjectLiked')
             ->withTimestamps();
-    }
-
-    public function userProjectLiked()
-    {
-        return $this->hasMany('App\Models\UserProjectLiked');
     }
 
     public function reports()
@@ -238,7 +238,7 @@ class Project extends Model
 
     public function getTotalLikesAttribute()
     {
-        return $this->users()->count() + $this->added_like;
+        return $this->usersProjectLiked()->count() + $this->added_like;
     }
     /**
      * Get Japanese formatted start time of project with day of the week

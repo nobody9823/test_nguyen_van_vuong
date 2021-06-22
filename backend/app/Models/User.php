@@ -89,11 +89,16 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
-    public function projects()
+    public function projectsLiked()
     {
         return $this->belongsToMany('App\Models\Project', 'user_project_liked')
             ->using('App\Models\UserProjectLiked')
             ->withTimestamps();
+    }
+
+    public function projects()
+    {
+        return $this->hasMany('App\Models\Project');
     }
 
     public function userAddresses()
