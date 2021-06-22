@@ -10,7 +10,7 @@ class Search extends Component
 {
     public $sort_type;
     public $word;
-    public $category_id;
+    public $tag_id;
     public $free_word;
     public $holding_check;
     public $cheered_check;
@@ -23,7 +23,7 @@ class Search extends Component
     {
         $this->sort_type = $request->get('sort_type');
         $this->word = $request->get('word');
-        $this->category_id = $request->get('category_id');
+        $this->tag_id = $request->get('tag_id');
         $this->free_word = $request->get('free_word');
         $this->holding_check = $request->get('holding_check');
         $this->cheered_check = $request->get('cheered_check');

@@ -34,4 +34,10 @@ class ProjectTest extends TestCase
         $response = $this->get(route('user.project.show', ['project' => Project::first()]));
         $response->assertOk();
     }
+
+    public function testSearchAction()
+    {
+        $response = $this->get(route('user.search'));
+        $response->assertOk();
+    }
 }

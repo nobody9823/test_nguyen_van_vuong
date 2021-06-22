@@ -6,26 +6,24 @@
 @foreach($projects as $project)
 <div class="project-one my-page_project-one project-card-rel">
     <div class="project-img">
-        @if($project->category)
-        <span class="project-cat">{{ $project->category->name }}</span>
-        @else
-        <span class="project-cat">no category</span>
-        @endif
+        @foreach($project->tags as $tag)
+        <span class="project-cat">{{ $tag->name }}</span>
+        @endforeach
         <button class="project-like" id="{{ $project->id }}">
-            @if ($project->users()->find(Auth::id()) !== null)
+            @if ($project->likedUsers()->find(Auth::id()) !== null)
             <i class="fas fa-heart project-like-icon"></i>
             @else
             <i class="far fa-heart project-like-icon"></i>
             @endif
         </button>
-        @if ($project->projectImages->isNotEmpty())
-        <img src="{{ Storage::url($project->projectImages[0]->image_url) }}">
+        @if ($project->projectFiles->isNotEmpty())
+        <img src="{{ Storage::url($project->projectFiles[0]->file_url) }}">
         @endif
     </div>
     <div class="project-content">
         <p class="project-content-ttl"><a href="{{ route('user.project.show', ['project' => $project]) }}">{{ $project->title }}</a></p>
         <div class="project-user">
-            <img src="{{ Storage::url($project->talent->image_url) }}">{{ $project->talent->name }}
+            <img src="{{ Storage::url($project->author->image_url) }}">{{ $project->author->name }}
         </div>
         <ul>
             <li>開始：{{ date($project->start_date) }}</li>
