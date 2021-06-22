@@ -152,7 +152,8 @@ class Project extends Model
 
     public function scopeOrdeyByLikedUsers($query)
     {
-        return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
+        // return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
+        return $query->withCount('users')->orderBy('users_count', 'DESC');
     }
 
     public function scopeOrderByNearlyDeadline($query)
