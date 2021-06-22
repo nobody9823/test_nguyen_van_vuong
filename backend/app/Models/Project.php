@@ -234,7 +234,7 @@ class Project extends Model
 
     public function getTotalLikesAttribute()
     {
-        return $this->usersProjectLiked()->count() + $this->added_like;
+        return $this->likedUsers()->count() + $this->added_like;
     }
     /**
      * Get Japanese formatted start time of project with day of the week
