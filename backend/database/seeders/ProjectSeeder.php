@@ -31,19 +31,10 @@ class ProjectSeeder extends Seeder
             ->each(function(Project $project){
                 $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->create());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->create());
-                $project->plans()->saveMany(Plan::factory(rand(1, 10))->create())
-                ->each(function(Plan $plan){
-                    $plan->userPlanBilling()->saveMany(UserPlanBilling::factory(random_int(3, 10))->make())
-                        ->each(function(UserPlanBilling $user_plan_billing){
-                            $user_plan_billing->messageContents()->saveMany(MessageContent::factory(rand(1, 10))->create());
-                        });
-                });
+                $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
                 $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
-                $project->comments()->saveMany(Comment::factory(rand(1, 5))->create())
-                ->each(function(Comment $comment){
-                    $comment->replies()->saveMany(Reply::factory(rand(1, 5))->create());
-                });
-                $project->usersProjectLiked()->attach(User::inRandomOrder()->first()->id);
+                $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->make());
+                $project->likedUsers()->attach(User::inRandomOrder()->first()->id);
             });
     }
 }

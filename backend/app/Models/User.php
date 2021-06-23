@@ -88,23 +88,23 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\SupporterComment', 'App\Models\UserSupporterCommentLiked');
     }
 
-    public function plans()
+    public function projects()
+    {
+        return $this->hasMany('App\Models\Project');
+    }
+
+    public function billingPlans()
     {
         return $this->belongsToMany('App\Models\Plan', 'user_plan_billing')
             ->using('App\Models\UserPlanBilling')
             ->withTimestamps();
     }
 
-    public function projectsLiked()
+    public function likedProjects()
     {
         return $this->belongsToMany('App\Models\Project', 'user_project_liked')
             ->using('App\Models\UserProjectLiked')
             ->withTimestamps();
-    }
-
-    public function projects()
-    {
-        return $this->hasMany('App\Models\Project');
     }
 
     public function address()

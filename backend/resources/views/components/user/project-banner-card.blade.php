@@ -6,19 +6,17 @@
             <div>
                 <a class="project-banner" href="{{ route('user.project.show', ['project' => $prop]) }}">
                     <div class="project-banner-img">
-                        @if($prop->category)
-                        <span class="project-banner-cat">{{ $prop->category->name }}</span>
-                        @else
-                        <span class="project-banner-cat">no category</span>
-                        @endif
-                        @if ($prop->projectImages->isNotEmpty())
-                        <img src="{{ Storage::url($prop->projectImages[0]->image_url) }}">
+                        @foreach($prop->tags as $tag)
+                        <span class="project-banner-cat">{{ $tag->name }}</span>
+                        @endforeach
+                        @if ($prop->projectFiles->isNotEmpty())
+                        <img src="{{ Storage::url($prop->projectFiles[0]->image_url) }}">
                         @endif
                     </div>
                     <div class="roject-banner-content">
                         <p class="project-banner-ttl">{{ $prop->title }}</p>
                         <div class="project-user">
-                            <img src="{{ Storage::url($prop->talent->image_url) }}">{{ $prop->talent->name }}
+                            <img src="{{ Storage::url($prop->user->image_url) }}">{{ $prop->user->name }}
                         </div>
                         <ul>
                             <li>開始：{{ date($prop->start_date) }}</li>
@@ -40,7 +38,7 @@
                             <div class="project-result-02">募集終了</div>
                         @endif
 
-                        <div class="project-num"><span>支援者数</span>{{ $prop->getCheeringUsersCount() }}人</div>
+                        <div class="project-num"><span>支援者数</span>{{ $prop->getBillingUsersCount() }}人</div>
                         <div class="project-num"><span>達成額</span>{{ number_format($prop->getAchievementAmount()) }}円</div>
                         <div class="project-num"><span>目標金額</span>{{ number_format($prop->target_amount) }}円</div>
                     </div>

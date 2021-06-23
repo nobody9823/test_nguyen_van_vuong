@@ -30,7 +30,7 @@ class Project extends Model
 
     private int $achievement_amount = 0;
     private int $achievement_rate = 0;
-    private int $cheering_users_count = 0;
+    private int $billing_users_count = 0;
     private bool $achievement_is_calculated = false;
 
     public static function boot()
@@ -68,10 +68,10 @@ class Project extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
-    public function usersProjectLiked()
+    public function likedUsers()
     {
         return $this->belongsToMany('App\Models\User', 'user_project_liked')
             ->using('App\Models\UserProjectLiked')
@@ -124,15 +124,15 @@ class Project extends Model
 
     public function scopeTakeWithRelations($query, $int)
     {
-        return $query->take($int)->with(['talent', 'projectImages', 'plans', 'activityReports']);
+        return $query->take($int)->with(['projectFiles', 'plans', 'plans.billingUsers', 'reports']);
     }
 
     public function scopeOrdeyByFundingAmount($query)
     {
         return $query
-        // projectsテーブルにplans,user_plan_cheeringテーブルを結合する
+        // projectsテーブルにplans,user_plan_billingテーブルを結合する
         ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('user_plan_cheering', 'plans.id', '=', 'user_plan_cheering.plan_id')
+        ->join('user_plan_billing', 'plans.id', '=', 'user_plan_billing.plan_id')
         // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
         ->select('plans.project_id','projects.*',DB::raw('SUM(plans.price) as funding_amount'))
         ->groupBy('plans.project_id')->orderBy('funding_amount','DESC');
@@ -141,18 +141,19 @@ class Project extends Model
     public function scopeOrdeyByNumberOfSupporters($query)
     {
         return $query
-        // projectsテーブルにplans,user_plan_cheeringテーブルを結合する
+        // projectsテーブルにplans,user_plan_billingテーブルを結合する
         ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('user_plan_cheering', 'plans.id', '=', 'user_plan_cheering.plan_id')
+        ->join('user_plan_billing', 'plans.id', '=', 'user_plan_billing.plan_id')
         // 結合テーブル内のplans.project_idが同じものは、その人数を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('count(user_plan_cheering.user_id) as number_of_user'))
+        ->select('plans.project_id','projects.*',DB::raw('count(user_plan_billing.user_id) as number_of_user'))
         ->groupBy('plans.project_id')
         ->orderBy('number_of_user', 'DESC');
     }
 
     public function scopeOrdeyByLikedUsers($query)
     {
-        return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
+        // return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
+        return $query->withCount('likedUsers')->orderBy('liked_users_count', 'DESC');
     }
 
     public function scopeOrderByNearlyDeadline($query)
@@ -165,11 +166,11 @@ class Project extends Model
         return $query->where('start_date', '>', Carbon::now())->orderBy(\DB::raw('abs(datediff(CURDATE(), start_date))'), "ASC");
     }
 
-    public function scopeOnlyCheeringDisplay($query)
+    public function scopeOnlyBillingDisplay($query)
     {
         return $query
         ->whereIn('projects.id',Plan::select('project_id')
-        ->whereIn('id',UserPlanCheering::select('plan_id')
+        ->whereIn('id',UserPlanBilling::select('plan_id')
         ->whereIn('user_id',User::select('id')->where('id', Auth::id())
         )));
     }
@@ -233,7 +234,7 @@ class Project extends Model
 
     public function getTotalLikesAttribute()
     {
-        return $this->usersProjectLiked()->count() + $this->added_like;
+        return $this->likedUsers()->count() + $this->added_like;
     }
     /**
      * Get Japanese formatted start time of project with day of the week
@@ -256,14 +257,14 @@ class Project extends Model
     }
 
     /**
-     * Get number of cheering users
+     * Get number of Billing users
      *
      * @return int
      */
-    public function getCheeringUsersCount(): int
+    public function getBillingUsersCount(): int
     {
         $this->calculateAchieve();
-        return $this->cheering_users_count;
+        return $this->billing_users_count;
     }
 
     /**
@@ -289,7 +290,7 @@ class Project extends Model
     }
 
     /**
-     * Calculate achievement amount ,achievement rate and number of cheering users
+     * Calculate achievement amount ,achievement rate and number of Billing users
      *
      * @return void
      */
@@ -300,17 +301,17 @@ class Project extends Model
             return;
         }
 
-        $plans =  $this->plans()->with('users')->get();
+        $plans =  $this->plans()->with('billingUsers')->get();
         // 応援プランを支援したユーザーの総数
-        $cheering_users_count = 0;
+        $billing_users_count = 0;
         // 現在の達成額
         $achievement_amount = 0;
 
         //それぞれのプランの応援人数から支援総額と応援人数の合計を算出
         foreach($plans as $plan) {
-            $users_count = count($plan->users);
+            $users_count = count($plan->billingUsers);
             $achievement_amount += $plan->price * $users_count;
-            $cheering_users_count += $users_count;
+            $billing_users_count += $users_count;
         }
         // 金額の達成率の算出
         if ($this->target_amount > 0) {
@@ -319,7 +320,7 @@ class Project extends Model
             $achievement_rate = 100;
         }
 
-        $this->cheering_users_count = $cheering_users_count;
+        $this->billing_users_count = $billing_users_count;
         $this->achievement_amount = $achievement_amount;
         $this->achievement_rate = $achievement_rate;
     }
@@ -330,18 +331,18 @@ class Project extends Model
     }
 
     // プロジェクトの持つプランをログインしているユーザーが支援しているかを確認
-    public function isCheering()
+    public function isBilling()
     {
-        $plans = $this->plans()->with('users')->get();
-        $is_cheering = false;
+        $plans = $this->plans()->with('billingUsers')->get();
+        $is_billing = false;
         foreach ($plans as $plan) {
-            $result = $plan->users()->find(Auth::id());
+            $result = $plan->billingUsers()->find(Auth::id());
             if ($result !== null) {
-                $is_cheering = true;
+                $is_billing = true;
                 break;
             }
         }
-        return $is_cheering;
+        return $is_billing;
     }
 
     public function saveProjectImages(array $images): void

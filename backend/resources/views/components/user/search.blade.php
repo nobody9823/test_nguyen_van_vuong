@@ -13,7 +13,7 @@
         <div>
             <p>カテゴリ</p>
             <div>
-                {{ Form::select("category_id", $categories(), old('category_id',$category_id),['rel' => 'dropdown','placeholder' => '指定しない','id' => 'category']) }}
+                {{ Form::select("tag_id", $tags(), old('tag_id',$tag_id),['rel' => 'dropdown','placeholder' => '指定しない','id' => 'tag']) }}
             </div>
         </div>
         <div>

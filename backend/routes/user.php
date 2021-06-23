@@ -16,8 +16,8 @@ use App\Http\Controllers\User\RegisterController;
 Route::get('/', [ProjectController::class, 'index'])->name('index');
 Route::get('/search', [ProjectController::class, 'search'])->name('search');
 Route::post('/project/{project}/liked', [ProjectController::class, 'ProjectLiked'])->name('user.project.liked');
-
 Route::resource('project', ProjectController::class)->only('show')->middleware('project.released');
+
 Route::prefix('project/{project}')->middleware('auth', 'project.released')->group(function () {
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
     Route::get('plan/{plan}/address', [PlanController::class, 'address'])->name('plan.address');
@@ -26,9 +26,11 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{plan}/join_for_payjp/{unique_token}', [PlanController::class, 'joinPlanForPayJp'])->name('plan.join_for_payjp');
     Route::get('plan/{plan}/join_for_paypay/{unique_token}', [PlanController::class, 'joinPlanForPayPay'])->name('plan.join_for_paypay');
     Route::get('plan/{plan}/success', [PlanController::class, 'success'])->name('plan.success');
-    Route::post('supporter_comment/post', [SupporterCommentController::class, 'postComment'])->name('supporter_comment.post');
+    // FIXME CommentControllerに修正
+    // Route::post('supporter_comment/post', [SupporterCommentController::class, 'postComment'])->name('supporter_comment.post');
 });
-Route::post('supporter_comment/{supporter_comment}/liked', [SupporterCommentController::class, 'commentLiked'])->name('user.supporter_comment.liked');
+// FIXME CommentControllerに修正
+// Route::post('supporter_comment/{supporter_comment}/liked', [SupporterCommentController::class, 'commentLiked'])->name('user.supporter_comment.liked');
 
 //---------------------dashboard-----------------------------------------------
 Route::group(['middleware' => ['auth:web']], function () {

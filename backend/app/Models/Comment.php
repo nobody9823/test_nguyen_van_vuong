@@ -18,8 +18,8 @@ class Comment extends Model
         });
     }
 
-    public function replies()
+    public function reply()
     {
-        return $this->hasMany('App\Models\Reply');
+        return $this->hasOne('App\Models\Reply');
     }
 }

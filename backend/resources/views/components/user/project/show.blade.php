@@ -36,24 +36,24 @@
         </div>
         <h2 class="sec-ttl">{{ $project->title }}</h2>
         <div class="project-user detail-user"><img
-                src="{{ Storage::url($project->talent->image_url) }}">{{ $project->talent->name }}</div>
+                src="{{ Storage::url($project->user->image_url) }}">{{ $project->user->name }}</div>
         <div class="detail_info">
             <div class="detail_imgs">
                 <div class="detail-slider-for">
-                    @foreach($project->projectImages as $project_image)
-                    <div><img src="{{ Storage::url($project_image->image_url) }}"></div>
+                    @foreach($project->projectFiles as $project_file)
+                    <div><img src="{{ Storage::url($project_file->file_url) }}"></div>
                     @endforeach
-                    @if($project->projectVideo !== null)
-                        {{ DisplayVideoHelper::getVideoAtUser(optional(optional($project)->projectVideo)->video_url) }}
-                    @endif
+                    {{-- @if($project->projectVideo !== null)
+                        <div>{{ DisplayVideoHelper::getThumbnail(optional(optional($project)->projectVideo)->video_url) }}</div>
+                    @endif --}}
                 </div>
                 <div class="detail-slider-nav">
-                    @foreach($project->projectImages as $project_image)
-                    <div><img src="{{ Storage::url($project_image->image_url) }}"></div>
+                    @foreach($project->projectFiles as $project_file)
+                    <div><img src="{{ Storage::url($project_file->file_url) }}"></div>
                     @endforeach
-                    @if($project->projectVideo !== null)
+                    {{-- @if($project->projectVideo !== null)
                         <div>{{ DisplayVideoHelper::getThumbnail(optional(optional($project)->projectVideo)->video_url) }}</div>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
             <div class="detail_info_content">
@@ -73,18 +73,18 @@
             </div>
             @endif
             <p><i class="fas fa-hands-helping pri_color_f i_icon"></i>現在の支援者数</p>
-            <div><span>{{ $project->getCheeringUsersCount() }}人</span></div>
+            <div><span>{{ $project->getBillingUsersCount() }}人</span></div>
             <p><i class="far fa-clock pri_color_f i_icon"></i>開催期間</p>
             <div>
                 {{ $project->getStartDate() }}～<br>{{ $project->getEndDate() }}
             </div>
             <p><i class="fab fa-itunes-note pri_color_f i_icon"></i>アイドル</p>
             <div class="project-user detail-user">
-                <img src="{{ Storage::url($project->talent->image_url) }}">
-                {{ $project->talent->name }}
+                <img src="{{ Storage::url($project->user->image_url) }}">
+                {{ $project->user->name }}
             </div>
             <div class="liked_project" id="{{ $project->id }}">
-                @if ($project->users()->find(Auth::id()) !== null)
+                @if ($project->likedUsers()->find(Auth::id()) !== null)
                 <img src="/image/liked-project-button.png">
                 @else
                 <img src="/image/like-project-button.png">
@@ -119,21 +119,8 @@
                         <div class="about">
                             <h2>応援プロジェクト概要</h2>
                             <section class="project-explanation-detail">
-                                <h3 class="headline">【自己紹介・挨拶】</h3>
                                 <section class="detail-content-section">
-                                    {{ $project->greeting_and_introduce }}
-                                </section>
-                                <h3 class="headline">【プロジェクトを立ち上げたきっかけ】</h3>
-                                <section class="detail-content-section">
-                                    {{ $project->opportunity }}
-                                </section>
-                                <h3 class="headline">【プロジェクト内容】</h3>
-                                <section class="detail-content-section">
-                                    {{ $project->explanation }}
-                                </section>
-                                <h3 class="headline">【終わりに】</h3>
-                                <section class="detail-content-section">
-                                    {{ $project->finally }}
+                                    {{ $project->content }}
                                 </section>
                             </section>
                         </div>
@@ -156,19 +143,17 @@
                     <div class="tab_type2">
                         <div class="news-list">
                             <h2>活動報告</h2>
-                            @foreach($project->activityReports as $activity_report)
+                            @foreach($project->reports as $report)
                             <div class="news">
                                 <p class="news-date">
-                                    {{ date_format($activity_report->created_at, 'Y'.'年'.'m'.'月'.'d'.'日') }}</p>
-                                <p class="news-ttl">{{ $activity_report->title }}</p>
+                                    {{ date_format($report->created_at, 'Y'.'年'.'m'.'月'.'d'.'日') }}</p>
+                                <p class="news-ttl">{{ $report->title }}</p>
                                 <div class="news-imgs">
                                     <div class="news-imgs-for news-imgs-for1">
-                                        @foreach($activity_report->activityReportImages as $image)
-                                        <div><img src="{{ Storage::url($image->image_url) }}"></div>
-                                        @endforeach
+                                        <div><img src="{{ Storage::url($report->image_url) }}"></div>
                                     </div>
                                 </div>
-                                <div class="news-txt" style="white-space: pre-line;">{{ $activity_report->content }}
+                                <div class="news-txt" style="white-space: pre-line;">{{ $report->content }}
                                 </div>
                             </div>
                             @endforeach
@@ -180,9 +165,9 @@
 
         {{--支援者ページ--}}
         <div class="detail_tab_content" id="detail_item_03_content">
-            @if ($project->isCheering() === true)
+            @if ($project->isBilling() === true)
             <div class="detail_tab_content_description">
-                @elseif($project->isCheering() === false)
+                @elseif($project->isBilling() === false)
                 <div class="text-center" style="color:#ff1493">
                     <h2>※応援プランを支援された方のみ閲覧可能です。</h2>
                 </div>
@@ -191,12 +176,13 @@
                     <!--detail_item_03内容-->
                     <div class="tabcontent">
                         <div class="tab_type3">
-                            @if ($project->supporterComments()->where('user_id', Auth::id())->first() === null)
+                            @if ($project->comments()->where('user_id', Auth::id())->first() === null)
                             <div class="post-form">
                                 <div class="text-center" style="color:#ff1493">
                                     <h2>※支援者ページへの投稿は一回までです。</h2>
                                 </div>
-                                <form action="{{ route('user.supporter_comment.post', ['project' => $project]) }}"
+                                {{-- FIXME Comment系リファクタリング後に適用 --}}
+                                {{-- <form action="{{ route('user.comment.post', ['project' => $project]) }}"
                                     enctype="multipart/form-data" method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -206,51 +192,46 @@
                                     <div class="form-grpup">
                                         <input type="file" name="image" id="imageUploader">
                                     </div>
-                                    @if ($project->isCheering() === true)
+                                    @if ($project->isBilling() === true)
                                     <div class="plan-btn-wrap" name="image" style="margin-top: 8px;">
                                         <button type="submit" class="plan-btn">支援者ページに投稿する</button>
                                     </div>
                                     @endif
-                                </form>
+                                </form> --}}
                             </div>
                             @endif
-                            @if ($project->isCheering() === true)
-                            @foreach($project->supporterComments()->orderBy('created_at', 'desc')->get() as
-                            $supporter_comment)
+                            @if ($project->isBilling() === true)
+                            @foreach($project->comments as $comment)
                             <div class="post">
                                 <div class="post-icons">
-                                    <p class="liked" id="{{ $supporter_comment->id }}">
-                                        @if ($supporter_comment->likedUsers()->find(Auth::id()) !== null)
+                                    <p class="liked" id="{{ $comment->id }}">
+                                        @if ($comment->likedUsers()->find(Auth::id()) !== null)
                                         <img src="/image/liked-icon.png" style="cursor: pointer">
                                         @else
                                         <img src="/image/like-icon.png" style="cursor: pointer">
                                         @endif
-                                        <div class="like-count" id="{{ count($supporter_comment->likedUsers) }}">
-                                            {{ count($supporter_comment->likedUsers) }}</div>
+                                        <div class="like-count" id="{{ count($comment->likedUsers) }}">
+                                            {{ count($comment->likedUsers) }}</div>
                                     </p>
                                 </div>
                                 <div class="post_in">
                                     <p class="post-user"><img src="/image/user-icon.png"></p>
                                     <div class="post-content">
-                                        <p class="post-name">{{ $supporter_comment->user->name }} <span
-                                                class="post-date">{{ date_format($supporter_comment->created_at, 'Y'.'年'.'m'.'月'.'d'.'日') }}</span>
+                                        <p class="post-name">{{ $comment->user->name }} <span
+                                                class="post-date">{{ date_format($comment->created_at, 'Y'.'年'.'m'.'月'.'d'.'日') }}</span>
                                         </p>
                                         <p class="post-txt" style="white-space: pre-line;">
-                                            {{ $supporter_comment->content }}</p>
-                                        @if ($supporter_comment->image_url)
-                                        <p class="post-img"><img
-                                                src="{{ Storage::url($supporter_comment->image_url) }}"></p>
-                                        @endif
-                                        @if ($supporter_comment->repliesToSupporterComment)
+                                            {{ $comment->content }}</p>
+                                        @if ($comment->reply)
                                         <div class="comment">
                                             <p class="comment-user"><img
-                                                    src="{{ Storage::url($supporter_comment->talent->first()->image_url) }}">
+                                                    src="{{ Storage::url($comment->reply->user->image_url) }}">
                                             </p>
                                             <div class="comment-content">
                                                 <p class="comment-txt">
-                                                    {{ $supporter_comment->repliesToSupporterComment->content }}</p>
+                                                    {{ $comment->reply->content }}</p>
                                                 <p class="comment-date">
-                                                    {{ date_format($supporter_comment->repliesToSupporterComment->created_at, 'Y'.'年'.'m'.'月'.'d'.'日') }}
+                                                    {{ date_format($comment->reply->created_at, 'Y'.'年'.'m'.'月'.'d'.'日') }}
                                                 </p>
                                             </div>
                                         </div>
@@ -259,7 +240,7 @@
                                 </div>
                             </div>
                             @endforeach
-                            @elseif ($project->isCheering() === false)
+                            @elseif ($project->isBilling() === false)
                             <div class="post">
                                 <p class="post-name">これはサンプルです</p>
                                 <div class="post-icons">
