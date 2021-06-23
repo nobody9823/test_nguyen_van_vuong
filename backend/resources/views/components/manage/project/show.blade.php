@@ -327,23 +327,21 @@
                                                 {{--クソみたいな感じになってしまいました、誰か解決法を鯉沼に教えてください。宜しくお願い致します。--}}
                                                 @foreach($project->plans as $plan)
                                                     @foreach($plan->users as $user)
-                                                        @foreach($user->userAddresses as $user_address)
-                                                            <tr>
-                                                                <td class="form-inline">
-                                                                <label class="checkbox-inline">
-                                                                    <input type="checkbox" name="user_ids[]"
-                                                                    value="{{ $user->id }}" style="margin-right: 1em;">
-                                                                    {{ $user->name }}
-                                                                </label>
-                                                                </td>
-                                                                <td>{{ $user->email }}</td>
-                                                                <td>{{ $plan->title }}</td>
-                                                                <td>{{ number_format($plan->price) }}円</td>
-                                                                <td>{{ date_format($user->pivot->created_at, "Y-m-d") }}</td>
-                                                                <td>{{ $plan->delivery_date }}</td>
-                                                                <td>{{ PrefectureHelper::getPrefectures()[$user_address->prefecture_id].$user_address->city.$user_address->block.$user_address->building }}</td>
-                                                            </tr>
-                                                        @endforeach
+                                                        <tr>
+                                                            <td class="form-inline">
+                                                            <label class="checkbox-inline">
+                                                                <input type="checkbox" name="user_ids[]"
+                                                                value="{{ $user->id }}" style="margin-right: 1em;">
+                                                                {{ $user->name }}
+                                                            </label>
+                                                            </td>
+                                                            <td>{{ $user->email }}</td>
+                                                            <td>{{ $plan->title }}</td>
+                                                            <td>{{ number_format($plan->price) }}円</td>
+                                                            <td>{{ date_format($user->pivot->created_at, "Y-m-d") }}</td>
+                                                            <td>{{ $plan->delivery_date }}</td>
+                                                            <td>{{ PrefectureHelper::getPrefectures()[$user->address->prefecture_id].$user->address->city.$user->address->block.$user->address->building }}</td>
+                                                        </tr>
                                                     @endforeach
                                                 @endforeach
                                             </table>
