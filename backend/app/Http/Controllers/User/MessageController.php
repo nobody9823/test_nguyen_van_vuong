@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageContentRequest;
 use App\Models\MessageContent;
-use App\Models\UserPlanCheering;
+use App\Models\UserPlanBilling;
 use App\Traits\message\MessageFunctions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +23,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $chating_messages = UserPlanCheering::where('user_id', Auth::id())->messaging()->seeking()->orderBy('updated_at', 'desc')->get();
-        $not_chating_messages = UserPlanCheering::where('user_id', Auth::id())->notMessaging()->seeking()->orderBy('updated_at', 'desc')->get();
+        $chating_messages = UserPlanBilling::where('user_id', Auth::id())->messaging()->seeking()->orderBy('updated_at', 'desc')->get();
+        $not_chating_messages = UserPlanBilling::where('user_id', Auth::id())->notMessaging()->seeking()->orderBy('updated_at', 'desc')->get();
         return view('user.mypage.message.index', [
             'chating_messages' => $chating_messages,
             'not_chating_messages' => $not_chating_messages,
@@ -47,10 +47,10 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MessageContentRequest $request, UserPlanCheering $user_plan_cheering)
+    public function store(MessageContentRequest $request, UserPlanBilling $user_plan_billing)
     {
-        $this->authorize('checkOwnedByUser', $user_plan_cheering);
-        if ($this->message_store($request, $user_plan_cheering, 'web')) {
+        $this->authorize('checkOwnedByUser', $user_plan_billing);
+        if ($this->message_store($request, $user_plan_billing, 'web')) {
             return redirect()->back()->with('flash_message', 'メッセージ送信が完了しました。');
         } else {
             return redirect()->back()->with('error', 'メッセージ送信に失敗しました。時間をおいてお試しください。');
@@ -63,13 +63,13 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(UserPlanCheering $message)
+    public function show(UserPlanBilling $message)
     {
         $this->authorize('checkOwnedByUser', $message);
         $message->messageContents()->readByUser();
         $selected_message = $message;
-        $chating_messages = UserPlanCheering::where('user_id', Auth::id())->messaging()->seeking()->orderBy('updated_at', 'desc')->get();
-        $not_chating_messages = UserPlanCheering::where('user_id', Auth::id())->notMessaging()->seeking()->orderBy('updated_at', 'desc')->get();
+        $chating_messages = UserPlanBilling::where('user_id', Auth::id())->messaging()->seeking()->orderBy('updated_at', 'desc')->get();
+        $not_chating_messages = UserPlanBilling::where('user_id', Auth::id())->notMessaging()->seeking()->orderBy('updated_at', 'desc')->get();
         return view('user.mypage.message.index', [
             'chating_messages' => $chating_messages,
             'not_chating_messages' => $not_chating_messages,
@@ -114,7 +114,7 @@ class MessageController extends Controller
     public function file_download(MessageContent $message_content)
     {
         $this->authorize('checkOwnedByUser', $message_content);
-        if ($message_content->userPlanCheering->user->id = Auth::guard()->id()) {
+        if ($message_content->userPlanBilling->user->id = Auth::guard()->id()) {
             return Storage::download($message_content->file_path, $message_content->file_original_name);
         } else {
             return redirect()->back()->with('error', '不正なアクセスを確認しました。時間をおいてお試しください。');

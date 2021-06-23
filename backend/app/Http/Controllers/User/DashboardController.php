@@ -22,7 +22,7 @@ class DashboardController extends Controller
      */
     public function plan(Request $request)
     {
-        $plans = User::find(Auth::id())->plans->load(['project', 'project.talent']);
+        $plans = User::find(Auth::id())->billingPlans->load(['project', 'project.user']);
         return view('user.mypage.plan', [
             'plans' => $plans,
         ]);
@@ -30,7 +30,7 @@ class DashboardController extends Controller
 
     public function comment()
     {
-        $comments = User::find(Auth::id())->supportComments->load(['project.plans', 'likedUsers', 'repliesToSupporterComment.talent']);
+        $comments = User::find(Auth::id())->comments->load(['project.plans', 'likedUsers', 'reply.user']);
         return view('user.mypage.comment', [
             'comments' => $comments,
         ]);
@@ -38,7 +38,7 @@ class DashboardController extends Controller
 
     public function project()
     {
-        $projects = User::find(Auth::id())->projects->load(['projectImages','category','talent']);
+        $projects = User::find(Auth::id())->likedProjects->load(['projectFiles','tags','user']);
         return view('user.mypage.project', [
             'projects' => $projects,
         ]);
@@ -46,9 +46,7 @@ class DashboardController extends Controller
 
     public function editProfile()
     {
-        $user = Auth::user();
-
-        return view('user.mypage.profile', ['user' => $user]);
+        return view('user.mypage.profile', ['user' => Auth::user()]);
     }
 
     public function updateProfile(UserProfileRequest $request, User $user)

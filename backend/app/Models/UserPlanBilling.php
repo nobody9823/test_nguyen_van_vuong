@@ -33,4 +33,24 @@ class UserPlanBilling extends Pivot
         // 招待者コードから検索する場合
         // return $this->belongsTo('App\Models\User', 'inviter_code', 'inviter_code');
     }
+
+    public function scopeMessaging($query)
+    {
+        return $query->whereIn('id', MessageContent::select('user_plan_billing_id'));
+    }
+
+    public function scopeNotMessaging($query)
+    {
+        return $query->whereNotIn('id', MessageContent::select('user_plan_billing_id'));
+    }
+
+    public function scopeSeeking($query)
+    {
+        return $query->whereIn('plan_id', Plan::select('id')->whereIn('project_id', Project::select('id')->seeking()));
+    }
+
+    public function scopeNotSeeking($query)
+    {
+        return $query->whereNotIn('plan_id', Plan::select('id')->whereIn('project_id', Project::select('id')->seeking()));
+    }
 }
