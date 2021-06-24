@@ -15,8 +15,8 @@ class Payment extends Model
         return $this->belongsTo('App\Models\Users');
     }
 
-    public function payments()
+    public function includedPlans()
     {
-        return $this->belongsToMany('App\Models\Payment', 'App\Models\PlanPaymentIncluded');
+        return $this->belongsToMany('App\Models\Plan', 'App\Models\PlanPaymentIncluded');
     }
 }
