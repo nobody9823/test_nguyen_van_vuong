@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\BankAccount;
+use App\Models\Profile;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -21,6 +22,7 @@ class UserSeeder extends Seeder
         User::factory(100)->create()->each(function(User $user){
             $user->address()->save(Address::factory()->make());
             $user->bankAccount()->save(BankAccount::factory()->make());
+            $user->profile()->save(Profile::factory()->make());
         });
     }
 }

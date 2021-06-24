@@ -66,6 +66,7 @@ class User extends Authenticatable
             $user->address()->delete();
             $user->snsLinks()->delete();
             $user->bankAccount()->delete();
+            $user->profile()->delete();
 
             // 中間テーブルの削除
             UserProjectLiked::where('user_id', $user->id)
@@ -110,6 +111,11 @@ class User extends Authenticatable
     public function address()
     {
         return $this->hasOne('App\Models\Address');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('App\Models\Profile');
     }
 
     public function snsUser()
