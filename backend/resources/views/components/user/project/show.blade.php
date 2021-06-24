@@ -36,7 +36,7 @@
         </div>
         <h2 class="sec-ttl">{{ $project->title }}</h2>
         <div class="project-user detail-user"><img
-                src="{{ Storage::url($project->user->image_url) }}">{{ $project->user->name }}</div>
+                src="{{ Storage::url($project->user->profile->image_url) }}">{{ $project->user->name }}</div>
         <div class="detail_info">
             <div class="detail_imgs">
                 <div class="detail-slider-for">
@@ -80,7 +80,7 @@
             </div>
             <p><i class="fab fa-itunes-note pri_color_f i_icon"></i>アイドル</p>
             <div class="project-user detail-user">
-                <img src="{{ Storage::url($project->user->image_url) }}">
+                <img src="{{ Storage::url($project->user->profile->image_url) }}">
                 {{ $project->user->name }}
             </div>
             <div class="liked_project" id="{{ $project->id }}">
