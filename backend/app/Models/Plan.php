@@ -120,15 +120,9 @@ class Plan extends Model
         return $this->belongsTo('App\Models\Project');
     }
 
-    public function billingUsers()
+    public function payments()
     {
-        return $this->belongsToMany('App\Models\User', 'user_plan_billing')
-                ->withPivot('created_at');
-    }
-
-    public function userPlanBilling()
-    {
-        return $this->hasMany('App\Models\UserPlanBilling');
+        return $this->belongsToMany('App\Models\Payment', 'App\Models\PlanPaymentIncluded');
     }
 
     public function deleteImage()
