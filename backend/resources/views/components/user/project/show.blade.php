@@ -165,9 +165,9 @@
 
         {{--支援者ページ--}}
         <div class="detail_tab_content" id="detail_item_03_content">
-            @if ($project->isBilling() === true)
+            @if ($project->isIncluded() === true)
             <div class="detail_tab_content_description">
-                @elseif($project->isBilling() === false)
+                @elseif($project->isIncluded() === false)
                 <div class="text-center" style="color:#ff1493">
                     <h2>※応援プランを支援された方のみ閲覧可能です。</h2>
                 </div>
@@ -192,7 +192,7 @@
                                     <div class="form-grpup">
                                         <input type="file" name="image" id="imageUploader">
                                     </div>
-                                    @if ($project->isBilling() === true)
+                                    @if ($project->isIncluded() === true)
                                     <div class="plan-btn-wrap" name="image" style="margin-top: 8px;">
                                         <button type="submit" class="plan-btn">支援者ページに投稿する</button>
                                     </div>
@@ -200,7 +200,7 @@
                                 </form> --}}
                             </div>
                             @endif
-                            @if ($project->isBilling() === true)
+                            @if ($project->isIncluded() === true)
                             @foreach($project->comments as $comment)
                             <div class="post">
                                 <div class="post-icons">
@@ -240,7 +240,7 @@
                                 </div>
                             </div>
                             @endforeach
-                            @elseif ($project->isBilling() === false)
+                            @elseif ($project->isIncluded() === false)
                             <div class="post">
                                 <p class="post-name">これはサンプルです</p>
                                 <div class="post-icons">
