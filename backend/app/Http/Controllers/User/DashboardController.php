@@ -8,6 +8,10 @@ use App\Http\Requests\UserProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Models\Payment;
+use App\Models\Plan;
+use App\Models\PlanPaymentIncluded;
+use App\Models\Project;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -20,25 +24,34 @@ class DashboardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function plan(Request $request)
+    // 購入履歴
+    public function paymentHistory()
     {
-        $plans = User::find(Auth::id())->billingPlans->load(['project', 'project.user']);
-        return view('user.mypage.plan', [
-            'plans' => $plans,
+        $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project']);
+        return view('user.mypage.payment', [
+            'payments' => $payments,
         ]);
     }
 
-    public function comment()
+    //
+    public function contributionComments()
     {
-        $comments = User::find(Auth::id())->comments->load(['project.plans', 'likedUsers', 'reply.user']);
+        $comments = Auth::user()->comments->load(['project.plans', 'likedUsers', 'reply.user']);
         return view('user.mypage.comment', [
             'comments' => $comments,
         ]);
     }
 
-    public function project()
+    // 応援購入したプロジェクト一覧
+    public function purchasedProjects()
     {
-        $projects = User::find(Auth::id())->likedProjects->load(['projectFiles','tags','user']);
+        $projects = Project::whereIn(
+            'id', Plan::query()->select('project_id')->whereIn(
+                'id', PlanPaymentIncluded::query()->select('plan_id')->whereIn(
+                    'payment_id', Payment::query()->select('id')->where('user_id', Auth::id())
+                )
+            )
+        )->with(['projectFiles', 'tags', 'likedUsers'])->get();
         return view('user.mypage.project', [
             'projects' => $projects,
         ]);
