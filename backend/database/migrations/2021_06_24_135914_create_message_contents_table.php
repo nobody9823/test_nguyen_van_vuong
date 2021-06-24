@@ -16,7 +16,7 @@ class CreateMessageContentsTable extends Migration
     {
         Schema::create('message_contents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_plan_billing_id')->constrained('user_plan_billing');
+            $table->foreignId('payment_id')->constrained('payments');
             $table->string('content');
             $table->string('file_path')->nullable();
             $table->string('file_original_name')->nullable();

@@ -33,7 +33,10 @@ class Plan extends Model
     {
         parent::boot();
         static::deleting(function(Plan $plan){
-            $plan->userPlanBilling()->delete();
+            $payment_ids = $plan->payments()->pluck('id');
+            PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
+            MessageContent::whereIn('payment_id', $payment_ids)->delete();
+            Payment::destroy($payment_ids)->delete();
         });
     }
 
@@ -120,15 +123,9 @@ class Plan extends Model
         return $this->belongsTo('App\Models\Project');
     }
 
-    public function billingUsers()
+    public function includedPayments()
     {
-        return $this->belongsToMany('App\Models\User', 'user_plan_billing')
-                ->withPivot('created_at');
-    }
-
-    public function userPlanBilling()
-    {
-        return $this->hasMany('App\Models\UserPlanBilling');
+        return $this->belongsToMany('App\Models\Payment', 'App\Models\PlanPaymentIncluded');
     }
 
     public function deleteImage()
