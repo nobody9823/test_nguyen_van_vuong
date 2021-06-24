@@ -181,8 +181,7 @@
                                 <div class="text-center" style="color:#ff1493">
                                     <h2>※支援者ページへの投稿は一回までです。</h2>
                                 </div>
-                                {{-- FIXME Comment系リファクタリング後に適用 --}}
-                                {{-- <form action="{{ route('user.comment.post', ['project' => $project]) }}"
+                                <form action="{{ route('user.comment.post', ['project' => $project]) }}"
                                     enctype="multipart/form-data" method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -197,7 +196,7 @@
                                         <button type="submit" class="plan-btn">支援者ページに投稿する</button>
                                     </div>
                                     @endif
-                                </form> --}}
+                                </form>
                             </div>
                             @endif
                             @if ($project->isBilling() === true)
