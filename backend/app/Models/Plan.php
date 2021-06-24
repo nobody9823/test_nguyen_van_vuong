@@ -123,7 +123,7 @@ class Plan extends Model
         return $this->belongsTo('App\Models\Project');
     }
 
-    public function payments()
+    public function includedPayments()
     {
         return $this->belongsToMany('App\Models\Payment', 'App\Models\PlanPaymentIncluded');
     }
