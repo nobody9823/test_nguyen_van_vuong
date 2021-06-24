@@ -18,6 +18,10 @@ class CreateProfilesTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->uuid('inviter_code');
             $table->string('image_url');
+            $table->string('first_name_kana');
+            $table->string('last_name_kana');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->date('birthday');
             $table->string('gender');
             $table->string('introduction');
