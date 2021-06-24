@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Enums\MessageStatus;
 
-class CreateUserPlanBillingTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,12 @@ class CreateUserPlanBillingTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_plan_billing', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('plan_id')->constrained('plans');
             $table->integer('inviter_id')->nullable();
+            $table->integer('price');
             $table->enum('message_status', MessageStatus::getValues())->default('ステータスなし');
             $table->string('merchant_payment_id')->unique();
             $table->string('pay_jp_id')->unique();
@@ -35,6 +36,6 @@ class CreateUserPlanBillingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_plan_billing');
+        Schema::dropIfExists('payments');
     }
 }
