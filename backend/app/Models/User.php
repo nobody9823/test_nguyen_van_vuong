@@ -74,8 +74,10 @@ class User extends Authenticatable
             $comment_ids = Comment::where('user_id', $user->id)->pluck('id')->toArray();
             Reply::whereIn('comment_id', $comment_ids)->delete();
             Comment::destroy($comment_ids);
-            UserPlanBilling::where('user_id', $user->id)
-                ->update(['deleted_at' => Carbon::now()]);
+            $payment_ids = $user->payments()->pluck('id');
+            MessageContent::whereIn('payment_id', $payment_ids)->delete();
+            PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
+            Payment::destroy($payment_ids);
         });
     }
 
@@ -94,11 +96,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Project');
     }
 
-    public function billingPlans()
+    public function payments()
     {
-        return $this->belongsToMany('App\Models\Plan', 'user_plan_billing')
-            ->using('App\Models\UserPlanBilling')
-            ->withTimestamps();
+        return $this->hasMany('App\Models\Payment');
     }
 
     public function likedProjects()
@@ -126,11 +126,6 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Models\Comment');
-    }
-
-    public function invitedPayments()
-    {
-        return $this->hasMany('App\Models\UserPlanBilling', 'inviter_id');
     }
 
     public function replies()
