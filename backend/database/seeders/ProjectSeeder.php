@@ -34,7 +34,7 @@ class ProjectSeeder extends Seeder
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->create());
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())
                     ->each(function(Plan $plan){
-                        $plan->payments()->saveMany(Payment::factory(rand(1, 5))->make());
+                        $plan->includedPayments()->saveMany(Payment::factory(rand(1, 5))->make());
                     });
                 $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
                 $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->make());
