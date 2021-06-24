@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use App\Models\Project;
-use App\Models\UserAddress;
+use App\Models\Address;
 use App\Models\UserPlanCheering;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ class PlanController extends Controller
 
   protected $payjp;
 
-  public function __construct(UserAddress $address, PayPayInterface $paypay_interface, PayJpInterface $payjp_interface)
+  public function __construct(Address $address, PayPayInterface $paypay_interface, PayJpInterface $payjp_interface)
   {
     $this->middleware(function ($request, $next) {
         $this->user = \Auth::user();
