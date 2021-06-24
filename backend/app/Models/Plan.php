@@ -33,7 +33,10 @@ class Plan extends Model
     {
         parent::boot();
         static::deleting(function(Plan $plan){
-            $plan->userPlanBilling()->delete();
+            $payment_ids = $plan->payments()->pluck('id');
+            PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
+            MessageContent::whereIn('payment_id', $payment_ids)->delete();
+            Payment::destroy($payment_ids)->delete();
         });
     }
 
