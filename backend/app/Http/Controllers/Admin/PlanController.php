@@ -35,13 +35,8 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request, Project $project)
-    {
-        $request->contribution ? $contribution = 'contribution' : $contribution = null;   
-        return view('admin.plan.create',
-        [
-            'project' => $project,
-            'contribution' => $contribution,
-        ]);
+    {   
+        return view('admin.plan.create', ['project' => $project]);
     }
 
     /**
