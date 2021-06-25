@@ -29,7 +29,7 @@
         <input class="form-check-input" type="radio" name="address_is_required" id="inlineRadio1" value="1" {{ optional($plan)->address_is_required ? 'checked' : '' }}>
         <label class="form-check-label" for="inlineRadio1">あり</label>
     </div>
-    <div class="form-check ">
+    <div class="form-check">
         <input class="form-check-input" type="radio" name="address_is_required" id="inlineRadio1" value="0" {{ optional($plan)->address_is_required || !isset($plan) ? '' : 'checked' }}>
         <label class="form-check-label" for="inlineRadio2">なし</label>
     </div>

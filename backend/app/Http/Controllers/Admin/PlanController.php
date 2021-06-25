@@ -49,13 +49,10 @@ class PlanController extends Controller
     {
             DB::beginTransaction();
             try {
-                if ($request->contribution) {
-                    $plan->saveContributionPlans($request, $project);
-                } else {
-                    $plan->project_id = $project->id;
-                    $plan->fill($request->all())->save();
-                }
-                $plan->saveOptions($request);
+                $plan->project_id = $project->id;
+                $plan->fill($request->all())->save();
+                // NOTE:現状オプションは使用しない為、コメントアウト
+                // $plan->saveOptions($request);
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollback();
