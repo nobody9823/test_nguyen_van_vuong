@@ -33,7 +33,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    //
+    // 投稿コメント一覧
     public function contributionComments()
     {
         $comments = Auth::user()->comments->load(['project.plans', 'likedUsers', 'reply.user']);
@@ -57,15 +57,18 @@ class DashboardController extends Controller
         ]);
     }
 
+    // プロフィール一覧,編集画面
     public function editProfile()
     {
-        return view('user.mypage.profile', ['user' => Auth::user()]);
+        return view('user.mypage.profile', ['user' => Auth::user()->load('profile')]);
     }
 
+    // プロフィール更新処理
     public function updateProfile(UserProfileRequest $request, User $user)
     {
-        $user->fill($request->all())->save();
-        return redirect()->route('user.edit_profile')->with('flash_message', 'プロフィール更新が成功しました。');
+        return $user->fill($request->all())->save()
+            ? redirect()->route('user.edit_profile')->with('flash_message', 'プロフィール更新が成功しました。')
+            : redirect()->back()->withErrors("プロフィールの更新に失敗しました。管理者にお問い合わせください。");
     }
 
     public function get_change_password()
