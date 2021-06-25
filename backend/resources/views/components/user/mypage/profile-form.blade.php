@@ -1,4 +1,4 @@
-@if($requestType() === 'name')
+@if(Request::get('input_type') === 'name')
     <a href="{{ route('user.profile') }}">戻る</a>
     <h3>ユーザー名</h3>
     <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
@@ -8,7 +8,7 @@
         <input name="name" type="text" placeholder="UserId"/>
         <button type="submit">変更する</button>
     </form>
-@elseif($requestType() === 'email')
+@elseif(Request::get('input_type') === 'email')
     <a href="{{ route('user.profile') }}">戻る</a>
     <h3>メールアドレス</h3>
     <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
@@ -22,7 +22,7 @@
         <input name="email_confirmation" type="email"/>
         <button type="submit">変更する</button>
     </form>
-@elseif($requestType() === 'password')
+@elseif(Request::get('input_type') === 'password')
     <a href="{{ route('user.profile') }}">戻る</a>
     <h3>パスワード</h3>
     <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
@@ -39,7 +39,7 @@
         <input name="new_password_confirmation" type="password"/>
         <button type="submit">変更する</button>
     </form>
-@elseif($requestType() === 'forgot_password')
+@elseif(Request::get('input_type') === 'forgot_password')
     <a href="{{ route('user.profile') }}">戻る</a>
     <h3>パスワード再設定</h3>
     <form action="{{ route('user.send_reset_password_mail') }}" method="POST">
@@ -49,7 +49,7 @@
         <button type="submit">再設定メールを送信</button>
         <p>会員登録時にご登録して頂いたメールアドレスを入力してください。パスワード再発行手続きのメールを送信します。</p>
     </form>
-@elseif($requestType() === 'birthday')
+@elseif(Request::get('input_type') === 'birthday')
     <a href="{{ route('user.profile') }}">戻る</a>
     <h3>生年月日</h3>
     <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
@@ -73,7 +73,7 @@
         </select>
         <button type="submit">変更する</button>
     </form>
-@elseif($requestType() === 'gender')
+@elseif(Request::get('input_type') === 'gender')
     <a href="{{ route('user.profile') }}">戻る</a>
     <h3>性別</h3>
     <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
@@ -92,7 +92,7 @@
         </select>
         <button type="submit">変更する</button>
     </form>
-@elseif($requestType() === 'introduction')
+@elseif(Request::get('input_type') === 'introduction')
     <a href="{{ route('user.profile') }}">戻る</a>
     <h3>自己紹介</h3>
     <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
