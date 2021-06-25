@@ -36,7 +36,7 @@
         </div>
         <h2 class="sec-ttl">{{ $project->title }}</h2>
         <div class="project-user detail-user"><img
-                src="{{ Storage::url($project->user->image_url) }}">{{ $project->user->name }}</div>
+                src="{{ Storage::url($project->user->profile->image_url) }}">{{ $project->user->name }}</div>
         <div class="detail_info">
             <div class="detail_imgs">
                 <div class="detail-slider-for">
@@ -80,7 +80,7 @@
             </div>
             <p><i class="fab fa-itunes-note pri_color_f i_icon"></i>アイドル</p>
             <div class="project-user detail-user">
-                <img src="{{ Storage::url($project->user->image_url) }}">
+                <img src="{{ Storage::url($project->user->profile->image_url) }}">
                 {{ $project->user->name }}
             </div>
             <div class="liked_project" id="{{ $project->id }}">
@@ -181,8 +181,7 @@
                                 <div class="text-center" style="color:#ff1493">
                                     <h2>※支援者ページへの投稿は一回までです。</h2>
                                 </div>
-                                {{-- FIXME Comment系リファクタリング後に適用 --}}
-                                {{-- <form action="{{ route('user.comment.post', ['project' => $project]) }}"
+                                <form action="{{ route('user.comment.post', ['project' => $project]) }}"
                                     enctype="multipart/form-data" method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -197,25 +196,20 @@
                                         <button type="submit" class="plan-btn">支援者ページに投稿する</button>
                                     </div>
                                     @endif
-                                </form> --}}
+                                </form>
                             </div>
                             @endif
                             @if ($project->isBilling() === true)
                             @foreach($project->comments as $comment)
                             <div class="post">
-                                <div class="post-icons">
-                                    <p class="liked" id="{{ $comment->id }}">
-                                        @if ($comment->likedUsers()->find(Auth::id()) !== null)
-                                        <img src="/image/liked-icon.png" style="cursor: pointer">
-                                        @else
-                                        <img src="/image/like-icon.png" style="cursor: pointer">
-                                        @endif
-                                        <div class="like-count" id="{{ count($comment->likedUsers) }}">
-                                            {{ count($comment->likedUsers) }}</div>
-                                    </p>
-                                </div>
                                 <div class="post_in">
-                                    <p class="post-user"><img src="/image/user-icon.png"></p>
+                                    <p class="post-user">
+                                        @if(isset($comment->user->profile->image_url))
+                                        <img src="{{ Storage::url($comment->user->profile->image_url) }}">
+                                        @else
+                                        <img src="/image/user-icon.png">
+                                        @endif
+                                    </p>
                                     <div class="post-content">
                                         <p class="post-name">{{ $comment->user->name }} <span
                                                 class="post-date">{{ date_format($comment->created_at, 'Y'.'年'.'m'.'月'.'d'.'日') }}</span>
@@ -224,8 +218,12 @@
                                             {{ $comment->content }}</p>
                                         @if ($comment->reply)
                                         <div class="comment">
-                                            <p class="comment-user"><img
-                                                    src="{{ Storage::url($comment->reply->user->image_url) }}">
+                                            <p class="comment-user">
+                                                @if(isset($comment->reply->user->profile->image_url))
+                                                <img src="{{ Storage::url($comment->reply->user->profile->image_url) }}">
+                                                @else
+                                                <img src="/image/user-icon.png">
+                                                @endif
                                             </p>
                                             <div class="comment-content">
                                                 <p class="comment-txt">
@@ -243,12 +241,6 @@
                             @elseif ($project->isBilling() === false)
                             <div class="post">
                                 <p class="post-name">これはサンプルです</p>
-                                <div class="post-icons">
-                                    <p>
-                                        <img src="/image/liked-icon.png" style="cursor: pointer">
-                                        <div class="like-count">5</div>
-                                    </p>
-                                </div>
                                 <div class="post_in">
                                     <p class="post-user"><img src="/image/user-icon.png"></p>
                                     <div class="post-content">
