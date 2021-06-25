@@ -90,6 +90,9 @@
                 <img src="/image/like-project-button.png">
                 @endif
             </div>
+            <div class="plan-btn-wrap">
+                <a href="{{ route('user.plan.selectPlans', ['project' => $project]) }}" class="plan-btn">支援する</a>
+            </div>
         </div>
     </div>
     <div class="detail_tabs">
@@ -203,23 +206,9 @@
                             @if ($project->isIncluded() === true)
                             @foreach($project->comments as $comment)
                             <div class="post">
-                                <div class="post-icons">
-                                    <p class="liked" id="{{ $comment->id }}">
-                                        @if ($comment->likedUsers()->find(Auth::id()) !== null)
-                                        <img src="/image/liked-icon.png" style="cursor: pointer">
-                                        @else
-                                        <img src="/image/like-icon.png" style="cursor: pointer">
-                                        @endif
-                                        <div class="like-count" id="{{ count($comment->likedUsers) }}">
-                                            {{ count($comment->likedUsers) }}</div>
-                                    </p>
-                                </div>
                                 <div class="post_in">
                                     <p class="post-user"><img src="/image/user-icon.png"></p>
                                     <div class="post-content">
-                                        <p class="post-name">{{ $comment->user->name }} <span
-                                                class="post-date">{{ date_format($comment->created_at, 'Y'.'年'.'m'.'月'.'d'.'日') }}</span>
-                                        </p>
                                         <p class="post-txt" style="white-space: pre-line;">
                                             {{ $comment->content }}</p>
                                         @if ($comment->reply)
