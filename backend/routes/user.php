@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/payment_history', [DashboardController::class, 'paymentHistory'])->name('payment_history');
     Route::get('/contribution_comments', [DashboardController::class, 'contributionComments'])->name('contribution_comments');
     Route::get('/purchased_projects', [DashboardController::class, 'purchasedProjects'])->name('purchased_projects');
+    Route::get('/liked_projects', [DashboardController::class, 'likedProjects'])->name('liked_projects');
     Route::get('/profile', [DashboardController::class, 'editProfile'])->name('edit_profile');
     Route::post('/profile/{user}', [DashboardController::class, 'updateProfile'])->name('update_profile');
     Route::get('/change_password', [DashboardController::class, 'get_change_password'])->name('change_password');

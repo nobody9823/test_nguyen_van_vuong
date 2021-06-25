@@ -48,11 +48,12 @@
                     @auth
 
 
-                    <a href="{{ route('user.plan') }}" id="mypage-js" class="main_menu">マイページ</a>
+                    <a href="{{ route('user.edit_profile') }}" id="mypage-js" class="main_menu">マイページ</a>
                     <ul class="main_menu-body">
-                        <li><a href="{{ route('user.plan') }}">支援プラン一覧</a></li>
-                        <li><a href="{{ route('user.comment') }}">支援コメント一覧</a></li>
-                        <li><a href="{{ route('user.project') }}">お気に入り<br>プロジェクト一覧</a></li>
+                        <li><a href="{{ route('user.payment_history') }}">購入履歴</a></li>
+                        <li><a href="{{ route('user.contribution_comments') }}">投稿コメント</a></li>
+                        <li><a href="{{ route('user.purchased_projects') }}">応援購入した<br>プロジェクト</a></li>
+                        <li><a href="{{ route('user.liked_projects') }}">お気に入り<br>プロジェクト</a></li>
                     </ul>
 
 

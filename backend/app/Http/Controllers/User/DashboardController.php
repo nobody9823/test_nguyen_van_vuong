@@ -28,9 +28,12 @@ class DashboardController extends Controller
     public function paymentHistory()
     {
         $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project']);
-        return view('user.mypage.payment', [
-            'payments' => $payments,
-        ]);
+
+        dd($payments);
+        // FIXME 画面ができたら適用
+        // return view('user.mypage.payment', [
+        //     'payments' => $payments,
+        // ]);
     }
 
     // 投稿コメント一覧
@@ -57,6 +60,14 @@ class DashboardController extends Controller
         ]);
     }
 
+    // お気に入りプロジェクト一覧
+    public function likedProjects()
+    {
+        return view('user.mypage.project', [
+            'projects' => Auth::user()->likedProjects->load(['projectFiles', 'tags', 'likedUsers'])
+        ]);
+    }
+
     // プロフィール一覧,編集画面
     public function editProfile()
     {
@@ -71,27 +82,32 @@ class DashboardController extends Controller
             : redirect()->back()->withErrors("プロフィールの更新に失敗しました。管理者にお問い合わせください。");
     }
 
+    // パスワード変更画面
     public function get_change_password()
     {
         return view('user.mypage.change_password');
     }
 
+    // パスワードの更新
     public function post_change_password(UserPasswordRequest $request, User $user)
     {
-        $user->password = $request->new_password;
-        $user->save();
-        return redirect()->back()->with('flash_message', "パスワード変更が成功しました。");
+        return $user->save(['password' => $request->new_password])
+            ? redirect()->back()->with('flash_message', "パスワード変更が成功しました。")
+            : redirect()->back()->withErrors("パスワードの更新に失敗いたしました。管理者にお問い合わせください。");
     }
 
+    // パスワードを忘れた方はこちら
     public function get_reset_password()
     {
         return view('user.reset_password');
     }
 
+    // FIXME パスワードを忘れた方はこちらからの処理未実装
     public function post_reset_password()
     {
     }
 
+    // 退会画面
     public function withdraw()
     {
         return view('user.mypage.withdraw');
@@ -99,11 +115,9 @@ class DashboardController extends Controller
 
     public function delete_user(User $user)
     {
-        if ($user->id === Auth::id()) {
-            $user->delete();
-            return redirect('/')->with('flash_message', '退会が完了しました。またのご利用をお待ちしております。');
-        } else {
-            return redirect()->back()->with('flash_message', '退会手続きに失敗しました。');
-        }
+        $user = User::find($user->id);
+        return $user->delete()
+            ? redirect('/')->with('flash_message', '退会が完了しました。またのご利用をお待ちしております。')
+            : redirect()->back()->with('flash_message', '退会手続きに失敗しました。');
     }
 }
