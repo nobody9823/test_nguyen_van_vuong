@@ -18,6 +18,7 @@ class CreatePlanPaymentIncludedTable extends Migration
             $table->foreignId('plan_id')->constrained('plans');
             $table->foreignId('payment_id')->constrained('payments');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

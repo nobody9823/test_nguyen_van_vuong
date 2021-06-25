@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SupporterCommentRequest extends FormRequest
+class CommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,6 @@ class SupporterCommentRequest extends FormRequest
     {
         return [
             'content' => ['required', 'string', 'max:255'],
-            'image' => ['nullable', 'image']
         ];
     }
 
@@ -34,7 +33,6 @@ class SupporterCommentRequest extends FormRequest
             'content.required' => "投稿内容を入力してください。",
             'content.string' => "投稿内容は文字で入力してください。",
             'content.max' => "投稿内容は255文字以内にしてください。",
-            'image.image' => "投稿する画像の拡張子を確認してください。"
         ];
     }
 }

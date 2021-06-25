@@ -62,6 +62,7 @@ class ProjectController extends Controller
                 'projectFiles',
                 'plans',
                 'plans.includedPayments',
+                'plans.includedPayments.user',
                 'reports' => function ($query) {
                     $query->orderByDesc('created_at');
                 },

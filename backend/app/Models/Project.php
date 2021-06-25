@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Storage;
 
+use function PHPUnit\Framework\isEmpty;
+
 class Project extends Model
 {
     use HasFactory, SoftDeletes;
@@ -127,7 +129,7 @@ class Project extends Model
 
     public function scopeTakeWithRelations($query, $int)
     {
-        return $query->take($int)->with(['projectFiles', 'plans', 'plans.includedPayments', 'reports']);
+        return $query->take($int)->with(['projectFiles', 'plans', 'plans.includedPayments', 'plans.includedPayments.user', 'reports']);
     }
 
     public function scopeOrdeyByFundingAmount($query)
@@ -304,7 +306,7 @@ class Project extends Model
             return;
         }
 
-        $plans =  $this->plans()->with('includedPayments')->get();
+        $plans =  $this->plans()->withCount('includedPayments')->get();
         // 応援プランを支援したユーザーの総数
         $included_users_count = 0;
         // 現在の達成額
@@ -312,9 +314,8 @@ class Project extends Model
 
         //それぞれのプランの応援人数から支援総額と応援人数の合計を算出
         foreach($plans as $plan) {
-            $users_count = count($plan->includedPayments);
-            $achievement_amount += $plan->price * $users_count;
-            $included_users_count += $users_count;
+            $achievement_amount += $plan->price * $plan->included_payments_count;
+            $billing_users_count += $plan->included_payments_count;
         }
         // 金額の達成率の算出
         if ($this->target_amount > 0) {
@@ -336,14 +337,14 @@ class Project extends Model
     // プロジェクトの持つプランをログインしているユーザーが支援しているかを確認
     public function isIncluded()
     {
-        $plans = $this->plans()->with('includedPayments')->get();
-        $is_included = false;
-        foreach ($plans as $plan) {
-            $result = $plan->includedPayments()->find(Auth::id());
-            if ($result !== null) {
-                $is_included = true;
-                break;
-            }
+        $plans = $this->plans()->whereIn(
+            'id',PlanPaymentIncluded::query()->select('plan_id')->whereIn(
+            'payment_id',Payment::query()->select('id')->where(
+            'user_id', Auth::id()
+        )))->get();
+        $is_billing = false;
+        if (!$plans->isEmpty()) {
+            $is_billing = true;
         }
         return $is_included;
     }

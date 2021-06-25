@@ -5,7 +5,7 @@ use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\MessageController;
 use App\Http\Controllers\User\PlanController;
 use App\Http\Controllers\User\ProjectController;
-use App\Http\Controllers\User\SupporterCommentController;
+use App\Http\Controllers\User\CommentController;
 use App\Http\Controllers\User\TopPageController;
 use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\InquiryController;
@@ -28,11 +28,8 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{plan}/join_for_payjp/{unique_token}', [PlanController::class, 'joinPlanForPayJp'])->name('plan.join_for_payjp');
     Route::get('plan/{plan}/join_for_paypay/{unique_token}', [PlanController::class, 'joinPlanForPayPay'])->name('plan.join_for_paypay');
     Route::get('plan/{plan}/success', [PlanController::class, 'success'])->name('plan.success');
-    // FIXME CommentControllerに修正
-    // Route::post('supporter_comment/post', [SupporterCommentController::class, 'postComment'])->name('supporter_comment.post');
+    Route::post('comment/post', [CommentController::class, 'postComment'])->name('comment.post');
 });
-// FIXME CommentControllerに修正
-// Route::post('supporter_comment/{supporter_comment}/liked', [SupporterCommentController::class, 'commentLiked'])->name('user.supporter_comment.liked');
 
 //---------------------dashboard-----------------------------------------------
 Route::group(['middleware' => ['auth:web']], function () {
