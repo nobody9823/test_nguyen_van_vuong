@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\MessageController;
 use App\Http\Controllers\User\PlanController;
@@ -9,6 +8,7 @@ use App\Http\Controllers\User\CommentController;
 use App\Http\Controllers\User\TopPageController;
 use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\InquiryController;
+use App\Http\Controllers\User\MypageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\RegisterController;
 
@@ -33,17 +33,17 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
 
 //---------------------dashboard-----------------------------------------------
 Route::group(['middleware' => ['auth:web']], function () {
-    Route::get('/payment_history', [DashboardController::class, 'paymentHistory'])->name('payment_history');
-    Route::get('/contribution_comments', [DashboardController::class, 'contributionComments'])->name('contribution_comments');
-    Route::get('/purchased_projects', [DashboardController::class, 'purchasedProjects'])->name('purchased_projects');
-    Route::get('/liked_projects', [DashboardController::class, 'likedProjects'])->name('liked_projects');
-    Route::get('/profile', [DashboardController::class, 'editProfile'])->name('edit_profile');
-    Route::post('/profile/{user}', [DashboardController::class, 'updateProfile'])->name('update_profile');
-    Route::get('/change_password', [DashboardController::class, 'get_change_password'])->name('change_password');
-    Route::post('/change_password/{user}', [DashboardController::class, 'post_change_password'])->name('check.change_password');
-    Route::get('/reset_password', [DashboardController::class, 'get_reset_password'])->name('reset_password');
-    Route::get('/withdraw', [DashboardController::class, 'withdraw'])->name('withdraw');
-    Route::delete('/withdraw/{user}', [DashboardController::class, 'delete_user'])->name('delete_user');
+    Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
+    Route::get('/contribution_comments', [MypageController::class, 'contributionComments'])->name('contribution_comments');
+    Route::get('/purchased_projects', [MypageController::class, 'purchasedProjects'])->name('purchased_projects');
+    Route::get('/liked_projects', [MypageController::class, 'likedProjects'])->name('liked_projects');
+    Route::get('/profile', [MypageController::class, 'editProfile'])->name('edit_profile');
+    Route::post('/profile/{user}', [MypageController::class, 'updateProfile'])->name('update_profile');
+    Route::get('/change_password', [MypageController::class, 'get_change_password'])->name('change_password');
+    Route::post('/change_password/{user}', [MypageController::class, 'post_change_password'])->name('check.change_password');
+    Route::get('/reset_password', [MypageController::class, 'get_reset_password'])->name('reset_password');
+    Route::get('/withdraw', [MypageController::class, 'withdraw'])->name('withdraw');
+    Route::delete('/withdraw/{user}', [MypageController::class, 'delete_user'])->name('delete_user');
 
     Route::resource('message', MessageController::class)->only(['index','show']);
     Route::post('message/{user_plan_cheering}', [MessageController::class,'store'])->name('message_content.store');

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class DashboardController extends Controller
+class MypageController extends Controller
 {
     /**
      * Handle the incoming request.
