@@ -28,7 +28,7 @@
     <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
         @method('PATCH')
         @csrf
-        <a href="{{ route('user.profile', ['input_type' => 'forgot_password']) }}">
+        <a href="{{ route('user.forgot_password') }}">
             パスワードを忘れた方はこちら
         </a>
         <label>現在のパスワード</label>
@@ -38,16 +38,6 @@
         <label>新しいパスワード（確認用）※コピー＆ペースト不可</label>
         <input name="new_password_confirmation" type="password"/>
         <button type="submit">変更する</button>
-    </form>
-@elseif(Request::get('input_type') === 'forgot_password')
-    <a href="{{ route('user.profile') }}">戻る</a>
-    <h3>パスワード再設定</h3>
-    <form action="{{ route('user.send_reset_password_mail') }}" method="POST">
-        @csrf
-        <label>メールアドレスを入力</label>
-        <input name="email" type="email" placeholder="メールアドレス"/>
-        <button type="submit">再設定メールを送信</button>
-        <p>会員登録時にご登録して頂いたメールアドレスを入力してください。パスワード再発行手続きのメールを送信します。</p>
     </form>
 @elseif(Request::get('input_type') === 'birthday')
     <a href="{{ route('user.profile') }}">戻る</a>

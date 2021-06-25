@@ -82,18 +82,9 @@ class MypageController extends Controller
             : redirect()->back()->withErrors("プロフィールの更新に失敗しました。管理者にお問い合わせください。");
     }
 
-    // パスワード変更画面
-    public function get_change_password()
+    public function forgotPassword()
     {
-        return view('user.mypage.change_password');
-    }
-
-    // パスワードの更新
-    public function post_change_password(UserPasswordRequest $request, User $user)
-    {
-        return $user->save(['password' => $request->new_password])
-            ? redirect()->back()->with('flash_message', "パスワード変更が成功しました。")
-            : redirect()->back()->withErrors("パスワードの更新に失敗いたしました。管理者にお問い合わせください。");
+        return view('user.forgot_password');
     }
 
     // FIXME パスワードを忘れた方はこちらからの処理未実装

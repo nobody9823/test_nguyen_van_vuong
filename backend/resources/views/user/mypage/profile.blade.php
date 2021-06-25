@@ -1,6 +1,6 @@
 @extends('user.layouts.base')
 
-@section('title', 'プロフィール')
+@section('title', 'マイページ | プロフィール')
 
 @section('content')
     <div class="content">

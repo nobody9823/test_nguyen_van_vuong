@@ -38,8 +38,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/purchased_projects', [MypageController::class, 'purchasedProjects'])->name('purchased_projects');
     Route::get('/liked_projects', [MypageController::class, 'likedProjects'])->name('liked_projects');
     Route::get('/profile', [MypageController::class, 'profile'])->name('profile');
-    Route::post('/profile/{user}', [MypageController::class, 'updateProfile'])->name('update_profile');
-    Route::post('/reset_password', [MypageController::class, 'sendResetPasswordMail'])->name('send_reset_password_mail');
+    Route::patch('/profile/{user}', [MypageController::class, 'updateProfile'])->name('update_profile');
     Route::get('/withdraw', [MypageController::class, 'withdraw'])->name('withdraw');
     Route::delete('/withdraw/{user}', [MypageController::class, 'delete_user'])->name('delete_user');
 
@@ -65,6 +64,9 @@ Route::get('/tradelaw', [TopPageController::class, 'tradelaw'])->name('tradelaw'
 Route::get('/terms', [TopPageController::class, 'terms'])->name('terms');
 Route::get('/privacy_policy', [TopPageController::class, 'privacyPolicy'])->name('privacy_policy');
 
+//---------------------Forgot Password-----------------------------------------------
+Route::get('/forgot_password', [MypageController::class, 'forgotPassword'])->name('forgot_password');
+Route::post('/send_reset_password_mail', [MypageController::class, 'sendResetPasswordMail'])->name('send_reset_password_mail');
 // --------------------password reset-------------------
 Route::get('/password_reset/{token}', [PasswordResetController::class, 'reset'])->name('password.reset');
 Route::post('/password_reset', [PasswordResetController::class, 'update'])->name('password.update');
