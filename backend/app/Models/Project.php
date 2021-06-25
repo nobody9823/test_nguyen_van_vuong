@@ -32,7 +32,7 @@ class Project extends Model
 
     private int $achievement_amount = 0;
     private int $achievement_rate = 0;
-    private int $billing_users_count = 0;
+    private int $included_users_count = 0;
     private bool $achievement_is_calculated = false;
 
     public static function boot()
@@ -44,7 +44,10 @@ class Project extends Model
             $project->projectTagTagging()->delete();
             // プランのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
-            UserPlanBilling::whereIn('plan_id', $plan_ids)->delete();
+            $payment_ids = Payment::whereIn('plan', $plan_ids)->pluck('id');
+            PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
+            MessageContent::whereIn('payment_id', $payment_ids)->delete();
+            Payment::destroy($payment_ids)->delete();
             Plan::destroy($plan_ids);
             // コメントのリレーション先も論理削除
             $comment_ids = $project->comments()->pluck('id')->toArray();
@@ -266,7 +269,7 @@ class Project extends Model
     public function getBillingUsersCount(): int
     {
         $this->calculateAchieve();
-        return $this->billing_users_count;
+        return $this->included_users_count;
     }
 
     /**
@@ -305,14 +308,14 @@ class Project extends Model
 
         $plans =  $this->plans()->withCount('includedPayments')->get();
         // 応援プランを支援したユーザーの総数
-        $billing_users_count = 0;
+        $included_users_count = 0;
         // 現在の達成額
         $achievement_amount = 0;
 
         //それぞれのプランの応援人数から支援総額と応援人数の合計を算出
         foreach($plans as $plan) {
             $achievement_amount += $plan->price * $plan->included_payments_count;
-            $billing_users_count += $plan->included_payments_count;
+            $included_users_count += $plan->included_payments_count;
         }
         // 金額の達成率の算出
         if ($this->target_amount > 0) {
@@ -321,7 +324,7 @@ class Project extends Model
             $achievement_rate = 100;
         }
 
-        $this->billing_users_count = $billing_users_count;
+        $this->included_users_count = $included_users_count;
         $this->achievement_amount = $achievement_amount;
         $this->achievement_rate = $achievement_rate;
     }
@@ -332,18 +335,18 @@ class Project extends Model
     }
 
     // プロジェクトの持つプランをログインしているユーザーが支援しているかを確認
-    public function isBilling()
+    public function isIncluded()
     {
         $plans = $this->plans()->whereIn(
             'id',PlanPaymentIncluded::query()->select('plan_id')->whereIn(
             'payment_id',Payment::query()->select('id')->where(
             'user_id', Auth::id()
         )))->get();
-        $is_billing = false;
+        $is_included = false;
         if (!$plans->isEmpty()) {
-            $is_billing = true;
+            $is_included = true;
         }
-        return $is_billing;
+        return $is_included;
     }
 
     public function saveProjectImages(array $images): void

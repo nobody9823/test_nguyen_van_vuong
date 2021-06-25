@@ -128,10 +128,6 @@
                 </div>
                 <div>
                     <p><a href="https://plus-p.jp/contact/">掲載希望者の方へ</a></p>
-                    <ul>
-                        <li><a href="{{ route('company.pre_create') }}">企業アカウント作成</a></li>
-                        <li><a href="{{ route('talent.pre_create') }}">タレントアカウント作成</a></li>
-                    </ul>
                     {{--                <p><a href="">オンラインストア</a></p>--}}
                     {{--                <ul>--}}
                     {{--                    <li><a href="">ガーディアンストア</a></li>--}}

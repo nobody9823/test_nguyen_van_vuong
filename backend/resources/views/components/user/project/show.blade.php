@@ -90,6 +90,9 @@
                 <img src="/image/like-project-button.png">
                 @endif
             </div>
+            <div class="plan-btn-wrap">
+                <a href="{{ route('user.plan.selectPlans', ['project' => $project]) }}" class="plan-btn">支援する</a>
+            </div>
         </div>
     </div>
     <div class="detail_tabs">
@@ -165,9 +168,9 @@
 
         {{--支援者ページ--}}
         <div class="detail_tab_content" id="detail_item_03_content">
-            @if ($project->isBilling() === true)
+            @if ($project->isIncluded() === true)
             <div class="detail_tab_content_description">
-                @elseif($project->isBilling() === false)
+                @elseif($project->isIncluded() === false)
                 <div class="text-center" style="color:#ff1493">
                     <h2>※応援プランを支援された方のみ閲覧可能です。</h2>
                 </div>
@@ -191,7 +194,7 @@
                                     <div class="form-grpup">
                                         <input type="file" name="image" id="imageUploader">
                                     </div>
-                                    @if ($project->isBilling() === true)
+                                    @if ($project->isIncluded() === true)
                                     <div class="plan-btn-wrap" name="image" style="margin-top: 8px;">
                                         <button type="submit" class="plan-btn">支援者ページに投稿する</button>
                                     </div>
@@ -199,7 +202,7 @@
                                 </form>
                             </div>
                             @endif
-                            @if ($project->isBilling() === true)
+                            @if ($project->isIncluded() === true)
                             @foreach($project->comments as $comment)
                             <div class="post">
                                 <div class="post_in">
@@ -211,9 +214,6 @@
                                         @endif
                                     </p>
                                     <div class="post-content">
-                                        <p class="post-name">{{ $comment->user->name }} <span
-                                                class="post-date">{{ date_format($comment->created_at, 'Y'.'年'.'m'.'月'.'d'.'日') }}</span>
-                                        </p>
                                         <p class="post-txt" style="white-space: pre-line;">
                                             {{ $comment->content }}</p>
                                         @if ($comment->reply)
@@ -238,7 +238,7 @@
                                 </div>
                             </div>
                             @endforeach
-                            @elseif ($project->isBilling() === false)
+                            @elseif ($project->isIncluded() === false)
                             <div class="post">
                                 <p class="post-name">これはサンプルです</p>
                                 <div class="post_in">
