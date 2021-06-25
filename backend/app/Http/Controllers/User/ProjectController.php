@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use App\Models\Project;
+use App\Models\Plan;
+use App\Http\Requests\ConfirmPaymentRequest;
 use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
 use Illuminate\Http\Request;
@@ -59,7 +61,7 @@ class ProjectController extends Controller
         return view('user.project.show', ['project' => $project->load([
                 'projectFiles',
                 'plans',
-                'plans.billingUsers',
+                'plans.includedPayments',
                 'reports' => function ($query) {
                     $query->orderByDesc('created_at');
                 },
@@ -98,6 +100,30 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Select a plans
+     *
+     * @param Project
+     * @return \Illuminate\Http\Response
+     */
+    public function selectPlans(Project $project)
+    {
+        $project->load('plans');
+        return view('user.project.select_plan', ['project' => $project]);
+    }
+
+    /**
+     * Confirm selected plans
+     *
+     * @param Project
+     * @return \Illuminate\Http\Response
+     */
+    public function confirmPayment(Project $project, ConfirmPaymentRequest $request)
+    {
+        $plans = Plan::whereIn('id', array_keys($request->plans))->get();
+        return view('user.project.confirm_plan', ['plans' => $plans, 'validated_data' => $request->all()]);
     }
 
     /**
