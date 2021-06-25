@@ -19,6 +19,8 @@ Route::post('/project/{project}/liked', [ProjectController::class, 'ProjectLiked
 Route::resource('project', ProjectController::class)->only('show')->middleware('project.released');
 
 Route::prefix('project/{project}')->middleware('auth', 'project.released')->group(function () {
+    Route::get('plan/selectPlans', [ProjectController::class, 'selectPlans'])->name('plan.selectPlans');
+    Route::get('plan/confirmPayment', [ProjectController::class, 'confirmPayment'])->name('plan.confirmPayment');
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
     Route::get('plan/{plan}/address', [PlanController::class, 'address'])->name('plan.address');
     Route::post('plan/{plan}/address', [PlanController::class, 'addressConfirm'])->name('plan.address.confirm');
