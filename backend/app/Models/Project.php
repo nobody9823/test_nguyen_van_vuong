@@ -342,9 +342,9 @@ class Project extends Model
             'payment_id',Payment::query()->select('id')->where(
             'user_id', Auth::id()
         )))->get();
-        $is_billing = false;
+        $is_included = false;
         if (!$plans->isEmpty()) {
-            $is_billing = true;
+            $is_included = true;
         }
         return $is_included;
     }
