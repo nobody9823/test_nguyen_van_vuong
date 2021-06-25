@@ -39,7 +39,7 @@ class Payment extends Model
     {
         return $query->whereIn(
             'id', PlanPaymentIncluded::query()->select('payment_id')->whereIn(
-                'plan_id', Plan::query()->select('id')->where(
+                'plan_id', Plan::query()->select('id')->whereIn(
                     'project_id', Project::query()->select('id')
                         ->seeking()
                 )
@@ -49,11 +49,11 @@ class Payment extends Model
 
     public function scopeNotSeeking($query)
     {
-        return $query->whereIn(
+        return $query->whereNotIn(
             'id', PlanPaymentIncluded::query()->select('payment_id')->whereIn(
-                'plan_id', Plan::query()->select('id')->where(
+                'plan_id', Plan::query()->select('id')->whereIn(
                     'project_id', Project::query()->select('id')
-                        ->afterSeeking()
+                        ->seeking()
                 )
             )
         );
