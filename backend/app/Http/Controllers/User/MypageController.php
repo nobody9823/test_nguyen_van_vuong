@@ -69,7 +69,7 @@ class MypageController extends Controller
     }
 
     // プロフィール一覧,編集画面
-    public function editProfile()
+    public function profile()
     {
         return view('user.mypage.profile', ['user' => Auth::user()->load('profile')]);
     }
@@ -78,7 +78,7 @@ class MypageController extends Controller
     public function updateProfile(UserProfileRequest $request, User $user)
     {
         return $user->fill($request->all())->save()
-            ? redirect()->route('user.edit_profile')->with('flash_message', 'プロフィール更新が成功しました。')
+            ? redirect()->route('user.profile')->with('flash_message', 'プロフィール更新が成功しました。')
             : redirect()->back()->withErrors("プロフィールの更新に失敗しました。管理者にお問い合わせください。");
     }
 
@@ -96,14 +96,8 @@ class MypageController extends Controller
             : redirect()->back()->withErrors("パスワードの更新に失敗いたしました。管理者にお問い合わせください。");
     }
 
-    // パスワードを忘れた方はこちら
-    public function get_reset_password()
-    {
-        return view('user.reset_password');
-    }
-
     // FIXME パスワードを忘れた方はこちらからの処理未実装
-    public function post_reset_password()
+    public function sendResetPasswordMail()
     {
     }
 

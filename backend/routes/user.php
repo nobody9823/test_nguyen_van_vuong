@@ -37,11 +37,9 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/contribution_comments', [MypageController::class, 'contributionComments'])->name('contribution_comments');
     Route::get('/purchased_projects', [MypageController::class, 'purchasedProjects'])->name('purchased_projects');
     Route::get('/liked_projects', [MypageController::class, 'likedProjects'])->name('liked_projects');
-    Route::get('/profile', [MypageController::class, 'editProfile'])->name('edit_profile');
+    Route::get('/profile', [MypageController::class, 'profile'])->name('profile');
     Route::post('/profile/{user}', [MypageController::class, 'updateProfile'])->name('update_profile');
-    Route::get('/change_password', [MypageController::class, 'get_change_password'])->name('change_password');
-    Route::post('/change_password/{user}', [MypageController::class, 'post_change_password'])->name('check.change_password');
-    Route::get('/reset_password', [MypageController::class, 'get_reset_password'])->name('reset_password');
+    Route::post('/reset_password', [MypageController::class, 'sendResetPasswordMail'])->name('send_reset_password_mail');
     Route::get('/withdraw', [MypageController::class, 'withdraw'])->name('withdraw');
     Route::delete('/withdraw/{user}', [MypageController::class, 'delete_user'])->name('delete_user');
 

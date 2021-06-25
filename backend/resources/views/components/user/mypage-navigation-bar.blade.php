@@ -12,8 +12,7 @@
         <li onmouseover="mouseOverSettingsOptions()" onmouseleave="mouseLeaveSettingOptions()"><a href="#">各種設定</a></li>
         <div class="setting_options" id="setting_options" style="display:none;" onmouseover="mouseOverSettingsOptions()"
             onmouseleave="mouseLeaveSettingOptions()">
-            <p><a href="{{ route('user.edit_profile') }}">プロフィール編集</a></p>
-            <p><a href="{{ route('user.change_password') }}">パスワード変更</a></p>
+            <p><a href="{{ route('user.profile') }}">プロフィール編集</a></p>
         </div>
 
     </ul>

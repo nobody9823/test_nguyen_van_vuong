@@ -48,7 +48,7 @@
                     @auth
 
 
-                    <a href="{{ route('user.edit_profile') }}" id="mypage-js" class="main_menu">マイページ</a>
+                    <a href="{{ route('user.profile') }}" id="mypage-js" class="main_menu">マイページ</a>
                     <ul class="main_menu-body">
                         <li><a href="{{ route('user.payment_history') }}">購入履歴</a></li>
                         <li><a href="{{ route('user.contribution_comments') }}">投稿コメント</a></li>
