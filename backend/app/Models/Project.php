@@ -315,7 +315,7 @@ class Project extends Model
         //それぞれのプランの応援人数から支援総額と応援人数の合計を算出
         foreach($plans as $plan) {
             $achievement_amount += $plan->price * $plan->included_payments_count;
-            $billing_users_count += $plan->included_payments_count;
+            $included_users_count += $plan->included_payments_count;
         }
         // 金額の達成率の算出
         if ($this->target_amount > 0) {
