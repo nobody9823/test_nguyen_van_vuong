@@ -11,7 +11,7 @@
 
 <div class="form-group">
     <label>画像</label>
-    <input id="imageUploader" type="file" name="images[]" multiple="multiple" value=" old('image') ">
+    <input id="imageUploader" type="file" name="image_url">
 </div>
 
 <button type="submit" class="btn btn-primary">{{ isset($report) ? "更新" : "作成" }}</button>
