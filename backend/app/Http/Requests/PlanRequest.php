@@ -7,6 +7,7 @@ use App\Rules\Options;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Contracts\Validation\Validator;
 
 class PlanRequest extends FormRequest
 {
@@ -32,7 +33,7 @@ class PlanRequest extends FormRequest
             'content' => ['required', 'string', 'max:2000'],
             'price' =>  ['integer', 'min:500', 'max:10000000', Rule::requiredIf($request->isMethod('post'))],
             'address_is_required' => ['required'],
-            'limit_of_supporters' => ['required','integer'],
+            'limit_of_supporters' => ['nullable','integer'],
             'delivery_date' => ['required', 'date_format:Y-m-d', 'after:now'],
             'image' => ['nullable', 'image'],
             // NOTE:現状オプションは使用しない為、コメントアウト
