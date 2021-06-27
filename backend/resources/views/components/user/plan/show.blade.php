@@ -13,15 +13,11 @@
             </p>
         </div>
         <h2 class="sec-ttl">{{ $plan->title }}</h2>
-        <div class="project-user detail-user"><img src="{{ Storage::url($project->talent->image_url) }}">{{ $project->talent->name }}</div>
+        <div class="project-user detail-user"><img src="{{ Storage::url($project->user->profile->image_url) }}">{{ $project->user->profile->name }}</div>
         <div class="detail_info">
             <div class="detail_imgs">
                 <div class="detail-slider-for">
-                    @if($plan->image_url == "Public/image/contribution.jpeg")
-                    <p class="plan-img"><img src="/image/contribution.jpeg"></p>
-                    @else
                     <div><img src="{{ Storage::url($plan->image_url) }}"></div>
-                    @endif
                 </div>
             </div>
             <div class="detail_info_content detail_info_content_mb">
@@ -31,28 +27,20 @@
 
                 <p style="white-space: pre-line;">詳細<br>{{ $plan->content }}</p>
                 <p>支援状況</p>
-                <div><span>{{ count($plan->users) }}人</span></div>
-                @if(!$plan->options->isEmpty())
-                    <p>オプション</p>
-                    @foreach($plan->options as $option)
-                    <div class="option-box">
-                        <p>{{ $option->name }}</p>
-                        @if(!is_null($option->quantity))
-                        <p>残りの数 : {{ $option->quantity }}</p>
-                        @endif
-                    </div>
-                @endforeach
-                @endif
+                <div><span>{{ count($plan->includedPayments) }}人</span></div>
+                
+                    <p>残りの数 : {{ $plan->limit_of_supporters ?: "残数設定なし" }}</p>
+                
                 <p>お返しお届け予定日</p>
                 <div>
-                    {{ $plan->estimated_return_date }}
+                    {{ $plan->delivery_date }}
                 </div>
-                <p>アイドル</p>
+                <p>インフルエンサー</p>
                 <div class="project-user detail-user">
-                    <img src="{{ Storage::url($project->talent->image_url) }}">
-                    {{ $project->talent->name }}
+                    <img src="{{ Storage::url($project->user->profile->image_url) }}">
+                    {{ $project->user->profile->name }}
                 </div>
-                @if($plan->options->every(function($option){ return $option->quantity === 0; }) && !$plan->options->isEmpty())
+                @if($plan->limit_of_supporters === 0)
                 <div class="plan-btn-wrap">
                     <a class="plan-btn-end">募集終了</a>
                 </div>
