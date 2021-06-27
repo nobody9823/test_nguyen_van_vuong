@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\ActivityReportImage;
-use App\Rules\ActivityReportImages;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
@@ -30,8 +28,7 @@ class ActivityReportRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:55'],
             'content' => ['required', 'string', 'max:2000'],
-            'images' => [Rule::requiredIf($request->isMethod('post')), new ActivityReportImages($request)],
-            'images.*' => ['image'],
+            'image_url' => [Rule::requiredIf($request->isMethod('post')),'image'],
         ];
     }
 
@@ -43,8 +40,8 @@ class ActivityReportRequest extends FormRequest
             'content.required' => '内容を入力してください。',
             'content.string' => '内容は文字で入力してください。',
             'content.max' => '内容は20000文字以内にしてください。',
-            'images.required' => "画像は必須項目です。",
-            'images.*.image' => "画像の形式が不正です。ご確認下さい。(jpg、jpeg、png、bmp、gif、svg、webp)",
+            'image_url.required' => "画像は必須項目です。",
+            'image_url.image' => "画像の形式が不正です。ご確認下さい。(jpg、jpeg、png、bmp、gif、svg、webp)",
         ];
     }
 
@@ -66,19 +63,4 @@ class ActivityReportRequest extends FormRequest
      *
      * @return array
      */
-    public function imagesToArray(): array
-    {
-        $imagesArray = [];
-        $data = $this->all();
-
-        if ($this->file('images') !== null){
-            foreach($data['images'] as $image){
-                $imagesArray[]
-                        = new ActivityReportImage([
-                                'image_url' => $image
-                            ]);
-            }
-        }
-        return $imagesArray;
-    }
 }
