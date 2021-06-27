@@ -7,7 +7,6 @@ use App\Rules\Options;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Contracts\Validation\Validator;
 
 class PlanRequest extends FormRequest
 {
