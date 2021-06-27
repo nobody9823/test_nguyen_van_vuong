@@ -66,7 +66,7 @@
                             個数
                         </div>
                         <div class="col-sm-9" style="overflow-wrap: break-word;">
-                            {{ $plan->limit_of_supporters }}</p>
+                            {{ $plan->limit_of_supporters ?: "個数設定なし" }}</p>
                         </div>
                     </div>
                     <div class="row row-col-2 pt-3" style="font-size: 20px">
