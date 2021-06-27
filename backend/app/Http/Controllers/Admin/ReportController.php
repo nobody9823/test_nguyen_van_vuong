@@ -33,7 +33,7 @@ class ReportController extends Controller
      */
     public function create(Project $project)
     {
-        return view('admin.activity_report.create', ['project' => $project]);
+        return view('admin.report.create', ['project' => $project]);
     }
 
     /**
