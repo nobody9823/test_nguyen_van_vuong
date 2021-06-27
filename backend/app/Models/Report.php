@@ -19,4 +19,26 @@ class Report extends Model
     {
         return $query->with('project')->paginate(10);
     }
+
+    public function scopeSearchByArrayWords($query, $words)
+    {
+        if($words[0] !== ""){
+            $query->where( function($query) use ($words){
+                foreach($words as $word){
+                    $query->where('title', 'like', "%$word%");
+                    $query->orWhere('content', 'like', "%$word%");
+                }
+            });
+        }
+
+        return $query;
+    }
+
+    public function scopeWithProjectId($query, $project_id)
+    {
+        if ($project_id !== null){
+            $query->where('project_id', $project_id);
+        }
+        return $query;
+    }
 }

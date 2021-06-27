@@ -136,14 +136,14 @@ class ReportController extends Controller
 
     public function search(SearchRequest $request)
     {
-        $activity_reports = Report::searchByArrayWords($request->getArrayWords())
+        $reports = Report::searchByArrayWords($request->getArrayWords())
                                             ->withProjectId($request->project)
                                             ->with('project')->paginate(10);
 
         $project = Project::find($request->project);
 
-        return view('admin.activity_report.index', [
-            'activity_reports' => $activity_reports,
+        return view('admin.report.index', [
+            'reports' => $reports,
             'project' => $project,
             ]);
     }
