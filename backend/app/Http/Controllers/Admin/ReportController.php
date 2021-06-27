@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ActivityReportRequest;
 use App\Http\Requests\SearchRequest;
-use App\Models\ActivityReport;
+use App\Models\Report;
 use App\Models\ActivityReportImage;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
-class ActivityReportController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class ActivityReportController extends Controller
      */
     public function index()
     {
-        $activity_reports = ActivityReport::getActivityReports();
+        $activity_reports = Report::getActivityReports();
         return view('admin.activity_report.index', ['project' => null, 'activity_reports' => $activity_reports]);
     }
 
@@ -42,7 +42,7 @@ class ActivityReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ActivityReportRequest $request, ActivityReport $activity_report, Project $project)
+    public function store(ActivityReportRequest $request, Report $activity_report, Project $project)
     {
         DB::beginTransaction();
         try {
@@ -57,7 +57,7 @@ class ActivityReportController extends Controller
         }
 
         $activity_reports = $project->activityReports()->paginate(10);
-        return redirect()->action([ActivityReportController::class, 'search'], ['project' => $project, 'activity_reports' => $activity_reports])->with('flash_message', '新規作成が完了しました。');
+        return redirect()->action([ReportController::class, 'search'], ['project' => $project, 'activity_reports' => $activity_reports])->with('flash_message', '新規作成が完了しました。');
     }
 
     /**
@@ -66,7 +66,7 @@ class ActivityReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ActivityReport $activity_report)
+    public function show(Report $activity_report)
     {
         return view('admin.activity_report.show', ['activity_report' => $activity_report]);
     }
@@ -77,7 +77,7 @@ class ActivityReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project, ActivityReport $activity_report)
+    public function edit(Project $project, Report $activity_report)
     {
         return view('admin.activity_report.edit', ['project' => $project, 'activity_report' => $activity_report, 'images' => $activity_report->activityReportImages]);
     }
@@ -89,7 +89,7 @@ class ActivityReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ActivityReportRequest $request, Project $project, ActivityReport $activity_report)
+    public function update(ActivityReportRequest $request, Project $project, Report $activity_report)
     {
         DB::beginTransaction();
         try {
@@ -104,7 +104,7 @@ class ActivityReportController extends Controller
         }
 
         $activity_reports = $project->activityReports()->paginate(10);
-        return redirect()->action([ActivityReportController::class, 'search'], ['project' => $project, 'activity_reports' => $activity_reports])->with('flash_message', '更新が完了しました。');
+        return redirect()->action([ReportController::class, 'search'], ['project' => $project, 'activity_reports' => $activity_reports])->with('flash_message', '更新が完了しました。');
     }
 
     /**
@@ -113,7 +113,7 @@ class ActivityReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project, ActivityReport $activity_report)
+    public function destroy(Project $project, Report $activity_report)
     {
         DB::beginTransaction();
         try {
@@ -124,7 +124,7 @@ class ActivityReportController extends Controller
             DB::rollback();
         }
         $activity_reports = $project->activityReports()->paginate(10);
-        return redirect()->action([ActivityReportController::class, 'search'], ['project' => $project, 'activity_reports' => $activity_reports])->with('flash_message', '削除が完了しました。');
+        return redirect()->action([ReportController::class, 'search'], ['project' => $project, 'activity_reports' => $activity_reports])->with('flash_message', '削除が完了しました。');
     }
 
     public function deleteImage(ActivityReportImage $activityReportImage)
@@ -136,7 +136,7 @@ class ActivityReportController extends Controller
 
     public function search(SearchRequest $request)
     {
-        $activity_reports = ActivityReport::searchByArrayWords($request->getArrayWords())
+        $activity_reports = Report::searchByArrayWords($request->getArrayWords())
                                             ->withProjectId($request->project)
                                             ->with('project')->paginate(10);
 
