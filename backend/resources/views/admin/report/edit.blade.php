@@ -6,22 +6,20 @@
 <div class="card">
     <div class="card-header">活動報告編集</div>
     <div class="card-body">
-        <form action="{{ route('admin.activity_report.update', ['project' => $project, 'activity_report' => $activity_report]) }}" enctype="multipart/form-data" method="POST">
+        <form action="{{ route('admin.report.update', ['project' => $project, 'report' => $report]) }}" enctype="multipart/form-data" method="POST">
             @csrf
             @method('PUT')
-            <x-manage.activity_report.form role="admin" :project="$project" :activityReport="$activity_report" />
+            <x-manage.report.form role="admin" :project="$project" :report="$report" />
         </form>
         <div class="row">
-        @foreach($images as $image)
             <div class="col-sm-4 p-2 image-card">
                 <span class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <img src="{{asset(Storage::url($image->image_url))}}" id='previousImage' style='height:200px; object-fit: cover;' alt="image" class="col-12">
-                        <button type="button" class="btn btn-danger del-btn" id="{{ $image->id }}">削除</button>
+                        <img src="{{asset(Storage::url($report->image_url))}}" id='previousImage' style='height:200px; object-fit: cover;' alt="image" class="col-12">
+                        <button type="button" class="btn btn-danger del-btn" id="{{ $report->id }}">削除</button>
                     </div>
                 </span>
             </div>
-        @endforeach
         </div>
     </div>
 </div>
@@ -70,9 +68,9 @@ $(function () {
             el.append('<meta name="csrf-token" content="{{ csrf_token() }}">');
             // ajaxについての記述
             $.ajax({
-                url: '/admin/activity_report/image/' + ImageId,
+                url: '/admin/report/image/' + ImageId,
                 type: 'POST',
-                data: {'activity_report_image': ImageId, '_method': 'DELETE'},
+                data: {'report_image': ImageId, '_method': 'DELETE'},
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 // 成功した時
                 success: function(msg){

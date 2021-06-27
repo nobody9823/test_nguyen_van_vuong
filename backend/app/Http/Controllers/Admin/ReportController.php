@@ -73,9 +73,9 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project, Report $activity_report)
+    public function edit(Project $project, Report $report)
     {
-        return view('admin.activity_report.edit', ['project' => $project, 'activity_report' => $activity_report, 'images' => $activity_report->activityReportImages]);
+        return view('admin.report.edit', ['project' => $project, 'report' => $report]);
     }
 
     /**

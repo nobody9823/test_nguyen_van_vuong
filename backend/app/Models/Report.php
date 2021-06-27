@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\ImageCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,8 @@ class Report extends Model
     protected $fillable = [
         'project_id',
         'title',
-        'content',        
+        'content',
+        'image_url',
     ];
 
     protected $casts = [
