@@ -107,14 +107,14 @@ class Plan extends Model
     public function scopeSearchWithEstimatedReturnDate($query, $from_date, $to_date)
     {
         if ($from_date !== null && $to_date !== null){
-            $query->whereBetween('estimated_return_date', [$from_date, $to_date])
-                ->orderBy('estimated_return_date', 'asc');
+            $query->whereBetween('delivery_date', [$from_date, $to_date])
+                ->orderBy('delivery_date', 'asc');
         } elseif ($from_date !== null){
-            $query->where('estimated_return_date', '>=', $from_date)
-                ->orderBy('estimated_return_date', 'asc');
+            $query->where('delivery_date', '>=', $from_date)
+                ->orderBy('delivery_date', 'asc');
         } elseif ($to_date !== null){
-            $query->where('estimated_return_date', '<=', $to_date)
-                ->orderBy('estimated_return_date', 'desc');
+            $query->where('delivery_date', '<=', $to_date)
+                ->orderBy('delivery_date', 'desc');
         }
         return $query;
     }
