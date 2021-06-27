@@ -19,11 +19,11 @@
 </div>
 @if(Request::get('word'))
 <div class="card-header d-flex align-items-center">
-    <div class="flex-grow-1">{{Request::get('word')}} の検索結果(全{{count($activityReports)}}件)</div>
+    <div class="flex-grow-1">{{Request::get('word')}} の検索結果(全{{count($reports)}}件)</div>
 </div>
 @endif
 <div class="card-body">
-    @if($activityReports->count() <= 0) <p>表示する投稿はありません。</p>
+    @if($reports->count() <= 0) <p>表示する投稿はありません。</p>
         @else
         <table class="table activity_report_list">
             <tr>
@@ -68,7 +68,7 @@
         </table>
         @endif
 
-        {{ $activityReports->appends(request()->input())->links() }}
+        {{ $reports->appends(request()->input())->links() }}
 </div>
 @section('script')
 <script>
