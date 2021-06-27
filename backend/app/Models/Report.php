@@ -10,6 +10,16 @@ class Report extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'project_id',
+        'title',
+        'content',        
+    ];
+
+    protected $casts = [
+        'image_url' => ImageCast::class,
+    ];
+
     public function project()
     {
         return $this->belongsTo('App\Models\Project');
