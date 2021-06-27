@@ -22,8 +22,8 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $activity_reports = Report::getActivityReports();
-        return view('admin.activity_report.index', ['project' => null, 'activity_reports' => $activity_reports]);
+        $reports = Report::getReports();
+        return view('admin.report.index', ['project' => null, 'reports' => $reports]);
     }
 
     /**

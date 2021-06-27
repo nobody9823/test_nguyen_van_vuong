@@ -80,7 +80,7 @@
                 <td>
                     <a href="{{ route($role.'.plan.search', ['project' => $project]) }}" class="btn btn-success mb-2">プラン一覧</a>
 
-                    <a href="{{ route($role.'.activity_report.search', ['project' => $project] )}}"
+                    <a href="{{ route($role.'.report.index', ['project' => $project] )}}"
                         class="btn btn-primary mb-2">活動報告一覧</a>
 
                     <a href="{{ route($role.'.supporter_comment.search', ['project_id' => $project->id] )}}"

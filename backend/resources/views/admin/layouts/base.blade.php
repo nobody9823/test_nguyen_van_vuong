@@ -100,7 +100,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.activity_report.index') }}">
+        <a class="nav-link" href="{{ route('admin.report.index') }}">
             活動報告管理
         </a>
     </li>

@@ -73,8 +73,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('plan', PlanController::class, ['only' => ['index', 'show', 'destroy']]);
 
     // 活動報告管理
-    Route::get('activity_report/search', [ReportController::class, 'search'])->name('activity_report.search');
-    Route::resource('activity_report', ReportController::class, ['only' => ['index', 'show', 'destroy']]);
+    Route::get('report/search', [ReportController::class, 'search'])->name('report.search');
+    Route::resource('report', ReportController::class, ['only' => ['index', 'show', 'destroy']]);
 
     //プロジェクト管理
     Route::get('project/search', [ProjectController::class, 'search'])->name('project.search');
@@ -92,7 +92,7 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('approved', [ProjectController::class, 'approved'])->name('project.approved');
         Route::get('under_suspension', [ProjectController::class, 'underSuspension'])->name('project.under_suspension');
 
-        Route::resource('activity_report', ReportController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+        Route::resource('report', ReportController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     });
     Route::delete('plan/image/{plan}', [PlanController::class, 'deleteImage'])->name('plan_image.destroy');
     Route::delete('plan/option/{option}', [PlanController::class, 'deleteOption'])->name('option.destroy');

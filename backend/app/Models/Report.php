@@ -14,4 +14,9 @@ class Report extends Model
     {
         return $this->belongsTo('App\Models\Project');
     }
+
+    public function scopeGetReports($query)
+    {
+        return $query->with('project')->paginate(10);
+    }
 }
