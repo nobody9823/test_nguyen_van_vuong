@@ -149,11 +149,12 @@ class PlanController extends Controller
         return response()->json('success');
     }
 
-    public function deleteOption(Option $option)
-    {
-        $option->delete();
-        return response()->json('success');
-    }
+    // NOTE:現状オプションは使用しない為、コメントアウト
+    // public function deleteOption(Option $option)
+    // {
+    //     $option->delete();
+    //     return response()->json('success');
+    // }
 
     /**
      * Search plan with words
