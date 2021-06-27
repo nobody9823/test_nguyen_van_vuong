@@ -63,13 +63,10 @@
                     </div>
                     <div class="row row-col-2 pt-3" style="font-size: 20px">
                         <div class="col-sm-3">
-                            オプション
+                            個数
                         </div>
                         <div class="col-sm-9" style="overflow-wrap: break-word;">
-                            @foreach($plan->options as $option)
-                                <p class="mb-0">{{ $option->name }}</p>
-                                <p>個数 : {{ $option->quantity }}</p>
-                            @endforeach
+                            {{ $plan->limit_of_supporters }}</p>
                         </div>
                     </div>
                     <div class="row row-col-2 pt-3" style="font-size: 20px">
@@ -77,7 +74,7 @@
                             お返し予定日
                         </div>
                         <div class="col-sm-3">
-                            {{ $plan->estimated_return_date }}
+                            {{ $plan->delivery_date }}
                         </div>
                     </div>
                 </div>

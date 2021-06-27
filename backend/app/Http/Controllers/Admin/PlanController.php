@@ -72,7 +72,7 @@ class PlanController extends Controller
      */
     public function show(Plan $plan)
     {
-        return view('admin.plan.show', ['plan' => $plan->load('options')]);
+        return view('admin.plan.show', ['plan' => $plan]);
     }
 
     /**
