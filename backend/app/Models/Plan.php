@@ -14,12 +14,13 @@ class Plan extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'image_url',
         'title',
         'content',
         'price',
+        'address_is_required',
+        'limit_of_supporters',
         'delivery_date',
-        'limit_of_supporters'
+        'image_url'
     ];
     protected $guarded = [
         'price',
@@ -33,10 +34,10 @@ class Plan extends Model
     {
         parent::boot();
         static::deleting(function(Plan $plan){
-            $payment_ids = $plan->payments()->pluck('id');
+            $payment_ids = $plan->includedPayments()->pluck('payments.id')->toArray();
             PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
             MessageContent::whereIn('payment_id', $payment_ids)->delete();
-            Payment::destroy($payment_ids)->delete();
+            Payment::whereIn('id', $payment_ids)->delete();
         });
     }
 
@@ -106,14 +107,14 @@ class Plan extends Model
     public function scopeSearchWithEstimatedReturnDate($query, $from_date, $to_date)
     {
         if ($from_date !== null && $to_date !== null){
-            $query->whereBetween('estimated_return_date', [$from_date, $to_date])
-                ->orderBy('estimated_return_date', 'asc');
+            $query->whereBetween('delivery_date', [$from_date, $to_date])
+                ->orderBy('delivery_date', 'asc');
         } elseif ($from_date !== null){
-            $query->where('estimated_return_date', '>=', $from_date)
-                ->orderBy('estimated_return_date', 'asc');
+            $query->where('delivery_date', '>=', $from_date)
+                ->orderBy('delivery_date', 'asc');
         } elseif ($to_date !== null){
-            $query->where('estimated_return_date', '<=', $to_date)
-                ->orderBy('estimated_return_date', 'desc');
+            $query->where('delivery_date', '<=', $to_date)
+                ->orderBy('delivery_date', 'desc');
         }
         return $query;
     }
@@ -135,22 +136,11 @@ class Plan extends Model
         }
     }
 
-    public function saveOptions(Request $request): void
-    {
-        if ($request->optionsToArray() !== null){
-            $this->options()->saveMany($request->optionsToArray());
-        }
-    }
-
-    public function saveContributionPlans($request, $project)
-    {
-        $this->project_id = $project->id;
-        $this->title = "寄付金プラン";
-        $this->content = "このプランは寄付金専用のプランとなり、リターンはありません。支援者コメントのみ可能で、ログインしていないユーザーでも購入可能です。";
-        $this->price = $request->price;
-        $this->estimated_return_date = "0001-01-01";
-        $this->necessary_address = "0";
-        $this->image_url = "Public/image/contribution.jpeg";
-        $this->save();
-    }
+    // NOTE:現状オプションは使用しない為、コメントアウト
+    // public function saveOptions(Request $request): void
+    // {
+    //     if ($request->optionsToArray() !== null){
+    //         $this->options()->saveMany($request->optionsToArray());
+    //     }
+    // }
 }

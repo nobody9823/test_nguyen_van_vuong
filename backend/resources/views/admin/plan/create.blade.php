@@ -9,7 +9,7 @@
         <form action="{{ route('admin.plan.store', ['project' => $project]) }}" enctype="multipart/form-data" method="POST">
             @csrf
 
-            <x-manage.plan.form guard="admin" :project="$project" :plan="null"  :contribution="$contribution" />
+            <x-manage.plan.form :project="$project" :plan="null" />
 
         </form>
     </div>
@@ -49,7 +49,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
 <script>
     $(function () {
-        $('#estimated_return_date').datetimepicker({
+        $('#delivery_date').datetimepicker({
             format: 'Y-m-d'
         });
     });
