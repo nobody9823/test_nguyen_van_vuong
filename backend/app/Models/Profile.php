@@ -15,6 +15,10 @@ class Profile extends Model
     protected $fillable = [
         'inviter_code',
         'image_url',
+        'first_name_kana',
+        'last_name_kana',
+        'first_name',
+        'last_name',
         'birthday',
         'gender',
         'introduction',
