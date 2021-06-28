@@ -22,8 +22,14 @@
         <input type="radio" id="dewey" name="payment_way" value="paypay">
         <label>PayPay</label>
     </div>
+    <div>
+        <div name="number_form" id="number-form" class="payjs-outer"></div>
+        <div name="expiry-form" id="expiry-form" class="payjs-outer"></div>
+        <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+    </div>
 
     <div>
+        <input type="hidden" name="payjp_token" id="payjp_token" value="">
         <label for="">姓(全角)</label>
         <input type="text" name="first_name">
         <label for="">名(全角)</label>
@@ -95,3 +101,23 @@ window.onload = function(){
 }
 </script>
 <script src="{{ asset('/js/Plans.js') }}"></script>
+<script src="https://js.pay.jp/v2/pay.js"></script>
+<script>
+    var payjp = Payjp('{{ config("app.pay_jp_key_for_test") }}')
+
+    var elements = payjp.elements()
+
+    // 入力フォームを分解して管理・配置できます
+    var numberElement = elements.create('cardNumber')
+    var expiryElement = elements.create('cardExpiry')
+    var cvcElement = elements.create('cardCvc')
+    numberElement.mount('#number-form')
+    expiryElement.mount('#expiry-form')
+    cvcElement.mount('#cvc-form')
+    cvcElement.on('blur', function(event){
+        payjp.createToken(numberElement)
+        payjp.createToken(numberElement).then(function(r) {
+            document.querySelector('#payjp_token').value = r.id;
+        })
+    })
+</script>
