@@ -10,6 +10,11 @@ class Comment extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'project_id',
+        'content'
+    ];
+
     public static function boot()
     {
         parent::boot();
