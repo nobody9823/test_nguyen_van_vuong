@@ -39,7 +39,7 @@ class MypageController extends Controller
     // 投稿コメント一覧
     public function contributionComments()
     {
-        $comments = Auth::user()->comments->load(['project.plans', 'likedUsers', 'reply.user']);
+        $comments = Auth::user()->comments->load(['project.plans', 'reply.user']);
         return view('user.mypage.comment', [
             'comments' => $comments,
         ]);

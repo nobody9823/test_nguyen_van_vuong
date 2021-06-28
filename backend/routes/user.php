@@ -31,7 +31,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::post('comment/post', [CommentController::class, 'postComment'])->name('comment.post');
 });
 
-//---------------------dashboard-----------------------------------------------
+//---------------------Mypage-----------------------------------------------
 Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
     Route::get('/contribution_comments', [MypageController::class, 'contributionComments'])->name('contribution_comments');
@@ -42,9 +42,10 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/withdraw', [MypageController::class, 'withdraw'])->name('withdraw');
     Route::delete('/withdraw/{user}', [MypageController::class, 'delete_user'])->name('delete_user');
 
-    Route::resource('message', MessageController::class)->only(['index','show']);
-    Route::post('message/{user_plan_cheering}', [MessageController::class,'store'])->name('message_content.store');
-    Route::get('message/{message_content}/file_download', [MessageController::class,'file_download'])->name('message_content.file_download');
+    // NOTICE: 現状優先度的にメッセージ機能の実装は間に合わなそうなので、コメントアウトにいたします...
+    // Route::resource('message', MessageController::class)->only(['index','show']);
+    // Route::post('message/{user_plan_cheering}', [MessageController::class,'store'])->name('message_content.store');
+    // Route::get('message/{message_content}/file_download', [MessageController::class,'file_download'])->name('message_content.file_download');
 });
 
 Route::middleware(['guest:web', 'throttle:10'])->group(function () {
