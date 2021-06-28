@@ -123,11 +123,6 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\SnsUser');
     }
 
-    public function comments()
-    {
-        return $this->hasMany('App\Models\Comment');
-    }
-
     public function replies()
     {
         return $this->hasMany('App\Models\Reply');

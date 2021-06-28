@@ -29,4 +29,9 @@ class Payment extends Model
     {
         return $this->belongsToMany('App\Models\Plan', 'App\Models\PlanPaymentIncluded');
     }
+
+    public function comment()
+    {
+        return $this->hasOne('App\Models\Comment');
+    }
 }
