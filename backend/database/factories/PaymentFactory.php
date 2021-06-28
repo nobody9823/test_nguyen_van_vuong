@@ -30,7 +30,8 @@ class PaymentFactory extends Factory
             'message_status' => 'ステータスなし',
             'merchant_payment_id' => UniqueToken::getToken(),
             'pay_jp_id' => UniqueToken::getToken(),
-            'payment_is_finished' => $this->faker->boolean(50)
+            'payment_is_finished' => $this->faker->boolean(50),
+            'remarks' => $this->faker->realText(100),
         ];
     }
 }
