@@ -38,7 +38,7 @@
                             <input type="checkbox" name=""><i class="far fa-square fa-2x"></i><i class="far fa-check-square fa-2x"></i>ログイン状態を保存する
                         </label>
                         <label>
-                            <a href="{{ route('user.reset_password') }}" class="pass_forget">パスワードを忘れた方はこちら</a>
+                            <a href="{{ route('user.forgot_password') }}" class="pass_forget">パスワードを忘れた方はこちら</a>
                         </label>
                     </div>
                     <div class="submit-box">
