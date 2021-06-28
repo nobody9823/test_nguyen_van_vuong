@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/withdraw', [MypageController::class, 'withdraw'])->name('withdraw');
     Route::delete('/withdraw/{user}', [MypageController::class, 'delete_user'])->name('delete_user');
 
+    //---------------------Project掲載依頼-----------------------------------------------
+    Route::get('/consultate_project', [ProjectController::class, 'consultateProject'])->name('consultate_project');
+    Route::post('/consultate_project/confirm', [ProjectController::class, 'consultateProjectConfirm'])->name('consultate_project.confirm');
     // NOTICE: 現状優先度的にメッセージ機能の実装は間に合わなそうなので、コメントアウトにいたします...
     // Route::resource('message', MessageController::class)->only(['index','show']);
     // Route::post('message/{user_plan_cheering}', [MessageController::class,'store'])->name('message_content.store');

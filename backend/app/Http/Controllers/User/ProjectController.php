@@ -7,6 +7,7 @@ use App\Models\Tag;
 use App\Models\Project;
 use App\Models\Plan;
 use App\Http\Requests\ConfirmPaymentRequest;
+use App\Http\Requests\ConsultateProjectConfirmRequest;
 use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
 use Illuminate\Http\Request;
@@ -229,6 +230,16 @@ class ProjectController extends Controller
         $projects = $projectsQuery->where('release_status', '掲載中')->with('tags')->paginate(9);
 
         return view('user.search', compact('projects', 'tags'));
+    }
+
+    public function consultateProject()
+    {
+        return view('user.consultate_project');
+    }
+
+    public function consultateProjectConfirm(ConsultateProjectConfirmRequest $request)
+    {
+        dd($request);
     }
 
     // こちらもデザインにないので一旦コメントアウトしておきます。
