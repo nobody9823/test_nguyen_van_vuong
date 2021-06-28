@@ -179,7 +179,7 @@
                     <!--detail_item_03内容-->
                     <div class="tabcontent">
                         <div class="tab_type3">
-                            @if ($project->comments()->where('user_id', Auth::id())->first() === null)
+                            @if ($project->comments()->whereIn('payment_id', Auth::user()->payments()->pluck('id')->toArray())->first() === null)
                             <div class="post-form">
                                 <div class="text-center" style="color:#ff1493">
                                     <h2>※支援者ページへの投稿は一回までです。</h2>
