@@ -10,6 +10,12 @@ class Comment extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'project_id',
+        'payment_id',
+        'content'
+    ];
+
     public static function boot()
     {
         parent::boot();
@@ -23,9 +29,9 @@ class Comment extends Model
         return $this->hasOne('App\Models\Reply');
     }
 
-    public function user()
+    public function payment()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\Payment');
     }
 
     public function project()

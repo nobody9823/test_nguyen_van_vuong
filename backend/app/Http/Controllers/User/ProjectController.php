@@ -3,9 +3,17 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Services\Plan\CalculationForPrice;
+use App\Traits\UniqueToken;
 use App\Models\Tag;
+use App\Models\User;
 use App\Models\Project;
 use App\Models\Plan;
+use App\Models\Payment;
+use App\Models\Comment;
+use App\Models\Profile;
+use App\Models\Address;
+use App\Actions\PayJp\PayJpInterface;
 use App\Http\Requests\ConfirmPaymentRequest;
 use App\Http\Requests\ConsultProjectSendRequest;
 use App\Mail\User\ConsultProject;
@@ -13,12 +21,23 @@ use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Log;
 use Mail;
 
 class ProjectController extends Controller
 {
+
+    public function __construct(PayJpInterface $pay_jp_interface)
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = \Auth::user();
+            return $next($request);
+        });
+
+        $this->pay_jp = $pay_jp_interface;
+    }
 
     public function index()
     {
@@ -128,8 +147,64 @@ class ProjectController extends Controller
      */
     public function confirmPayment(Project $project, ConfirmPaymentRequest $request)
     {
-        $plans = Plan::whereIn('id', array_keys($request->plans))->get();
-        return view('user.project.confirm_plan', ['plans' => $plans, 'validated_data' => $request->all()]);
+        DB::beginTransaction();
+        try {
+            $this->user->profile->fill($request->all())->save();
+            $this->user->address->fill($request->all())->save();
+            $plans = Plan::whereIn('id', array_keys($request->plans))->get();
+            $price_amount = CalculationForPrice::getPriceAmount($request->plans, $plans);
+            $unique_token = UniqueToken::getToken();
+            $payment = Payment::make([
+                'price' => $price_amount,
+                'message_status' => 'ステータスなし',
+                'merchant_payment_id' => $unique_token,
+                'pay_jp_id' => $request->payjp_token,
+                'payment_is_finished' => false,
+                'remarks' => $request->remarks
+            ]);
+            $comment = Comment::make([
+                'project_id' => $project->id,
+                'content' => $request->comments,
+            ]);
+            $this->user->payments()->save($payment)
+                ->each(function($payment) use ($plans, $comment){
+                    $payment->includedPlans()->saveMany($plans);
+                    $payment->comment()->save($comment);
+                });
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return view('user.project.confirm_plan', ['project' => $project, 'payment' => $payment]);
+    }
+
+    /**
+     * do payment for Pay Jp
+     *
+     *@param App\Models\Project
+     *@param App\Models\Payment
+     *
+     *@return \Illuminate\Http\Response
+     */
+    public function paymentForPayJp(Project $project, Payment $payment)
+    {
+        $response = $this->pay_jp->Payment($payment->price, $payment->pay_jp_id);
+        DB::beginTransaction();
+        try {
+                $payment->payment_is_finished = true;
+                $payment->save();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollback();
+                $this->pay_jp->Refund($response->id);
+                throw $e;
+            }
+
+        $supporter_count = User::getCountOfSupportersWithProject($project);
+        $total_amount = Payment::getTotalAmountOfSupporterWithProject($project);
+
+        return view('user.plan.supported', ['project' => $project, 'payment' => $payment, 'supporter_count' => $supporter_count, 'total_amount' => $total_amount]);
     }
 
     /**
