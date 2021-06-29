@@ -79,6 +79,7 @@ class ProjectController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+            Log::alert($e);
             return redirect()->back()->withErrors('プロジェクトの作成に失敗しました。管理会社に連絡をお願いします。');
         }
 
@@ -191,12 +192,12 @@ class ProjectController extends Controller
      * @throws \Exception
      */
     // FIXME #372 ソフトデリートする
-    public function deleteImage(ProjectImage $projectImage)
-    {
-        Storage::delete($projectImage->image_url);
-        $projectImage->delete();
-        return response()->json('success');
-    }
+    // public function deleteImage(ProjectImage $projectImage)
+    // {
+    //     Storage::delete($projectImage->image_url);
+    //     $projectImage->delete();
+    //     return response()->json('success');
+    // }
 
     /**
      * @param  Request  $request
