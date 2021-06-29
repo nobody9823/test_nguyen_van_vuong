@@ -10,30 +10,30 @@
             <form action="{{ route('user.consult_project.send') }}" method="POST" enctype="multipart/form-data" id="consultForm">
                 @csrf
                 <label style="color: red;">担当者名[必須]</label>
-                <input type="text" name="name" value="{{ old('name', Auth::user()->name) }}" required/>
+                <input type="text" name="name" value="{{ old('name', optional(Auth::user())->name) }}" required/>
                 <label style="color: red;">メールアドレス[必須]</label>
-                <input type="email" name="email" value="{{ old('email', Auth::user()->email) }}" required/>
+                <input type="email" name="email" value="{{ old('email', optional(Auth::user())->email) }}" required/>
                 <label style="color: red;">電話番号（ハイフンなし）[必須]</label>
-                <input type="text" name="phone_number" value="{{ old('phone_number', Auth::user()->profile->phone_number) }}" required pattern="^[0-9]+$"/>
+                <input type="text" name="phone_number" value="{{ old('phone_number', optional(Auth::user()->profile)->phone_number) }}" required pattern="^[0-9]+$"/>
                 <label style="color: red;">郵便番号（ハイフンなし）[必須]</label>
-                <input type="text" name="postal_code" value="{{ old('postal_code', Auth::user()->address->postal_code) }}" required pattern="^[0-9]+$"/>
+                <input type="text" name="postal_code" value="{{ old('postal_code', optional(Auth::user()->address)->postal_code) }}" required pattern="^[0-9]+$"/>
                 <label style="color: red;">都道府県[必須]</label>
                 <select name="prefecture" required>
                     <option value="">選択してください</option>
-                    @foreach(\App\Helpers\PrefectureHelper::getPrefectures() as $prefecture)
+                    @foreach(\App\Helpers\PrefectureHelper::getPrefectures() as $prefecture_id => $prefecture)
                     <option value="{{ $prefecture }}"
-                        {{ old('prefecture', \App\Helpers\PrefectureHelper::getPrefectures()[Auth::user()->address->prefecture_id]) === $prefecture ? 'selected' : ''}}
+                        {{ old('prefecture') === $prefecture || optional(Auth::user()->address)->prefecture_id === $prefecture_id ? 'selected' : ''}}
                     >
                         {{ $prefecture }}
                     </option>
                     @endforeach
                 </select>
                 <label style="color: red;">市区町村[必須]</label>
-                <input type="text" name="city" value="{{ old('city', Auth::user()->address->city) }}" required/>
+                <input type="text" name="city" value="{{ old('city', optional(Auth::user()->address)->city) }}" required/>
                 <label style="color: red;">番地[必須]</label>
-                <input type="text" name="block" value="{{ old('block', Auth::user()->address->block) }}" required/>
+                <input type="text" name="block" value="{{ old('block', optional(Auth::user()->address)->block) }}" required/>
                 <label>建物名</label>
-                <input type="text" name="building" value="{{ old('building', Auth::user()->address->building) }}"/>
+                <input type="text" name="building" value="{{ old('building', optional(Auth::user()->address)->building) }}"/>
                 <label>企業ホームページ</label>
                 <input type="text" name="site_url" value="{{ old('site_url') }}"/>
                 <label style="color: red;">実施したいプロジェクトのカテゴリを選択してください[必須]</label>
