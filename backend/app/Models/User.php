@@ -164,6 +164,16 @@ class User extends Authenticatable
         return $query->pluck('name', 'id');
     }
 
+    public function scopeGetCountOfSupportersWithProject($query, Project $project)
+    {
+        return $query->whereIn('id', Payment::whereIn('id',
+                    PlanPaymentIncluded::whereIn('plan_id',
+                            Plan::where('project_id', $project->id)->pluck('id')->toArray()
+                        )->pluck('id')->toArray()
+                    )->pluck('id')->toArray()
+                )->count();
+    }
+
     //--------------- local scopes -------------
 
 
