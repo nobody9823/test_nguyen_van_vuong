@@ -33,9 +33,9 @@
                 <input type="text" name="site_url"/>
                 <label style="color: red;">実施したいプロジェクトのカテゴリを選択してください[必須]</label>
                 <select name="category" required>
-                    <option value="テストカテゴリー１">テストカテゴリー１</option>
-                    <option value="テストカテゴリー２">テストカテゴリー２</option>
-                    <option value="テストカテゴリー３">テストカテゴリー３</option>
+                    @foreach(\App\Models\Tag::pluckNameAndId() as $tag_name)
+                    <option value="{{ $tag_name }}">{{ $tag_name }}</option>
+                    @endforeach
                 </select>
                 <label style="color: red;">fanReturnにご相談いただいたきっかけを教えてください。<br/>（最も当てはまるものを選択してください。）[必須]</label>
                 <select name="motive" required>
