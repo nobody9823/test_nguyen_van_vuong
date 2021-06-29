@@ -23,6 +23,7 @@ class CreatePaymentsTable extends Migration
             $table->string('merchant_payment_id')->unique();
             $table->string('pay_jp_id')->unique();
             $table->boolean('payment_is_finished')->default(false);
+            $table->string('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

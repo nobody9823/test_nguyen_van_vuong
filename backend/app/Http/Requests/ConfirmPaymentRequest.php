@@ -8,6 +8,7 @@ use App\Rules\CheckPlanAmount;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ConfirmPaymentRequest extends FormRequest
 {
@@ -29,6 +30,8 @@ class ConfirmPaymentRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
+            'payment_way' => ['required', 'string'],
+            'payjp_token' => [Rule::requiredIf($request->payment_way === "credit")],
             'plans' => ['required', new CheckPlanAmount($this)],
             'plans.*' => ['required', 'integer'],
             'payment_way' => ['required', 'string'],
@@ -44,6 +47,7 @@ class ConfirmPaymentRequest extends FormRequest
             'city' => ['required', 'string'],
             'block' => ['required', 'string'],
             'building' => ['nullable', 'string'],
+            'birthday'  => ['required_with:birth_year,birth_month,birth_day', 'string', 'date_format:Y-m-d'],
             'birth_year'  => ['required_with:birth_month,birth_day', 'string'],
             'birth_month' => ['required_with:birth_year,birth_day', 'string'],
             'birth_day'   => ['required_with:birth_year,birth_month', 'string'],
@@ -59,6 +63,14 @@ class ConfirmPaymentRequest extends FormRequest
         }
         if ($this->has('postal_code')){
             $this->postal_code = (string) $this->postal_code;
+        }
+        if ($this->input('birth_day') && $this->input('birth_month') && $this->input('birth_year'))
+        {
+            $birthDate = implode('-', $this->only(['birth_year', 'birth_month', 'birth_day']));
+            $this->merge([
+                $birth_day =  new Carbon($birthDate),
+                'birthday' => $birth_day->format('Y-m-d'),
+            ]);
         }
     }
 
