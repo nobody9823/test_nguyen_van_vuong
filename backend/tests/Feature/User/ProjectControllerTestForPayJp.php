@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Plan;
 use App\Models\Payment;
 use Tests\TestCase;
+use Exception;
 use App\Traits\UniqueToken;
 use Illuminate\Http\UploadedFile;
 
@@ -56,6 +57,16 @@ class ProjectControllerTestForPayJp extends TestCase
 
         $this->success_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
 
+        $params = [
+            'card' => [
+                "number" => "4000000000080319",
+                "exp_month" => "12",
+                "exp_year" => "2024",
+            ]
+        ];
+
+        $this->fail_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
+
         $this->success_payment = Payment::factory()->state([
                     'user_id' => $this->supporter->id,
                     'price' => $this->plan->price,
@@ -66,10 +77,30 @@ class ProjectControllerTestForPayJp extends TestCase
                     'remarks' => 'test remarks'
                 ])->create();
 
+        $params = [
+            'card' => [
+                "number" => "4000000000080319",
+                "exp_month" => "12",
+                "exp_year" => "2024",
+            ]
+        ];
+
+        $this->fail_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
+
+        $this->fail_payment = Payment::factory()->state([
+                'user_id' => $this->supporter->id,
+                'price' => $this->plan->price,
+                'message_status' => 'ステータスなし',
+                'merchant_payment_id' => UniqueToken::getToken(),
+                'pay_jp_id' => $this->fail_token->id,
+                'payment_is_finished' => false,
+                'remarks' => 'test remarks'
+            ])->create();
+
         $this->url = "project/{$this->project->id}/plan/confirmPayment";
     }
 
-    public function testPaymentForPayJpAction()
+    public function testPaymentForPayJpActionIsSuccess()
     {
         $this->withoutExceptionHandling();
         $response = $this->actingAs($this->supporter)
@@ -82,5 +113,18 @@ class ProjectControllerTestForPayJp extends TestCase
         $response->assertOk();
         $payment =Payment::find($this->success_payment->id);
         $this->assertSame(1, $payment->payment_is_finished);
+    }
+
+    public function testPaymentForPayJpActionIsFail()
+    {
+        $this->withoutExceptionHandling();
+        $this->expectException(Exception::class);
+        ($this->actingAs($this->supporter)
+            ->from($this->url)
+            ->get(route('user.plan.paymentForPayJp', [
+                'project' => $this->project,
+                'payment' => $this->fail_payment
+            ])
+        ))->execute(1);
     }
 }
