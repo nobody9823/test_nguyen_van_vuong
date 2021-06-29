@@ -129,9 +129,14 @@ class Plan extends Model
         return $this->belongsToMany('App\Models\Payment', 'App\Models\PlanPaymentIncluded');
     }
 
+    public function getSupportedUsers()
+    {
+        return User::whereIn('id', $this->includedPayments()->pluck('user_id'))->get();
+    }
+
     public function deleteImage()
     {
-        if (strpos($this->image_url, 'sampleImage') === false){
+        if (strpos($this->image_url, 'sampleImage') === false) {
             \Storage::delete($this->image_url);
         }
     }
