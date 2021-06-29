@@ -7,11 +7,13 @@ use App\Models\Tag;
 use App\Models\Project;
 use App\Models\Plan;
 use App\Http\Requests\ConfirmPaymentRequest;
-use App\Http\Requests\ConsultateProjectConfirmRequest;
+use App\Http\Requests\ConsultProjectSendRequest;
+use App\Mail\User\ConsultProject;
 use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mail;
 
 class ProjectController extends Controller
 {
@@ -232,16 +234,17 @@ class ProjectController extends Controller
         return view('user.search', compact('projects', 'tags'));
     }
 
-    public function consultateProject()
+    public function consultProject()
     {
-        return view('user.consultate_project');
+        return view('user.consult_project');
     }
 
-    public function consultateProjectConfirm(ConsultateProjectConfirmRequest $request)
+    public function consultProjectSend(ConsultProjectSendRequest $request)
     {
-        dd($request);
+        // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
+        Mail::to(config('mail.from.address'))->send(new ConsultProject($request->all()));
+        return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
     }
-
     // こちらもデザインにないので一旦コメントアウトしておきます。
     // public function ProjectLiked(Request $request)
     // {

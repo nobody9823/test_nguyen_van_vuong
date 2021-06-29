@@ -7,7 +7,7 @@ use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ConsultateProjectConfirmRequest extends FormRequest
+class ConsultProjectSendRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -55,7 +55,7 @@ class ConsultateProjectConfirmRequest extends FormRequest
             // 'category' => ['required'], NOTICE ここはハッシュタグのカテゴリのことなのかよく分からないので要確認
             'motive' => ['required', Rule::in($motive_rulein)],
             'introducer' => ['nullable', 'string', 'max:255'],
-            'consultation_content' => ['required', 'string', 'max:300'],
+            'consultation_content' => ['required', 'string', 'max:500'],
             'files' => ['nullable', 'array'],
             'files.*' => ['file', 'image'],
         ];

@@ -7,7 +7,7 @@
     <div class="content">
         <div class="section">
 
-            <form action="{{ route('user.consultate_project.confirm') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('user.consult_project.send') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <label style="color: red;">担当者名[必須]</label>
                 <input type="text" name="name" required/>
