@@ -142,7 +142,7 @@
                         <div class="card" style="border: none; background-color: #f8f9fa;">
                             <a href="{{ route($role.'.plan.index', ['project' => $project]) }}"
                                 class="btn btn-sm btn-primary mt-1">プラン一覧</a>
-                            <a href="{{ route($role.'.comment.index', ['project_id' => $project->id] )}}"
+                            <a href="{{ route($role.'.comment.index', ['project' => $project] )}}"
                                 class="btn btn-sm btn-primary mt-1">コメント一覧</a>
                             <a href="{{ route($role.'.report.index', ['project' => $project] )}}"
                                 class="btn btn-sm btn-primary mt-1">活動報告一覧</a>
