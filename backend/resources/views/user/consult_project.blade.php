@@ -7,7 +7,7 @@
     <div class="content">
         <div class="section">
 
-            <form action="{{ route('user.consult_project.send') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('user.consult_project.send') }}" method="POST" enctype="multipart/form-data" id="consultForm">
                 @csrf
                 <label style="color: red;">担当者名[必須]</label>
                 <input type="text" name="name" required/>
@@ -67,4 +67,20 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script>
+    jQuery(function ($) {
+        $('#consultForm').submit(function(e) {
+            e.preventDefault();
+            if (confirm("未実装 ここのタイミングでポップアップで確認画面を表示できるようにします")) {
+                document.getElementById('consultForm').submit();
+            } else {
+                //cancel
+                return false;
+            }
+        });
+    });
+</script>
 @endsection
