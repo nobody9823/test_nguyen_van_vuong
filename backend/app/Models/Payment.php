@@ -34,4 +34,13 @@ class Payment extends Model
     {
         return $this->hasOne('App\Models\Comment');
     }
+
+    public function scopeGetTotalAmountOfSupporterWithProject($query, Project $project)
+    {
+        return $query->whereIn('id',
+                    PlanPaymentIncluded::whereIn('plan_id',
+                        $project->plans()->pluck('id')->toArray()
+                    )->pluck('id')->toArray()
+                )->sum('price');
+    }
 }
