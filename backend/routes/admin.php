@@ -72,7 +72,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('user_payment_included', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);
 
     // 活動報告管理
-    Route::resource('report', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);
+    Route::resource('report', ReportController::class, ['only' => ['index', 'show', 'destroy']]);
 
     // コメント管理
     Route::resource('comment', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);

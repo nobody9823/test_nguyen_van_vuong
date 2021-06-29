@@ -62,9 +62,9 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Report $activity_report)
+    public function show(Report $report)
     {
-        return view('admin.activity_report.show', ['activity_report' => $activity_report]);
+        return view('admin.report.show', ['report' => $report]);
     }
 
     /**
