@@ -185,5 +185,25 @@ class User extends Authenticatable
             Storage::delete($this->image_url);
         };
     }
+
+    public function saveProfile($request) :void
+    {
+        if (isset($this->profile)) {
+            $this->profile()->save($this->profile->fill($request->all()));
+        } else {
+            $profile = new Profile();
+            $this->profile()->save($profile->fill($request->all()));
+        }
+    }
+
+    public function saveAddress($request) :void
+    {
+        if (isset($this->address)) {
+            $this->address()->save($this->address->fill($request->all()));
+        } else {
+            $address = new Address();
+            $this->address()->save($address->fill($request->all()));
+        }
+    }
     //--------------- functions -------------
 }
