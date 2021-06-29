@@ -11,8 +11,10 @@ use App\Http\Requests\ConsultProjectSendRequest;
 use App\Mail\User\ConsultProject;
 use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Log;
 use Mail;
 
 class ProjectController extends Controller
@@ -241,9 +243,15 @@ class ProjectController extends Controller
 
     public function consultProjectSend(ConsultProjectSendRequest $request)
     {
-        // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
-        Mail::to(config('mail.from.address'))->send(new ConsultProject($request->all()));
-        return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
+        try {
+            // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
+            Mail::to(config('mail.from.address'))->send(new ConsultProject($request->all()));
+            return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
+        } catch(Exception $e) {
+            // NOTICE Slackにログを送信できるみたいなので今後時間があったら実装してみても良いかもしれないです。
+            Log::error("メール送信に失敗しました。", $e->getTrace());
+            return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");
+        }
     }
     // こちらもデザインにないので一旦コメントアウトしておきます。
     // public function ProjectLiked(Request $request)
