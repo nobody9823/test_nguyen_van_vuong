@@ -111,6 +111,7 @@ class ReportController extends Controller
         DB::beginTransaction();
         try {
             $report->delete();
+            Storage::delete($report->image_url);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

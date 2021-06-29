@@ -43,6 +43,14 @@ Route::middleware('auth:admin')->group(function () {
     //プロフィール管理
     Route::resource('detail', DetailController::class, ['only' => ['show', 'edit', 'update']]);
 
+    // -------このタスクのレビューが終了後削除する。-------
+    Route::get('project/search', [ProjectController::class, 'search'])->name('project.search');
+    Route::get('plan/search', [PlanController::class, 'search'])->name('plan.search');
+    Route::get('report/search', [ReportController::class, 'search'])->name('report.search');
+    Route::get('supporter_comment/search', [CommentController::class, 'search'])->name('supporter_comment.search');
+    Route::get('plan/create', [PlanController::class, 'search'])->name('plan.create');
+    // -------------------------------------------------
+
     //プロジェクト管理
     Route::resource('project', ProjectController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show']]);
     Route::get('project/{project}/release', [ProjectController::class, 'release'])->name('project.release');
@@ -62,7 +70,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('project/send_cheering_users_mail', [MailController::class, 'sendCheeringUsersMail'])->name('project.mail.send_cheering_users_mail');
     Route::delete('plan/image/{plan}', [PlanController::class, 'deleteImage'])->name('plan_image.destroy');
     Route::delete('plan/option/{option}', [PlanController::class, 'deleteOption'])->name('option.destroy');
-    Route::delete('activity_report/image/{activity_report_image}', [ReportController::class, 'deleteImage'])->name('activity_report.image');
+    Route::delete('report/image/{report_image}', [ReportController::class, 'deleteImage'])->name('report.image');
 
     // プラン管理
     Route::resource('plan', PlanController::class, ['only' => ['index', 'store', 'edit', 'show', 'destroy']]);
