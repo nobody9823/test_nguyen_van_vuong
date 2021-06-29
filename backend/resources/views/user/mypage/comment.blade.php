@@ -16,13 +16,6 @@
                     <div class="my-page_comment-tit">{{Str::limit($comment->project->title,30)}} &gt;
                         {{date_format($comment->created_at,'Y年m月d日')}}にコメント
                     </div>
-                    <div class="my-page_comment-post-icons">
-                        @if ($comment->likedUsers)
-                        <div><img src={{asset('image/liked-icon.png')}}>{{count($comment->likedUsers)}}</div>
-                        @else
-                        <div><img src={{asset('image/like-icon.png')}}></div>
-                        @endif
-                    </div>
                 </div>
                 <div class="my-com-box">
                     <div class="my-com-img"><img src="{{Storage::url($comment->image_url)}}"></div>

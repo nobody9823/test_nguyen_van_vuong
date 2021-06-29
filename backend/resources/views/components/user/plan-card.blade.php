@@ -10,14 +10,10 @@
         <p><strong>お返しお届け予定日</strong></p>
         <p>{{ $plan->estimated_return_date }}</p>
     </div>
-
-    @if( date($project->end_date < now()) || ($plan->limit_of_supporters === 0) )
-        <p class="plan-btn-end">募集終了</p>
-    @elseif( date($project->start_date) > now() )
-        <p class="plan-btn-pre">公開前</p>
-    @else
-        <div class="plan-btn-wrap">
-            <a href="{{ route('user.plan.show', ['project' => $project,'plan' => $plan]) }}" class="plan-btn">支援する</a>
-        </div>
-    @endif
+    <input type="checkbox" name="plan_ids[]" class="plan_ids" onChange="Plans.planIsChecked(this)" id="{{ $plan->id }}">
+    <select name="plans[{{$plan->id}}]amount[]" id="plan_amount_{{ $plan->id }}" disabled>
+        @for($i = 1; $i <= $plan->limit_of_supporters; $i ++)
+            <option value="{{ $i }}">{{ $i }}</option>
+        @endfor
+    </select>
 </div>

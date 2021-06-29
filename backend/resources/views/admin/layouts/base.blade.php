@@ -9,7 +9,7 @@
 @endsection
 
 @section('header_content')
-<a class="navbar-brand" href="{{ route('admin.dashboard') }}">ガーディアン</a>
+<a class="navbar-brand" href="{{ route('admin.dashboard') }}">ファンリターン</a>
 
 {{--        left side menu--}}
 <ul class="navbar mr-auto">
@@ -59,64 +59,42 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.user.index')}}">
-            ユーザ管理
-        </a>
+        <div class="nav-link">
+            <a href="{{route('admin.user.index')}}">
+                ユーザ管理
+            </a>
+            {{-- <a role='button' class="dropdown-toggle" href="#collapse_user" data-toggle="collapse"
+                aria-controls="collapse_user" aria-expanded="true">
+            </a> --}}
+        </div>
     </li>
     <li class="nav-item">
-        <div class="btn-group">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                style="cursor: pointer;">
-                <i class="fas fa-caret-down"></i> 企業管理
+        <div class="nav-link">
+            <a class="" href="{{ route('admin.project.index') }}">
+                プロジェクト管理
             </a>
-
-            <div class="dropdown-menu">
-                <a class="dropdown-item text-success" href="{{ route('admin.company.index') }}">承認済み企業</a>
-                <a class="dropdown-item text-danger" href="{{ route('admin.temporary_company.index') }}">承認待ち企業</a>
+            <a role='button' class="dropdown-toggle" href="#collapse_project" data-toggle="collapse"
+                aria-controls="collapse_project" aria-expanded="true">
+            </a>
+            <div class="collapse show" id="collapse_project">
+                <a class='nav-link-child' href="{{ route('admin.plan.index') }}">
+                    プラン管理
+                </a>
+                <a class='nav-link-child' href="{{ route('admin.user_payment_included.index') }}">
+                    応募者管理
+                </a>
+                <a class='nav-link-child' href="{{ route('admin.report.index') }}">
+                    活動報告管理
+                </a>
+                <a class='nav-link-child' href="{{ route('admin.comment.index') }}">
+                    コメント管理
+                </a>
             </div>
         </div>
     </li>
     <li class="nav-item">
-        <div class="btn-group">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                style="cursor: pointer;">
-                <i class="fas fa-caret-down"></i> タレント管理
-            </a>
-
-            <div class="dropdown-menu">
-                <a class="dropdown-item text-success" href="{{ route('admin.talent.index') }}">承認済みタレント</a>
-                <a class="dropdown-item text-danger" href="{{ route('admin.temporary_talent.index') }}">承認待ちタレント</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.project.index') }}">
-            プロジェクト管理
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.plan.index') }}">
-            プラン管理
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.report.index') }}">
-            活動報告管理
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('admin.category.index')}}">
-            カテゴリ管理
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href={{ route('admin.supporter_comment.index') }}>
-            支援者コメント管理
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.supporter_purchase.index') }}">
-            支援者・支援管理
+        <a class="nav-link" href="{{ route('admin.message.index') }}">
+            メッセージ管理
         </a>
     </li>
     <li class="nav-item">

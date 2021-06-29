@@ -55,10 +55,7 @@
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
     @if ($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role === "admin"))
-    <form action="{{ route($role.'.plan.create', ['project' => $project]) }}">
-        <button class="btn btn-outline-success" type="submit">新規作成</button>
-        <button class="btn btn-outline-success" type="submit" name="contribution" value="contribution">寄付金プラン作成</button>
-    </form>
+    <a href="{{ route($role.'.plan.create', ['project' => $project]) }}" class="btn btn-success">新規作成</a>
     @endif
 </div>
 @if(Request::get('word'))
@@ -95,8 +92,7 @@
                     {{ number_format($plan->price) }}円
                 </td>
                 <td>
-                    <!-- 寄付金プラン作成時にリターン提供日はデフォルト値として'0001-01-01'が挿入される。 -->
-                    {{ $plan->estimated_return_date == '0001-01-01' ? "なし" : $plan->estimated_return_date }}
+                    {{ $plan->delivery_date }}
                 </td>
                 <td>
                     <a href="{{ route($role.'.plan.preview', ['project' => $plan->project, 'plan' => $plan]) }}" class="btn btn-success">
@@ -105,14 +101,7 @@
                 </td>
                 @if($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role === "admin"))
                 <td>
-                    <!-- 寄付金プラン作成時にリターン提供日はデフォルト値として'0001-01-01'が挿入される。 -->
-                    <form action="{{ route($role.'.plan.edit', ['project' => $plan->project, 'plan' => $plan]) }}">
-                        @if($plan->estimated_return_date == '0001-01-01')
-                        <button class="btn btn-primary" name="contribution" value="contribution">編集</button>
-                        @else
-                        <button class="btn btn-primary">編集</button>
-                        @endif
-                    </form>
+                    <a class="btn btn-primary" href="{{ route($role.'.plan.edit', ['project' => $plan->project, 'plan' => $plan]) }}">編集</a>
                 </td>
                 <form action="{{ route($role.'.plan.destroy', ['project' => $project, 'plan' =>$plan]) }}" method="POST">
                     @csrf
