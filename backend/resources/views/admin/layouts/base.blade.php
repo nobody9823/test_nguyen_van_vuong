@@ -80,11 +80,15 @@
                 <a class='nav-link-child' href="{{ route('admin.plan.index') }}">
                     プラン管理
                 </a>
-                <!-- エラーになる為、一時的に削除しました -->
+                <a class='nav-link-child' href="{{ route('admin.user_payment_included.index') }}">
+                    応募者管理
+                </a>
                 <a class='nav-link-child' href="{{ route('admin.report.index') }}">
                     活動報告管理
                 </a>
-                
+                <a class='nav-link-child' href="{{ route('admin.comment.index') }}">
+                    コメント管理
+                </a>
             </div>
         </div>
     </li>
