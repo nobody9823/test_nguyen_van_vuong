@@ -85,22 +85,19 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ReportRequest $request, Project $project, Report $activity_report)
+    public function update(ReportRequest $request, Project $project, Report $report)
     {
         DB::beginTransaction();
         try {
-            $activity_report
-                ->fill($request->fillWithProjectId($project->id))
-                ->save();
-            $activity_report->activityReportImages()->saveMany($request->ImagesToArray());
+            $report->fill($request->fillWithProjectId($project->id))->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->withErrors('活動報告の作成に失敗しました。管理会社に連絡をお願いします。');
         }
 
-        $activity_reports = $project->activityReports()->paginate(10);
-        return redirect()->action([ReportController::class, 'search'], ['project' => $project, 'activity_reports' => $activity_reports])->with('flash_message', '更新が完了しました。');
+        $reports = $project->reports()->paginate(10);
+        return redirect()->action([ReportController::class, 'search'], ['project' => $project, 'reports' => $reports])->with('flash_message', '更新が完了しました。');
     }
 
     /**
