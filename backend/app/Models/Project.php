@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Auth;
 use App\Models\UserProjectLiked;
+use App\Traits\SearchFunctions;
+use App\Traits\SortBySelected;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +19,7 @@ use function PHPUnit\Framework\isEmpty;
 
 class Project extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes,SearchFunctions,SortBySelected;
 
     protected $fillable = [
         'user_id',
@@ -103,6 +105,9 @@ class Project extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
+
+
+    //--------------local scope----------------//
     public function scopeGetProjectsWithPaginate($query)
     {
         return $query->with('user')->orderBy('created_at', 'desc')->paginate(10);
@@ -236,6 +241,19 @@ class Project extends Model
         }
         return $query;
     }
+
+    public function scopeSearch($query)
+    {
+        if ($this->getSearchWordInArray()) {
+            foreach ($this->getSearchWordInArray() as $word) {
+                $query->where(function ($query) use ($word) {
+                    $query->Where('title', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                });
+            }
+        }
+    }
+    //--------------local scope----------------//
+
 
     public function getTotalLikesAttribute()
     {

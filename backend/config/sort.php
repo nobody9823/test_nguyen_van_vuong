@@ -49,6 +49,8 @@ return array(
     //プロジェクト管理
     'release_status_asc' => '掲載状態昇順',
     'release_status_desc' => '掲載状態降順',
+    'liked_users_count_asc' => 'いいね数昇順',
+    'liked_users_count_desc' => 'いいね数降順',
 
     //プラン管理
     'price_asc' => '価格昇順',
