@@ -106,18 +106,17 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project, Report $activity_report)
+    public function destroy(Project $project, Report $report)
     {
         DB::beginTransaction();
         try {
-            $activity_report->deleteImages();
-            $activity_report->delete();
+            $report->delete();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
         }
-        $activity_reports = $project->activityReports()->paginate(10);
-        return redirect()->action([ReportController::class, 'search'], ['project' => $project, 'activity_reports' => $activity_reports])->with('flash_message', '削除が完了しました。');
+        $reports = $project->reports()->paginate(10);
+        return redirect()->action([ReportController::class, 'search'], ['project' => $project, 'reports' => $reports])->with('flash_message', '削除が完了しました。');
     }
 
     public function deleteImage(ActivityReportImage $activityReportImage)
