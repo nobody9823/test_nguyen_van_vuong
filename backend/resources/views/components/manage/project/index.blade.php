@@ -58,6 +58,14 @@
             <option value="user_name_desc" {{ Request::get('sort_type') === "user_name_desc" ? 'selected' : '' }}>
                 ユーザー名降順
             </option>
+            <option value="liked_users_count_asc"
+                {{ Request::get('sort_type') === "liked_users_count_asc" ? 'selected' : '' }}>
+                いいね数昇順
+            </option>
+            <option value="liked_users_count_desc"
+                {{ Request::get('sort_type') === "liked_users_count_desc" ? 'selected' : '' }}>
+                いいね数降順
+            </option>
         </select>
         <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索"
             value="{{ Request::get('word') }}">
@@ -99,16 +107,16 @@
         @else
         <table class="table">
             <tr>
-                <th style="width:10%">タイトル</th>
+                <th style="width:23%">タイトル</th>
                 <th style="width:10%">ユーザー名</th>
-                <th style="width:10%">プロジェクト詳細</th>
+                <th style="width:12%">プロジェクト詳細</th>
                 <th style="width:10%">プレビュー</th>
-                <th style="width: 20%">その他一覧</th>
+                <th style="width:10%">関連一覧画面</th>
                 <th style="width:10%">編集/削除</th>
                 @if($role === "admin")
                 <th style="width:10%; text-align:center;">いいね数</th>
                 @endif
-                <th style="width: 10%">掲載状態</th>
+                <th style="width:15%">掲載状態</th>
             </tr>
             @foreach($projects as $project)
             <tr>
@@ -124,41 +132,49 @@
                         class="btn btn-success">表示</a>
                 </td>
                 <td>
-                    <a href="{{ route($role.'.plan.index', ['project' => $project]) }}"
-                        class="btn btn-success mb-2">プラン一覧</a>
+                    <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                        data-target="#collapse{{ $project->id }}" aria-expanded="false"
+                        aria-controls="#collapse{{ $project->id }}">
+                        一覧 ▼
+                    </button>
 
-                    <a href="{{ route($role.'.report.index', ['project' => $project] )}}"
-                        class="btn btn-primary mb-2">活動報告一覧</a>
-
-                    <a href="{{ route($role.'.comment.index', ['project_id' => $project->id] )}}"
-                        class="btn btn-primary">コメント一覧</a>
+                    <div class="collapse {{ $loop->index === 0?'show':'' }}" id="collapse{{$project->id}}">
+                        <div class="card" style="border: none; background-color: #f8f9fa;">
+                            <a href="{{ route($role.'.plan.index', ['project' => $project]) }}"
+                                class="btn btn-sm btn-primary mt-1">プラン一覧</a>
+                            <a href="{{ route($role.'.comment.index', ['project_id' => $project->id] )}}"
+                                class="btn btn-sm btn-primary mt-1">コメント一覧</a>
+                            <a href="{{ route($role.'.report.index', ['project' => $project] )}}"
+                                class="btn btn-sm btn-primary mt-1">活動報告一覧</a>
+                        </div>
+                    </div>
                 </td>
 
                 <td>
-                    @if ($project->release_status !== '掲載中' && $project->release_status !== '承認待ち' || $role === "admin")
-                    <a href="{{ route($role.'.project.edit', ['project' => $project]) }}"
-                        class="btn btn-primary mb-2">編集</a>
-                    <form action="{{ route($role.'.project.destroy', ['project' => $project]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-dell" type="submit">削除</button>
-                        @endif
+                    <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                        data-target="#collapseExample{{ $project->id }}" aria-expanded="true"
+                        aria-controls="collapseExample">
+                        設定 ▼
+                    </button>
+                    <div class="collapse {{ $loop->index === 0?'show':null }}" id="collapseExample{{$project->id}}">
+                        <div class="card" style="border: none; background-color: #f8f9fa;">
+                            @if ($project->release_status !== '掲載中' && $project->release_status !== '承認待ち' || $role
+                            ===
+                            "admin")
+                            <a href="{{ route($role.'.project.edit', ['project' => $project]) }}"
+                                class="btn btn-sm btn-primary mt-1">編集</a>
+                            <form action="{{ route($role.'.project.destroy', ['project' => $project]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-sm btn-danger mt-1 w-100 btn-dell" type="submit">削除</button>
+                            </form>
+                            @endif
+                        </div>
+                    </div>
                 </td>
                 </form>
                 <td>
                     <div class="d-flex flex-column justify-content-center">
-                        <div class="d-flex justify-content-center">
-                            <button class="btn btn-sm btn-danger" type="button"
-                                onClick="decrementLikes({{$project->id}}, 1)">- 1</button>
-                            <button class="btn btn-sm btn-primary" type="button"
-                                onClick="incrementLikes({{$project->id}}, 1)">+ 1</button>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <button class="btn btn-sm btn-danger" type="button"
-                                onClick="decrementLikes({{$project->id}}, 10)">- 10</button>
-                            <button class="btn btn-sm btn-primary" type="button"
-                                onClick="incrementLikes({{$project->id}}, 10)">+ 10</button>
-                        </div>
                         <div class="d-flex justify-content-center">
                             <p>
                                 <img style="height:1em" src="/image/heart.jpg">
