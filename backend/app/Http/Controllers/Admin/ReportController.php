@@ -110,8 +110,8 @@ class ReportController extends Controller
     {
         DB::beginTransaction();
         try {
-            $report->delete();
             Storage::delete($report->image_url);
+            $report->delete();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -120,10 +120,13 @@ class ReportController extends Controller
         return redirect()->action([ReportController::class, 'search'], ['project' => $project, 'reports' => $reports])->with('flash_message', '削除が完了しました。');
     }
 
-    public function deleteImage(ActivityReportImage $activityReportImage)
+    public function deleteImage(Request $request, Report $report)
     {
-        Storage::delete($activityReportImage->image_url);
-        $activityReportImage->delete();
+        Storage::delete($request->report['image_url']);
+
+        $report = Report::find($request->report['id']);
+        $report->image_url = "public/sampleImage/now_printing.png";
+        $report->save();   
         return response()->json('success');
     }
 

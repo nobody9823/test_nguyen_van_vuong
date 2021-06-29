@@ -62,15 +62,16 @@ $(function () {
         if (deleteConfirm === true) {
             // 対象の要素を取得
             var el = $(this);
-            // 画像のIDを取得
-            var ImageId = el.attr('id');
+            // 活動報告のデータをJSON形式で受け取る
+            var report = @json($report);
+
             // トークンの挿入
             el.append('<meta name="csrf-token" content="{{ csrf_token() }}">');
             // ajaxについての記述
             $.ajax({
-                url: '/admin/report/image/' + ImageId,
+                url: '/admin/report/image/' + report["id"],
                 type: 'POST',
-                data: {'report_image': ImageId, '_method': 'DELETE'},
+                data: {'report': report, '_method': 'DELETE'},
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 // 成功した時
                 success: function(msg){
