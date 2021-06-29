@@ -44,6 +44,7 @@ class Project extends Model
             // プロジェクト画像と動画の論理削除
             $project->projectFiles()->delete();
             $project->projectTagTagging()->delete();
+            $project->reports()->delete();
 
             // プランのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
@@ -57,9 +58,7 @@ class Project extends Model
             // コメントのリレーション先も論理削除
             $comment_ids = $project->comments()->pluck('id')->toArray();
             Reply::whereIn('comment_id', $comment_ids)->delete();
-            $project->comments()->delete();
-            $report_ids = $project->reports()->pluck('id')->toArray();
-            Report::destroy($report_ids);
+            Comment::destroy($comment_ids);
             // user project liked の論理削除
             UserProjectLiked::where('project_id', $project->id)
                             ->update(array('deleted_at' => Carbon::now()));

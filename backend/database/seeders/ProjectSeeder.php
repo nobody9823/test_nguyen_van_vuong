@@ -36,7 +36,7 @@ class ProjectSeeder extends Seeder
                     $plan->includedPayments()->attach(Payment::inRandomOrder()->first()->id);
                 });
                 $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
-                $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->make());
+                $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->create());
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
             });
     }
