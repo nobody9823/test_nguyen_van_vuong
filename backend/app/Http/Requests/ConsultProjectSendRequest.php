@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Helpers\PrefectureHelper;
+use App\Models\Tag;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -52,7 +53,7 @@ class ConsultProjectSendRequest extends FormRequest
             'block' => ['required', 'string', 'max:255'],
             'building' => ['nullable', 'string', 'max:255'],
             'site_url' => ['nullable', 'url'],
-            // 'category' => ['required'], NOTICE ここはハッシュタグのカテゴリのことなのかよく分からないので要確認
+            'tag' => ['required', Rule::in(Tag::pluck('name'))],
             'motive' => ['required', Rule::in($motive_rulein)],
             'introducer' => ['nullable', 'string', 'max:255'],
             'consultation_content' => ['required', 'string', 'max:500'],

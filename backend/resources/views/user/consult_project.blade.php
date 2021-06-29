@@ -10,36 +10,45 @@
             <form action="{{ route('user.consult_project.send') }}" method="POST" enctype="multipart/form-data" id="consultForm">
                 @csrf
                 <label style="color: red;">担当者名[必須]</label>
-                <input type="text" name="name" required/>
+                <input type="text" name="name" value="{{ old('name', Auth::user()->name) }}" required/>
                 <label style="color: red;">メールアドレス[必須]</label>
-                <input type="email" name="email" required/>
+                <input type="email" name="email" value="{{ old('email', Auth::user()->email) }}" required/>
                 <label style="color: red;">電話番号（ハイフンなし）[必須]</label>
-                <input type="text" name="phone_number" required/>
+                <input type="text" name="phone_number" value="{{ old('phone_number', Auth::user()->profile->phone_number) }}" required pattern="^[0-9]+$"/>
                 <label style="color: red;">郵便番号（ハイフンなし）[必須]</label>
-                <input type="text" name="postal_code" required/>
+                <input type="text" name="postal_code" value="{{ old('postal_code', Auth::user()->address->postal_code) }}" required pattern="^[0-9]+$"/>
                 <label style="color: red;">都道府県[必須]</label>
                 <select name="prefecture" required>
+                    <option value="">選択してください</option>
                     @foreach(\App\Helpers\PrefectureHelper::getPrefectures() as $prefecture)
-                    <option value="{{ $prefecture }}">{{ $prefecture }}</option>
+                    <option value="{{ $prefecture }}"
+                        {{ old('prefecture', \App\Helpers\PrefectureHelper::getPrefectures()[Auth::user()->address->prefecture_id]) === $prefecture ? 'selected' : ''}}
+                    >
+                        {{ $prefecture }}
+                    </option>
                     @endforeach
                 </select>
                 <label style="color: red;">市区町村[必須]</label>
-                <input type="text" name="city" required/>
+                <input type="text" name="city" value="{{ old('city', Auth::user()->address->city) }}" required/>
                 <label style="color: red;">番地[必須]</label>
-                <input type="text" name="block" required/>
+                <input type="text" name="block" value="{{ old('block', Auth::user()->address->block) }}" required/>
                 <label>建物名</label>
-                <input type="text" name="building"/>
+                <input type="text" name="building" value="{{ old('building', Auth::user()->address->building) }}"/>
                 <label>企業ホームページ</label>
-                <input type="text" name="site_url"/>
+                <input type="text" name="site_url" value="{{ old('site_url') }}"/>
                 <label style="color: red;">実施したいプロジェクトのカテゴリを選択してください[必須]</label>
-                <select name="category" required>
-                    @foreach(\App\Models\Tag::pluckNameAndId() as $tag_name)
-                    <option value="{{ $tag_name }}">{{ $tag_name }}</option>
+                <select name="tag" required>
+                    <option value="">選択してください</option>
+                    @foreach(\App\Models\Tag::pluckNameAndId() as $tag)
+                    <option value="{{ $tag }}" {{ old('tag') === $tag ? 'selected' : ''}}>
+                        {{ $tag }}
+                    </option>
                     @endforeach
                 </select>
                 <label style="color: red;">fanReturnにご相談いただいたきっかけを教えてください。<br/>（最も当てはまるものを選択してください。）[必須]</label>
                 <select name="motive" required>
                     {{-- NOTICE この項目は今後管理画面から編集できるように要望が来そうですが、一旦そのまま項目出します --}}
+                    <option value="">選択してください</option>
                     <option value="Facebook広告/Twitter広告">Facebook広告/Twitter広告</option>
                     <option value="SNSでの友人のシェア/リツイート">SNSでの友人のシェア/リツイート</option>
                     <option value="Webメディアの記事">Webメディアの記事</option>
@@ -56,9 +65,9 @@
                     {{-- <option value="その他">その他</option> FIXME その他選択時にインプットフォームの値をname="motive"にセットされるように今後実装します--}}
                 </select>
                 <label>紹介の場合や過去にFanReturnの担当者とやりとりされている場合は、紹介企業名や、紹介者名、FanReturnの担当者名をご記入ください。</label>
-                <input type="text" name="introducer" />
+                <input type="text" name="introducer" value="{{ old('introducer') }}"/>
                 <label style="color: red;">相談内容[必須]</label>
-                <textarea name="consultation_content" required></textarea>
+                <textarea name="consultation_content" required>{{ old('consultation_content') }}</textarea>
                 <label>プロジェクトの概要が分かる画像ファイル</label>
                 <input type="file" name="files[]" multiple accept=".jpg,.gif,.png,image/gif,image/jpeg,image/png"/>
                 <input type="checkbox" required />
