@@ -331,7 +331,7 @@ class ProjectController extends Controller
         } catch(Exception $e) {
             DB::rollBack();
             // NOTICE Slackにログを送信できるみたいなので今後時間があったら実装してみても良いかもしれないです。
-            Log::error("メール送信に失敗しました。", $e->getTrace());
+            Log::error($e->getMessage(), $e->getTrace());
             return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");
         }
     }
