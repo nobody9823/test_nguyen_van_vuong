@@ -1,27 +1,32 @@
-@foreach($plans as $plan)
+@foreach($payment->includedPlans as $plan)
 <div>
-    {{ $plan->title }}
-    {{ $plan->content }}
-    {{ $plan->delivery_date }}
-    {{ $plan->price }}
-    {{ $plan->image_url }}
+    {{ $plan['title'] }}
+    {{ $plan['content'] }}
+    {{ $plan['delivery_date'] }}
+    {{ $plan['price'] }}
+    {{ $plan['image_url'] }}
 </div>
 @endforeach
 <div>
-    {{ $validated_data['payment_way'] }}
-    {{ $validated_data['first_name'] }}
-    {{ $validated_data['last_name'] }}
-    {{ $validated_data['first_name_kana'] }}
-    {{ $validated_data['last_name_kana'] }}
-    {{ $validated_data['email'] }}
-    {{ $validated_data['gender'] }}
-    {{ $validated_data['phone_number'] }}
-    {{ $validated_data['postal_code'] }}
-    {{ $validated_data['prefecture'] }}
-    {{ $validated_data['city'] }}
-    {{ $validated_data['block'] }}
-    {{ $validated_data['building'] }}
-    {{ $validated_data['birth_year'].$validated_data['birth_month'].$validated_data['birth_day'] }}
-    {{ $validated_data['remarks'] }}
-    {{ $validated_data['comments'] }}
+    @if($payment->pay_jp_id !== null)
+        {{ 'credit' }}
+    @else
+        {{ 'pay pay' }}
+    @endif
+    {{ Auth::user()->profile->first_name }}
+    {{ Auth::user()->profile->last_name }}
+    {{ Auth::user()->profile->first_name_kana }}
+    {{ Auth::user()->profile->last_name_kana }}
+    {{ Auth::user()->email }}
+    {{ Auth::user()->profile->gender }}
+    {{ Auth::user()->profile->phone_number }}
+    {{ Auth::user()->address->postal_code }}
+    {{ Auth::user()->address->prefecture }}
+    {{ Auth::user()->address->city }}
+    {{ Auth::user()->address->block }}
+    {{ Auth::user()->address->building }}
+    {{ Auth::user()->profile->birthday }}
+    {{ $payment->remarks }}
+    {{ $payment->comment->content }}
 </div>
+<a href="{{ route('user.plan.paymentForPayJp', ['project' => $project, 'payment' => $payment]) }}">決済する</a>
