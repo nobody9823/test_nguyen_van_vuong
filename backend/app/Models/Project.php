@@ -44,17 +44,20 @@ class Project extends Model
             // プロジェクト画像と動画の論理削除
             $project->projectFiles()->delete();
             $project->projectTagTagging()->delete();
+
             // プランのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
-            $payment_ids = Payment::whereIn('plan', $plan_ids)->pluck('id');
+            $plan_payment_included_payment_ids = PlanPaymentIncluded::whereIn('plan_id', $plan_ids)->pluck('payment_id')->toArray();
+            $payment_ids = Payment::whereIn('id', $plan_payment_included_payment_ids)->pluck('id')->toArray();
+            $message_ids = MessageContent::whereIn('payment_id', $payment_ids)->pluck('id')->toArray();
             PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
-            MessageContent::whereIn('payment_id', $payment_ids)->delete();
-            Payment::destroy($payment_ids)->delete();
+            MessageContent::destroy($message_ids);
+            Payment::destroy($payment_ids);
             Plan::destroy($plan_ids);
             // コメントのリレーション先も論理削除
             $comment_ids = $project->comments()->pluck('id')->toArray();
             Reply::whereIn('comment_id', $comment_ids)->delete();
-            Comment::destroy($comment_ids);
+            $project->comments()->delete();
             $report_ids = $project->reports()->pluck('id')->toArray();
             Report::destroy($report_ids);
             // user project liked の論理削除

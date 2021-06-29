@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -141,6 +142,7 @@ class ProjectController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+            Log::alert($e);
             return redirect()->back()->withErrors('プロジェクトの更新に失敗しました。管理会社に連絡をお願いします。');
         }
         return redirect()->action([ProjectController::class, 'index'])->with('flash_message', '更新が成功しました。');
@@ -162,6 +164,7 @@ class ProjectController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+            Log::alert($e);
             return redirect()->back()->withErrors('プロジェクトの削除に失敗しました。管理会社に連絡をお願いします。');
         }
         return redirect()->action([ProjectController::class, 'index'])->with('flash_message', '削除が成功しました。');

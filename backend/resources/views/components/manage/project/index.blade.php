@@ -158,9 +158,7 @@
                     </button>
                     <div class="collapse {{ $loop->index === 0?'show':null }}" id="collapseExample{{$project->id}}">
                         <div class="card" style="border: none; background-color: #f8f9fa;">
-                            @if ($project->release_status !== '掲載中' && $project->release_status !== '承認待ち' || $role
-                            ===
-                            "admin")
+                            @if ($project->release_status !== '掲載中'&&$project->release_status!=='承認待ち'||$role==="admin")
                             <a href="{{ route($role.'.project.edit', ['project' => $project]) }}"
                                 class="btn btn-sm btn-primary mt-1">編集</a>
                             <form action="{{ route($role.'.project.destroy', ['project' => $project]) }}" method="POST">
