@@ -4,7 +4,8 @@
 
 <!-- 公開非公開ボタン -->
 @section('css')
-<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <link rel="stylesheet" href="{{ asset('css/bootstrap-multiselect.min.css') }}">
 <script src="{{ asset('js/bootstrap-multiselect.min.js') }}"></script>
@@ -13,39 +14,84 @@
 @section('content')
 <!-- エラーや操作完了のメッセージ -->
 <div class="card-header d-flex align-items-center">
-    <div class="flex-grow-1">プロジェクト一覧</div>
-        <form action="{{ route($role.'.project.search') }}" class="form-inline pr-3" method="get" style="position: relative">
-            @csrf
-            <p>
-                <a class="btn btn-secondary mt-3 mr-3" data-toggle="collapse" href="#collapseExample" role="button"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    詳細条件 ▼
-                </a>
-            </p>
-            <div class="collapse" id="collapseExample" style="position: absolute; top: 55px; left: -10px;">
-                <div class="card card-body">
-                    <div class="form-group mb-2 flex-column">
-                        @foreach(ProjectReleaseStatus::getValues() as $release_status)
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="{{ $release_status }}" name="release_statuses[]" id="flexCheckDefault" {{ Request::get('release_statuses') !== null && in_array($release_status, Request::get('release_statuses')) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="flexCheckDefault">
-                                {{ $release_status }}
-                            </label>
-                        </div>
-                        @endforeach
+    <div class="flex-grow-1">
+        プロジェクト管理
+        @if (count($projects) >0)
+        (全{{ $projects->total() }}件
+        {{  ($projects->currentPage() -1) * $projects->perPage() + 1}} -
+        {{ (($projects->currentPage() -1) * $projects->perPage() + 1) + (count($projects) -1)  }}件を表示)
+        @endif
+    </div>
+    <form action="{{ route($role.'.project.index') }}" class="form-inline pr-3" method="get" style="position: relative">
+        <p>
+            <a class="btn btn-secondary mt-3 mr-3" data-toggle="collapse" href="#collapseExample" role="button"
+                aria-expanded="false" aria-controls="collapseExample">
+                詳細条件 ▼
+            </a>
+        </p>
+        <div class="collapse" id="collapseExample" style="position: absolute; top: 55px; left: -10px;">
+            <div class="card card-body">
+                <div class="form-group mb-2 flex-column">
+                    @foreach(ProjectReleaseStatus::getValues() as $release_status)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $release_status }}"
+                            name="release_statuses[]" id="flexCheckDefault"
+                            {{ Request::get('release_statuses') !== null && in_array($release_status, Request::get('release_statuses')) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="flexCheckDefault">
+                            {{ $release_status }}
+                        </label>
                     </div>
+                    @endforeach
                 </div>
             </div>
-            <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索" value="{{ Request::get('word') }}">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
-        </form>
+        </div>
+        <select name="sort_type" id="sort" class="form-control mr-2">
+            <option value="" {{ !Request::get('sort_type') ? 'selected' : '' }}>
+                並び替え</option>
+            <option value="title_asc" {{ Request::get('sort_type') === "title_asc" ? 'selected' : '' }}>タイトル昇順
+            </option>
+            <option value="title_desc" {{ Request::get('sort_type') === "title_desc" ? 'selected' : '' }}>タイトル降順
+            </option>
+            <option value="user_name_asc" {{ Request::get('sort_type') === "user_name_asc" ? 'selected' : '' }}>
+                ユーザー名昇順
+            </option>
+            <option value="user_name_desc" {{ Request::get('sort_type') === "user_name_desc" ? 'selected' : '' }}>
+                ユーザー名降順
+            </option>
+        </select>
+        <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索"
+            value="{{ Request::get('word') }}">
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
+    </form>
     <div class="text-right">
         <a href="{{ route($role.'.project.create') }}" class="btn btn-outline-success">新規作成</a>
     </div>
 </div>
-@if(Request::get('word'))
-<div class="card-header d-flex align-items-center">
-    <div class="flex-grow-1">{{Request::get('word')}} の検索結果(全{{count($projects)}}件)</div>
+@if(Request::get('word') || Request::get('sort_type'))
+<div class="card-header">
+    <span style="cursor: pointer;" data-toggle="collapse" data-target="#collapseSearchFilter" aria-expanded="false"
+        aria-controls="collapseFilter">
+        検索条件▼
+    </span>
+    <a class="btn btn-sm btn-outline-info ml-4" href={{route($role.'.project.index')}}>検索条件をクリア</a>
+</div>
+<div class="collapse" id="collapseSearchFilter">
+    @if(Request::get('word'))
+    <div class="card-header d-flex align-items-center">
+        検索ワード :
+        <div class="flex-grow-1">
+            【{{ Request::get('word') }}】
+        </div>
+    </div>
+    @endif
+    @if(Request::get('sort_type'))
+    <div class="card-header d-flex align-items-center">
+        並び替え条件 :
+        <div class="flex-grow-1">
+            【{{ config('sort')[Request::get('sort_type')]}}】
+        </div>
+    </div>
+    @endif
 </div>
 @endif
 <div class="card-body">
@@ -78,12 +124,13 @@
                         class="btn btn-success">表示</a>
                 </td>
                 <td>
-                    <a href="{{ route($role.'.plan.search', ['project' => $project]) }}" class="btn btn-success mb-2">プラン一覧</a>
+                    <a href="{{ route($role.'.plan.index', ['project' => $project]) }}"
+                        class="btn btn-success mb-2">プラン一覧</a>
 
-                    <a href="{{ route($role.'.activity_report.search', ['project' => $project] )}}"
+                    <a href="{{ route($role.'.report.index', ['project' => $project] )}}"
                         class="btn btn-primary mb-2">活動報告一覧</a>
 
-                    <a href="{{ route($role.'.supporter_comment.search', ['project_id' => $project->id] )}}"
+                    <a href="{{ route($role.'.comment.index', ['project_id' => $project->id] )}}"
                         class="btn btn-primary">コメント一覧</a>
                 </td>
 
@@ -95,22 +142,26 @@
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-dell" type="submit">削除</button>
-                    @endif
+                        @endif
                 </td>
                 </form>
                 <td>
                     <div class="d-flex flex-column justify-content-center">
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-sm btn-danger" type="button" onClick="decrementLikes({{$project->id}}, 1)">- 1</button>
-                            <button class="btn btn-sm btn-primary" type="button" onClick="incrementLikes({{$project->id}}, 1)">+ 1</button>
+                            <button class="btn btn-sm btn-danger" type="button"
+                                onClick="decrementLikes({{$project->id}}, 1)">- 1</button>
+                            <button class="btn btn-sm btn-primary" type="button"
+                                onClick="incrementLikes({{$project->id}}, 1)">+ 1</button>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-sm btn-danger" type="button" onClick="decrementLikes({{$project->id}}, 10)">- 10</button>
-                            <button class="btn btn-sm btn-primary" type="button" onClick="incrementLikes({{$project->id}}, 10)">+ 10</button>
+                            <button class="btn btn-sm btn-danger" type="button"
+                                onClick="decrementLikes({{$project->id}}, 10)">- 10</button>
+                            <button class="btn btn-sm btn-primary" type="button"
+                                onClick="incrementLikes({{$project->id}}, 10)">+ 10</button>
                         </div>
                         <div class="d-flex justify-content-center">
                             <p>
-                                <img src="/image/liked-icon.png">
+                                <img style="height:1em" src="/image/heart.jpg">
                             </p>
                             <p id="total_likes_{{ $project->id }}">
                                 {{ $project->total_likes }}
@@ -120,25 +171,25 @@
                 </td>
                 <td>
                     @if ($project->release_status === "---")
-                        <div class="card border-primary mb-3 text-center">
-                            <div class="card-header bg-transparent border-primary">---</div>
-                        </div>
+                    <div class="card border-primary mb-3 text-center">
+                        <div class="card-header bg-transparent border-primary">---</div>
+                    </div>
                     @elseif ($project->release_status === "差し戻し")
-                        <div class="card border-warning mb-3 text-center">
-                            <div class="card-header bg-transparent border-warning">差し戻し</div>
-                        </div>
+                    <div class="card border-warning mb-3 text-center">
+                        <div class="card-header bg-transparent border-warning">差し戻し</div>
+                    </div>
                     @elseif ($project->release_status === "承認待ち")
-                        <div class="card border-info mb-3 text-center">
-                            <div class="card-header bg-transparent border-info">承認待ち</div>
-                        </div>
+                    <div class="card border-info mb-3 text-center">
+                        <div class="card-header bg-transparent border-info">承認待ち</div>
+                    </div>
                     @elseif ($project->release_status === "掲載中")
-                        <div class="card border-success mb-3 text-center">
-                            <div class="card-header bg-transparent border-success">掲載中</div>
-                        </div>
+                    <div class="card border-success mb-3 text-center">
+                        <div class="card-header bg-transparent border-success">掲載中</div>
+                    </div>
                     @elseif ($project->release_status === "掲載停止中")
-                        <div class="card border-secondary mb-3 text-center">
-                            <div class="card-header bg-transparent border-secondary">掲載停止中</div>
-                        </div>
+                    <div class="card border-secondary mb-3 text-center">
+                        <div class="card-header bg-transparent border-secondary">掲載停止中</div>
+                    </div>
                     @endif
                 </td>
             </tr>
