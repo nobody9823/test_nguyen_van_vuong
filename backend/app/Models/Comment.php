@@ -33,4 +33,9 @@ class Comment extends Model
     {
         return $this->belongsTo('App\Models\Payment');
     }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Models\Project');
+    }
 }

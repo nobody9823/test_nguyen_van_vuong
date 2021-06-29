@@ -12,6 +12,7 @@ use \Illuminate\Support\Str;
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @yield('title_content')
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('css')
 </head>
@@ -59,4 +60,5 @@ use \Illuminate\Support\Str;
     </div>
     @yield('script')
 </body>
+
 </html>

@@ -108,9 +108,9 @@ class Project extends Model
         return $query->with('user')->orderBy('created_at', 'desc')->paginate(10);
     }
 
-    public function scopeGetReleasedProject()
+    public function scopeGetReleasedProject($query)
     {
-        return $this->where('release_status', '掲載中');
+        return $query->where('release_status', '掲載中');
     }
 
     //company_id = Auth::id()のtalentを持つprojectを持ってくる

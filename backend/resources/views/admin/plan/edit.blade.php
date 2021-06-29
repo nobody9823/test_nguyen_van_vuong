@@ -11,7 +11,7 @@
             @csrf
             @method('PUT')
 
-            <x-manage.plan.form guard="admin" :project="$project" :plan="$plan" :contribution="$contribution" />
+            <x-manage.plan.form :project="$project" :plan="$plan" />
 
         </form>
         @if ($plan->image_url !== null)
@@ -19,12 +19,8 @@
             <div class="col-sm-4 p-2 image-card">
                 <span class="card" style="width: 18rem;">
                     <div class="card-body">
-                        @if($contribution)
-                            <img src="/image/contribution.jpeg" id='previousImage' style='height:200px; object-fit: cover;' alt="image" class="col-12">
-                        @else
-                            <img src="{{asset(Storage::url($plan->image_url))}}" id='previousImage' style='height:200px; object-fit: cover;' alt="image" class="col-12">
-                            <button type="button" class="btn btn-danger del-btn" id="{{ $plan->id }}">削除</button>
-                        @endif
+                        <img src="{{asset(Storage::url($plan->image_url))}}" id='previousImage' style='height:200px; object-fit: cover;' alt="image" class="col-12">
+                        <button type="button" class="btn btn-danger del-btn" id="{{ $plan->id }}">削除</button>
                     </div>
                 </span>
             </div>
@@ -67,7 +63,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
 <script>
     $(function() {
-        $('#estimated_return_date').datetimepicker({
+        $('#delivery_date').datetimepicker({
             format: 'Y-m-d'
         });
     });

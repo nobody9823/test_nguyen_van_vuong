@@ -15,6 +15,7 @@ class CreateSnsLinksTable extends Migration
     {
         Schema::create('sns_links', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->string('twitter_url');
             $table->string('instagram_url');
             $table->string('youtube_url');
