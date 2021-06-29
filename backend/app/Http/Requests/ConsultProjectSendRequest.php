@@ -48,7 +48,7 @@ class ConsultProjectSendRequest extends FormRequest
             'email' => ['required', 'email', Rule::unique('users')->ignore(Auth::user())],
             'phone_number' => ['required', 'regex:/^[0-9]+$/i'],
             'postal_code' => ['required', 'regex:/^[0-9]+$/i'],
-            'prefecture' => ['required', Rule::in(PrefectureHelper::getPrefectures())],
+            'prefecture_id' => ['required', Rule::in(array_keys(PrefectureHelper::getPrefectures()))],
             'city' => ['required', 'string', 'max:255'],
             'block' => ['required', 'string', 'max:255'],
             'building' => ['nullable', 'string', 'max:255'],
@@ -60,6 +60,13 @@ class ConsultProjectSendRequest extends FormRequest
             'files' => ['nullable', 'array'],
             'files.*' => ['file', 'image'],
         ];
+    }
+
+    public function passedValidation()
+    {
+        if (is_null($this->building)) {
+            $this->merge(['building' => '']);
+        }
     }
 
     public function attributes()

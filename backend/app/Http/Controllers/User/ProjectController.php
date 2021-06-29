@@ -318,11 +318,18 @@ class ProjectController extends Controller
 
     public function consultProjectSend(ConsultProjectSendRequest $request)
     {
+        DB::beginTransaction();
         try {
+            $profile = new Profile();
+            $address = new Address();
+            Auth::user()->profile()->save($profile->fill($request->all()));
+            Auth::user()->address()->save($address->fill($request->all()));
             // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
             Mail::to(config('mail.from.address'))->send(new ConsultProject($request->all()));
+            DB::commit();
             return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
         } catch(Exception $e) {
+            DB::rollBack();
             // NOTICE Slackにログを送信できるみたいなので今後時間があったら実装してみても良いかもしれないです。
             Log::error("メール送信に失敗しました。", $e->getTrace());
             return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");

@@ -18,11 +18,11 @@
                 <label style="color: red;">郵便番号（ハイフンなし）[必須]</label>
                 <input type="text" name="postal_code" value="{{ old('postal_code', optional(Auth::user()->address)->postal_code) }}" required pattern="^[0-9]+$"/>
                 <label style="color: red;">都道府県[必須]</label>
-                <select name="prefecture" required>
+                <select name="prefecture_id" required>
                     <option value="">選択してください</option>
                     @foreach(\App\Helpers\PrefectureHelper::getPrefectures() as $prefecture_id => $prefecture)
-                    <option value="{{ $prefecture }}"
-                        {{ old('prefecture') === $prefecture || optional(Auth::user()->address)->prefecture_id === $prefecture_id ? 'selected' : ''}}
+                    <option value="{{ $prefecture_id }}"
+                        {{ old('prefecture_id', optional(Auth::user()->address)->prefecture_id) == $prefecture_id ? 'selected' : ''}}
                     >
                         {{ $prefecture }}
                     </option>
