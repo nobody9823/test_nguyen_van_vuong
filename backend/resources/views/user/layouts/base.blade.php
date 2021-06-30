@@ -62,10 +62,10 @@
 <div class="drower-menu-list">
     <nav id="js-header__nav " class="l-header__nav navgation_inner">
 		<a href="★" title="★" rel="home" class="h_logo_css_sp">
-			<img src="img/logo-white.svg">
+			<img src="image/logo-white.svg">
 		</a>
 
-	<div class="other_site_header"></div>
+	    <div class="other_site_header"></div>
 		<ul id="js-global-nav" class="p-global-nav main-menu menu_base taso_menu">
 
 			<li class="menu-item nav_btn taso_li menuset_01">
@@ -241,158 +241,158 @@
             </div><!--/.footer_inner-->
         </div><!--/.footer_under-->
 
-        </footer>
+    </footer>
 
-        </div><!--/wrapper-->
+</div><!--/wrapper-->
 
 
-        <script>
-        $(window).on('load', function(){
-          var winW = $(window).width();
-          var winH = $(window).height();
-          var devW = 767;
-          if (winW <= devW) {
-            //767px以下の時の処理
-          } else {
-            //768pxより大きい時の処理
-          }
+<script>
+$(window).on('load', function(){
+    var winW = $(window).width();
+    var winH = $(window).height();
+    var devW = 767;
+    if (winW <= devW) {
+    //767px以下の時の処理
+    } else {
+    //768pxより大きい時の処理
+    }
+});
+
+/**nav**/
+$(function() {
+    var headNav = $("#header_wrap");
+    var headNav_img_01 = $(".view_01");
+    var headNav_img_02 = $(".view_02");
+
+    //scrollだけだと読み込み時困るのでloadも追加
+    $(window).on('load scroll', function () {
+        //現在の位置が200px以上かつ、クラスfixedが付与されていない時
+        if($(this).scrollTop() > 150 && headNav.hasClass('fixed') == false) {
+            //headerの高さ分上に設定
+            headNav.css({"top": '-100px'});
+            //クラスfixedを付与
+            headNav.addClass('fixed');
+
+            headNav_img_02.removeClass('view_no');
+            headNav_img_02.addClass('view_yes');
+
+            headNav_img_01.removeClass('view_yes');
+            headNav_img_01.addClass('view_no');
+
+            $("#container").addClass('container_margin-top');
+
+            //位置を0に設定し、アニメーションのスピードを指定
+            headNav.animate({"top": 0},400);
+
+        }
+        //現在の位置が199px以下かつ、クラスfixedが付与されている時にfixedを外す
+        else if($(this).scrollTop() < 149 && headNav.hasClass('fixed') == true){
+            headNav.removeClass('fixed');
+
+            headNav_img_02.removeClass('view_yes');
+            headNav_img_02.addClass('view_no');
+
+            headNav_img_01.removeClass('view_no');
+            headNav_img_01.addClass('view_yes');
+
+            $("#container").removeClass('container_margin-top');
+        }
+    });
+});
+
+//チェックボックス操作時
+$(function(){
+    $('input[name="nav-tgl"]').change(function() {
+    if($(this).prop('checked')) {
+        $('input[name="nav-tgl_clone"]').prop('checked',true);
+    } else {
+        $('input[name="nav-tgl_clone"]').prop('checked',false);
+    }
+    });
+
+    $('#nav-tgl').on('change', function(){
+    var st = $(window).scrollTop();
+    if($(this).prop("checked") == true) {
+        $('html').addClass('scroll-prevent');
+        $('html').css('top', -(st) + 'px');
+        $('#nav-tgl').on('change', function(){
+        if($(this).prop("checked") !== true) {
+            $('html').removeClass('scroll-prevent');
+            $(window).scrollTop(st);
+        }
         });
+    }
+    });
+});
 
-        /**nav**/
-        $(function() {
-            var headNav = $("#header_wrap");
-            var headNav_img_01 = $(".view_01");
-            var headNav_img_02 = $(".view_02");
+//ハンバーガー　メガナビ
+jQuery(document).ready(function($) {
+    $('#js-global-nav li').each(function(i) {
 
-            //scrollだけだと読み込み時困るのでloadも追加
-            $(window).on('load scroll', function () {
-                //現在の位置が200px以上かつ、クラスfixedが付与されていない時
-                if($(this).scrollTop() > 150 && headNav.hasClass('fixed') == false) {
-                    //headerの高さ分上に設定
-                    headNav.css({"top": '-100px'});
-                    //クラスfixedを付与
-                    headNav.addClass('fixed');
+        $(this).hover(function() {
+            var attr = this.getAttribute("id");
+            //console.log(attr);
+            var h_mega_nav = "#" + attr + "-js";
+            //console.log(h_mega_nav);
+            $(h_mega_nav).addClass("is-active");
 
-                    headNav_img_02.removeClass('view_no');
-                    headNav_img_02.addClass('view_yes');
-
-                    headNav_img_01.removeClass('view_yes');
-                    headNav_img_01.addClass('view_no');
-
-                    $("#container").addClass('container_margin-top');
-
-                    //位置を0に設定し、アニメーションのスピードを指定
-                    headNav.animate({"top": 0},400);
-
-                }
-                //現在の位置が199px以下かつ、クラスfixedが付与されている時にfixedを外す
-                else if($(this).scrollTop() < 149 && headNav.hasClass('fixed') == true){
-                    headNav.removeClass('fixed');
-
-                    headNav_img_02.removeClass('view_yes');
-                    headNav_img_02.addClass('view_no');
-
-                    headNav_img_01.removeClass('view_no');
-                    headNav_img_01.addClass('view_yes');
-
-                    $("#container").removeClass('container_margin-top');
-                }
-            });
+        }, function() {
+            var attr = this.getAttribute("id");
+            //console.log(attr);
+            var h_mega_nav = "#" + attr + "-js";
+            $(h_mega_nav).removeClass("is-active");
         });
-
-        //チェックボックス操作時
-        $(function(){
-          $('input[name="nav-tgl"]').change(function() {
-            if($(this).prop('checked')) {
-              $('input[name="nav-tgl_clone"]').prop('checked',true);
-            } else {
-              $('input[name="nav-tgl_clone"]').prop('checked',false);
-            }
-          });
-
-          $('#nav-tgl').on('change', function(){
-            var st = $(window).scrollTop();
-            if($(this).prop("checked") == true) {
-              $('html').addClass('scroll-prevent');
-              $('html').css('top', -(st) + 'px');
-              $('#nav-tgl').on('change', function(){
-                if($(this).prop("checked") !== true) {
-                  $('html').removeClass('scroll-prevent');
-                  $(window).scrollTop(st);
-                }
-              });
-            }
-          });
-        });
-
-        //ハンバーガー　メガナビ
-        jQuery(document).ready(function($) {
-            $('#js-global-nav li').each(function(i) {
-
-                $(this).hover(function() {
-                    var attr = this.getAttribute("id");
-                    //console.log(attr);
-                    var h_mega_nav = "#" + attr + "-js";
-                    //console.log(h_mega_nav);
-                    $(h_mega_nav).addClass("is-active");
-
-                }, function() {
-                    var attr = this.getAttribute("id");
-                    //console.log(attr);
-                    var h_mega_nav = "#" + attr + "-js";
-                    $(h_mega_nav).removeClass("is-active");
-                });
-            });
-        });
+    });
+});
 
 
 
-        //【さらに条件を追加】ボタン
-        //全選択ボタンを取得する
-        const uncheckBtn = document.getElementById("ac_list_uncheck-btn");
-        //チェックボックスを取得する
-        const el = document.getElementsByClassName("ac_list_checks");
+//【さらに条件を追加】ボタン
+//全選択ボタンを取得する
+const uncheckBtn = document.getElementById("ac_list_uncheck-btn");
+//チェックボックスを取得する
+const el = document.getElementsByClassName("ac_list_checks");
 
-        //全てのチェックボックスのチェックを外す
-        const uncheckAll = () => {
-            for (let i = 0; i < el.length; i++) {
-                el[i].checked = false;
-            }
-        };
-        //全選択ボタンをクリックした時「uncheckAll」を実行
-        uncheckBtn.addEventListener("click", uncheckAll, false);
+//全てのチェックボックスのチェックを外す
+const uncheckAll = () => {
+    for (let i = 0; i < el.length; i++) {
+        el[i].checked = false;
+    }
+};
+//全選択ボタンをクリックした時「uncheckAll」を実行
+uncheckBtn.addEventListener("click", uncheckAll, false);
 
 
 
-        //【slick】
-        $(function(){
-         var mainSlider = "#slider"; //メインスライダーid
-         var thumbnailSlider = "#thumbnail_slider"; //サムネイルスライダーid
+//【slick】
+$(function(){
+    var mainSlider = "#slider"; //メインスライダーid
+    var thumbnailSlider = "#thumbnail_slider"; //サムネイルスライダーid
 
-          $(mainSlider).slick({
-            autoplay: true,
-            speed: 2000,
-            arrows: true,
-            asNavFor: thumbnailSlider,
-            dots: false,
-          });
-          $(thumbnailSlider).slick({
-            slidesToShow: 5,
-            speed: 2000,
-            asNavFor: mainSlider,
-            arrows: false,
-            dots: false,
-          });
-          //#thumbnail_sliderでクリックしたスライドをカレントにする
-          $(thumbnailSlider+" .slick-slide").on('click',function(){
-            var index = $(this).attr("data-slick-index");
-            $(thumbnailSlider).slick("slickGoTo",index,false);
-          });
-        });
+    $(mainSlider).slick({
+    autoplay: true,
+    speed: 2000,
+    arrows: true,
+    asNavFor: thumbnailSlider,
+    dots: false,
+    });
+    $(thumbnailSlider).slick({
+    slidesToShow: 5,
+    speed: 2000,
+    asNavFor: mainSlider,
+    arrows: false,
+    dots: false,
+    });
+    //#thumbnail_sliderでクリックしたスライドをカレントにする
+    $(thumbnailSlider+" .slick-slide").on('click',function(){
+    var index = $(this).attr("data-slick-index");
+    $(thumbnailSlider).slick("slickGoTo",index,false);
+    });
+});
 
 
 
 
-        </script>
-        </body>
-        </html>
+</script>
+</body>
+</html>

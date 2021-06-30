@@ -401,19 +401,13 @@
             </div><!--/.img_box_01_L_item-->
 
 
-
         </div>
-
 
     </section><!--/#pc-top_03-->
 
 
-
-
     <section id="pc-top_04" class="section_base">
         <div class="tit_L_01 E-font"><h2>RANKING</h2><div class="sub_tit_L">ランキング</div></div>
-
-
 
     <div class="img_box_03">
         <div class="img_box_03_L">
