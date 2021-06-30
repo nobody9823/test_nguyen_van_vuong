@@ -152,7 +152,6 @@ class ProjectTest extends TestCase
         $this->project->save();
         $this->project->plans()->saveMany(Plan::factory(5)->make());
         $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.index'))->get(route('admin.project.preview', ['project' => $this->project]));
-        // $response->assertSee('プレビュー表示中です');
         $response->assertOk();
         $response->assertViewIs('admin.project.preview');
     }
