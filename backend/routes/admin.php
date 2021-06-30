@@ -47,8 +47,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('project/search', [ProjectController::class, 'search'])->name('project.search');
     Route::get('plan/search', [PlanController::class, 'search'])->name('plan.search');
     Route::get('report/search', [ReportController::class, 'search'])->name('report.search');
-    Route::get('supporter_comment/search', [CommentController::class, 'search'])->name('supporter_comment.search');
-    Route::get('plan/create', [PlanController::class, 'search'])->name('plan.create');
+    Route::get('supporter_comment/search', [CommentController::class, 'search'])->name('supporter_comment.search');  
     // -------------------------------------------------
 
     //プロジェクト管理
