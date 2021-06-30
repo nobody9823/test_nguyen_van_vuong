@@ -328,6 +328,7 @@ class ProjectController extends Controller
 
     public function support(Project $project)
     {
+        $this->authorize('checkIsFinishedPayment', $project);
         if (!isset(Auth::user()->profile->inviter_code)) {
             $value = [
                 'inviter_code' => Str::uuid()

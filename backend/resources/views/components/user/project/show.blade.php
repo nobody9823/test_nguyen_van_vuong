@@ -93,6 +93,11 @@
             <div class="plan-btn-wrap">
                 <a href="{{ route('user.plan.selectPlans', ['project' => $project]) }}" class="plan-btn">支援する</a>
             </div>
+            @if($project->isIncluded() === true)
+            <div class="plan-btn-wrap">
+                <a href="{{ route('user.project.support', ['project' => $project]) }}">プロジェクトサポーターになる</a>
+            </div>
+            @endif
         </div>
     </div>
     <div class="detail_tabs">
