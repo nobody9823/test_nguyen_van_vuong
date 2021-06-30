@@ -54,6 +54,7 @@ class ConsultProjectSendRequest extends FormRequest
             'building' => ['nullable', 'string', 'max:255'],
             'site_url' => ['nullable', 'url'],
             'tag' => ['required', Rule::in(Tag::pluck('name'))],
+            'commission' => ['required', Rule::in(['シンプルサポート', 'スタンダートサポート', 'プレミアムサポート', 'フルサポートプラン'])],
             'motive' => ['required', Rule::in($motive_rulein)],
             'introducer' => ['nullable', 'string', 'max:255'],
             'consultation_content' => ['required', 'string', 'max:500'],
@@ -76,6 +77,8 @@ class ConsultProjectSendRequest extends FormRequest
             'motive' => 'fanReturnにご相談いただいたきっかけ',
             'introducer' => '紹介企業名や、紹介者名、FanReturnの担当者名',
             'consultation_content' => '相談内容',
+            'commission' => 'プラン',
+            'tag' => 'カテゴリ',
             'files' => '画像ファイル',
             'files.*' => '画像ファイル',
         ];

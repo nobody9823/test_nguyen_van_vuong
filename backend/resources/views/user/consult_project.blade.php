@@ -45,6 +45,14 @@
                     </option>
                     @endforeach
                 </select>
+                <label style="color: red;">プラン選択<a href="{{ route('user.commission') }}">※プランとは</a></label>
+                <select name="commission" required>
+                    <option value="">選択してください</option>
+                    <option value="シンプルサポート">シンプルサポート</option>
+                    <option value="スタンダートサポート">スタンダートサポート</option>
+                    <option value="プレミアムサポート">プレミアムサポート</option>
+                    <option value="フルサポートプラン">フルサポートプラン</option>
+                </select>
                 <label style="color: red;">fanReturnにご相談いただいたきっかけを教えてください。<br/>（最も当てはまるものを選択してください。）[必須]</label>
                 <select name="motive" required>
                     {{-- NOTICE この項目は今後管理画面から編集できるように要望が来そうですが、一旦そのまま項目出します --}}

@@ -11,6 +11,7 @@
     <p>建物名 : {{ $input['building'] }}</p>
     <p>企業ホームページ : {{ $input['site_url'] }}</p>
     <p>カテゴリ : {{ $input['tag'] }}</p>
+    <p>プラン : {{ $input['commission'] }}</p>
     <p>FanReturnを知ったきっかけ : {{ $input['motive'] }}</p>
     <p>このサービスの紹介者 : {{ $input['introducer'] }}</p>
     <p>相談内容 : </p>

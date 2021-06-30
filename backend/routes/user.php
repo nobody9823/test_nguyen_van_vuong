@@ -79,3 +79,6 @@ Route::post('/password_reset', [PasswordResetController::class, 'update'])->name
 // --------------------inqury-------------------
 Route::get('/inquiry/create', [InquiryController::class, 'createInquiry'])->name('inquiry.create');
 Route::post('/inquiry/send', [InquiryController::class, 'sendInquiry'])->name('inquiry.send');
+
+// --------------------commission-------------------
+Route::get('commission', [MypageController::class, 'commission'])->name('commission');
