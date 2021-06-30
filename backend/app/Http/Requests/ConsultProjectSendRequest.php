@@ -48,7 +48,7 @@ class ConsultProjectSendRequest extends FormRequest
             'email' => ['required', 'email', Rule::unique('users')->ignore(Auth::user())],
             'phone_number' => ['required', 'regex:/^[0-9]+$/i'],
             'postal_code' => ['required', 'regex:/^[0-9]+$/i'],
-            'prefecture_id' => ['required', Rule::in(array_keys(PrefectureHelper::getPrefectures()))],
+            'prefecture' => ['required', Rule::in(PrefectureHelper::getPrefectures())],
             'city' => ['required', 'string', 'max:255'],
             'block' => ['required', 'string', 'max:255'],
             'building' => ['nullable', 'string', 'max:255'],

@@ -5,7 +5,7 @@
     <p>メールアドレス : {{ $input['email'] }}</p>
     <p>電話番号 : {{ $input['phone_number'] }}</p>
     <p>郵便番号 : {{ $input['postal_code'] }}</p>
-    <p>都道府県 : {{ \App\Helpers\PrefectureHelper::getPrefectures()[$input['prefecture_id']] }}</p>
+    <p>都道府県 : {{ $input['prefecture'] }}</p>
     <p>市区町村 : {{ $input['city'] }}</p>
     <p>番地 : {{ $input['block'] }}</p>
     <p>建物名 : {{ $input['building'] }}</p>
