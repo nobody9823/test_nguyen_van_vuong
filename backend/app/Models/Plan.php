@@ -33,7 +33,7 @@ class Plan extends Model
     public static function boot()
     {
         parent::boot();
-        static::deleting(function(Plan $plan){
+        static::deleting(function (Plan $plan) {
             $payment_ids = $plan->includedPayments()->pluck('payments.id')->toArray();
             PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
             MessageContent::whereIn('payment_id', $payment_ids)->delete();
@@ -46,11 +46,15 @@ class Plan extends Model
     // しかし、今後の仕様変更によりプロジェクト管理画面を経由せず、個別でプラン管理画面に画面遷移する事になった場合を見据え、そのまま記載している。
     public function scopeGetPlansByCompany($query)
     {
-        return $query->whereIn('project_id', Project::select('id')
-                        ->whereIn('talent_id', Talent::select('id')
+        return $query->whereIn(
+            'project_id',
+            Project::select('id')
+                        ->whereIn(
+                            'talent_id',
+                            Talent::select('id')
                             ->where('company_id', Auth::id())->get()
-                    )->get()
-                );
+                        )->get()
+        );
     }
 
     public function scopeGetPlansByTalent($query)
@@ -67,9 +71,9 @@ class Plan extends Model
 
     public function scopeSearchByWords($query, $words)
     {
-        if ($words[0] !== ""){
-            foreach($words as $word){
-                $query->where(function ($query) use ($word){
+        if ($words[0] !== "") {
+            foreach ($words as $word) {
+                $query->where(function ($query) use ($word) {
                     $query->searchWord($word);
                 });
             }
@@ -77,8 +81,9 @@ class Plan extends Model
         return $query;
     }
 
-    public function scopeWithProjectId($query, $project_id){
-        if ($project_id !== null){
+    public function scopeWithProjectId($query, $project_id)
+    {
+        if ($project_id !== null) {
             $query->with('project')->where('project_id', $project_id);
         }
         return $query;
@@ -91,13 +96,13 @@ class Plan extends Model
 
     public function scopeSearchWithPrice($query, $min_price, $max_price)
     {
-        if ($min_price !== null && $max_price !== null){
+        if ($min_price !== null && $max_price !== null) {
             $query->whereBetween('price', [$min_price, $max_price])
                 ->orderBy('price', 'asc');
-        } elseif ($min_price !== null){
+        } elseif ($min_price !== null) {
             $query->where('price', '>=', $min_price)
                 ->orderBy('price', 'asc');
-        } elseif ($max_price !== null){
+        } elseif ($max_price !== null) {
             $query->where('price', '<=', $max_price)
                 ->orderBy('price', 'desc');
         }
@@ -106,13 +111,13 @@ class Plan extends Model
 
     public function scopeSearchWithEstimatedReturnDate($query, $from_date, $to_date)
     {
-        if ($from_date !== null && $to_date !== null){
+        if ($from_date !== null && $to_date !== null) {
             $query->whereBetween('delivery_date', [$from_date, $to_date])
                 ->orderBy('delivery_date', 'asc');
-        } elseif ($from_date !== null){
+        } elseif ($from_date !== null) {
             $query->where('delivery_date', '>=', $from_date)
                 ->orderBy('delivery_date', 'asc');
-        } elseif ($to_date !== null){
+        } elseif ($to_date !== null) {
             $query->where('delivery_date', '<=', $to_date)
                 ->orderBy('delivery_date', 'desc');
         }

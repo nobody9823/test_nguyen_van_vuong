@@ -59,18 +59,16 @@
         </a>
     </li>
     <li class="nav-item">
-        <div class="nav-link">
-            <a href="{{route('admin.user.index')}}">
-                ユーザ管理
-            </a>
-            {{-- <a role='button' class="dropdown-toggle" href="#collapse_user" data-toggle="collapse"
+        <a class="nav-link" href="{{route('admin.user.index')}}">
+            ユーザ管理
+        </a>
+        {{-- <a role='button' class="dropdown-toggle" href="#collapse_user" data-toggle="collapse"
                 aria-controls="collapse_user" aria-expanded="true">
             </a> --}}
-        </div>
     </li>
     <li class="nav-item">
         <div class="nav-link">
-            <a class="" href="{{ route('admin.project.index') }}">
+            <a class="nav-link_2" href="{{ route('admin.project.index') }}">
                 プロジェクト管理
             </a>
             <a role='button' class="dropdown-toggle" href="#collapse_project" data-toggle="collapse"

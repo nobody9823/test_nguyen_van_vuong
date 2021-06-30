@@ -24,7 +24,6 @@ class ProjectFactory extends Factory
      */
     public function definition()
     {
-
         return [
             'user_id' => $this->faker->numberBetween(1, 50),
             'title' => Arr::random([
@@ -38,8 +37,8 @@ class ProjectFactory extends Factory
             'release_status' => Arr::random(
                 ProjectReleaseStatus::getValues()
             ),
-            'start_date' => Carbon::now(),
-            'end_date' => $this->faker->dateTimeBetween($startDate = 'now', $endDate = '+3 month'),
+            'start_date' => $this->faker->dateTimeBetween($startDate = '2 week', $endDate = '1 month'),
+            'end_date' => $this->faker->dateTimeBetween($startDate = '1 month', $endDate = '2 month'),
             'target_amount' => $this->faker->randomDigit * 100000,
         ];
     }
