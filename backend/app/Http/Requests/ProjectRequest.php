@@ -72,8 +72,8 @@ class ProjectRequest extends FormRequest
     {
         $tags = [];
         $data = $this->all();
-        if (!empty($data['tags']) && $data['tags'][0] !== null ){
-            foreach($data['tags'] as $tag){
+        if (!empty($data['tags']) && $data['tags'][0] !== null) {
+            foreach ($data['tags'] as $tag) {
                 $tags[] = new ProjectTagTagging([
                     'tag_id' => $tag
                 ]);
@@ -84,7 +84,7 @@ class ProjectRequest extends FormRequest
 
     public function projectVideo()
     {
-        if ($this->all()['video_url'] !== null){
+        if (isset($this->all()['video_url']) && $this->all()['video_url'] !== null) {
             return new ProjectFile([
                 'file_url' => $this->all()['video_url'],
                 'file_content_type' => 'video_url'
