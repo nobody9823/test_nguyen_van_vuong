@@ -186,23 +186,23 @@ class User extends Authenticatable
         };
     }
 
-    public function saveProfile($request) :void
+    public function saveProfile(array $value) :void
     {
         if (isset($this->profile)) {
-            $this->profile()->save($this->profile->fill($request->all()));
+            $this->profile()->save($this->profile->fill($value));
         } else {
             $profile = new Profile();
-            $this->profile()->save($profile->fill($request->all()));
+            $this->profile()->save($profile->fill($value));
         }
     }
 
-    public function saveAddress($request) :void
+    public function saveAddress(array $value) :void
     {
         if (isset($this->address)) {
-            $this->address()->save($this->address->fill($request->all()));
+            $this->address()->save($this->address->fill($value));
         } else {
             $address = new Address();
-            $this->address()->save($address->fill($request->all()));
+            $this->address()->save($address->fill($value));
         }
     }
     //--------------- functions -------------

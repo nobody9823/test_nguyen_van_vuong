@@ -320,8 +320,8 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            Auth::user()->saveProfile($request);
-            Auth::user()->saveAddress($request);
+            Auth::user()->saveProfile($request->all());
+            Auth::user()->saveAddress($request->all());
             // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
             Mail::to(config('mail.from.address'))->send(new ConsultProject($request->all()));
             DB::commit();
