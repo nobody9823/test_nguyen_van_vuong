@@ -2,3 +2,18 @@
     display: block;
     padding: 0.5rem 1rem 0 2rem;
 }
+
+.nav-link-child:hover,
+.nav-link-child:focus {
+    text-decoration: none;
+}
+
+.nav-link_2 {
+    display: inline;
+    /* padding: 0.5rem 0 0.5rem 1rem; */
+}
+
+.nav-link_2:hover,
+.nav-link_2:focus {
+    text-decoration: none;
+}

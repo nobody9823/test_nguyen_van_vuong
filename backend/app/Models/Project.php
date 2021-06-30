@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Auth;
 use App\Models\UserProjectLiked;
+use App\Traits\SearchFunctions;
+use App\Traits\SortBySelected;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +19,7 @@ use function PHPUnit\Framework\isEmpty;
 
 class Project extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes,SearchFunctions,SortBySelected;
 
     protected $fillable = [
         'user_id',
@@ -42,19 +44,21 @@ class Project extends Model
             // プロジェクト画像と動画の論理削除
             $project->projectFiles()->delete();
             $project->projectTagTagging()->delete();
+            $project->reports()->delete();
+
             // プランのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
-            $payment_ids = Payment::whereIn('plan', $plan_ids)->pluck('id');
+            $plan_payment_included_payment_ids = PlanPaymentIncluded::whereIn('plan_id', $plan_ids)->pluck('payment_id')->toArray();
+            $payment_ids = Payment::whereIn('id', $plan_payment_included_payment_ids)->pluck('id')->toArray();
+            $message_ids = MessageContent::whereIn('payment_id', $payment_ids)->pluck('id')->toArray();
             PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
-            MessageContent::whereIn('payment_id', $payment_ids)->delete();
-            Payment::destroy($payment_ids)->delete();
+            MessageContent::destroy($message_ids);
+            Payment::destroy($payment_ids);
             Plan::destroy($plan_ids);
             // コメントのリレーション先も論理削除
             $comment_ids = $project->comments()->pluck('id')->toArray();
             Reply::whereIn('comment_id', $comment_ids)->delete();
             Comment::destroy($comment_ids);
-            $report_ids = $project->reports()->pluck('id')->toArray();
-            Report::destroy($report_ids);
             // user project liked の論理削除
             UserProjectLiked::where('project_id', $project->id)
                             ->update(array('deleted_at' => Carbon::now()));
@@ -103,6 +107,9 @@ class Project extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
+
+
+    //--------------local scope----------------//
     public function scopeGetProjectsWithPaginate($query)
     {
         return $query->with('user')->orderBy('created_at', 'desc')->paginate(10);
@@ -236,6 +243,19 @@ class Project extends Model
         }
         return $query;
     }
+
+    public function scopeSearch($query)
+    {
+        if ($this->getSearchWordInArray()) {
+            foreach ($this->getSearchWordInArray() as $word) {
+                $query->where(function ($query) use ($word) {
+                    $query->Where('title', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                });
+            }
+        }
+    }
+    //--------------local scope----------------//
+
 
     public function getTotalLikesAttribute()
     {

@@ -49,9 +49,12 @@ class MypageController extends Controller
     public function purchasedProjects()
     {
         $projects = Project::whereIn(
-            'id', Plan::query()->select('project_id')->whereIn(
-                'id', PlanPaymentIncluded::query()->select('plan_id')->whereIn(
-                    'payment_id', Payment::query()->select('id')->where('user_id', Auth::id())
+            'id',
+            Plan::query()->select('project_id')->whereIn(
+                'id',
+                PlanPaymentIncluded::query()->select('plan_id')->whereIn(
+                    'payment_id',
+                    Payment::query()->select('id')->where('user_id', Auth::id())
                 )
             )
         )->with(['projectFiles', 'tags', 'likedUsers'])->get();

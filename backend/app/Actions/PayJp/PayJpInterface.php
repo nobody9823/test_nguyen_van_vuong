@@ -14,7 +14,7 @@ interface PayJpInterface
      *
      * @return object
      */
-    public function Payment(int $price, Request $request): object;
+    public function Payment(int $price, string $pay_jp_id): object;
 
     /**
      * Refund already finished payment

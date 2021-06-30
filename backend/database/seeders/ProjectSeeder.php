@@ -29,16 +29,15 @@ class ProjectSeeder extends Seeder
         Project::truncate();
 
         Project::factory(30)->create()
-            ->each(function(Project $project){
+            ->each(function (Project $project) {
                 $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->create());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->create());
-                $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())
-                    ->each(function(Plan $plan){
-                        $plan->includedPayments()->attach(Payment::inRandomOrder()->first()->id);
-                    });
+                $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())->each(function (Plan $plan) {
+                    $plan->includedPayments()->attach(Payment::inRandomOrder()->first()->id);
+                });
                 $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
-                $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->make());
-                $project->likedUsers()->attach(User::inRandomOrder()->first()->id);
+                $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->create());
+                $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
             });
     }
 }
