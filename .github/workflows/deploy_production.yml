@@ -28,4 +28,4 @@ jobs:
             ls .
             git pull origin main
             php -v
-            make app-main-init
+            make app-production-init
