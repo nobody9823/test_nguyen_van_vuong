@@ -48,10 +48,11 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('project/{project}/release', [ProjectController::class, 'release'])->name('project.release');
     Route::get('project/{project}/preview', [ProjectController::class, 'preview'])->name('project.preview');
     Route::get('project/{project}/output_cheering_users_to_csv', [ProjectController::class, 'output_cheering_users_to_csv'])->name('project.output_cheering_users_to_csv');
-    Route::delete('project/image/{project_image}', [ProjectController::class, 'deleteImage'])->name('project.image');
-    Route::patch('project/{project}/increment_likes', [ProjectController::class, 'incrementLikes'])->name('project.increment_likes');
-    Route::patch('project/{project}/decrement_likes', [ProjectController::class, 'decrementLikes'])->name('project.decrement_likes');
+    // Route::delete('project/image/{project_image}', [ProjectController::class, 'deleteImage'])->name('project.image');
+    // Route::patch('project/{project}/increment_likes', [ProjectController::class, 'incrementLikes'])->name('project.increment_likes');
+    // Route::patch('project/{project}/decrement_likes', [ProjectController::class, 'decrementLikes'])->name('project.decrement_likes');
     Route::prefix('project/{project}')->group(function () {
+        Route::resource('plan', PlanController::class, ['only' => ['create', 'store']]);
         Route::get('send_back', [ProjectController::class, 'sendBack'])->name('project.send_back');
         Route::get('approved', [ProjectController::class, 'approved'])->name('project.approved');
         Route::get('under_suspension', [ProjectController::class, 'underSuspension'])->name('project.under_suspension');
@@ -65,7 +66,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::delete('activity_report/image/{activity_report_image}', [ActivityReportController::class, 'deleteImage'])->name('activity_report.image');
 
     // プラン管理
-    Route::resource('plan', PlanController::class, ['only' => ['index', 'store', 'edit', 'show', 'destroy']]);
+    Route::resource('plan', PlanController::class, ['only' => ['index', 'edit','update', 'show', 'destroy']]);
     Route::get('plan/{plan}/preview', [PlanController::class, 'preview'])->name('plan.preview');
 
     // 応募者管理

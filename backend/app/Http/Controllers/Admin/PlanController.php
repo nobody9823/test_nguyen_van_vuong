@@ -22,11 +22,13 @@ class PlanController extends Controller
     public function index()
     {
         $plans = Plan::paginate(10);
-        return view('admin.plan.index',
-        [
+        return view(
+            'admin.plan.index',
+            [
             'project' => null,
             'plans' => $plans,
-        ]);
+        ]
+        );
     }
 
     /**
@@ -35,7 +37,7 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Project $project)
-    {   
+    {
         return view('admin.plan.create', ['project' => $project]);
     }
 
@@ -47,17 +49,17 @@ class PlanController extends Controller
      */
     public function store(PlanRequest $request, Project $project, Plan $plan)
     {
-            DB::beginTransaction();
-            try {
-                $plan->project_id = $project->id;
-                $plan->fill($request->all())->save();
-                // NOTE:現状オプションは使用しない為、コメントアウト
-                // $plan->saveOptions($request);
-                DB::commit();
-            } catch (\Exception $e) {
-                DB::rollback();
-                return redirect()->back()->withErrors('プランの作成に失敗しました。管理会社にご連絡をお願いします。');
-            }
+        DB::beginTransaction();
+        try {
+            $plan->project_id = $project->id;
+            $plan->fill($request->all())->save();
+            // NOTE:現状オプションは使用しない為、コメントアウト
+            // $plan->saveOptions($request);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors('プランの作成に失敗しました。管理会社にご連絡をお願いします。');
+        }
 
         return redirect()
             ->action([PlanController::class, 'search'], ['project' => $project, 'plans' => $project->plans()->paginate(10)])
@@ -83,11 +85,13 @@ class PlanController extends Controller
      */
     public function edit(Project $project, Plan $plan)
     {
-        return view('admin.plan.edit',
-        [
+        return view(
+            'admin.plan.edit',
+            [
             'project' => $project,
             'plan' => $plan,
-        ]);
+        ]
+        );
     }
 
     /**
@@ -172,11 +176,12 @@ class PlanController extends Controller
 
         $project = Project::find($request->project);
 
-        return view('admin.plan.index',
-        [
+        return view(
+            'admin.plan.index',
+            [
             'project' => $project,
             'plans' => $plans,
-        ]);
+        ]
+        );
     }
-
 }

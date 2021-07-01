@@ -52,9 +52,12 @@ class MypageController extends Controller
     public function purchasedProjects()
     {
         $projects = Project::whereIn(
-            'id', Plan::query()->select('project_id')->whereIn(
-                'id', PlanPaymentIncluded::query()->select('plan_id')->whereIn(
-                    'payment_id', Payment::query()->select('id')->where('user_id', Auth::id())
+            'id',
+            Plan::query()->select('project_id')->whereIn(
+                'id',
+                PlanPaymentIncluded::query()->select('plan_id')->whereIn(
+                    'payment_id',
+                    Payment::query()->select('id')->where('user_id', Auth::id())
                 )
             )
         )->with(['projectFiles', 'tags', 'likedUsers'])->get();
@@ -115,5 +118,10 @@ class MypageController extends Controller
         return $user->delete()
             ? redirect('/')->with('flash_message', '退会が完了しました。またのご利用をお待ちしております。')
             : redirect()->back()->with('flash_message', '退会手続きに失敗しました。');
+    }
+
+    public function commission()
+    {
+        return view('user.commission');
     }
 }
