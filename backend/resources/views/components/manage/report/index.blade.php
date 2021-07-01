@@ -5,9 +5,10 @@
 @section('content')
 <div class="card-header d-flex align-items-center">
     <div class="flex-grow-1">活動報告一覧</div>
-    <form action="{{ route($role.'.report.search', ['project' => $project]) }}" class="form-inline pr-3" method="get">
+    <form action="{{ route($role.'.report.index') }}" class="form-inline pr-3" method="get">
         @csrf
         <input name="word" type="search" class="form-control" aria-level="Search" placeholder="キーワードで検索" value="{{ Request::get('word') }}">
+        <input name="project" type="hidden" value="{{ $project }}">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
     @if ($project !== null)

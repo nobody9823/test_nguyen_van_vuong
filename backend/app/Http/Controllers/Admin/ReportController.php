@@ -19,10 +19,10 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reports = Report::getReports();
-        return view('admin.report.index', ['project' => null, 'reports' => $reports]);
+        $reports = Report::search()->withProjectId($request->project)->getReports();
+        return view('admin.report.index', ['project' => $request->project, 'reports' => $reports]);
     }
 
     /**
@@ -130,18 +130,18 @@ class ReportController extends Controller
         return response()->json('success');
     }
 
-    public function search(SearchRequest $request)
-    {
-        $reports = Report::searchByArrayWords($request->getArrayWords())
-                                            ->withProjectId($request->project)
-                                            ->with('project')->paginate(10);
+    // public function search(SearchRequest $request)
+    // {
+    //     $reports = Report::searchByArrayWords($request->getArrayWords())
+    //                                         ->withProjectId($request->project)
+    //                                         ->with('project')->paginate(10);
 
-        $project = Project::find($request->project);
+    //     $project = Project::find($request->project);
 
-        return view('admin.report.index', [
-            'reports' => $reports,
-            'project' => $project,
-            ]);
-    }
+    //     return view('admin.report.index', [
+    //         'reports' => $reports,
+    //         'project' => $project,
+    //         ]);
+    // }
 
 }
