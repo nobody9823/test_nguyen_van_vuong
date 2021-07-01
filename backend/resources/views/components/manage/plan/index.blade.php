@@ -5,7 +5,7 @@
 @section('content')
 <div class="card-header d-flex align-items-center">
     <div class="flex-grow-1">プラン一覧</div>
-    <form action="{{ route($role.'.plan.search') }}" class="form-inline pr-3" method="get" style="position: relative">
+    <form action="{{ route($role.'.plan.index') }}" class="form-inline pr-3" method="get" style="position: relative">
         @csrf
         <p>
             <a class="btn btn-secondary mt-3 mr-3" data-toggle="collapse" href="#collapseExample" role="button"
@@ -57,6 +57,7 @@
         </div>
         <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索"
             value="{{ Request::get('word') }}">
+        <input type="hidden" name="project" value="{{ optional($project)->id }}">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
     @if ($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role ===
