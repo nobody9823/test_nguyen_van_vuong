@@ -30,19 +30,6 @@ class Report extends Model
         return $this->belongsTo('App\Models\Project');
     }
 
-    public function scopeGetReports($query)
-    {
-        return $query->with('project')->paginate(10);
-    }
-
-    public function scopeWithProjectId($query, $project_id)
-    {
-        if ($project_id !== null) {
-            $query->where('project_id', $project_id);
-        }
-        return $query;
-    }
-
     public function scopeNarrowDownWithProject($query)
     {
         if (Request::get('project')) {
