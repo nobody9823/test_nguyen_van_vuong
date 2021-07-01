@@ -17,7 +17,7 @@ class CreateAddressesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('postal_code');
-            $table->integer('prefecture_id');
+            $table->string('prefecture');
             $table->string('city');
             $table->string('block');
             $table->string('building')->default("");
