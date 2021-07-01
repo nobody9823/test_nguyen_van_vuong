@@ -62,7 +62,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('project/preview_cheering_users_mail', [MailController::class, 'previewCheeringUsersMail'])->name('project.mail.preview_cheering_users_mail');
     Route::post('project/send_cheering_users_mail', [MailController::class, 'sendCheeringUsersMail'])->name('project.mail.send_cheering_users_mail');
     Route::delete('plan/image/{plan}', [PlanController::class, 'deleteImage'])->name('plan_image.destroy');
-    Route::delete('plan/option/{option}', [PlanController::class, 'deleteOption'])->name('option.destroy');
+    // NOTE:現状オプションは使用しない為、コメントアウト
+    // Route::delete('plan/option/{option}', [PlanController::class, 'deleteOption'])->name('option.destroy');
     Route::delete('activity_report/image/{activity_report_image}', [ActivityReportController::class, 'deleteImage'])->name('activity_report.image');
 
     // プラン管理
