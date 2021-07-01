@@ -129,19 +129,4 @@ class ReportController extends Controller
         $report->save();   
         return response()->json('success');
     }
-
-    // public function search(SearchRequest $request)
-    // {
-    //     $reports = Report::searchByArrayWords($request->getArrayWords())
-    //                                         ->withProjectId($request->project)
-    //                                         ->with('project')->paginate(10);
-
-    //     $project = Project::find($request->project);
-
-    //     return view('admin.report.index', [
-    //         'reports' => $reports,
-    //         'project' => $project,
-    //         ]);
-    // }
-
 }
