@@ -108,4 +108,9 @@ class MypageController extends Controller
             ? redirect('/')->with('flash_message', '退会が完了しました。またのご利用をお待ちしております。')
             : redirect()->back()->with('flash_message', '退会手続きに失敗しました。');
     }
+
+    public function commission()
+    {
+        return view('user.commission');
+    }
 }
