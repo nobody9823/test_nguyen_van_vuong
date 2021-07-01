@@ -53,6 +53,7 @@ Route::middleware('auth:admin')->group(function () {
     // Route::patch('project/{project}/decrement_likes', [ProjectController::class, 'decrementLikes'])->name('project.decrement_likes');
     Route::prefix('project/{project}')->group(function () {
         Route::resource('plan', PlanController::class, ['only' => ['create', 'store']]);
+        Route::get('plan/{plan}/preview', [PlanController::class, 'preview'])->name('plan.preview');
         Route::get('send_back', [ProjectController::class, 'sendBack'])->name('project.send_back');
         Route::get('approved', [ProjectController::class, 'approved'])->name('project.approved');
         Route::get('under_suspension', [ProjectController::class, 'underSuspension'])->name('project.under_suspension');
@@ -68,7 +69,6 @@ Route::middleware('auth:admin')->group(function () {
 
     // プラン管理
     Route::resource('plan', PlanController::class, ['only' => ['index', 'edit','update', 'show', 'destroy']]);
-    Route::get('plan/{plan}/preview', [PlanController::class, 'preview'])->name('plan.preview');
 
     // 応募者管理
     Route::resource('user_payment_included', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);

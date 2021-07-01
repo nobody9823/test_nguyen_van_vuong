@@ -103,7 +103,7 @@
                     {{ $plan->delivery_date }}
                 </td>
                 <td>
-                    <a href="{{ route($role.'.plan.preview', ['project' => $plan->project, 'plan' => $plan]) }}"
+                    <a href="{{ route($role.'.plan.preview', ['project' => $plan->project->id, 'plan' => $plan]) }}"
                         class="btn btn-success">
                         表示
                     </a>
