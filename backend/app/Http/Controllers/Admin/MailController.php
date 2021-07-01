@@ -15,8 +15,10 @@ class MailController extends Controller
     public function createCheeringUsersMail(Request $request, Project $project)
     {
         $users = User::find($request->user_ids);
-        return view('admin.mail.project.create_cheering_users_mail',
-                      ['project' => $project->load(['plans', 'plans.users']), 'users' => $users]);
+        return view(
+            'admin.mail.project.create_cheering_users_mail',
+            ['project' => $project->load('plans'), 'users' => $users]
+        );
     }
 
     public function previewCheeringUsersMail(MailRequest $request)
@@ -26,8 +28,10 @@ class MailController extends Controller
         $subject = $request->subject;
         $description = $request->description;
 
-        return view('admin.mail.project.preview_cheering_users_mail',
-                      ['subject' => $subject, 'description' => $description, 'users' => $users]);
+        return view(
+            'admin.mail.project.preview_cheering_users_mail',
+            ['subject' => $subject, 'description' => $description, 'users' => $users]
+        );
     }
 
     public function sendCheeringUsersMail(MailRequest $request)
