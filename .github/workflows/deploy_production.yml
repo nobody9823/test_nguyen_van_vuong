@@ -27,5 +27,6 @@ jobs:
             cd ${{ secrets.SERVER_PRODUCTION_PROJECT_DIR}}
             ls .
             git pull origin main
+            cd backend
             php -v
             make app-production-init
