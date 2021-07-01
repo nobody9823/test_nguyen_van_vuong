@@ -13,7 +13,7 @@ class UserProjectLiked extends Pivot
 
     protected $table = 'user_project_liked';
 
-    public function Project()
+    public function project()
     {
         return $this->belongsTo('App\Models\Project');
     }

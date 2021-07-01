@@ -28,7 +28,7 @@ class ProjectImages implements Rule
         if ($this->request->isMethod('post')) {
             return count($value) <= 10;
         } else {
-            return $this->request->route('project')->projectImages->count() + count($value) <= 10;
+            return $this->request->route('project')->projectFiles()->where('file_content_type', 'image_url')->count() + count($value) <= 10;
         }
     }
 

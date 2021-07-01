@@ -23,9 +23,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'image_url',
         'email_verified_at',
+        'password',
+        'birthday',
+        'gender',
+        'introduction',
+        'phone_number',
+        'birthday_is_published',
+        'gender_is_published',
+        'image_url',
     ];
 
     /**
@@ -56,18 +62,22 @@ class User extends Authenticatable
         parent::boot();
 
         static::deleting(function (User $user) {
-            $user->supportComments()->delete();
-            $user->userAddresses()->delete();
-            $user->userDetail()->delete();
             $user->snsUser()->delete();
+            $user->address()->delete();
+            $user->snsLinks()->delete();
+            $user->bankAccount()->delete();
+            $user->profile()->delete();
 
             // 中間テーブルの削除
-            UserSupporterCommentLiked::where('user_id', $user->id)
-                ->update(['deleted_at' => Carbon::now()]);
-            UserPlanCheering::where('user_id', $user->id)
-                ->update(['deleted_at' => Carbon::now()]);
             UserProjectLiked::where('user_id', $user->id)
                 ->update(['deleted_at' => Carbon::now()]);
+            $comment_ids = Comment::where('user_id', $user->id)->pluck('id')->toArray();
+            Reply::whereIn('comment_id', $comment_ids)->delete();
+            Comment::destroy($comment_ids);
+            $payment_ids = $user->payments()->pluck('id');
+            MessageContent::whereIn('payment_id', $payment_ids)->delete();
+            PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
+            Payment::destroy($payment_ids);
         });
     }
 
@@ -81,29 +91,31 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\SupporterComment', 'App\Models\UserSupporterCommentLiked');
     }
 
-    public function plans()
+    public function projects()
     {
-        return $this->belongsToMany('App\Models\Plan', 'user_plan_cheering')
-            ->using('App\Models\UserPlanCheering')
-            ->withPivot('selected_option')
-            ->withTimestamps();
+        return $this->hasMany('App\Models\Project');
     }
 
-    public function projects()
+    public function payments()
+    {
+        return $this->hasMany('App\Models\Payment');
+    }
+
+    public function likedProjects()
     {
         return $this->belongsToMany('App\Models\Project', 'user_project_liked')
             ->using('App\Models\UserProjectLiked')
             ->withTimestamps();
     }
 
-    public function userAddresses()
+    public function address()
     {
-        return $this->hasMany('App\Models\UserAddress');
+        return $this->hasOne('App\Models\Address');
     }
 
-    public function userDetail()
+    public function profile()
     {
-        return $this->hasOne('App\Models\UserDetail');
+        return $this->hasOne('App\Models\Profile');
     }
 
     public function snsUser()
@@ -111,6 +123,20 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\SnsUser');
     }
 
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Reply');
+    }
+
+    public function snsLinks()
+    {
+        return $this->hasMany('App\Models\SnsLink');
+    }
+
+    public function bankAccount()
+    {
+        return $this->hasOne('App\Models\BankAccount');
+    }
 
     //--------------- local scopes -------------
     public function scopeGetUsers()
@@ -132,6 +158,26 @@ class User extends Authenticatable
     {
         return $query->where('name', 'like', "%$word%")->pluck('id')->toArray();
     }
+
+    public function scopePluckNameAndId($query)
+    {
+        return $query->pluck('name', 'id');
+    }
+
+    public function scopeGetCountOfSupportersWithProject($query, Project $project)
+    {
+        return $query->whereIn(
+            'id',
+            Payment::whereIn(
+            'id',
+            PlanPaymentIncluded::whereIn(
+                        'plan_id',
+                        Plan::where('project_id', $project->id)->pluck('id')->toArray()
+                    )->pluck('id')->toArray()
+        )->pluck('id')->toArray()
+        )->count();
+    }
+
     //--------------- local scopes -------------
 
 

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Auth;
 use App\Models\UserProjectLiked;
+use App\Traits\SearchFunctions;
+use App\Traits\SortBySelected;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,18 +15,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Storage;
 
+use function PHPUnit\Framework\isEmpty;
+
 class Project extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes,SearchFunctions,SortBySelected;
 
     protected $fillable = [
-        'category_id',
-        'talent_id',
+        'user_id',
         'title',
-        'greeting_and_introduce',
-        'explanation',
-        'opportunity',
-        'finally',
+        'content',
         'target_amount',
         'start_date',
         'end_date',
@@ -34,7 +34,7 @@ class Project extends Model
 
     private int $achievement_amount = 0;
     private int $achievement_rate = 0;
-    private int $cheering_users_count = 0;
+    private int $included_users_count = 0;
     private bool $achievement_is_calculated = false;
 
     public static function boot()
@@ -42,46 +42,32 @@ class Project extends Model
         parent::boot();
         static::deleting(function(Project $project){
             // プロジェクト画像と動画の論理削除
-            $project->projectImages()->delete();
-            $project->projectVideo()->delete();
+            $project->projectFiles()->delete();
+            $project->projectTagTagging()->delete();
+            $project->reports()->delete();
+
             // プランのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
-            UserPlanCheering::whereIn('plan_id', $plan_ids)->delete();
-            Option::whereIn('plan_id', $plan_ids)->delete();
+            $plan_payment_included_payment_ids = PlanPaymentIncluded::whereIn('plan_id', $plan_ids)->pluck('payment_id')->toArray();
+            $payment_ids = Payment::whereIn('id', $plan_payment_included_payment_ids)->pluck('id')->toArray();
+            $message_ids = MessageContent::whereIn('payment_id', $payment_ids)->pluck('id')->toArray();
+            PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
+            MessageContent::destroy($message_ids);
+            Payment::destroy($payment_ids);
             Plan::destroy($plan_ids);
-            // 支援者コメントのリレーション先も論理削除
-            $supporter_comment_ids = $project->supporterComments()->pluck('id')->toArray();
-            UserSupporterCommentLiked::whereIn('supporter_comment_id', $supporter_comment_ids)->delete();
-            RepliesToSupporterComment::whereIn('supporter_comment_id', $supporter_comment_ids)->delete();
-            SupporterComment::destroy($supporter_comment_ids);
-            // 活動報告のリレーション先も論理削除
-            $activity_report_ids = $project->activityReports()->pluck('id')->toArray();
-            ActivityReportImage::whereIn('activity_report_id', $activity_report_ids)->delete();
-            ActivityReport::destroy($activity_report_ids);
+            // コメントのリレーション先も論理削除
+            $comment_ids = $project->comments()->pluck('id')->toArray();
+            Reply::whereIn('comment_id', $comment_ids)->delete();
+            Comment::destroy($comment_ids);
             // user project liked の論理削除
             UserProjectLiked::where('project_id', $project->id)
                             ->update(array('deleted_at' => Carbon::now()));
         });
     }
 
-    public function category()
+    public function projectFiles()
     {
-        return $this->belongsTo('App\Models\Category');
-    }
-
-    public function talent()
-    {
-        return $this->belongsTo('App\Models\Talent');
-    }
-
-    public function projectImages()
-    {
-        return $this->hasMany('App\Models\ProjectImage');
-    }
-
-    public function projectVideo()
-    {
-        return $this->hasOne('App\Models\ProjectVideo');
+        return $this->hasMany('App\Models\ProjectFile');
     }
 
     public function plans()
@@ -89,37 +75,49 @@ class Project extends Model
         return $this->hasMany('App\Models\Plan');
     }
 
-    public function users()
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
+
+    public function likedUsers()
     {
         return $this->belongsToMany('App\Models\User', 'user_project_liked')
             ->using('App\Models\UserProjectLiked')
             ->withTimestamps();
     }
 
-    public function userProjectLiked()
+    public function reports()
     {
-        return $this->hasMany('App\Models\UserProjectLiked');
+        return $this->hasMany('App\Models\Report');
     }
 
-    public function activityReports()
+    public function tags()
     {
-        return $this->hasMany('App\Models\ActivityReport');
+        return $this->belongsToMany('App\Models\Tag', 'App\Models\ProjectTagTagging');
     }
 
-    public function supporterComments()
+    public function projectTagTagging()
     {
-        return $this->hasMany('App\Models\SupporterComment');
+        return $this->hasMany('App\Models\ProjectTagTagging');
     }
 
-    // FIXME 命名が抽象的すぎるので直したい
-    public function scopeGetProjects($query)
+    public function comments()
     {
-        return $query->with('talent')->orderBy('created_at', 'desc')->paginate(10);
+        return $this->hasMany('App\Models\Comment');
     }
 
-    public function scopeGetReleasedProject()
+
+
+    //--------------local scope----------------//
+    public function scopeGetProjectsWithPaginate($query)
     {
-        return $this->where('release_status', '掲載中');
+        return $query->with('user')->orderBy('created_at', 'desc')->paginate(10);
+    }
+
+    public function scopeGetReleasedProject($query)
+    {
+        return $query->where('release_status', '掲載中');
     }
 
     //company_id = Auth::id()のtalentを持つprojectを持ってくる
@@ -138,15 +136,15 @@ class Project extends Model
 
     public function scopeTakeWithRelations($query, $int)
     {
-        return $query->take($int)->with(['talent', 'projectImages', 'plans', 'activityReports']);
+        return $query->take($int)->with(['projectFiles', 'plans', 'plans.includedPayments', 'plans.includedPayments.user', 'reports']);
     }
 
     public function scopeOrdeyByFundingAmount($query)
     {
         return $query
-        // projectsテーブルにplans,user_plan_cheeringテーブルを結合する
+        // projectsテーブルにplans,user_plan_billingテーブルを結合する
         ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('user_plan_cheering', 'plans.id', '=', 'user_plan_cheering.plan_id')
+        ->join('user_plan_billing', 'plans.id', '=', 'user_plan_billing.plan_id')
         // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
         ->select('plans.project_id','projects.*',DB::raw('SUM(plans.price) as funding_amount'))
         ->groupBy('plans.project_id')->orderBy('funding_amount','DESC');
@@ -155,18 +153,19 @@ class Project extends Model
     public function scopeOrdeyByNumberOfSupporters($query)
     {
         return $query
-        // projectsテーブルにplans,user_plan_cheeringテーブルを結合する
+        // projectsテーブルにplans,user_plan_billingテーブルを結合する
         ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('user_plan_cheering', 'plans.id', '=', 'user_plan_cheering.plan_id')
+        ->join('user_plan_billing', 'plans.id', '=', 'user_plan_billing.plan_id')
         // 結合テーブル内のplans.project_idが同じものは、その人数を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('count(user_plan_cheering.user_id) as number_of_user'))
+        ->select('plans.project_id','projects.*',DB::raw('count(user_plan_billing.user_id) as number_of_user'))
         ->groupBy('plans.project_id')
         ->orderBy('number_of_user', 'DESC');
     }
 
     public function scopeOrdeyByLikedUsers($query)
     {
-        return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
+        // return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
+        return $query->withCount('likedUsers')->orderBy('liked_users_count', 'DESC');
     }
 
     public function scopeOrderByNearlyDeadline($query)
@@ -179,11 +178,11 @@ class Project extends Model
         return $query->where('start_date', '>', Carbon::now())->orderBy(\DB::raw('abs(datediff(CURDATE(), start_date))'), "ASC");
     }
 
-    public function scopeOnlyCheeringDisplay($query)
+    public function scopeOnlyBillingDisplay($query)
     {
         return $query
         ->whereIn('projects.id',Plan::select('project_id')
-        ->whereIn('id',UserPlanCheering::select('plan_id')
+        ->whereIn('id',UserPlanBilling::select('plan_id')
         ->whereIn('user_id',User::select('id')->where('id', Auth::id())
         )));
     }
@@ -245,9 +244,22 @@ class Project extends Model
         return $query;
     }
 
+    public function scopeSearch($query)
+    {
+        if ($this->getSearchWordInArray()) {
+            foreach ($this->getSearchWordInArray() as $word) {
+                $query->where(function ($query) use ($word) {
+                    $query->Where('title', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                });
+            }
+        }
+    }
+    //--------------local scope----------------//
+
+
     public function getTotalLikesAttribute()
     {
-        return $this->users()->count() + $this->added_like;
+        return $this->likedUsers()->count() + $this->added_like;
     }
     /**
      * Get Japanese formatted start time of project with day of the week
@@ -270,14 +282,14 @@ class Project extends Model
     }
 
     /**
-     * Get number of cheering users
+     * Get number of Billing users
      *
      * @return int
      */
-    public function getCheeringUsersCount(): int
+    public function getBillingUsersCount(): int
     {
         $this->calculateAchieve();
-        return $this->cheering_users_count;
+        return $this->included_users_count;
     }
 
     /**
@@ -303,7 +315,7 @@ class Project extends Model
     }
 
     /**
-     * Calculate achievement amount ,achievement rate and number of cheering users
+     * Calculate achievement amount ,achievement rate and number of Billing users
      *
      * @return void
      */
@@ -314,17 +326,16 @@ class Project extends Model
             return;
         }
 
-        $plans =  $this->plans()->with('users')->get();
+        $plans =  $this->plans()->withCount('includedPayments')->get();
         // 応援プランを支援したユーザーの総数
-        $cheering_users_count = 0;
+        $included_users_count = 0;
         // 現在の達成額
         $achievement_amount = 0;
 
         //それぞれのプランの応援人数から支援総額と応援人数の合計を算出
         foreach($plans as $plan) {
-            $users_count = count($plan->users);
-            $achievement_amount += $plan->price * $users_count;
-            $cheering_users_count += $users_count;
+            $achievement_amount += $plan->price * $plan->included_payments_count;
+            $included_users_count += $plan->included_payments_count;
         }
         // 金額の達成率の算出
         if ($this->target_amount > 0) {
@@ -333,7 +344,7 @@ class Project extends Model
             $achievement_rate = 100;
         }
 
-        $this->cheering_users_count = $cheering_users_count;
+        $this->included_users_count = $included_users_count;
         $this->achievement_amount = $achievement_amount;
         $this->achievement_rate = $achievement_rate;
     }
@@ -344,49 +355,49 @@ class Project extends Model
     }
 
     // プロジェクトの持つプランをログインしているユーザーが支援しているかを確認
-    public function isCheering()
+    public function isIncluded()
     {
-        $plans = $this->plans()->with('users')->get();
-        $is_cheering = false;
-        foreach ($plans as $plan) {
-            $result = $plan->users()->find(Auth::id());
-            if ($result !== null) {
-                $is_cheering = true;
-                break;
-            }
+        $plans = $this->plans()->whereIn(
+            'id',PlanPaymentIncluded::query()->select('plan_id')->whereIn(
+            'payment_id',Payment::query()->select('id')->where(
+            'user_id', Auth::id()
+        )))->get();
+        $is_included = false;
+        if (!$plans->isEmpty()) {
+            $is_included = true;
         }
-        return $is_cheering;
+        return $is_included;
     }
 
-    public function saveProjectImages(Request $request): void
+    public function saveProjectImages(array $images): void
     {
-        if ($request->images !== null){
-            $this->projectImages()->saveMany($request->imagesToArray());
+        if (!empty($images) && $images[0] !== null){
+            $this->projectFiles()->saveMany($images);
         }
     }
 
     public function saveProjectVideo($projectVideo)
     {
         // ユーザーがURLを入力していないor更新する際にURLが変更されていない場合
-        if (optional($projectVideo)->video_url === null || (optional(optional($this->projectVideo))->video_url === optional($projectVideo)->video_url)) {
+        if (optional($projectVideo)->file_url === null || optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === optional($projectVideo)->file_url) {
             return false;
         // 新規作成の時or更新する際に動画のURLが存在しない場合
-        } elseif(optional(optional($this->projectVideo))->video_url === null && optional($projectVideo)->video_url !== null){
-            $this->projectVideo()->save($projectVideo);
+        } elseif(optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === null && optional($projectVideo)->file_url !== null){
+            $this->projectFiles()->save($projectVideo);
             // プロジェクト更新時に既に埋め込んでいるURLから別のURLに変更した場合
-        } elseif(optional(optional($this->projectVideo))->video_url !== optional($projectVideo)->video_url){
-            $this->projectVideo()->delete();
-            $this->projectVideo()->save($projectVideo);
+        } elseif(optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url !== optional($projectVideo)->file_url){
+            $this->projectFiles()->where('file_content_type', 'video_url')->first()->delete();
+            $this->projectFiles()->save($projectVideo);
         };
     }
 
     public function deleteProjectImages(): void
     {
-        foreach($this->projectImages as $image){
-            if(strpos($image->image_url, 'sampleImage') === false){
-                Storage::delete($image->image_url);
+        foreach($this->projectFiles as $file){
+            if(strpos($file->file_url, 'sampleImage') === false && $file->file_content_type === 'video_url'){
+                Storage::delete($file->file_url);
             };
-            $image->delete();
+            $file->delete();
         }
     }
 }

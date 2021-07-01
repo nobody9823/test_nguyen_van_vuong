@@ -13,7 +13,6 @@ class SnsUser extends Model
     protected $fillable = [
         'user_id',
         'sns_user_id',
-        'sns_name',
         'sns_service_name',
     ];
 

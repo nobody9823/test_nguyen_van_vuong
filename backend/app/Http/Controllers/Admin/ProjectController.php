@@ -6,16 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LikeCalculationRequest;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Requests\SearchRequest;
-use App\Models\Category;
 use App\Models\Plan;
+use App\Models\Tag;
+use App\Models\User;
 use App\Models\Project;
-use App\Models\ProjectImage;
-use App\Models\Talent;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -24,9 +24,26 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::getProjects();
+        $projects = Project::search()->searchWithReleaseStatus($request->release_statuses)->sortBySelected($request->sort_type);
+
+        //リレーション先OrderBy
+        if ($request->sort_type === 'user_name_asc') {
+            $projects = $projects->get()->sortBy('user.name')->paginate(10);
+        } elseif ($request->sort_type === 'user_name_desc') {
+            $projects = $projects->get()->sortByDesc('user.name')->paginate(10);
+        } elseif ($request->sort_type === 'liked_users_count_asc') {
+            $projects = $projects->get()->sortBy(function ($project, $key) {
+                return $project->total_likes;
+            })->paginate(10);
+        } elseif ($request->sort_type === 'liked_users_count_desc') {
+            $projects = $projects->get()->sortByDesc(function ($project, $key) {
+                return $project->total_likes;
+            })->paginate(10);
+        } else {
+            $projects = $projects->paginate(10);
+        }
         return view('admin.project.index', ['projects' => $projects]);
     }
 
@@ -37,12 +54,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluckNameAndId();
-        $talents = Talent::pluckNameAndId();
-
+        $users = User::pluckNameAndId();
+        $tags = Tag::pluckNameAndId();
         return view('admin.project.create', [
-            'categories' => $categories,
-            'talents' => $talents,
+            'tags' => $tags,
+            'users' => $users
         ]);
     }
 
@@ -57,16 +73,20 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            $project->saveProjectImages($request);
+            $project->projectTagTagging()->saveMany($request->tagsToArray());
+            $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+            Log::alert($e);
             return redirect()->back()->withErrors('プロジェクトの作成に失敗しました。管理会社に連絡をお願いします。');
         }
 
-        return redirect()->action([PlanController::class, 'create'],
-            ['project' => $project, 'plans' => $project->plans])->with('flash_message', 'プロジェクト作成が成功しました。プランを作成してください。');
+        return redirect()->action(
+            [PlanController::class, 'create'],
+            ['project' => $project, 'plans' => $project->plans]
+        )->with('flash_message', 'プロジェクト作成が成功しました。プランを作成してください。');
     }
 
     /**
@@ -77,7 +97,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load('projectImages', 'projectVideo', 'plans', 'plans.users', 'activityReports');
+        $project->load('projectFiles', 'plans', 'reports');
         return view('admin.project.show', compact('project'));
     }
 
@@ -89,15 +109,19 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $categories = Category::pluckNameAndId();
-        $talents = Talent::pluckNameAndId();
-        $project_images = $project->projectImages;
+        $users = User::pluckNameAndId();
+        $tags = Tag::pluckNameAndId();
+        $projectTags = $project->tags->pluck('id')->toArray();
+        $projectImages = $project->projectFiles()->where('file_content_type', 'image_url')->get();
+        $projectVideo = $project->projectFiles()->where('file_content_type', 'video_url')->first();
 
         return view('admin.project.edit', [
             'project' => $project,
-            'categories' => $categories,
-            'talents' => $talents,
-            'project_images' => $project_images,
+            'tags' => $tags,
+            'projectTags' => $projectTags,
+            'users' => $users,
+            'projectImages' => $projectImages,
+            'projectVideo' => $projectVideo,
         ]);
     }
 
@@ -113,12 +137,13 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            // トップ画像の情報を一括保存
-            $project->saveProjectImages($request);
+            $project->projectTagTagging()->saveMany($request->tagsToArray());
+            $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+            Log::alert($e);
             return redirect()->back()->withErrors('プロジェクトの更新に失敗しました。管理会社に連絡をお願いします。');
         }
         return redirect()->action([ProjectController::class, 'index'])->with('flash_message', '更新が成功しました。');
@@ -140,7 +165,8 @@ class ProjectController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->withErrors('プロジェクトの更新に失敗しました。管理会社に連絡をお願いします。');
+            Log::alert($e);
+            return redirect()->back()->withErrors('プロジェクトの削除に失敗しました。管理会社に連絡をお願いします。');
         }
         return redirect()->action([ProjectController::class, 'index'])->with('flash_message', '削除が成功しました。');
     }
@@ -166,27 +192,27 @@ class ProjectController extends Controller
      * @throws \Exception
      */
     // FIXME #372 ソフトデリートする
-    public function deleteImage(ProjectImage $projectImage)
-    {
-        Storage::delete($projectImage->image_url);
-        $projectImage->delete();
-        return response()->json('success');
-    }
+    // public function deleteImage(ProjectImage $projectImage)
+    // {
+    //     Storage::delete($projectImage->image_url);
+    //     $projectImage->delete();
+    //     return response()->json('success');
+    // }
 
     /**
      * @param  Request  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function search(SearchRequest $request)
-    {
-        $projects = Project::SearchByArrayWords($request->getArrayWords())
-                            ->searchWithReleaseStatus($request->release_statuses)
-                            ->getProjects();
+    // public function search(SearchRequest $request)
+    // {
+    //     $projects = Project::SearchByArrayWords($request->getArrayWords())
+    //                         ->searchWithReleaseStatus($request->release_statuses)
+    //                         ->getProjects();
 
-        return view('admin.project.index', [
-            'projects' => $projects,
-        ]);
-    }
+    //     return view('admin.project.index', [
+    //         'projects' => $projects,
+    //     ]);
+    // }
 
     /**
      * @param  Project  $project
@@ -201,14 +227,14 @@ class ProjectController extends Controller
     public function output_cheering_users_to_csv(Project $project)
     {
         //ページ遷移させずにダウンロードさせるためにstreamed responseとして返す
-        $response = new StreamedResponse(function () use($project) {
+        $response = new StreamedResponse(function () use ($project) {
             $project->load('plans', 'plans.users');
             $data = [];
             $plans = $project->plans;
             //プロジェクト詳細画面出力情報に合わせてデータを作成
             foreach ($plans as $plan) {
                 foreach ($plan->users as $user) {
-                    foreach($user->userAddresses as $user_address) {
+                    foreach ($user->userAddresses as $user_address) {
                         $data[] = [
                         $user->name,
                             $user->email,
@@ -243,7 +269,7 @@ class ProjectController extends Controller
 
     public function approved(Project $project)
     {
-        if ($project->release_status === "承認待ち" || $project->release_status === "掲載停止中"){
+        if ($project->release_status === "承認待ち" || $project->release_status === "掲載停止中") {
             $project->release_status = "掲載中";
             return $project->save() ?
                 redirect()->back()->with('flash_message', "掲載しました。") :
@@ -254,43 +280,43 @@ class ProjectController extends Controller
 
     public function sendBack(Project $project)
     {
-        if ($project->release_status === "承認待ち"){
+        if ($project->release_status === "承認待ち") {
             $project->release_status = "差し戻し";
             return $project->save() ?
             redirect()->back()->with('flash_message', "差し戻しが完了しました。") :
             redirect()->back()->withErrors('差し戻しに失敗しました。');
         }
-            redirect()->back()->withErrors('差し戻しに失敗しました。');
+        redirect()->back()->withErrors('差し戻しに失敗しました。');
     }
 
     public function underSuspension(Project $project)
     {
-        if($project->release_status === "掲載中"){
+        if ($project->release_status === "掲載中") {
             $project->release_status = "掲載停止中";
-        return $project->save() ?
+            return $project->save() ?
             redirect()->back()->with('flash_message', "掲載停止しました。") :
             redirect()->back()->withErrors('掲載停止に失敗しました。');
         }
-            redirect()->back()->withErrors('掲載停止に失敗しました。');
+        redirect()->back()->withErrors('掲載停止に失敗しました。');
     }
 
-    public function incrementLikes(LikeCalculationRequest $request, Project $project)
-    {
-        $project->added_like += $request->add_point;
-        $project->save();
-        return response()->json([
-            'result' => 'success',
-            'total_likes' => $project->total_likes,
-        ]);
-    }
+    // public function incrementLikes(LikeCalculationRequest $request, Project $project)
+    // {
+    //     $project->added_like += $request->add_point;
+    //     $project->save();
+    //     return response()->json([
+    //         'result' => 'success',
+    //         'total_likes' => $project->total_likes,
+    //     ]);
+    // }
 
-    public function decrementLikes(LikeCalculationRequest $request, Project $project)
-    {
-        $project->added_like -= $request->sub_point;
-        $project->save();
-        return response()->json([
-            'result' => 'success',
-            'total_likes' => $project->total_likes,
-        ]);
-    }
+    // public function decrementLikes(LikeCalculationRequest $request, Project $project)
+    // {
+    //     $project->added_like -= $request->sub_point;
+    //     $project->save();
+    //     return response()->json([
+    //         'result' => 'success',
+    //         'total_likes' => $project->total_likes,
+    //     ]);
+    // }
 }

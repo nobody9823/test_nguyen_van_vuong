@@ -40,6 +40,8 @@ services:
       - MYSQL_USER=${DB_USER:-valleyin}
       - MYSQL_PASSWORD=${DB_PASS:-valleyin}
       - MYSQL_ROOT_PASSWORD=${DB_PASS:-valleyin}
+    user: "1000:50"
+    command: --innodb-use-native-aio=0
 
   db_testing:
     build:
@@ -54,6 +56,8 @@ services:
       - MYSQL_USER=valleyin
       - MYSQL_PASSWORD=valleyin
       - MYSQL_ROOT_PASSWORD=valleyin
+    user: "1000:50"
+    command: --innodb-use-native-aio=0
 
   mail:
     image: mailhog/mailhog

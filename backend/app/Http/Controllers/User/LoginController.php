@@ -58,7 +58,7 @@ class LoginController extends Controller
                 $oauth_user->user->save();
             }
             Auth::login($oauth_user->user);
-            return redirect()->action([DashboardController::class, 'plan']);
+            return redirect()->action([MypageController::class, 'profile']);
         }
         return '情報が取得できませんでした。';
     }

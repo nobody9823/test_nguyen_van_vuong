@@ -17,8 +17,7 @@ class SupporterCommentController extends Controller
      */
     public function index()
     {
-        $supporter_comments =
-            SupporterComment::with(['project', 'user', 'repliesToSupporterComment'])
+        $supporter_comments = SupporterComment::with(['project', 'user', 'repliesToSupporterComment'])
                             ->orderBy('created_at', 'DESC')
                             ->paginate(10);
 

@@ -6,8 +6,8 @@
         <div class="breadcrumb">
             <p>
                 <a href="/">TOP</a>　＞　<a href="/search">応援プロジェクト</a>
-                {{ $categories != null ? '　＞　' : ''}}
-                {{ $categories != null ? $categories[$_GET['category_id']] : ''}}
+                {{ $tags != null ? '　＞　' : ''}}
+                {{ $tags != null ? $tags[$_GET['tag_id']] : ''}}
             </p>
         </div>
         <div class="project-search">

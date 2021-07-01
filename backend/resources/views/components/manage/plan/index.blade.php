@@ -21,13 +21,15 @@
                             価格
                         </label>
                         <div class="form-group">
-                            <input type="number" class="form-control" value="{{ Request::get('min_price') }}" name="min_price">
+                            <input type="number" class="form-control" value="{{ Request::get('min_price') }}"
+                                name="min_price">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">円</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" value="{{ Request::get('max_price') }}" name="max_price">
+                            <input type="number" class="form-control" value="{{ Request::get('max_price') }}"
+                                name="max_price">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">円</span>
                             </div>
@@ -36,13 +38,15 @@
                             リターン提供日
                         </label>
                         <div class="form-group">
-                            <input type="text" class="form-control" value="{{ Request::get('from_date') }}" name="from_date" id="from_date">
+                            <input type="text" class="form-control" value="{{ Request::get('from_date') }}"
+                                name="from_date" id="from_date">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">日から</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" value="{{ Request::get('to_date') }}" name="to_date" id="to_date">
+                            <input type="text" class="form-control" value="{{ Request::get('to_date') }}" name="to_date"
+                                id="to_date">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">日まで</span>
                             </div>
@@ -51,14 +55,13 @@
                 </div>
             </div>
         </div>
-        <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索" value="{{ Request::get('word') }}">
+        <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索"
+            value="{{ Request::get('word') }}">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
-    @if ($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role === "admin"))
-    <form action="{{ route($role.'.plan.create', ['project' => $project]) }}">
-        <button class="btn btn-outline-success" type="submit">新規作成</button>
-        <button class="btn btn-outline-success" type="submit" name="contribution" value="contribution">寄付金プラン作成</button>
-    </form>
+    @if ($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role ===
+    "admin"))
+    <a href="{{ route($role.'.plan.create', ['project' => $project]) }}" class="btn btn-success">新規作成</a>
     @endif
 </div>
 @if(Request::get('word'))
@@ -76,7 +79,8 @@
                 <th style="width:8%">価格</th>
                 <th style="width:10%">リターン提供日</th>
                 <th style="width:10%">プレビュー</th>
-                @if($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role === "admin"))
+                @if($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') ||
+                $role === "admin"))
                 <th style="width:10%">編集</th>
                 <th style="width:10%">削除</th>
                 @else
@@ -95,26 +99,22 @@
                     {{ number_format($plan->price) }}円
                 </td>
                 <td>
-                    <!-- 寄付金プラン作成時にリターン提供日はデフォルト値として'0001-01-01'が挿入される。 -->
-                    {{ $plan->estimated_return_date == '0001-01-01' ? "なし" : $plan->estimated_return_date }}
+                    {{ $plan->delivery_date }}
                 </td>
                 <td>
-                    <a href="{{ route($role.'.plan.preview', ['project' => $plan->project, 'plan' => $plan]) }}" class="btn btn-success">
+                    <a href="{{ route($role.'.plan.preview', ['project' => $plan->project, 'plan' => $plan]) }}"
+                        class="btn btn-success">
                         表示
                     </a>
                 </td>
-                @if($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role === "admin"))
+                @if($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') ||
+                $role === "admin"))
                 <td>
-                    <!-- 寄付金プラン作成時にリターン提供日はデフォルト値として'0001-01-01'が挿入される。 -->
-                    <form action="{{ route($role.'.plan.edit', ['project' => $plan->project, 'plan' => $plan]) }}">
-                        @if($plan->estimated_return_date == '0001-01-01')
-                        <button class="btn btn-primary" name="contribution" value="contribution">編集</button>
-                        @else
-                        <button class="btn btn-primary">編集</button>
-                        @endif
-                    </form>
+                    <a class="btn btn-primary"
+                        href="{{ route($role.'.plan.edit', ['project' => $plan->project, 'plan' => $plan]) }}">編集</a>
                 </td>
-                <form action="{{ route($role.'.plan.destroy', ['project' => $project, 'plan' =>$plan]) }}" method="POST">
+                <form action="{{ route($role.'.plan.destroy', ['project' => $project, 'plan' =>$plan]) }}"
+                    method="POST">
                     @csrf
                     @method('DELETE')
                     <td>
