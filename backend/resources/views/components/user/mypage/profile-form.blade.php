@@ -5,7 +5,7 @@
         @method('PATCH')
         @csrf
         <label>ユーザー名</label>
-        <input name="name" type="text" placeholder="UserId"/>
+        <input name="name" type="text" placeholder="UserId" value="{{ old('name', Auth::user()->name) }}"/>
         <button type="submit">変更する</button>
     </form>
 @elseif(Request::get('input_type') === 'email')
