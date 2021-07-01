@@ -16,11 +16,7 @@
 <div class="card-header d-flex align-items-center">
     <div class="flex-grow-1">
         プロジェクト管理
-        @if (count($projects) >0)
-        (全{{ $projects->total() }}件
-        {{  ($projects->currentPage() -1) * $projects->perPage() + 1}} -
-        {{ (($projects->currentPage() -1) * $projects->perPage() + 1) + (count($projects) -1)  }}件を表示)
-        @endif
+        <x-manage.display_index_count :props="$projects" />
     </div>
     <form action="{{ route($role.'.project.index') }}" class="form-inline pr-3" method="get" style="position: relative">
         <p>
@@ -45,28 +41,33 @@
                 </div>
             </div>
         </div>
-        <select name="sort_type" id="sort" class="form-control mr-2">
+        <x-manage.sort_form :props_array="[
+            'title' => 'タイトル',
+            'user_name' => 'ユーザー名',
+            'liked_users_count' => 'いいね数',
+        ]" />
+        {{-- <select name="sort_type" id="sort" class="form-control mr-2">
             <option value="" {{ !Request::get('sort_type') ? 'selected' : '' }}>
-                並び替え</option>
-            <option value="title_asc" {{ Request::get('sort_type') === "title_asc" ? 'selected' : '' }}>タイトル昇順
-            </option>
-            <option value="title_desc" {{ Request::get('sort_type') === "title_desc" ? 'selected' : '' }}>タイトル降順
-            </option>
-            <option value="user_name_asc" {{ Request::get('sort_type') === "user_name_asc" ? 'selected' : '' }}>
-                ユーザー名昇順
-            </option>
-            <option value="user_name_desc" {{ Request::get('sort_type') === "user_name_desc" ? 'selected' : '' }}>
-                ユーザー名降順
-            </option>
-            <option value="liked_users_count_asc"
-                {{ Request::get('sort_type') === "liked_users_count_asc" ? 'selected' : '' }}>
-                いいね数昇順
-            </option>
-            <option value="liked_users_count_desc"
-                {{ Request::get('sort_type') === "liked_users_count_desc" ? 'selected' : '' }}>
-                いいね数降順
-            </option>
-        </select>
+        並び替え</option>
+        <option value="title_asc" {{ Request::get('sort_type') === "title_asc" ? 'selected' : '' }}>タイトル昇順
+        </option>
+        <option value="title_desc" {{ Request::get('sort_type') === "title_desc" ? 'selected' : '' }}>タイトル降順
+        </option>
+        <option value="user_name_asc" {{ Request::get('sort_type') === "user_name_asc" ? 'selected' : '' }}>
+            ユーザー名昇順
+        </option>
+        <option value="user_name_desc" {{ Request::get('sort_type') === "user_name_desc" ? 'selected' : '' }}>
+            ユーザー名降順
+        </option>
+        <option value="liked_users_count_asc"
+            {{ Request::get('sort_type') === "liked_users_count_asc" ? 'selected' : '' }}>
+            いいね数昇順
+        </option>
+        <option value="liked_users_count_desc"
+            {{ Request::get('sort_type') === "liked_users_count_desc" ? 'selected' : '' }}>
+            いいね数降順
+        </option>
+        </select> --}}
         <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索"
             value="{{ Request::get('word') }}">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
@@ -75,33 +76,7 @@
         <a href="{{ route($role.'.project.create') }}" class="btn btn-outline-success">新規作成</a>
     </div>
 </div>
-@if(Request::get('word') || Request::get('sort_type'))
-<div class="card-header">
-    <span style="cursor: pointer;" data-toggle="collapse" data-target="#collapseSearchFilter" aria-expanded="false"
-        aria-controls="collapseFilter">
-        検索条件▼
-    </span>
-    <a class="btn btn-sm btn-outline-info ml-4" href={{route($role.'.project.index')}}>検索条件をクリア</a>
-</div>
-<div class="collapse" id="collapseSearchFilter">
-    @if(Request::get('word'))
-    <div class="card-header d-flex align-items-center">
-        検索ワード :
-        <div class="flex-grow-1">
-            【{{ Request::get('word') }}】
-        </div>
-    </div>
-    @endif
-    @if(Request::get('sort_type'))
-    <div class="card-header d-flex align-items-center">
-        並び替え条件 :
-        <div class="flex-grow-1">
-            【{{ config('sort')[Request::get('sort_type')]}}】
-        </div>
-    </div>
-    @endif
-</div>
-@endif
+<x-manage.search_terms :role="$role" model='project' />
 <div class="card-body">
     @if($projects->count() <= 0) <p>表示する投稿はありません。</p>
         @else
@@ -158,7 +133,8 @@
                     </button>
                     <div class="collapse {{ $loop->index === 0?'show':null }}" id="collapseExample{{$project->id}}">
                         <div class="card" style="border: none; background-color: #f8f9fa;">
-                            @if ($project->release_status !== '掲載中'&&$project->release_status!=='承認待ち'||$role==="admin")
+                            @if ($project->release_status !== ' 掲載中'&&$project->
+                            release_status!=='承認待ち'||$role==="admin")
                             <a href="{{ route($role.'.project.edit', ['project' => $project]) }}"
                                 class="btn btn-sm btn-primary mt-1">編集</a>
                             <form action="{{ route($role.'.project.destroy', ['project' => $project]) }}" method="POST">
