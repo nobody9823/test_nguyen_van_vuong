@@ -27,5 +27,6 @@ jobs:
             cd ${{ secrets.SERVER_STAGING_PROJECT_DIR}}
             ls .
             git pull origin staging
+            cd backend
             php -v
             make app-staging-init
