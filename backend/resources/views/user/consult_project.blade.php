@@ -78,7 +78,7 @@
                 <textarea name="consultation_content" required>{{ old('consultation_content') }}</textarea>
                 <label>プロジェクトの概要が分かる画像ファイル</label>
                 <input type="file" name="files[]" multiple accept=".jpg,.gif,.png,image/gif,image/jpeg,image/png"/>
-                <input type="checkbox" required />
+                <input type="checkbox" required style="display: inline-block"/>
                 <p style="color: red;">利用規約、及びガイドラインを確認し、自己または自己の役員および従業員が利用規約で規定する暴力団等並びに反社会的勢力等に該当しないことを表明し、保証します。[必須]</p>
                 <button type="submit">確認する</button>
             </form>
