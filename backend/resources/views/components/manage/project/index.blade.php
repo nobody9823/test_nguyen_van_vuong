@@ -46,28 +46,6 @@
             'user_name' => 'ユーザー名',
             'liked_users_count' => 'いいね数',
         ]" />
-        {{-- <select name="sort_type" id="sort" class="form-control mr-2">
-            <option value="" {{ !Request::get('sort_type') ? 'selected' : '' }}>
-        並び替え</option>
-        <option value="title_asc" {{ Request::get('sort_type') === "title_asc" ? 'selected' : '' }}>タイトル昇順
-        </option>
-        <option value="title_desc" {{ Request::get('sort_type') === "title_desc" ? 'selected' : '' }}>タイトル降順
-        </option>
-        <option value="user_name_asc" {{ Request::get('sort_type') === "user_name_asc" ? 'selected' : '' }}>
-            ユーザー名昇順
-        </option>
-        <option value="user_name_desc" {{ Request::get('sort_type') === "user_name_desc" ? 'selected' : '' }}>
-            ユーザー名降順
-        </option>
-        <option value="liked_users_count_asc"
-            {{ Request::get('sort_type') === "liked_users_count_asc" ? 'selected' : '' }}>
-            いいね数昇順
-        </option>
-        <option value="liked_users_count_desc"
-            {{ Request::get('sort_type') === "liked_users_count_desc" ? 'selected' : '' }}>
-            いいね数降順
-        </option>
-        </select> --}}
         <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索"
             value="{{ Request::get('word') }}">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>

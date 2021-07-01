@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Casts\ImageCast;
 use App\Casts\HashMake;
 use Auth;
+use App\Traits\SearchFunctions;
+use App\Traits\SortBySelected;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes,SearchFunctions,SortBySelected;
 
     /**
      * The attributes that are mass assignable.
@@ -150,14 +152,15 @@ class User extends Authenticatable
         return $this->paginate(10);
     }
 
-    public function scopeSearchWord($query, $words)
+    public function scopeSearch($query)
     {
-        return $query->where(function ($user) use ($words) {
-            foreach ($words as $word) {
-                $user->Where('name', 'like', "%$word%");
-                $user->orWhere('email', 'like', "%$word%");
+        if ($this->getSearchWordInArray()) {
+            foreach ($this->getSearchWordInArray() as $word) {
+                $query->where(function ($query) use ($word) {
+                    $query->Where('name', 'like', "%$word%")->orWhere('email', 'like', "%$word%");
+                });
             }
-        })->paginate(10);
+        }
     }
 
     public function scopeSearchUsersToArray($query, $word): array
@@ -175,12 +178,12 @@ class User extends Authenticatable
         return $query->whereIn(
             'id',
             Payment::whereIn(
-            'id',
-            PlanPaymentIncluded::whereIn(
-                        'plan_id',
-                        Plan::where('project_id', $project->id)->pluck('id')->toArray()
-                    )->pluck('id')->toArray()
-        )->pluck('id')->toArray()
+                'id',
+                PlanPaymentIncluded::whereIn(
+                    'plan_id',
+                    Plan::where('project_id', $project->id)->pluck('id')->toArray()
+                )->pluck('id')->toArray()
+            )->pluck('id')->toArray()
         )->count();
     }
 
@@ -211,7 +214,8 @@ class User extends Authenticatable
         return $query->whereIn(
             'id',
             Profile::query()->select('user_id')->where(
-                'inviter_code', $inviter_code
+                'inviter_code',
+                $inviter_code
             )
         );
     }

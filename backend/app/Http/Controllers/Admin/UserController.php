@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::getUsers();
+        $users = User::search()->sortBySelected($request->sort_type)->paginate(10);
         return view('admin.user.index', ['users' => $users]);
     }
 
@@ -47,16 +47,6 @@ class UserController extends Controller
         $user->deleteImageIfSample();
         $user->delete();
         return redirect()->action([UserController::class, 'index'])->with('flash_message', '削除が成功しました。');
-    }
-
-    public function search(SearchRequest $request)
-    {
-        $users = User::searchWord($request->getArrayWords());
-
-        return view('admin.user.index', [
-            'users' => $users,
-            'word' => $request->getWords(),
-        ]);
     }
 
     public function passwordReset(User $user)
