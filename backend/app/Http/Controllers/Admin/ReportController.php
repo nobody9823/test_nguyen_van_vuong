@@ -21,7 +21,7 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        $reports = Report::search()->withProjectId($request->project)->getReports();
+        $reports = Report::search()->narrowDownWithProject()->sortBySelected($request->sort_type)->paginate(10);
         return view('admin.report.index', ['project' => $request->project, 'reports' => $reports]);
     }
 
@@ -126,7 +126,7 @@ class ReportController extends Controller
 
         $report = Report::find($request->report['id']);
         $report->image_url = "public/sampleImage/now_printing.png";
-        $report->save();   
+        $report->save();
         return response()->json('success');
     }
 }

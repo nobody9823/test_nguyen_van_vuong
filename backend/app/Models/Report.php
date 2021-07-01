@@ -6,11 +6,13 @@ use App\Casts\ImageCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\SearchFunctions;
+use App\Traits\SortBySelected;
 use Illuminate\Database\Eloquent\Model;
+use Request;
 
 class Report extends Model
 {
-    use HasFactory, SoftDeletes, SearchFunctions;
+    use HasFactory, SoftDeletes, SearchFunctions,SortBySelected;
 
     protected $fillable = [
         'project_id',
@@ -35,17 +37,24 @@ class Report extends Model
 
     public function scopeWithProjectId($query, $project_id)
     {
-        if ($project_id !== null){
+        if ($project_id !== null) {
             $query->where('project_id', $project_id);
         }
         return $query;
+    }
+
+    public function scopeNarrowDownWithProject($query)
+    {
+        if (Request::get('project')) {
+            return $query->where('project_id', Request::get('project'));
+        }
     }
 
     public function scopeSearch($query)
     {
         if ($this->getSearchWordInArray()) {
             foreach ($this->getSearchWordInArray() as $word) {
-                $query->where(function ($query) use ($word) { 
+                $query->where(function ($query) use ($word) {
                     $query->where('title', 'like', "%$word%");
                     $query->orWhere('content', 'like', "%$word%");
                 });
