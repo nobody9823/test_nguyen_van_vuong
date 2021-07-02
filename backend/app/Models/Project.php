@@ -87,6 +87,13 @@ class Project extends Model
             ->withTimestamps();
     }
 
+    public function supportedUsers()
+    {
+        return $this->belongsToMany('App\Models\User', 'user_project_supported')
+            ->using('App\Models\UserProjectSupported')
+            ->withTimestamps();
+    }
+
     public function reports()
     {
         return $this->hasMany('App\Models\Report');
