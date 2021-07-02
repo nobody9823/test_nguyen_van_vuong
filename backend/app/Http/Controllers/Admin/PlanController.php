@@ -22,6 +22,7 @@ class PlanController extends Controller
     public function index(Request $request)
     {
         $plans = Plan::search()->narrowDownWithProject()
+                                ->sortBySelected($request->sort_type)
                                 ->searchWithPrice($request->min_price, $request->max_price)
                                 ->searchWithEstimatedReturnDate($request->from_date, $request->to_date)
                                 ->paginate(10);
