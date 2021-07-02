@@ -14,7 +14,7 @@
     </div>
     <form action="{{ route($role.'.plan.index') }}" class="form-inline pr-3" method="get" style="position: relative">
         @csrf
-        <x-common.add_hidden_query />
+        <x-common.add_hidden_query :project="$project->id" />
         <p>
             <a class="btn btn-secondary mt-3 mr-3" data-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample">

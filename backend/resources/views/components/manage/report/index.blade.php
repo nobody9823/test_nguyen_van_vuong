@@ -13,7 +13,7 @@
         @endif
     </div>
     <form action="{{ route($role.'.report.index') }}" class="form-inline pr-3" method="get">
-        <x-common.add_hidden_query />
+        <x-common.add_hidden_query :project="$project"/>
         <select name="sort_type" id="sort" class="form-control mr-2">
             <option value="" {{ !Request::get('sort_type') ? 'selected' : '' }}>
                 並び替え</option>
