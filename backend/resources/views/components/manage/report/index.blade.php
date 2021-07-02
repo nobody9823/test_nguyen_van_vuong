@@ -107,7 +107,7 @@
                     @csrf
                     @method('DELETE')
                     <td>
-                        <button class="btn btn-danger btn-dell" type="submit">削除</button>
+                        <button class="btn btn-danger btn-dell" type="submit" name="report_linked_project" value="report_linked_project">削除</button>
                     </td>
                 </form>
                 @else
