@@ -30,6 +30,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{plan}/join_for_paypay/{unique_token}', [PlanController::class, 'joinPlanForPayPay'])->name('plan.join_for_paypay');
     Route::get('plan/{plan}/success', [PlanController::class, 'success'])->name('plan.success');
     Route::post('comment/post', [CommentController::class, 'postComment'])->name('comment.post');
+    Route::get('support', [ProjectController::class, 'support'])->name('project.support');
 });
 
 //---------------------Mypage-----------------------------------------------
@@ -43,6 +44,9 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/withdraw', [MypageController::class, 'withdraw'])->name('withdraw');
     Route::delete('/withdraw/{user}', [MypageController::class, 'delete_user'])->name('delete_user');
 
+    //---------------------Project掲載依頼-----------------------------------------------
+    Route::get('/consult_project', [ProjectController::class, 'consultProject'])->name('consult_project');
+    Route::post('/consult_project', [ProjectController::class, 'consultProjectSend'])->name('consult_project.send');
     // NOTICE: 現状優先度的にメッセージ機能の実装は間に合わなそうなので、コメントアウトにいたします...
     // Route::resource('message', MessageController::class)->only(['index','show']);
     // Route::post('message/{user_plan_cheering}', [MessageController::class,'store'])->name('message_content.store');
@@ -76,3 +80,6 @@ Route::post('/password_reset', [PasswordResetController::class, 'update'])->name
 // --------------------inqury-------------------
 Route::get('/inquiry/create', [InquiryController::class, 'createInquiry'])->name('inquiry.create');
 Route::post('/inquiry/send', [InquiryController::class, 'sendInquiry'])->name('inquiry.send');
+
+// --------------------commission-------------------
+Route::get('commission', [MypageController::class, 'commission'])->name('commission');

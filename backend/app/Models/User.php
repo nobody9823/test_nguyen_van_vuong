@@ -108,6 +108,13 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function supportedProjects()
+    {
+        return $this->belongsToMany('App\Models\Project', 'user_project_supported')
+            ->using('App\Models\UserProjectSupported')
+            ->withTimestamps();
+    }
+
     public function address()
     {
         return $this->hasOne('App\Models\Address');
@@ -188,6 +195,26 @@ class User extends Authenticatable
         if (strpos($this->image_url, 'sampleImage') === false) {
             Storage::delete($this->image_url);
         };
+    }
+
+    public function saveProfile(array $value) :void
+    {
+        if (isset($this->profile)) {
+            $this->profile()->save($this->profile->fill($value));
+        } else {
+            $profile = new Profile();
+            $this->profile()->save($profile->fill($value));
+        }
+    }
+
+    public function saveAddress(array $value) :void
+    {
+        if (isset($this->address)) {
+            $this->address()->save($this->address->fill($value));
+        } else {
+            $address = new Address();
+            $this->address()->save($address->fill($value));
+        }
     }
     //--------------- functions -------------
 }

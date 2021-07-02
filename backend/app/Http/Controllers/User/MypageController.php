@@ -12,9 +12,12 @@ use App\Models\Payment;
 use App\Models\Plan;
 use App\Models\PlanPaymentIncluded;
 use App\Models\Project;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Log;
 
 class MypageController extends Controller
 {
@@ -80,9 +83,17 @@ class MypageController extends Controller
     // プロフィール更新処理
     public function updateProfile(UserProfileRequest $request, User $user)
     {
-        return $user->fill($request->all())->save()
-            ? redirect()->route('user.profile')->with('flash_message', 'プロフィール更新が成功しました。')
-            : redirect()->back()->withErrors("プロフィールの更新に失敗しました。管理者にお問い合わせください。");
+        DB::beginTransaction();
+        try {
+            $user->fill($request->all())->save();
+            $user->saveProfile($request->all());
+            DB::commit();
+            return redirect()->route('user.profile')->with('flash_message', 'プロフィール更新が成功しました。');
+        } catch(Exception $e) {
+            DB::rollBack();
+            Log::alert($e->getMessage(), $e->getTrace());
+            return redirect()->back()->withErrors("プロフィールの更新に失敗しました。管理者にお問い合わせください。");
+        }
     }
 
     public function forgotPassword()
@@ -107,5 +118,10 @@ class MypageController extends Controller
         return $user->delete()
             ? redirect('/')->with('flash_message', '退会が完了しました。またのご利用をお待ちしております。')
             : redirect()->back()->with('flash_message', '退会手続きに失敗しました。');
+    }
+
+    public function commission()
+    {
+        return view('user.commission');
     }
 }

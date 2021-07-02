@@ -8,7 +8,7 @@
         活動報告詳細
     </div>
     <div class="text-right">
-        <a href="{{ route($role.'.activity_report.index') }}" class="btn btn-outline-info">活動報告一覧へ戻る</a>
+        <a href="{{ route($role.'.report.index') }}" class="btn btn-outline-info">活動報告一覧へ戻る</a>
     </div>
 </header>
 <article class="card mt-3">
@@ -17,10 +17,10 @@
             活動報告詳細
         </h5>
         <div>
-            <a href="{{ route($role.'.activity_report.edit', ['project' => $activityReport->project, 'activity_report' => $activityReport]) }}"
+            <a href="{{ route($role.'.report.edit', ['project' => $report->project, 'report' => $report]) }}"
                 class="btn btn-primary">編集</a>
             <div style="display: inline-flex">
-                <form action="{{ route($role.'.activity_report.destroy', ['project' => $activityReport->project, 'activity_report' => $activityReport]) }}"
+                <form action="{{ route($role.'.report.destroy', ['project' => $report->project, 'report' => $report]) }}"
                         method="POST">
                     @csrf
                     @method('DELETE')
@@ -35,12 +35,7 @@
             <div class="col-sm-4">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                    @foreach($activityReport->activityReportImages as $image)
-                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                            <img src="{{ asset(Storage::url($image->image_url)) }}"
-                                    style="max-width: 100%" class="d-block w-100">
-                        </div>
-                    @endforeach
+                        <img src="{{ asset(Storage::url($report->image_url)) }}" style="max-width: 100%" class="d-block w-100">
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -56,7 +51,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col" style="font-size: 24px">
-                            {{ $activityReport->title }}
+                            {{ $report->title }}
                         </div>
                     </div>
                     <div class="row row-col-2 pt-3" style="font-size: 20px">
@@ -64,7 +59,7 @@
                             活動報告内容
                         </div>
                         <div class="col-sm-9" style="overflow-wrap: break-word;">
-                            {{ $activityReport->content }}
+                            {{ $report->content }}
                         </div>
                     </div>
                 </div>

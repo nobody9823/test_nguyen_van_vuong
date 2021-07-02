@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\ActivityReportController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -57,7 +57,7 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('send_back', [ProjectController::class, 'sendBack'])->name('project.send_back');
         Route::get('approved', [ProjectController::class, 'approved'])->name('project.approved');
         Route::get('under_suspension', [ProjectController::class, 'underSuspension'])->name('project.under_suspension');
-        Route::resource('activity_report', ActivityReportController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+        Route::resource('report', ReportController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     });
     Route::get('project/{project}/create_cheering_users_mail', [MailController::class, 'createCheeringUsersMail'])->name('project.mail.create_cheering_users_mail');
     Route::post('project/preview_cheering_users_mail', [MailController::class, 'previewCheeringUsersMail'])->name('project.mail.preview_cheering_users_mail');
@@ -65,7 +65,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::delete('plan/image/{plan}', [PlanController::class, 'deleteImage'])->name('plan_image.destroy');
     // NOTE:現状オプションは使用しない為、コメントアウト
     // Route::delete('plan/option/{option}', [PlanController::class, 'deleteOption'])->name('option.destroy');
-    Route::delete('activity_report/image/{activity_report_image}', [ActivityReportController::class, 'deleteImage'])->name('activity_report.image');
+    Route::delete('report/image/{report_image}', [ReportController::class, 'deleteImage'])->name('report.image');
 
     // プラン管理
     Route::resource('plan', PlanController::class, ['only' => ['index', 'show', 'destroy']]);
@@ -74,7 +74,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('user_payment_included', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);
 
     // 活動報告管理
-    Route::resource('report', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);
+    Route::resource('report', ReportController::class, ['only' => ['index', 'show', 'destroy']]);
 
     // コメント管理
     Route::resource('comment', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);

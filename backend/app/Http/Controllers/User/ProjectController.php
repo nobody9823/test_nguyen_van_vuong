@@ -15,11 +15,18 @@ use App\Models\Profile;
 use App\Models\Address;
 use App\Actions\PayJp\PayJpInterface;
 use App\Http\Requests\ConfirmPaymentRequest;
+use App\Http\Requests\ConsultProjectSendRequest;
+use App\Mail\User\ConsultProject;
 use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Str;
+use Log;
+use Mail;
 
 class ProjectController extends Controller
 {
@@ -306,6 +313,28 @@ class ProjectController extends Controller
         return view('user.search', compact('projects', 'tags'));
     }
 
+    public function consultProject()
+    {
+        return view('user.consult_project');
+    }
+
+    public function consultProjectSend(ConsultProjectSendRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            Auth::user()->saveProfile($request->all());
+            Auth::user()->saveAddress($request->all());
+            // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
+            Mail::to(config('mail.from.address'))->send(new ConsultProject($request->all()));
+            DB::commit();
+            return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
+        } catch(Exception $e) {
+            DB::rollBack();
+            // NOTICE Slackにログを送信できるみたいなので今後時間があったら実装してみても良いかもしれないです。
+            Log::error($e->getMessage(), $e->getTrace());
+            return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");
+        }
+    }
     // こちらもデザインにないので一旦コメントアウトしておきます。
     // public function ProjectLiked(Request $request)
     // {
@@ -323,4 +352,21 @@ class ProjectController extends Controller
     //         return $result = "登録";
     //     }
     // }
+
+    public function support(Project $project)
+    {
+        $this->authorize('checkIsFinishedPayment', $project);
+        if (!isset(Auth::user()->profile->inviter_code)) {
+            $value = [
+                'inviter_code' => Str::uuid()
+            ];
+            Auth::user()->saveProfile($value);
+            Auth::user()->load('profile');
+        }
+        $encrypted_code = Crypt::encrypt(Auth::user()->profile->inviter_code);
+        $invitation_url = route('user.project.show', ['project' => $project, 'inviter' => $encrypted_code]);
+        Auth::user()->supportedProjects()->attach($project->id);
+
+        return view('user.project.support', ['invitation_url' => $invitation_url]);
+    }
 }

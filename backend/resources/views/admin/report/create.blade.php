@@ -6,10 +6,10 @@
 <div class="card">
     <div class="card-header">活動報告新規作成</div>
     <div class="card-body">
-        <form action="{{ route('admin.activity_report.store', ['project' => $project]) }}" 
+        <form action="{{ route('admin.report.store', ['project' => $project]) }}" 
         enctype="multipart/form-data" method="POST">
             @csrf
-            <x-manage.activity_report.form role="admin" :project="$project" :activityReport="null" />
+            <x-manage.report.form role="admin" :project="$project" :report="null" />
         </form>
     </div>
 </div>
