@@ -13,6 +13,7 @@ class Profile extends Model
     protected $table = 'profiles';
 
     protected $fillable = [
+        'user_id',
         'inviter_code',
         'image_url',
         'first_name_kana',
