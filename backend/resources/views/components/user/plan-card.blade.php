@@ -10,8 +10,8 @@
         <p><strong>お返しお届け予定日</strong></p>
         <p>{{ $plan->estimated_return_date }}</p>
     </div>
-    <input type="checkbox" name="plan_ids[]" class="plan_ids" onChange="Plans.planIsChecked(this)" id="{{ $plan->id }}">
-    <select name="plans[{{$plan->id}}]amount[]" id="plan_amount_{{ $plan->id }}" disabled>
+    <input type="checkbox" name="plan_ids[]" class="plan_ids" onChange="Plans.planIsChecked(this)" id="{{ $plan->id }}" value="{{ $plan->price }}">
+    <select name="plans[{{$plan->id}}]amount[]" id="plan_amount_{{ $plan->id }}" onChange="Plans.planAmountIsChanged(this)" disabled>
         @for($i = 1; $i <= $plan->limit_of_supporters; $i ++)
             <option value="{{ $i }}">{{ $i }}</option>
         @endfor
