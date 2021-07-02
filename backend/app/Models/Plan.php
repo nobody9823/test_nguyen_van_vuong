@@ -8,7 +8,7 @@ use App\Traits\SearchFunctions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Http\Request;
+use Request;
 
 class Plan extends Model
 {
@@ -53,12 +53,11 @@ class Plan extends Model
     }
 
     //--------------local scope----------------//
-    public function scopeWithProjectId($query, $project_id)
+    public function scopeNarrowDownWithProject($query)
     {
-        if ($project_id !== null) {
-            $query->with('project')->where('project_id', $project_id);
+        if (Request::get('project')) {
+            return $query->where('project_id', Request::get('project'));
         }
-        return $query;
     }
 
     public function scopeSearch($query)
