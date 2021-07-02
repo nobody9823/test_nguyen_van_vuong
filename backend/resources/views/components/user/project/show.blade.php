@@ -93,7 +93,7 @@
         @endif
     </div>
     <div class="plan-btn-wrap">
-        <a href="{{ route('user.plan.selectPlans', ['project' => $project]) }}" class="plan-btn">支援する</a>
+        <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="plan-btn">支援する</a>
     </div>
     @if($project->isIncluded() === true)
         <div class="plan-btn-wrap">

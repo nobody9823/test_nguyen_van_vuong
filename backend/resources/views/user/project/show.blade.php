@@ -15,7 +15,7 @@ use Carbon\Carbon;
     </ul>
 </div>
 @endif
-<x-user.project.show :project="$project" />
+<x-user.project.show :project="$project" :inviterCode="$inviter_code" />
 @endsection
 
 @section('script')

@@ -244,5 +244,15 @@ class User extends Authenticatable
         )->withSum('invitedPayments', 'price')
         ->orderBy('invited_payments_sum_price', 'DESC');
     }
+
+    public function scopeGetInviterFromInviterCode($query, $inviter_code)
+    {
+        return $query->whereIn(
+            'id',
+            Profile::query()->select('user_id')->where(
+                'inviter_code', $inviter_code
+            )
+        );
+    }
     //--------------- functions -------------
 }

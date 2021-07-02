@@ -7,7 +7,7 @@
     </ul>
 </div>
 @endif
-<form action="{{ route('user.plan.confirmPayment', ['project' => $project]) }}" class="h-adr" method="post">
+<form action="{{ route('user.plan.confirmPayment', ['project' => $project, 'inviter_code' => $inviter_code ?? '']) }}" class="h-adr" method="post">
     @csrf
     <input type="hidden" class="p-country-name" value="Japan">
     <div class="plan-div">
