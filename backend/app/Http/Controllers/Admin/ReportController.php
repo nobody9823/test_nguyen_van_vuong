@@ -53,7 +53,7 @@ class ReportController extends Controller
         }
 
         $reports = $project->reports()->paginate(10);
-        return redirect()->action([ReportController::class, 'index'], ['project' => $project, 'reports' => $reports])->with('flash_message', '新規作成が完了しました。');
+        return redirect()->action([ReportController::class, 'index'], ['project' => $project])->with('flash_message', '新規作成が完了しました。');
     }
 
     /**
@@ -97,7 +97,7 @@ class ReportController extends Controller
         }
 
         $reports = $project->reports()->paginate(10);
-        return redirect()->action([ReportController::class, 'index'], ['project' => $project, 'reports' => $reports])->with('flash_message', '更新が完了しました。');
+        return redirect()->action([ReportController::class, 'index'], ['project' => $project])->with('flash_message', '更新が完了しました。');
     }
 
     /**
