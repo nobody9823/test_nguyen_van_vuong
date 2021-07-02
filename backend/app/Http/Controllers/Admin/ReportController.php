@@ -117,7 +117,7 @@ class ReportController extends Controller
             DB::rollback();
         }
         $reports = $project->reports()->paginate(10);
-        return redirect()->action([ReportController::class, 'index'], ['project' => $project, 'reports' => $reports])->with('flash_message', '削除が完了しました。');
+        return redirect()->action([ReportController::class, 'index'], ['project' => $project])->with('flash_message', '削除が完了しました。');
     }
 
     public function deleteImage(Request $request, Report $report)
