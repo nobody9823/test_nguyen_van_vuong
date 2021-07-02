@@ -191,38 +191,6 @@ class User extends Authenticatable
         )->count();
     }
 
-    //--------------- local scopes -------------
-
-
-
-    //--------------- functions -------------
-    public function deleteImageIfSample(): void
-    {
-        if (strpos($this->image_url, 'sampleImage') === false) {
-            Storage::delete($this->image_url);
-        };
-    }
-
-    public function saveProfile(array $value) :void
-    {
-        if (isset($this->profile)) {
-            $this->profile()->save($this->profile->fill($value));
-        } else {
-            $profile = new Profile();
-            $this->profile()->save($profile->fill($value));
-        }
-    }
-
-    public function saveAddress(array $value) :void
-    {
-        if (isset($this->address)) {
-            $this->address()->save($this->address->fill($value));
-        } else {
-            $address = new Address();
-            $this->address()->save($address->fill($value));
-        }
-    }
-
     // inviter_idが一致するpaymentsの数を集計して降順に並び替え
     public function scopeGetInvitersRankedByInvitedUsers($query, $project_id)
     {
@@ -253,6 +221,37 @@ class User extends Authenticatable
                 'inviter_code', $inviter_code
             )
         );
+    }
+    //--------------- local scopes -------------
+
+
+
+    //--------------- functions -------------
+    public function deleteImageIfSample(): void
+    {
+        if (strpos($this->image_url, 'sampleImage') === false) {
+            Storage::delete($this->image_url);
+        };
+    }
+
+    public function saveProfile(array $value) :void
+    {
+        if (isset($this->profile)) {
+            $this->profile()->save($this->profile->fill($value));
+        } else {
+            $profile = new Profile();
+            $this->profile()->save($profile->fill($value));
+        }
+    }
+
+    public function saveAddress(array $value) :void
+    {
+        if (isset($this->address)) {
+            $this->address()->save($this->address->fill($value));
+        } else {
+            $address = new Address();
+            $this->address()->save($address->fill($value));
+        }
     }
     //--------------- functions -------------
 }
