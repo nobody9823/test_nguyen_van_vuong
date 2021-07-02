@@ -1,0 +1,1 @@
+<x-manage.report.show role="admin" :report="$report" />

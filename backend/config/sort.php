@@ -55,8 +55,8 @@ return array(
     //プラン管理
     'price_asc' => '価格昇順',
     'price_desc' => '価格降順',
-    'estimated_return_date_asc' => 'リターン提供日昇順',
-    'estimated_return_date_desc' => 'リターン提供日降順',
+    'delivery_date_asc' => 'リターン提供日昇順',
+    'delivery_date_desc' => 'リターン提供日降順',
 
     //活動報告管理
     'content_asc' => '内容昇順',

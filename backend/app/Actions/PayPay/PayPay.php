@@ -1,7 +1,7 @@
 <?php
 namespace App\Actions\PayPay;
 
-use App\Models\Plan;
+use App\Models\Payment;
 use App\Models\Project;
 use PayPay\OpenPaymentAPI\Client;
 use PayPay\OpenPaymentAPI\Models\CreateQrCodePayload;
@@ -27,7 +27,7 @@ class PayPay implements PayPayInterface
     }
 
     // QRコードを生成する関数
-    public function createQrCode(string $merchant_payment_id, int $price, Project $project, Plan $plan): array
+    public function createQrCode(string $merchant_payment_id, int $price, Project $project, Payment $payment): array
     {
 
         // 任意の支払い取引IDを生成(64桁以内)
@@ -43,7 +43,7 @@ class PayPay implements PayPayInterface
         // 支払いがウェブブラウザで発生している場合は WEB_LINK になります。
         $this->CQCPayload->setRedirectType('WEB_LINK');
         // 支払い後のリダイレクト先
-        $this->CQCPayload->setRedirectUrl(route('user.plan.join_for_paypay', ['project' => $project, 'plan' => $plan, 'unique_token' => $merchant_payment_id]));
+        $this->CQCPayload->setRedirectUrl(route('user.plan.payment_for_pay_pay', ['project' => $project, 'payment' => $payment]));
 
         // QRコードを生成
         return $this->client->code->createQRCode($this->CQCPayload);

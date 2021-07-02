@@ -19,15 +19,22 @@ class PlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $plans = Plan::paginate(10);
+        $plans = Plan::search()->narrowDownWithProject()
+                                ->sortBySelected($request->sort_type)
+                                ->searchWithPrice($request->min_price, $request->max_price)
+                                ->searchWithEstimatedReturnDate($request->from_date, $request->to_date)
+                                ->paginate(10);
+        
+        $project = Project::find($request->project);
+        
         return view(
             'admin.plan.index',
             [
-            'project' => null,
+            'project' => $project,
             'plans' => $plans,
-        ]
+            ]
         );
     }
 
@@ -48,7 +55,7 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(PlanRequest $request, Project $project, Plan $plan)
-    {
+    { 
         DB::beginTransaction();
         try {
             $plan->project_id = $project->id;
@@ -62,7 +69,7 @@ class PlanController extends Controller
         }
 
         return redirect()
-            ->action([PlanController::class, 'search'], ['project' => $project, 'plans' => $project->plans()->paginate(10)])
+            ->action([PlanController::class, 'index'], ['project' => $project])
             ->with('flash_message', 'プラン作成が成功しました。');
     }
 
@@ -116,7 +123,7 @@ class PlanController extends Controller
         }
 
         return redirect()
-            ->action([PlanController::class, 'search'], ['project' => $project, 'plans' => $project->plans()->paginate(10)])
+            ->action([PlanController::class, 'index'], ['project' => $project,])
             ->with('flash_message', 'プラン更新が成功しました。');
     }
 
@@ -131,7 +138,7 @@ class PlanController extends Controller
         $plan->deleteImage();
         $plan->delete();
         $plans = Plan::paginate(10);
-        return redirect()->action([PlanController::class, 'search'], ['project' => $plan->project, 'plans' => $plans])->with('flash_message', 'プラン削除が成功しました。');
+        return redirect()->action([PlanController::class, 'index'], ['project' => $plan->project, 'plans' => $plans])->with('flash_message', 'プラン削除が成功しました。');
     }
 
     /**
@@ -159,29 +166,4 @@ class PlanController extends Controller
     //     $option->delete();
     //     return response()->json('success');
     // }
-
-    /**
-     * Search plan with words
-     *
-     * @param \App\Http\Requests\SearchRequest
-     * @return \Illuminate\Http\Response
-     */
-    public function search(SearchRequest $request)
-    {
-        $plans = Plan::searchByWords($request->getArrayWords())
-                    ->withProjectId($request->project)
-                    ->searchWithPrice($request->min_price, $request->max_price)
-                    ->searchWithEstimatedReturnDate($request->from_date, $request->to_date)
-                    ->paginate(10);
-
-        $project = Project::find($request->project);
-
-        return view(
-            'admin.plan.index',
-            [
-            'project' => $project,
-            'plans' => $plans,
-        ]
-        );
-    }
 }

@@ -177,18 +177,9 @@
     <section id="pc-top_02" class="section_base">
         <div class="tit_L_01 E-font"><h2>CATEGORY</h2><div class="sub_tit_L">カテゴリー</div></div>
         <div class="cate_tag_01">
-            <a href="★" class="cate_tag_link">プロダクト</a>
-            <a href="★" class="cate_tag_link">ファッション</a>
-            <a href="★" class="cate_tag_link">ダミーダミー</a>
-            <a href="★" class="cate_tag_link">プロダクト</a>
-            <a href="★" class="cate_tag_link">ファッション</a>
-            <a href="★" class="cate_tag_link">ダミーダミー</a>
-            <a href="★" class="cate_tag_link">プロダクト</a>
-            <a href="★" class="cate_tag_link">ファッション</a>
-            <a href="★" class="cate_tag_link">ダミーダミー</a>
-            <a href="★" class="cate_tag_link">プロダクト</a>
-            <a href="★" class="cate_tag_link">ファッション</a>
-            <a href="★" class="cate_tag_link">ダミーダミー</a>
+            @foreach($tags as $tag)
+            <a href="★" class="cate_tag_link">{{$tag->name}}</a>
+            @endforeach
         </div>
     </section><!--/#pc-top_02-->
 
