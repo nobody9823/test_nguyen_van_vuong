@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\ImageCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,6 +29,10 @@ class Profile extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+    protected $casts = [
+        'image_url' => ImageCast::class,
+    ];
 
     public function user()
     {
