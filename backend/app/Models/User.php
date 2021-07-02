@@ -230,10 +230,11 @@ class User extends Authenticatable
             'id',
             UserProjectSupported::query()->select('user_id')
                 ->whereIn('project_id', $project_id)
-        )->withCount('invitedPayments as invited_users_count')
-        ->orderBy('invited_users_count', 'DESC');
+        )->withCount('invitedPayments')
+        ->orderBy('invited_payments_count', 'DESC');
     }
 
+    // inviter_idが一致するpaymentsの
     public function scopeGetInvitersRankedByInvitedTotalAmount($query, $project_id)
     {
         return $query->whereIn(
