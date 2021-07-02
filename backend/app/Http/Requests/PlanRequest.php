@@ -34,7 +34,7 @@ class PlanRequest extends FormRequest
             'address_is_required' => ['required'],
             'limit_of_supporters' => ['nullable','integer'],
             'delivery_date' => ['required', 'date_format:Y-m-d', 'after:now'],
-            'image' => ['nullable', 'image'],
+            'image' => ['required', 'image'],
             // NOTE:現状オプションは使用しない為、コメントアウト
             // 'options' => ['array'],
             // 'options.*.name' => ['nullable', 'string'],
