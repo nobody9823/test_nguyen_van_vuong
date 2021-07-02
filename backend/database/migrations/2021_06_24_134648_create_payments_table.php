@@ -21,7 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('price');
             $table->enum('message_status', MessageStatus::getValues())->default('ステータスなし');
             $table->string('merchant_payment_id')->unique();
-            $table->string('pay_jp_id')->unique();
+            $table->string('pay_jp_id')->unique()->nullable();
             $table->boolean('payment_is_finished')->default(false);
             $table->string('remarks')->nullable();
             $table->timestamps();
