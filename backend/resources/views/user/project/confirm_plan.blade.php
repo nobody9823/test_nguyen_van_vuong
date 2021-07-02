@@ -29,4 +29,8 @@
     {{ $payment->remarks }}
     {{ $payment->comment->content }}
 </div>
-<a href="{{ route('user.plan.paymentForPayJp', ['project' => $project, 'payment' => $payment]) }}">決済する</a>
+@if ($payment->pay_jp_id !== null)
+    <a href="{{ route('user.plan.paymentForPayJp', ['project' => $project, 'payment' => $payment]) }}">決済する</a>
+@else
+    <a href="{{ $qr_code['data']['url'] }}">決済する</a>
+@endif
