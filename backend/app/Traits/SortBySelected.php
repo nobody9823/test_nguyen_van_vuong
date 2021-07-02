@@ -162,11 +162,11 @@ trait SortBySelected
             case 'price_desc':
                 return $query->orderBy('price', 'desc');
                 break;
-            case 'estimated_return_date_asc':
-                return $query->orderBy('estimated_return_date', 'asc');
+            case 'delivery_date_asc':
+                return $query->orderBy('delivery_date', 'asc');
                 break;
-            case 'estimated_return_date_desc':
-                return $query->orderBy('estimated_return_date', 'desc');
+            case 'delivery_date_desc':
+                return $query->orderBy('delivery_date', 'desc');
                 break;
 
             //活動報告管理

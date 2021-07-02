@@ -78,6 +78,12 @@
             <option value="price_desc" {{ Request::get('sort_type') === "price_desc" ? 'selected' : '' }}>
                 価格降順
             </option>
+            <option value="delivery_date_asc" {{ Request::get('sort_type') === "delivery_date_asc" ? 'selected' : '' }}>
+                リターン提供日昇順
+            </option>
+            <option value="delivery_date_desc" {{ Request::get('sort_type') === "delivery_date_desc" ? 'selected' : '' }}>
+                リターン提供日降順
+            </option>
         </select>
         <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索"
             value="{{ Request::get('word') }}">
