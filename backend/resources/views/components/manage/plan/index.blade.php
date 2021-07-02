@@ -94,7 +94,7 @@
         aria-controls="collapseFilter">
         検索条件▼
     </span>
-    <a class="btn btn-sm btn-outline-info ml-4" href={{route($role.'.report.index')}}>検索条件をクリア</a>
+    <a class="btn btn-sm btn-outline-info ml-4" href={{route($role.'.plan.index')}}>検索条件をクリア</a>
 </div>
 <div class="collapse" id="collapseSearchFilter">
     @if(Request::get('project'))
