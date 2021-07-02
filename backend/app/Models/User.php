@@ -234,7 +234,7 @@ class User extends Authenticatable
         ->orderBy('invited_payments_count', 'DESC');
     }
 
-    // inviter_idが一致するpaymentsの
+    // inviter_idが一致するpaymentsの支援総額から降順に並び替え
     public function scopeGetInvitersRankedByInvitedTotalAmount($query, $project_id)
     {
         return $query->whereIn(
