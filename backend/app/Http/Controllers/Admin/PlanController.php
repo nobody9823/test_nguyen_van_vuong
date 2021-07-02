@@ -27,7 +27,7 @@ class PlanController extends Controller
                                 ->paginate(10);
         
         $project = Project::find($request->project);
-
+        
         return view(
             'admin.plan.index',
             [
@@ -54,7 +54,7 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(PlanRequest $request, Project $project, Plan $plan)
-    {
+    { 
         DB::beginTransaction();
         try {
             $plan->project_id = $project->id;
