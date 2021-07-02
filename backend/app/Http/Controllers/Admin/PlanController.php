@@ -69,7 +69,7 @@ class PlanController extends Controller
         }
 
         return redirect()
-            ->action([PlanController::class, 'index'], ['project' => $project, 'plans' => $project->plans()->paginate(10)])
+            ->action([PlanController::class, 'index'], ['project' => $project])
             ->with('flash_message', 'プラン作成が成功しました。');
     }
 
@@ -123,7 +123,7 @@ class PlanController extends Controller
         }
 
         return redirect()
-            ->action([PlanController::class, 'index'], ['project' => $project, 'plans' => $project->plans()->paginate(10)])
+            ->action([PlanController::class, 'index'], ['project' => $project,])
             ->with('flash_message', 'プラン更新が成功しました。');
     }
 
