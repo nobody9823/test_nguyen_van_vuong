@@ -23,6 +23,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Str;
 use Log;
 use Mail;
 
@@ -350,4 +352,21 @@ class ProjectController extends Controller
     //         return $result = "登録";
     //     }
     // }
+
+    public function support(Project $project)
+    {
+        $this->authorize('checkIsFinishedPayment', $project);
+        if (!isset(Auth::user()->profile->inviter_code)) {
+            $value = [
+                'inviter_code' => Str::uuid()
+            ];
+            Auth::user()->saveProfile($value);
+            Auth::user()->load('profile');
+        }
+        $encrypted_code = Crypt::encrypt(Auth::user()->profile->inviter_code);
+        $invitation_url = route('user.project.show', ['project' => $project, 'inviter' => $encrypted_code]);
+        Auth::user()->supportedProjects()->attach($project->id);
+
+        return view('user.project.support', ['invitation_url' => $invitation_url]);
+    }
 }

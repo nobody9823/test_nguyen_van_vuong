@@ -30,6 +30,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{plan}/join_for_paypay/{unique_token}', [PlanController::class, 'joinPlanForPayPay'])->name('plan.join_for_paypay');
     Route::get('plan/{plan}/success', [PlanController::class, 'success'])->name('plan.success');
     Route::post('comment/post', [CommentController::class, 'postComment'])->name('comment.post');
+    Route::get('support', [ProjectController::class, 'support'])->name('project.support');
 });
 
 //---------------------Mypage-----------------------------------------------
