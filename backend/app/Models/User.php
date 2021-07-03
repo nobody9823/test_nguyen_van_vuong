@@ -26,13 +26,6 @@ class User extends Authenticatable
         'email',
         'email_verified_at',
         'password',
-        'birthday',
-        'gender',
-        'introduction',
-        'phone_number',
-        'birthday_is_published',
-        'gender_is_published',
-        'image_url',
     ];
 
     /**

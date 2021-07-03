@@ -38,4 +38,13 @@ class Comment extends Model
     {
         return $this->belongsTo('App\Models\Project');
     }
+
+    public function scopeGetOwnComments($query)
+    {
+        return $query->whereIn(
+            'payment_id',
+            Payment::query()->select('id')
+                ->where('user_id', \Auth::id())
+        );
+    }
 }
