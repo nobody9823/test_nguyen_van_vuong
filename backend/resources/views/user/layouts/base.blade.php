@@ -247,6 +247,7 @@
 </div><!--/wrapper-->
 
 
+@yield('script')
 <script>
 $(window).on('load', function(){
     var winW = $(window).width();
