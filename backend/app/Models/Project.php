@@ -268,6 +268,13 @@ class Project extends Model
     {
         return $this->likedUsers()->count() + $this->added_like;
     }
+
+    public function getNumberOfDaysLeftAttribute()
+    {
+        $end_date = new Carbon($this->end_date);
+        $today = Carbon::now();
+        return $end_date->diffInDays($today);
+    }
     /**
      * Get Japanese formatted start time of project with day of the week
      *
