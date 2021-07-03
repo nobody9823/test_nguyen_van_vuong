@@ -8,11 +8,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" rel="stylesheet">
+
 <link href="{{ asset('css/reset.css') }}" type="text/css" rel="stylesheet">
 <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 
 </head>
@@ -325,6 +326,31 @@ $(function(){
     });
 });
 
+//【slick】
+$(function(){
+    var mainSlider = document.getElementById('slider'); //メインスライダーid
+    var thumbnailSlider = document.getElementById('thumbnail_slider'); //サムネイルスライダーid
+    $(mainSlider).slick({
+    autoplay: true,
+    speed: 2000,
+    arrows: true,
+    asNavFor: thumbnailSlider,
+    dots: false,
+    });
+    $(thumbnailSlider).slick({
+    slidesToShow: 5,
+    speed: 2000,
+    asNavFor: mainSlider,
+    arrows: false,
+    dots: false,
+    });
+    //#thumbnail_sliderでクリックしたスライドをカレントにする
+    $(thumbnailSlider+" .slick-slide").on('click',function(){
+    var index = $(this).attr("data-slick-index");
+    $(thumbnailSlider).slick("slickGoTo",index,false);
+    });
+});
+
 //ハンバーガー　メガナビ
 jQuery(document).ready(function($) {
     $('#js-global-nav li').each(function(i) {
@@ -361,38 +387,6 @@ const uncheckAll = () => {
 };
 //全選択ボタンをクリックした時「uncheckAll」を実行
 uncheckBtn.addEventListener("click", uncheckAll, false);
-
-
-
-//【slick】
-$(function(){
-    var mainSlider = "#slider"; //メインスライダーid
-    var thumbnailSlider = "#thumbnail_slider"; //サムネイルスライダーid
-
-    $(mainSlider).slick({
-    autoplay: true,
-    speed: 2000,
-    arrows: true,
-    asNavFor: thumbnailSlider,
-    dots: false,
-    });
-    $(thumbnailSlider).slick({
-    slidesToShow: 5,
-    speed: 2000,
-    asNavFor: mainSlider,
-    arrows: false,
-    dots: false,
-    });
-    //#thumbnail_sliderでクリックしたスライドをカレントにする
-    $(thumbnailSlider+" .slick-slide").on('click',function(){
-    var index = $(this).attr("data-slick-index");
-    $(thumbnailSlider).slick("slickGoTo",index,false);
-    });
-});
-
-
-
-
 </script>
 </body>
 </html>
