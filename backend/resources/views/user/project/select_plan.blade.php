@@ -370,7 +370,7 @@
                         <textarea name="comments" class="def_textarea" rows="6"></textarea>
                     </div><!--/form_item_row-->
                     <div class="def_btn">
-                        <button type="submit" class="disable-btn">決済する</button>
+                        <button type="submit" class="disable-btn">確認画面へ</button>
                     </div>
 
                 </div><!--/.inner_item-->
