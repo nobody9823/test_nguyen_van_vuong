@@ -1,3 +1,7 @@
+@php
+use Carbon\Carbon;
+@endphp
+
 @extends('user.layouts.base')
 
 @section('content')
@@ -44,9 +48,12 @@
 
         <div class="img_box_01_R">
 
+            @foreach($projects as $project)
             <div class="img_box_01_R_item">
                 <div class="ib01R_01">
-                    <img src="image/test_img.svg">
+                    @if ($project->projectFiles->isNotEmpty())
+                    <img src="{{ Storage::url($project->projectFiles[0]->file_url) }}">
+                    @endif
                     <a href="★" class="cover_link"></a>
                     <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
                 </div>
@@ -54,9 +61,14 @@
                 <div class="ib01R_02">
                 <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
-                         <span style="width:60%;"></span>
+                         <span style="width: {{ $project->getAchievementRate() }}%;"></span>
                     </div>
                 </div>
+
+                {{-- <div class="process">
+                    <div class="bar" style="width: {{ $project->getAchievementRate() }}%;">
+                        <span>{{ $project->getAchievementRate()}}%</span></div>
+                </div> --}}
 
                 <div class="ib01R_03">
                     <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
@@ -64,86 +76,11 @@
                 </div>
 
                 <div class="ib01R_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
+                    <div>現在 <span>{{ number_format($project->getAchievementAmount()) }}円</span></div>
+                    <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}</span></div>
                 </div>
             </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_01_R_item">
-                <div class="ib01R_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib01R_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib01R_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib01R_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_01_R_item">
-                <div class="ib01R_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib01R_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib01R_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib01R_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_01_R_item">
-                <div class="ib01R_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib01R_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib01R_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib01R_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
+            @endforeach
 
 
         </div>

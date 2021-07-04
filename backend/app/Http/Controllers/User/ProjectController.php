@@ -13,6 +13,7 @@ use App\Models\Payment;
 use App\Models\Comment;
 use App\Models\Profile;
 use App\Models\Address;
+use Carbon\Carbon;
 use App\Actions\PayJp\PayJpInterface;
 use App\Http\Requests\ConfirmPaymentRequest;
 use App\Http\Requests\ConsultProjectSendRequest;
@@ -44,6 +45,7 @@ class ProjectController extends Controller
     public function index()
     {
         $tags = Tag::all();
+        $projects = Project::take(4)->get();
 
         // 応援プロジェクト（目標金額の高い順）
         $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
@@ -71,7 +73,8 @@ class ProjectController extends Controller
             'popularity_projects',
             'nearly_deadline_projects',
             'nearly_open_projects',
-            'tags'
+            'tags',
+            'projects'
         ));
     }
 

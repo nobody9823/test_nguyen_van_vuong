@@ -367,7 +367,7 @@ input[type=radio]:checked + .radio-fan::after {
 .ib01R_01{ border-radius: 8px; margin: 0 0 10px 0; position: relative;}
 .ib01R_01 img { width: 100%; border-radius: 8px 8px 0px 0px;}
 .ib01R_02{ padding: 0 10px; margin: 0 0 10px 0;}
-.ib01R_02 .progress-bar{ width: 100%; height: 7px; background: #eee; border-radius: 5px;}
+.ib01R_02 .progress-bar{ width: 100%; height: 7px; background: #eee; border-radius: 5px; overflow: hidden;}
 .ib01R_02 .progress-bar span { display:block; height: 7px; border-radius: 5px; background: #00aebd; background: -moz-linear-gradient(left,  #00aebd 0%, #fff200 100%); background: -webkit-linear-gradient(left,  #00aebd 0%,#fff200 100%); background: linear-gradient(to right,  #00aebd 0%,#fff200 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00aebd', endColorstr='#fff200',GradientType=1 ); }
 
 .img_box_01_R .progress-bar_par{ display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; margin-bottom: 0px;}
