@@ -236,12 +236,12 @@
                     <div class="footer_item"><a href="★">クラウドファンティングとは</a></div>
                     <div class="footer_item"><a href="★">ヘルプ</a></div>
                     <div class="footer_item"><a href="★">お問い合わせ</a></div>
-                    <div class="footer_item"><a href="★">利用規約</a></div>
-                    <div class="footer_item"><a href="★">細則</a></div>
-                    <div class="footer_item"><a href="★">プライバシーポリシー</a></div>
-                    <div class="footer_item"><a href="★">特定商取引法に基づく表記</a></div>
-                    <div class="footer_item"><a href="★">情報セキュリティ方針</a></div>
-                    <div class="footer_item"><a href="★">反社基本方針</a></div>
+                    <div class="footer_item"><a href="{{ route('user.terms_of_service') }}">利用規約</a></div>
+                    {{-- <div class="footer_item"><a href="★">細則</a></div> --}}
+                    <div class="footer_item"><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></div>
+                    <div class="footer_item"><a href="{{ route('user.trade_law') }}">特定商取引法に基づく表記</a></div>
+                    {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div> --}}
+                    {{-- <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
                     <div class="footer_sns_icon dis_f_wra_alc">
                         <a href="★"><img class="" src="image/sns_01.svg"></a>
                         <a href="★"><img class="" src="image/sns_02.svg"></a>
