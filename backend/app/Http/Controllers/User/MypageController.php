@@ -125,4 +125,17 @@ class MypageController extends Controller
     {
         return view('user.commission');
     }
+
+    public function termsOfService()
+    {
+        return view('user.terms_of_service');
+    }
+    public function privacyPolicy()
+    {
+        return view('user.privacy_policy');
+    }
+    public function tradeLaw()
+    {
+        return view('user.trade_law');
+    }
 }
