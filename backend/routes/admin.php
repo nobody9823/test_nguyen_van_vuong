@@ -77,7 +77,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('report', ReportController::class, ['only' => ['index', 'show']]);
 
     // コメント管理
-    Route::resource('comment', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);
+    Route::resource('comment', CommentController::class, ['only' => ['index', 'show', 'destroy']]);
 
     //返信管理
     Route::resource('reply_to_comment', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);
