@@ -7,6 +7,7 @@
     <div class="flex-grow-1">支援者コメント一覧</div>
     <form action={{route($guard.'.comment.index')}} class="form-inline pr-3" method="get" style="position: relative;">
         @csrf
+        <x-common.add_hidden_query />
         <p>
             <a class="btn btn-secondary mt-3 mr-3" data-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample">
@@ -74,7 +75,7 @@
                     {{ $comment->project->title }}
                 </td>
                 <td>
-                    {{ $comment->project->user->name }}
+                    {{ $comment->reply->user->name }}
                 </td>
                 <td>
                     {{-- 返信あり→それを表示

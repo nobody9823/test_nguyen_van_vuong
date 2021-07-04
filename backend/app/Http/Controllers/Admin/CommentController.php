@@ -15,12 +15,13 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $comments = Comment::with(['project', 'payment.user', 'reply'])
-                            ->orderBy('created_at', 'DESC')
-                            ->paginate(10);
-                            // dd($comments);
+        $comments = Comment::search()->narrowDownWithProject()
+                                     ->searchWithPostDates($request->from_date, $request->to_date)
+                                     ->with(['project', 'payment.user', 'reply.user'])
+                                     ->orderBy('created_at', 'DESC')
+                                     ->paginate(10);
 
         return view('admin.supporter_comment.index', compact('comments'));
     }
@@ -91,18 +92,5 @@ class CommentController extends Controller
         $supporter_comment->delete();
         return redirect()->action([CommentController::class, 'index'])
                         ->with('flash_message', "支援者コメントの削除が完了しました");
-    }
-
-    public function search(SearchRequest $request)
-    {
-        $supporter_comments =
-            Comment::searchByWords($request->getArrayWords())
-                            ->searchByProject($request->project_id)
-                            ->searchWithPostDates($request->from_date, $request->to_date)
-                            ->with(['project', 'user', 'repliesToSupporterComment'])
-                            ->orderBy('created_at', 'DESC')
-                            ->paginate(10);
-
-        return view('admin.supporter_comment.index', compact('supporter_comments'));
     }
 }
