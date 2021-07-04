@@ -5,8 +5,9 @@
 @section('content')
 <div class="card-header d-flex align-items-center">
     <div class="flex-grow-1">支援者コメント一覧</div>
-    <form action={{route($guard.'.supporter_comment.search')}} class="form-inline pr-3" method="get" style="position: relative;">
+    <form action={{route($guard.'.comment.index')}} class="form-inline pr-3" method="get" style="position: relative;">
         @csrf
+        <x-common.add_hidden_query />
         <p>
             <a class="btn btn-secondary mt-3 mr-3" data-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample">
@@ -46,7 +47,7 @@
 </div>
 @endif
 <div class="card-body">
-    @if($supporterComments->count() <= 0) <p>表示する投稿はありません。</p>
+    @if($comments->count() <= 0) <p>表示する投稿はありません。</p>
         @else
         <table class="table">
             <tr>
@@ -59,38 +60,34 @@
                 <th style="width:10%">返信を編集</th>
                 <th style="width:10%">返信を削除</th>
             </tr>
-            @foreach($supporterComments as $supporter_comment)
+            @foreach($comments as $comment)
             <tr>
                 <td>
-                    {{ $supporter_comment->created_at }}
+                    {{ $comment->created_at }}
                 </td>
                 <td>
-                    <p>{{ Str::limit($supporter_comment->content, 200) }}</p>
+                    <p>{{ Str::limit($comment->content, 200) }}</p>
                 </td>
                 <td>
-                    {{ $supporter_comment->user->name }}
+                    {{ $comment->payment->user->name }}
                 </td>
                 <td>
-                    {{ $supporter_comment->project->title }}
+                    {{ $comment->project->title }}
                 </td>
                 <td>
-                    {{ $supporter_comment->project->talent->name }}
+                    {{ optional($comment)->reply->user->name }}
                 </td>
                 <td>
                     {{-- 返信あり→それを表示
                     返信なし→返信ボタン追加、編集ボタンdisabled --}}
-                    @if ($supporter_comment->repliesToSupporterComment)
-                    <p>{{$supporter_comment->repliesToSupporterComment->content}}</p>
+                    @if ($comment->reply)
+                    <p>{{$comment->reply->content}}</p>
                 </td>
                 <td>
-                    <a href=" {{ route($guard.'.replies_to_supporter_comment.edit', [
-                        'replies_to_supporter_comment' => $supporter_comment->repliesToSupporterComment,
-                        ]) }} " class="btn btn-success">編集</a>
+                    <a href=" {{ route($guard.'.reply.edit', ['reply' => $comment->reply]) }} " class="btn btn-success">編集</a>
                 </td>
                 <td>
-                    <form action="{{ route($guard.'.replies_to_supporter_comment.destroy', [
-                            'replies_to_supporter_comment' => $supporter_comment->repliesToSupporterComment,]) }}"
-                        method="POST">
+                    <form action="{{ route($guard.'.reply.destroy', ['reply' => $comment->reply]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-dell" type="submit">削除</button>
@@ -100,9 +97,8 @@
 
                 @else
                 <p>未返信</p>
-                <a href=" {{ route($guard.'.replies_to_supporter_comment.create', [
-                        'supporter_comment' => $supporter_comment,
-                        ]) }} " class="btn btn-primary btn-sm">返信する
+                <a href=" {{ route($guard.'.reply.create', ['comment' => $comment,]) }} " class="btn btn-primary btn-sm">
+                    返信する
                 </a>
                 </td>
                 <td>
@@ -118,7 +114,7 @@
             @endforeach
         </table>
         <div class="d-flex justify-content-center">
-            {{ $supporterComments->appends(request()->input())->links() }}
+            {{ $comments->appends(request()->input())->links() }}
         </div>
         @endif
 </div>
