@@ -82,5 +82,12 @@ Route::post('/password_reset', [PasswordResetController::class, 'update'])->name
 Route::get('/inquiry/create', [InquiryController::class, 'createInquiry'])->name('inquiry.create');
 Route::post('/inquiry/send', [InquiryController::class, 'sendInquiry'])->name('inquiry.send');
 
+// --------------------terms of service-------------------
+Route::get('/terms_of_service', [MypageController::class, 'termsOfService'])->name('terms_of_service');
+// --------------------privacy policy-------------------
+Route::get('/privacy_policy', [MypageController::class, 'privacyPolicy'])->name('privacy_policy');
+// --------------------trade law-------------------
+Route::get('/trade_law', [MypageController::class, 'tradeLaw'])->name('trade_law');
+
 // --------------------commission-------------------
 Route::get('commission', [MypageController::class, 'commission'])->name('commission');
