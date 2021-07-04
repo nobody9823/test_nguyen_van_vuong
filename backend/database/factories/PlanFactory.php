@@ -26,15 +26,15 @@ class PlanFactory extends Factory
         return [
             'project_id' => random_int(1, 100),
             'title' => Arr::random([
-                '【SS席】目標金額達成の場合は感謝ライブにご招待します',
-                '【A席】目標金額達成の場合は感謝ライブにご招待します',
-                '【C席】目標金額達成の場合は感謝ライブにご招待します',
+                'インフルエンサーの「やりたい」が叶う”それがファンリターン',
+                'インフルエンサーの「やりたい」が叶う”それがファンリターン',
+                'インフルエンサーの「やりたい」が叶う”それがファンリターン',
             ]),
-            'content' => 'ご支援いただいた方には感謝の意味を込めて渋谷〇〇にて開催の〇〇ライブのチケットを進呈させて頂きますのでスケジュール調整の上、是非渋谷〇〇にお越し頂ければ嬉しく存じます。',
+            'content' => 'インフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターン',
             'limit_of_supporters' => $this->faker->numberBetween(50, 100),
             'delivery_date' => $this->faker->dateTimeBetween('+30days', '+90days'),
             'price' => random_int(1, 30) * 1000,
-            'image_url' => 'public/sampleImage/planSample.jpg',
+            'image_url' => 'public/sampleImage/now_printing.png',
             'address_is_required' => $this->faker->boolean(50),
         ];
     }

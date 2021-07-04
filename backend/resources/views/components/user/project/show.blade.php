@@ -95,9 +95,9 @@
                     @endif
                     <div class="pds_sec01_R_btn02">
                         <div class="footer_sns_icon dis_f_wra_alc">
-                            <a href="#"><img class="" src="img/sns_01.svg"></a>
-                            <a href="#"><img class="" src="img/sns_02.svg"></a>
-                            <a href="#"><img class="" src="img/sns_03.svg"></a>
+                            <a href="#"><img class="" src="{{ asset('image/sns_01.svg') }}"></a>
+                            <a href="#"><img class="" src="{{ asset('image/sns_02.svg') }}"></a>
+                            <a href="#"><img class="" src="{{ asset('image/sns_03.svg') }}"></a>
                         </div>
                     </div>
                 </div><!--/pds_sec01_R_nin01-->
@@ -116,7 +116,7 @@
                 <div class="wlr_64_L inner_item">
                     <div class="pds_sec02_tit">{{ $project->title }}</div>
                     <div class="pds_sec02_txt">{{ $project->content }}</div>
-                    <div class="pds_sec02_img"><img class="" src="img/test_img.svg"></div>
+                    <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div>
                 </div><!--/wlr_64_L-->
 
                 <div class="wlr_64_R">

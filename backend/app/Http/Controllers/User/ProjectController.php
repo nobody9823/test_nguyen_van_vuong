@@ -13,6 +13,7 @@ use App\Models\Payment;
 use App\Models\Comment;
 use App\Models\Profile;
 use App\Models\Address;
+use Carbon\Carbon;
 use App\Actions\PayJp\PayJpInterface;
 use App\Actions\PayPay\PayPayInterface;
 use App\Http\Requests\ConfirmPaymentRequest;
@@ -53,6 +54,8 @@ class ProjectController extends Controller
     public function index()
     {
         $tags = Tag::all();
+        $projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        ->inRandomOrder()->takeWithRelations(5)->get();
 
         // 応援プロジェクト（目標金額の高い順）
         $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
@@ -80,7 +83,8 @@ class ProjectController extends Controller
             'popularity_projects',
             'nearly_deadline_projects',
             'nearly_open_projects',
-            'tags'
+            'tags',
+            'projects'
         ));
     }
 
@@ -225,10 +229,7 @@ class ProjectController extends Controller
                 throw $e;
             }
 
-        $supporter_count = User::getCountOfSupportersWithProject($project);
-        $total_amount = Payment::getTotalAmountOfSupporterWithProject($project);
-
-        return view('user.plan.supported', ['project' => $project, 'payment' => $payment, 'supporter_count' => $supporter_count, 'total_amount' => $total_amount]);
+        return view('user.plan.supported', ['project' => $project, 'payment' => $payment]);
     }
 
     public function paymentForPayPay(Project $project, Payment $payment)

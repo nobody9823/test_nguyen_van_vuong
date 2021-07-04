@@ -28,8 +28,8 @@
 <div id="branding">
 	<div id="header_01">
 		<div id="site-title">
-			<a href="★" title="★" rel="home">
-				<img class="h_logo_css" src="image/logo-color.svg">
+			<a href="{{ route('user.index') }}" title="FanReturn" rel="home">
+				<img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
 			</a>
 		</div>
 	</div>
@@ -37,16 +37,28 @@
 
 
 		<div id="wm_btn">
+            @auth
+            <div class="menuset_03 wm_login_btn">
+                <form action="{{ route('logout') }}" action="POST">
+                    @csrf
+                    <a type="submit" class="">
+                        ログアウト
+                    </a>
+                </form>
+			</div>
+            @endauth
+            @guest
 			<div class="menuset_03 wm_login_btn">
-				<a href="★" class="">
+                <a href="{{ route('login') }}" class="">
 					ログイン
 				</a>
 			</div>
 			<div class="menuset_03 wm_signup_btn">
-				<a href="★" class="">
+                <a href="{{ route('user.pre_create') }}" class="">
 					新規登録
 				</a>
 			</div>
+            @endguest
 		</div>
 
 		<input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
@@ -62,25 +74,25 @@
 <div class="drower-menu">
 <div class="drower-menu-list">
     <nav id="js-header__nav " class="l-header__nav navgation_inner">
-		<a href="★" title="★" rel="home" class="h_logo_css_sp">
-			<img src="image/logo-white.svg">
+		<a href="{{ route('user.index') }}" title="FanReturn" rel="home" class="h_logo_css_sp">
+			<img src="{{ asset('image/logo-white.svg') }}">
 		</a>
 
 	    <div class="other_site_header"></div>
 		<ul id="js-global-nav" class="p-global-nav main-menu menu_base taso_menu">
 
 			<li class="menu-item nav_btn taso_li menuset_01">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="#" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">はじめる</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="#" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">さがす</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="#" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">ファンリターンとは</p>
 				</a>
 			</li>
@@ -97,57 +109,73 @@
 				<input type="checkbox" id="item_c_2" style="display:none;">
 				<input type="checkbox" id="ta_menu-2"><label for="ta_menu-2" class="taso_li_a_label"><span class="pd"><i class="fas fa-chevron-down"></i></span></label>
 					<ul class="taso_ul pri_W_b taso_ul_ko" style="background: #fff; padding: 10px;">
-						<li class="taso_li taso_li_ko ninki_tag_li">
-							<div><a href="★"># テキスト</a></div>
-							<div><a href="★"># テキスト</a></div>
-							<div><a href="★"># テキスト</a></div>
-							<div><a href="★"># テキスト</a></div>
-							<div><a href="★"># テキスト</a></div>
-						</li>
+                        {{-- NOTICE コンポーネントにしてタグを何かしら順にする必要がある？ --}}
+                        {{-- @foreach($popularyTags() as $tag) --}}
+                            <li class="taso_li taso_li_ko ninki_tag_li">
+                            <div><a href="#"># テキスト</a></div>
+                            </li>
+                        {{-- @endforeach --}}
 					</ul>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
+                {{-- NOTICE こちらは全てのタグを表示する --}}
+                {{-- @foreach($allTags() as $tag) --}}
+				<a href="#" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">全てのタグ</p>
 				</a>
+                {{-- @endforeach --}}
 			</li>
+            @auth
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">応援したプロジェクト</p>
+				<a href="{{ route('user.purchased_projects') }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">応援したプロジェクト</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="{{ route('user.payment_history') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">購入履歴</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="{{ route('user.liked_projects') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">お気に入り</p>
 				</a>
 			</li>
+            @endauth
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="{{ route('user.inquiry.create') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">お問い合わせ</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="#" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">よくあるご質問・ヘルプ</p>
 				</a>
 			</li>
 
+            @auth
+            <li class="menu-item nav_btn taso_li menuset_03 login_btn">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="top_menu-1 nav_btn_link disable-btn">
+                        <p class="nav_btn_tit_L log_out">ログアウト</p>
+                    </button>
+                </form>
+			</li>
+            @endauth
 
+            @guest
 			<li class="menu-item nav_btn taso_li menuset_03 login_btn">
-				<a href="★" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">ログイン</p>
+                <a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">ログイン</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_03 signup_btn">
-				<a href="★" class="top_menu-1 nav_btn_link">
-					<p>新規登録</p>
+                <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
+                    <p>新規登録</p>
 				</a>
 			</li>
+            @endguest
 
 			<li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
 				<i class="fas fa-search"></i><input type="text" name="search_word" placeholder="キーワードを検索">
@@ -170,9 +198,9 @@
 </style>
 
 <div class="pc-details-screen_header">
-	<div class="pdsh_item pdsh_current">プロジェクト<a href="★" class="cover_link"></a></div>
-	<div class="pdsh_item">活動レポート<a href="★" class="cover_link"></a></div>
-	<div class="pdsh_item">応援コメント<a href="★" class="cover_link"></a></div>
+	<div class="pdsh_item pdsh_current">プロジェクト<a href="#" class="cover_link"></a></div>
+	<div class="pdsh_item">活動レポート<a href="#" class="cover_link"></a></div>
+	<div class="pdsh_item">応援コメント<a href="#" class="cover_link"></a></div>
 </div>
 
 </header>
@@ -214,16 +242,16 @@
                     <div class="footer_item"><a href="★">クラウドファンティングとは</a></div>
                     <div class="footer_item"><a href="★">ヘルプ</a></div>
                     <div class="footer_item"><a href="★">お問い合わせ</a></div>
-                    <div class="footer_item"><a href="★">利用規約</a></div>
-                    <div class="footer_item"><a href="★">細則</a></div>
-                    <div class="footer_item"><a href="★">プライバシーポリシー</a></div>
-                    <div class="footer_item"><a href="★">特定商取引法に基づく表記</a></div>
-                    <div class="footer_item"><a href="★">情報セキュリティ方針</a></div>
-                    <div class="footer_item"><a href="★">反社基本方針</a></div>
+                    <div class="footer_item"><a href="{{ route('user.terms_of_service') }}">利用規約</a></div>
+                    {{-- <div class="footer_item"><a href="★">細則</a></div> --}}
+                    <div class="footer_item"><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></div>
+                    <div class="footer_item"><a href="{{ route('user.trade_law') }}">特定商取引法に基づく表記</a></div>
+                    {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div> --}}
+                    {{-- <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
                     <div class="footer_sns_icon dis_f_wra_alc">
-                        <a href="★"><img class="" src="image/sns_01.svg"></a>
-                        <a href="★"><img class="" src="image/sns_02.svg"></a>
-                        <a href="★"><img class="" src="image/sns_03.svg"></a>
+                        <a href="★"><img class="" src="{{ asset('image/sns_01.svg') }}"></a>
+                        <a href="★"><img class="" src="{{ asset('image/sns_02.svg') }}"></a>
+                        <a href="★"><img class="" src="{{ asset('image/sns_03.svg') }}"></a>
                     </div>
                 </div>
             </div><!--/.footer_inner-->
@@ -231,13 +259,18 @@
 
         <div class="footer_under">
             <div class="footer_under_inner">
-                <div class="footer_logo"><img class="h_logo_css" src="image/logo-color.svg"></div>
+                <div class="footer_logo"><img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}"></div>
                 <ul>
-                    <li><a href="★">はじめる</a></li>
-                    <li><a href="★">さがす</a></li>
-                    <li><a href="★">ファンリターンとは</a></li>
-                    <li><a href="★">ログイン</a></li>
-                    <li><a href="★">新規登録</a></li>
+                    <li><a href="#">はじめる</a></li>
+                    <li><a href="#">さがす</a></li>
+                    <li><a href="#">ファンリターンとは</a></li>
+                    @auth
+                    <li><a href="{{ route('logout') }}">ログアウト</a></li>
+                    @endauth
+                    @guest
+                    <li><a href="{{ route('login') }}">ログイン</a></li>
+                    <li><a href="{{ route('user.pre_create') }}">新規登録</a></li>
+                    @endguest
                 </ul>
             </div><!--/.footer_inner-->
         </div><!--/.footer_under-->
