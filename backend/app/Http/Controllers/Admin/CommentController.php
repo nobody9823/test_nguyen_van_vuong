@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use Illuminate\Http\Request;
-use App\Models\SupporterComment;
+use App\Models\Comment;
 
-class SupporterCommentController extends Controller
+class CommentController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,13 +15,15 @@ class SupporterCommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $supporter_comments = SupporterComment::with(['project', 'user', 'repliesToSupporterComment'])
-                            ->orderBy('created_at', 'DESC')
-                            ->paginate(10);
+        $comments = Comment::search()->narrowDownWithProject()
+                                     ->searchWithPostDates($request->from_date, $request->to_date)
+                                     ->with(['project', 'payment.user', 'reply.user'])
+                                     ->orderBy('created_at', 'DESC')
+                                     ->paginate(10);
 
-        return view('admin.supporter_comment.index', compact('supporter_comments'));
+        return view('admin.comment.index', compact('comments'));
     }
 
     /**
@@ -85,23 +87,11 @@ class SupporterCommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SupporterComment $supporter_comment)
-    {
-        $supporter_comment->delete();
-        return redirect()->action([SupporterCommentController::class, 'index'])
-                        ->with('flash_message', "支援者コメントの削除が完了しました");
-    }
-
-    public function search(SearchRequest $request)
-    {
-        $supporter_comments =
-            SupporterComment::searchByWords($request->getArrayWords())
-                            ->searchByProject($request->project_id)
-                            ->searchWithPostDates($request->from_date, $request->to_date)
-                            ->with(['project', 'user', 'repliesToSupporterComment'])
-                            ->orderBy('created_at', 'DESC')
-                            ->paginate(10);
-
-        return view('admin.supporter_comment.index', compact('supporter_comments'));
-    }
+    // TODO:今後、管理画面で支援者コメントを削除する仕様になれば使用する。そうでない場合は削除してください。
+    // public function destroy(Comment $comment)
+    // {
+    //     $comment->delete(); 
+    //     return redirect()->action([CommentController::class, 'index'])
+    //                      ->with('flash_message', "支援者コメントの削除が完了しました");
+    // }
 }

@@ -17,7 +17,7 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->uuid('inviter_code')->nullable();
-            $table->string('image_url')->default('public/sampleImage/person_sample.jpg');
+            $table->string('image_url')->default('public/sampleImage/my-page.svg');
             $table->string('first_name_kana')->default("");
             $table->string('last_name_kana')->default("");
             $table->string('first_name')->default("");

@@ -87,6 +87,13 @@ class Project extends Model
             ->withTimestamps();
     }
 
+    public function supportedUsers()
+    {
+        return $this->belongsToMany('App\Models\User', 'user_project_supported')
+            ->using('App\Models\UserProjectSupported')
+            ->withTimestamps();
+    }
+
     public function reports()
     {
         return $this->hasMany('App\Models\Report');
@@ -260,6 +267,13 @@ class Project extends Model
     public function getTotalLikesAttribute()
     {
         return $this->likedUsers()->count() + $this->added_like;
+    }
+
+    public function getNumberOfDaysLeftAttribute()
+    {
+        $end_date = new Carbon($this->end_date);
+        $today = Carbon::now();
+        return $end_date->diffInDays($today);
     }
     /**
      * Get Japanese formatted start time of project with day of the week

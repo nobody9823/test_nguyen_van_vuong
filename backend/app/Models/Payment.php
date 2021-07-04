@@ -12,6 +12,7 @@ class Payment extends Model
     use HasFactory, SoftDeletes, includedPlans;
 
     protected $fillable = [
+        'inviter_id',
         'user_id',
         'price',
         'message_status',

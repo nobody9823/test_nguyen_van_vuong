@@ -106,14 +106,5 @@ const Plans = (() => {
             };
             total_amount.value = Number(total_price);
         },
-        checkPaymentWay: (el) => {
-            let form = document.getElementById('credit_forms');
-
-            if(el.value === 'paypay'){
-                form.style.display = 'none';
-            } else {
-                form.style.display = 'block';
-            }
-        }
     }
 })()

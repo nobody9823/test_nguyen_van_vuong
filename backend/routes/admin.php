@@ -10,8 +10,8 @@ use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ProjectController;
-use App\Http\Controllers\Admin\RepliesToSupporterCommentController;
-use App\Http\Controllers\Admin\SupporterCommentController;
+use App\Http\Controllers\Admin\ReplyController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\TemporaryCompanyController;
 use App\Http\Controllers\Admin\TemporaryTalentController;
@@ -77,10 +77,10 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('report', ReportController::class, ['only' => ['index', 'show']]);
 
     // コメント管理
-    Route::resource('comment', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);
+    Route::resource('comment', CommentController::class, ['only' => ['index', 'show', 'destroy']]);
 
     //返信管理
-    Route::resource('reply_to_comment', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);
+    Route::resource('reply', ReplyController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
     // メッセージ管理
     Route::resource('message', MessageController::class)->only(['index','show']);

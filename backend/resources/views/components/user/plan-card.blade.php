@@ -1,4 +1,27 @@
-<div class="plan">
+<div class="pds_sec02_box inner_item">
+    <div class="pds_sec02_img">
+        <img class="" src="{{ Storage::url($plan->image_url) }}">
+    </div>
+    <div class="pds_sec02_01">
+        <div class="pds_sec02_01_en">{{ $plan->price }}円</div>
+        <div class="pds_sec02_01_nokori_nin">残り：13人まで</div>
+    </div>
+
+    <div class="pds_sec02_01_btn">
+        このリターンを選択する
+        <a href="" class="cover_link"></a>
+    </div>
+
+    <div class="pds_sec02_txt">
+        {{ $plan->content }}
+    </div>
+
+    <div class="pds_sec02_01">
+        <div class="pds_sec02_01_shien_nin">支援者：13人</div>
+        <div class="pds_sec02_01_day">お届け日：{{ $plan->delivery_date }}</div>
+    </div>
+</div>
+{{-- <div class="plan">
     <h3 class="plan-price">{{ number_format($plan->price) }}円</h3>
     @if($plan->image_url == "Public/image/contribution.jpeg")
         <p class="plan-img"><img src="/image/contribution.jpeg"></p>
@@ -16,4 +39,4 @@
             <option value="{{ $i }}">{{ $i }}</option>
         @endfor
     </select>
-</div>
+</div> --}}
