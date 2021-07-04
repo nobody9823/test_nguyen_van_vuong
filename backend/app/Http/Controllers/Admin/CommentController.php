@@ -23,7 +23,7 @@ class CommentController extends Controller
                                      ->orderBy('created_at', 'DESC')
                                      ->paginate(10);
 
-        return view('admin.supporter_comment.index', compact('comments'));
+        return view('admin.comment.index', compact('comments'));
     }
 
     /**
