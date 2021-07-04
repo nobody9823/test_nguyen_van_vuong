@@ -32,10 +32,10 @@
                         'type' => 'password',
                         'placeholder' => 'パスワード（英数字8文字以上）',
                         'style' => 'width: 30%;
-                        height: 40px;
-                        padding: 10px;
-                        border: solid 1px #DBDBDB;
-                        border-radius: 4px;'
+                            height: 40px;
+                            padding: 10px;
+                            border: solid 1px #DBDBDB;
+                            border-radius: 4px;'
                     ]) }}
                         @error('password')
                         <div class="invalid-feedback" style="color: red;">
@@ -54,7 +54,7 @@
                         <label>
                             <a href="{{ route('user.forgot_password') }}" class="pee_pass_link">パスワードを忘れた方はこちら</a>
                         </label>
-                        <div class="submit-test">
+                        <div class="submit">
                             <input type="submit" name="" value="ログイン" style="
                             width: 300px;
                             margin: 50px;
