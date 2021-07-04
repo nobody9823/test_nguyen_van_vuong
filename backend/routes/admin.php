@@ -80,7 +80,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('comment', CommentController::class, ['only' => ['index', 'show', 'destroy']]);
 
     //返信管理
-    Route::resource('reply', ActivityReportController::class, ['only' => ['index', 'create', 'show', 'destroy']]);
+    Route::resource('reply', ActivityReportController::class, ['only' => ['index', 'create', 'edit', 'show', 'destroy']]);
 
     // メッセージ管理
     Route::resource('message', MessageController::class)->only(['index','show']);
