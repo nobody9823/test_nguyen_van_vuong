@@ -29,7 +29,7 @@
 	<div id="header_01">
 		<div id="site-title">
 			<a href="{{ route('user.index') }}" title="FanReturn" rel="home">
-				<img class="h_logo_css" src="image/logo-color.svg">
+				<img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
 			</a>
 		</div>
 	</div>
@@ -75,7 +75,7 @@
 <div class="drower-menu-list">
     <nav id="js-header__nav " class="l-header__nav navgation_inner">
 		<a href="{{ route('user.index') }}" title="FanReturn" rel="home" class="h_logo_css_sp">
-			<img src="image/logo-white.svg">
+			<img src="{{ asset('image/logo-white.svg') }}">
 		</a>
 
 	    <div class="other_site_header"></div>
@@ -249,9 +249,9 @@
                     {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div> --}}
                     {{-- <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
                     <div class="footer_sns_icon dis_f_wra_alc">
-                        <a href="★"><img class="" src="image/sns_01.svg"></a>
-                        <a href="★"><img class="" src="image/sns_02.svg"></a>
-                        <a href="★"><img class="" src="image/sns_03.svg"></a>
+                        <a href="★"><img class="" src="{{ asset('image/sns_01.svg') }}"></a>
+                        <a href="★"><img class="" src="{{ asset('image/sns_02.svg') }}"></a>
+                        <a href="★"><img class="" src="{{ asset('image/sns_03.svg') }}"></a>
                     </div>
                 </div>
             </div><!--/.footer_inner-->
@@ -259,7 +259,7 @@
 
         <div class="footer_under">
             <div class="footer_under_inner">
-                <div class="footer_logo"><img class="h_logo_css" src="image/logo-color.svg"></div>
+                <div class="footer_logo"><img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}"></div>
                 <ul>
                     <li><a href="#">はじめる</a></li>
                     <li><a href="#">さがす</a></li>

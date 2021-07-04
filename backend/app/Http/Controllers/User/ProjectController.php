@@ -229,10 +229,7 @@ class ProjectController extends Controller
                 throw $e;
             }
 
-        $supporter_count = User::getCountOfSupportersWithProject($project);
-        $total_amount = Payment::getTotalAmountOfSupporterWithProject($project);
-
-        return view('user.plan.supported', ['project' => $project, 'payment' => $payment, 'supporter_count' => $supporter_count, 'total_amount' => $total_amount]);
+        return view('user.plan.supported', ['project' => $project, 'payment' => $payment]);
     }
 
     public function paymentForPayPay(Project $project, Payment $payment)
