@@ -75,7 +75,7 @@
                     {{ $comment->project->title }}
                 </td>
                 <td>
-                    {{ $comment->reply->user->name }}
+                    {{ optional($comment)->reply->user->name }}
                 </td>
                 <td>
                     {{-- 返信あり→それを表示
@@ -84,14 +84,10 @@
                     <p>{{$comment->reply->content}}</p>
                 </td>
                 <td>
-                    <a href=" {{ route($guard.'.reply.edit', [
-                        'reply' => $comment->reply,
-                        ]) }} " class="btn btn-success">編集</a>
+                    <a href=" {{ route($guard.'.reply.edit', ['reply' => $comment->reply]) }} " class="btn btn-success">編集</a>
                 </td>
                 <td>
-                    <form action="{{ route($guard.'.reply.destroy', [
-                            'reply' => $comment->reply,]) }}"
-                        method="POST">
+                    <form action="{{ route($guard.'.reply.destroy', ['reply' => $comment->reply]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger btn-dell" type="submit">削除</button>
@@ -101,9 +97,8 @@
 
                 @else
                 <p>未返信</p>
-                <a href=" {{ route($guard.'.reply.create', [
-                        'supporter_comment' => $comment,
-                        ]) }} " class="btn btn-primary btn-sm">返信する
+                <a href=" {{ route($guard.'.reply.create', ['comment' => $comment,]) }} " class="btn btn-primary btn-sm">
+                    返信する
                 </a>
                 </td>
                 <td>
