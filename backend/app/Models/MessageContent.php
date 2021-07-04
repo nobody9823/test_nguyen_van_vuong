@@ -12,7 +12,6 @@ class MessageContent extends Model
     use HasFactory,SoftDeletes;
 
     protected $table = 'message_contents';
-    protected $touches = ['userPlanCheering'];
     protected $dates = ['deleted_at'];
 
     /**
@@ -21,12 +20,12 @@ class MessageContent extends Model
      * @var array
      */
     protected $fillable = [
-        'user_plan_cheering_id',
+        'payment_id',
     ];
 
-    public function userPlanCheering()
+    public function payment()
     {
-        return $this->belongsTo(UserPlanCheering::class, 'user_plan_cheering_id');
+        return $this->belongsTo(Payment::class, 'payment_id');
     }
 
     public function scopeReadByUser($query)

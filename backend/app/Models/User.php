@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\ImageCast;
 use App\Casts\HashMake;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,9 +24,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
-        'image_url',
         'email_verified_at',
+        'password',
     ];
 
     /**
@@ -56,18 +56,22 @@ class User extends Authenticatable
         parent::boot();
 
         static::deleting(function (User $user) {
-            $user->supportComments()->delete();
-            $user->userAddresses()->delete();
-            $user->userDetail()->delete();
             $user->snsUser()->delete();
+            $user->address()->delete();
+            $user->snsLinks()->delete();
+            $user->bankAccount()->delete();
+            $user->profile()->delete();
 
             // 中間テーブルの削除
-            UserSupporterCommentLiked::where('user_id', $user->id)
-                ->update(['deleted_at' => Carbon::now()]);
-            UserPlanCheering::where('user_id', $user->id)
-                ->update(['deleted_at' => Carbon::now()]);
             UserProjectLiked::where('user_id', $user->id)
                 ->update(['deleted_at' => Carbon::now()]);
+            $comment_ids = Comment::where('user_id', $user->id)->pluck('id')->toArray();
+            Reply::whereIn('comment_id', $comment_ids)->delete();
+            Comment::destroy($comment_ids);
+            $payment_ids = $user->payments()->pluck('id');
+            MessageContent::whereIn('payment_id', $payment_ids)->delete();
+            PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
+            Payment::destroy($payment_ids);
         });
     }
 
@@ -81,29 +85,43 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\SupporterComment', 'App\Models\UserSupporterCommentLiked');
     }
 
-    public function plans()
+    public function projects()
     {
-        return $this->belongsToMany('App\Models\Plan', 'user_plan_cheering')
-            ->using('App\Models\UserPlanCheering')
-            ->withPivot('selected_option')
-            ->withTimestamps();
+        return $this->hasMany('App\Models\Project');
     }
 
-    public function projects()
+    public function payments()
+    {
+        return $this->hasMany('App\Models\Payment');
+    }
+
+    public function invitedPayments()
+    {
+        return $this->hasMany('App\Models\User', 'inviter_id', 'id');
+    }
+
+    public function likedProjects()
     {
         return $this->belongsToMany('App\Models\Project', 'user_project_liked')
             ->using('App\Models\UserProjectLiked')
             ->withTimestamps();
     }
 
-    public function userAddresses()
+    public function supportedProjects()
     {
-        return $this->hasMany('App\Models\UserAddress');
+        return $this->belongsToMany('App\Models\Project', 'user_project_supported')
+            ->using('App\Models\UserProjectSupported')
+            ->withTimestamps();
     }
 
-    public function userDetail()
+    public function address()
     {
-        return $this->hasOne('App\Models\UserDetail');
+        return $this->hasOne('App\Models\Address');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('App\Models\Profile');
     }
 
     public function snsUser()
@@ -111,6 +129,20 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\SnsUser');
     }
 
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Reply');
+    }
+
+    public function snsLinks()
+    {
+        return $this->hasMany('App\Models\SnsLink');
+    }
+
+    public function bankAccount()
+    {
+        return $this->hasOne('App\Models\BankAccount');
+    }
 
     //--------------- local scopes -------------
     public function scopeGetUsers()
@@ -132,6 +164,57 @@ class User extends Authenticatable
     {
         return $query->where('name', 'like', "%$word%")->pluck('id')->toArray();
     }
+
+    public function scopePluckNameAndId($query)
+    {
+        return $query->pluck('name', 'id');
+    }
+
+    public function scopeGetCountOfSupportersWithProject($query, Project $project)
+    {
+        return $query->whereIn(
+            'id',
+            Payment::whereIn(
+            'id',
+            PlanPaymentIncluded::whereIn(
+                        'plan_id',
+                        Plan::where('project_id', $project->id)->pluck('id')->toArray()
+                    )->pluck('id')->toArray()
+        )->pluck('id')->toArray()
+        )->count();
+    }
+
+    // inviter_idが一致するpaymentsの数を集計して降順に並び替え
+    public function scopeGetInvitersRankedByInvitedUsers($query, $project_id)
+    {
+        return $query->whereIn(
+            'id',
+            UserProjectSupported::query()->select('user_id')
+                ->whereIn('project_id', $project_id)
+        )->withCount('invitedPayments')
+        ->orderBy('invited_payments_count', 'DESC');
+    }
+
+    // inviter_idが一致するpaymentsの支援総額から降順に並び替え
+    public function scopeGetInvitersRankedByInvitedTotalAmount($query, $project_id)
+    {
+        return $query->whereIn(
+            'id',
+            UserProjectSupported::query()->select('user_id')
+                ->whereIn('project_id', $project_id)
+        )->withSum('invitedPayments', 'price')
+        ->orderBy('invited_payments_sum_price', 'DESC');
+    }
+
+    public function scopeGetInviterFromInviterCode($query, $inviter_code)
+    {
+        return $query->whereIn(
+            'id',
+            Profile::query()->select('user_id')->where(
+                'inviter_code', $inviter_code
+            )
+        );
+    }
     //--------------- local scopes -------------
 
 
@@ -142,6 +225,26 @@ class User extends Authenticatable
         if (strpos($this->image_url, 'sampleImage') === false) {
             Storage::delete($this->image_url);
         };
+    }
+
+    public function saveProfile(array $value) :void
+    {
+        if (isset($this->profile)) {
+            $this->profile()->save($this->profile->fill($value));
+        } else {
+            $profile = new Profile();
+            $this->profile()->save($profile->fill($value));
+        }
+    }
+
+    public function saveAddress(array $value) :void
+    {
+        if (isset($this->address)) {
+            $this->address()->save($this->address->fill($value));
+        } else {
+            $address = new Address();
+            $this->address()->save($address->fill($value));
+        }
     }
     //--------------- functions -------------
 }

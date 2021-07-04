@@ -1,39 +1,40 @@
-<div class="fixedcontainer mypage_contents my-page_header">
-    <ul id="my-page_header-menu" class="sm sm-clean" data-smartmenus-id="16131297636922026">
-        <li><a href="{{ route('user.plan') }}">支援プラン一覧</a></li>
-        <li><a href="{{ route('user.project') }}">お気に入り<br>プロジェクト一覧</a></li>
-        <li onmouseover="mouseOverMessageOptions()" onmouseleave="mouseLeaveMessageOptions()"><a href="#">やりとり</a></li>
-        <div class="message_options" id="message_options" style="display:none;" onmouseover="mouseOverMessageOptions()"
-            onmouseleave="mouseLeaveMessageOptions()">
-            <p><a href="{{ route('user.comment') }}">支援コメント一覧</a></p>
-            <p><a href="{{ route('user.message.index') }}">メッセージ一覧</a></p>
+<div class="prof_page_L">
+
+    <div class="prof_img_box">
+        @if(isset(Auth::user()->profile))
+        <img class="prof_img" src="{{ Storage::url(Auth::user()->profile->image_url) }}">
+        @else
+        <img class="prof_img" src="image/my-page.svg">
+        @endif
+        <div class="prof_img_name">{{ Auth::user()->name }}</div>
+    </div>
+    <div class="prof_btn_box_base">
+        <div class="prof_btn_box_01">
+            <div class="pbb_01_01"><i class="fas fa-volume-up"></i> 応援購入<a href="#" class="cover_link"></a></div>
+            <div class="pbb_01_link">応援購入したプロジェクト<i class="fas fa-chevron-right"></i>
+                <a href="{{ route('user.purchased_projects') }}" class="cover_link"></a>
+            </div>
+            <div class="pbb_01_link">お気に入りプロジェクト<i class="fas fa-chevron-right"></i>
+                <a href="{{ route('user.payment_history') }}" class="cover_link"></a>
+            </div>
+            <div class="pbb_01_link">購入履歴<i class="fas fa-chevron-right"></i>
+                <a href="{{ route('user.liked_projects') }}" class="cover_link"></a>
+            </div>
+            <div class="pbb_01_link">投稿コメント一覧<i class="fas fa-chevron-right"></i>
+                <a href="{{ route('user.contribution_comments') }}" class="cover_link"></a>
+            </div>
+            {{-- NOTICE 現状メッセージ機能の実装間に合わなそうなので一旦コメントアウトいたします --}}
+            {{-- <p><a href="{{ route('user.message.index') }}">メッセージ一覧</a></p> --}}
         </div>
-        <li onmouseover="mouseOverSettingsOptions()" onmouseleave="mouseLeaveSettingOptions()"><a href="#">各種設定</a></li>
-        <div class="setting_options" id="setting_options" style="display:none;" onmouseover="mouseOverSettingsOptions()"
-            onmouseleave="mouseLeaveSettingOptions()">
-            <p><a href="{{ route('user.edit_profile') }}">プロフィール編集</a></p>
-            <p><a href="{{ route('user.change_password') }}">パスワード変更</a></p>
+        <div class="prof_btn_box_02">
+            <div class="pbb_01_01"><i class="fas fa-user"></i> アカウント情報<a href="#" class="cover_link"></a></div>
+            <div class="pbb_01_link">プロフィール編集<i class="fas fa-chevron-right"></i>
+                <a href="{{ route('user.profile') }}" class="cover_link"></a>
+            </div>
+            <div class="pbb_01_link">退会について<i class="fas fa-chevron-right"></i>
+                <a href="{{ route('user.withdraw') }}" class="cover_link"></a>
+            </div>
         </div>
+    </div>
 
-    </ul>
-</div>
-
-<script>
-    let message_options = document.getElementById("message_options");
-    let setting_options = document.getElementById("setting_options");
-
-function mouseOverMessageOptions(){
-    message_options.style.display = "block";
-}
-function mouseLeaveMessageOptions(){
-    message_options.style.display = "none";
-}
-
-
-function mouseOverSettingsOptions(){
-    setting_options.style.display = "block";
-}
-function mouseLeaveSettingOptions(){
-    setting_options.style.display = "none";
-}
-</script>
+</div><!--/prof_page_L-->

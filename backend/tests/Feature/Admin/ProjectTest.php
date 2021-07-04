@@ -2,238 +2,157 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Models\Admin;
+use App\Models\Plan;
+use App\Models\Project;
+use App\Models\Tag;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use Illuminate\Support\Facades\DB;
-use App\Models\Admin;
-use App\Models\Project;
-use Artisan;
-use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
 class ProjectTest extends TestCase
 {
-    // use RefreshDatabase;
+    use RefreshDatabase;
 
-    // protected $user;
+    public function setUp() :void
+    {
+        parent::setUp();
+        // リレーションで色々詰まったのですべて書いちゃった
+        $this->admin = Admin::factory()->create();
+        $this->user = User::factory()->valleyin()->hasProfile()->create();
+        $this->tag = Tag::factory(5)->create();
+        $this->project = Project::factory()->state([
+            'user_id' => $this->user->id,
+        ])->make();
+    }
 
-    // protected $data;
+    /**
+     * A basic test of index.
+     *
+     * @return void
+     */
+    public function test_index()
+    {
+        $response = $this->actingAs($this->admin, 'admin')->get(route('admin.project.index'));
+        $response->assertViewIs('admin.project.index');
+        $response->assertOk();
+    }
 
-    // public function setUp() :void
-    // {
-    //     parent::setUp();
-    //     Artisan::call('migrate:refresh');
-    //     Artisan::call('db:seed');
-    //     $this->user = Admin::first();
-    //     $this->project = Project::first();
-    //     Storage::fake('testing');
-    //     $this->data =  [
-    //         'title' => "test",
-    //         'explanation' => "test",
-    //         'target_amount' => 100000,
-    //         'talent_id' => 1,
-    //         'start_date' => Carbon::tomorrow()->format('Y-m-d H:i:s'),
-    //         'end_date' => Carbon::parse('+1 month')->endOfMonth()->format('Y-m-d H:i:s'),
-    //         'category_id' => 1,
-    //         'is_released' => 0,
-    //         'images' => array(
-    //             UploadedFile::fake()->image('dummy1.png'),
-    //             UploadedFile::fake()->image('dummy2.png'),
-    //             UploadedFile::fake()->image('dummy3.png'),
-    //         )
-    //     ];
-    // }
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testAccessToAdminProjectIndexPage()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->get(route('admin.project.index'));
+    /**
+     * A basic test of create
+     *
+     * @return void
+     */
+    public function test_create()
+    {
+        $response = $this->actingAs($this->admin, 'admin')->get(route('admin.project.create'));
+        $response->assertViewIs('admin.project.create');
+        $response->assertOk();
+    }
 
-    //     $response->assertStatus(200)
-    //                 ->assertSee('プロジェクト一覧');
-    // }
+    /**
+     * A basic test of store
+     *
+     * @return void
+     */
+    public function test_store()
+    {
+        Storage::fake('avatars');
+        $file = UploadedFile::fake()->image('avatar.jpeg');
+        $start_date = new Carbon($this->project->start_date);
+        $end_date = new Carbon($this->project->end_date);
+        $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.create'))->post(route('admin.project.store'), [
+            'user_id' => $this->user->id,
+            'title' => $this->project->title,
+            'content' => $this->project->content,
+            'target_amount' => $this->project->target_amount,
+            'start_date' => $start_date->format('Y-m-d H:i:s'),
+            'end_date' => $end_date->format('Y-m-d H:i:s'),
+            'release_status' => $this->project->release_status,
+            'images' => [$file],
+        ]);
+        $response->assertRedirect('/admin/project/'.Project::first()->id.'/plan/create');
+    }
 
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testAccessToAdminProjectCreatePage()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->get(route('admin.project.create'));
+    /**
+     * A basic test of show
+     *
+     * @return void
+     */
+    public function test_show()
+    {
+        $this->project->save();
+        $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.index'))->get(route('admin.project.show', ['project' => $this->project]));
+        $response->assertOk();
+        $response->assertViewIs('admin.project.show');
+    }
 
-    //     $response->assertStatus(200)
-    //                 ->assertSee('新規プロジェクト追加');
-    // }
+    /**
+     * A basic test of edit
+     *
+     * @return void
+     */
+    public function test_edit()
+    {
+        $this->project->save();
+        $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.index'))->get(route('admin.project.edit', ['project' => $this->project]));
+        $response->assertOk();
+        $response->assertViewIs('admin.project.edit');
+    }
 
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testCreateProjectByAdmin()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->post(route('admin.project.store', $this->data));
-    //     $project = Project::where("title", 'like', 'test')->first();
+    /**
+     * A basic test of update
+     *
+     * @return void
+     */
+    public function test_update()
+    {
+        $this->project->save();
+        Storage::fake('avatars');
+        $file = UploadedFile::fake()->image('avatar.jpeg');
+        $start_date = new Carbon($this->project->start_date);
+        $end_date = new Carbon($this->project->end_date);
+        $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.edit', ['project' => $this->project]))->put(route('admin.project.update', ['project' => $this->project]), [
+                'user_id' => $this->project->user_id,
+                'title' => $this->project->title,
+                'content' => $this->project->content,
+                'target_amount' => $this->project->target_amount,
+                'start_date' => $start_date->format('Y-m-d H:i:s'),
+                'end_date' => $end_date->format('Y-m-d H:i:s'),
+                'release_status' => $this->project->release_status,
+                'images' => [$file],
+            ]);
+        $response->assertRedirect(route('admin.project.index'));
+    }
 
-    //     $response->assertRedirect(route('admin.plan.create', $project))
-    //                 ->assertSessionHas('flash_message', 'プロジェクト作成が成功しました。プランを作成してください。');
-    //     foreach($project->projectImages as $image){
-    //         Storage::disk('testing')->assertExists($image->image_url);
-    //     }
-    // }
+    /**
+     * A basic test of delete
+     *
+     * @return void
+     */
+    public function test_delete()
+    {
+        $this->project->save();
+        $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.index'))->delete(route('admin.project.destroy', ['project' => $this->project]));
+        $response->assertRedirect(route('admin.project.index'));
+        $this->assertSoftDeleted($this->project);
+    }
 
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testAccessToAdminProjectShowPage()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->get(route('admin.project.show', $this->project));
-
-    //     $response->assertStatus(200)
-    //                 ->assertSee('プロジェクト詳細');
-    // }
-
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testAccessToAdminProjectEditPage()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->get(route('admin.project.edit', $this->project));
-
-    //     $response->assertStatus(200)
-    //                 ->assertSee('プロジェクト編集画面');
-    // }
-
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testEditProjectByAdmin()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->put(route('admin.project.update', $this->project), $this->data);
-
-    //     $response->assertRedirect(route('admin.project.index'))
-    //                 ->assertSessionHas('flash_message', '更新が成功しました。');
-    //     foreach($project->projectImages as $image){
-    //         Storage::disk('testing')->assertExists($image->image_url);
-    //     }
-    // }
-
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testAccessToAdminProjectPreviewPage()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->get(route('admin.project.preview', $this->project));
-
-    //     $response->assertStatus(200)
-    //                 ->assertSee('みんなのチカラでアイドルを救え');
-    // }
-
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testDestroyProjectImageByAdmin()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->deleteJson(route('admin.project.image', $this->project->projectImages->first()));
-
-    //     $response->assertStatus(200);
-    //     $this->assertEquals($response->getData(), 'success');
-    // }
-
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testDestroyProjectByAdmin()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->delete(route('admin.project.destroy', $this->project));
-
-    //     $response->assertRedirect(route('admin.project.index'))
-    //                 ->assertSessionHas('flash_message', '削除が成功しました。');
-    // }
-
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testSearchProjectsByAdmin()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->post(route('admin.project.search', [
-    //                             "word" => "test"
-    //                         ]));
-
-    //     $response->assertStatus(200)
-    //                 ->assertSee('test の検索結果');
-    // }
-
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testReleaseProjectByAdmin()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $project = Project::where('is_released', false)->first();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->getJson(route('admin.project.release', $project));
-
-    //     $response->assertStatus(200);
-    //     $this->assertEquals($response->getData(), 'success');
-    // }
-
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function testGetCsvOfProjectDataByAdmin()
-    // {
-    //     $this->withoutExceptionHandling();
-    //     $response = $this->actingAs($this->user, 'admin')
-    //                         ->get(route('admin.project.output_cheering_users_to_csv', $this->project));
-
-    //     $project_title = $this->project->title;
-    //     $response->assertStatus(200)
-    //                 ->assertHeader('Content-Type', 'text/csv; charset=UTF-8')
-    //                 ->assertHeader('Content-Disposition', "attachment; filename=cheering_user_list_${project_title}.csv");
-    // }
+    /**
+     * A basic test of preview
+     *
+     * @return void
+     */
+    public function test_preview()
+    {
+        $this->project->save();
+        $this->project->plans()->saveMany(Plan::factory(5)->make());
+        $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.index'))->get(route('admin.project.preview', ['project' => $this->project]));
+        $response->assertOk();
+        $response->assertViewIs('admin.project.preview');
+    }
 }

@@ -233,10 +233,12 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DisplayVideoHelper' => App\Helpers\DisplayVideoHelper::class,
+        'PrefectureHelper' => App\Helpers\PrefectureHelper::class,
         'ProjectReleaseStatus' => App\Enums\ProjectReleaseStatus::class,
         'Slack' => App\Services\Slack\SlackFacade::class,
     ],
 
+    'basic_auth' => env('BASIC_AUTH', false),
     'pay_jp_secret_for_test' => env('PAY_JP_SECRET_FOR_TEST'),
     'pay_jp_key_for_test' => env('PAY_JP_KEY_FOR_TEST'),
     'pay_jp_secret' => env('PAY_JP_SECRET'),

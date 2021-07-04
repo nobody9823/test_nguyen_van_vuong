@@ -14,18 +14,35 @@ class PayJp implements PayJpInterface
      *
      * @return object
      */
-    public function Payment(int $price, Request $request): object
+    public function Payment(int $price, string $pay_jp_id): object
     {
-        $request->validate([
-            'payjp-token' => 'required'
-        ]);
-
         \Payjp\Payjp::setApiKey(config('app.pay_jp_secret_for_test'));
-        return \Payjp\Charge::create(array(
-                "card" => $request['payjp-token'],
-                "amount" => $price,
-                "currency" => "jpy",
-            ));
+        try {
+            $result = \Payjp\Charge::create(array(
+                        "card" => $pay_jp_id,
+                        "amount" => $price,
+                        "currency" => "jpy",
+                ));
+            } catch(\Payjp\Error\Card $e) {
+                throw $e;
+            } catch (\Payjp\Error\InvalidRequest $e) {
+                // Invalid parameters were supplied to Payjp's API
+                throw $e;
+            } catch (\Payjp\Error\Authentication $e) {
+                // Authentication with Payjp's API failed
+                throw $e;
+            } catch (\Payjp\Error\ApiConnection $e) {
+                // Network communication with Payjp failed
+                throw $e;
+            } catch (\Payjp\Error\Base $e) {
+                // Display a very generic error to the user, and maybe send
+                // yourself an email
+                throw $e;
+            } catch(\Exception $e){
+            // Something else happened, completely unrelated to Payjp
+            throw $e;
+            }
+        return $result;
     }
 
     /**

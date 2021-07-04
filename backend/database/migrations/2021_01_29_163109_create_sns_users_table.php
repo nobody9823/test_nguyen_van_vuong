@@ -15,7 +15,7 @@ class CreateSnsUsersTable extends Migration
     {
         Schema::create('sns_users', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained('users');
             $table->uuid('sns_user_id');
             $table->enum('sns_service_name', ['google', 'facebook', 'twitter', 'line']);
             $table->softDeletes();

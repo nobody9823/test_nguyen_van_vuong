@@ -146,7 +146,7 @@ class RegisterController extends Controller
                 return redirect()->action([RegisterController::class, 'create'], ['token' => $token])->withErrors("登録に失敗しました。もう一度入力してください。");
             }
                 Auth::login($user);
-                return redirect()->route('user.plan')->with('flash_message', '登録が完了しました。引き続きガーディアンをご記入ください。');
+                return redirect()->route('user.profile')->with('flash_message', 'FanReturnへの登録が完了致しました。');
         }
     }
 }
