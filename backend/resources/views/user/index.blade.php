@@ -16,7 +16,7 @@ use Carbon\Carbon;
         <div class="img_box_01_L">
             <div class="img_box_01_L_item">
                 <div class="ib01L_01">
-                    <img src="{{ Storage::url($projects->first()->projectFiles[0]->file_url) }}">
+                    <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
                     <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
                     <a href="#" class="okini_link_L"><i class="far fa-heart"></i></a>
                 </div>
@@ -52,9 +52,7 @@ use Carbon\Carbon;
                 @if(!$loop->first)
                 <div class="img_box_01_R_item">
                     <div class="ib01R_01">
-                        @if ($project->projectFiles->isNotEmpty())
-                        <img src="{{ Storage::url($project->projectFiles[0]->file_url) }}">
-                        @endif
+                        <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         <a href="#" class="okini_link"><i class="far fa-heart"></i></a>
                     </div>

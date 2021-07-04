@@ -54,7 +54,8 @@ class ProjectController extends Controller
     public function index()
     {
         $tags = Tag::all();
-        $projects = Project::take(4)->get();
+        $projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        ->inRandomOrder()->takeWithRelations(5)->get();
 
         // 応援プロジェクト（目標金額の高い順）
         $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
