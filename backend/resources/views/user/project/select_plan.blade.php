@@ -370,7 +370,9 @@
                         <textarea name="comments" class="def_textarea" rows="6"></textarea>
                     </div><!--/form_item_row-->
                     <div class="def_btn">
-                        <button type="submit" class="disable-btn">確認画面へ</button>
+                        <button type="submit" class="disable-btn">
+                            <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">確認画面へ</p>
+                        </button>
                     </div>
 
                 </div><!--/.inner_item-->

@@ -39,9 +39,12 @@
 		<div id="wm_btn">
             @auth
             <div class="menuset_03 wm_login_btn">
-                <a href="{{ route('logout') }}" class="">
-					ログアウト
-				</a>
+                <form action="{{ route('logout') }}" action="POST">
+                    @csrf
+                    <a type="submit" class="">
+                        ログアウト
+                    </a>
+                </form>
 			</div>
             @endauth
             @guest
@@ -152,9 +155,12 @@
 
             @auth
             <li class="menu-item nav_btn taso_li menuset_03 login_btn">
-                <a href="{{ route('logout') }}" class="top_menu-1 nav_btn_link">
-                    <p class="nav_btn_tit_L">ログアウト</p>
-				</a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="top_menu-1 nav_btn_link disable-btn">
+                        <p class="nav_btn_tit_L log_out">ログアウト</p>
+                    </button>
+                </form>
 			</li>
             @endauth
 
@@ -255,11 +261,16 @@
             <div class="footer_under_inner">
                 <div class="footer_logo"><img class="h_logo_css" src="image/logo-color.svg"></div>
                 <ul>
-                    <li><a href="★">はじめる</a></li>
-                    <li><a href="★">さがす</a></li>
-                    <li><a href="★">ファンリターンとは</a></li>
-                    <li><a href="★">ログイン</a></li>
-                    <li><a href="★">新規登録</a></li>
+                    <li><a href="#">はじめる</a></li>
+                    <li><a href="#">さがす</a></li>
+                    <li><a href="#">ファンリターンとは</a></li>
+                    @auth
+                    <li><a href="{{ route('logout') }}">ログアウト</a></li>
+                    @endauth
+                    @guest
+                    <li><a href="{{ route('login') }}">ログイン</a></li>
+                    <li><a href="{{ route('user.pre_create') }}">新規登録</a></li>
+                    @endguest
                 </ul>
             </div><!--/.footer_inner-->
         </div><!--/.footer_under-->
