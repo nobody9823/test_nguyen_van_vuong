@@ -30,8 +30,21 @@ class ProjectSeeder extends Seeder
 
         Project::factory(30)->create()
             ->each(function (Project $project) {
-                $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->create());
-                $project->reports()->saveMany(Report::factory(rand(1, 10))->create());
+                $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->make());
+                $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
+                $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())->each(function (Plan $plan) {
+                    $plan->includedPayments()->attach(Payment::inRandomOrder()->first()->id);
+                });
+                $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
+                $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->create());
+                $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
+            });
+
+        // 公開中
+        Project::factory(10)->released()->create()
+            ->each(function (Project $project) {
+                $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->make());
+                $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())->each(function (Plan $plan) {
                     $plan->includedPayments()->attach(Payment::inRandomOrder()->first()->id);
                 });

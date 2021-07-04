@@ -39,7 +39,7 @@ class ProfileFactory extends Factory
             'phone_number' => $this->faker->numberBetween(10000000000, 99999999999),
             'birthday_is_published' => $this->faker->boolean(50),
             'gender_is_published' => $this->faker->boolean(50),
-            'image_url' => $this->faker->imageUrl,
+            'image_url' => 'public/sampleImage/my-page.svg',
             'inviter_code' => $this->faker->uuid,
         ];
     }

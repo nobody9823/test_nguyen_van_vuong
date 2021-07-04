@@ -1,6 +1,9 @@
-<div class="login_other">または</div>
+<div class="login_other" style="text-align: center;">または</div>
 
-<div class="login_social">
+<div class="login_social" 
+style="display: flex;
+       flex-direction: column;
+       align-items: center;">
     <a class="my-page_btn" id="google_login_link" href="{{ route('user.sns_login.redirect', 'google') }}">
         <span class="icon"><i class="fab fa-google"></i></span>
         Googleアカウントでログインする

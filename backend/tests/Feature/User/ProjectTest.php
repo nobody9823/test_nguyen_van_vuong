@@ -4,6 +4,7 @@ namespace Tests\Feature\User;
 
 use App\Models\Profile;
 use App\Models\Project;
+use App\Models\ProjectFile;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -20,9 +21,9 @@ class ProjectTest extends TestCase
 
         $this->users = User::factory()
             ->has(Profile::factory())
-            ->has(Project::factory()->state([
-                'release_status' => '掲載中'
-            ]))
+            ->has(Project::factory()->released()->has(
+                ProjectFile::factory()
+            ))
             ->count(10)->create();
     }
 

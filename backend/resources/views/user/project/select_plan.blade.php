@@ -198,7 +198,7 @@
                                     {{-- <div class="tab1_04"><input type="checkbox" id="aaa" class="ac_list_checks"><label for="aaa" class="checkbox-fan">このクレジットカード情報を保存する</label></div> --}}
 
                                     <div class="creca_icon">
-                                    <img src="img/credit-card_2.png"><img src="img/credit-card_1.png"><img src="img/credit-card_0.png"><img src="img/credit-card_5.png"><img src="img/credit-card_6.png">
+                                    <img src="{{ asset('image/credit-card_2.png') }}"><img src="{{ asset('image/credit-card_1.png') }}"><img src="{{ asset('image/credit-card_0.png') }}"><img src="{{ asset('image/credit-card_5.png') }}"><img src="{{ asset('image/credit-card_6.png') }}">
                                     </div>
 
                                     <div class="tab1_05">
@@ -370,7 +370,9 @@
                         <textarea name="comments" class="def_textarea" rows="6"></textarea>
                     </div><!--/form_item_row-->
                     <div class="def_btn">
-                        <button type="submit" class="disable-btn">確認画面へ</button>
+                        <button type="submit" class="disable-btn">
+                            <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">確認画面へ</p>
+                        </button>
                     </div>
 
                 </div><!--/.inner_item-->
