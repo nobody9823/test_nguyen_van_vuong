@@ -9,6 +9,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ConfirmPaymentRequest extends FormRequest
 {
@@ -34,7 +36,8 @@ class ConfirmPaymentRequest extends FormRequest
             'payjp_token' => [Rule::requiredIf($request->payment_way === "credit")],
             'plans' => ['required', new CheckPlanAmount($this)],
             'plans.*' => ['required', 'integer'],
-            'payment_way' => ['required', 'string'],
+            'total_amount' => ['required', 'integer'],
+            'display_added_price' => ['nullable', 'integer'],
             'first_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'last_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'first_name' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
@@ -72,6 +75,16 @@ class ConfirmPaymentRequest extends FormRequest
                 'birthday' => $birth_day->format('Y-m-d'),
             ]);
         }
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            redirect()
+            ->route('user.plan.selectPlans', ['project' => $this->route('project'), 'inviter_code' => $this->inviter_code ?? ''])
+            ->withErrors($validator)
+            ->withInput()
+        );
     }
 
     public function messages()

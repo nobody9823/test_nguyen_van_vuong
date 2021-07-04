@@ -1,3 +1,7 @@
+@extends('user.layouts.base')
+
+@section('content')
+
 @if ($errors->any())
 <div class="error-message text-center">
     <ul class="error-message-list">
@@ -7,92 +11,377 @@
     </ul>
 </div>
 @endif
-<form action="{{ route('user.plan.confirmPayment', ['project' => $project]) }}" class="h-adr" method="post">
-    @csrf
-    <input type="hidden" class="p-country-name" value="Japan">
-    <div class="plan-div">
-        <h2>応援プラン</h2>
+
+<div class="Assist-input_base">
+
+    <div class="as_header_01">
+        <div class="as_header_inner">
+            <div class="as_h_01">
+                <div class="as_h_01_01"><div class="as_h_01_dotted as_h_01_current"><div></div></div><div class="as_h_01_txt">入力</div></div>
+                <div class="as_h_01_02"><div class="as_h_01_dotted"><div></div></div><div class="as_h_01_txt">確認</div></div>
+                <div class="as_h_01_03"><div class="as_h_01_dotted"><div></div></div><div class="as_h_01_txt">完了</div></div>
+            </div><!--/-->
+
+            <div class="as_h_line"></div><!--/-->
+        </div><!--/as_header_inner-->
+    </div><!--/as_header-->
+
+    <div class="as_header_02 inner_item">リターンを選択し、必要情報を入力してください</div>
+    <form action="{{ route('user.plan.confirmPayment', ['project' => $project, 'inviter_code' => $inviter_code ?? '']) }}" class="h-adr" method="post">
+        @csrf
+        <input type="hidden" class="p-country-name" value="Japan">
+        <!--★選択時 ↓as_select_return　に　asr_currentを追加-->
         @foreach($project->plans as $plan)
-            <x-user.plan-card :plan="$plan" :project="$project" />
+        <div class="as_select_return asr_current">
+            <div class="def_inner inner_item">
+                <div class="wlr_64">
+                    <div class="wlr_64_L">
+                        <div class="as_img">
+                            <img class="" src="{{ Storage::url($plan->image_url) }}">
+                        </div>
+                    </div><!--/wlr_64_L-->
+
+                    <div class="wlr_64_R">
+                        <div class="as_01">
+                            <div class="as_check">
+                                <input type="checkbox" name="plan_ids[]" class="plan_ids ac_list_checks checkbox-fan" onChange="Plans.planIsChecked(this)" id="{{ $plan->id }}" value="{{ $plan->price }}">
+                                <label for="{{ $plan->id }}" class="checkbox-fan_02">{{ $plan->price }}円</label>
+                            </div>
+                        </div>
+
+                        <div class="as_02">
+                            <div class="cp_ipselect_02 cp_chb ">
+                                <select name="plans[{{$plan->id}}]amount[]" id="plan_amount_{{ $plan->id }}" onChange="Plans.planAmountIsChanged(this)" disabled>
+                                    @for($i = 1; $i <= $plan->limit_of_supporters; $i ++)
+                                        <option value="{{ $i }}">数量{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div><!--/-->
+
+                        <div class="as_tit">{{ $plan->title }}</div><!--/-->
+
+                        <div class="as_txt">{{ $plan->content }}</div>
+
+                        <div class="as_03">
+                            <div class="as_shien_nin">支援者 <span>{{ $plan->includedPayments->count() }}人</span></div>
+                            <div class="as_day">お届け予定 <span>{{ $plan->delivery_date }}</span></div>
+                        </div>
+                    </div><!--/wlr_64_R-->
+                </div><!--/wlr_64-->
+            </div><!--/def_inner-->
+        </div><!--/as_select_return-->
         @endforeach
-    </div>
-    <div>
-        <input type="radio" id="huey" name="payment_way" value="credit">
-        <label>Credit</label>
 
-        <input type="radio" id="dewey" name="payment_way" value="paypay">
-        <label>PayPay</label>
-    </div>
-    <div>
-        <div name="number_form" id="number-form" class="payjs-outer"></div>
-        <div name="expiry-form" id="expiry-form" class="payjs-outer"></div>
-        <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
-    </div>
+        {{-- <!--★通常時-->
+        <div class="as_select_return">
+            <div class="def_inner inner_item">
+                <div class="wlr_64">
+                    <div class="wlr_64_L">
+                        <div class="as_img"><img class="" src="img/test_img.svg"></div>
+                    </div><!--/wlr_64_L-->
+                    <div class="wlr_64_R">
+                        <div class="as_01">
+                            <div class="as_check"><input type="checkbox" id="fcb2_02" class="ac_list_checks"><label for="fcb2_02" class="checkbox-fan_02">2,500円<span>以上</span></label></div>
+                        </div>
+                        <div class="as_02">
+                            <div class="cp_ipselect_02 cp_chb ">
+                                <select required>
+                                    <option value="" hidden>数量 1</option>
+                                    <option value="1">数量 2</option>
+                                    <option value="2">数量 3</option>
+                                    <option value="3">数量 4</option>
+                                    <option value="4">数量 5</option>
+                                </select>
+                            </div>
+                        </div><!--/-->
+                        <div class="as_tit">タイトルタイトルタイトルタイトルタイトル</div><!--/-->
+                        <div class="as_txt">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</div>
 
-    <div>
-        <input type="hidden" name="payjp_token" id="payjp_token" value="">
-        <label for="">姓(全角)</label>
-        <input type="text" name="first_name">
-        <label for="">名(全角)</label>
-        <input type="text" name="last_name">
-        <label for="">セイ(全角)</label>
-        <input type="text" name="first_name_kana">
-        <label for="">メイ(全角)</label>
-        <input type="text" name="last_name_kana">
-        <label for="">メールアドレス</label>
-        <input type="email" name="email">
-        <label for="">性別</label>
-        <select name="gender">
-            <option value="select">選択</option>
-            <option value="男性">男性</option>
-            <option value="女性">女性</option>
-            <option value="その他">その他</option>
-        </select>
-        <label for="">電話番号(ハイフンなし)</label>
-        <input type="number" name="phone_number">
-        <label for="">郵便番号(ハイフンなし)</label>
-        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code">
-        <label for="">都道府県</label>
-        <select name="prefecture" class="p-region">
-                <option value="non_selected">選択してください</option>
-            @for($i = 1; $i <= 47; $i++)
-                <option value="{{ PrefectureHelper::getPrefectures()[$i] }}">{{ PrefectureHelper::getPrefectures()[$i] }}</option>
-            @endfor
-        </select>
-        <label>市町村</label>
-        <input type="text" name="city" class="p-locality" readonly /><br>
-        <label>番地</label>
-        <input type="text" name="block" class="p-street-address" /><br>
-        <label>建物名</label>
-        <input type="text" name="building" class="p-extended-address" />
-        <label for="birth_year" class="col-md-4 control-label">生年月日</label>
-        <select id="birth_year" class="form-control" name="birth_year">
-            <option value="">----</option>
-            @for ($i = 1980; $i <= 2005; $i++)
-            <option value="{{ $i }}"@if(old('birth_year') == $i) selected @endif>{{ $i }}</option>
-            @endfor
-        </select>
+                        <div class="as_03">
+                            <div class="as_shien_nin">支援者 <span>500人</span></div>
+                            <div class="as_day">お届け予定 <span>2021年6月下旬</span></div>
+                        </div>
+                    </div><!--/wlr_64_R-->
+                </div><!--/wlr_64-->
+            </div><!--/def_inner-->
+        </div><!--/as_select_return--> --}}
 
-        <select id="birth_month" class="form-control" name="birth_month">
-            <option value="">--</option>
-            @for ($i = 1; $i <= 12; $i++)
-            <option value="{{ $i }}"@if(old('birth_month') == $i) selected @endif>{{ $i }}</option>
-            @endfor
-        </select>
+        <div class=" def_inner" style="padding-bottom: 10px;">
+            <div class="as_i_tit inner_item">支援金額</div>
+        </div>
 
-        <select id="birth_day" class="form-control" name="birth_day">
-            <option value="">--</option>
-            @for ($i = 1; $i <= 31; $i++)
-            <option value="{{ $i }}"@if(old('birth_day') == $i) selected @endif>{{ $i }}</option>
-            @endfor
-        </select>
-        <label for="">備考欄</label>
-        <input type="text" name="remarks">
-        <label for="">任意コメント</label>
-        <input type="text" name="comments">
-    </div>
-    <button type="submit">決済する</button>
-</form>
+
+            <div class="def_outer_blue">
+            <div class=" def_inner inner_item">
+                <div class="as_i_01">
+                    <div class="as_i_01_L">
+                        <div>
+                            <div class="as_i_01_L_01">リターン合計金額</div>
+                            <div class="as_i_01_L_02 E-font">
+                                <input type="number" name="total_amount" id="total_amount" class="pay_input_count" readonly>
+                                <span>円</span></div>
+                        </div>
+                    </div><!--/.as_i_01_L-->
+
+                    <div class="as_i_01_R">
+                        <div>
+                            <div class="as_i_01_R_01">上乗せ支援で応援しよう！</div>
+                            <div class="as_i_01_R_02 ">
+                                    <input type="button" onClick="Plans.subTotalAmount()" class="pay_minus_btn" value="-">
+                                    <input type="number" name="display_added_price" id="display_added_price" readonly class="pay_input_count"><span class="pay_input_count_en">円</span>
+                                    <input type="button" onClick="Plans.addTotalAmount()" class="pay_plus_btn" value="+">
+                                        {{-- <select name="pay_select_count" class=" pay_select_count" style="display: none;">
+                                            <option value="100" selected>+100</option>
+                                            <option value="1000">+1000</option>
+                                            <option value="10000">+10000</option>
+                                        </select> --}}
+                            </div>
+                        </div>
+                    </div><!--/.as_i_01_R-->
+                </div><!--/.as_i_01-->
+
+            </div><!--/.inner_item-->
+            </div><!--/def_outer_blue-->
+
+
+            <div class=" def_inner inner_item">
+
+                {{-- <div class="as_i_02">
+                    <div class="as_i_tit">紹介者コード</div>
+                    <div class="as_i_txt">プロジェクトサポーターのから発行されたコードをご入力ください。</div>
+                    <input type="text" value="" class="def_input_50p" placeholder="クーポンをお持ちの方はご入力ください">
+                </div><!--/.as_i_02--> --}}
+
+                <div class="as_i_03">
+                    <div class="as_i_tit">お支払い方法をお選びください <span class="hissu_txt">必須</span></div>
+
+                    <div class="as_i_03_01">
+
+                        <div class="tab_container">
+                            <input class="radio-fan" type="radio" id="tab1" name="payment_way" value="credit" onChange="Plans.checkPaymentWay(this)">
+                            {{-- <input id="tab1" type="radio" name="tab_item" checked> --}}
+                            <label class="tab_item" for="tab1">クレジットカード</label>
+                            {{-- <input id="tab2" type="radio" name="tab_item">
+                            <label class="tab_item" for="tab2">コンビニ</label>
+                            <input id="tab3" type="radio" name="tab_item">
+                            <label class="tab_item" for="tab3">銀行振込</label>
+                            <input id="tab4" type="radio" name="tab_item">
+                            <label class="tab_item" for="tab4">キャリア決済</label> --}}
+                            <input class="radio-fan" type="radio" id="tab5" name="payment_way" value="paypay" onChange="Plans.checkPaymentWay(this)">
+                            {{-- <input id="tab5" type="radio" name="tab_item"> --}}
+                            <label class="tab_item" for="tab5">PayPay</label>
+                            {{-- <input id="tab6" type="radio" name="tab_item">
+                            <label class="tab_item" for="tab6">楽天ペイ</label> --}}
+
+                            <div class="tab_content" id="tab1_content">
+                                <div class="tab_content_description tab1_desc">
+                                    <div class="tab1_01">
+                                        <div class="tab1_01_01">クレジットカード番号</div>
+                                        <div name="number_form" id="number-form" class="payjs-outer"></div>
+                                    </div>
+
+                                    <div class="tab1_02">
+                                        <div class="tab1_02_01">セキュリティコード</div>
+                                        <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+                                        <div class="tooltip1">
+                                            <p>？</p>
+                                            <div class="description1">カードの裏面にある末尾3桁の数字</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab1_01">
+                                        <div class="tab1_01_01">有効期限</div>
+                                        <div name="expiry-form" id="expiry-form" class="payjs-outer"></div>
+                                    </div>
+
+                                    {{-- <div class="tab1_04"><input type="checkbox" id="aaa" class="ac_list_checks"><label for="aaa" class="checkbox-fan">このクレジットカード情報を保存する</label></div> --}}
+
+                                    <div class="creca_icon">
+                                    <img src="img/credit-card_2.png"><img src="img/credit-card_1.png"><img src="img/credit-card_0.png"><img src="img/credit-card_5.png"><img src="img/credit-card_6.png">
+                                    </div>
+
+                                    <div class="tab1_05">
+                                    有効期限が残り100日以上のクレジットカード（Visa/Mastercard JCB/Diners Club/American Express）でご利用いただけます。<br>
+                                    デビットカード・プリペイドカードの利用は推奨しておりません。<br>
+                                    利用される場合は注意事項を必ずご確認ください。<br>
+                                    このクレジットカード情報は当社では保持せず、決済代行会社であるGMOペイメントゲートウェイ株式会社にて安全に管理されます。
+                                    </div>
+
+
+                                </div>
+                            </div><!--/tab_content-->
+                            {{-- <div class="tab_content" id="tab2_content">
+                                <div class="tab_content_description">
+                                <p class="c-txtsp">タブ2の内容</p>
+                                </div>
+                            </div><!--/tab_content-->
+                            <div class="tab_content" id="tab3_content">
+                                <div class="tab_content_description">
+                                <p class="c-txtsp">タブ3の内容</p>
+                                </div>
+                            </div><!--/tab_content-->
+                            <div class="tab_content" id="tab4_content">
+                                <div class="tab_content_description">
+                                <p class="c-txtsp">タブ4の内容</p>
+                                </div>
+                            </div><!--/tab_content--> --}}
+                            <div class="tab_content" id="tab5_content">
+                                <div class="tab_content_description">
+                                <p class="c-txtsp">PayPayでのお支払い</p>
+                                </div>
+                            </div><!--/tab_content-->
+                            {{-- <div class="tab_content" id="tab6_content">
+                                <div class="tab_content_description">
+                                <p class="c-txtsp">タブ6の内容</p>
+                                </div>
+                            </div><!--/tab_content--> --}}
+
+                        </div><!--/tab_container-->
+                    </div><!--/.as_i_03_01-->
+
+                </div><!--/.as_i_03-->
+
+                <div class="as_i_04">
+                    <div class="as_i_tit">必要情報を入力してください</div>
+                    <div class="as_i_04_01">プロフィール情報</div>
+                    <div class="as_i_txt">「性別」と「生年月日」は公開されません。プロジェクトの集計データとして、プロジェクトオーナーへ提供されます。</div>
+
+                    <div class="as_i_04_02"><span>！</span>必ずお読みください</div>
+                    <div class="as_i_txt">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</div>
+
+                </div><!--/.as_i_04-->
+
+            </div><!--/.inner_item-->
+
+            <div class="def_outer_gray">
+                <div class=" def_inner inner_item">
+                    <input type="hidden" name="payjp_token" id="payjp_token" value="">
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>
+                        <input type="text" name="first_name" class="def_input_100p">
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
+                        <input type="text" name="last_name" class="def_input_100p">
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">セイ（全角）<span class="hissu_txt">必須</span></div>
+                        <input type="text" name="first_name_kana" class="def_input_100p">
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">メイ（全角）<span class="hissu_txt">必須</span></div>
+                        <input type="text" name="last_name_kana" class="def_input_100p">
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">メールアドレス<span class="hissu_txt">必須</span></div>
+                        <input type="email" name="email" class="def_input_100p">
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">性別<span class="hissu_txt">必須</span></div>
+                        <div class="cp_ipselect cp_normal">
+                            <select name="gender">
+                                <option value="select">選択</option>
+                                <option value="男性">男性</option>
+                                <option value="女性">女性</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">電話番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
+                        <input type="number" name="phone_number" class="def_input_100p">
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
+                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p">
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">都道府県<span class="hissu_txt">必須</span></div>
+                        <div class="cp_ipselect cp_normal">
+                            <select name="prefecture" class="p-region">
+                                    <option value="non_selected">選択してください</option>
+                                @for($i = 1; $i <= 47; $i++)
+                                    <option value="{{ PrefectureHelper::getPrefectures()[$i] }}">{{ PrefectureHelper::getPrefectures()[$i] }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">市区町村<span class="hissu_txt">必須</span></div>
+                        <input type="text" name="city" class="p-locality def_input_100p" readonly />
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
+                        <input type="text" name="block" class="p-street-address def_input_100p" />
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">建物名<span class="nini_txt">任意</span></div>
+                        <input type="text" name="building" class="p-extended-address def_input_100p" />
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">生年月日<span class="hissu_txt">必須</span></div>
+                        <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
+                            <select id="birth_year" class="form-control" name="birth_year">
+                                <option value="">----</option>
+                                @for ($i = 1980; $i <= 2005; $i++)
+                                <option value="{{ $i }}"@if(old('birth_year') == $i) selected @endif>{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
+                            <select id="birth_month" class="form-control" name="birth_month">
+                                <option value="">--</option>
+                                @for ($i = 1; $i <= 12; $i++)
+                                <option value="{{ $i }}"@if(old('birth_month') == $i) selected @endif>{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="cp_ipselect cp_normal" >
+                            <select id="birth_day" class="form-control" name="birth_day">
+                                <option value="">--</option>
+                                @for ($i = 1; $i <= 31; $i++)
+                                <option value="{{ $i }}"@if(old('birth_day') == $i) selected @endif>{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">備考欄<span class="nini_txt">任意</span>　<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
+                        <textarea name="remarks" class="def_textarea" rows="6"></textarea>
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">応援コメント<span class="nini_txt">任意</span>　<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
+                        <textarea name="comments" class="def_textarea" rows="6"></textarea>
+                    </div><!--/form_item_row-->
+                    <div class="def_btn">
+                        <button type="submit" class="disable-btn">確認画面へ</button>
+                    </div>
+
+                </div><!--/.inner_item-->
+            </div><!--/def_outer_gray-->
+
+        </div>
+    </form>
+</div>
+@endsection
+
+@section('script')
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script>
 window.onload = function(){
@@ -115,10 +404,11 @@ window.onload = function(){
     numberElement.mount('#number-form')
     expiryElement.mount('#expiry-form')
     cvcElement.mount('#cvc-form')
-    cvcElement.on('blur', function(event){
+    expiryElement.on('blur', function(event){
         payjp.createToken(numberElement)
         payjp.createToken(numberElement).then(function(r) {
             document.querySelector('#payjp_token').value = r.id;
         })
     })
 </script>
+@endsection

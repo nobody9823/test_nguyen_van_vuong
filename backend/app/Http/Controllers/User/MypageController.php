@@ -8,6 +8,7 @@ use App\Http\Requests\UserProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Models\Comment;
 use App\Models\Payment;
 use App\Models\Plan;
 use App\Models\PlanPaymentIncluded;
@@ -42,7 +43,7 @@ class MypageController extends Controller
     // 投稿コメント一覧
     public function contributionComments()
     {
-        $comments = Auth::user()->comments->load(['project.plans', 'reply.user']);
+        $comments = Comment::getOwnComments()->orderBy('created_at', 'DESC')->get();
         return view('user.mypage.comment', [
             'comments' => $comments,
         ]);

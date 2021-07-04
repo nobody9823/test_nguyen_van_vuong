@@ -13,7 +13,7 @@ use Exception;
 use App\Traits\UniqueToken;
 use Illuminate\Http\UploadedFile;
 
-class ProjectControllerTestForPayJp extends TestCase
+class ProjectControllerForPayJpTest extends TestCase
 {
     use RefreshDatabase;
 

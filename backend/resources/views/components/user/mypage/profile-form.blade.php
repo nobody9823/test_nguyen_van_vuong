@@ -1,108 +1,226 @@
+<div class="prof_page_R">
 @if(Request::get('input_type') === 'name')
-    <a href="{{ route('user.profile') }}">戻る</a>
-    <h3>ユーザー名</h3>
-    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
+    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="nameForm">
         @method('PATCH')
         @csrf
-        <label>ユーザー名</label>
-        <input name="name" type="text" placeholder="UserId" value="{{ old('name', Auth::user()->name) }}"/>
-        <button type="submit">変更する</button>
+        <div class="prof_edit_row">
+            <div class="prof_edit_01">ユーザー名<br><span>編集中</span></div>
+            <div class="prof_edit_editbox">
+                <input name="name" type="text" placeholder="UserId" value="{{ old('name', Auth::user()->name) }}"/>
+            </div>
+            <div class="prof_edit_03">
+                <a href="javascript:document.nameForm.submit()">更新</a>
+            </div>
+        </div>
+    </form>
+@elseif(Request::get('input_type') === 'image_url')
+    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="imageForm" enctype="multipart/form-data">
+        @method('PATCH')
+        @csrf
+        <div class="prof_edit_row">
+            <div class="prof_edit_01">プロフィール写真<br><span>編集中</span></div>
+            <div class="prof_edit_editbox">
+                <input type="file" id="files_input" name="image_url" accept=".png, .jpg, .jpeg, .gif"><br><span class="prof_edit_editbox_desc">ファイルサイズは1MB以下<br>ファイル形式は jpeg、gif、png 形式のみ可</span>
+            </div>
+            <div class="prof_edit_03">
+                <a href="javascript:document.imageForm.submit()">更新</a>
+            </div>
+        </div>
     </form>
 @elseif(Request::get('input_type') === 'email')
-    <a href="{{ route('user.profile') }}">戻る</a>
-    <h3>メールアドレス</h3>
-    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
+    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="mailForm">
         @method('PATCH')
         @csrf
-        <p>現在のメールアドレス</p>
-        <p>{{ Auth::user()->email }}</p>
-        <label>新しいメールアドレス※半角英数字のみ</label>
-        <input name="email" type="email"/>
-        <label>新しいメールアドレス（確認用）※コピー＆ペースト不可</label>
-        <input name="email_confirmation" type="email"/>
-        <button type="submit">変更する</button>
+        <div class="prof_edit_row">
+            <div class="prof_edit_01">メールアドレス<br><span>編集中</span></div>
+            <div class="prof_edit_editbox">
+                <div class="pee_tit pee_tit_first">現在のメールアドレス</div>
+                <div class="pee_now">{{ Auth::user()->email }}</div>
+
+                <div class="pee_tit">新しいメールアドレス<span class="prof_edit_editbox_desc">　半角英数字のみ</span></div>
+                <input name="email" type="email"/>
+
+                <div class="pee_tit">新しいメールアドレス（確認用）
+                    {{-- <span class="prof_edit_editbox_desc">　コピー＆ペースト不可</span> --}}
+                </div>
+                <input name="email_confirmation" type="email"/>
+            </div>
+            <div class="prof_edit_03">
+                <a href="javascript:document.mailForm.submit()">更新</a>
+            </div>
+        </div>
     </form>
 @elseif(Request::get('input_type') === 'password')
-    <a href="{{ route('user.profile') }}">戻る</a>
-    <h3>パスワード</h3>
-    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
+    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="passwordForm">
         @method('PATCH')
         @csrf
-        <a href="{{ route('user.forgot_password') }}">
-            パスワードを忘れた方はこちら
-        </a>
-        <label>現在のパスワード</label>
-        <input name="current_password" type="password"/>
-        <label>新しいパスワード※6文字以上の半角英数字記号</label>
-        <input name="new_password" type="password"/>
-        <label>新しいパスワード（確認用）※コピー＆ペースト不可</label>
-        <input name="new_password_confirmation" type="password"/>
-        <button type="submit">変更する</button>
+        <div class="prof_edit_row">
+            <div class="prof_edit_01">パスワード<br><span>編集中</span></div>
+            <div class="prof_edit_editbox">
+                <div class="pee_tit pee_tit_first">現在のパスワード
+                    <a href="{{ route('user.forgot_password') }}" class="pee_pass_link">
+                        現在のパスワードを忘れた方はこちらから
+                    </a>
+                </div>
+                <div class="pee_now">*********</div>
+
+                <div class="pee_tit">新しいパスワード<span class="prof_edit_editbox_desc">　半角英数字のみ</span></div>
+                <input name="new_password" type="password"/>
+
+                <div class="pee_tit">新しいパスワード（確認用）
+                    {{-- <span class="prof_edit_editbox_desc">　コピー＆ペースト不可</span> --}}
+                </div>
+                <input name="new_password_confirmation" type="password"/>
+
+            </div>
+            <div class="prof_edit_03">
+                <a href="javascript:document.passwordForm.submit()">更新</a>
+            </div>
+        </div>
     </form>
-@elseif(Request::get('input_type') === 'birthday')
-    <a href="{{ route('user.profile') }}">戻る</a>
-    <h3>生年月日</h3>
-    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
-        @method('PATCH')
-        @csrf
-        <label>年</label>
-        <select>
-            <option></option>
-        </select>
-        <label>月</label>
-        <select>
-            <option></option>
-        </select>
-        <label>日</label>
-        <select>
-            <option></option>
-        </select>
-        <label>公開設定</label>
-        <select>
-            <option></option>
-        </select>
-        <button type="submit">変更する</button>
-    </form>
+{{-- @elseif(Request::get('input_type') === 'birthday')
+<form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
+    @method('PATCH')
+    @csrf
+    <div class="prof_edit_row">
+        <div class="prof_edit_01">生年月日<br><span>編集中</span></div>
+        <div class="prof_edit_editbox pee_select_hori">
+            <div class="cp_ipselect cp_normal">
+                <select name="year">
+                    <option value="">年</option>
+                    <option value="1930">1930</option>
+                    <option value="2020">2020</option>
+                </select>
+            </div>
+            <div class="cp_ipselect cp_normal">
+                <select name="month">
+                    <option value="">月</option>
+                    <option value="1">1</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="cp_ipselect cp_normal">
+                <select name="day">
+                    <option value="">日</option>
+                    <option value="1">1</option>
+                    <option value="31">31</option>
+                </select>
+            </div>
+            <div class="cp_ipselect cp_normal">
+                <select name="koukai">
+                    <option value="yes">公開する</option>
+                    <option value="no">公開しない</option>
+                </select>
+            </div>
+        </div>
+        <div class="prof_edit_03">
+            <button type="submit">更新</button>
+        </div>
+    </div>
+</form> --}}
 @elseif(Request::get('input_type') === 'gender')
-    <a href="{{ route('user.profile') }}">戻る</a>
-    <h3>性別</h3>
+    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="genderForm">
+        @method('PATCH')
+        @csrf
+        <div class="prof_edit_row">
+			<div class="prof_edit_01">性別<br><span>編集中</span></div>
+			<div class="prof_edit_editbox pee_select_hori">
+				<div class="cp_ipselect cp_normal">
+					<select name="gender">
+                        <option value="女性">女性</option>
+						<option value="男性">男性</option>
+                        <option value="その他">その他</option>
+					</select>
+				</div>
+				<div class="cp_ipselect cp_normal">
+					<select name="gender_is_published">
+                        <option value="1">公開する</option>
+                        <option value="0">公開しない</option>
+                    </select>
+				</div>
+			</div>
+			<div class="prof_edit_03">
+                <a href="javascript:document.genderForm.submit()">更新</a>
+            </div>
+		</div>
+    </form>
+{{-- @elseif(Request::get('input_type') === 'introduction')
     <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
         @method('PATCH')
         @csrf
-        <label>性別</label>
-        <select name="gender">
-            <option value="男性">男性</option>
-            <option value="女性">女性</option>
-            <option value="その他">その他</option>
-        </select>
-        <label>公開設定</label>
-        <select name="gender_is_published">
-            <option value="">公開する</option>
-            <option value="">公開しない</option>
-        </select>
-        <button type="submit">変更する</button>
-    </form>
-@elseif(Request::get('input_type') === 'introduction')
-    <a href="{{ route('user.profile') }}">戻る</a>
-    <h3>自己紹介</h3>
-    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
-        @method('PATCH')
-        @csrf
-        <label>自己紹介</label>
-        <textarea name="introduction"></textarea>
-        <button type="submit">変更する</button>
-    </form>
+        <div class="prof_edit_row">
+			<div class="prof_edit_01">自己紹介<br><span>編集中</span></div>
+			<div class="prof_edit_editbox">
+				<textarea rows="8" name="introduction"></textarea>
+			</div>
+			<div class="prof_edit_03">
+                <button type="submit">更新</button>
+            </div>
+        </div>
+    </form> --}}
 @else
-    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" enctype="multipart/form-data">
-        @method('PATCH')
-        @csrf
-        <input type="file" name="image_url"/>
-        <button type="submit">プロフィール画像を編集する</button>
-    </form>
-    <a href="{{ route('user.profile', ['input_type' => 'name']) }}">ユーザー名</a>
-    <a href="{{ route('user.profile', ['input_type' => 'email']) }}">メールアドレス</a>
-    <a href="{{ route('user.profile', ['input_type' => 'password']) }}">パスワード</a>
-    <a href="{{ route('user.profile', ['input_type' => 'birthday']) }}">生年月日</a>
-    <a href="{{ route('user.profile', ['input_type' => 'gender']) }}">性別</a>
-    <a href="{{ route('user.profile', ['input_type' => 'introduction']) }}">自己紹介</a>
+    <div class="prof_edit_row">
+        <div class="prof_edit_01">ユーザー名</div>
+        <div class="prof_edit_02">{{ Auth::user()->name }}</div>
+        <div class="prof_edit_03">
+            編集
+            <a href="{{ route('user.profile', ['input_type' => 'name']) }}" class="cover_link"></a>
+        </div>
+    </div>
+    <div class="prof_edit_row">
+        <div class="prof_edit_01">プロフィール写真</div>
+        <div class="prof_edit_02"></div>
+        <div class="prof_edit_03">
+            編集
+            <a href="{{ route('user.profile', ['input_type' => 'image_url']) }}" class="cover_link"></a>
+        </div>
+    </div>
+    <div class="prof_edit_row">
+        <div class="prof_edit_01">メールアドレス</div>
+        <div class="prof_edit_02">{{ Auth::user()->email }}</div>
+        <div class="prof_edit_03">
+            編集
+            <a href="{{ route('user.profile', ['input_type' => 'email']) }}" class="cover_link"></a>
+        </div>
+    </div>
+    <div class="prof_edit_row">
+        <div class="prof_edit_01">パスワード</div>
+        <div class="prof_edit_02">********</div>
+        <div class="prof_edit_03">
+            編集
+            <a href="{{ route('user.profile', ['input_type' => 'password']) }}" class="cover_link"></a>
+        </div>
+    </div>
+    {{-- <div class="prof_edit_row">
+        <div class="prof_edit_01">URL</div>
+        <div class="prof_edit_02"></div>
+        <div class="prof_edit_03">編集<a href="★" class="cover_link"></a></div>
+    </div> --}}
+    {{-- <div class="prof_edit_row">
+        <div class="prof_edit_01">現在地</div>
+        <div class="prof_edit_02">設定されていません</div>
+        <div class="prof_edit_03">編集<a href="★" class="cover_link"></a></div>
+    </div> --}}
+    {{-- <div class="prof_edit_row">
+        <div class="prof_edit_01">生年月日</div>
+        <div class="prof_edit_02">設定されていません</div>
+        <div class="prof_edit_03">編集<a href="{{ route('user.profile', ['input_type' => 'birthday']) }}" class="cover_link"></a></div>
+    </div> --}}
+    <div class="prof_edit_row">
+        <div class="prof_edit_01">性別</div>
+        <div class="prof_edit_02">
+            @if(isset(Auth::user()->profile->gender))
+                {{ Auth::user()->profile->gender }}
+            @else
+                設定されていません
+            @endif
+        </div>
+        <div class="prof_edit_03">編集<a href="{{ route('user.profile', ['input_type' => 'gender']) }}" class="cover_link"></a></div>
+    </div>
+    {{-- <div class="prof_edit_row">
+        <div class="prof_edit_01">自己紹介</div>
+        <div class="prof_edit_02">設定されていません</div>
+        <div class="prof_edit_03">編集<a href="{{ route('user.profile', ['input_type' => 'introduction']) }}" class="cover_link"></a></div>
+    </div> --}}
 @endif
+</div>

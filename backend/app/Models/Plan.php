@@ -4,14 +4,16 @@ namespace App\Models;
 
 use App\Casts\ImageCast;
 use Auth;
+use App\Traits\SearchFunctions;
+use App\Traits\SortBySelected;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Http\Request;
+use Request;
 
 class Plan extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, SearchFunctions, SortBySelected;
 
     protected $fillable = [
         'title',
@@ -41,57 +43,33 @@ class Plan extends Model
         });
     }
 
-    // NOTE:scopeGetPlansByCompanyとscopeGetPlansByTalentの処理で、ログインユーザーと同じカンパニー・タレントidのプランを取得する処理を記載しているが、この処理は現状必要ない(もし、無くても正常に動作する)
-    // ※return $query->where('project_id', $project_id);   ・・・ 本来はこれだけでも問題ない。
-    // しかし、今後の仕様変更によりプロジェクト管理画面を経由せず、個別でプラン管理画面に画面遷移する事になった場合を見据え、そのまま記載している。
-    public function scopeGetPlansByCompany($query)
+    public function project()
     {
-        return $query->whereIn(
-            'project_id',
-            Project::select('id')
-                        ->whereIn(
-                            'talent_id',
-                            Talent::select('id')
-                            ->where('company_id', Auth::id())->get()
-                        )->get()
-        );
+        return $this->belongsTo('App\Models\Project');
     }
 
-    public function scopeGetPlansByTalent($query)
+    public function includedPayments()
     {
-        return $query->whereIn('project_id', Project::select('id')
-                    ->where('talent_id', Auth::id())->get());
+        return $this->belongsToMany('App\Models\Payment', 'App\Models\PlanPaymentIncluded');
     }
 
-    public function scopeSearchWord($query, $word)
+    //--------------local scope----------------//
+    public function scopeNarrowDownWithProject($query)
     {
-        return $query->where('title', 'like', "%$word%")
-                    ->orWhere('price', 'like', "%$word");
+        if (Request::get('project')) {
+            return $query->where('project_id', Request::get('project'));
+        }
     }
 
-    public function scopeSearchByWords($query, $words)
+    public function scopeSearch($query)
     {
-        if ($words[0] !== "") {
-            foreach ($words as $word) {
+        if ($this->getSearchWordInArray()) {
+            foreach ($this->getSearchWordInArray() as $word) {
                 $query->where(function ($query) use ($word) {
-                    $query->searchWord($word);
+                    $query->where('title', 'like', "%$word%")->orWhere('price', 'like', "%$word");
                 });
             }
         }
-        return $query;
-    }
-
-    public function scopeWithProjectId($query, $project_id)
-    {
-        if ($project_id !== null) {
-            $query->with('project')->where('project_id', $project_id);
-        }
-        return $query;
-    }
-
-    public function scopeSearchWordWithProjectId($query, $projects)
-    {
-        return $query->orWhereIn('project_id', $projects);
     }
 
     public function scopeSearchWithPrice($query, $min_price, $max_price)
@@ -123,16 +101,8 @@ class Plan extends Model
         }
         return $query;
     }
-
-    public function project()
-    {
-        return $this->belongsTo('App\Models\Project');
-    }
-
-    public function includedPayments()
-    {
-        return $this->belongsToMany('App\Models\Payment', 'App\Models\PlanPaymentIncluded');
-    }
+    //--------------local scope----------------//
+    
 
     public function getSupportedUsers()
     {
