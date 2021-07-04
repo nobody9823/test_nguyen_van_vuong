@@ -28,7 +28,7 @@
 <div id="branding">
 	<div id="header_01">
 		<div id="site-title">
-			<a href="★" title="★" rel="home">
+			<a href="{{ route('user.index') }}" title="FanReturn" rel="home">
 				<img class="h_logo_css" src="image/logo-color.svg">
 			</a>
 		</div>
@@ -37,16 +37,25 @@
 
 
 		<div id="wm_btn">
+            @auth
+            <div class="menuset_03 wm_login_btn">
+                <a href="{{ route('logout') }}" class="">
+					ログアウト
+				</a>
+			</div>
+            @endauth
+            @guest
 			<div class="menuset_03 wm_login_btn">
-				<a href="★" class="">
+                <a href="{{ route('login') }}" class="">
 					ログイン
 				</a>
 			</div>
 			<div class="menuset_03 wm_signup_btn">
-				<a href="★" class="">
+                <a href="{{ route('user.pre_create') }}" class="">
 					新規登録
 				</a>
 			</div>
+            @endguest
 		</div>
 
 		<input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
@@ -62,7 +71,7 @@
 <div class="drower-menu">
 <div class="drower-menu-list">
     <nav id="js-header__nav " class="l-header__nav navgation_inner">
-		<a href="★" title="★" rel="home" class="h_logo_css_sp">
+		<a href="{{ route('user.index') }}" title="FanReturn" rel="home" class="h_logo_css_sp">
 			<img src="image/logo-white.svg">
 		</a>
 
@@ -70,17 +79,17 @@
 		<ul id="js-global-nav" class="p-global-nav main-menu menu_base taso_menu">
 
 			<li class="menu-item nav_btn taso_li menuset_01">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="#" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">はじめる</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="#" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">さがす</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="#" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">ファンリターンとは</p>
 				</a>
 			</li>
@@ -97,57 +106,70 @@
 				<input type="checkbox" id="item_c_2" style="display:none;">
 				<input type="checkbox" id="ta_menu-2"><label for="ta_menu-2" class="taso_li_a_label"><span class="pd"><i class="fas fa-chevron-down"></i></span></label>
 					<ul class="taso_ul pri_W_b taso_ul_ko" style="background: #fff; padding: 10px;">
-						<li class="taso_li taso_li_ko ninki_tag_li">
-							<div><a href="★"># テキスト</a></div>
-							<div><a href="★"># テキスト</a></div>
-							<div><a href="★"># テキスト</a></div>
-							<div><a href="★"># テキスト</a></div>
-							<div><a href="★"># テキスト</a></div>
-						</li>
+                        {{-- NOTICE コンポーネントにしてタグを何かしら順にする必要がある？ --}}
+                        {{-- @foreach($popularyTags() as $tag) --}}
+                            <li class="taso_li taso_li_ko ninki_tag_li">
+                            <div><a href="#"># テキスト</a></div>
+                            </li>
+                        {{-- @endforeach --}}
 					</ul>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
+                {{-- NOTICE こちらは全てのタグを表示する --}}
+                {{-- @foreach($allTags() as $tag) --}}
+				<a href="#" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">全てのタグ</p>
 				</a>
+                {{-- @endforeach --}}
 			</li>
+            @auth
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">応援したプロジェクト</p>
+				<a href="{{ route('user.purchased_projects') }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">応援したプロジェクト</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="{{ route('user.payment_history') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">購入履歴</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="{{ route('user.liked_projects') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">お気に入り</p>
 				</a>
 			</li>
+            @endauth
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="{{ route('user.inquiry.create') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">お問い合わせ</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_02">
-				<a href="★" class="top_menu-1 nav_btn_link">
+				<a href="#" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">よくあるご質問・ヘルプ</p>
 				</a>
 			</li>
 
+            @auth
+            <li class="menu-item nav_btn taso_li menuset_03 login_btn">
+                <a href="{{ route('logout') }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">ログアウト</p>
+				</a>
+			</li>
+            @endauth
 
+            @guest
 			<li class="menu-item nav_btn taso_li menuset_03 login_btn">
-				<a href="★" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">ログイン</p>
+                <a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">ログイン</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_03 signup_btn">
-				<a href="★" class="top_menu-1 nav_btn_link">
-					<p>新規登録</p>
+                <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
+                    <p>新規登録</p>
 				</a>
 			</li>
+            @endguest
 
 			<li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
 				<i class="fas fa-search"></i><input type="text" name="search_word" placeholder="キーワードを検索">
@@ -170,9 +192,9 @@
 </style>
 
 <div class="pc-details-screen_header">
-	<div class="pdsh_item pdsh_current">プロジェクト<a href="★" class="cover_link"></a></div>
-	<div class="pdsh_item">活動レポート<a href="★" class="cover_link"></a></div>
-	<div class="pdsh_item">応援コメント<a href="★" class="cover_link"></a></div>
+	<div class="pdsh_item pdsh_current">プロジェクト<a href="#" class="cover_link"></a></div>
+	<div class="pdsh_item">活動レポート<a href="#" class="cover_link"></a></div>
+	<div class="pdsh_item">応援コメント<a href="#" class="cover_link"></a></div>
 </div>
 
 </header>
