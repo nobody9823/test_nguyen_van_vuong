@@ -39,7 +39,7 @@
                     <button class="btn btn-secondary" type="button" data-toggle="collapse"
                         data-target="#collapseUserProfile{{ $user->id }}" aria-expanded="true"
                         aria-controls="collapseUserProfile">
-                        設定 ▼
+                        詳細 ▼
                     </button>
                     <div class="collapse {{ $loop->index === 0?'show':null }}" id="collapseUserProfile{{$user->id}}">
                         <div class="card" style="border: none; background-color: #f8f9fa;">
@@ -82,15 +82,15 @@
                     <button class="btn btn-secondary" type="button" data-toggle="collapse"
                         data-target="#collapseAddress{{ $user->id }}" aria-expanded="true"
                         aria-controls="collapseAddress">
-                        設定 ▼
+                        住所 ▼
                     </button>
-                    <div class="collapse {{ $loop->index === 0?'show':null }}" id="collapseUserProfile{{$user->id}}">
+                    <div class="collapse {{ $loop->index === 0?'show':null }}" id="collapseAddress{{$user->id}}">
                         <div class="card" style="border: none; background-color: #f8f9fa;">
                             <button type="button" class="btn btn-sm btn-success mt-1" data-toggle="modal"
                                 data-target="#user_address{{ $user->id }}">
                                 表示
                             </button>
-                            <a href="{{ route('admin.address.edit', ['user' => $user,'address' => $user->address]) }}"
+                            <a href="{{ route('admin.address.edit', ['user' => $user]) }}"
                                 class="btn btn-sm btn-primary mt-1">編集</a>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <p>郵便番号:{{ optional($user->address)->postal_code }}</p>
-                                    <p>県庁所在地:{{ optional($user->address)->prefecture_id }}</p>
+                                    <p>都道府県:{{ optional($user->address)->prefecture }}</p>
                                     <p>住所1(市町村など):{{ optional($user->address)->city }}</p>
                                     <p>住所2(番地など):{{ optional($user->address)->block }}</p>
                                     <p>住所3(建物番号など):{{ optional($user->address)->building }}</p>

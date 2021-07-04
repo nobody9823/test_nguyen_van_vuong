@@ -44,7 +44,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('user', UserController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('user/password_reset/{user}', [UserController::class, 'passwordReset'])->name('user.password_reset');
     Route::prefix('user/{user}')->group(function () {
-        Route::resource('address', AddressController::class, ['only' => ['create', 'store','edit','update']]);
+        Route::get('address/edit', [AddressController::class,'edit'])->name('address.edit');
+        Route::resource('address', AddressController::class, ['only' => ['create', 'store','update']]);
         Route::resource('profile', ProfileController::class, ['only' => ['create', 'store','edit','update']]);
     });
 
