@@ -9,6 +9,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ConfirmPaymentRequest extends FormRequest
 {
@@ -73,6 +75,16 @@ class ConfirmPaymentRequest extends FormRequest
                 'birthday' => $birth_day->format('Y-m-d'),
             ]);
         }
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            redirect()
+            ->route('user.plan.selectPlans', ['project' => $this->route('project'), 'inviter_code' => $this->inviter_code ?? ''])
+            ->withErrors($validator)
+            ->withInput()
+        );
     }
 
     public function messages()

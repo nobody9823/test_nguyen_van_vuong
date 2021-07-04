@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\ImageCast;
 use App\Casts\HashMake;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -94,6 +95,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Payment');
     }
 
+    public function invitedPayments()
+    {
+        return $this->hasMany('App\Models\User', 'inviter_id', 'id');
+    }
+
     public function likedProjects()
     {
         return $this->belongsToMany('App\Models\Project', 'user_project_liked')
@@ -178,6 +184,37 @@ class User extends Authenticatable
         )->count();
     }
 
+    // inviter_idが一致するpaymentsの数を集計して降順に並び替え
+    public function scopeGetInvitersRankedByInvitedUsers($query, $project_id)
+    {
+        return $query->whereIn(
+            'id',
+            UserProjectSupported::query()->select('user_id')
+                ->whereIn('project_id', $project_id)
+        )->withCount('invitedPayments')
+        ->orderBy('invited_payments_count', 'DESC');
+    }
+
+    // inviter_idが一致するpaymentsの支援総額から降順に並び替え
+    public function scopeGetInvitersRankedByInvitedTotalAmount($query, $project_id)
+    {
+        return $query->whereIn(
+            'id',
+            UserProjectSupported::query()->select('user_id')
+                ->whereIn('project_id', $project_id)
+        )->withSum('invitedPayments', 'price')
+        ->orderBy('invited_payments_sum_price', 'DESC');
+    }
+
+    public function scopeGetInviterFromInviterCode($query, $inviter_code)
+    {
+        return $query->whereIn(
+            'id',
+            Profile::query()->select('user_id')->where(
+                'inviter_code', $inviter_code
+            )
+        );
+    }
     //--------------- local scopes -------------
 
 

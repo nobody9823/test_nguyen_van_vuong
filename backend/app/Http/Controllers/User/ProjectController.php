@@ -21,6 +21,7 @@ use App\Mail\User\ConsultProject;
 use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
 use Exception;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +46,8 @@ class ProjectController extends Controller
         $this->payment = $payment;
 
         $this->comment = $comment;
+
+        $this->inviter_code = null;
     }
 
     public function index()
@@ -91,9 +94,19 @@ class ProjectController extends Controller
         //
     }
 
-    public function show(Project $project)
+    public function show(Request $request, Project $project)
     {
-        return view('user.project.show', ['project' => $project->load([
+        if ($request->inviter) {
+            try {
+                $this->inviter_code = Crypt::decrypt($request->inviter);
+            } catch (DecryptException $e) {
+                Log::alert($e->getMessage(), $e->getTrace());
+                return redirect()->route('user.index')->withErrors('読み込みに失敗しました。管理者にお問い合わせください。');
+            }
+        }
+        return view('user.project.show', [
+            'inviter_code' => $this->inviter_code,
+            'project' => $project->load([
                 'projectFiles',
                 'plans',
                 'plans.includedPayments',
@@ -101,7 +114,8 @@ class ProjectController extends Controller
                 'reports' => function ($query) {
                     $query->orderByDesc('created_at');
                 },
-            ])]);
+            ]),
+        ]);
     }
 
     /**
@@ -144,10 +158,10 @@ class ProjectController extends Controller
      * @param Project
      * @return \Illuminate\Http\Response
      */
-    public function selectPlans(Project $project)
+    public function selectPlans(Request $request, Project $project)
     {
         $project->load('plans');
-        return view('user.project.select_plan', ['project' => $project]);
+        return view('user.project.select_plan', ['project' => $project, 'inviter_code' => $request->inviter_code]);
     }
 
     /**
@@ -160,11 +174,13 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $this->user->profile->fill($request->all())->save();
-            $this->user->address->fill($request->all())->save();
+            $this->user->saveProfile($request->all());
+            $this->user->saveAddress($request->all());
             $unique_token = UniqueToken::getToken();
+            $inviter = !is_null($request->inviter_code) ? User::getInviterFromInviterCode($request->inviter_code)->first() : null;
             $payment = $this->payment->fill(array_merge(
                 [
+                    'inviter_id' => !is_null($request->inviter_code) ? $inviter->id : null,
                     'price' => $request->total_amount,
                     'message_status' => "ステータスなし",
                     'merchant_payment_id' => $unique_token,
@@ -183,6 +199,7 @@ class ProjectController extends Controller
             DB::rollback();
             throw $e;
         }
+        Auth::user()->load(['profile', 'address']);
         return view('user.project.confirm_plan', ['project' => $project, 'payment' => $payment, 'qr_code' => $qr_code]);
     }
 
