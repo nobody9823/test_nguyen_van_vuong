@@ -41,7 +41,7 @@ class ProjectSeeder extends Seeder
             });
 
         // 公開中
-        Project::factory(30)->released()->create()
+        Project::factory(10)->released()->create()
             ->each(function (Project $project) {
                 $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());

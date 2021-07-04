@@ -49,6 +49,7 @@ class ProjectFactory extends Factory
             return [
                 'start_date' => Carbon::yesterday(),
                 'end_date' => Carbon::now()->addMonth(),
+                'release_status' => '掲載中',
             ];
         });
     }
