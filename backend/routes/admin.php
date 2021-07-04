@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\RepliesToSupporterCommentController;
-use App\Http\Controllers\Admin\SupporterCommentController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\TemporaryCompanyController;
 use App\Http\Controllers\Admin\TemporaryTalentController;

@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use Illuminate\Http\Request;
-use App\Models\SupporterComment;
+use App\Models\Comment;
 
-class SupporterCommentController extends Controller
+class CommentController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -17,7 +17,7 @@ class SupporterCommentController extends Controller
      */
     public function index()
     {
-        $supporter_comments = SupporterComment::with(['project', 'user', 'repliesToSupporterComment'])
+        $supporter_comments = Comment::with(['project', 'user', 'repliesToSupporterComment'])
                             ->orderBy('created_at', 'DESC')
                             ->paginate(10);
 
@@ -88,14 +88,14 @@ class SupporterCommentController extends Controller
     public function destroy(SupporterComment $supporter_comment)
     {
         $supporter_comment->delete();
-        return redirect()->action([SupporterCommentController::class, 'index'])
+        return redirect()->action([CommentController::class, 'index'])
                         ->with('flash_message', "支援者コメントの削除が完了しました");
     }
 
     public function search(SearchRequest $request)
     {
         $supporter_comments =
-            SupporterComment::searchByWords($request->getArrayWords())
+            Comment::searchByWords($request->getArrayWords())
                             ->searchByProject($request->project_id)
                             ->searchWithPostDates($request->from_date, $request->to_date)
                             ->with(['project', 'user', 'repliesToSupporterComment'])
