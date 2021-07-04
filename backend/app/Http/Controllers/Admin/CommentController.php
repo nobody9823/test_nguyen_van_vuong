@@ -17,11 +17,12 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $supporter_comments = Comment::with(['project', 'user', 'repliesToSupporterComment'])
+        $comments = Comment::with(['project', 'payment.user', 'reply'])
                             ->orderBy('created_at', 'DESC')
                             ->paginate(10);
+                            // dd($comments);
 
-        return view('admin.supporter_comment.index', compact('supporter_comments'));
+        return view('admin.supporter_comment.index', compact('comments'));
     }
 
     /**
