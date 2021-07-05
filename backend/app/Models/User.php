@@ -103,7 +103,7 @@ class User extends Authenticatable
 
     public function invitedPayments()
     {
-        return $this->hasMany('App\Models\User', 'inviter_id', 'id');
+        return $this->hasMany('App\Models\Payment', 'inviter_id', 'id');
     }
 
     public function likedProjects()
@@ -196,9 +196,10 @@ class User extends Authenticatable
     {
         return $query->whereIn(
             'id',
-            UserProjectSupported::query()->select('user_id')
-                ->whereIn('project_id', $project_id)
-        )->withCount('invitedPayments')
+            UserProjectSupported::where('project_id', $project_id)->pluck('user_id')->toArray()
+        )->withCount(['invitedPayments' => function ($query) use ($project_id) {
+            $query->filterByProjectId($project_id);
+        }])
         ->orderBy('invited_payments_count', 'DESC');
     }
 
@@ -207,9 +208,10 @@ class User extends Authenticatable
     {
         return $query->whereIn(
             'id',
-            UserProjectSupported::query()->select('user_id')
-                ->whereIn('project_id', $project_id)
-        )->withSum('invitedPayments', 'price')
+            UserProjectSupported::where('project_id', $project_id)->pluck('user_id')->toArray()
+        )->withSum(['invitedPayments' => function ($query) use ($project_id) {
+            $query->filterByProjectId($project_id);
+        }], 'price')
         ->orderBy('invited_payments_sum_price', 'DESC');
     }
 
@@ -217,7 +219,7 @@ class User extends Authenticatable
     {
         return $query->whereIn(
             'id',
-            Profile::query()->select('user_id')->where(
+            Profile::select('user_id')->where(
                 'inviter_code',
                 $inviter_code
             )

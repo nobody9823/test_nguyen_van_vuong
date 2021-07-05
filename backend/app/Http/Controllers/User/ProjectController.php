@@ -178,8 +178,9 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $this->user->saveProfile($request->all());
+            $this->user->saveProfile($request->except(['inviter_code']));
             $this->user->saveAddress($request->all());
+            $this->user->load(['profile', 'address']);
             $unique_token = UniqueToken::getToken();
             $inviter = !is_null($request->inviter_code) ? User::getInviterFromInviterCode($request->inviter_code)->first() : null;
             $payment = $this->payment->fill(array_merge(
@@ -203,7 +204,6 @@ class ProjectController extends Controller
             DB::rollback();
             throw $e;
         }
-        Auth::user()->load(['profile', 'address']);
         return view('user.project.confirm_plan', ['project' => $project, 'payment' => $payment, 'qr_code' => $qr_code]);
     }
 
@@ -405,13 +405,6 @@ class ProjectController extends Controller
     public function support(Project $project)
     {
         $this->authorize('checkIsFinishedPayment', $project);
-        if (!isset(Auth::user()->profile->inviter_code)) {
-            $value = [
-                'inviter_code' => Str::uuid()
-            ];
-            Auth::user()->saveProfile($value);
-            Auth::user()->load('profile');
-        }
         $encrypted_code = Crypt::encrypt(Auth::user()->profile->inviter_code);
         $invitation_url = route('user.project.show', ['project' => $project, 'inviter' => $encrypted_code]);
         Auth::user()->supportedProjects()->attach($project->id);
