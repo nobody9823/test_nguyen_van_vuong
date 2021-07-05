@@ -19,7 +19,7 @@ use Carbon\Carbon;
                     <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
                     <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
                     <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
-                    @if ($projects->first()->user()->find(Auth::id()) === null)
+                    @if ($user_liked->where('project_id',$projects->first()->id)->isEmpty())
                     <i class="far fa-heart"></i>
                     @else
                     <i class="fas fa-heart"></i>
@@ -61,7 +61,7 @@ use Carbon\Carbon;
                         <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         <div class="okini_link liked_project" id="{{ $project->id }}">
-                        @if ($projects->first()->user()->find(Auth::id()) === null)
+                        @if ($user_liked->where('project_id',$project->id)->isEmpty())
                         <i class="far fa-heart"></i>
                         @else
                         <i class="fas fa-heart"></i>
@@ -354,7 +354,7 @@ use Carbon\Carbon;
                     <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
                     <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>                    
                     <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
-                        @if ($projects->first()->user()->find(Auth::id()) === null)
+                        @if ($user_liked->where('project_id',$projects->first()->id)->isEmpty())
                         <i class="far fa-heart"></i>
                         @else
                         <i class="fas fa-heart"></i>
@@ -401,7 +401,7 @@ use Carbon\Carbon;
                         <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         <div class="okini_link liked_project" id="{{ $project->id }}">
-                        @if ($projects->first()->user()->find(Auth::id()) === null)
+                        @if ($user_liked->where('project_id',$project->id)->isEmpty())
                         <i class="far fa-heart"></i>
                         @else
                         <i class="fas fa-heart"></i>
@@ -468,7 +468,7 @@ use Carbon\Carbon;
                         <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         <div class="okini_link liked_project" id="{{ $project->id }}">
-                        @if ($projects->first()->user()->find(Auth::id()) === null)
+                        @if ($user_liked->where('project_id',$project->id)->isEmpty())
                         <i class="far fa-heart"></i>
                         @else
                         <i class="fas fa-heart"></i>
@@ -545,15 +545,13 @@ use Carbon\Carbon;
             data: {'project_id': projectId },
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         })
-        .then((res) => {
-            console.log(res);
-            if(res == "登録"){
+        .then((response) => {
+            console.log(response);
+            if(response == "登録"){
                 el.children('i').attr('class', 'fas fa-heart');
-                alert("登録");
-            } else if(res == "削除"){
+            } else if(response == "削除"){
                 el.children('i').attr('class', 'far fa-heart');
-                alert("登録解除");
-            } else if (res == "未ログイン") {
+            } else if (response == "未ログイン") {
                 alert("ログインもしくは会員登録をしてください");
             } else {
                 alert("エラーが起こりました。");

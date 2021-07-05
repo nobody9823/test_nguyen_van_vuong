@@ -54,9 +54,10 @@ class ProjectController extends Controller
     public function index()
     {
         $tags = Tag::all();
+        $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
         $projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
         ->inRandomOrder()->takeWithRelations(5)->get();
-
+        
         // ランキング(支援総額順)
         $ranking_projects = Project::getReleasedProject()->seeking()->orderByFundingAmount()
         ->takeWithRelations(5)->skip(1)->get();
@@ -93,6 +94,7 @@ class ProjectController extends Controller
             // 'nearly_open_projects',
             'ranking_projects',
             'tags',
+            'user_liked',
             'projects'
         ));
     }
