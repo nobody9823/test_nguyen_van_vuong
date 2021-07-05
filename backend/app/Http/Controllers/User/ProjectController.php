@@ -224,12 +224,12 @@ class ProjectController extends Controller
                     }
                 });
             $this->plan->updatePlansByIds($plans, $validated_request['plans']);
+            $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
             DB::commit();
         } catch (\Exception $e){
             DB::rollback();
             throw $e;
         }
-        $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
         if ($validated_request['payment_way'] === 'credit'){
             return redirect()->action([ProjectController::class, 'paymentForPayJp'], ['project' => $project, 'payment' => $payment]);
         } else if ($validated_request['payment_way'] === 'paypay'){
