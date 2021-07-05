@@ -406,7 +406,7 @@ window.onload = function(){
     numberElement.mount('#number-form')
     expiryElement.mount('#expiry-form')
     cvcElement.mount('#cvc-form')
-    expiryElement.on('blur', function(event){
+    expiryElement.on('change', function(event){
         payjp.createToken(numberElement)
         payjp.createToken(numberElement).then(function(r) {
             document.querySelector('#payjp_token').value = r.id;
