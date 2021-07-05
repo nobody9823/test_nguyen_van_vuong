@@ -58,31 +58,35 @@ class ProjectController extends Controller
         ->inRandomOrder()->takeWithRelations(5)->get();
 
         // 応援プロジェクト（目標金額の高い順）
-        $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
-            ->inRandomOrder()->takeWithRelations(9)->get();
+        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        //     ->inRandomOrder()->takeWithRelations(9)->get();
+
+        // 応援プロジェクト（目標金額の高い順）
+        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        //     ->inRandomOrder()->takeWithRelations(9)->get();
 
         // 最新のプロジェクト
-        $new_projects = Project::getReleasedProject()->seeking()->orderBy('created_at', 'DESC')
-            ->takeWithRelations(9)->get();
+        // $new_projects = Project::getReleasedProject()->seeking()->orderBy('created_at', 'DESC')
+        //     ->takeWithRelations(9)->get();
 
         // 人気のプロジェクト
-        $popularity_projects = Project::getReleasedProject()->seeking()->ordeyByLikedUsers()
-            ->takeWithRelations(9)->get();
+        // $popularity_projects = Project::getReleasedProject()->seeking()->ordeyByLikedUsers()
+        //     ->takeWithRelations(9)->get();
 
         // 募集終了が近いプロジェクト
-        $nearly_deadline_projects = Project::getReleasedProject()->seeking()->orderByNearlyDeadline()
-            ->inRandomOrder()->takeWithRelations(9)->get();
+        // $nearly_deadline_projects = Project::getReleasedProject()->seeking()->orderByNearlyDeadline()
+        //     ->inRandomOrder()->takeWithRelations(9)->get();
 
         // もうすぐ公開のプロジェクト
-        $nearly_open_projects = Project::getReleasedProject()->orderByNearlyOpen()
-            ->inRandomOrder()->takeWithRelations(9)->get();
+        // $nearly_open_projects = Project::getReleasedProject()->orderByNearlyOpen()
+        //     ->inRandomOrder()->takeWithRelations(9)->get();
 
         return view('user.index', compact(
-            'new_projects',
-            'cheer_projects',
-            'popularity_projects',
-            'nearly_deadline_projects',
-            'nearly_open_projects',
+            // 'new_projects',
+            // 'cheer_projects',
+            // 'popularity_projects',
+            // 'nearly_deadline_projects',
+            // 'nearly_open_projects',
             'tags',
             'projects'
         ));
