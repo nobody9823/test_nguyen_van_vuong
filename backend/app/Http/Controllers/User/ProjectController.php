@@ -57,6 +57,9 @@ class ProjectController extends Controller
         $projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
         ->inRandomOrder()->takeWithRelations(5)->get();
 
+        // ランキング(支援総額順)
+        $ranking_projects = Project::getReleasedProject()->seeking()->inRandomOrder()->takeWithRelations(9)->get();
+
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
         //     ->inRandomOrder()->takeWithRelations(9)->get();
@@ -87,6 +90,7 @@ class ProjectController extends Controller
             // 'popularity_projects',
             // 'nearly_deadline_projects',
             // 'nearly_open_projects',
+            'ranking_projects',
             'tags',
             'projects'
         ));
