@@ -152,8 +152,9 @@ class Project extends Model
         // projectsテーブルにplan_payment_includedテーブルを結合する
         ->join('plans', 'projects.id', '=', 'plans.project_id')
         ->join('plan_payment_included', 'plans.id', '=', 'plan_payment_included.plan_id')
+        ->join('payments', 'plan_payment_included.payment_id', '=', 'payments.id')
         // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('SUM(plans.price) as funding_amount'))
+        ->select('plans.project_id','projects.*',DB::raw('SUM(payments.price) as funding_amount'))
         ->groupBy('plans.project_id')->orderBy('funding_amount','DESC');
     }
 
