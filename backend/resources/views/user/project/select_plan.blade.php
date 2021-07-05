@@ -17,13 +17,20 @@
         @endforeach
     </div>
     <div>
-        <input type="radio" id="huey" name="payment_way" value="credit">
-        <label>Credit</label>
-
-        <input type="radio" id="dewey" name="payment_way" value="paypay">
-        <label>PayPay</label>
+        <label for="">お支払額</label>
+        <input type="number" name="total_amount" id="total_amount" readonly><br>
+        <input type="number" name="display_added_price" id="display_added_price" readonly>
+        <button type="button" onClick="Plans.addTotalAmount()">+</button>
+        <button type="button" onClick="Plans.subTotalAmount()">-</button>
     </div>
     <div>
+        <input type="radio" id="huey" name="payment_way" value="credit" onChange="Plans.checkPaymentWay(this)">
+        <label>Credit</label>
+
+        <input type="radio" id="dewey" name="payment_way" value="paypay" onChange="Plans.checkPaymentWay(this)">
+        <label>PayPay</label>
+    </div>
+    <div id="credit_forms">
         <div name="number_form" id="number-form" class="payjs-outer"></div>
         <div name="expiry-form" id="expiry-form" class="payjs-outer"></div>
         <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
