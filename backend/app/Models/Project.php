@@ -148,14 +148,13 @@ class Project extends Model
 
     public function scopeOrderByFundingAmount($query)
     {
-        $query
+        return $query
         // projectsテーブルにplan_payment_includedテーブルを結合する
         ->join('plans', 'projects.id', '=', 'plans.project_id')
         ->join('plan_payment_included', 'plans.id', '=', 'plan_payment_included.plan_id')
         // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
         ->select('plans.project_id','projects.*',DB::raw('SUM(plans.price) as funding_amount'))
         ->groupBy('plans.project_id')->orderBy('funding_amount','DESC');
-        return $query;
     }
 
     public function scopeOrderByNumberOfSupporters($query)
