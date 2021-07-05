@@ -1232,7 +1232,7 @@ input[name="tab_item"] {
 .pay_input_count { width: 230px; height: 47px; padding: 10px; border: solid 1px #DBDBDB; border-radius: 4px; font-size: 2.0rem; font-weight: bold; text-align: right;}
 .pay_input_count_en{font-size: 1.6rem; font-weight: bold; padding: 0 0 0 5px;}
 .pay_select_count{ padding: 12px 8px; border-radius: 5px; border: solid 1px #00AEBD; color: #00AEBD; margin: 0 0 0 8px; }
-.pay_minus_btn{ font-size: 2.5rem; font-weight: bold; color: #fff; background: #00AEBD; padding: 0 7px; border:none; border-radius: 50%; margin: 0 10px 0 0;  }
+.pay_minus_btn{ font-size: 2.5rem; font-weight: bold; color: #fff; background: #00AEBD; padding: 0 10px; border:none; border-radius: 50%; margin: 0 10px 0 0;  }
 .pay_plus_btn{ font-size: 2.5rem; font-weight: bold; color: #fff; background: #00AEBD; padding: 0 7px; border:none; border-radius: 50%; margin: 0 0 0 10px;  }
 
 .as_i_02{ margin-bottom: 50px;}
