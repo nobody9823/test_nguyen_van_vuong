@@ -1064,6 +1064,7 @@ input[type=radio]:checked + .radio-fan::after {
 	font-family: "Font Awesome 5 Free";
 	content: '\f0dc';
 	font-weight: 900;
+	pointer-events: none;
 }
 .cp_ipselect_02.cp_chb select {
 	padding: 8px 38px 8px 8px;
