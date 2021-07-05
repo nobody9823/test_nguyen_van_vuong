@@ -675,6 +675,7 @@ input[type=radio]:checked + .radio-fan::after {
 	content: '\f0dc';
 	font-weight: 900;
 	color: #DBDBDB;
+	pointer-events: none;
 }
 .cp_ipselect.cp_normal select {
 	padding: 8px 38px 8px 8px;
