@@ -72,6 +72,10 @@
                                     <p>性別:{{ optional($user->profile)->gender }}</p>
                                     <p>公開状態:{{ optional($user->profile)->gender_is_published ?'公開中':'非公開中' }}</p>
                                     <p>紹介文:{{ optional($user->profile)->introduction }}</p>
+                                    <p>画像:
+                                        <img style="max-height:5vw;"
+                                            src="{{ Storage::url(optional($user->profile)->image_url) }}">
+                                    </p>
                                     <p></p>
                                 </div>
                             </div>

@@ -10,7 +10,7 @@
                 <div class="card-header">{{ $user->name }}さんのプロフィール編集</div>
                 <div class="card-body">
                     <form action="{{ route('admin.profile.update', ['user' => $user,'profile' => $user->profile]) }}"
-                        method="POST">
+                        enctype="multipart/form-data" method="POST">
                         @method('PATCH')
                         @csrf
                         <x-admin.profile.form :user="$user" />

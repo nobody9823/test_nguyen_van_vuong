@@ -27,7 +27,7 @@ class ProfileRequest extends FormRequest
     {
         $expire_date = Carbon::now()->format('Y-m-d');
         return [
-            'image' =>['nullable', 'image'],
+            'image_url' =>['nullable', 'image'],
             'first_name_kana' =>['required', 'string'],
             'last_name_kana' =>['required', 'string'],
             'first_name' =>['required', 'string'],

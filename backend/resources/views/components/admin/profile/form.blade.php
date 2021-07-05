@@ -69,6 +69,15 @@
     <input type="text" name="postal_code" class="form-control"
         value="{{ old('postal_code', optional($user->profile)->postal_code) }}" required>
 </div> --}}
+<div class="form-group">
+    <label for="imageUploader" class="pr-4">画像(現在の画像から更新されます)</label><br>
+    <input type="file" name="image_url" id="imageUploader" value="{{ old('image_url') }}"><br>
+    @if(isset(optional($user->profile)->image_url))
+    <div>
+        <img style="max-height:200px; max-width:300px;" src="{{ Storage::url(optional($user->profile)->image_url) }}">
+    </div>
+    @endif
+</div>
 
 @if($user->profile)
 <button type="submit" class="btn btn-primary">更新</button>
@@ -76,18 +85,29 @@
 <button type="submit" class="btn btn-primary">作成</button>
 @endif
 
-{{--
-<div class="form-group">
-    <label>都道府県</label>
-    <div class="dropdown">
-        <select class='form-control' name="prefecture" required>
-            <option value="">選択してください</option>
-            @foreach(PrefectureHelper::getPrefectures() as $key => $value)
-            <option value="{{ $value }}"
-{{ old('prefecture', optional($user->profile)->prefecture) === $value ? 'selected' : ''}}>
-{{ $value }}
-</option>
-@endforeach
-</select>
-</div>
-</div> --}}
+<script>
+    $(function() {
+  $('#imageUploader').after('<span id="uploadedImage"></span>');
+
+  // アップロードするファイルを選択
+  $('#imageUploader').change(function() {
+    var file = $(this).prop('files')[0];
+
+    // 画像以外は処理を停止
+    if (! file.type.match('image.*')) {
+      // クリア
+      $(this).val('');
+      $('#uploadedImage').html('');
+      return;
+    }
+
+    // 画像表示
+    var reader = new FileReader();
+    reader.onload = function() {
+      var img_src = $('<img>').attr('src', reader.result).attr('style','height:200px;');
+      $('#uploadedImage').html(img_src);
+    }
+    reader.readAsDataURL(file);
+  });
+});
+</script>

@@ -9,7 +9,8 @@
             <div class="card">
                 <div class="card-header">{{ $user->name }}さんのプロフィール作成</div>
                 <div class="card-body">
-                    <form action="{{ route('admin.profile.store', ['user' => $user]) }}" method="POST">
+                    <form action="{{ route('admin.profile.store', ['user' => $user]) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <x-admin.profile.form :user="$user" />
                     </form>
