@@ -165,7 +165,7 @@ class ProjectController extends Controller
     public function selectPlans(Request $request, Project $project)
     {
         $project->load('plans');
-        return view('user.project.select_plan', ['project' => $project, 'inviter_code' => $request->inviter_code]);
+        return view('user.project.select_plan', ['project' => $project, 'inviter_code' => $request->inviter_code, 'user' => $this->user]);
     }
 
     /**
