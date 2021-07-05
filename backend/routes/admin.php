@@ -46,7 +46,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::prefix('user/{user}')->group(function () {
         Route::get('address/edit', [AddressController::class,'edit'])->name('address.edit');
         Route::resource('address', AddressController::class, ['only' => ['create', 'store','update']]);
-        Route::resource('profile', ProfileController::class, ['only' => ['create', 'store','edit','update']]);
+        Route::get('profile/edit', [ProfileController::class,'edit'])->name('profile.edit');
+        Route::resource('profile', ProfileController::class, ['only' => ['create', 'store','update']]);
     });
 
     //プロフィール管理
