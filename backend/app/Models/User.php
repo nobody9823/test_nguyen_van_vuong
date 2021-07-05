@@ -64,9 +64,17 @@ class User extends Authenticatable
             $user->bankAccount()->delete();
             $user->profile()->delete();
 
+            $project_ids = Project::where('user_id', $user->id)->pluck('id')->toArray();
+            ProjectFile::whereIn('project_id', $project_ids)->delete();
+            Project::destroy($project_ids);
+
             // 中間テーブルの削除
             UserProjectLiked::where('user_id', $user->id)
                 ->update(['deleted_at' => Carbon::now()]);
+            UserProjectSupported::where('user_id', $user->id)
+                ->update(['deleted_at' => Carbon::now()]);
+            Payment::where('inviter_id', $user->id)
+                ->update(['inviter_id' => null]);
             $payment_ids = $user->payments()->pluck('id');
             $comment_ids = Comment::whereIn('payment_id', $payment_ids)->pluck('id')->toArray();
             Reply::whereIn('comment_id', $comment_ids)->delete();
@@ -77,15 +85,11 @@ class User extends Authenticatable
         });
     }
 
-    public function supportComments()
-    {
-        return $this->hasMany('App\Models\SupporterComment');
-    }
-
-    public function userSupporterCommentLiked()
-    {
-        return $this->belongsToMany('App\Models\SupporterComment', 'App\Models\UserSupporterCommentLiked');
-    }
+    // NOTICE デザインにないのでコメントアウト
+    // public function userCommentLiked()
+    // {
+    //     return $this->belongsToMany('App\Models\Comment', 'App\Models\UserCommentLiked');
+    // }
 
     public function projects()
     {
