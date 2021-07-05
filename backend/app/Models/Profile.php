@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\ImageCast;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -38,5 +39,38 @@ class Profile extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function getBirthDay()
+    {
+        $date = new Carbon($this->birthday);
+        return $date;
+    }
+
+    public function getYearOfBirth()
+    {
+        if ($this->birthday !== null)
+        {
+            return $this->getBirthDay()->year;
+        }
+        return null;
+    }
+
+    public function getMonthOfBirth()
+    {
+        if ($this->birthday !== null)
+        {
+            return $this->getBirthDay()->month;
+        }
+        return null;
+    }
+
+    public function getDayOfBirth()
+    {
+        if ($this->birthday !== null)
+        {
+            return $this->getBirthDay()->day;
+        }
+        return null;
     }
 }
