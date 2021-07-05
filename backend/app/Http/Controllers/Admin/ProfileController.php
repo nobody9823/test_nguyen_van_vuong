@@ -43,7 +43,12 @@ class ProfileController extends Controller
     {
         $profile = new Profile();
         $user->profile()->save($profile->fill($request->all()));
-        return redirect()->action([UserController::class,'index'])->with('flash_message', '住所の作成が完了しました。');
+        // ユーザー作成から遷移してきた場合、住所入力画面へ
+        if ($request->from_user_store) {
+            return redirect()->action([AddressController::class,'create'], ['user' => $user])->with('flash_message', '住所の作成が完了しました。最後に住所の入力をしてください。');
+        } else {
+            return redirect()->action([UserController::class,'index'])->with('flash_message', '住所の作成が完了しました。');
+        }
     }
 
     /**

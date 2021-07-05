@@ -75,6 +75,9 @@ use \Illuminate\Support\Str;
         $(".datetime_picker").datetimepicker({
             format: 'Y-m-d H:i:s'
         });
+        $(".date_picker").datetimepicker({
+            format: 'Y-m-d'
+        });
     });
     </script>
 

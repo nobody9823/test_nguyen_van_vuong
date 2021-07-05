@@ -28,7 +28,7 @@ class UserController extends Controller
     public function store(UserRequest $request, User $user)
     {
         $user->fill($request->all())->save();
-        return redirect()->action([UserController::class, 'store'])->with('flash_message', "ユーザーが作成されました。");
+        return redirect()->action([ProfileController::class,'create'], ['user' => $user,'from_user_store' => true])->with('flash_message', "ユーザーが作成されました。引き続きプロフィール情報を入力してください。");
     }
 
     public function edit(User $user)

@@ -1,6 +1,10 @@
 <div class="form-group">
     <label>招待コード</label>
+    @if (optional($user->profile)->inviter_code)
     <p>{{ optional($user->profile)->inviter_code }}</p>
+    @else
+    <small style="display: block">(プロフィール作成時に発行されます)</small style="display: block">
+    @endif
 </div>
 
 <div class="form-group">
@@ -32,7 +36,7 @@
         <input type="checkbox" name="birthday_is_published"
             {{ optional($user->profile)->birthday_is_published === 1 ?'checked':'' }} value=1>
     </label>
-    <input type="text" name="birthday" class="form-control datetime_picker"
+    <input type="text" name="birthday" class="form-control date_picker"
         value="{{ old('birthday', optional($user->profile)->birthday) }}" required>
 </div>
 

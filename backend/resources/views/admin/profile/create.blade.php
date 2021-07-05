@@ -11,6 +11,7 @@
                 <div class="card-body">
                     <form action="{{ route('admin.profile.store', ['user' => $user]) }}" method="POST"
                         enctype="multipart/form-data">
+                        <x-common.add_hidden_query />
                         @csrf
                         <x-admin.profile.form :user="$user" />
                     </form>
