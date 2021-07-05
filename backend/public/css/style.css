@@ -989,7 +989,7 @@ input[type=radio]:checked + .radio-fan::after {
 .as_h_01_01{ width: 44px; height: 88px;}
 .as_h_01_02{ width: 44px; height: 88px;}
 .as_h_01_03{ width: 44px; height: 88px;}
-.as_h_01_current{ background: url(../img/as_dotted_current.svg);}
+.as_h_01_current{ background: url('../image/as_dotted_current.svg');}
 .as_h_01_dotted{ width: 44px; height: 44px; text-align: center; border-radius: 22px; position: relative;}
 .as_h_01_dotted div { width: 12px; height: 12px; border-radius: 6px; background: #00AEBD; position: absolute; top:17px; left: 16px; }
 .as_h_01_txt{ width: 44px; text-align: center; padding: 20px 0 0 0;}
