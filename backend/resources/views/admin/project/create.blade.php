@@ -10,8 +10,9 @@
     <div class="card-body">
 
         <form action="{{ route('admin.project.store') }}" enctype="multipart/form-data" method="post">
-        @csrf
-            <x-manage.project.form :project="null" :projectTags="null" :tags="$tags" :users="$users" :projectVideo="null" />
+            @csrf
+            <x-manage.project.form :project="null" :projectTags="null" :tags="$tags" :users="$users"
+                :projectVideo="null" />
 
         </form>
 
@@ -46,19 +47,5 @@
 });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js">
-</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
-
-<script>
-    $(function () {
-    $("#start_date").datetimepicker({
-        format: 'Y-m-d H:i:s'
-    });
-    $("#end_date").datetimepicker({
-        format: 'Y-m-d H:i:s'
-    });
-});
-</script>
 @endsection
 @endsection

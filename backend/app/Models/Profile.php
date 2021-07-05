@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use phpDocumentor\Reflection\Types\Self_;
 
 class Profile extends Model
 {
@@ -35,6 +36,15 @@ class Profile extends Model
     protected $casts = [
         'image_url' => ImageCast::class,
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (self $profile) {
+            $profile->inviter_code = \Str::uuid();
+        });
+    }
 
     public function user()
     {
