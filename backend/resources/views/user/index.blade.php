@@ -18,7 +18,13 @@ use Carbon\Carbon;
                 <div class="ib01L_01">
                     <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
                     <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
-                    <a href="#" class="okini_link_L"><i class="far fa-heart"></i></a>
+                    <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
+                    @if ($user_liked->where('project_id',$projects->first()->id)->isEmpty())
+                    <i class="far fa-heart"></i>
+                    @else
+                    <i class="fas fa-heart"></i>
+                    @endif
+                    </div>
                 </div>
 
                 <div class="ib01L_cate_tag">
@@ -54,7 +60,13 @@ use Carbon\Carbon;
                     <div class="ib01R_01">
                         <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                        <a href="#" class="okini_link"><i class="far fa-heart"></i></a>
+                        <div class="okini_link liked_project" id="{{ $project->id }}">
+                        @if ($user_liked->where('project_id',$project->id)->isEmpty())
+                        <i class="far fa-heart"></i>
+                        @else
+                        <i class="fas fa-heart"></i>
+                        @endif
+                        </div>
                     </div>
 
                     <div class="ib01R_02">
@@ -340,8 +352,14 @@ use Carbon\Carbon;
             <div class="img_box_03_L_item">
                 <div class="ib03L_01">
                     <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
-                    <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
-                    <a href="#" class="okini_link_L"><i class="far fa-heart"></i></a>
+                    <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>                    
+                    <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
+                        @if ($user_liked->where('project_id',$projects->first()->id)->isEmpty())
+                        <i class="far fa-heart"></i>
+                        @else
+                        <i class="fas fa-heart"></i>
+                        @endif
+                    </div>
                 </div>
 
                 <div class="ib03L_rank">
@@ -382,7 +400,13 @@ use Carbon\Carbon;
                     <div class="ib03R_01">
                         <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                        <a href="#" class="okini_link"><i class="far fa-heart"></i></a>
+                        <div class="okini_link liked_project" id="{{ $project->id }}">
+                        @if ($user_liked->where('project_id',$project->id)->isEmpty())
+                        <i class="far fa-heart"></i>
+                        @else
+                        <i class="fas fa-heart"></i>
+                        @endif
+                        </div>
                     </div>
 
                     <div class="ib03R_rank">
@@ -443,6 +467,13 @@ use Carbon\Carbon;
                     <div class="ib02_01 new_project_obi E-font">
                         <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
+                        <div class="okini_link liked_project" id="{{ $project->id }}">
+                        @if ($user_liked->where('project_id',$project->id)->isEmpty())
+                        <i class="far fa-heart"></i>
+                        @else
+                        <i class="fas fa-heart"></i>
+                        @endif
+                        </div>
                     </div>
 
                     <div class="ib02_02">
@@ -496,4 +527,13 @@ use Carbon\Carbon;
             <div class="footer-over_R_03"><i class="fas fa-chevron-right"></i></div>
         </a>
     </div>
+@endsection
+
+@section('script')
+<script>
+// csrfトークンを下記のproject-liked.jsファイルに送信
+window.Laravel = {};
+window.Laravel.csrfToken = @json( csrf_token() );
+</script>
+<script src="{{ asset('/js/project-liked.js') }}"></script>
 @endsection

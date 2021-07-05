@@ -54,9 +54,10 @@ class ProjectController extends Controller
     public function index()
     {
         $tags = Tag::all();
+        $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
         $projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
         ->inRandomOrder()->takeWithRelations(5)->get();
-
+        
         // ランキング(支援総額順)
         $ranking_projects = Project::getReleasedProject()->seeking()->orderByFundingAmount()
         ->takeWithRelations(5)->skip(1)->get();
@@ -93,6 +94,7 @@ class ProjectController extends Controller
             // 'nearly_open_projects',
             'ranking_projects',
             'tags',
+            'user_liked',
             'projects'
         ));
     }
@@ -393,23 +395,23 @@ class ProjectController extends Controller
             return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");
         }
     }
-    // こちらもデザインにないので一旦コメントアウトしておきます。
-    // public function ProjectLiked(Request $request)
-    // {
-    //     $userLiked = UserProjectLiked::where('user_id', Auth::id())->where('project_id', $request->project_id)->first();
+    
+    public function ProjectLiked(Request $request)
+    {
+        $userLiked = UserProjectLiked::where('user_id', Auth::id())->where('project_id', $request->project_id)->first();
 
-    //     if (Auth::id() === null) {
-    //         return $result = "未ログイン";
-    //     } elseif ($userLiked !== null) {
-    //         $userLiked->delete();
-    //         return $result = "削除";
-    //     } else {
-    //         $project_liked = new UserProjectLiked(['user_id' => Auth::id()]);
-    //         $project_liked->project_id = $request->project_id;
-    //         $project_liked->save();
-    //         return $result = "登録";
-    //     }
-    // }
+        if (Auth::id() === null) {
+            return $result = "未ログイン";
+        } elseif ($userLiked !== null) {
+            $userLiked->delete();
+            return $result = "削除";
+        } else {
+            $project_liked = new UserProjectLiked(['user_id' => Auth::id()]);
+            $project_liked->project_id = $request->project_id;
+            $project_liked->save();
+            return $result = "登録";
+        }
+    }
 
     public function support(Project $project)
     {
