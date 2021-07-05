@@ -260,27 +260,27 @@
 
                     <div class="form_item_row">
                         <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="first_name" class="def_input_100p">
+                        <input type="text" name="first_name" class="def_input_100p" value="{{ old('first_name', optional($user->profile)->first_name) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
                         <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="last_name" class="def_input_100p">
+                        <input type="text" name="last_name" class="def_input_100p" value="{{ old('last_name', optional($user->profile)->last_name) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
                         <div class="form_item_tit">セイ（全角）<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="first_name_kana" class="def_input_100p">
+                        <input type="text" name="first_name_kana" class="def_input_100p" value="{{ old('first_name_kana', optional($user->profile)->first_name_kana) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
                         <div class="form_item_tit">メイ（全角）<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="last_name_kana" class="def_input_100p">
+                        <input type="text" name="last_name_kana" class="def_input_100p" value="{{ old('last_name_kana', optional($user->profile)->last_name_kana) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
                         <div class="form_item_tit">メールアドレス<span class="hissu_txt">必須</span></div>
-                        <input type="email" name="email" class="def_input_100p">
+                        <input type="email" name="email" class="def_input_100p" value="{{ old('email', optional($user)->email) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
@@ -288,21 +288,21 @@
                         <div class="cp_ipselect cp_normal">
                             <select name="gender">
                                 <option value="select">選択</option>
-                                <option value="男性">男性</option>
-                                <option value="女性">女性</option>
-                                <option value="その他">その他</option>
+                                <option value="男性" {{ old('gender') === "男性" || optional($user->profile)->gender === "男性" ? 'selected' : '' }}>男性</option>
+                                <option value="女性" {{ old('gender') === "女性" || optional($user->profile)->gender === "女性" ? 'selected' : '' }}>女性</option>
+                                <option value="その他"　{{ old('gender') === "その他" || optional($user->profile)->gender === "その他" ? 'selected' : '' }}>その他</option>
                             </select>
                         </div>
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
                         <div class="form_item_tit">電話番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-                        <input type="number" name="phone_number" class="def_input_100p">
+                        <input type="number" name="phone_number" class="def_input_100p" value="{{ old('phone_number', optional($user->profile)->phone_number) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
                         <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p">
+                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('address', optional($user->address)->postal_code) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
@@ -311,7 +311,7 @@
                             <select name="prefecture" class="p-region">
                                     <option value="non_selected">選択してください</option>
                                 @for($i = 1; $i <= 47; $i++)
-                                    <option value="{{ PrefectureHelper::getPrefectures()[$i] }}">{{ PrefectureHelper::getPrefectures()[$i] }}</option>
+                                    <option value="{{ PrefectureHelper::getPrefectures()[$i] }}" {{ optional($user->address)->prefecture === PrefectureHelper::getPrefectures()[$i] || old('prefecture') === PrefectureHelper::getPrefectures()[$i] ? 'selected' : '' }}>{{ PrefectureHelper::getPrefectures()[$i] }}</option>
                                 @endfor
                             </select>
                         </div>
@@ -319,17 +319,17 @@
 
                     <div class="form_item_row">
                         <div class="form_item_tit">市区町村<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="city" class="p-locality def_input_100p" readonly />
+                        <input type="text" name="city" class="p-locality def_input_100p" value="{{ old('city', optional($user->address)->city) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
                         <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="block" class="p-street-address def_input_100p" />
+                        <input type="text" name="block" class="p-street-address def_input_100p"  value="{{ old('block', optional($user->address)->block) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
                         <div class="form_item_tit">建物名<span class="nini_txt">任意</span></div>
-                        <input type="text" name="building" class="p-extended-address def_input_100p" />
+                        <input type="text" name="building" class="p-extended-address def_input_100p"  value="{{ old('building', optional($user->address)->building) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
@@ -338,7 +338,7 @@
                             <select id="birth_year" class="form-control" name="birth_year">
                                 <option value="">----</option>
                                 @for ($i = 1980; $i <= 2005; $i++)
-                                <option value="{{ $i }}"@if(old('birth_year') == $i) selected @endif>{{ $i }}</option>
+                                <option value="{{ $i }}"@if(old('birth_year', optional($user->profile)->getYearOfBirth()) == $i) selected @endif>{{ $i }}</option>
                                 @endfor
                             </select>
                         </div>
@@ -346,7 +346,7 @@
                             <select id="birth_month" class="form-control" name="birth_month">
                                 <option value="">--</option>
                                 @for ($i = 1; $i <= 12; $i++)
-                                <option value="{{ $i }}"@if(old('birth_month') == $i) selected @endif>{{ $i }}</option>
+                                <option value="{{ $i }}"@if(old('birth_month', optional($user->profile)->getMonthOfBirth()) == $i) selected @endif>{{ $i }}</option>
                                 @endfor
                             </select>
                         </div>
@@ -354,7 +354,7 @@
                             <select id="birth_day" class="form-control" name="birth_day">
                                 <option value="">--</option>
                                 @for ($i = 1; $i <= 31; $i++)
-                                <option value="{{ $i }}"@if(old('birth_day') == $i) selected @endif>{{ $i }}</option>
+                                <option value="{{ $i }}"@if(old('birth_day', optional($user->profile)->getDayOfBirth()) == $i) selected @endif>{{ $i }}</option>
                                 @endfor
                             </select>
                         </div>
@@ -362,12 +362,12 @@
 
                     <div class="form_item_row">
                         <div class="form_item_tit">備考欄<span class="nini_txt">任意</span>　<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-                        <textarea name="remarks" class="def_textarea" rows="6"></textarea>
+                        <textarea name="remarks" class="def_textarea" rows="6">{{ old('remarks') }}</textarea>
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
                         <div class="form_item_tit">応援コメント<span class="nini_txt">任意</span>　<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-                        <textarea name="comments" class="def_textarea" rows="6"></textarea>
+                        <textarea name="comments" class="def_textarea" rows="6">{{ old('comments') }}</textarea>
                     </div><!--/form_item_row-->
                     <div class="def_btn">
                         <button type="submit" class="disable-btn">
