@@ -1,361 +1,426 @@
-<!DOCTYPE HTML>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
-<html lang="ja">
-
+<!doctype html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<title></title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 
-    <title></title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" rel="stylesheet">
 
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/slick.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/slick-theme.css') }}" />
-    <link href="{{ asset('css/normalize.css') }}" type="text/css" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
-    <link href="{{ asset('css/responsive.css') }}" type="text/css" rel="stylesheet">
-    <link href="{{ asset('css/sm-core-css.css') }}" type="text/css" rel="stylesheet">
-    <link href="{{ asset('css/sm-clean.css') }}" type="text/css" rel="stylesheet">
-    <link href="{{ asset('css/mypage.css') }}" type="text/css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <!--★-->
-    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
-    <!--★-->
-    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-    @yield('css')
+<link href="{{ asset('css/reset.css') }}" type="text/css" rel="stylesheet">
+<link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
 </head>
 
-<body id="pagetop">
-
-    <!--▼★header-->
-    <header>
-        <div class="header_in">
-            <div class="fixedcontainer">
-                <div class="logo"><a href="/"><img src="/image/g_logo-01.svg"></a><br><span
-                        class="logo_txt">みんなのチカラでアイドルを救え</span></div>
-                <div class="header_right">
-                    @auth
+<body>
+<div id="wrapper" class="hfeed">
 
 
-                    <a href="{{ route('user.profile') }}" id="mypage-js" class="main_menu">マイページ</a>
-                    <ul class="main_menu-body">
-                        <li><a href="{{ route('user.payment_history') }}">購入履歴</a></li>
-                        <li><a href="{{ route('user.contribution_comments') }}">投稿コメント</a></li>
-                        <li><a href="{{ route('user.purchased_projects') }}">応援購入した<br>プロジェクト</a></li>
-                        <li><a href="{{ route('user.liked_projects') }}">お気に入り<br>プロジェクト</a></li>
-                    </ul>
+<div id="header_wrap" style="">
+<header id="header">
+
+<div id="branding">
+	<div id="header_01">
+		<div id="site-title">
+			<a href="{{ route('user.index') }}" title="FanReturn" rel="home">
+				<img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
+			</a>
+		</div>
+	</div>
+	<div id="header_03">
 
 
-                    <a href="logout" class="main_menu" onclick="event.preventDefault();
-                       document.getElementById('logout-form').submit();">
-                        ログアウト</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                    </form>
-                    @else
-                    <a href="/login" class="main_menu">ログイン</a>
-                    <a href="{{ route('user.pre_create') }}" class="main_menu">会員登録</a>
-                    @endauth
-                </div>
-                <div class="header_left" id="header_left">
-                    <a href="/search" id="search" class="main_menu">応援プロジェクト <i class="fas fa-caret-down fc_i_01"></i><i
-                            class="fas fa-caret-up fc_i_02" style="display: none;"></i></a>
-                    <x-user.sub-menu />
-                    <x-user.word-search route="user.search" />
-                </div>
-            </div>
-        </div>
-    </header>
-    <!--▲★header-->
+		<div id="wm_btn">
+            @auth
+            <div class="menuset_03 wm_login_btn">
+                <form action="{{ route('logout') }}" action="POST">
+                    @csrf
+                    <a type="submit" class="">
+                        ログアウト
+                    </a>
+                </form>
+			</div>
+            @endauth
+            @guest
+			<div class="menuset_03 wm_login_btn">
+                <a href="{{ route('login') }}" class="">
+					ログイン
+				</a>
+			</div>
+			<div class="menuset_03 wm_signup_btn">
+                <a href="{{ route('user.pre_create') }}" class="">
+					新規登録
+				</a>
+			</div>
+            @endguest
+		</div>
 
-    @if (session('flash_message'))
-    <div class="text-center" style="background-color: #38c172; color: #ffffff; font-size: 200%;">
-        {{ session('flash_message') }}
-    </div>
-    @endif
-    @if ($errors->any())
-    <div class="error-message text-center">
-        <ul class="error-message-list">
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
+		<input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
+		<label for="nav-tgl" class="open nav-tgl-btn"><span></span></label>
+		<label for="nav-tgl" class="close nav-tgl-btn"></label>
+
+	</div>
+</div>
+
+<div id="menu">
+<div class="global-navi">
+<input type="checkbox" id="nav-tgl" name="nav-tgl">
+<div class="drower-menu">
+<div class="drower-menu-list">
+    <nav id="js-header__nav " class="l-header__nav navgation_inner">
+		<a href="{{ route('user.index') }}" title="FanReturn" rel="home" class="h_logo_css_sp">
+			<img src="{{ asset('image/logo-white.svg') }}">
+		</a>
+
+	    <div class="other_site_header"></div>
+		<ul id="js-global-nav" class="p-global-nav main-menu menu_base taso_menu">
+
+			<li class="menu-item nav_btn taso_li menuset_01">
+				<a href="#" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">はじめる</p>
+				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_01">
+				<a href="#" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">さがす</p>
+				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_01">
+				<a href="#" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">ファンリターンとは</p>
+				</a>
+			</li>
+
+
+			<li id="menu-item-2" class="menu-item menu-item-2 nav_btn menu-item-has-children taso_li menuset_02">
+					<a href="#" id="top_menu-2" data-megamenu="js-megamenu2" class=" nav_btn_link taso_li_a">
+						<label for="item_c_2" class="item_c">
+							<div>
+							<p class="nav_btn_tit_L">人気のタグ</p>
+							</div>
+						</label>
+					</a>
+				<input type="checkbox" id="item_c_2" style="display:none;">
+				<input type="checkbox" id="ta_menu-2"><label for="ta_menu-2" class="taso_li_a_label"><span class="pd"><i class="fas fa-chevron-down"></i></span></label>
+					<ul class="taso_ul pri_W_b taso_ul_ko" style="background: #fff; padding: 10px;">
+                        {{-- NOTICE コンポーネントにしてタグを何かしら順にする必要がある？ --}}
+                        {{-- @foreach($popularyTags() as $tag) --}}
+                            <li class="taso_li taso_li_ko ninki_tag_li">
+                            <div><a href="#"># テキスト</a></div>
+                            </li>
+                        {{-- @endforeach --}}
+					</ul>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_02">
+                {{-- NOTICE こちらは全てのタグを表示する --}}
+                {{-- @foreach($allTags() as $tag) --}}
+				<a href="#" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">全てのタグ</p>
+				</a>
+                {{-- @endforeach --}}
+			</li>
+            @auth
+			<li class="menu-item nav_btn taso_li menuset_02">
+				<a href="{{ route('user.purchased_projects') }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">応援したプロジェクト</p>
+				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_02">
+				<a href="{{ route('user.payment_history') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">購入履歴</p>
+				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_02">
+				<a href="{{ route('user.liked_projects') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">お気に入り</p>
+				</a>
+			</li>
+            @endauth
+			<li class="menu-item nav_btn taso_li menuset_02">
+				<a href="{{ route('user.inquiry.create') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">お問い合わせ</p>
+				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_02">
+				<a href="#" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">よくあるご質問・ヘルプ</p>
+				</a>
+			</li>
+
+            @auth
+            <li class="menu-item nav_btn taso_li menuset_03 login_btn">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="top_menu-1 nav_btn_link disable-btn">
+                        <p class="nav_btn_tit_L log_out">ログアウト</p>
+                    </button>
+                </form>
+			</li>
+            @endauth
+
+            @guest
+			<li class="menu-item nav_btn taso_li menuset_03 login_btn">
+                <a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">ログイン</p>
+				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_03 signup_btn">
+                <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
+                    <p>新規登録</p>
+				</a>
+			</li>
+            @endguest
+
+			<li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
+				<i class="fas fa-search"></i><input type="text" name="search_word" placeholder="キーワードを検索">
+			</li>
+
+		</ul>
+	</nav>
+
+</div><!--/drower-menu-list-->
+</div><!--/drower-menu-->
+
+</div>
+</div><!--/#menu-->
+
+<style>
+.pc-details-screen_header{ display: flex; flex-wrap: wrap; align-items: center; align-content: center; width: 100%; font-size: 1.3rem; color:#00AEBD ;}
+.pc-details-screen_header div{ width: 120px; padding: 15px 0; text-align: center;}
+.pdsh_item{ position: relative;}
+.pdsh_current{ border-bottom: solid 2px #00AEBD;}
+</style>
+
+<div class="pc-details-screen_header">
+	<div class="pdsh_item pdsh_current">プロジェクト<a href="#" class="cover_link"></a></div>
+	<div class="pdsh_item">活動レポート<a href="#" class="cover_link"></a></div>
+	<div class="pdsh_item">応援コメント<a href="#" class="cover_link"></a></div>
+</div>
+
+</header>
+</div>
+
+<style>
+/**他ページヘッダー**/
+.pc-details-screen_header{ display: none;}
+</style>
+
+
     @yield('content')
-    <a href="#pagetop" class="fixed_bottom"><img src="/image/gotop.png"></a>
+
+
+
     <footer>
-        <div class="fixedcontainer">
-            <div class="footer_in1">
-                <div>
-                    <p><a href="{{ route('user.search') }}">応援プロジェクト</a></p>
-                    <ul>
-                        <li><a href="{{ route('user.question') }}">応援プロジェクトとは</a></li>
-                        <li><a href="{{ route('user.search') }}">プロジェクト検索</a></li>
-                    </ul>
-                    <p><a href="{{ route('user.question') }}">初めての方</a></p>
-                    <ul>
-                        <li><a href="{{ route('user.question') }}">初めての応援</a></li>
-                    </ul>
+        <div class="footer_main">
+            <div class="footer_main_inner">
+                <div class="footer_main_01">
+                    <div class="footer_tit">プロジェクトをさがす</div>
+                    <div class="footer_item"><a href="★">カテゴリ</a></div>
+                    <div class="footer_item"><a href="★">テキストテキスト</a></div>
+                    <div class="footer_item"><a href="★">テキストテキストテキストテキスト</a></div>
+                    <div class="footer_item"><a href="★">テキストテキスト</a></div>
+                    <div class="footer_item"><a href="★">テキストテキストテキストテキストテキストテキスト</a></div>
+                    <div class="footer_item"><a href="★">テキストテキスト</a></div>
+                    <div class="footer_item"><a href="★">テキストテキストテキストテキスト</a></div>
                 </div>
-                <div>
-                    <p><a href="https://plus-p.jp/">ガーディアン運営</a></p>
-                    <ul>
-                        <li><a href="https://plus-p.jp/company/">企業情報</a></li>
-                        <li><a href="{{ route('user.terms') }}">利用規約</a></li>
-                        <li><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></li>
-                        <li><a href="{{ route('user.tradelaw') }}">特定商取引法に基づく表示</a></li>
-                    </ul>
+
+                <div class="footer_main_02">
+                    <div class="footer_tit">プロジェクトをはじめる</div>
+                    <div class="footer_item"><a href="★">プロジェクト掲載</a></div>
+                    <div class="footer_item"><a href="★">プロジェクトを作る</a></div>
                 </div>
-                <div>
-                    <p><a href="https://plus-p.jp/contact/">カスタマーサービス</a></p>
-                    <ul>
-                        <!-- TODO:今後の仕様次第ですが、メルマガ機能を搭載する事になれば、コメントアウトを解除します。 -->
-                        <!-- <li><a href="{{ route('register') }}">メールマガジン</a></li> -->
-                        <li><a href="{{ route('user.question') }}">FAQ</a></li>
-                        <li><a href="{{ route('user.inquiry.create') }}">お問い合わせ</a></li>
-                    </ul>
+
+                <div class="footer_main_03">
+                    <div class="footer_tit">fanreturnについて</div>
+                    <div class="footer_item"><a href="★">fanreturnとは</a></div>
+                    <div class="footer_item"><a href="★">クラウドファンティングとは</a></div>
+                    <div class="footer_item"><a href="★">ヘルプ</a></div>
+                    <div class="footer_item"><a href="★">お問い合わせ</a></div>
+                    <div class="footer_item"><a href="{{ route('user.terms_of_service') }}">利用規約</a></div>
+                    {{-- <div class="footer_item"><a href="★">細則</a></div> --}}
+                    <div class="footer_item"><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></div>
+                    <div class="footer_item"><a href="{{ route('user.trade_law') }}">特定商取引法に基づく表記</a></div>
+                    {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div> --}}
+                    {{-- <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
+                    <div class="footer_sns_icon dis_f_wra_alc">
+                        <a href="★"><img class="" src="{{ asset('image/sns_01.svg') }}"></a>
+                        <a href="★"><img class="" src="{{ asset('image/sns_02.svg') }}"></a>
+                        <a href="★"><img class="" src="{{ asset('image/sns_03.svg') }}"></a>
+                    </div>
                 </div>
-                <div>
-                    <p><a href="https://plus-p.jp/contact/">掲載希望者の方へ</a></p>
-                    {{--                <p><a href="">オンラインストア</a></p>--}}
-                    {{--                <ul>--}}
-                    {{--                    <li><a href="">ガーディアンストア</a></li>--}}
-                    {{--                </ul>--}}
-                </div>
-            </div>
-            <div class="footer_in2">
-                <div class="hidden-sp">
-                    <a
-                        href="https://m.facebook.com/pages/category/Local-Business/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%83%97%E3%83%AA%E3%83%A5-1429949117018781/"><img
-                            src="/image/facebook.svg"></a>
-                    <a href="https://twitter.com/plus_prstaff"><img src="/image/twitter.svg"></a>
-                    <a href="https://line.me/R/ti/p/%40fvm7035p"><img src="/image/line.svg"></a>
-                    <a href="https://www.instagram.com/plus_staff/"><img src="/image/instagram.svg"></a>
-                </div>
-                <div class="visible-sp">
-                    <a
-                        href="https://m.facebook.com/pages/category/Local-Business/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%83%97%E3%83%AA%E3%83%A5-1429949117018781/"><img
-                            src="/image/facebook.png"></a>
-                    <a href="https://twitter.com/plus_prstaff"><img src="/image/twitter.png"></a>
-                    <a href="https://line.me/R/ti/p/%40fvm7035p"><img src="/image/line.png"></a>
-                    <a href="https://www.instagram.com/plus_staff/"><img src="/image/instagram.png"></a>
-                </div>
-            </div>
-            <div class="footer_in3">
-                <p><a href="">サイトマップ</a>　<a href="https://recruit-41e63.web.app/policy">プライバシーポリシー</a>　<a
-                        href="{{ route('user.inquiry.create') }}">お問い合わせ</a>　<a
-                        href="https://recruit-41e63.web.app/terms">サイトご利用規約</a></p>
-                <p>Copyright © plus-p.work Co., Ltd. All Rights Reserved.</p>
-            </div>
-        </div>
+            </div><!--/.footer_inner-->
+        </div><!--/.footer_main-->
+
+        <div class="footer_under">
+            <div class="footer_under_inner">
+                <div class="footer_logo"><img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}"></div>
+                <ul>
+                    <li><a href="#">はじめる</a></li>
+                    <li><a href="#">さがす</a></li>
+                    <li><a href="#">ファンリターンとは</a></li>
+                    @auth
+                    <li><a href="{{ route('logout') }}">ログアウト</a></li>
+                    @endauth
+                    @guest
+                    <li><a href="{{ route('login') }}">ログイン</a></li>
+                    <li><a href="{{ route('user.pre_create') }}">新規登録</a></li>
+                    @endguest
+                </ul>
+            </div><!--/.footer_inner-->
+        </div><!--/.footer_under-->
+
     </footer>
 
-    <!--▼★-->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="{{ asset('js/slick.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery.smartmenus.min.js') }}"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-smooth-scroll/2.2.0/jquery.smooth-scroll.min.js"></script>
-    @yield('script')
-    <script>
-        $(document).ready(function () {
-        $('a').smoothScroll();
-        $(window).scroll(function () {
-
-            var $height = $(window).scrollTop();
-
-            if ($height > 50) {
-                $('.fixed_bottom').show();
-            } else {
-                $('.fixed_bottom').hide();
-            }
-        });
-
-        $('.slider-for').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            arrows: false,
-            fade: true,
-            asNavFor: '.slider-nav-in'
-        });
-        $('.slider-nav-in').slick({
-            slidesToShow: 5,
-            slidesToScroll: 1,
-            asNavFor: '.slider-for',
-            dots: false,
-            centerMode: true,
-            centerPadding: '0',
-            focusOnSelect: true,
-            arrows: false,
-        });
-        $('.project-banner-slider').slick({
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            arrows: true,
-            responsive: [
-                {
-                    breakpoint: 999,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                    }
-                }
-            ]
-        });
-
-        // ヘッダーのマイページにホバーした際にメニューを表示する
-        $("#mypage-js").hover(
-            function () {
-                $(".main_menu-body").addClass("main_menu-body-display");
-            },
-            function () {
-                $(".main_menu-body").removeClass("main_menu-body-display");
-            }
-        );
-        $(".main_menu-body").hover(
-            function () {
-                $(".main_menu-body").addClass("main_menu-body-display");
-            },
-            function () {
-                $(".main_menu-body").removeClass("main_menu-body-display");
-            }
-        );
+</div><!--/wrapper-->
 
 
-        //detail.html用
-        $('.detail-slider-for').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: true,
-            fade: true,
-            asNavFor: '.detail-slider-nav',
-        });
-        $('.detail-slider-nav').slick({
-            slidesToShow: 7,
-            slidesToScroll: 1,
-            asNavFor: '.detail-slider-for',
-            dots: false,
-            focusOnSelect: true,
-            centerPadding: '0',
-            arrows: false,
-        });
+@yield('script')
+<script>
+$(window).on('load', function(){
+    var winW = $(window).width();
+    var winH = $(window).height();
+    var devW = 767;
+    if (winW <= devW) {
+    //767px以下の時の処理
+    } else {
+    //768pxより大きい時の処理
+    }
+});
 
-        //detail.html用　タブ用slick修正
-        var tab_2_slider_01_01 = $('.news-imgs-for1').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: true,
-            centerMode: true,
-            centerPadding: '50px',
-            focusOnSelect: true,
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        centerMode: false
-                    }
-                }
-            ]
-        });
-        var tab_2_slider_01_02 = $('.news-imgs-nav1').slick({
-            slidesToShow: 7,
-            slidesToScroll: 1,
-            dots: false,
-            centerPadding: '0',
-            focusOnSelect: true,
-            arrows: false,
-        });
-        var tab_2_slider_02_01 = $('.news-imgs-for2').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: true,
-            centerMode: true,
-            centerPadding: '50px',
-            focusOnSelect: true,
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        centerMode: false
-                    }
-                }
-            ]
-        });
-        var tab_2_slider_02_02 = $('.news-imgs-nav2').slick({
-            slidesToShow: 7,
-            slidesToScroll: 1,
-            dots: false,
-            centerPadding: '0',
-            focusOnSelect: true,
-            arrows: false
-        });
-        $('input[name="detail_tab_item"]').change(function () {
-            tab_2_slider_01_01.slick('setPosition');
-            tab_2_slider_01_02.slick('setPosition');
-            tab_2_slider_02_01.slick('setPosition');
-            tab_2_slider_02_02.slick('setPosition');
-        });
+/**nav**/
+$(function() {
+    var headNav = $("#header_wrap");
+    var headNav_img_01 = $(".view_01");
+    var headNav_img_02 = $(".view_02");
 
+    //scrollだけだと読み込み時困るのでloadも追加
+    $(window).on('load scroll', function () {
+        //現在の位置が200px以上かつ、クラスfixedが付与されていない時
+        if($(this).scrollTop() > 150 && headNav.hasClass('fixed') == false) {
+            //headerの高さ分上に設定
+            headNav.css({"top": '-100px'});
+            //クラスfixedを付与
+            headNav.addClass('fixed');
 
-        //ヘッダーボタン（応援プロジェクト用）
-        $.fn.clickToggle = function (a, b) {
-            return this.each(function () {
-                var clicked = false;
-                $(this).on('click', function () {
-                    clicked = !clicked;
-                    if (clicked) {
-                        return a.apply(this, arguments);
-                    }
-                    return b.apply(this, arguments);
-                });
-            });
-        };
+            headNav_img_02.removeClass('view_no');
+            headNav_img_02.addClass('view_yes');
 
-        $('#search').clickToggle(function () {
-            $(this).next('.header_submenu').slideDown(300);
-            $(this).css({'color': '#ff1493', 'border-bottom': '3px solid #ff1493'});
-            $('.fc_i_01').css('display', 'none');
-            $('.fc_i_02').css('display', 'inline-block');
-        }, function () {
-            $(this).next('.header_submenu').slideUp(300);
-            $(this).css({'color': 'inherit', 'border-bottom': '3px solid #fff'});
-            $('.fc_i_01').css('display', 'inline-block');
-            $('.fc_i_02').css('display', 'none');
-        });
-        $("#search,.header_submenu")
-            .mouseover(function () {
-                $(".header_submenu").show();
-            })
-        $("#header_left,.header_submenu")
-            .mouseleave(function () {
-                $(".header_submenu").hide();
-            });
-        $(function() {
-            $('#my-page_header-menu').smartmenus();
-            $('#my-page_header-menu_sample').smartmenus();
+            headNav_img_01.removeClass('view_yes');
+            headNav_img_01.addClass('view_no');
 
-        });
+            $("#container").addClass('container_margin-top');
 
+            //位置を0に設定し、アニメーションのスピードを指定
+            headNav.animate({"top": 0},400);
+
+        }
+        //現在の位置が199px以下かつ、クラスfixedが付与されている時にfixedを外す
+        else if($(this).scrollTop() < 149 && headNav.hasClass('fixed') == true){
+            headNav.removeClass('fixed');
+
+            headNav_img_02.removeClass('view_yes');
+            headNav_img_02.addClass('view_no');
+
+            headNav_img_01.removeClass('view_no');
+            headNav_img_01.addClass('view_yes');
+
+            $("#container").removeClass('container_margin-top');
+        }
     });
-    </script>
-    <!--▲★-->
+});
 
+//チェックボックス操作時
+$(function(){
+    $('input[name="nav-tgl"]').change(function() {
+    if($(this).prop('checked')) {
+        $('input[name="nav-tgl_clone"]').prop('checked',true);
+    } else {
+        $('input[name="nav-tgl_clone"]').prop('checked',false);
+    }
+    });
+
+    $('#nav-tgl').on('change', function(){
+    var st = $(window).scrollTop();
+    if($(this).prop("checked") == true) {
+        $('html').addClass('scroll-prevent');
+        $('html').css('top', -(st) + 'px');
+        $('#nav-tgl').on('change', function(){
+        if($(this).prop("checked") !== true) {
+            $('html').removeClass('scroll-prevent');
+            $(window).scrollTop(st);
+        }
+        });
+    }
+    });
+});
+
+//【slick】
+$(function(){
+    var mainSlider = document.getElementById('slider'); //メインスライダーid
+    var thumbnailSlider = document.getElementById('thumbnail_slider'); //サムネイルスライダーid
+    $(mainSlider).slick({
+    autoplay: true,
+    speed: 2000,
+    arrows: true,
+    asNavFor: thumbnailSlider,
+    dots: false,
+    });
+    $(thumbnailSlider).slick({
+    slidesToShow: 5,
+    speed: 2000,
+    asNavFor: mainSlider,
+    arrows: false,
+    dots: false,
+    });
+    //#thumbnail_sliderでクリックしたスライドをカレントにする
+    $(thumbnailSlider+" .slick-slide").on('click',function(){
+    var index = $(this).attr("data-slick-index");
+    $(thumbnailSlider).slick("slickGoTo",index,false);
+    });
+});
+
+//ハンバーガー　メガナビ
+jQuery(document).ready(function($) {
+    $('#js-global-nav li').each(function(i) {
+
+        $(this).hover(function() {
+            var attr = this.getAttribute("id");
+            //console.log(attr);
+            var h_mega_nav = "#" + attr + "-js";
+            //console.log(h_mega_nav);
+            $(h_mega_nav).addClass("is-active");
+
+        }, function() {
+            var attr = this.getAttribute("id");
+            //console.log(attr);
+            var h_mega_nav = "#" + attr + "-js";
+            $(h_mega_nav).removeClass("is-active");
+        });
+    });
+});
+
+
+
+//【さらに条件を追加】ボタン
+//全選択ボタンを取得する
+const uncheckBtn = document.getElementById("ac_list_uncheck-btn");
+//チェックボックスを取得する
+const el = document.getElementsByClassName("ac_list_checks");
+
+//全てのチェックボックスのチェックを外す
+const uncheckAll = () => {
+    for (let i = 0; i < el.length; i++) {
+        el[i].checked = false;
+    }
+};
+//全選択ボタンをクリックした時「uncheckAll」を実行
+uncheckBtn.addEventListener("click", uncheckAll, false);
+</script>
 </body>
-
 </html>

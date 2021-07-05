@@ -6,17 +6,17 @@
 <div class="card-header d-flex align-items-center">
 
     @if(($word ?? ''))
-        <div class="flex-grow-1">{{$word}} の検索結果(全{{count($users)}}件)</div>
+    <div class="flex-grow-1">{{$word}} の検索結果(全{{count($users)}}件)</div>
     @else
-        <div class="flex-grow-1">ユーザー管理</div>
+    <div class="flex-grow-1">ユーザー管理</div>
     @endif
-    <form action="{{ route('admin.user.search') }}" class="form-inline pr-3" method="get">
+    <form action="{{ route('admin.user.index') }}" class="form-inline pr-3" method="get">
         @csrf
         <input name="word" type="search" class="form-control" aria-level="Search" placeholder="キーワードで検索">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
     <div class="text-right">
-    <a href="{{ route('admin.user.create') }}" class="btn btn-outline-success">新規作成</a>
+        <a href="{{ route('admin.user.create') }}" class="btn btn-outline-success">新規作成</a>
     </div>
 </div>
 <div class="card-body">

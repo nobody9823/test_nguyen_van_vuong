@@ -13,14 +13,23 @@ use App\Models\Payment;
 use App\Models\Comment;
 use App\Models\Profile;
 use App\Models\Address;
+use Carbon\Carbon;
 use App\Actions\PayJp\PayJpInterface;
 use App\Actions\PayPay\PayPayInterface;
 use App\Http\Requests\ConfirmPaymentRequest;
+use App\Http\Requests\ConsultProjectSendRequest;
+use App\Mail\User\ConsultProject;
 use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
+use Exception;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Str;
+use Log;
+use Mail;
 
 class ProjectController extends Controller
 {
@@ -38,10 +47,16 @@ class ProjectController extends Controller
         $this->payment = $payment;
 
         $this->comment = $comment;
+
+        $this->inviter_code = null;
     }
 
     public function index()
     {
+        $tags = Tag::all();
+        $projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        ->inRandomOrder()->takeWithRelations(5)->get();
+
         // 応援プロジェクト（目標金額の高い順）
         $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
             ->inRandomOrder()->takeWithRelations(9)->get();
@@ -67,7 +82,9 @@ class ProjectController extends Controller
             'cheer_projects',
             'popularity_projects',
             'nearly_deadline_projects',
-            'nearly_open_projects'
+            'nearly_open_projects',
+            'tags',
+            'projects'
         ));
     }
 
@@ -81,9 +98,19 @@ class ProjectController extends Controller
         //
     }
 
-    public function show(Project $project)
+    public function show(Request $request, Project $project)
     {
-        return view('user.project.show', ['project' => $project->load([
+        if ($request->inviter) {
+            try {
+                $this->inviter_code = Crypt::decrypt($request->inviter);
+            } catch (DecryptException $e) {
+                Log::alert($e->getMessage(), $e->getTrace());
+                return redirect()->route('user.index')->withErrors('読み込みに失敗しました。管理者にお問い合わせください。');
+            }
+        }
+        return view('user.project.show', [
+            'inviter_code' => $this->inviter_code,
+            'project' => $project->load([
                 'projectFiles',
                 'plans',
                 'plans.includedPayments',
@@ -91,7 +118,8 @@ class ProjectController extends Controller
                 'reports' => function ($query) {
                     $query->orderByDesc('created_at');
                 },
-            ])]);
+            ]),
+        ]);
     }
 
     /**
@@ -134,10 +162,10 @@ class ProjectController extends Controller
      * @param Project
      * @return \Illuminate\Http\Response
      */
-    public function selectPlans(Project $project)
+    public function selectPlans(Request $request, Project $project)
     {
         $project->load('plans');
-        return view('user.project.select_plan', ['project' => $project]);
+        return view('user.project.select_plan', ['project' => $project, 'inviter_code' => $request->inviter_code]);
     }
 
     /**
@@ -150,11 +178,13 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $this->user->profile->fill($request->all())->save();
-            $this->user->address->fill($request->all())->save();
+            $this->user->saveProfile($request->all());
+            $this->user->saveAddress($request->all());
             $unique_token = UniqueToken::getToken();
+            $inviter = !is_null($request->inviter_code) ? User::getInviterFromInviterCode($request->inviter_code)->first() : null;
             $payment = $this->payment->fill(array_merge(
                 [
+                    'inviter_id' => !is_null($request->inviter_code) ? $inviter->id : null,
                     'price' => $request->total_amount,
                     'message_status' => "ステータスなし",
                     'merchant_payment_id' => $unique_token,
@@ -173,6 +203,7 @@ class ProjectController extends Controller
             DB::rollback();
             throw $e;
         }
+        Auth::user()->load(['profile', 'address']);
         return view('user.project.confirm_plan', ['project' => $project, 'payment' => $payment, 'qr_code' => $qr_code]);
     }
 
@@ -198,10 +229,7 @@ class ProjectController extends Controller
                 throw $e;
             }
 
-        $supporter_count = User::getCountOfSupportersWithProject($project);
-        $total_amount = Payment::getTotalAmountOfSupporterWithProject($project);
-
-        return view('user.plan.supported', ['project' => $project, 'payment' => $payment, 'supporter_count' => $supporter_count, 'total_amount' => $total_amount]);
+        return view('user.plan.supported', ['project' => $project, 'payment' => $payment]);
     }
 
     public function paymentForPayPay(Project $project, Payment $payment)
@@ -334,6 +362,28 @@ class ProjectController extends Controller
         return view('user.search', compact('projects', 'tags'));
     }
 
+    public function consultProject()
+    {
+        return view('user.consult_project');
+    }
+
+    public function consultProjectSend(ConsultProjectSendRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            Auth::user()->saveProfile($request->all());
+            Auth::user()->saveAddress($request->all());
+            // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
+            Mail::to(config('mail.from.address'))->send(new ConsultProject($request->all()));
+            DB::commit();
+            return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
+        } catch(Exception $e) {
+            DB::rollBack();
+            // NOTICE Slackにログを送信できるみたいなので今後時間があったら実装してみても良いかもしれないです。
+            Log::error($e->getMessage(), $e->getTrace());
+            return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");
+        }
+    }
     // こちらもデザインにないので一旦コメントアウトしておきます。
     // public function ProjectLiked(Request $request)
     // {
@@ -351,4 +401,21 @@ class ProjectController extends Controller
     //         return $result = "登録";
     //     }
     // }
+
+    public function support(Project $project)
+    {
+        $this->authorize('checkIsFinishedPayment', $project);
+        if (!isset(Auth::user()->profile->inviter_code)) {
+            $value = [
+                'inviter_code' => Str::uuid()
+            ];
+            Auth::user()->saveProfile($value);
+            Auth::user()->load('profile');
+        }
+        $encrypted_code = Crypt::encrypt(Auth::user()->profile->inviter_code);
+        $invitation_url = route('user.project.show', ['project' => $project, 'inviter' => $encrypted_code]);
+        Auth::user()->supportedProjects()->attach($project->id);
+
+        return view('user.project.support', ['invitation_url' => $invitation_url]);
+    }
 }
