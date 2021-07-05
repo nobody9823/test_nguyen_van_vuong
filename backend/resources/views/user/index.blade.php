@@ -18,7 +18,7 @@ use Carbon\Carbon;
                 <div class="ib01L_01">
                     <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
                     <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
-                    <div class="okini_link_L">
+                    <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
                     @if ($projects->first()->user()->find(Auth::id()) === null)
                     <i class="far fa-heart"></i>
                     @else
@@ -60,7 +60,7 @@ use Carbon\Carbon;
                     <div class="ib01R_01">
                         <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                        <div class="okini_link">
+                        <div class="okini_link liked_project" id="{{ $project->id }}">
                         @if ($projects->first()->user()->find(Auth::id()) === null)
                         <i class="far fa-heart"></i>
                         @else
@@ -353,7 +353,7 @@ use Carbon\Carbon;
                 <div class="ib03L_01">
                     <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
                     <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>                    
-                    <div class="okini_link_L">
+                    <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
                         @if ($projects->first()->user()->find(Auth::id()) === null)
                         <i class="far fa-heart"></i>
                         @else
@@ -400,7 +400,7 @@ use Carbon\Carbon;
                     <div class="ib03R_01">
                         <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                        <div class="okini_link">
+                        <div class="okini_link liked_project" id="{{ $project->id }}">
                         @if ($projects->first()->user()->find(Auth::id()) === null)
                         <i class="far fa-heart"></i>
                         @else
@@ -467,7 +467,7 @@ use Carbon\Carbon;
                     <div class="ib02_01 new_project_obi E-font">
                         <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                        <div class="okini_link">
+                        <div class="okini_link liked_project" id="{{ $project->id }}">
                         @if ($projects->first()->user()->find(Auth::id()) === null)
                         <i class="far fa-heart"></i>
                         @else
@@ -526,5 +526,40 @@ use Carbon\Carbon;
             </div>
             <div class="footer-over_R_03"><i class="fas fa-chevron-right"></i></div>
         </a>
+        <button>ボタン</button>
     </div>
+@endsection
+
+@section('script')
+<script>
+// プロジェクトのお気に入り登録・解除処理
+    $('.liked_project').on('click', function() {
+        var el = $(this);
+        var projectId = el.attr('id');
+
+        el.append('<meta name="csrf-token" content="{{ csrf_token() }}">');
+
+        $.ajax({
+            url: '/project/'+ projectId + '/liked',
+            type: 'POST',
+            data: {'project_id': projectId },
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        })
+        .then((res) => {
+            console.log(res);
+            if(res == "登録"){
+                el.children('i').attr('class', 'fas fa-heart');
+            } else if(res == "削除"){
+                el.children('i').attr('class', 'far fa-heart');
+            } else if (res == "未ログイン") {
+                alert("ログインもしくは会員登録をしてください");
+            } else {
+                alert("エラーが起こりました。");
+            }
+        })
+        .fail((error)=>{
+            console.log("エラーが起こりました。")
+        })
+    });
+</script>
 @endsection
