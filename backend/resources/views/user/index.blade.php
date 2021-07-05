@@ -549,8 +549,10 @@ use Carbon\Carbon;
             console.log(res);
             if(res == "登録"){
                 el.children('i').attr('class', 'fas fa-heart');
+                alert("登録");
             } else if(res == "削除"){
                 el.children('i').attr('class', 'far fa-heart');
+                alert("登録解除");
             } else if (res == "未ログイン") {
                 alert("ログインもしくは会員登録をしてください");
             } else {
