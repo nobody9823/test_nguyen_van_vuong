@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Casts\ImageCast;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use phpDocumentor\Reflection\Types\Self_;
 
 class Profile extends Model
 {
@@ -35,8 +37,50 @@ class Profile extends Model
         'image_url' => ImageCast::class,
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (self $profile) {
+            $profile->inviter_code = \Str::uuid();
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function getBirthDay()
+    {
+        $date = new Carbon($this->birthday);
+        return $date;
+    }
+
+    public function getYearOfBirth()
+    {
+        if ($this->birthday !== null)
+        {
+            return $this->getBirthDay()->year;
+        }
+        return null;
+    }
+
+    public function getMonthOfBirth()
+    {
+        if ($this->birthday !== null)
+        {
+            return $this->getBirthDay()->month;
+        }
+        return null;
+    }
+
+    public function getDayOfBirth()
+    {
+        if ($this->birthday !== null)
+        {
+            return $this->getBirthDay()->day;
+        }
+        return null;
     }
 }

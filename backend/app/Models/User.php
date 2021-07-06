@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Casts\ImageCast;
 use App\Casts\HashMake;
 use Auth;
+use App\Traits\SearchFunctions;
+use App\Traits\SortBySelected;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes,SearchFunctions,SortBySelected;
 
     /**
      * The attributes that are mass assignable.
@@ -62,28 +64,32 @@ class User extends Authenticatable
             $user->bankAccount()->delete();
             $user->profile()->delete();
 
+            $project_ids = Project::where('user_id', $user->id)->pluck('id')->toArray();
+            ProjectFile::whereIn('project_id', $project_ids)->delete();
+            Project::destroy($project_ids);
+
             // 中間テーブルの削除
             UserProjectLiked::where('user_id', $user->id)
                 ->update(['deleted_at' => Carbon::now()]);
-            $comment_ids = Comment::where('user_id', $user->id)->pluck('id')->toArray();
+            UserProjectSupported::where('user_id', $user->id)
+                ->update(['deleted_at' => Carbon::now()]);
+            Payment::where('inviter_id', $user->id)
+                ->update(['inviter_id' => null]);
+            $payment_ids = $user->payments()->pluck('id');
+            $comment_ids = Comment::whereIn('payment_id', $payment_ids)->pluck('id')->toArray();
             Reply::whereIn('comment_id', $comment_ids)->delete();
             Comment::destroy($comment_ids);
-            $payment_ids = $user->payments()->pluck('id');
             MessageContent::whereIn('payment_id', $payment_ids)->delete();
             PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
             Payment::destroy($payment_ids);
         });
     }
 
-    public function supportComments()
-    {
-        return $this->hasMany('App\Models\SupporterComment');
-    }
-
-    public function userSupporterCommentLiked()
-    {
-        return $this->belongsToMany('App\Models\SupporterComment', 'App\Models\UserSupporterCommentLiked');
-    }
+    // NOTICE デザインにないのでコメントアウト
+    // public function userCommentLiked()
+    // {
+    //     return $this->belongsToMany('App\Models\Comment', 'App\Models\UserCommentLiked');
+    // }
 
     public function projects()
     {
@@ -97,7 +103,7 @@ class User extends Authenticatable
 
     public function invitedPayments()
     {
-        return $this->hasMany('App\Models\User', 'inviter_id', 'id');
+        return $this->hasMany('App\Models\Payment', 'inviter_id', 'id');
     }
 
     public function likedProjects()
@@ -150,14 +156,15 @@ class User extends Authenticatable
         return $this->paginate(10);
     }
 
-    public function scopeSearchWord($query, $words)
+    public function scopeSearch($query)
     {
-        return $query->where(function ($user) use ($words) {
-            foreach ($words as $word) {
-                $user->Where('name', 'like', "%$word%");
-                $user->orWhere('email', 'like', "%$word%");
+        if ($this->getSearchWordInArray()) {
+            foreach ($this->getSearchWordInArray() as $word) {
+                $query->where(function ($query) use ($word) {
+                    $query->Where('name', 'like', "%$word%")->orWhere('email', 'like', "%$word%");
+                });
             }
-        })->paginate(10);
+        }
     }
 
     public function scopeSearchUsersToArray($query, $word): array
@@ -175,12 +182,12 @@ class User extends Authenticatable
         return $query->whereIn(
             'id',
             Payment::whereIn(
-            'id',
-            PlanPaymentIncluded::whereIn(
-                        'plan_id',
-                        Plan::where('project_id', $project->id)->pluck('id')->toArray()
-                    )->pluck('id')->toArray()
-        )->pluck('id')->toArray()
+                'id',
+                PlanPaymentIncluded::whereIn(
+                    'plan_id',
+                    Plan::where('project_id', $project->id)->pluck('id')->toArray()
+                )->pluck('id')->toArray()
+            )->pluck('id')->toArray()
         )->count();
     }
 
@@ -189,9 +196,10 @@ class User extends Authenticatable
     {
         return $query->whereIn(
             'id',
-            UserProjectSupported::query()->select('user_id')
-                ->whereIn('project_id', $project_id)
-        )->withCount('invitedPayments')
+            UserProjectSupported::where('project_id', $project_id)->pluck('user_id')->toArray()
+        )->withCount(['invitedPayments' => function ($query) use ($project_id) {
+            $query->filterByProjectId($project_id);
+        }])
         ->orderBy('invited_payments_count', 'DESC');
     }
 
@@ -200,9 +208,10 @@ class User extends Authenticatable
     {
         return $query->whereIn(
             'id',
-            UserProjectSupported::query()->select('user_id')
-                ->whereIn('project_id', $project_id)
-        )->withSum('invitedPayments', 'price')
+            UserProjectSupported::where('project_id', $project_id)->pluck('user_id')->toArray()
+        )->withSum(['invitedPayments' => function ($query) use ($project_id) {
+            $query->filterByProjectId($project_id);
+        }], 'price')
         ->orderBy('invited_payments_sum_price', 'DESC');
     }
 
@@ -210,8 +219,9 @@ class User extends Authenticatable
     {
         return $query->whereIn(
             'id',
-            Profile::query()->select('user_id')->where(
-                'inviter_code', $inviter_code
+            Profile::select('user_id')->where(
+                'inviter_code',
+                $inviter_code
             )
         );
     }

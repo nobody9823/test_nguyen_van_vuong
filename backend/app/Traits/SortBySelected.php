@@ -33,10 +33,10 @@ trait SortBySelected
                 return $query->orderBy('title', 'desc');
                 break;
             case 'prefecture_asc':
-                return $query->orderBy('prefecture_id', 'asc');
+                return $query->orderBy('prefecture', 'asc');
                 break;
             case 'prefecture_desc':
-                return $query->orderBy('prefecture_id', 'desc');
+                return $query->orderBy('prefecture', 'desc');
                 break;
             case 'age_asc':
                 return $query->orderBy('age', 'asc');

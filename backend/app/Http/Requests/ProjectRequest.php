@@ -41,6 +41,7 @@ class ProjectRequest extends FormRequest
             'title' => ['required', 'string', 'max:45'],
             'content' => ['required', 'string', 'max:5000'],
             'target_amount' => ['required', 'integer', 'max:99999999'],
+            'curator' => ['required', 'string'],
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
             'start_date' => ['required', 'date_format:Y-m-d H:i:s', $request->isMethod('post') ?'after:1 week':null],
             'end_date' => ['required', 'date_format:Y-m-d H:i:s', 'after:start_date', "before:{$end_date_limit}"],
@@ -109,6 +110,8 @@ class ProjectRequest extends FormRequest
             'target_amount.required' => "目標金額を入力してください。",
             'target_amount.integer' => "目標金額は数字で入力してください。",
             'target_amount.max' => "目標金額は99,999,999円以内にしてください。",
+            'curator.required' => "キュレーターを入力してください。",
+            'curator.string' => "キュレーターは文字列で入力してください。",
             'start_date.required' => "掲載開始日時を入力してください。",
             'start_date.date_format' => "掲載開始日時の形式を確認してください。",
             'start_date.after' => "掲載開始日時を現在より1週間後にしてください",
