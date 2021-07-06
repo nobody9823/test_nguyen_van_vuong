@@ -96,6 +96,11 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.tag.index') }}">
+            タグ管理
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.detail.show', ['detail' => Auth::id()]) }}">
             各種設定
         </a>

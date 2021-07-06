@@ -17,7 +17,7 @@
 --}}
 @extends('admin.layouts.base')
 
-@section('title', "{{$title}}情報編集")
+@section('title', "$title"."一覧")
 
 @section('content')
 <div class="card-header d-flex justify-content-between align-items-center">
