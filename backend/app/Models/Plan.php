@@ -8,6 +8,7 @@ use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Request;
 
@@ -102,7 +103,6 @@ class Plan extends Model
         return $query;
     }
     //--------------local scope----------------//
-    
 
     public function getSupportedUsers()
     {
@@ -113,6 +113,28 @@ class Plan extends Model
     {
         if (strpos($this->image_url, 'sampleImage') === false) {
             \Storage::delete($this->image_url);
+        }
+    }
+
+    public function scopeGetPlansByIds($query, array $plan_ids)
+    {
+        return $query->whereIn('id', $plan_ids);
+    }
+
+    public function scopeLockForUpdatePlansByIds($query, array $plan_ids)
+    {
+        return $query->getPlansByIds($plan_ids)->lockForUpdate();
+    }
+
+    public function scopeUpdatePlansByIds($query, Collection $plans, array $plan_ids)
+    {
+        foreach ($plans as $plan){
+            foreach($plan_ids as $key => $value){
+                if ($plan->id === $key){
+                    $plan->limit_of_supporters -= $value;
+                    $plan->save();
+                }
+            }
         }
     }
 

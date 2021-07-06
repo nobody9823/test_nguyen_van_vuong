@@ -131,56 +131,6 @@ class ProjectControllerForPayPayTest extends TestCase
         ];
     }
 
-
-    /**
-     * test of create qr code is success
-     *
-     * @return void
-     */
-    public function testConfirmPaymentActionIsSuccess()
-    {
-        $this->withoutExceptionHandling();
-        $mock = \Mockery::mock(PayPay::class);
-        $mock->shouldReceive('createQrCode')
-            ->once()
-            ->andReturn($this->response_create_qr_code);
-
-        $this->app->bind(PayPayInterface::class, function () use ($mock) {
-            return $mock;
-        });
-
-        $response = $this->actingAs($this->supporter)
-                        ->post(route('user.plan.confirmPayment', array_merge(['project' => $this->project], $this->params)));
-        $response->assertOk();
-        $payments = $this->supporter->payments()->get();
-        $this->assertCount(2, $payments);
-    }
-
-    /**
-     * test of create qr code is fail
-     *
-     * @return void
-     */
-    public function testConfirmPaymentActionIsFail()
-    {
-        $this->withoutExceptionHandling();
-        $this->expectException(Exception::class);
-
-        $mock = \Mockery::mock(PayPay::class);
-        $mock->shouldReceive('createQrCode')
-            ->once()
-            ->andThrow(Exception::class);
-
-        $this->app->bind(PayPayInterface::class, function () use ($mock) {
-            return $mock;
-        });
-
-        ($this->actingAs($this->supporter)
-                        ->post(route('user.plan.confirmPayment', array_merge(['project' => $this->project], $this->params))))->execute(1);
-        $payments = $this->supporter->payments()->get();
-        $this->assertCount(1, $payments);
-    }
-
     /**
      * test of do payment as pay pay is true
      *

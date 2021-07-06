@@ -23,13 +23,13 @@
             <div class="av_tit">決済金額</div>
             <div class="av_txt">
                 購入者側の手数料要確認(支援金額：2,500円<br>システム利用料：220円（税込）)
-                <div>合計：{{ $payment->price }}円</div>
+                <div>合計：{{ $validated_request['total_amount'] }}円</div>
             </div>
         </div><!--/av_box-->
 
         <div class="av_box">
             <div class="av_tit">リターン内容</div>
-            @foreach($payment->includedPlans as $plan)
+            @foreach($plans as $plan)
             <div class="av_txt">
                 <div>{{ $plan->title }}<br>支援金額：{{ $plan->price }}円</div>
                 支援者：500人(未実装) <br>お届け予定：{{ $plan->delivery_date }}
@@ -41,21 +41,21 @@
         <div class="av_box">
             <div class="av_tit">備考欄<span class="av_tit_span_01">※非公開</span></div>
             <div class="av_txt">
-                {{ $payment->remarks }}
+                {{ $validated_request['remarks'] }}
             </div>
         </div><!--/av_box-->
 
         <div class="av_box">
             <div class="av_tit">コメント<span class="av_tit_span_01">※公開</span></div>
             <div class="av_txt">
-                {{ $payment->comment->content }}
+                {{ $validated_request['comments'] }}
             </div>
         </div><!--/av_box-->
 
         <div class="av_box">
             <div class="av_tit">お支払い方法</div>
             <div class="av_txt">
-                @if($payment->pay_jp_id !== null)
+                @if($validated_request['payment_way'] !== 'pay pay')
                     {{ 'credit' }}<br>
                     クレジットカード（VISA）<br>
                     クレジットカード番号：1234567891011123<br>
@@ -99,11 +99,7 @@
         <div class="av_caution">※入力に誤りがないか今一度確認の上、完了にお進みください</div>
 
         <div class="def_btn">
-            @if ($payment->pay_jp_id !== null)
-                <a href="{{ route('user.plan.paymentForPayJp', ['project' => $project, 'payment' => $payment]) }}" style="color: white">決済する</a>
-            @else
-                <a href="{{ $qr_code['data']['url'] }}" style="color: white">決済する</a>
-            @endif
+            <a href="{{ route('user.plan.prepare_for_payment', ['project' => $project, 'validated_request' => $validated_request]) }}"  style="color: white">決済する</a>
         </div>
 
         {{-- <div class="def_btn_02">内容を変更する</div> --}}
