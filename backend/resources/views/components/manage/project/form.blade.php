@@ -12,7 +12,8 @@
 
 <div class="form-group">
     <label>プロジェクト内容</label>
-    <textarea type="text" name="content" class="form-control">{{old('content', optional($project ?? null)->content)}}</textarea>
+    <textarea type="text" name="content"
+        class="form-control">{{old('content', optional($project ?? null)->content)}}</textarea>
 </div>
 
 <div class="form-row">
@@ -22,6 +23,12 @@
             value="{{ old('target_amount', optional($project ?? null)->target_amount) }}" step="10000">
     </div>
     <h5 class="pt-5">円</h5>
+</div>
+
+<div class="form-group">
+    <label>キュレーター</label>
+    <input type="text" name="curator" class="form-control"
+        value="{{ old('curator', optional($project ?? null)->curator) }}">
 </div>
 
 <div>
@@ -44,14 +51,15 @@
 </div>
 
 <div class="d-flex flex-wrap">
-@foreach($tags as $key => $value)
+    @foreach($tags as $key => $value)
     <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="{{ $key }}" name="tags[]" id="flexCheckDefault" {{ $projectTags !== null && in_array($key, $projectTags) ? 'checked' : '' }}>
-    <label class="form-check-label" for="flexCheckDefault">
-        {{ $value }}
-    </label>
+        <input class="form-check-input" type="checkbox" value="{{ $key }}" name="tags[]" id="flexCheckDefault"
+            {{ $projectTags !== null && in_array($key, $projectTags) ? 'checked' : '' }}>
+        <label class="form-check-label" for="flexCheckDefault">
+            {{ $value }}
+        </label>
     </div>
-@endforeach
+    @endforeach
 </div>
 
 <div class="form-group">
@@ -66,7 +74,9 @@
             <li>動画URLはYouTubeのURLを使用してください。</li>
         </ul>
     </div>
-    <input type="text" name="video_url" class="form-control" value="{{ old('video_url', optional($projectVideo)->file_url) }}" placeholder="https://www.youtube.com/watch?v=xxxxxxxxxxxxxx">
+    <input type="text" name="video_url" class="form-control"
+        value="{{ old('video_url', optional($projectVideo)->file_url) }}"
+        placeholder="https://www.youtube.com/watch?v=xxxxxxxxxxxxxx">
     <section class="d-flex justify-content-left">
         <div class="col-sm-4">
             {{ DisplayVideoHelper::getVideoAtManage(optional($projectVideo)->file_url) }}
@@ -75,7 +85,7 @@
 </div>
 
 @if($project ?? false)
-    <button type="submit" class="btn btn-primary">更新</button>
+<button type="submit" class="btn btn-primary">更新</button>
 @else
-    <button type="submit" class="btn btn-primary">作成</button>
+<button type="submit" class="btn btn-primary">作成</button>
 @endif
