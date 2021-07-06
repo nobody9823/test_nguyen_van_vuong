@@ -21,6 +21,7 @@ class CreateProjectsTable extends Migration
             $table->string('title')->default('');
             $table->string('content', 15000)->default('');
             $table->integer('target_amount')->default(0);
+            $table->string('curator')->default('');
             $table->date('start_date')->default(Carbon::minValue());
             $table->date('end_date')->default(Carbon::maxValue());
             $table->enum('release_status', ProjectReleaseStatus::getValues())->default('---');
