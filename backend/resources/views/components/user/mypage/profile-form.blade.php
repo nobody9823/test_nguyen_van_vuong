@@ -78,6 +78,20 @@
             </div>
         </div>
     </form>
+@elseif(Request::get('input_type') === 'inviter_code')
+    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="urlForm">
+        @method('PATCH')
+        @csrf
+        <div class="prof_edit_row">
+            <div class="prof_edit_01">ユーザー名<br><span>編集中</span></div>
+            <div class="prof_edit_editbox">
+                <input name="url" type="text" placeholder="UserId" value="{{ old('url', Auth::user()->profile->inviter_code) }}"/>
+            </div>
+            <div class="prof_edit_03">
+                <a href="javascript:document.urlForm.submit()">更新</a>
+            </div>
+        </div>
+    </form>
 {{-- @elseif(Request::get('input_type') === 'birthday')
 <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
     @method('PATCH')
@@ -191,11 +205,13 @@
             <a href="{{ route('user.profile', ['input_type' => 'password']) }}" class="cover_link"></a>
         </div>
     </div>
-    {{-- <div class="prof_edit_row">
+    <div class="prof_edit_row">
         <div class="prof_edit_01">URL</div>
-        <div class="prof_edit_02"></div>
-        <div class="prof_edit_03">編集<a href="★" class="cover_link"></a></div>
-    </div> --}}
+        <div class="prof_edit_02">{{ Auth::user()->profile->inviter_code }}</div>
+        <div class="prof_edit_03">
+            編集
+            <a href="{{ route('user.profile', ['input_type' => 'inviter_code']) }}" class="cover_link"></a></div>
+    </div>
     {{-- <div class="prof_edit_row">
         <div class="prof_edit_01">現在地</div>
         <div class="prof_edit_02">設定されていません</div>
