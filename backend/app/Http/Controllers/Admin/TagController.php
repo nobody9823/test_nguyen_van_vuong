@@ -83,10 +83,10 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $Tag
      * @return \Illuminate\Http\Response
      */
-    public function update(NameValidatorRequest $request, Tag $category)
+    public function update(NameValidatorRequest $request, Tag $tag)
     {
-        $category->name = $request->name;
-        $category->save();
+        $tag->name = $request->name;
+        $tag->save();
         return redirect()->action([TagController::class, 'index'])->with('flash_message', 'カテゴリ更新が完了しました');
     }
 
