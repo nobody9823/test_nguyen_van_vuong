@@ -3,41 +3,51 @@
 @section('title', '本登録画面')
 
 @section('content')
-<div class="content" style=" background: #f5f5f5; padding: 80px 0;">
-    <div class="section">
-        <div class="fixedcontainer mypage_contents sign-in_box">
-            <h2><i class="fas fa-sign-in-alt"></i>本登録</h2>
-            <form action={{route('user.register',['token' => $token])}} method='post'>
-                @csrf
-                <div class="form-group user_login">
-                    {{ Form::label('name', 'お名前', ['class' =>  'control-label']) }}
-                    <input style="margin-bottom: 10px;" name='name' type="text"
-                        class={{"form-control".($errors->has('name') ? ' is-invalid' : '')}} placeholder='お名前'
-                        value="{{ old('name') }}" required>
-                    {{ Form::label('password', 'パスワード', ['class' =>  'control-label']) }}
-                    <input style="margin-bottom: 10px;" name='password' type="password"
-                        class={{"form-control".($errors->has('name') ? ' is-invalid' : '')}} placeholder='パスワード'
-                        value="{{ old('password') }}" required>
-                    {{ Form::label('password_confirmation', '確認パスワード', ['class' =>  'control-label']) }}
-                    <input style="margin-bottom: 10px;" name='password_confirmation' type="password"
-                        class={{"form-control".($errors->has('name') ? ' is-invalid' : '')}} placeholder='確認パスワード'
-                        value="{{ old('password_confirmation') }}" required>
-                </div>
-                <div class="wlr_64_R">
-                    <div class="as_01">
-                        <input type="checkbox" class="checkbox-fan" id="tos" required>
-                        <label for="tos" class="checkbox-fan_02"></label>
-                    </div>
+<section id="" class="section_base">
+    <div class=" def_inner inner_item">
+
+        <div class="tit_L_01 E-font"><h2>REGISTER</h2><div class="sub_tit_L">本登録</div></div>
+
+        <form action="{{ route('user.register',['token' => $token]) }}" method="POST">
+            @csrf
+            <div class="form_item_row">
+                <div class="form_item_tit">ユーザーID<span class="form_item_tit_desc">※全角・半角英数字3-20文字</span></div>
+                <input name="name" type="text" value="" class="def_input_100p" placeholder="ユーザーID">
+            </div><!--/form_item_row-->
+
+            <div class="form_item_row">
+                <div class="form_item_tit">パスワード<span class="form_item_tit_desc">※半角英数字6文字以上</span></div>
+                <input name="password" type="password" value="" class="def_input_100p" placeholder="パスワード">
+            </div><!--/form_item_row-->
+
+            <div class="form_item_row">
+                <div class="form_item_tit">パスワード確認用</div>
+                <input name="password_confirmation" type="password" value="" class="def_input_100p" placeholder="パスワード確認用">
+            </div><!--/form_item_row-->
+
+            <div class="nm_doui">
+                <input type="checkbox" id="aaa" class="ac_list_checks" required>
+                <label for="aaa" class="checkbox-fan">
                     <a href="{{ route('user.terms_of_service') }}">利用規約</a>
-                    <p>と</p>
+                    と
                     <a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a>
-                    <p>に同意する</p>
-                </div>
-                <div class="submit-box">
-                    <input type="submit" name="" value="本登録を完了する" class="my-page_btn">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+                    に同意する
+                </label>
+            </div>
+
+            <div class="nm_s_txt">
+                ※ FanReturn.comからのメールアドレスが受信拒否設定に含まれていないかご確認ください。<br>
+                ※ FanReturnからのメールマガジン/各種お知らせをお送りさせていただきます。<br>
+                （不要な場合は登録後に解除できます。）<br>
+                ※ 携帯キャリアのメールアドレスでは、応援購入後などにシステムからのメールが届かない場合がありますのでご注意ください。<br>
+            </div>
+
+            <div class="def_btn">
+                <button type="submit" class="disable-btn">
+                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">新規会員登録</p>
+                </button>
+            </div>
+        </form>
+    </div><!--/.inner_item-->
+</section><!--/.section_base-->
 @endsection
