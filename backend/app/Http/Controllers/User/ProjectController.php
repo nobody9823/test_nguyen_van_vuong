@@ -216,7 +216,7 @@ class ProjectController extends Controller
                 ], $request->all()
             ));
             $this->user->payments()->save($payment)
-                ->each(function($payment) use ($validated_request){
+                ->each(function($payment) use ($project, $validated_request){
                     $payment->includedPlansByArrayPlan($validated_request['plans']);
                     if (!empty($validated_request['comments'])){
                         $comment = $this->comment->fill(['project_id' =>  $project->id, 'content' => $validated_request['comments']]);
