@@ -37,6 +37,18 @@ class Payment extends Model
         return $this->hasOne('App\Models\Comment');
     }
 
+    public function scopeFilterByProjectId($query, $project_id)
+    {
+        return $query->whereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn(
+            'plan_id',
+            Plan::select('id')->whereIn(
+                'project_id',
+                Project::where('id', $project_id)->pluck('id')->toArray()
+            )
+        ));
+    }
+
+    // FIXME ここのスコープはクエリではなくてpriceの合計値が返っている気がいたします。
     public function scopeGetTotalAmountOfSupporterWithProject($query, Project $project)
     {
         return $query->whereIn('id',

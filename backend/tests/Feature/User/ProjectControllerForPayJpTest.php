@@ -31,6 +31,7 @@ class ProjectControllerForPayJpTest extends TestCase
             'content' => 'test content',
             'target_amount' => 10000000,
             'release_status' => '掲載中',
+            'curator' => 'test_curator',
             'start_date' => now(),
             'end_date' => now()
         ])->create();
@@ -105,11 +106,12 @@ class ProjectControllerForPayJpTest extends TestCase
         $this->withoutExceptionHandling();
         $response = $this->actingAs($this->supporter)
                         ->from($this->url)
-                        ->get(route('user.plan.paymentForPayJp', [
+                        ->get(
+                            route('user.plan.paymentForPayJp', [
                             'project' => $this->project,
                             'payment' => $this->success_payment
                         ])
-                    );
+                        );
         $response->assertOk();
         $payment =Payment::find($this->success_payment->id);
         $this->assertSame(1, $payment->payment_is_finished);
@@ -121,10 +123,11 @@ class ProjectControllerForPayJpTest extends TestCase
         $this->expectException(Exception::class);
         ($this->actingAs($this->supporter)
             ->from($this->url)
-            ->get(route('user.plan.paymentForPayJp', [
+            ->get(
+                route('user.plan.paymentForPayJp', [
                 'project' => $this->project,
                 'payment' => $this->fail_payment
             ])
-        ))->execute(1);
+            ))->execute(1);
     }
 }
