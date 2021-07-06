@@ -32,8 +32,8 @@ class TagController extends Controller
     public function create()
     {
         return view('components.admin.simple_create', [
-            'title' => 'カテゴリ',
-            'type' => 'category',
+            'title' => 'タグ',
+            'type' => 'tag',
         ]);
     }
 
