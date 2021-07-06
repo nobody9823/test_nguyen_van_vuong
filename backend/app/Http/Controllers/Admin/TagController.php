@@ -96,9 +96,9 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $Tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $category)
+    public function destroy(Tag $tag)
     {
-        $category->delete();
+        $tag->delete();
         return redirect()->action([TagController::class, 'index'])->with('flash_message', '削除が成功しました。');
     }
 }
