@@ -22,6 +22,7 @@ use App\Mail\User\ConsultProject;
 use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
 use Exception;
+use App\Notifications\PaymentNotification;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -244,7 +245,7 @@ class ProjectController extends Controller
                 $this->pay_jp->Refund($response->id);
                 throw $e;
             }
-
+            $this->user->notify(new PaymentNotification($project, $payment));
         return view('user.plan.supported', ['project' => $project, 'payment' => $payment]);
     }
 
@@ -269,6 +270,7 @@ class ProjectController extends Controller
             $this->pay_pay->cancelPayment($payment_id);
             throw $e;
         }
+        $this->user->notify(new PaymentNotification($project, $payment));
         $supporter_count = User::getCountOfSupportersWithProject($project);
         $total_amount = Payment::getTotalAmountOfSupporterWithProject($project);
         return view('user.plan.supported', ['project' => $project, 'payment' => $payment, 'supporter_count' => $supporter_count, 'total_amount' => $total_amount]);
