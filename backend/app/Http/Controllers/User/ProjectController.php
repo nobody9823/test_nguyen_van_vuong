@@ -173,10 +173,15 @@ class ProjectController extends Controller
      * @param Project
      * @return \Illuminate\Http\Response
      */
-    public function selectPlans(Request $request, Project $project)
+    public function selectPlans(Request $request, Project $project, Plan $plan)
     {
-        $project->load('plans');
-        return view('user.project.select_plan', ['project' => $project, 'inviter_code' => $request->inviter_code, 'user' => $this->user]);
+        return view('user.project.select_plan',
+            [
+                'project' => $project,
+                'inviter_code' => $request->inviter_code,
+                'user' => $this->user,
+                'plans' => $plan->id !== null ? $plan : $project->plans
+            ]);
     }
 
     /**
