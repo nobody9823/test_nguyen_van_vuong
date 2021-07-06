@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ActivityReportController;
+use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -9,6 +11,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ReplyController;
 use App\Http\Controllers\Admin\CommentController;
@@ -19,6 +22,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WorkAttendanceController;
 use App\Http\Controllers\Admin\WorkShiftController;
 use App\Http\Controllers\Admin\SupporterPurchaseController;
+use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
 //ログイン
@@ -39,6 +43,12 @@ Route::middleware('auth:admin')->group(function () {
     //ユーザー管理
     Route::resource('user', UserController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('user/password_reset/{user}', [UserController::class, 'passwordReset'])->name('user.password_reset');
+    Route::prefix('user/{user}')->group(function () {
+        Route::get('address/edit', [AddressController::class,'edit'])->name('address.edit');
+        Route::resource('address', AddressController::class, ['only' => ['create', 'store','update']]);
+        Route::get('profile/edit', [ProfileController::class,'edit'])->name('profile.edit');
+        Route::resource('profile', ProfileController::class, ['only' => ['create', 'store','update']]);
+    });
 
     //プロフィール管理
     Route::resource('detail', DetailController::class, ['only' => ['show', 'edit', 'update']]);

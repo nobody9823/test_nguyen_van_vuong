@@ -26,6 +26,7 @@ class Project extends Model
         'title',
         'content',
         'target_amount',
+        'curator',
         'start_date',
         'end_date',
     ];
@@ -146,18 +147,19 @@ class Project extends Model
         return $query->take($int)->with(['projectFiles', 'plans', 'plans.includedPayments', 'plans.includedPayments.user', 'reports']);
     }
 
-    public function scopeOrdeyByFundingAmount($query)
+    public function scopeOrderByFundingAmount($query)
     {
         return $query
-        // projectsテーブルにplans,user_plan_billingテーブルを結合する
+        // projectsテーブルにplan_payment_includedテーブルを結合する
         ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('user_plan_billing', 'plans.id', '=', 'user_plan_billing.plan_id')
+        ->join('plan_payment_included', 'plans.id', '=', 'plan_payment_included.plan_id')
+        ->join('payments', 'plan_payment_included.payment_id', '=', 'payments.id')
         // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('SUM(plans.price) as funding_amount'))
+        ->select('plans.project_id','projects.*',DB::raw('SUM(payments.price) as funding_amount'))
         ->groupBy('plans.project_id')->orderBy('funding_amount','DESC');
     }
 
-    public function scopeOrdeyByNumberOfSupporters($query)
+    public function scopeOrderByNumberOfSupporters($query)
     {
         return $query
         // projectsテーブルにplans,user_plan_billingテーブルを結合する
@@ -242,11 +244,11 @@ class Project extends Model
     public function scopeSearchWithReleaseStatus($query, $release_statuses)
     {
         if (is_array($release_statuses) && optional($release_statuses)[0] !== null){
-            foreach($release_statuses as $release_status){
-                $query->orWhere(function($query) use ($release_status){
-                    $query->where('release_status', $release_status);
-                });
-            }
+            $query->where(function($query) use ($release_statuses){
+                foreach($release_statuses as $release_status){
+                    $query->orWhere('release_status', $release_status);
+                }
+            });
         }
         return $query;
     }
@@ -256,7 +258,7 @@ class Project extends Model
         if ($this->getSearchWordInArray()) {
             foreach ($this->getSearchWordInArray() as $word) {
                 $query->where(function ($query) use ($word) {
-                    $query->Where('title', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                    $query->where('title', 'like', "%$word%")->orWhere('curator', 'like', "%$word%")->orWhere('id', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
                 });
             }
         }
@@ -267,6 +269,11 @@ class Project extends Model
     public function getTotalLikesAttribute()
     {
         return $this->likedUsers()->count() + $this->added_like;
+    }
+
+    public function getDisplayIdAttribute()
+    {
+        return 'PR'.sprintf('%05d', $this->id);
     }
 
     public function getNumberOfDaysLeftAttribute()

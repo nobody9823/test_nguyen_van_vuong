@@ -54,36 +54,47 @@ class ProjectController extends Controller
     public function index()
     {
         $tags = Tag::all();
+        $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
         $projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
         ->inRandomOrder()->takeWithRelations(5)->get();
+        
+        // ランキング(支援総額順)
+        $ranking_projects = Project::getReleasedProject()->seeking()->orderByFundingAmount()
+        ->takeWithRelations(5)->skip(1)->get();
 
         // 応援プロジェクト（目標金額の高い順）
-        $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
-            ->inRandomOrder()->takeWithRelations(9)->get();
+        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        //     ->inRandomOrder()->takeWithRelations(9)->get();
+
+        // 応援プロジェクト（目標金額の高い順）
+        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        //     ->inRandomOrder()->takeWithRelations(9)->get();
 
         // 最新のプロジェクト
-        $new_projects = Project::getReleasedProject()->seeking()->orderBy('created_at', 'DESC')
-            ->takeWithRelations(9)->get();
+        // $new_projects = Project::getReleasedProject()->seeking()->orderBy('created_at', 'DESC')
+        //     ->takeWithRelations(9)->get();
 
         // 人気のプロジェクト
-        $popularity_projects = Project::getReleasedProject()->seeking()->ordeyByLikedUsers()
-            ->takeWithRelations(9)->get();
+        // $popularity_projects = Project::getReleasedProject()->seeking()->ordeyByLikedUsers()
+        //     ->takeWithRelations(9)->get();
 
         // 募集終了が近いプロジェクト
-        $nearly_deadline_projects = Project::getReleasedProject()->seeking()->orderByNearlyDeadline()
-            ->inRandomOrder()->takeWithRelations(9)->get();
+        // $nearly_deadline_projects = Project::getReleasedProject()->seeking()->orderByNearlyDeadline()
+        //     ->inRandomOrder()->takeWithRelations(9)->get();
 
         // もうすぐ公開のプロジェクト
-        $nearly_open_projects = Project::getReleasedProject()->orderByNearlyOpen()
-            ->inRandomOrder()->takeWithRelations(9)->get();
+        // $nearly_open_projects = Project::getReleasedProject()->orderByNearlyOpen()
+        //     ->inRandomOrder()->takeWithRelations(9)->get();
 
         return view('user.index', compact(
-            'new_projects',
-            'cheer_projects',
-            'popularity_projects',
-            'nearly_deadline_projects',
-            'nearly_open_projects',
+            // 'new_projects',
+            // 'cheer_projects',
+            // 'popularity_projects',
+            // 'nearly_deadline_projects',
+            // 'nearly_open_projects',
+            'ranking_projects',
             'tags',
+            'user_liked',
             'projects'
         ));
     }
@@ -165,7 +176,7 @@ class ProjectController extends Controller
     public function selectPlans(Request $request, Project $project)
     {
         $project->load('plans');
-        return view('user.project.select_plan', ['project' => $project, 'inviter_code' => $request->inviter_code]);
+        return view('user.project.select_plan', ['project' => $project, 'inviter_code' => $request->inviter_code, 'user' => $this->user]);
     }
 
     /**
@@ -178,8 +189,9 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $this->user->saveProfile($request->all());
+            $this->user->saveProfile($request->except(['inviter_code']));
             $this->user->saveAddress($request->all());
+            $this->user->load(['profile', 'address']);
             $unique_token = UniqueToken::getToken();
             $inviter = !is_null($request->inviter_code) ? User::getInviterFromInviterCode($request->inviter_code)->first() : null;
             $payment = $this->payment->fill(array_merge(
@@ -203,7 +215,6 @@ class ProjectController extends Controller
             DB::rollback();
             throw $e;
         }
-        Auth::user()->load(['profile', 'address']);
         return view('user.project.confirm_plan', ['project' => $project, 'payment' => $payment, 'qr_code' => $qr_code]);
     }
 
@@ -384,34 +395,27 @@ class ProjectController extends Controller
             return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");
         }
     }
-    // こちらもデザインにないので一旦コメントアウトしておきます。
-    // public function ProjectLiked(Request $request)
-    // {
-    //     $userLiked = UserProjectLiked::where('user_id', Auth::id())->where('project_id', $request->project_id)->first();
+    
+    public function ProjectLiked(Request $request)
+    {
+        $userLiked = UserProjectLiked::where('user_id', Auth::id())->where('project_id', $request->project_id)->first();
 
-    //     if (Auth::id() === null) {
-    //         return $result = "未ログイン";
-    //     } elseif ($userLiked !== null) {
-    //         $userLiked->delete();
-    //         return $result = "削除";
-    //     } else {
-    //         $project_liked = new UserProjectLiked(['user_id' => Auth::id()]);
-    //         $project_liked->project_id = $request->project_id;
-    //         $project_liked->save();
-    //         return $result = "登録";
-    //     }
-    // }
+        if (Auth::id() === null) {
+            return $result = "未ログイン";
+        } elseif ($userLiked !== null) {
+            $userLiked->delete();
+            return $result = "削除";
+        } else {
+            $project_liked = new UserProjectLiked(['user_id' => Auth::id()]);
+            $project_liked->project_id = $request->project_id;
+            $project_liked->save();
+            return $result = "登録";
+        }
+    }
 
     public function support(Project $project)
     {
         $this->authorize('checkIsFinishedPayment', $project);
-        if (!isset(Auth::user()->profile->inviter_code)) {
-            $value = [
-                'inviter_code' => Str::uuid()
-            ];
-            Auth::user()->saveProfile($value);
-            Auth::user()->load('profile');
-        }
         $encrypted_code = Crypt::encrypt(Auth::user()->profile->inviter_code);
         $invitation_url = route('user.project.show', ['project' => $project, 'inviter' => $encrypted_code]);
         Auth::user()->supportedProjects()->attach($project->id);

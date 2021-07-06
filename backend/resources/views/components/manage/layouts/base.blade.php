@@ -59,6 +59,28 @@ use \Illuminate\Support\Str;
         </div>
     </div>
     @yield('script')
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js">
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
+
+    <script>
+        $(function () {
+        $("#start_date").datetimepicker({
+            format: 'Y-m-d H:i:s'
+        });
+        $("#end_date").datetimepicker({
+            format: 'Y-m-d H:i:s'
+        });
+        $(".datetime_picker").datetimepicker({
+            format: 'Y-m-d H:i:s'
+        });
+        $(".date_picker").datetimepicker({
+            format: 'Y-m-d'
+        });
+    });
+    </script>
+
 </body>
 
 </html>

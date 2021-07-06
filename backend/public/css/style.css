@@ -675,6 +675,7 @@ input[type=radio]:checked + .radio-fan::after {
 	content: '\f0dc';
 	font-weight: 900;
 	color: #DBDBDB;
+	pointer-events: none;
 }
 .cp_ipselect.cp_normal select {
 	padding: 8px 38px 8px 8px;
@@ -989,7 +990,7 @@ input[type=radio]:checked + .radio-fan::after {
 .as_h_01_01{ width: 44px; height: 88px;}
 .as_h_01_02{ width: 44px; height: 88px;}
 .as_h_01_03{ width: 44px; height: 88px;}
-.as_h_01_current{ background: url(../img/as_dotted_current.svg);}
+.as_h_01_current{ background: url('../image/as_dotted_current.svg');}
 .as_h_01_dotted{ width: 44px; height: 44px; text-align: center; border-radius: 22px; position: relative;}
 .as_h_01_dotted div { width: 12px; height: 12px; border-radius: 6px; background: #00AEBD; position: absolute; top:17px; left: 16px; }
 .as_h_01_txt{ width: 44px; text-align: center; padding: 20px 0 0 0;}
@@ -1064,6 +1065,7 @@ input[type=radio]:checked + .radio-fan::after {
 	font-family: "Font Awesome 5 Free";
 	content: '\f0dc';
 	font-weight: 900;
+	pointer-events: none;
 }
 .cp_ipselect_02.cp_chb select {
 	padding: 8px 38px 8px 8px;
@@ -1231,7 +1233,7 @@ input[name="tab_item"] {
 .pay_input_count { width: 230px; height: 47px; padding: 10px; border: solid 1px #DBDBDB; border-radius: 4px; font-size: 2.0rem; font-weight: bold; text-align: right;}
 .pay_input_count_en{font-size: 1.6rem; font-weight: bold; padding: 0 0 0 5px;}
 .pay_select_count{ padding: 12px 8px; border-radius: 5px; border: solid 1px #00AEBD; color: #00AEBD; margin: 0 0 0 8px; }
-.pay_minus_btn{ font-size: 2.5rem; font-weight: bold; color: #fff; background: #00AEBD; padding: 0 7px; border:none; border-radius: 50%; margin: 0 10px 0 0;  }
+.pay_minus_btn{ font-size: 2.5rem; font-weight: bold; color: #fff; background: #00AEBD; padding: 0 10px; border:none; border-radius: 50%; margin: 0 10px 0 0;  }
 .pay_plus_btn{ font-size: 2.5rem; font-weight: bold; color: #fff; background: #00AEBD; padding: 0 7px; border:none; border-radius: 50%; margin: 0 0 0 10px;  }
 
 .as_i_02{ margin-bottom: 50px;}
