@@ -43,11 +43,11 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(NameValidatorRequest $request, Tag $category)
+    public function store(NameValidatorRequest $request, Tag $tag)
     {
-        $category->name = $request->name;
-        $category->save();
-        return redirect()->action([TagController::class, 'index'])->with('flash_message', '新規カテゴリ作成が完了しました。');
+        $tag->name = $request->name;
+        $tag->save();
+        return redirect()->action([TagController::class, 'index'])->with('flash_message', '新規タグ作成が完了しました。');
     }
 
     /**
