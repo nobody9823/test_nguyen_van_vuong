@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ActivityReportController;
 use App\Http\Controllers\Admin\AddressController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DetailController;
