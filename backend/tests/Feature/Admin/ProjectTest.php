@@ -24,7 +24,6 @@ class ProjectTest extends TestCase
         // リレーションで色々詰まったのですべて書いちゃった
         $this->admin = Admin::factory()->create();
         $this->user = User::factory()->valleyin()->hasProfile()->create();
-        $this->tag = Tag::factory(5)->create();
         $this->project = Project::factory()->state([
             'user_id' => $this->user->id,
         ])->make();
