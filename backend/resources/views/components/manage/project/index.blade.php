@@ -42,6 +42,7 @@
             </div>
         </div>
         <x-manage.sort_form :props_array="[
+            'id' => 'ID',
             'title' => 'タイトル',
             'user_name' => 'ユーザー名',
             'liked_users_count' => 'いいね数',
@@ -60,10 +61,10 @@
         @else
         <table class="table">
             <tr>
-                <th style="width:23%">タイトル</th>
-                <th style="width:10%">ユーザー名</th>
-                <th style="width:12%">プロジェクト詳細</th>
-                <th style="width:10%">プレビュー</th>
+                <th style="width:5%">ID</th>
+                <th style="width:20%">タイトル</th>
+                <th style="width:10%">ユーザー名/キュレーター</th>
+                <th style="width:10%">詳細</th>
                 <th style="width:10%">関連一覧画面</th>
                 <th style="width:10%">編集/削除</th>
                 @if($role === "admin")
@@ -74,15 +75,27 @@
             @foreach($projects as $project)
             <tr>
                 <td>
+                    {{ $project->display_id }}
+                </td>
+                <td>
                     {{ $project->title }}
                 </td>
-                <td>{{ $project->user->name }}</td>
+                <td>{{ $project->user->name }} / {{ $project->curator }}</td>
                 <td>
-                    <a href="{{ route($role.'.project.show', ['project' => $project]) }}" class="btn btn-primary">確認</a>
-                </td>
-                <td>
-                    <a href="{{ route($role.'.project.preview', ['project' => $project] )}}"
-                        class="btn btn-success">表示</a>
+                    <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                        data-target="#collapse_detail{{ $project->id }}" aria-expanded="false"
+                        aria-controls="#collapse_detail{{ $project->id }}">
+                        詳細 ▼
+                    </button>
+
+                    <div class="collapse {{ $loop->index === 0?'show':'' }}" id="collapse_detail{{$project->id}}">
+                        <div class="card" style="border: none; background-color: #f8f9fa;">
+                            <a href="{{ route($role.'.project.show', ['project' => $project]) }}"
+                                class="btn btn-sm btn-primary mt-1">確認</a>
+                            <a href="{{ route($role.'.project.preview', ['project' => $project] )}}"
+                                class="btn btn-sm btn-success mt-1">プレビュー表示</a>
+                        </div>
+                    </div>
                 </td>
                 <td>
                     <button class="btn btn-secondary" type="button" data-toggle="collapse"

@@ -244,11 +244,11 @@ class Project extends Model
     public function scopeSearchWithReleaseStatus($query, $release_statuses)
     {
         if (is_array($release_statuses) && optional($release_statuses)[0] !== null){
-            foreach($release_statuses as $release_status){
-                $query->orWhere(function($query) use ($release_status){
-                    $query->where('release_status', $release_status);
-                });
-            }
+            $query->where(function($query) use ($release_statuses){
+                foreach($release_statuses as $release_status){
+                    $query->orWhere('release_status', $release_status);
+                }
+            });
         }
         return $query;
     }
@@ -258,7 +258,7 @@ class Project extends Model
         if ($this->getSearchWordInArray()) {
             foreach ($this->getSearchWordInArray() as $word) {
                 $query->where(function ($query) use ($word) {
-                    $query->Where('title', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                    $query->where('title', 'like', "%$word%")->orWhere('curator', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
                 });
             }
         }
@@ -269,6 +269,11 @@ class Project extends Model
     public function getTotalLikesAttribute()
     {
         return $this->likedUsers()->count() + $this->added_like;
+    }
+
+    public function getDisplayIdAttribute()
+    {
+        return 'PR'.sprintf('%05d', $this->id);
     }
 
     public function getNumberOfDaysLeftAttribute()
