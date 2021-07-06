@@ -30,7 +30,7 @@ class ProjectControllerForPayPayTest extends TestCase
 
         $this->supporter = User::factory()->create();
 
-        $this->supporter->each(function ($user){
+        $this->supporter->each(function ($user) {
             $this->profile = $user->profile()->save(Profile::factory()->make());
             $this->profile = $user->address()->save(Address::factory()->make());
             $this->payment = $user->payments()->save(Payment::factory()->make());
@@ -42,6 +42,7 @@ class ProjectControllerForPayPayTest extends TestCase
             'content' => 'test content',
             'target_amount' => 10000000,
             'release_status' => '掲載中',
+            'curator' => 'test_curator',
             'start_date' => now(),
             'end_date' => now()
         ])->create();
@@ -97,7 +98,7 @@ class ProjectControllerForPayPayTest extends TestCase
             ]
         ];
 
-    $this->params = [
+        $this->params = [
         "_token" => "p2a6jKCe7pfX6VeZ7VL6UKWp4u1pMRHvMO6ZinIZ",
         "plan_ids" => [
             0 => "1000"
@@ -143,7 +144,7 @@ class ProjectControllerForPayPayTest extends TestCase
             ->once()
             ->andReturn($this->response_payment_detail);
 
-        $this->app->bind(PayPayInterface::class, function () use ($mock){
+        $this->app->bind(PayPayInterface::class, function () use ($mock) {
             return $mock;
         });
         $response = $this->actingAs($this->supporter)
@@ -167,7 +168,7 @@ class ProjectControllerForPayPayTest extends TestCase
             ->once()
             ->andThrow(Exception::class);
 
-        $this->app->bind(PayPayInterface::class, function () use ($mock){
+        $this->app->bind(PayPayInterface::class, function () use ($mock) {
             return $mock;
         });
         ($this->actingAs($this->supporter)
