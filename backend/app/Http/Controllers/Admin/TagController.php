@@ -56,7 +56,7 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $category)
+    public function show(Tag $tag)
     {
         //
     }
@@ -67,12 +67,12 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $Tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $category)
+    public function edit(Tag $tag)
     {
         return view('components.admin.simple_edit', [
             'title' => 'カテゴリ',
-            'type' => 'category',
-            'prop' => $category,
+            'type' => 'tag',
+            'prop' => $tag,
         ]);
     }
 
