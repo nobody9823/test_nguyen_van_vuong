@@ -45,7 +45,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             // 'email' => 'required|string|email||unique:users,email',
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->whereNull('deleted_at')]
+            'email' => ['required', 'string', 'email', 'confirmed', 'max:255', Rule::unique('users')->whereNull('deleted_at')],
+            'email_confirmation' => ['required', 'string']
         ]);
     }
 
