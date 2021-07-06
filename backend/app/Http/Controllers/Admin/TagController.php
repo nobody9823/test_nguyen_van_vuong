@@ -31,7 +31,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('components.admin.simple_create', [
+        return view('components.admin.simple_form', [
             'title' => 'タグ',
             'type' => 'tag',
         ]);
@@ -69,7 +69,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        return view('components.admin.simple_edit', [
+        return view('components.admin.simple_form', [
             'title' => 'カテゴリ',
             'type' => 'tag',
             'prop' => $tag,
