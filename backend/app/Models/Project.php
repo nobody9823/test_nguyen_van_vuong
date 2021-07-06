@@ -26,6 +26,7 @@ class Project extends Model
         'title',
         'content',
         'target_amount',
+        'curator',
         'start_date',
         'end_date',
     ];
