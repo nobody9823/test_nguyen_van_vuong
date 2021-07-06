@@ -7,7 +7,7 @@ use App\Http\Requests\NameValidatorRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Tag::getCategories();
+        $tag = Tag::orderBy('created_at','DESC')->paginate(10);        
         return view('components.admin.simple_index', [
-            "title" => 'カテゴリ',
-            "type" => 'category',
-            "props" => $categories,
+            "title" => 'タグ',
+            "type" => 'tag',
+            "props" => $tag,
         ]);
     }
 
