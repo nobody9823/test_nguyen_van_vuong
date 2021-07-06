@@ -158,8 +158,8 @@
             </div>
 		</div>
     </form>
-{{-- @elseif(Request::get('input_type') === 'introduction')
-    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
+@elseif(Request::get('input_type') === 'introduction')
+    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="introductionForm">
         @method('PATCH')
         @csrf
         <div class="prof_edit_row">
@@ -168,10 +168,10 @@
 				<textarea rows="8" name="introduction"></textarea>
 			</div>
 			<div class="prof_edit_03">
-                <button type="submit">更新</button>
+                <a href="javascript:document.introductionForm.submit()">更新</a>
             </div>
         </div>
-    </form> --}}
+    </form>
 @else
     <div class="prof_edit_row">
         <div class="prof_edit_01">ユーザー名</div>
@@ -233,10 +233,16 @@
         </div>
         <div class="prof_edit_03">編集<a href="{{ route('user.profile', ['input_type' => 'gender']) }}" class="cover_link"></a></div>
     </div>
-    {{-- <div class="prof_edit_row">
+    <div class="prof_edit_row">
         <div class="prof_edit_01">自己紹介</div>
-        <div class="prof_edit_02">設定されていません</div>
+        <div class="prof_edit_02">
+        @if(isset(Auth::user()->profile->introduction))
+            {{ Auth::user()->profile->introduction }}
+        @else
+            設定されていません
+        @endif
+        </div>
         <div class="prof_edit_03">編集<a href="{{ route('user.profile', ['input_type' => 'introduction']) }}" class="cover_link"></a></div>
-    </div> --}}
+    </div>
 @endif
 </div>
