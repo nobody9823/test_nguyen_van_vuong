@@ -9,7 +9,7 @@
 
     <div class="pds_sec02_01_btn">
         このリターンを選択する
-        <a href="" class="cover_link"></a>
+        <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'plan' => $plan]) }}" class="cover_link"></a>
     </div>
 
     <div class="pds_sec02_txt">
