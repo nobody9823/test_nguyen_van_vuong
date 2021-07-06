@@ -258,7 +258,7 @@ class Project extends Model
         if ($this->getSearchWordInArray()) {
             foreach ($this->getSearchWordInArray() as $word) {
                 $query->where(function ($query) use ($word) {
-                    $query->where('title', 'like', "%$word%")->orWhere('curator', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                    $query->where('title', 'like', "%$word%")->orWhere('curator', 'like', "%$word%")->orWhere('id', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
                 });
             }
         }
