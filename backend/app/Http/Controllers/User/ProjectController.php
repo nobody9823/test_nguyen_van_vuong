@@ -58,7 +58,7 @@ class ProjectController extends Controller
     {
         $tags = Tag::all();
         $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
-        $projects = Project::getReleasedProject()->seeking()->joinProjectPlanPayment()->orderBy('target_amount', 'DESC')
+        $projects = Project::getReleasedProject()->seeking()->joinProjectPlanPayment()
         ->inRandomOrder()->takeWithRelations(5)->get();
         
         // ランキング(支援総額順)
