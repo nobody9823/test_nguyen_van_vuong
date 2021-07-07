@@ -147,7 +147,7 @@ class Project extends Model
         return $query->take($int)->with(['projectFiles', 'plans', 'plans.includedPayments', 'plans.includedPayments.user', 'reports']);
     }
 
-    public function scopeOrderByFundingAmount($query)
+    public function scopeJoinQueryCalculation($query)
     {
         return $query
         // projectsテーブルにplan_payment_includedテーブルを結合する
@@ -155,20 +155,9 @@ class Project extends Model
         ->join('plan_payment_included', 'plans.id', '=', 'plan_payment_included.plan_id')
         ->join('payments', 'plan_payment_included.payment_id', '=', 'payments.id')
         // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('SUM(payments.price) as funding_amount'))
-        ->groupBy('plans.project_id')->orderBy('funding_amount','DESC');
-    }
-
-    public function scopeOrderByNumberOfSupporters($query)
-    {
-        return $query
-        // projectsテーブルにplans,user_plan_billingテーブルを結合する
-        ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('user_plan_billing', 'plans.id', '=', 'user_plan_billing.plan_id')
-        // 結合テーブル内のplans.project_idが同じものは、その人数を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('count(user_plan_billing.user_id) as number_of_user'))
-        ->groupBy('plans.project_id')
-        ->orderBy('number_of_user', 'DESC');
+        ->select('plans.project_id','projects.*', DB::raw('SUM(payments.price) as funding_amount'),
+                                                  DB::raw('count(payments.user_id) as number_of_user'))
+        ->groupBy('plans.project_id');
     }
 
     public function scopeOrdeyByLikedUsers($query)
