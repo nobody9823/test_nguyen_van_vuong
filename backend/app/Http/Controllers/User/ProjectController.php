@@ -58,11 +58,11 @@ class ProjectController extends Controller
     {
         $tags = Tag::all();
         $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
-        $projects = Project::getReleasedProject()->seeking()->joinProjectPlanPayment()
+        $projects = Project::getReleasedProject()->seeking()->joinQueryCalculation()
         ->inRandomOrder()->takeWithRelations(5)->get();
         
         // ランキング(支援総額順)
-        $ranking_projects = Project::getReleasedProject()->seeking()->joinProjectPlanPayment()->takeWithRelations(5)->skip(1)->orderBy('funding_amount','DESC')->get();
+        $ranking_projects = Project::getReleasedProject()->seeking()->joinQueryCalculation()->takeWithRelations(5)->skip(1)->orderBy('funding_amount','DESC')->get();
 
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
