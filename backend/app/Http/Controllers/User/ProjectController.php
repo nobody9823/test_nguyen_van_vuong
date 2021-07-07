@@ -62,7 +62,7 @@ class ProjectController extends Controller
         ->inRandomOrder()->takeWithRelations(5)->get();
         
         // ランキング(支援総額順)
-        $ranking_projects = Project::getReleasedProject()->seeking()->joinQueryCalculation()->takeWithRelations(5)->skip(1)->orderBy('funding_amount','DESC')->get();
+        $ranking_projects = Project::getReleasedProject()->seeking()->joinQueryCalculation()->takeWithRelations(5)->skip(1)->orderBy('payment_sum_price','DESC')->get();
 
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
