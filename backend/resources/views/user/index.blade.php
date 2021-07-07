@@ -36,7 +36,7 @@ use Carbon\Carbon;
                 <div class="ib01L_02">
                 <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
-                        <span style="width: {{ $projects->first()->getAchievementRate() }}%; max-width:100%"></span>
+                        <span style="width: {{ $projects->first()->AchievementRate }}%; max-width:100%"></span>
                     </div>
                 </div>
 
@@ -72,13 +72,13 @@ use Carbon\Carbon;
                     <div class="ib01R_02">
                     <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                         <div class="progress-bar">
-                            <span style="width: {{ $project->getAchievementRate() }}%; max-width:100%"></span>
+                            <span style="width: {{ $project->AchievementRate }}%; max-width:100%"></span>
                         </div>
                     </div>
 
                     {{-- <div class="process">
-                        <div class="bar" style="width: {{ $project->getAchievementRate() }}%;">
-                            <span>{{ $project->getAchievementRate()}}%</span></div>
+                        <div class="bar" style="width: {{ $project->AchievementRate }}%;">
+                            <span>{{ $project->AchievementRate}}%</span></div>
                     </div> --}}
 
                     <div class="ib01R_03">
@@ -376,7 +376,7 @@ use Carbon\Carbon;
                 <div class="ib01L_02">
                 <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
-                        <span style="width: {{ $projects->first()->getAchievementRate() }}%; max-width:100%"></span>
+                        <span style="width: {{ $projects->first()->AchievementRate }}%; max-width:100%"></span>
                     </div>
                 </div>
 
@@ -423,13 +423,13 @@ use Carbon\Carbon;
                     <div class="ib03R_02">
                     <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                         <div class="progress-bar">
-                            <span style="width: {{ $project->getAchievementRate() }}%; max-width:100%"></span>
+                            <span style="width: {{ $project->AchievementRate }}%; max-width:100%"></span>
                         </div>
                     </div>
 
                     {{-- <div class="process">
-                        <div class="bar" style="width: {{ $project->getAchievementRate() }}%;">
-                            <span>{{ $project->getAchievementRate()}}%</span></div>
+                        <div class="bar" style="width: {{ $project->AchievementRate }}%;">
+                            <span>{{ $project->AchievementRate}}%</span></div>
                     </div> --}}
 
                     <div class="ib03R_03">
@@ -479,7 +479,7 @@ use Carbon\Carbon;
                     <div class="ib02_02">
                     <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                         <div class="progress-bar">
-                             <span style="width: {{ $project->getAchievementRate() }}%; max-width:100%"></span>
+                             <span style="width: {{ $project->AchievementRate }}%; max-width:100%"></span>
                         </div>
                     </div>
 
