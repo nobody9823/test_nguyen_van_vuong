@@ -83,7 +83,7 @@
         @method('PATCH')
         @csrf
         <div class="prof_edit_row">
-            <div class="prof_edit_01">ユーザー名<br><span>編集中</span></div>
+            <div class="prof_edit_01">URL<br><span>編集中</span></div>
             <div class="prof_edit_editbox">
                 <input name="url" type="text" placeholder="UserId" value="{{ old('url', Auth::user()->profile->inviter_code) }}"/>
             </div>
