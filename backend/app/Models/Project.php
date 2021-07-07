@@ -271,6 +271,16 @@ class Project extends Model
         $today = Carbon::now();
         return $end_date->diffInDays($today);
     }
+
+    public function getAchievementRateAttribute()
+    {
+        // 金額の達成率の算出
+        if ($this->target_amount > 0) {
+            return round($this->payment_sum_price * 100 / $this->target_amount);
+        } else { // ゼロ除算対策
+            return 100;
+        }
+    }
     /**
      * Get Japanese formatted start time of project with day of the week
      *
