@@ -35,7 +35,7 @@
 	</div>
 	<div id="header_03">
 
-        @guest
+        @guest('web')
 		<div id="wm_btn">
 			<div class="menuset_03 wm_login_btn">
 				<a href="{{ route('login') }}" class="">
@@ -49,7 +49,7 @@
 			</div>
 		</div>
         @endguest
-        @auth
+        @auth('web')
 		<div id="wm_btn" class="login_after_user_btn">
 			<div id="user_btn">
 				<div class="user_btn_01">
@@ -138,7 +138,7 @@
 			</li>
 
 
-			@guest
+			@guest('web')
 			<li class="menu-item nav_btn taso_li menuset_03 login_btn">
                 <a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">ログイン</p>
@@ -152,7 +152,7 @@
             @endguest
 
 
-            @auth
+            @auth('web')
 			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.purchased_projects') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">応援購入したプロジェクト</p>
@@ -201,7 +201,7 @@
 					<p class="nav_btn_tit_L">よくあるご質問・ヘルプ</p>
 				</a>
 			</li>
-            @auth
+            @auth('web')
 			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.withdraw') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">退会について</p>
@@ -215,7 +215,7 @@
 			</li>
 
 			<!--▼ ★★★ログイン時-->
-            @auth
+            @auth('web')
 			<li class="menuset_05 login_after_user_btn">
 				<div id="user_btn">
 					<div class="user_btn_01">
@@ -327,7 +327,7 @@
                     <li><a href="#">さがす</a></li>
                     <li><a href="#">ファンリターンとは</a></li>
 
-                    @guest
+                    @guest('web')
                     <li class="menu-item nav_btn taso_li menuset_03 login_btn">
                         <a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
                             <p class="nav_btn_tit_L">ログイン</p>
