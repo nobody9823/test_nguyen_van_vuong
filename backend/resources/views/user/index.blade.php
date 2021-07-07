@@ -351,10 +351,10 @@ use Carbon\Carbon;
         <div class="img_box_03_L">
             <div class="img_box_03_L_item">
                 <div class="ib03L_01">
-                    <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
-                    <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>                    
-                    <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
-                        @if ($user_liked->where('project_id',$projects->first()->id)->isEmpty())
+                    <img src="{{ Storage::url($ranking_projects->first()->projectFiles->first()->file_url) }}">
+                    <a href="{{ route('user.project.show', ['project' => $ranking_projects->first()]) }}" class="cover_link"></a>                    
+                    <div class="okini_link_L liked_project" id="{{ $ranking_projects->first()->id }}">
+                        @if ($user_liked->where('project_id',$ranking_projects->first()->id)->isEmpty())
                         <i class="far fa-heart"></i>
                         @else
                         <i class="fas fa-heart"></i>
@@ -376,19 +376,19 @@ use Carbon\Carbon;
                 <div class="ib01L_02">
                 <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
-                        <span style="width: {{ $projects->first()->AchievementRate }}%; max-width:100%"></span>
+                        <span style="width: {{ $ranking_projects->first()->AchievementRate }}%; max-width:100%"></span>
                     </div>
                 </div>
 
                 <div class="ib03L_03">
-                    <h2>{{ Str::limit($projects->first()->title, 46) }}</h2>
-                    <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
+                    <h2>{{ Str::limit($ranking_projects->first()->title, 46) }}</h2>
+                    <a href="{{ route('user.project.show', ['project' => $ranking_projects->first()]) }}" class="cover_link"></a>
                 </div>
 
                 <div class="ib03L_04">
-                    <div>現在 <span>{{ number_format($projects->first()->payment_sum_price) }}円</span></div>
-                    <div>支援者 <span>{{ $projects->first()->payment_count }}人</span></div>
-                    <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($projects->first()->end_date)) }}日</span></div>
+                    <div>現在 <span>{{ number_format($ranking_projects->first()->payment_sum_price) }}円</span></div>
+                    <div>支援者 <span>{{ $ranking_projects->first()->payment_count }}人</span></div>
+                    <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($ranking_projects->first()->end_date)) }}日</span></div>
                 </div>
             </div><!--/.img_box_03_L_item-->
         </div>
