@@ -601,9 +601,9 @@
             <p>
                 個人情報保護対応窓口
             </p>
-            <p>
-                support@★★★★.co.jp
-            </p>
+            <a href="mailto:support@fanreturn.com">
+                support@fanreturn.com
+            </a>
         </div>
         <p>
             <br/>
