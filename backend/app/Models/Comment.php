@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\SearchFunctions;
+use App\Traits\SortBySelected;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +11,7 @@ use Request;
 
 class Comment extends Model
 {
-    use HasFactory, SoftDeletes, SearchFunctions;
+    use HasFactory, SoftDeletes, SearchFunctions,SortBySelected;
 
     protected $fillable = [
         'project_id',

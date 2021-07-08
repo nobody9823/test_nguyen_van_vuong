@@ -19,10 +19,37 @@ class CommentController extends Controller
     {
         $comments = Comment::search()->narrowDownWithProject()
                                      ->searchWithPostDates($request->from_date, $request->to_date)
-                                     ->with(['project', 'payment.user'])
-                                     ->orderBy('created_at', 'DESC')
-                                     ->paginate(10);
+                                     ->with(['project', 'payment.user','reply'])
+                                     ->sortBySelected($request->sort_type);
 
+        //リレーション先OrderBy
+        if ($request->sort_type === 'payment_user_name_asc') {
+            $comments = $comments->get()->sortBy('payment.user.name')->paginate(10);
+        } elseif ($request->sort_type === 'payment_user_name_desc') {
+            $comments = $comments->get()->sortByDesc('payment.user.name')->paginate(10);
+        } elseif ($request->sort_type === 'project_id_asc') {
+            $comments = $comments->get()->sortBy('project.id')->paginate(10);
+        } elseif ($request->sort_type === 'project_id_desc') {
+            $comments = $comments->get()->sortByDesc('project.id')->paginate(10);
+        } elseif ($request->sort_type === 'project_user_name_asc') {
+            $comments = $comments->get()->sortBy('project.user.name')->paginate(10);
+        } elseif ($request->sort_type === 'project_user_name_desc') {
+            $comments = $comments->get()->sortByDesc('project.user.name')->paginate(10);
+        } elseif ($request->sort_type === 'reply_content_asc') {
+            $comments = $comments->get()->sortBy('reply.content')->paginate(10);
+        } elseif ($request->sort_type === 'reply_content_desc') {
+            $comments = $comments->get()->sortByDesc('reply.content')->paginate(10);
+        } elseif ($request->sort_type === 'reply_exist_asc') {
+            $comments = $comments->get()->sortBy(function ($comment, $key) {
+                return isset($comment->reply);
+            })->paginate(10);
+        } elseif ($request->sort_type === 'reply_exist_desc') {
+            $comments = $comments->get()->sortByDesc(function ($comment, $key) {
+                return isset($comment->reply);
+            })->paginate(10);
+        } else {
+            $comments = $comments->paginate(10);
+        }
         return view('admin.comment.index', compact('comments'));
     }
 

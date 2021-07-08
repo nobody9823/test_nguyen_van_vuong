@@ -42,6 +42,15 @@
                 </div>
             </div>
         </div>
+        <x-manage.sort_form :props_array="[
+            'created_at' => '投稿日',
+            'content' => '内容',
+            'payment_user_name' => 'ユーザー名',
+            'project_id' => 'プロジェクトID',
+            'project_user_name' => 'インフルエンサー',
+            'reply_content' => '返信内容',
+            'reply_exist' => '返信の有無',
+        ]" />
         <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索"
             value="{{ Request::get('word') }}">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
