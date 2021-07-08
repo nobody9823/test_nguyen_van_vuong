@@ -2,16 +2,6 @@
 
 @section('content')
 
-@if ($errors->any())
-<div class="error-message text-center">
-    <ul class="error-message-list">
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
 <div class="Assist-input_base">
 
     <div class="as_header_01">
@@ -144,6 +134,7 @@
                                     <div class="tab1_01">
                                         <div class="tab1_01_01">クレジットカード番号</div>
                                         <div name="number_form" id="number-form" class="payjs-outer"></div>
+                                        <span id="errors" style="color: red;"></span>
                                     </div>
 
                                     <div class="tab1_02">
@@ -364,6 +355,25 @@ window.onload = function(){
 
     var elements = payjp.elements()
 
+    var errors = document.getElementById('errors');
+
+    let numEl = document.getElementById('number-form')
+
+    let exEl = document.getElementById('expiry-form')
+
+    let cvcEl = document.getElementById('cvc-form')
+
+    const checkCardNumber = (result) => {
+        if (result === undefined){
+            errors.innerHTML = 'カード情報が不正です。';
+            document.querySelector('#payjp_token').value = '';
+        } else {
+            errors.innerHTML = '';
+            document.querySelector('#payjp_token').value = result;
+            console.log(document.querySelector('#payjp_token'))
+        }
+    };
+
     // 入力フォームを分解して管理・配置できます
     var numberElement = elements.create('cardNumber')
     var expiryElement = elements.create('cardExpiry')
@@ -371,11 +381,27 @@ window.onload = function(){
     numberElement.mount('#number-form')
     expiryElement.mount('#expiry-form')
     cvcElement.mount('#cvc-form')
-    expiryElement.on('change', function(event){
-        payjp.createToken(numberElement)
-        payjp.createToken(numberElement).then(function(r) {
-            document.querySelector('#payjp_token').value = r.id;
-        })
-    })
+
+    let config = { attribute: true, attributeOldValue: true}
+
+    const observer = new MutationObserver(mutationRecords => {
+            for (let MutationRecord of mutationRecords){
+                if(MutationRecord.target.classList.contains('PayjpElement--complete')){
+                    if (
+                            (exEl.classList.contains('PayjpElement--complete')) &&
+                            (cvcEl.classList.contains('PayjpElement--complete')) &&
+                            (numEl.classList.contains('PayjpElement--complete'))
+                        ){
+                            payjp.createToken(numberElement).then(function(r) {
+                                checkCardNumber(r.id);
+                            })
+                    }
+                }
+            }
+        });
+    observer.disconnect();
+    observer.observe(numEl, config);
+    observer.observe(exEl, config);
+    observer.observe(cvcEl, config);
 </script>
 @endsection

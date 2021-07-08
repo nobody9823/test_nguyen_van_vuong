@@ -60,7 +60,7 @@ class ProjectController extends Controller
         $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
         $projects = Project::getReleasedProject()->seeking()->joinQueryCalculation()
         ->inRandomOrder()->takeWithRelations(5)->get();
-        
+
         // ランキング(支援総額順)
         $ranking_projects = Project::getReleasedProject()->seeking()->joinQueryCalculation()->takeWithRelations(5)->skip(1)->orderBy('payment_sum_price','DESC')->get();
 
@@ -419,7 +419,7 @@ class ProjectController extends Controller
             Auth::user()->saveProfile($request->all());
             Auth::user()->saveAddress($request->all());
             // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
-            Mail::to(config('mail.from.address'))->send(new ConsultProject($request->all()));
+            Mail::to(config('mail.customer_support.address'))->send(new ConsultProject($request->all()));
             DB::commit();
             return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
         } catch(Exception $e) {
@@ -429,7 +429,7 @@ class ProjectController extends Controller
             return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");
         }
     }
-    
+
     public function ProjectLiked(Request $request)
     {
         $userLiked = UserProjectLiked::where('user_id', Auth::id())->where('project_id', $request->project_id)->first();

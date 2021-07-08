@@ -26,9 +26,9 @@ class ProjectControllerForPayPayTest extends TestCase
     {
         parent::setUp();
 
-        $this->creator = User::factory()->create();
+        $this->creator = User::factory()->hasProfile()->create();
 
-        $this->supporter = User::factory()->create();
+        $this->supporter = User::factory()->hasProfile()->create();
 
         $this->supporter->each(function ($user) {
             $this->profile = $user->profile()->save(Profile::factory()->make());

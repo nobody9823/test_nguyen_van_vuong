@@ -21,9 +21,9 @@ class ProjectControllerForPayJpTest extends TestCase
     {
         parent::setUp();
 
-        $this->creator = User::factory()->create();
+        $this->creator = User::factory()->hasProfile()->create();
 
-        $this->supporter = User::factory()->create();
+        $this->supporter = User::factory()->hasProfile()->create();
 
         $this->project = Project::factory()->state([
             'user_id' => $this->creator->id,

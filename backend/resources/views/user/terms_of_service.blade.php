@@ -356,9 +356,26 @@
             <strong>条（成約手数料の支払い）</strong>
         </p>
         <p style="color: red">
-            第8条第1項に基づきイベントが成立した場合、イベント実行者においては、当社に対してイベント成立の成約手数料として、イベント購入金の決定額（以下「イベント購入額」といいます。）の20%に相当する金額を支払う義務が発生します。当該成約手数料は、当社からイベント実行者へ支払われるイベント購入額から差し引かれます。なお、振込手数料はイベント実行者負担となります。
-            ※手数料プラン説明ページへのリンクを置く
+            第8条第1項に基づきイベントが成立した場合、イベント実行者においては、当社に対してイベント成立の成約手数料として、イベント購入金の決定額（以下「イベント購入額」といいます。）の下記の表の割合に従い手数料を支払う義務が発生します。当該成約手数料は、当社からイベント実行者へ支払われるイベント購入額から差し引かれます。なお、振込手数料はイベント実行者負担となります。
         </p>
+        <div style="display: flex;">
+            <div style="width: 25%; border: 1px solid black; text-align: center">
+                <div style="border-bottom: 1px solid black;">シンプルサポート</div>
+                <div>手数料15％</div>
+            </div>
+            <div style="width: 25%; border: 1px solid black; border-left-style: none; text-align: center">
+                <div style="border-bottom: 1px solid black;">スタンダードサポート</div>
+                <div>手数料20％</div>
+            </div>
+            <div style="width: 25%; border: 1px solid black; border-left-style: none; text-align: center">
+                <div style="border-bottom: 1px solid black;">プレミアムサポート</div>
+                <div>手数料30％</div>
+            </div>
+            <div style="width: 25%; border: 1px solid black; border-left-style: none; text-align: center">
+                <div style="border-bottom: 1px solid black;">フルサポートプラン</div>
+                <div>手数料40％</div>
+            </div>
+        </div>
         <p>
             <br/>
         </p>
@@ -393,7 +410,7 @@
                 （ⅰ）クレジットカード払いの場合
             </p>
             <p>
-                クレジットカード会社の決済承認がなされた時点。ただし、イベント成立後はイベント購入の完了時点とします。
+                クレジットカード会社の決済承認がなされた時点。ただし、イベント成立後の購入者については、会員間契約の決済が完了する時期は、イベント購入の完了時点とします。
             </p>
             <p>
                 <br/>
@@ -584,9 +601,9 @@
             <p>
                 個人情報保護対応窓口
             </p>
-            <p>
-                support@★★★★.co.jp
-            </p>
+            <a href="mailto:support@fanreturn.com">
+                support@fanreturn.com
+            </a>
         </div>
         <p>
             <br/>
@@ -813,11 +830,11 @@
             <strong>免責</strong>
             <strong>)</strong>
         </p>
-        <p>
-            1.当社は、本サービスに伴う情報の提供に関して発生あるいは誘発された損害、情報の利用により得た成果、または、その情報自体の合法性や道徳性、権利の許諾、正確さ、イベント実行者とファン間における会員間契約を含む全ての契約について、責任を負わないものとします。
+        <p style="color: red">
+            1.当社は、本サービスに伴う情報の提供に関して発生あるいは誘発された損害、情報の利用により得た成果、または、その情報自体の合法性や道徳性、権利の許諾、正確さ、イベント実行者とファン間における会員間契約を含む全ての契約について、責任を負わないものとします。ただし、イベント実行者とファン間でトラブルが発生した場合は、プラットフォーマーとして、積極的に問題解決に協力し尽力するものとします。
         </p>
         <p>
-            2.当社は、本サービス提供のためのコンピューターシステムの障害等による電子メールの遅配、未配、★★★★上の誤表示(価格・数量の誤表示等含む)及びそれ以外のいかなる原因に基づき生じた損害について、一切の責任又は義務を負わないものとします。
+            2.当社は、本サービス提供のためのコンピューターシステムの障害等による電子メールの遅配、未配、FanReturn上の誤表示(価格・数量の誤表示等含む)及びそれ以外のいかなる原因に基づき生じた損害について、一切の責任又は義務を負わないものとします。
         </p>
         <p>
             3.当社は、会員が使用するコンピューター、回線、ソフトウェア等の環境等に基づき生じた損害について、賠償する義務を一切負わないものとします。なお、当社は別途定める方法により、会員に対して当該環境等について告知することがあります。
@@ -852,7 +869,7 @@
         </p>
         <p>
             <strong>第</strong>
-            <strong>20</strong>
+            <strong>21</strong>
             <strong>条</strong>
             <strong>(</strong>
             <strong>本利用規約の変更</strong>
@@ -878,7 +895,7 @@
         </p>
         <p>
             <strong>第</strong>
-            <strong>21</strong>
+            <strong>22</strong>
             <strong>条（分離可能性）</strong>
         </p>
         <p>
@@ -889,7 +906,7 @@
         </p>
         <p>
             <strong>第</strong>
-            <strong>22</strong>
+            <strong>23</strong>
             <strong>条</strong>
             <strong>(</strong>
             <strong>協議・管轄裁判所</strong>
@@ -906,7 +923,7 @@
         </p>
         <p>
             <strong>第</strong>
-            <strong>23</strong>
+            <strong>24</strong>
             <strong>条</strong>
             <strong>(</strong>
             <strong>準拠法</strong>
@@ -919,7 +936,7 @@
             <br/>
         </p>
         <p>
-            2021年 月 日 制定
+            2021年7月8日 制定
         </p>
         <p>
             <br/>
