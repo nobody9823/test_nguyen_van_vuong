@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\Plan;
 use App\Models\Payment;
+use App\Models\PaymentToken;
 use App\Models\Comment;
 use App\Models\Profile;
 use App\Models\Address;
@@ -60,7 +61,7 @@ class ProjectController extends Controller
         $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
         $projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
         ->inRandomOrder()->takeWithRelations(5)->get();
-        
+
         // ランキング(支援総額順)
         $ranking_projects = Project::getReleasedProject()->seeking()->orderByFundingAmount()
         ->takeWithRelations(5)->skip(1)->get();
@@ -228,8 +229,7 @@ class ProjectController extends Controller
                     'inviter_id' => !empty($validated_request['inviter_code']) ? $inviter->id : null,
                     'price' => $validated_request['total_amount'],
                     'message_status' => "ステータスなし",
-                    'merchant_payment_id' => $unique_token,
-                    'pay_jp_id' => !empty($validated_request['payjp_token']) ? $validated_request['payjp_token'] : null,
+                    'payment_way' => !empty($validated_request['payjp_token']) ? 'PayJp' : 'PayPay',
                     'payment_is_finished' => false
                 ], $request->all()
             ));
@@ -243,6 +243,9 @@ class ProjectController extends Controller
                 });
             $this->plan->updatePlansByIds($plans, $validated_request['plans']);
             $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
+            $payment->token()->save(PaymentToken::make([
+                'token' => !empty($validated_request['payjp_token']) ? $validated_request['payjp_token'] : $unique_token,
+            ]));
             DB::commit();
         } catch (\Exception $e){
             DB::rollback();
@@ -266,7 +269,7 @@ class ProjectController extends Controller
      */
     public function paymentForPayJp(Project $project, Payment $payment)
     {
-        $response = $this->pay_jp->Payment($payment->price, $payment->pay_jp_id);
+        $response = $this->pay_jp->Payment($payment->price, $payment->token->token);
         DB::beginTransaction();
         try {
                 $payment->payment_is_finished = true;
