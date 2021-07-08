@@ -62,14 +62,17 @@ class Comment extends Model
         if ($this->getSearchWordInArray()) {
             foreach ($this->getSearchWordInArray() as $word) {
                 $query->where(function ($query) use ($word) {
+                    // 内容が一致するか
                     $query->where('content', 'like', "%$word%")
-                    ->orWhereIn('payment_id', Payment::select('id')
-                    ->whereIn('user_id',User::select('id')->where('name','like',"%$word%")))
-                    ->orWhereIn('id', Reply::select('comment_id')->where('content', 'like', "%$word%"))
-                    ->orWhereIn('project_id', Project::select('id')->where('title', 'like', "%$word%"))
-                    ->orWhereIn('id', Reply::select('comment_id')
-                    ->whereIn('user_id',User::select('id')->where('name','like',"%$word%")));
-                }); 
+                    // コメント投稿者名が一致するか
+                    ->orWhereIn('payment_id', Payment::select('id')->whereIn('user_id', User::select('id')->where('name', 'like', "%$word%")))
+                    // プロジェクトIDが一致するか
+                    ->orWhereIn('project_id', Project::select('id')->where('id', 'like', "%$word%"))
+                    // プロジェクト投稿したインフルエンサー名が一致するか
+                    ->orWhereIn('project_id', Project::select('id')->whereIn('user_id', User::select('id')->where('name', 'like', "%$word%")))
+                    // 返信内容と一致するか
+                    ->orWhereIn('id', Reply::select('comment_id')->where('content', 'like', "%$word%"));
+                });
             }
         }
     }

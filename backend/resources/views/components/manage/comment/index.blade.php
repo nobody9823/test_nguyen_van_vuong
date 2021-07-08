@@ -4,7 +4,10 @@
 
 @section('content')
 <div class="card-header d-flex align-items-center">
-    <div class="flex-grow-1">コメント管理</div>
+    <div class="flex-grow-1">
+        コメント管理
+        <x-manage.display_index_count :props="$comments" />
+    </div>
     <form action={{route($guard.'.comment.index')}} class="form-inline pr-3" method="get" style="position: relative;">
         @csrf
         <x-common.add_hidden_query />
@@ -44,11 +47,7 @@
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
 </div>
-@if(Request::get('word'))
-<div class="card-header d-flex align-items-center">
-    <div class="flex-grow-1">検索キーワード : {{ Request::get('word') }}</div>
-</div>
-@endif
+<x-manage.search-terms role="admin" model='comment' />
 <div class="card-body">
     @if($comments->count() <= 0) <p>表示する投稿はありません。</p>
         @else
@@ -58,8 +57,8 @@
                 <th style="width:20%">内容</th>
                 <th style="width:10%">ユーザ名</th>
                 <th style="width:10%">プロジェクトID</th>
-                <th style="width:10%">タレント名</th>
-                <th style="width:20%">タレントの返信</th>
+                <th style="width:10%">インフルエンサー</th>
+                <th style="width:20%">返信内容</th>
                 <th style="width:10%">返信/編集/削除</th>
             </tr>
             @foreach($comments as $comment)
