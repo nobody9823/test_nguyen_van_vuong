@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ReplyController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\TemporaryCompanyController;
 use App\Http\Controllers\Admin\TemporaryTalentController;
@@ -81,7 +82,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('plan', PlanController::class, ['only' => ['index', 'show', 'destroy']]);
 
     // 応募者管理
-    Route::resource('user_payment_included', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);
+    Route::resource('payment', PaymentController::class, ['only' => ['index', 'show', 'destroy']]);
 
     // 活動報告管理
     Route::resource('report', ReportController::class, ['only' => ['index', 'show']]);
@@ -102,8 +103,6 @@ Route::middleware('auth:admin')->group(function () {
     Route::put('message/{message_content}', [MessageController::class,'update'])->name('message_content.update');
     Route::delete('message/{message_content}', [MessageController::class,'destroy'])->name('message_content.destroy');
     Route::get('message/{message_content}/file_download', [MessageController::class,'file_download'])->name('message_content.file_download');
-
-    Route::resource('supporter_purchase', SupporterPurchaseController::class, ['only' => ['index']]);
 });
 
 // 上記以外のパラメーターを取得して、route('admin.dashboard')にリダイレクトする。
