@@ -286,23 +286,20 @@ class ProjectController extends Controller
 
     public function paymentForPayPay(Project $project, Payment $payment)
     {
-        $response = $this->pay_pay->getPaymentDetail($payment->merchant_payment_id);
+        $response = $this->pay_pay->getPaymentDetail($payment->token->token);
 
-        if($response['data']['status'] === 'COMPLETED'){
-            $payment_id = $response['data']['merchantPaymentId'];
-        } else {
+        if($response['data']['status'] !== 'COMPLETED'){
             return redirect()->action([ProjectController::class, 'selectPlans'], ['project' => $project])->withError('決済処理に失敗しました。管理会社に連絡をお願いします。');
         }
 
         DB::beginTransaction();
         try {
-            $payment = Payment::where('merchant_payment_id', $payment_id)->first();
             $payment->payment_is_finished = true;
             $payment->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            $this->pay_pay->cancelPayment($payment_id);
+            $this->pay_pay->cancelPayment($response['data']['merchantPaymentId']);
             throw $e;
         }
         $this->user->notify(new PaymentNotification($project, $payment));
@@ -437,7 +434,7 @@ class ProjectController extends Controller
             return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");
         }
     }
-    
+
     public function ProjectLiked(Request $request)
     {
         $userLiked = UserProjectLiked::where('user_id', Auth::id())->where('project_id', $request->project_id)->first();
