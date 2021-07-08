@@ -33,6 +33,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{plan}/success', [PlanController::class, 'success'])->name('plan.success');
     Route::post('comment/post', [CommentController::class, 'postComment'])->name('comment.post');
     Route::get('support', [ProjectController::class, 'support'])->name('project.support');
+    Route::get('supporter_ranking', [ProjectController::class, 'supporterRanking'])->name('project.supporter_ranking');
 });
 
 //---------------------Mypage-----------------------------------------------

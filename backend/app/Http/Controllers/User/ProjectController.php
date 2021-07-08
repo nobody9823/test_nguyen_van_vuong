@@ -275,7 +275,7 @@ class ProjectController extends Controller
                 throw $e;
             }
             $this->user->notify(new PaymentNotification($project, $payment));
-            
+
         return view('user.plan.supported', ['project' => $project->getLoadPaymentsCountAndSumPrice(), 'payment' => $payment]);
     }
 
@@ -454,6 +454,15 @@ class ProjectController extends Controller
         $invitation_url = route('user.project.show', ['project' => $project, 'inviter' => $encrypted_code]);
         Auth::user()->supportedProjects()->attach($project->id);
 
-        return view('user.project.support', ['invitation_url' => $invitation_url]);
+        return view('user.project.support', ['invitation_url' => $invitation_url, 'project' => $project]);
+    }
+
+    public function supporterRanking(Project $project)
+    {
+        $this->authorize('checkIsFinishedPayment', $project);
+        $users_ranked_by_users_count = User::getInvitersRankedByInvitedUsers($project->id)->take(100)->get();
+        $users_ranked_by_total_amount = User::getInvitersRankedByInvitedTotalAmount($project->id)->take(100)->get();
+
+        return view('user.project.supporter_ranking', compact('users_ranked_by_users_count', 'users_ranked_by_total_amount'));
     }
 }
