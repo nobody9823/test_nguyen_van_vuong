@@ -57,7 +57,7 @@
                         @if(isset(Auth::user()->profile))
                         <div class="user_btn_01_01" style="background-image: url({{ Storage::url(Auth::user()->profile->image_url) }})">
                         @else
-                        <div class="user_btn_01_01" style="background-image: url({{ Storage::url(Auth::user()->profile->image_url) }})">
+                        <div class="user_btn_01_01" style="background-image: url('/image/')">
                         @endif
                         </div>
                     </a>
@@ -223,7 +223,7 @@
                             @if(isset(Auth::user()->profile))
                             <div class="user_btn_01_01" style="background-image: url({{ Storage::url(Auth::user()->profile->image_url) }})">
                             @else
-                            <div class="user_btn_01_01" style="background-image: url({{ Storage::url(Auth::user()->profile->image_url) }})">
+                            <div class="user_btn_01_01" style="background-image: url('image/my-page.svg')">
                             @endif
                             </div>
                         </a>
