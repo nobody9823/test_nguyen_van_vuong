@@ -10,6 +10,10 @@ class PaymentToken extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'payment_id',
+        'token',
+    ];
     public function payment()
     {
         return $this->belongsTo('App\Models\Payment');
