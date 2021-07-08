@@ -90,7 +90,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('comment', CommentController::class, ['only' => ['index', 'show', 'destroy']]);
 
     //返信管理
-    Route::resource('reply', ReplyController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    Route::post('reply/{comment}', [ReplyController::class,'store'])->name('reply.store');
+    Route::resource('reply', ReplyController::class, ['only' => ['update', 'destroy']]);
 
     //タグ管理
     Route::resource('tag', TagController::class, ['only' => ['index','create', 'store', 'edit', 'update', 'destroy']]);
