@@ -32,6 +32,11 @@ class Payment extends Model
         return $this->belongsToMany('App\Models\Plan', 'App\Models\PlanPaymentIncluded');
     }
 
+    public function inviter()
+    {
+        return $this->belongsTo('App\Models\User', 'inviter_id');
+    }
+
     public function comment()
     {
         return $this->hasOne('App\Models\Comment');
@@ -51,11 +56,13 @@ class Payment extends Model
     // FIXME ここのスコープはクエリではなくてpriceの合計値が返っている気がいたします。
     public function scopeGetTotalAmountOfSupporterWithProject($query, Project $project)
     {
-        return $query->whereIn('id',
-                    PlanPaymentIncluded::whereIn('plan_id',
-                        $project->plans()->pluck('id')->toArray()
-                    )->pluck('id')->toArray()
-                )->sum('price');
+        return $query->whereIn(
+            'id',
+            PlanPaymentIncluded::whereIn(
+                'plan_id',
+                $project->plans()->pluck('id')->toArray()
+            )->pluck('id')->toArray()
+        )->sum('price');
     }
 
     public function messageContents()
@@ -76,9 +83,12 @@ class Payment extends Model
     public function scopeSeeking($query)
     {
         return $query->whereIn(
-            'id', PlanPaymentIncluded::query()->select('payment_id')->whereIn(
-                'plan_id', Plan::query()->select('id')->whereIn(
-                    'project_id', Project::query()->select('id')
+            'id',
+            PlanPaymentIncluded::query()->select('payment_id')->whereIn(
+                'plan_id',
+                Plan::query()->select('id')->whereIn(
+                    'project_id',
+                    Project::query()->select('id')
                         ->seeking()
                 )
             )
@@ -88,9 +98,12 @@ class Payment extends Model
     public function scopeNotSeeking($query)
     {
         return $query->whereNotIn(
-            'id', PlanPaymentIncluded::query()->select('payment_id')->whereIn(
-                'plan_id', Plan::query()->select('id')->whereIn(
-                    'project_id', Project::query()->select('id')
+            'id',
+            PlanPaymentIncluded::query()->select('payment_id')->whereIn(
+                'plan_id',
+                Plan::query()->select('id')->whereIn(
+                    'project_id',
+                    Project::query()->select('id')
                         ->seeking()
                 )
             )
