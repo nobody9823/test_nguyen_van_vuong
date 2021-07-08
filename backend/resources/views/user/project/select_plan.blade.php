@@ -2,16 +2,6 @@
 
 @section('content')
 
-@if ($errors->any())
-<div class="error-message text-center">
-    <ul class="error-message-list">
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
 <div class="Assist-input_base">
 
     <div class="as_header_01">
