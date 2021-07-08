@@ -56,18 +56,33 @@
                         <div class="ps_rank_02_tit">金額</div>
 
                         @foreach($users_ranked_by_total_amount as $project_supporter)
-                        <div class="ps_rank_02_rank_item_row">
-                            <div class="ps_rank_item_01">
-                                <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
-                                <path id="" class="rank_color_01" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
-                                    c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
-                                    c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
-                                </svg>
-                            </div>
-                            <div class="ps_rank_item_02">{{ $loop->iteration }}位</div>
-                            <div class="ps_rank_item_03">{{ $project_supporter->name }}</div>
-                            <div class="ps_rank_item_04">{{ $project_supporter->invited_payments_sum_price }}円</div>
-                        </div><!--/ps_rank_02_rank_item_row-->
+                            @continue($loop->iteration !== 1 && $loop->iteration !== 2 && $loop->iteration !== 3 && $loop->iteration !== 4 && $project_supporter->email !== Auth::user()->email && !$loop->last)
+                            <div class="ps_rank_02_rank_item_row {{ $project_supporter->email === Auth::user()->email ? 'ps_rank_item_myrank' : '' }}">
+                                <div class="ps_rank_item_01">
+                                    @if($loop->iteration === 1)
+                                        <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
+                                        <path id="" class="rank_color_01" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
+                                            c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
+                                            c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
+                                        </svg>
+                                    @elseif($loop->iteration === 2)
+                                        <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
+                                        <path id="" class="rank_color_02" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
+                                            c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
+                                            c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
+                                        </svg>
+                                    @elseif($loop->iteration === 3)
+                                        <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
+                                        <path id="" class="rank_color_03" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
+                                            c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
+                                            c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
+                                        </svg>
+                                    @endif
+                                </div>
+                                <div class="ps_rank_item_02">{{ $loop->iteration }}位</div>
+                                <div class="ps_rank_item_03">{{ $project_supporter->name }}</div>
+                                <div class="ps_rank_item_04">{{ $project_supporter->invited_payments_sum_price }}円</div>
+                            </div><!--/ps_rank_02_rank_item_row-->
                         @endforeach
 
                         {{-- <div class="ps_rank_02_rank_item_row">
@@ -127,18 +142,33 @@
                         <div class="ps_rank_02_tit">紹介件数</div>
 
                         @foreach($users_ranked_by_users_count as $rank => $project_supporter)
-                        <div class="ps_rank_02_rank_item_row">
-                            <div class="ps_rank_item_01">
-                                <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
-                                <path id="" class="rank_color_01" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
-                                    c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
-                                    c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
-                                </svg>
-                            </div>
-                            <div class="ps_rank_item_02">{{ $loop->iteration }}位</div>
-                            <div class="ps_rank_item_03">{{ $project_supporter->name }}</div>
-                            <div class="ps_rank_item_04">{{ $project_supporter->invited_payments_count }}件</div>
-                        </div><!--/ps_rank_02_rank_item_row-->
+                            @continue($loop->iteration !== 1 && $loop->iteration !== 2 && $loop->iteration !== 3 && $loop->iteration !== 4 && $project_supporter->email !== Auth::user()->email && !$loop->last)
+                            <div class="ps_rank_02_rank_item_row {{ $project_supporter->email === Auth::user()->email ? 'ps_rank_item_myrank' : '' }}">
+                                <div class="ps_rank_item_01">
+                                    @if($loop->iteration === 1)
+                                        <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
+                                        <path id="" class="rank_color_01" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
+                                            c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
+                                            c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
+                                        </svg>
+                                    @elseif($loop->iteration === 2)
+                                        <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
+                                        <path id="" class="rank_color_02" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
+                                            c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
+                                            c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
+                                        </svg>
+                                    @elseif($loop->iteration === 3)
+                                        <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
+                                        <path id="" class="rank_color_03" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
+                                            c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
+                                            c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
+                                        </svg>
+                                    @endif
+                                </div>
+                                <div class="ps_rank_item_02">{{ $loop->iteration }}位</div>
+                                <div class="ps_rank_item_03">{{ $project_supporter->name }}</div>
+                                <div class="ps_rank_item_04">{{ $project_supporter->invited_payments_count }}件</div>
+                            </div><!--/ps_rank_02_rank_item_row-->
                         @endforeach
 
                         {{-- <div class="ps_rank_02_rank_item_row">
