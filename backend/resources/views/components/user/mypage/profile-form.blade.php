@@ -92,6 +92,27 @@
             </div>
         </div>
     </form>
+@elseif(Request::get('input_type') === 'prefecture_id')
+    <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="prefectureForm">
+        @method('PATCH')
+        @csrf
+        <div class="prof_edit_row">
+            <div class="prof_edit_01">現在地<br><span>編集中</span></div>
+            <div class="prof_edit_editbox">
+                <select class="form-control mb-2" name="prefecture">
+                    {{-- <option value="0" selected>都道府県を選択</option> --}}
+                    @foreach(config('prefecture') as $index => $name)
+                    <option value="{{ $index }}" {{old('prefecture_id', optional(optional(Auth::user())->address)->prefecture_id) == $index ? 'selected' : ''}}>{{$name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="prof_edit_03">
+                <a href="javascript:document.prefectureForm.submit()">更新</a>
+            </div>
+        </div>
+    </form>
+
+
 {{-- @elseif(Request::get('input_type') === 'birthday')
 <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
     @method('PATCH')
@@ -212,11 +233,13 @@
             編集
             <a href="{{ route('user.profile', ['input_type' => 'inviter_code']) }}" class="cover_link"></a></div>
     </div>
-    {{-- <div class="prof_edit_row">
+    <div class="prof_edit_row">
         <div class="prof_edit_01">現在地</div>
-        <div class="prof_edit_02">設定されていません</div>
-        <div class="prof_edit_03">編集<a href="★" class="cover_link"></a></div>
-    </div> --}}
+        <div class="prof_edit_02">{{ Auth::user()->address->PrefName }}</div>
+        <div class="prof_edit_03">
+            編集
+            <a href="{{ route('user.profile', ['input_type' => 'prefecture_id']) }}" class="cover_link"></a></div>
+    </div>
     {{-- <div class="prof_edit_row">
         <div class="prof_edit_01">生年月日</div>
         <div class="prof_edit_02">設定されていません</div>

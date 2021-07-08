@@ -25,4 +25,9 @@ class Address extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+
+    public function getPrefNameAttribute() {
+        return config('prefecture.'.$this->prefecture_id);
+    }
+
 }
