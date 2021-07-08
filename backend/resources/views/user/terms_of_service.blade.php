@@ -601,9 +601,9 @@
             <p>
                 個人情報保護対応窓口
             </p>
-            <p>
-                support@★★★★.co.jp
-            </p>
+            <a href="mailto:support@fanreturn.com">
+                support@fanreturn.com
+            </a>
         </div>
         <p>
             <br/>
@@ -830,8 +830,8 @@
             <strong>免責</strong>
             <strong>)</strong>
         </p>
-        <p>
-            1.当社は、本サービスに伴う情報の提供に関して発生あるいは誘発された損害、情報の利用により得た成果、または、その情報自体の合法性や道徳性、権利の許諾、正確さ、イベント実行者とファン間における会員間契約を含む全ての契約について、責任を負わないものとします。
+        <p style="color: red">
+            1.当社は、本サービスに伴う情報の提供に関して発生あるいは誘発された損害、情報の利用により得た成果、または、その情報自体の合法性や道徳性、権利の許諾、正確さ、イベント実行者とファン間における会員間契約を含む全ての契約について、責任を負わないものとします。ただし、イベント実行者とファン間でトラブルが発生した場合は、プラットフォーマーとして、積極的に問題解決に協力し尽力するものとします。
         </p>
         <p>
             2.当社は、本サービス提供のためのコンピューターシステムの障害等による電子メールの遅配、未配、FanReturn上の誤表示(価格・数量の誤表示等含む)及びそれ以外のいかなる原因に基づき生じた損害について、一切の責任又は義務を負わないものとします。
@@ -869,7 +869,7 @@
         </p>
         <p>
             <strong>第</strong>
-            <strong>20</strong>
+            <strong>21</strong>
             <strong>条</strong>
             <strong>(</strong>
             <strong>本利用規約の変更</strong>
@@ -895,7 +895,7 @@
         </p>
         <p>
             <strong>第</strong>
-            <strong>21</strong>
+            <strong>22</strong>
             <strong>条（分離可能性）</strong>
         </p>
         <p>
@@ -906,7 +906,7 @@
         </p>
         <p>
             <strong>第</strong>
-            <strong>22</strong>
+            <strong>23</strong>
             <strong>条</strong>
             <strong>(</strong>
             <strong>協議・管轄裁判所</strong>
@@ -923,7 +923,7 @@
         </p>
         <p>
             <strong>第</strong>
-            <strong>23</strong>
+            <strong>24</strong>
             <strong>条</strong>
             <strong>(</strong>
             <strong>準拠法</strong>
