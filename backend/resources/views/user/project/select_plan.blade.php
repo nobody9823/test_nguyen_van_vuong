@@ -31,48 +31,13 @@
         @csrf
         <input type="hidden" class="p-country-name" value="Japan">
         <!--★選択時 ↓as_select_return　に　asr_currentを追加-->
-        @foreach($project->plans as $plan)
-        <div class="as_select_return asr_current">
-            <div class="def_inner inner_item">
-                <div class="wlr_64">
-                    <div class="wlr_64_L">
-                        <div class="as_img">
-                            <img class="" src="{{ Storage::url($plan->image_url) }}">
-                        </div>
-                    </div><!--/wlr_64_L-->
-
-                    <div class="wlr_64_R">
-                        <div class="as_01">
-                            <div class="as_check">
-                                <input type="checkbox" name="plan_ids[]" class="plan_ids ac_list_checks checkbox-fan" onChange="Plans.planIsChecked(this)" id="{{ $plan->id }}" value="{{ $plan->price }}">
-                                <label for="{{ $plan->id }}" class="checkbox-fan_02">{{ $plan->price }}円</label>
-                            </div>
-                        </div>
-
-                        <div class="as_02">
-                            <div class="cp_ipselect_02 cp_chb ">
-                                <select name="plans[{{$plan->id}}]amount[]" id="plan_amount_{{ $plan->id }}" onChange="Plans.planAmountIsChanged(this)" disabled>
-                                    @for($i = 1; $i <= $plan->limit_of_supporters; $i ++)
-                                        <option value="{{ $i }}">数量{{ $i }}</option>
-                                    @endfor
-                                </select>
-                            </div>
-                        </div><!--/-->
-
-                        <div class="as_tit">{{ $plan->title }}</div><!--/-->
-
-                        <div class="as_txt">{{ $plan->content }}</div>
-
-                        <div class="as_03">
-                            <div class="as_shien_nin">支援者 <span>{{ $plan->includedPayments->count() }}人</span></div>
-                            <div class="as_day">お届け予定 <span>{{ $plan->delivery_date }}</span></div>
-                        </div>
-                    </div><!--/wlr_64_R-->
-                </div><!--/wlr_64-->
-            </div><!--/def_inner-->
-        </div><!--/as_select_return-->
-        @endforeach
-
+        @if ($plans instanceof \App\Models\Plan)
+            <x-user.plan.plan-payment-card :plan="$plans" />
+        @else
+            @foreach($project->plans as $plan)
+                <x-user.plan.plan-payment-card :plan="$plan" />
+            @endforeach
+        @endif
         {{-- <!--★通常時-->
         <div class="as_select_return">
             <div class="def_inner inner_item">
@@ -179,6 +144,7 @@
                                     <div class="tab1_01">
                                         <div class="tab1_01_01">クレジットカード番号</div>
                                         <div name="number_form" id="number-form" class="payjs-outer"></div>
+                                        <span id="errors" style="color: red;"></span>
                                     </div>
 
                                     <div class="tab1_02">
@@ -399,6 +365,25 @@ window.onload = function(){
 
     var elements = payjp.elements()
 
+    var errors = document.getElementById('errors');
+
+    let numEl = document.getElementById('number-form')
+
+    let exEl = document.getElementById('expiry-form')
+
+    let cvcEl = document.getElementById('cvc-form')
+
+    const checkCardNumber = (result) => {
+        if (result === undefined){
+            errors.innerHTML = 'カード情報が不正です。';
+            document.querySelector('#payjp_token').value = '';
+        } else {
+            errors.innerHTML = '';
+            document.querySelector('#payjp_token').value = result;
+            console.log(document.querySelector('#payjp_token'))
+        }
+    };
+
     // 入力フォームを分解して管理・配置できます
     var numberElement = elements.create('cardNumber')
     var expiryElement = elements.create('cardExpiry')
@@ -406,11 +391,27 @@ window.onload = function(){
     numberElement.mount('#number-form')
     expiryElement.mount('#expiry-form')
     cvcElement.mount('#cvc-form')
-    expiryElement.on('blur', function(event){
-        payjp.createToken(numberElement)
-        payjp.createToken(numberElement).then(function(r) {
-            document.querySelector('#payjp_token').value = r.id;
-        })
-    })
+
+    let config = { attribute: true, attributeOldValue: true}
+
+    const observer = new MutationObserver(mutationRecords => {
+            for (let MutationRecord of mutationRecords){
+                if(MutationRecord.target.classList.contains('PayjpElement--complete')){
+                    if (
+                            (exEl.classList.contains('PayjpElement--complete')) &&
+                            (cvcEl.classList.contains('PayjpElement--complete')) &&
+                            (numEl.classList.contains('PayjpElement--complete'))
+                        ){
+                            payjp.createToken(numberElement).then(function(r) {
+                                checkCardNumber(r.id);
+                            })
+                    }
+                }
+            }
+        });
+    observer.disconnect();
+    observer.observe(numEl, config);
+    observer.observe(exEl, config);
+    observer.observe(cvcEl, config);
 </script>
 @endsection

@@ -33,14 +33,17 @@ const Plans = (() => {
 
     return {
         planIsChecked: (el) => {
+            let selected_card = document.getElementById('plan_card_' + el.id)
 
             let total_amount = getTotalAmount();
 
             let selected_amount = getAmountById(el.id);
 
             if(selected_amount.disabled){
+                selected_card.classList.add('asr_current')
                 selected_amount.disabled = false;
             } else {
+                selected_card.classList.remove('asr_current')
                 selected_amount.disabled = true;
             }
             total_amount.value = getTotalPrice();

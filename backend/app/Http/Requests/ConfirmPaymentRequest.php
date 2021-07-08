@@ -54,8 +54,8 @@ class ConfirmPaymentRequest extends FormRequest
             'birth_year'  => ['required_with:birth_month,birth_day', 'string'],
             'birth_month' => ['required_with:birth_year,birth_day', 'string'],
             'birth_day'   => ['required_with:birth_year,birth_month', 'string'],
-            'remarks' => ['required', 'string', 'max:300'],
-            'comments' => ['required', 'string', 'max:300'],
+            'remarks' => ['nullable', 'string', 'max:300'],
+            'comments' => ['nullable', 'string', 'max:300'],
         ];
     }
 

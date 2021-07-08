@@ -69,14 +69,16 @@ return array(
     'applied_user_status_desc' => 'メッセージ状況降順',
 
     //支援者コメント管理
-    'user_name_asc' => 'ユーザー名昇順',
-    'user_name_desc' => 'ユーザー名降順',
-    'project_title_asc' => 'プロジェクト名昇順',
-    'project_title_desc' => 'プロジェクト名降順',
-    'project_talent_name_asc' => 'タレント名昇順',
-    'project_talent_name_desc' => 'タレント名降順',
-    'replies_to_supporter_comment_content_asc' => 'タレントの返信昇順',
-    'replies_to_supporter_comment_content_desc' => 'タレントの返信降順',
+    'payment_user_name_asc' => 'ユーザー名昇順',
+    'payment_user_name_desc' => 'ユーザー名降順',
+    'project_id_asc' => 'プロジェクトID昇順',
+    'project_id_desc' => 'プロジェクトID降順',
+    'project_user_name_asc' => 'インフルエンサー昇順',
+    'project_user_name_desc' => 'インフルエンサー降順',
+    'reply_content_asc' => '返信内容昇順',
+    'reply_content_desc' => '返信内容降順',
+    'reply_exist_asc' => '返信の有無昇順',
+    'reply_exist_desc' => '返信の有無降順',
 
     //支援者・支援管理
     'selected_option_asc' => 'オプション昇順',

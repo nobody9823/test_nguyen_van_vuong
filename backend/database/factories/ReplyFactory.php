@@ -24,7 +24,6 @@ class ReplyFactory extends Factory
     {
         return [
             'comment_id' => $this->faker->numberBetween(1, 30),
-            'user_id' => $this->faker->numberBetween(1, 100),
             'content' => Arr::random([
                 '頑張ってください！',
                 'みんなで乗り越えましょう',
