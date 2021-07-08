@@ -61,7 +61,7 @@
 
 
                 <div class="pds_sec01_progress-bar">
-                    <div class="progress-bar_par"><div>0%</div><div>100%（未実装）</div></div>
+                    <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
                         <span style="width: {{ $project->AchievementRate }}%; max-width:100%"></span>
                     </div>
