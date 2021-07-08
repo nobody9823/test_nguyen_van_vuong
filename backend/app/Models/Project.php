@@ -155,8 +155,8 @@ class Project extends Model
         ->join('plan_payment_included', 'plans.id', '=', 'plan_payment_included.plan_id')
         ->join('payments', 'plan_payment_included.payment_id', '=', 'payments.id')
         // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
-        ->select('plans.project_id','projects.*', DB::raw('SUM(payments.price) as payment_sum_price'),
-                                                  DB::raw('count(payments.user_id) as payment_count'))
+        ->select('plans.project_id','projects.*', DB::raw('SUM(payments.price) as payments_sum_price'),
+                                                  DB::raw('count(payments.user_id) as payments_count'))
         ->groupBy('plans.project_id');
     }
 
@@ -276,7 +276,7 @@ class Project extends Model
     {
         // 金額の達成率の算出
         if ($this->target_amount > 0) {
-            return round($this->payment_sum_price * 100 / $this->target_amount);
+            return round($this->payments_sum_price * 100 / $this->target_amount);
         } else { // ゼロ除算対策
             return 100;
         }

@@ -62,7 +62,7 @@ class ProjectController extends Controller
         ->inRandomOrder()->takeWithRelations(5)->get();
 
         // ランキング(支援総額順)
-        $ranking_projects = Project::getReleasedProject()->seeking()->joinQueryCalculation()->takeWithRelations(5)->skip(1)->orderBy('payment_sum_price','DESC')->get();
+        $ranking_projects = Project::getReleasedProject()->seeking()->joinQueryCalculation()->takeWithRelations(5)->skip(1)->orderBy('payments_sum_price','DESC')->get();
 
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
@@ -121,7 +121,7 @@ class ProjectController extends Controller
                 return redirect()->route('user.index')->withErrors('読み込みに失敗しました。管理者にお問い合わせください。');
             }
         }
-        
+
         $project = $project::where('projects.id',$project->id)->joinQueryCalculation()
         ->with('projectFiles','plans','reports','plans.includedPayments','plans.includedPayments.user')->first();
 

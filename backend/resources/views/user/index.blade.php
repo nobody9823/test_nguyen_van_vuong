@@ -36,7 +36,7 @@ use Carbon\Carbon;
                 <div class="ib01L_02">
                 <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
-                        <span style="width: {{ $projects->first()->AchievementRate }}%; max-width:100%"></span>
+                        <span style="width: {{ $projects->first()->achievement_rate }}%; max-width:100%"></span>
                     </div>
                 </div>
 
@@ -46,8 +46,8 @@ use Carbon\Carbon;
                 </div>
 
                 <div class="ib01L_04">
-                    <div>現在 <span>{{ number_format($projects->first()->payment_sum_price) }}円</span></div>
-                    <div>支援者 <span>{{ $projects->first()->payment_count }}人</span></div>
+                    <div>現在 <span>{{ number_format($projects->first()->payments_sum_price) }}円</span></div>
+                    <div>支援者 <span>{{ $projects->first()->payments_count }}人</span></div>
                     <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($projects->first()->end_date)) }}日</span></div>
                 </div>
             </div><!--/.img_box_01_L_item-->
@@ -72,13 +72,13 @@ use Carbon\Carbon;
                     <div class="ib01R_02">
                     <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                         <div class="progress-bar">
-                            <span style="width: {{ $project->AchievementRate }}%; max-width:100%"></span>
+                            <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
                         </div>
                     </div>
 
                     {{-- <div class="process">
-                        <div class="bar" style="width: {{ $project->AchievementRate }}%;">
-                            <span>{{ $project->AchievementRate}}%</span></div>
+                        <div class="bar" style="width: {{ $project->achievement_rate }}%;">
+                            <span>{{ $project->achievement_rate}}%</span></div>
                     </div> --}}
 
                     <div class="ib01R_03">
@@ -87,7 +87,7 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="ib01R_04">
-                        <div>現在 <span>{{ number_format($project->payment_sum_price) }}円</span></div>
+                        <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
                         <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
@@ -352,7 +352,7 @@ use Carbon\Carbon;
             <div class="img_box_03_L_item">
                 <div class="ib03L_01">
                     <img src="{{ Storage::url($ranking_projects->first()->projectFiles->first()->file_url) }}">
-                    <a href="{{ route('user.project.show', ['project' => $ranking_projects->first()]) }}" class="cover_link"></a>                    
+                    <a href="{{ route('user.project.show', ['project' => $ranking_projects->first()]) }}" class="cover_link"></a>
                     <div class="okini_link_L liked_project" id="{{ $ranking_projects->first()->id }}">
                         @if ($user_liked->where('project_id',$ranking_projects->first()->id)->isEmpty())
                         <i class="far fa-heart"></i>
@@ -376,7 +376,7 @@ use Carbon\Carbon;
                 <div class="ib01L_02">
                 <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
-                        <span style="width: {{ $ranking_projects->first()->AchievementRate }}%; max-width:100%"></span>
+                        <span style="width: {{ $ranking_projects->first()->achievement_rate }}%; max-width:100%"></span>
                     </div>
                 </div>
 
@@ -386,8 +386,8 @@ use Carbon\Carbon;
                 </div>
 
                 <div class="ib03L_04">
-                    <div>現在 <span>{{ number_format($ranking_projects->first()->payment_sum_price) }}円</span></div>
-                    <div>支援者 <span>{{ $ranking_projects->first()->payment_count }}人</span></div>
+                    <div>現在 <span>{{ number_format($ranking_projects->first()->payments_sum_price) }}円</span></div>
+                    <div>支援者 <span>{{ $ranking_projects->first()->payments_count }}人</span></div>
                     <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($ranking_projects->first()->end_date)) }}日</span></div>
                 </div>
             </div><!--/.img_box_03_L_item-->
@@ -423,13 +423,13 @@ use Carbon\Carbon;
                     <div class="ib03R_02">
                     <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                         <div class="progress-bar">
-                            <span style="width: {{ $project->AchievementRate }}%; max-width:100%"></span>
+                            <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
                         </div>
                     </div>
 
                     {{-- <div class="process">
-                        <div class="bar" style="width: {{ $project->AchievementRate }}%;">
-                            <span>{{ $project->AchievementRate}}%</span></div>
+                        <div class="bar" style="width: {{ $project->achievement_rate }}%;">
+                            <span>{{ $project->achievement_rate}}%</span></div>
                     </div> --}}
 
                     <div class="ib03R_03">
@@ -438,7 +438,7 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="ib03R_04">
-                        <div>現在 <span>{{ number_format($project->payment_sum_price) }}円</span></div>
+                        <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
                         <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
@@ -479,7 +479,7 @@ use Carbon\Carbon;
                     <div class="ib02_02">
                     <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                         <div class="progress-bar">
-                             <span style="width: {{ $project->AchievementRate }}%; max-width:100%"></span>
+                             <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
                         </div>
                     </div>
 
@@ -489,7 +489,7 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="ib02_04">
-                        <div>現在 <span>{{ number_format($project->payment_sum_price) }}円</span></div>
+                        <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
                         <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
