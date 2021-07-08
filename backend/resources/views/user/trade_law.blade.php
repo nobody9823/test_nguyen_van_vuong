@@ -92,8 +92,26 @@
             役務の対価
         </p>
         <p style="color: red">
-            イベントが成立した場合、イベント実行者は当社に対してのイベント開催の成約手数料として、ファンが支払うイベント購入代金の20%が発生します。※手数料プラン説明ページへのリンクを置く
+            イベントが成立した場合、イベント実行者は当社に対してのイベント開催の成約手数料として、下記の表の割合に従い手数料が発生します。
         </p>
+        <div style="display: flex;">
+            <div style="width: 25%; border: 1px solid black; text-align: center">
+                <div style="border-bottom: 1px solid black;">シンプルサポート</div>
+                <div>手数料15％</div>
+            </div>
+            <div style="width: 25%; border: 1px solid black; border-left-style: none; text-align: center">
+                <div style="border-bottom: 1px solid black;">スタンダードサポート</div>
+                <div>手数料20％</div>
+            </div>
+            <div style="width: 25%; border: 1px solid black; border-left-style: none; text-align: center">
+                <div style="border-bottom: 1px solid black;">プレミアムサポート</div>
+                <div>手数料30％</div>
+            </div>
+            <div style="width: 25%; border: 1px solid black; border-left-style: none; text-align: center">
+                <div style="border-bottom: 1px solid black;">フルサポートプラン</div>
+                <div>手数料40％</div>
+            </div>
+        </div>
         <p>
             <br/>
         </p>

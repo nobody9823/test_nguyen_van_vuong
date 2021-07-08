@@ -37,16 +37,32 @@
                     <div id="pds_sec01_slider">
                     <ul id="slider">
                         @foreach($project->projectFiles as $project_file)
-                        <li class="slide-item">
-                            <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
-                        </li>
+                            @if($project_file->file_content_type === 'image_url')
+                            <li class="slide-item">
+                                <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                            </li>
+                            @elseif($project_file->file_content_type === 'video_url')
+                            <li class="slide-item">
+                                <div class="iframe-wrap">
+                                    <iframe width="854" height="480" src="{{ $project_file->file_url }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                </div>
+                            </li>
+                            @endif
                         @endforeach
                     </ul>
                     <ul id="thumbnail_slider">
                         @foreach($project->projectFiles as $project_file)
-                        <li class="thumbnail-item">
-                            <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
-                        </li>
+                            @if($project_file->file_content_type === 'image_url')
+                            <li class="thumbnail-item">
+                                <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                            </li>
+                            @elseif($project_file->file_content_type === 'video_url')
+                            <li class="thumbnail-item">
+                                <div class="iframe-wrap">
+                                    <iframe width="854" height="480" src="{{ $project_file->file_url }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                </div>
+                            </li>
+                            @endif
                         @endforeach
                     </ul>
                     </div>

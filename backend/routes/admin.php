@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ActivityReportController;
 use App\Http\Controllers\Admin\AddressController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DetailController;
@@ -90,7 +90,11 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('comment', CommentController::class, ['only' => ['index', 'show', 'destroy']]);
 
     //返信管理
-    Route::resource('reply', ReplyController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    Route::post('reply/{comment}', [ReplyController::class,'store'])->name('reply.store');
+    Route::resource('reply', ReplyController::class, ['only' => ['update', 'destroy']]);
+
+    //タグ管理
+    Route::resource('tag', TagController::class, ['only' => ['index','create', 'store', 'edit', 'update', 'destroy']]);
 
     // メッセージ管理
     Route::resource('message', MessageController::class)->only(['index','show']);
