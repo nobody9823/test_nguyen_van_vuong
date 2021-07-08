@@ -37,6 +37,11 @@ class Payment extends Model
         return $this->hasOne('App\Models\Comment');
     }
 
+    public function token()
+    {
+        return $this->hasOne('App\Models\PaymentToken');
+    }
+
     public function scopeFilterByProjectId($query, $project_id)
     {
         return $query->whereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn(
