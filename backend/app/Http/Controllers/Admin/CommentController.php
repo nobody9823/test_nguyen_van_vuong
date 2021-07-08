@@ -19,7 +19,7 @@ class CommentController extends Controller
     {
         $comments = Comment::search()->narrowDownWithProject()
                                      ->searchWithPostDates($request->from_date, $request->to_date)
-                                     ->with(['project', 'payment.user', 'reply.user'])
+                                     ->with(['project', 'payment.user'])
                                      ->orderBy('created_at', 'DESC')
                                      ->paginate(10);
 
@@ -90,7 +90,7 @@ class CommentController extends Controller
     // TODO:今後、管理画面で支援者コメントを削除する仕様になれば使用する。そうでない場合は削除してください。
     // public function destroy(Comment $comment)
     // {
-    //     $comment->delete(); 
+    //     $comment->delete();
     //     return redirect()->action([CommentController::class, 'index'])
     //                      ->with('flash_message', "支援者コメントの削除が完了しました");
     // }
