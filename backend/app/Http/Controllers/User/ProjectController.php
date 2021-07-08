@@ -121,17 +121,13 @@ class ProjectController extends Controller
                 return redirect()->route('user.index')->withErrors('読み込みに失敗しました。管理者にお問い合わせください。');
             }
         }
+        
+        $project = $project::where('projects.id',$project->id)->joinQueryCalculation()
+        ->with('projectFiles','plans','reports','plans.includedPayments','plans.includedPayments.user')->first();
+
         return view('user.project.show', [
             'inviter_code' => $this->inviter_code,
-            'project' => $project->load([
-                'projectFiles',
-                'plans',
-                'plans.includedPayments',
-                'plans.includedPayments.user',
-                'reports' => function ($query) {
-                    $query->orderByDesc('created_at');
-                },
-            ]),
+            'project' => $project,
         ]);
     }
 
