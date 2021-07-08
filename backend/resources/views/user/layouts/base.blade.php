@@ -272,11 +272,23 @@
 /**他ページヘッダー**/
 .pc-details-screen_header{ display: none;}
 </style>
+    @if (session('flash_message'))
+        <div class="fan_alert fan_alert-success">
+            {{ session('flash_message') }}
+        </div>
+    @endif
 
+    @if ($errors->any())
+        <div class="fan_alert fan_alert-danger">
+            <ul>
+                @foreach($errors->all()  as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     @yield('content')
-
-
 
     <footer>
         <div class="footer_main">
