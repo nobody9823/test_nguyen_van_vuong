@@ -47,7 +47,7 @@ class InquiryController extends Controller
             $file_names = null;
         }
 
-        Mail::to(Admin::get("email"))->send(new MailFromInquiry($inquiry, $file_names));
+        Mail::to(config('mail.customer_support.address'))->send(new MailFromInquiry($inquiry, $file_names));
 
         // メールを送信した後、アップロードしたStorage内の画像を削除する。
         if (isset($file_names)) {
@@ -55,7 +55,7 @@ class InquiryController extends Controller
                 Storage::delete('public/image/' . $file_name);
             }
         }
-    
+
         return redirect()->route('user.inquiry.create')->with('flash_message', 'メール送信が成功しました。');
     }
 }

@@ -87,6 +87,10 @@ return [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
+    'customer_support' => [
+        'address' => 'support@fanreturn.com',
+        'name' => '株式会社ICH 個人情報保護対応窓口',
+    ],
 
     /*
     |--------------------------------------------------------------------------
