@@ -147,17 +147,14 @@ class Project extends Model
         return $query->take($int)->with(['projectFiles', 'plans', 'plans.includedPayments', 'plans.includedPayments.user', 'reports']);
     }
 
-    public function scopeJoinQueryCalculation($query)
+    // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
+    public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        return $query
-        // projectsテーブルにplan_payment_includedテーブルを結合する
-        ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('plan_payment_included', 'plans.id', '=', 'plan_payment_included.plan_id')
-        ->join('payments', 'plan_payment_included.payment_id', '=', 'payments.id')
-        // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
-        ->select('plans.project_id','projects.*', DB::raw('SUM(payments.price) as payments_sum_price'),
-                                                  DB::raw('count(payments.user_id) as payments_count'))
-        ->groupBy('plans.project_id');
+        return $query->with(['plans' => function ($query) {
+            $query
+                ->withCount('includedPayments')
+                ->withSum('includedPayments', 'price');
+        }]);
     }
 
     public function scopeOrdeyByLikedUsers($query)
@@ -272,14 +269,40 @@ class Project extends Model
         return $end_date->diffInDays($today);
     }
 
+    // plansの持つ'included_payments_count'の合計値 => 支援者総数
+    // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
+    public function getPlansSumIncludedPaymentsCountAttribute()
+    {
+        return $this->plans->sum('included_payments_count');
+    }
+
+    // plansの持つ'included_payments_sum_price'の合計値 => 支援総金額
+    // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
+    public function getPlansSumIncludedPaymentsSumPriceAttribute()
+    {
+        return $this->plans->sum('included_payments_sum_price');
+    }
+
+    // 目標金額に対する支援総額の割合
+    // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
     public function getAchievementRateAttribute()
     {
         // 金額の達成率の算出
         if ($this->target_amount > 0) {
-            return round($this->payments_sum_price * 100 / $this->target_amount);
+            return round($this->plans_sum_included_payments_sum_price * 100 / $this->target_amount);
         } else { // ゼロ除算対策
             return 100;
         }
+    }
+
+    // 紐づくプランが持つ'included_payments_count'の合計が高い順に並び替えてコレクションにして返す
+    // コレクションにしてから呼び出さないと使えない
+    public function sortedByPaymentsCount($projects)
+    {
+        $projectsSortedByPaymentsCount = $projects->sortByDesc(function ($project) {
+            return $project->plans->sum('included_payments_count');
+        })->values()->all();
+        return collect($projectsSortedByPaymentsCount);
     }
     /**
      * Get Japanese formatted start time of project with day of the week
