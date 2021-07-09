@@ -17,8 +17,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-use App\Helpers\PrefectureHelper;
-
 class ProjectController extends Controller
 {
     /**
@@ -99,7 +97,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project = $project::where('projects.id',$project->id)->joinQueryCalculation()
+        $project = $project::where('projects.id',$project->id)->getWithPaymentsCountAndSumPrice()
         ->with('projectFiles','plans','reports')->first();
         return view('admin.project.show', ['project' => $project]);
     }
