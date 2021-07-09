@@ -1324,13 +1324,14 @@ input[name="tab_item"] {
 
 @media screen and (max-width: 400px){
 	.pay_input_count { width: 130px;}
+	.tab1_desc{display: flex; flex-wrap: wrap; align-items: center; align-content: center; flex-flow: column;}
 }
 
 
-
+.cvc_wrapper { display: flex; }
 .tab1_desc{display: flex; flex-wrap: wrap; align-items: center; align-content: center;}
 .tab1_01{ width: 49%; margin: 0 1% 0 0;}
-.tab1_02{ width: 24%; margin: 0 1% 0 0;}
+.tab1_02{ width: 24%; margin: 0 1% 0 0; flex-grow: 1; min-width: 120px}
 .tab1_03{ width: 24%; margin: 0 1% 0 0; display: flex; flex-wrap: wrap; align-items: center; align-content: center;}
 
 .tab1_04{ width: 100%; margin: 0 0 15px 0;}
