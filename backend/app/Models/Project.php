@@ -297,12 +297,20 @@ class Project extends Model
 
     // 紐づくプランが持つ'included_payments_count'の合計が高い順に並び替えてコレクションにして返す
     // コレクションにしてから呼び出さないと使えない
-    public function sortedByPaymentsCount($projects)
+    public function scopeSortedByPaymentsCount($projects)
     {
-        $projectsSortedByPaymentsCount = $projects->sortByDesc(function ($project) {
+        $projectsSortedByPaymentsCount = $projects->get()->sortByDesc(function ($project) {
             return $project->plans->sum('included_payments_count');
         })->values()->all();
         return collect($projectsSortedByPaymentsCount);
+    }
+
+    public function scopeSortedByPaymentsSumPrice($projects)
+    {
+        $projectsSortedByPaymentsSumPrice = $projects->get()->sortByDesc(function ($project) {
+            return $project->plans->sum('included_payments_sum_price');
+        })->values()->all();
+        return collect($projectsSortedByPaymentsSumPrice);
     }
     /**
      * Get Japanese formatted start time of project with day of the week
