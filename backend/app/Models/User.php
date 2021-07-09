@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\ImageCast;
 use App\Casts\HashMake;
+use App\Notifications\ResetPasswordNotification;
 use Auth;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes,SearchFunctions,SortBySelected;
+    use HasFactory, Notifiable, SoftDeletes, SearchFunctions, SortBySelected;
 
     /**
      * The attributes that are mass assignable.
@@ -83,6 +84,11 @@ class User extends Authenticatable
             PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
             Payment::destroy($payment_ids);
         });
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     // NOTICE デザインにないのでコメントアウト

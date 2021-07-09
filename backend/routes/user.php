@@ -73,8 +73,8 @@ Route::get('/terms', [TopPageController::class, 'terms'])->name('terms');
 Route::get('/privacy_policy', [TopPageController::class, 'privacyPolicy'])->name('privacy_policy');
 
 //---------------------Forgot Password-----------------------------------------------
-Route::get('/forgot_password', [MypageController::class, 'forgotPassword'])->name('forgot_password');
-Route::post('/send_reset_password_mail', [MypageController::class, 'sendResetPasswordMail'])->name('send_reset_password_mail');
+Route::get('/forgot_password', [PasswordResetController::class, 'forgotPassword'])->name('forgot_password');
+Route::post('/send_reset_password_mail', [PasswordResetController::class, 'sendResetPasswordMail'])->name('send_reset_password_mail');
 // --------------------password reset-------------------
 Route::get('/password_reset/{token}', [PasswordResetController::class, 'reset'])->name('password.reset');
 Route::post('/password_reset', [PasswordResetController::class, 'update'])->name('password.update');
