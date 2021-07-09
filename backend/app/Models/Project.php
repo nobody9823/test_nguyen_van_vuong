@@ -47,7 +47,7 @@ class Project extends Model
             $project->projectTagTagging()->delete();
             $project->reports()->delete();
 
-            // プランのリレーション先も論理削除
+            // リターンのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
             $plan_payment_included_payment_ids = PlanPaymentIncluded::whereIn('plan_id', $plan_ids)->pluck('payment_id')->toArray();
             $payment_ids = Payment::whereIn('id', $plan_payment_included_payment_ids)->pluck('id')->toArray();
@@ -332,7 +332,36 @@ class Project extends Model
      */
     public function getEndDate()
     {
+<<<<<<< HEAD
         return $this->end_date->isoFormat('YYYY年MM月DD日(ddd)');
+=======
+        //一回計算されてるならもうしないで返す
+        if ($this->achievement_is_calculated) {
+            return;
+        }
+
+        $plans =  $this->plans()->withCount('includedPayments')->get();
+        // 応援リターンを支援したユーザーの総数
+        $included_users_count = 0;
+        // 現在の達成額
+        $achievement_amount = 0;
+
+        //それぞれのリターンの応援人数から支援総額と応援人数の合計を算出
+        foreach($plans as $plan) {
+            $achievement_amount += $plan->price * $plan->included_payments_count;
+            $included_users_count += $plan->included_payments_count;
+        }
+        // 金額の達成率の算出
+        if ($this->target_amount > 0) {
+            $achievement_rate = round($achievement_amount * 100 / $this->target_amount);
+        } else { // ゼロ除算対策
+            $achievement_rate = 100;
+        }
+
+        $this->included_users_count = $included_users_count;
+        $this->achievement_amount = $achievement_amount;
+        $this->achievement_rate = $achievement_rate;
+>>>>>>> develop
     }
 
     public function releaseProject(){
@@ -340,7 +369,7 @@ class Project extends Model
         return $this->save() ? true : false;
     }
 
-    // プロジェクトの持つプランをログインしているユーザーが支援しているかを確認
+    // プロジェクトの持つリターンをログインしているユーザーが支援しているかを確認
     public function isIncluded()
     {
         $plans = $this->plans()->whereIn(

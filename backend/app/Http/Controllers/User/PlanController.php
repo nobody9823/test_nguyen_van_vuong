@@ -98,7 +98,7 @@ class PlanController extends Controller
     } elseif ($result['resultInfo']['code'] === 'SUCCESS'){
       try {
         DB::beginTransaction();
-          // options_tableの中から、プランに紐づいていてセッションのオプションタイトルと同じオプションの行をロックする。
+          // options_tableの中から、リターンに紐づいていてセッションのオプションタイトルと同じオプションの行をロックする。
           $option = $plan->options()
               ->where('name', $request->selected_option)
               ->where( function ($query) {

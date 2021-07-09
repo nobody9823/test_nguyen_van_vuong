@@ -34,7 +34,7 @@
                 <th style="width:5%">支援額</th>
                 <th style="width:10%">オプション</th>
                 <th style="width:10%">企業名/タレント名</th>
-                <th style="width:20%">プロジェクト名/支援プラン</th>
+                <th style="width:20%">プロジェクト名/支援リターン</th>
                 <th style="width:10%">メッセージ</th>
             </tr>
             @foreach($supporterPurchases as $supporter_purchase)

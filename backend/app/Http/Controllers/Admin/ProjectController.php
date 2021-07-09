@@ -86,7 +86,7 @@ class ProjectController extends Controller
         return redirect()->action(
             [PlanController::class, 'create'],
             ['project' => $project, 'plans' => $project->plans]
-        )->with('flash_message', 'プロジェクト作成が成功しました。プランを作成してください。');
+        )->with('flash_message', 'プロジェクト作成が成功しました。リターンを作成してください。');
     }
 
     /**
@@ -251,7 +251,7 @@ class ProjectController extends Controller
 
             //保存しない形でファイルのアウトプットを作成（良く分かってないので文章変です。）
             $stream = fopen('php://output', 'w');
-            $csv_head = ['支援者名', 'メールアドレス', '支援プラン名', '支援額', '支援日', 'お返し予定日', '住所'];
+            $csv_head = ['支援者名', 'メールアドレス', '支援リターン名', '支援額', '支援日', 'お返し予定日', '住所'];
             //カラムとかデータを文字コード変換してさっき開いたファイルに挿入
             mb_convert_variables('SJIS', 'UTF-8', $csv_head);
             fputcsv($stream, $csv_head);

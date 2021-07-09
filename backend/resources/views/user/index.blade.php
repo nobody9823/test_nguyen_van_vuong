@@ -27,11 +27,11 @@ use Carbon\Carbon;
                     </div>
                 </div>
 
-                <div class="ib01L_cate_tag">
+                {{-- <div class="ib01L_cate_tag">
                     @foreach($projects->first()->tags as $tag)
                         <a href="#" class="cate_tag_link">{{ $tag->name }}</a>
                     @endforeach
-                </div>
+                </div> --}}
 
                 <div class="ib01L_02">
                 <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
@@ -121,14 +121,14 @@ use Carbon\Carbon;
 
 
 
-    <section id="pc-top_02" class="section_base">
+    {{-- <section id="pc-top_02" class="section_base">
         <div class="tit_L_01 E-font"><h2>CATEGORY</h2><div class="sub_tit_L">カテゴリー</div></div>
         <div class="cate_tag_01">
             @foreach($tags as $tag)
             <a href="★" class="cate_tag_link">{{$tag->name}}</a>
             @endforeach
         </div>
-    </section><!--/#pc-top_02-->
+    </section><!--/#pc-top_02--> --}}
 
 
 
@@ -447,11 +447,11 @@ use Carbon\Carbon;
         </div>
     </div><!--/.img_box_03-->
 
-    <div class="more_btn_01">
+    {{-- <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
         <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
         <a href="#" class="cover_link"></a>
-    </div>
+    </div> --}}
 
     </section><!--/#pc-top_04-->
 
@@ -497,11 +497,11 @@ use Carbon\Carbon;
 
             </div>
 
-    <div class="more_btn_01">
+    {{-- <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
         <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
         <a href="★" class="cover_link"></a>
-    </div>
+    </div> --}}
 
     </section><!--/#pc-top_04-->
 
