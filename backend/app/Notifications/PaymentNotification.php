@@ -52,12 +52,8 @@ class PaymentNotification extends Notification
                     'billing_users_count' => $this->project->getBillingUsersCount(),
                     'achievement_amount' => $this->project->getAchievementAmount(),
                     'project_title' => $this->project->title,
-                    'payment_id' => $this->payment->merchant_payment_id
+                    'payment_id' => $this->payment->token->token
                 ]);
-                // ->with();
-                    // ->line('The introduction to the notification.')
-                    // ->action('Notification Action', url('/'))
-                    // ->line('Thank you for using our application!');
     }
 
     /**

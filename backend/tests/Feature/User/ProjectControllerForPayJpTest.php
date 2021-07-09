@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\Plan;
 use App\Models\Payment;
+use App\Models\PaymentToken;
 use Tests\TestCase;
 use Exception;
 use App\Traits\UniqueToken;
@@ -72,11 +73,14 @@ class ProjectControllerForPayJpTest extends TestCase
                     'user_id' => $this->supporter->id,
                     'price' => $this->plan->price,
                     'message_status' => 'ステータスなし',
-                    'merchant_payment_id' => UniqueToken::getToken(),
-                    'pay_jp_id' => $this->success_token->id,
+                    'payment_way' => 'PayJp',
                     'payment_is_finished' => false,
                     'remarks' => 'test remarks'
                 ])->create();
+
+        $this->success_payment->token()->save(PaymentToken::factory()->state([
+            'token' => $this->success_token->id,
+        ])->make());
 
         $params = [
             'card' => [
@@ -92,11 +96,14 @@ class ProjectControllerForPayJpTest extends TestCase
                 'user_id' => $this->supporter->id,
                 'price' => $this->plan->price,
                 'message_status' => 'ステータスなし',
-                'merchant_payment_id' => UniqueToken::getToken(),
-                'pay_jp_id' => $this->fail_token->id,
+                'payment_way' => 'PayJp',
                 'payment_is_finished' => false,
                 'remarks' => 'test remarks'
             ])->create();
+
+        $this->fail_payment->token()->save(PaymentToken::factory()->state([
+                'token' => $this->fail_token->id
+            ])->make());
 
         $this->url = "project/{$this->project->id}/plan/confirmPayment";
     }
