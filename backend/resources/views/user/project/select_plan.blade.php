@@ -137,9 +137,11 @@
                                         <span id="errors" style="color: red;"></span>
                                     </div>
 
-                                    <div class="tab1_02">
-                                        <div class="tab1_02_01">セキュリティコード</div>
-                                        <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+                                    <div class="cvc_wrapper">
+                                        <div class="tab1_02">
+                                            <div class="tab1_02_01">セキュリティコード</div>
+                                            <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+                                        </div>
                                         <div class="tooltip1">
                                             <p>？</p>
                                             <div class="description1">カードの裏面にある末尾3桁の数字</div>
