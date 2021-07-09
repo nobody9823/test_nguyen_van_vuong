@@ -122,8 +122,7 @@ class ProjectController extends Controller
             }
         }
 
-        $project = $project::where('projects.id',$project->id)->joinQueryCalculation()
-        ->with('projectFiles','plans','reports','plans.includedPayments','plans.includedPayments.user')->first();
+        $project = $project::where('projects.id',$project->id)->getWithPaymentsCountAndSumPrice()->first();
 
         return view('user.project.show', [
             'inviter_code' => $this->inviter_code,
