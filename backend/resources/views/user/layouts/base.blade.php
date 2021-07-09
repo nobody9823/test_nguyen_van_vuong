@@ -95,7 +95,7 @@
 	    <div class="other_site_header"></div>
 		<ul id="js-global-nav" class="p-global-nav main-menu menu_base taso_menu">
 
-			<li class="menu-item nav_btn taso_li menuset_01">
+			{{-- <li class="menu-item nav_btn taso_li menuset_01">
 				<a href="★" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">はじめる</p>
 				</a>
@@ -109,10 +109,10 @@
 				<a href="★" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">ファンリターンとは</p>
 				</a>
-			</li>
+			</li> --}}
 
 
-			<li id="menu-item-2" class="menu-item menu-item-2 nav_btn menu-item-has-children taso_li menuset_02">
+			{{-- <li id="menu-item-2" class="menu-item menu-item-2 nav_btn menu-item-has-children taso_li menuset_02">
 					<a href="#" id="top_menu-2" data-megamenu="js-megamenu2" class=" nav_btn_link taso_li_a">
 						<label for="item_c_2" class="item_c">
 							<div>
@@ -135,7 +135,7 @@
 				<a href="★" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">全てのタグ</p>
 				</a>
-			</li>
+			</li> --}}
 
 
 			@guest('web')
@@ -191,7 +191,7 @@
 			</li>
             @endauth
 
-			<li class="menu-item nav_btn taso_li menuset_06">
+			{{-- <li class="menu-item nav_btn taso_li menuset_06">
 				<a href="★" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">お問い合わせ</p>
 				</a>
@@ -200,7 +200,7 @@
 				<a href="★" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">よくあるご質問・ヘルプ</p>
 				</a>
-			</li>
+			</li> --}}
             @auth('web')
 			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.withdraw') }}" class="top_menu-1 nav_btn_link">
@@ -210,9 +210,9 @@
             @endauth
 
 
-			<li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
+			{{-- <li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
 				<i class="fas fa-search"></i><input type="text" name="search_word" placeholder="キーワードを検索">
-			</li>
+			</li> --}}
 
 			<!--▼ ★★★ログイン時-->
             @auth('web')
@@ -259,11 +259,11 @@
 .pdsh_current{ border-bottom: solid 2px #00AEBD;}
 </style>
 
-<div class="pc-details-screen_header">
+{{-- <div class="pc-details-screen_header">
 	<div class="pdsh_item pdsh_current">プロジェクト<a href="#" class="cover_link"></a></div>
 	<div class="pdsh_item">活動レポート<a href="#" class="cover_link"></a></div>
 	<div class="pdsh_item">応援コメント<a href="#" class="cover_link"></a></div>
-</div>
+</div> --}}
 
 </header>
 </div>
@@ -293,7 +293,7 @@
     <footer>
         <div class="footer_main">
             <div class="footer_main_inner">
-                <div class="footer_main_01">
+                {{-- <div class="footer_main_01">
                     <div class="footer_tit">プロジェクトをさがす</div>
                     <div class="footer_item"><a href="★">カテゴリ</a></div>
                     <div class="footer_item"><a href="★">テキストテキスト</a></div>
@@ -308,14 +308,14 @@
                     <div class="footer_tit">プロジェクトをはじめる</div>
                     <div class="footer_item"><a href="★">プロジェクト掲載</a></div>
                     <div class="footer_item"><a href="★">プロジェクトを作る</a></div>
-                </div>
+                </div> --}}
 
                 <div class="footer_main_03">
                     <div class="footer_tit">fanreturnについて</div>
-                    <div class="footer_item"><a href="★">fanreturnとは</a></div>
+                    {{-- <div class="footer_item"><a href="★">fanreturnとは</a></div>
                     <div class="footer_item"><a href="★">クラウドファンティングとは</a></div>
                     <div class="footer_item"><a href="★">ヘルプ</a></div>
-                    <div class="footer_item"><a href="★">お問い合わせ</a></div>
+                    <div class="footer_item"><a href="★">お問い合わせ</a></div> --}}
                     <div class="footer_item"><a href="{{ route('user.terms_of_service') }}">利用規約</a></div>
                     {{-- <div class="footer_item"><a href="★">細則</a></div> --}}
                     <div class="footer_item"><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></div>
@@ -335,9 +335,9 @@
             <div class="footer_under_inner">
                 <div class="footer_logo"><img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}"></div>
                 <ul>
-                    <li><a href="#">はじめる</a></li>
+                    {{-- <li><a href="#">はじめる</a></li>
                     <li><a href="#">さがす</a></li>
-                    <li><a href="#">ファンリターンとは</a></li>
+                    <li><a href="#">ファンリターンとは</a></li> --}}
 
                     @guest('web')
                     <li class="menu-item nav_btn taso_li menuset_03 login_btn">
@@ -357,6 +357,9 @@
         </div><!--/.footer_under-->
 
     </footer>
+    <p id="page-top_btn">
+        <a href="#wrapper"><i class="fas fa-chevron-circle-up"></i></a>
+    </p>
 
 </div><!--/wrapper-->
 

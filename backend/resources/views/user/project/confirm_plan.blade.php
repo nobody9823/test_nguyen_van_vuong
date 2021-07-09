@@ -22,7 +22,6 @@
         <div class="av_box">
             <div class="av_tit">決済金額</div>
             <div class="av_txt">
-                購入者側の手数料要確認(支援金額：2,500円<br>システム利用料：220円（税込）)
                 <div>合計：{{ $validated_request['total_amount'] }}円</div>
             </div>
         </div><!--/av_box-->

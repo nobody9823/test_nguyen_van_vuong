@@ -17,6 +17,7 @@ use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 use Log;
 
@@ -95,16 +96,6 @@ class MypageController extends Controller
             Log::alert($e->getMessage(), $e->getTrace());
             return redirect()->back()->withErrors("プロフィールの更新に失敗しました。管理者にお問い合わせください。");
         }
-    }
-
-    public function forgotPassword()
-    {
-        return view('user.forgot_password');
-    }
-
-    // FIXME パスワードを忘れた方はこちらからの処理未実装
-    public function sendResetPasswordMail()
-    {
     }
 
     // 退会画面

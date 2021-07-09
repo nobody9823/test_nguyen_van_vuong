@@ -33,7 +33,6 @@ class MailForPasswordReset extends Mailable
     public function build()
     {
         return $this->view('admin.mail.template.password_reset')
-            ->from(config('mail.from.address'))
             ->subject('パスワード変更のお願い')
             ->with([
                 'url' => url(route($this->getModelName().'.password.reset', ['token' => $this->token])),
