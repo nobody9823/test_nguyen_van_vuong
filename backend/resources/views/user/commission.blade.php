@@ -1,7 +1,7 @@
 @extends('user.layouts.base')
 
-@section('title', 'プラン')
+@section('title', 'リターン')
 
 @section('content')
-    <p>プラン説明画面</p>
+    <p>リターン説明画面</p>
 @endsection

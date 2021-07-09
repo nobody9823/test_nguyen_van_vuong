@@ -37,6 +37,6 @@ class CheckPlanAmount implements Rule
      */
     public function message()
     {
-        return 'プランの購入数が不正です。確認をお願いします。';
+        return 'リターンの購入数が不正です。確認をお願いします。';
     }
 }
