@@ -138,7 +138,7 @@ class PlanController extends Controller
         $plan->deleteImage();
         $plan->delete();
         $plans = Plan::paginate(10);
-        return redirect()->action([PlanController::class, 'index'], ['project' => $plan->project, 'plans' => $plans])->with('flash_message', 'プラン削除が成功しました。');
+        return redirect()->action([PlanController::class, 'index'], ['project' => $plan->project])->with('flash_message', 'プラン削除が成功しました。');
     }
 
     /**

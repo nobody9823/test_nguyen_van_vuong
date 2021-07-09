@@ -424,7 +424,7 @@ class ProjectController extends Controller
             Auth::user()->saveProfile($request->all());
             Auth::user()->saveAddress($request->all());
             // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
-            Mail::to(config('mail.from.address'))->send(new ConsultProject($request->all()));
+            Mail::to(config('mail.customer_support.address'))->send(new ConsultProject($request->all()));
             DB::commit();
             return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
         } catch(Exception $e) {
