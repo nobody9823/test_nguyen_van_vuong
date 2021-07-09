@@ -44,7 +44,7 @@ class ProjectSeeder extends Seeder
         // 公開中
         Project::factory(10)->released()->create()
             ->each(function (Project $project) {
-                $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->make());
+                $project->projectFiles()->saveMany(ProjectFile::factory(10)->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())->each(function (Plan $plan) {
                     // $plan->includedPayments()->attach(Payment::inRandomOrder()->first()->id);
