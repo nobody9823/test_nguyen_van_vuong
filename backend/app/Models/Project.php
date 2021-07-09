@@ -47,7 +47,7 @@ class Project extends Model
             $project->projectTagTagging()->delete();
             $project->reports()->delete();
 
-            // プランのリレーション先も論理削除
+            // リターンのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
             $plan_payment_included_payment_ids = PlanPaymentIncluded::whereIn('plan_id', $plan_ids)->pluck('payment_id')->toArray();
             $payment_ids = Payment::whereIn('id', $plan_payment_included_payment_ids)->pluck('id')->toArray();
@@ -154,7 +154,7 @@ class Project extends Model
         ->join('plans', 'projects.id', '=', 'plans.project_id')
         ->join('plan_payment_included', 'plans.id', '=', 'plan_payment_included.plan_id')
         ->join('payments', 'plan_payment_included.payment_id', '=', 'payments.id')
-        // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
+        // 結合テーブル内のproject_idが同じものは、リターンの価格を全て足す。
         ->select('plans.project_id','projects.*',DB::raw('SUM(payments.price) as funding_amount'))
         ->groupBy('plans.project_id')->orderBy('funding_amount','DESC');
     }
@@ -348,12 +348,12 @@ class Project extends Model
         }
 
         $plans =  $this->plans()->withCount('includedPayments')->get();
-        // 応援プランを支援したユーザーの総数
+        // 応援リターンを支援したユーザーの総数
         $included_users_count = 0;
         // 現在の達成額
         $achievement_amount = 0;
 
-        //それぞれのプランの応援人数から支援総額と応援人数の合計を算出
+        //それぞれのリターンの応援人数から支援総額と応援人数の合計を算出
         foreach($plans as $plan) {
             $achievement_amount += $plan->price * $plan->included_payments_count;
             $included_users_count += $plan->included_payments_count;
@@ -375,7 +375,7 @@ class Project extends Model
         return $this->save() ? true : false;
     }
 
-    // プロジェクトの持つプランをログインしているユーザーが支援しているかを確認
+    // プロジェクトの持つリターンをログインしているユーザーが支援しているかを確認
     public function isIncluded()
     {
         $plans = $this->plans()->whereIn(
