@@ -16,8 +16,7 @@ class Payment extends Model
         'user_id',
         'price',
         'message_status',
-        'merchant_payment_id',
-        'pay_jp_id',
+        'payment_way',
         'payment_is_finished',
         'remarks'
     ];
