@@ -75,7 +75,8 @@
                             <div class="as_i_01_L_01">リターン合計金額</div>
                             <div class="as_i_01_L_02 E-font">
                                 <input type="number" name="total_amount" id="total_amount" class="pay_input_count" readonly>
-                                <span>円</span></div>
+                                <span>円</span>
+                            </div>
                         </div>
                     </div><!--/.as_i_01_L-->
 
