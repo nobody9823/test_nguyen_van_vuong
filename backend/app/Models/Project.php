@@ -332,36 +332,7 @@ class Project extends Model
      */
     public function getEndDate()
     {
-<<<<<<< HEAD
         return $this->end_date->isoFormat('YYYY年MM月DD日(ddd)');
-=======
-        //一回計算されてるならもうしないで返す
-        if ($this->achievement_is_calculated) {
-            return;
-        }
-
-        $plans =  $this->plans()->withCount('includedPayments')->get();
-        // 応援リターンを支援したユーザーの総数
-        $included_users_count = 0;
-        // 現在の達成額
-        $achievement_amount = 0;
-
-        //それぞれのリターンの応援人数から支援総額と応援人数の合計を算出
-        foreach($plans as $plan) {
-            $achievement_amount += $plan->price * $plan->included_payments_count;
-            $included_users_count += $plan->included_payments_count;
-        }
-        // 金額の達成率の算出
-        if ($this->target_amount > 0) {
-            $achievement_rate = round($achievement_amount * 100 / $this->target_amount);
-        } else { // ゼロ除算対策
-            $achievement_rate = 100;
-        }
-
-        $this->included_users_count = $included_users_count;
-        $this->achievement_amount = $achievement_amount;
-        $this->achievement_rate = $achievement_rate;
->>>>>>> develop
     }
 
     public function releaseProject(){
