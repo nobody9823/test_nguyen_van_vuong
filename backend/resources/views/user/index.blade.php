@@ -16,7 +16,7 @@ use Carbon\Carbon;
         <div class="img_box_01_L">
             <div class="img_box_01_L_item">
                 <div class="ib01L_01">
-                    <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
+                    <img src="{{ Storage::url($projects->first()->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
                     <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
                     <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
                     @if ($user_liked->where('project_id',$projects->first()->id)->isEmpty())
@@ -58,7 +58,7 @@ use Carbon\Carbon;
                 @if(!$loop->first)
                 <div class="img_box_01_R_item">
                     <div class="ib01R_01">
-                        <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
+                        <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         <div class="okini_link liked_project" id="{{ $project->id }}">
                         @if ($user_liked->where('project_id',$project->id)->isEmpty())
@@ -351,7 +351,7 @@ use Carbon\Carbon;
         <div class="img_box_03_L">
             <div class="img_box_03_L_item">
                 <div class="ib03L_01">
-                    <img src="{{ Storage::url($ranking_projects->first()->projectFiles->first()->file_url) }}">
+                    <img src="{{ Storage::url($ranking_projects->first()->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
                     <a href="{{ route('user.project.show', ['project' => $ranking_projects->first()]) }}" class="cover_link"></a>
                     <div class="okini_link_L liked_project" id="{{ $ranking_projects->first()->id }}">
                         @if ($user_liked->where('project_id',$ranking_projects->first()->id)->isEmpty())
@@ -398,7 +398,7 @@ use Carbon\Carbon;
                 @if(!$loop->first)
                 <div class="img_box_03_R_item">
                     <div class="ib03R_01">
-                        <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
+                        <img src="{{ Storage::url($project->projectFiles->where('file_content_type', 'image_url')->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         <div class="okini_link liked_project" id="{{ $project->id }}">
                         @if ($user_liked->where('project_id',$project->id)->isEmpty())
@@ -465,7 +465,7 @@ use Carbon\Carbon;
                 @foreach($projects as $project)
                 <div class="img_box_02_item">
                     <div class="ib02_01 new_project_obi E-font">
-                        <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
+                        <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         <div class="okini_link liked_project" id="{{ $project->id }}">
                         @if ($user_liked->where('project_id',$project->id)->isEmpty())

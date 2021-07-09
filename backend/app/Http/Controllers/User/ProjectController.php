@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\Plan;
 use App\Models\Payment;
+use App\Models\PaymentToken;
 use App\Models\Comment;
 use App\Models\Profile;
 use App\Models\Address;
@@ -222,8 +223,7 @@ class ProjectController extends Controller
                     'inviter_id' => !empty($validated_request['inviter_code']) ? $inviter->id : null,
                     'price' => $validated_request['total_amount'],
                     'message_status' => "ステータスなし",
-                    'merchant_payment_id' => $unique_token,
-                    'pay_jp_id' => !empty($validated_request['payjp_token']) ? $validated_request['payjp_token'] : null,
+                    'payment_way' => !empty($validated_request['payjp_token']) ? 'PayJp' : 'PayPay',
                     'payment_is_finished' => false
                 ], $request->all()
             ));
@@ -237,6 +237,9 @@ class ProjectController extends Controller
                 });
             $this->plan->updatePlansByIds($plans, $validated_request['plans']);
             $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
+            $payment->token()->save(PaymentToken::make([
+                'token' => !empty($validated_request['payjp_token']) ? $validated_request['payjp_token'] : $unique_token,
+            ]));
             DB::commit();
         } catch (\Exception $e){
             DB::rollback();
@@ -260,7 +263,7 @@ class ProjectController extends Controller
      */
     public function paymentForPayJp(Project $project, Payment $payment)
     {
-        $response = $this->pay_jp->Payment($payment->price, $payment->pay_jp_id);
+        $response = $this->pay_jp->Payment($payment->price, $payment->token->token);
         DB::beginTransaction();
         try {
                 $payment->payment_is_finished = true;
@@ -279,23 +282,20 @@ class ProjectController extends Controller
 
     public function paymentForPayPay(Project $project, Payment $payment)
     {
-        $response = $this->pay_pay->getPaymentDetail($payment->merchant_payment_id);
+        $response = $this->pay_pay->getPaymentDetail($payment->token->token);
 
-        if($response['data']['status'] === 'COMPLETED'){
-            $payment_id = $response['data']['merchantPaymentId'];
-        } else {
+        if($response['data']['status'] !== 'COMPLETED'){
             return redirect()->action([ProjectController::class, 'selectPlans'], ['project' => $project])->withError('決済処理に失敗しました。管理会社に連絡をお願いします。');
         }
 
         DB::beginTransaction();
         try {
-            $payment = Payment::where('merchant_payment_id', $payment_id)->first();
             $payment->payment_is_finished = true;
             $payment->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            $this->pay_pay->cancelPayment($payment_id);
+            $this->pay_pay->cancelPayment($response['data']['merchantPaymentId']);
             throw $e;
         }
         $this->user->notify(new PaymentNotification($project, $payment));
