@@ -142,11 +142,6 @@ class Project extends Model
         return $query->where('talent_id', Auth::id())->getProjects();
     }
 
-    public function scopeTakeWithRelations($query, $int)
-    {
-        return $query->take($int)->with(['projectFiles', 'plans', 'plans.includedPayments', 'plans.includedPayments.user', 'reports']);
-    }
-
     // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {

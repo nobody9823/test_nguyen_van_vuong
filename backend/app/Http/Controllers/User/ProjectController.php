@@ -66,27 +66,27 @@ class ProjectController extends Controller
 
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
-        //     ->inRandomOrder()->takeWithRelations(9)->get();
+        //     ->inRandomOrder()->get();
 
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
-        //     ->inRandomOrder()->takeWithRelations(9)->get();
+        //     ->inRandomOrder()->get();
 
         // 最新のプロジェクト
         // $new_projects = Project::getReleasedProject()->seeking()->orderBy('created_at', 'DESC')
-        //     ->takeWithRelations(9)->get();
+        //     ->get();
 
         // 人気のプロジェクト
         // $popularity_projects = Project::getReleasedProject()->seeking()->ordeyByLikedUsers()
-        //     ->takeWithRelations(9)->get();
+        //     ->get();
 
         // 募集終了が近いプロジェクト
         // $nearly_deadline_projects = Project::getReleasedProject()->seeking()->orderByNearlyDeadline()
-        //     ->inRandomOrder()->takeWithRelations(9)->get();
+        //     ->inRandomOrder()->get();
 
         // もうすぐ公開のプロジェクト
         // $nearly_open_projects = Project::getReleasedProject()->orderByNearlyOpen()
-        //     ->inRandomOrder()->takeWithRelations(9)->get();
+        //     ->inRandomOrder()->get();
 
         return view('user.index', compact(
             // 'new_projects',
