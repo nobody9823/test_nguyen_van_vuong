@@ -152,6 +152,14 @@ class Project extends Model
         }]);
     }
 
+    public function getLoadPaymentsCountAndSumPrice()
+    { 
+        return $this->load(['plans' => function($query){
+            $query->withCount('includedPayments')
+                  ->withSum('includedPayments', 'price');
+        }]);
+    }
+
     public function scopeOrdeyByLikedUsers($query)
     {
         // return $query->withCount('users')->orderByRaw('users_count + added_like DESC');

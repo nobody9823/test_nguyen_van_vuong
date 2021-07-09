@@ -123,11 +123,9 @@ class ProjectController extends Controller
             }
         }
 
-        $project = $project::where('projects.id',$project->id)->getWithPaymentsCountAndSumPrice()->first();
-
         return view('user.project.show', [
             'inviter_code' => $this->inviter_code,
-            'project' => $project,
+            'project' => $project->getLoadPaymentsCountAndSumPrice()
         ]);
     }
 
@@ -276,8 +274,7 @@ class ProjectController extends Controller
             }
             $this->user->notify(new PaymentNotification($project, $payment));
             
-            $project = $project::where('projects.id',$project->id)->getWithPaymentsCountAndSumPrice()->first();
-        return view('user.plan.supported', ['project' => $project, 'payment' => $payment]);
+        return view('user.plan.supported', ['project' => $project->getLoadPaymentsCountAndSumPrice(), 'payment' => $payment]);
     }
 
     public function paymentForPayPay(Project $project, Payment $payment)

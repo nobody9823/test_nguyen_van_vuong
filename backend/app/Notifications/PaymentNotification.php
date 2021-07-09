@@ -19,9 +19,8 @@ class PaymentNotification extends Notification
      * @return void
      */
     public function __construct(Project $project, Payment $payment)
-    {
-        $project = $project::where('projects.id',$project->id)->getWithPaymentsCountAndSumPrice()->first();
-        $this->project = $project;
+    { 
+        $this->project = $project->getLoadPaymentsCountAndSumPrice();
 
         $this->payment = $payment;
     }
