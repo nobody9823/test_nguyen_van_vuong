@@ -20,6 +20,7 @@ class PaymentNotification extends Notification
      */
     public function __construct(Project $project, Payment $payment)
     {
+        $project = $project::where('projects.id',$project->id)->getWithPaymentsCountAndSumPrice()->first();
         $this->project = $project;
 
         $this->payment = $payment;
@@ -49,8 +50,8 @@ class PaymentNotification extends Notification
                 ->subject('【FanReturn】リターンの購入が完了しました。')
                 ->view('user.mail.template.payment_finished',
                 [
-                    'billing_users_count' => $this->project->getBillingUsersCount(),
-                    'achievement_amount' => $this->project->getAchievementAmount(),
+                    'billing_users_count' => $this->project->plansSumIncludedPaymentsCount,
+                    'achievement_amount' => $this->project->plansSumIncludedPaymentsSumPrice,
                     'project_title' => $this->project->title,
                     'payment_id' => $this->payment->merchant_payment_id
                 ]);
