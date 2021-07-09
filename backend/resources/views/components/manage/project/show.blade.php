@@ -166,12 +166,12 @@
                     </div>
 
 
-                    {{--プラン一覧--}}
+                    {{--リターン一覧--}}
                     <div class="card border-info">
                         <div class="card-header" id="planListHead">
                             <a class="btn btn-link" data-toggle="collapse" data-target="#planListBody"
                                 aria-expanded="true" aria-controls="planListBody">
-                                <h5>プラン一覧▼</h5>
+                                <h5>リターン一覧▼</h5>
                             </a>
                         </div>
                         <div id="planListBody" class="collapse" aria-labelledby="planListHead"
@@ -201,7 +201,7 @@
                                                 </li>
                                                 <li class="list-group-item">
                                                     <h6 class="font-weight-bold mb-2" style="white-space: pre-line;">
-                                                        プラン内容</h6>
+                                                        リターン内容</h6>
                                                     {{ $plan->content }}
                                                 </li>
                                                 <li class="list-group-item">
@@ -320,7 +320,7 @@
                                         <tr>
                                             <th>名前</th>
                                             <th>メールアドレス</th>
-                                            <th>支援プラン</th>
+                                            <th>支援リターン</th>
                                             <th>支援額</th>
                                             <th>支援日</th>
                                             <th>お返し予定日</th>

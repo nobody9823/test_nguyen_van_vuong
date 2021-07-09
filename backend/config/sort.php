@@ -52,7 +52,7 @@ return array(
     'liked_users_count_asc' => 'いいね数昇順',
     'liked_users_count_desc' => 'いいね数降順',
 
-    //プラン管理
+    //リターン管理
     'price_asc' => '価格昇順',
     'price_desc' => '価格降順',
     'delivery_date_asc' => 'リターン提供日昇順',
@@ -91,8 +91,8 @@ return array(
     'plan_project_talent_name_desc' => 'タレント名降順',
     'plan_project_title_asc' => 'プロジェクト名昇順',
     'plan_project_title_desc' => 'プロジェクト名降順',
-    'plan_title_asc' => '支援プラン昇順',
-    'plan_title_desc' => '支援プラン降順',
+    'plan_title_asc' => '支援リターン昇順',
+    'plan_title_desc' => '支援リターン降順',
 
     //リレーションなど特別なもの
     // 'user_resume_last_name_kana_asc' => 'カナ昇順',

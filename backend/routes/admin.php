@@ -77,7 +77,7 @@ Route::middleware('auth:admin')->group(function () {
     // Route::delete('plan/option/{option}', [PlanController::class, 'deleteOption'])->name('option.destroy');
     Route::delete('report/image/{report_image}', [ReportController::class, 'deleteImage'])->name('report.image');
 
-    // プラン管理
+    // リターン管理
     Route::resource('plan', PlanController::class, ['only' => ['index', 'show', 'destroy']]);
 
     // 応募者管理

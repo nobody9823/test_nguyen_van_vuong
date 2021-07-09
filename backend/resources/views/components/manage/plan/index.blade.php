@@ -1,11 +1,11 @@
 @extends($role.'.layouts.base')
 
-@section('title', 'プラン一覧')
+@section('title', 'リターン一覧')
 
 @section('content')
 <div class="card-header d-flex align-items-center">
     <div class="flex-grow-1">
-        プラン一覧
+        リターン一覧
         @if (count($plans) >0)
         (全{{ $plans->total() }}件
         {{  ($plans->currentPage() -1) * $plans->perPage() + 1}} -
@@ -134,8 +134,8 @@
         @else
         <table class="table">
             <tr>
-                <th style="width:10%">プラン名</th>
-                <th style="width:25%">プラン内容</th>
+                <th style="width:10%">リターン名</th>
+                <th style="width:25%">リターン内容</th>
                 <th style="width:8%">価格</th>
                 <th style="width:10%">リターン提供日</th>
                 <!-- <th style="width:10%">プレビュー</th> -->
@@ -144,7 +144,7 @@
                 <th style="width:10%">編集</th>
                 <th style="width:10%">削除</th>
                 @else
-                <th style="width: 10%">プラン詳細</th>
+                <th style="width: 10%">リターン詳細</th>
                 @endif
             </tr>
             @foreach($plans as $plan)
