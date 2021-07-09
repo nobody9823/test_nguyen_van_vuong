@@ -272,6 +272,8 @@ class ProjectController extends Controller
                 throw $e;
             }
             $this->user->notify(new PaymentNotification($project, $payment));
+            
+            $project = $project::where('projects.id',$project->id)->getWithPaymentsCountAndSumPrice()->first();
         return view('user.plan.supported', ['project' => $project, 'payment' => $payment]);
     }
 
