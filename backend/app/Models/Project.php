@@ -25,6 +25,7 @@ class Project extends Model
         'user_id',
         'title',
         'content',
+        'ps_plan_content',
         'target_amount',
         'curator',
         'start_date',
