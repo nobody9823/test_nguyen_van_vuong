@@ -132,6 +132,13 @@ class Payment extends Model
         }
     }
 
+    public function scopeNarrowDownWithProject($query)
+    {
+        $project_id = Request::get('project');
+        if (Request::get('project')) {
+            return $query->whereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->whereIn('project_id', Project::select('id')->where('id', $project_id))));
+        }
+    }
     public function scopeNarrowDownByDate($query)
     {
         if (Request::get('from_date')) {

@@ -6,11 +6,7 @@
 <div class="card-header d-flex align-items-center">
     <div class="flex-grow-1">
         リターン一覧
-        @if (count($plans) >0)
-        (全{{ $plans->total() }}件
-        {{  ($plans->currentPage() -1) * $plans->perPage() + 1}} -
-        {{ (($plans->currentPage() -1) * $plans->perPage() + 1) + (count($plans) -1)  }}件を表示)
-        @endif
+        <x-manage.display_index_count :props="$plans" />
     </div>
     <form action="{{ route($role.'.plan.index') }}" class="form-inline pr-3" method="get" style="position: relative">
         @csrf
@@ -63,28 +59,11 @@
                 </div>
             </div>
         </div>
-        <select name="sort_type" id="sort" class="form-control mr-2">
-            <option value="" {{ !Request::get('sort_type') ? 'selected' : '' }}>
-                並び替え</option>
-            <option value="title_asc" {{ Request::get('sort_type') === "title_asc" ? 'selected' : '' }}>
-                タイトル昇順
-            </option>
-            <option value="title_desc" {{ Request::get('sort_type') === "title_desc" ? 'selected' : '' }}>
-                タイトル降順
-            </option>
-            <option value="price_asc" {{ Request::get('sort_type') === "price_asc" ? 'selected' : '' }}>
-                価格昇順
-            </option>
-            <option value="price_desc" {{ Request::get('sort_type') === "price_desc" ? 'selected' : '' }}>
-                価格降順
-            </option>
-            <option value="delivery_date_asc" {{ Request::get('sort_type') === "delivery_date_asc" ? 'selected' : '' }}>
-                リターン提供日昇順
-            </option>
-            <option value="delivery_date_desc" {{ Request::get('sort_type') === "delivery_date_desc" ? 'selected' : '' }}>
-                リターン提供日降順
-            </option>
-        </select>
+        <x-manage.sort_form :props_array="[
+            'title' => 'タイトル',
+            'price' => '価格',
+            'delivery_date' => 'リターン提供日',
+        ]" />
         <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索"
             value="{{ Request::get('word') }}">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
@@ -94,41 +73,7 @@
     <a href="{{ route($role.'.plan.create', ['project' => $project]) }}" class="btn btn-success">新規作成</a>
     @endif
 </div>
-@if(Request::get('word') || Request::get('sort_type'))
-<div class="card-header">
-    <span style="cursor: pointer;" data-toggle="collapse" data-target="#collapseSearchFilter" aria-expanded="false"
-        aria-controls="collapseFilter">
-        検索条件▼
-    </span>
-    <a class="btn btn-sm btn-outline-info ml-4" href={{route($role.'.plan.index')}}>検索条件をクリア</a>
-</div>
-<div class="collapse" id="collapseSearchFilter">
-    @if(Request::get('project'))
-    <div class="card-header d-flex align-items-center">
-        プロジェクトタイトル :
-        <div class="flex-grow-1">
-            【{{ App\Models\Project::find(Request::get('project'))->title }}】
-        </div>
-    </div>
-    @endif
-    @if(Request::get('word'))
-    <div class="card-header d-flex align-items-center">
-        検索ワード :
-        <div class="flex-grow-1">
-            【{{ Request::get('word') }}】
-        </div>
-    </div>
-    @endif
-    @if(Request::get('sort_type'))
-    <div class="card-header d-flex align-items-center">
-        並び替え条件 :
-        <div class="flex-grow-1">
-            【{{ config('sort')[Request::get('sort_type')]}}】
-        </div>
-    </div>
-    @endif
-</div>
-@endif
+<x-manage.search-terms role="admin" model='plan' />
 <div class="card-body">
     @if($plans->count() <= 0) <p>表示する投稿はありません。</p>
         @else

@@ -16,10 +16,12 @@ class PaymentController extends Controller
     public function index(Request $request)
     {
         $payments = Payment::search()
+                    ->narrowDownWithProject()
                     ->NarrowDownByDate()
                     ->NarrowDownByPrice()
                     ->with(['user','inviter','includedPlans.project.user','comment'])
                     ->sortBySelected($request->sort_type);
+
         //リレーション先OrderBy
         if ($request->sort_type === 'user_name_asc') {
             $payments = $payments->get()->sortBy('user.name')->paginate(10);
