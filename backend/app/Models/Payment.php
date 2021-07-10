@@ -35,7 +35,7 @@ class Payment extends Model
     {
         return $this->belongsToMany('App\Models\Plan', 'App\Models\PlanPaymentIncluded');
     }
-    
+
     public function project()
     {
         return $this->belongsTo('App\Models\Project');
@@ -54,29 +54,6 @@ class Payment extends Model
     public function token()
     {
         return $this->hasOne('App\Models\PaymentToken');
-    }
-
-    public function scopeFilterByProjectId($query, $project_id)
-    {
-        return $query->whereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn(
-            'plan_id',
-            Plan::select('id')->whereIn(
-                'project_id',
-                Project::where('id', $project_id)->pluck('id')->toArray()
-            )
-        ));
-    }
-
-    // FIXME ここのスコープはクエリではなくてpriceの合計値が返っている気がいたします。
-    public function scopeGetTotalAmountOfSupporterWithProject($query, Project $project)
-    {
-        return $query->whereIn(
-            'id',
-            PlanPaymentIncluded::whereIn(
-                'plan_id',
-                $project->plans()->pluck('id')->toArray()
-            )->pluck('id')->toArray()
-        )->sum('price');
     }
 
     public function messageContents()

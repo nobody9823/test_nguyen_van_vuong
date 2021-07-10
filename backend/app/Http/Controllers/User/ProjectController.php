@@ -298,9 +298,8 @@ class ProjectController extends Controller
             throw $e;
         }
         $this->user->notify(new PaymentNotification($project, $payment));
-        $supporter_count = User::getCountOfSupportersWithProject($project);
-        $total_amount = Payment::getTotalAmountOfSupporterWithProject($project);
-        return view('user.plan.supported', ['project' => $project, 'payment' => $payment, 'supporter_count' => $supporter_count, 'total_amount' => $total_amount]);
+
+        return view('user.plan.supported', ['project' => $project->getLoadPaymentsCountAndSumPrice(), 'payment' => $payment]);
     }
 
     /**
@@ -454,7 +453,7 @@ class ProjectController extends Controller
         $invitation_url = route('user.project.show', ['project' => $project, 'inviter' => $encrypted_code]);
         Auth::user()->supportedProjects()->attach($project->id);
 
-        return view('user.project.support', ['invitation_url' => $invitation_url, 'project' => $project]);
+        return view('user.project.support', ['invitation_url' => $invitation_url, 'project' => $project->getLoadPaymentsCountAndSumPrice()]);
     }
 
     public function supporterRanking(Project $project)
@@ -466,7 +465,7 @@ class ProjectController extends Controller
             [
                 'users_ranked_by_users_count' => $users_ranked_by_users_count,
                 'users_ranked_by_total_amount' => $users_ranked_by_total_amount,
-                'project' => $project->load('projectFiles')
+                'project' => $project->getLoadPaymentsCountAndSumPrice(),
             ],
         );
     }
