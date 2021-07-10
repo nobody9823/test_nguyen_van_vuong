@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Services\Payment\includedPlans;
+use App\Traits\SearchFunctions;
+use App\Traits\SortBySelected;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Request;
 
 class Payment extends Model
 {
-    use HasFactory, SoftDeletes, includedPlans;
+    use HasFactory, SoftDeletes, includedPlans,SortBySelected,SearchFunctions;
 
     protected $fillable = [
         'inviter_id',
@@ -112,5 +116,43 @@ class Payment extends Model
                 )
             )
         );
+    }
+
+    public function scopeSearch($query)
+    {
+        if ($this->getSearchWordInArray()) {
+            foreach ($this->getSearchWordInArray() as $word) {
+                $query->where(function ($query) use ($word) {
+                    $query->whereIn('user_id', User::select('id')->where('name', 'like', "%$word%"))
+                    ->orWhereIn('inviter_id', User::select('id')->where('name', 'like', "%$word%"))
+                    ->orWhereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->whereIn('project_id', Project::select('id')->where('title', 'like', "%$word%"))))
+                    ->orWhereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->where('title', 'like', "%$word%")));
+                });
+            }
+        }
+    }
+
+    public function scopeNarrowDownByDate($query)
+    {
+        if (Request::get('from_date')) {
+            $from_date = new Carbon(Request::get('from_date'));
+            $query->whereDate('created_at', '>=', $from_date->setTime(23, 59, 59));
+        }
+        if (Request::get('to_date')) {
+            $to_date = new Carbon(Request::get('to_date'));
+            $query->whereDate('created_at', '<=', $to_date->setTime(23, 59, 59));
+        }
+        return $query;
+    }
+
+    public function scopeNarrowDownByPrice($query)
+    {
+        if (Request::get('from_price')) {
+            $query->where('price', '>=', Request::get('from_price'));
+        }
+        if (Request::get('to_price')) {
+            $query->where('price', '<=', Request::get('to_price'));
+        }
+        return $query;
     }
 }

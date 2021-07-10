@@ -81,18 +81,17 @@ return array(
     'reply_exist_desc' => '返信の有無降順',
 
     //支援者・支援管理
-    'selected_option_asc' => 'オプション昇順',
-    'selected_option_desc' => 'オプション降順',
-    'plan_price_asc' => '支援額昇順',
-    'plan_price_desc' => '支援額降順',
-    'plan_project_talent_company_name_asc' => '企業名昇順',
-    'plan_project_talent_company_name_desc' => '企業名降順',
-    'plan_project_talent_name_asc' => 'タレント名昇順',
-    'plan_project_talent_name_desc' => 'タレント名降順',
-    'plan_project_title_asc' => 'プロジェクト名昇順',
-    'plan_project_title_desc' => 'プロジェクト名降順',
-    'plan_title_asc' => '支援リターン昇順',
-    'plan_title_desc' => '支援リターン降順',
+    'user_name_asc' => '支援者名昇順',
+    'user_name_desc' => '支援者名降順',
+    'inviter_name_asc' => '招待者名昇順',
+    'inviter_name_desc' => '招待者名降順',
+    'price_asc' => '支援額昇順',
+    'price_desc' => '支援額降順',
+    'plan_payment_included_plan_project_user_name_asc' => 'インフルエンサー名',
+    'plan_payment_included_plan_project_user_name_desc' => 'インフルエンサー名',
+    'plan_payment_included_plan_project_title_asc' => 'プロジェクト名',
+    'plan_payment_included_plan_project_title_desc' => 'プロジェクト名',
+
 
     //リレーションなど特別なもの
     // 'user_resume_last_name_kana_asc' => 'カナ昇順',
