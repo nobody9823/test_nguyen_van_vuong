@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('title')->default('');
-            $table->string('content', 15000)->default('');
+            $table->string('content', 10000)->default('');
             $table->string('ps_plan_content', 5000)->default('');
             $table->integer('target_amount')->default(0);
             $table->string('curator')->default('');
