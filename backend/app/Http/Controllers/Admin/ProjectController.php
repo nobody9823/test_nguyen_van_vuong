@@ -97,8 +97,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load('projectFiles', 'plans', 'reports');
-        return view('admin.project.show', compact('project'));
+        $project = $project::where('projects.id',$project->id)->getWithPaymentsCountAndSumPrice()
+        ->with('projectFiles','plans','reports')->first();
+        return view('admin.project.show', ['project' => $project]);
     }
 
     /**

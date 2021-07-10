@@ -33,11 +33,6 @@ class Project extends Model
 
     protected $dates = ['start_date', 'end_date'];
 
-    private int $achievement_amount = 0;
-    private int $achievement_rate = 0;
-    private int $included_users_count = 0;
-    private bool $achievement_is_calculated = false;
-
     public static function boot()
     {
         parent::boot();
@@ -142,33 +137,22 @@ class Project extends Model
         return $query->where('talent_id', Auth::id())->getProjects();
     }
 
-    public function scopeTakeWithRelations($query, $int)
+    // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
+    public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        return $query->take($int)->with(['projectFiles', 'plans', 'plans.includedPayments', 'plans.includedPayments.user', 'reports']);
+        return $query->with(['plans' => function ($query) {
+            $query
+                ->withCount('includedPayments')
+                ->withSum('includedPayments', 'price');
+        }]);
     }
 
-    public function scopeOrderByFundingAmount($query)
-    {
-        return $query
-        // projectsテーブルにplan_payment_includedテーブルを結合する
-        ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('plan_payment_included', 'plans.id', '=', 'plan_payment_included.plan_id')
-        ->join('payments', 'plan_payment_included.payment_id', '=', 'payments.id')
-        // 結合テーブル内のproject_idが同じものは、リターンの価格を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('SUM(payments.price) as funding_amount'))
-        ->groupBy('plans.project_id')->orderBy('funding_amount','DESC');
-    }
-
-    public function scopeOrderByNumberOfSupporters($query)
-    {
-        return $query
-        // projectsテーブルにplans,user_plan_billingテーブルを結合する
-        ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('user_plan_billing', 'plans.id', '=', 'user_plan_billing.plan_id')
-        // 結合テーブル内のplans.project_idが同じものは、その人数を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('count(user_plan_billing.user_id) as number_of_user'))
-        ->groupBy('plans.project_id')
-        ->orderBy('number_of_user', 'DESC');
+    public function getLoadPaymentsCountAndSumPrice()
+    { 
+        return $this->load(['plans' => function($query){
+            $query->withCount('includedPayments')
+                  ->withSum('includedPayments', 'price');
+        }]);
     }
 
     public function scopeOrdeyByLikedUsers($query)
@@ -282,6 +266,50 @@ class Project extends Model
         $today = Carbon::now();
         return $end_date->diffInDays($today);
     }
+
+    // plansの持つ'included_payments_count'の合計値 => 支援者総数
+    // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
+    public function getPaymentUsersCountAttribute()
+    {
+        return $this->plans->sum('included_payments_count');
+    }
+
+    // plansの持つ'included_payments_sum_price'の合計値 => 支援総金額
+    // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
+    public function getAchievementAmountAttribute()
+    {
+        return $this->plans->sum('included_payments_sum_price');
+    }
+
+    // 目標金額に対する支援総額の割合
+    // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
+    public function getAchievementRateAttribute()
+    {
+        // 金額の達成率の算出
+        if ($this->target_amount > 0) {
+            return round($this->achievement_amount * 100 / $this->target_amount);
+        } else { // ゼロ除算対策
+            return 100;
+        }
+    }
+
+    // 紐づくプランが持つ'included_payments_count'の合計が高い順に並び替えてコレクションにして返す
+    // コレクションにしてから呼び出さないと使えない
+    public function scopeSortedByPaymentsCount($projects)
+    {
+        $projectsSortedByPaymentsCount = $projects->get()->sortByDesc(function ($project) {
+            return $project->plans->sum('included_payments_count');
+        })->values()->all();
+        return collect($projectsSortedByPaymentsCount);
+    }
+
+    public function scopeSortedByPaymentsSumPrice($projects)
+    {
+        $projectsSortedByPaymentsSumPrice = $projects->get()->sortByDesc(function ($project) {
+            return $project->plans->sum('included_payments_sum_price');
+        })->values()->all();
+        return collect($projectsSortedByPaymentsSumPrice);
+    }
     /**
      * Get Japanese formatted start time of project with day of the week
      *
@@ -300,74 +328,6 @@ class Project extends Model
     public function getEndDate()
     {
         return $this->end_date->isoFormat('YYYY年MM月DD日(ddd)');
-    }
-
-    /**
-     * Get number of Billing users
-     *
-     * @return int
-     */
-    public function getBillingUsersCount(): int
-    {
-        $this->calculateAchieve();
-        return $this->included_users_count;
-    }
-
-    /**
-     * Get achievement amount of project
-     *
-     * @return int
-     */
-    public function getAchievementAmount(): int
-    {
-        $this->calculateAchieve();
-        return $this->achievement_amount;
-    }
-
-    /**
-     * Get achievement rate of project
-     *
-     * @return int
-     */
-    public function getAchievementRate(): int
-    {
-        $this->calculateAchieve();
-        return $this->achievement_rate;
-    }
-
-    /**
-     * Calculate achievement amount ,achievement rate and number of Billing users
-     *
-     * @return void
-     */
-    public function calculateAchieve(): void
-    {
-        //一回計算されてるならもうしないで返す
-        if ($this->achievement_is_calculated) {
-            return;
-        }
-
-        $plans =  $this->plans()->withCount('includedPayments')->get();
-        // 応援リターンを支援したユーザーの総数
-        $included_users_count = 0;
-        // 現在の達成額
-        $achievement_amount = 0;
-
-        //それぞれのリターンの応援人数から支援総額と応援人数の合計を算出
-        foreach($plans as $plan) {
-            $achievement_amount += $plan->price * $plan->included_payments_count;
-            $included_users_count += $plan->included_payments_count;
-        }
-        // 金額の達成率の算出
-        if ($this->target_amount > 0) {
-            $achievement_rate = round($achievement_amount * 100 / $this->target_amount);
-        } else { // ゼロ除算対策
-            $achievement_rate = 100;
-        }
-
-        $this->included_users_count = $included_users_count;
-        $this->achievement_amount = $achievement_amount;
-        $this->achievement_rate = $achievement_rate;
     }
 
     public function releaseProject(){

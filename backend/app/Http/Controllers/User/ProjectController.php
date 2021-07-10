@@ -59,36 +59,35 @@ class ProjectController extends Controller
     {
         $tags = Tag::all();
         $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
-        $projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
-        ->inRandomOrder()->takeWithRelations(5)->get();
+        $projects = Project::getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice()
+        ->inRandomOrder()->take(5)->get();
 
         // ランキング(支援総額順)
-        $ranking_projects = Project::getReleasedProject()->seeking()->orderByFundingAmount()
-        ->takeWithRelations(5)->skip(1)->get();
+        $ranking_projects = Project::getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice()->sortedByPaymentsSumPrice()->skip(1)->take(5);
 
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
-        //     ->inRandomOrder()->takeWithRelations(9)->get();
+        //     ->inRandomOrder()->get();
 
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
-        //     ->inRandomOrder()->takeWithRelations(9)->get();
+        //     ->inRandomOrder()->get();
 
         // 最新のプロジェクト
         // $new_projects = Project::getReleasedProject()->seeking()->orderBy('created_at', 'DESC')
-        //     ->takeWithRelations(9)->get();
+        //     ->get();
 
         // 人気のプロジェクト
         // $popularity_projects = Project::getReleasedProject()->seeking()->ordeyByLikedUsers()
-        //     ->takeWithRelations(9)->get();
+        //     ->get();
 
         // 募集終了が近いプロジェクト
         // $nearly_deadline_projects = Project::getReleasedProject()->seeking()->orderByNearlyDeadline()
-        //     ->inRandomOrder()->takeWithRelations(9)->get();
+        //     ->inRandomOrder()->get();
 
         // もうすぐ公開のプロジェクト
         // $nearly_open_projects = Project::getReleasedProject()->orderByNearlyOpen()
-        //     ->inRandomOrder()->takeWithRelations(9)->get();
+        //     ->inRandomOrder()->get();
 
         return view('user.index', compact(
             // 'new_projects',
@@ -123,17 +122,10 @@ class ProjectController extends Controller
                 return redirect()->route('user.index')->withErrors('読み込みに失敗しました。管理者にお問い合わせください。');
             }
         }
+
         return view('user.project.show', [
             'inviter_code' => $this->inviter_code,
-            'project' => $project->load([
-                'projectFiles',
-                'plans',
-                'plans.includedPayments',
-                'plans.includedPayments.user',
-                'reports' => function ($query) {
-                    $query->orderByDesc('created_at');
-                },
-            ]),
+            'project' => $project->getLoadPaymentsCountAndSumPrice()
         ]);
     }
 
@@ -281,7 +273,8 @@ class ProjectController extends Controller
                 throw $e;
             }
             $this->user->notify(new PaymentNotification($project, $payment));
-        return view('user.plan.supported', ['project' => $project, 'payment' => $payment]);
+            
+        return view('user.plan.supported', ['project' => $project->getLoadPaymentsCountAndSumPrice(), 'payment' => $payment]);
     }
 
     public function paymentForPayPay(Project $project, Payment $payment)
