@@ -76,7 +76,8 @@
     @else
     <table class="table">
         <tr>
-            <th style="width:5%">選択</th>
+            <th style="width:5%"><input name='checkbox' class="checkbox" type="checkbox"
+                    {{ old('checkbox')?'checked':'' }} onchange="all_checkbox_toggle(this)">選択</th>
             <th style="width:5%">ID</th>
             <th style="width:20%">タイトル</th>
             <th style="width:10%">ユーザー名/キュレーター</th>
@@ -91,7 +92,7 @@
         @foreach($projects as $project)
         <tr>
             <td>
-                <input form="operate_projects" type="checkbox" name="project_id[]" id="project_id[]"
+                <input form="operate_projects" class="checkbox" type="checkbox" name="project_id[]" id="project_id[]"
                     value={{ $project->id }}>
             </td>
             <td>
@@ -263,6 +264,7 @@
             location.reload();
         });
     }
+
     </script>
     @endsection
     @endsection
