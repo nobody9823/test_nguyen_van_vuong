@@ -33,11 +33,6 @@ class Project extends Model
 
     protected $dates = ['start_date', 'end_date'];
 
-    private int $achievement_amount = 0;
-    private int $achievement_rate = 0;
-    private int $included_users_count = 0;
-    private bool $achievement_is_calculated = false;
-
     public static function boot()
     {
         parent::boot();
@@ -274,14 +269,14 @@ class Project extends Model
 
     // plansの持つ'included_payments_count'の合計値 => 支援者総数
     // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
-    public function getPlansSumIncludedPaymentsCountAttribute()
+    public function getPaymentUsersCountAttribute()
     {
         return $this->plans->sum('included_payments_count');
     }
 
     // plansの持つ'included_payments_sum_price'の合計値 => 支援総金額
     // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
-    public function getPlansSumIncludedPaymentsSumPriceAttribute()
+    public function getAchievementAmountAttribute()
     {
         return $this->plans->sum('included_payments_sum_price');
     }
@@ -292,7 +287,7 @@ class Project extends Model
     {
         // 金額の達成率の算出
         if ($this->target_amount > 0) {
-            return round($this->plans_sum_included_payments_sum_price * 100 / $this->target_amount);
+            return round($this->achievement_amount * 100 / $this->target_amount);
         } else { // ゼロ除算対策
             return 100;
         }

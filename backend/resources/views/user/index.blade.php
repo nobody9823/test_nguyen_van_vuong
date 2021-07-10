@@ -46,8 +46,8 @@ use Carbon\Carbon;
                 </div>
 
                 <div class="ib01L_04">
-                    <div>現在 <span>{{ number_format($projects->first()->plansSumIncludedPaymentsSumPrice) }}円</span></div>
-                    <div>支援者 <span>{{ $projects->first()->plansSumIncludedPaymentsCount }}人</span></div>
+                    <div>現在 <span>{{ number_format($projects->first()->achievement_amount) }}円</span></div>
+                    <div>支援者 <span>{{ $projects->first()->payment_users_count }}人</span></div>
                     <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($projects->first()->end_date)) }}日</span></div>
                 </div>
             </div><!--/.img_box_01_L_item-->
@@ -87,7 +87,7 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="ib01R_04">
-                        <div>現在 <span>{{ number_format($project->plansSumIncludedPaymentsSumPrice) }}円</span></div>
+                        <div>現在 <span>{{ number_format($project->achievement_amount) }}円</span></div>
                         <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
@@ -386,8 +386,8 @@ use Carbon\Carbon;
                 </div>
 
                 <div class="ib03L_04">
-                    <div>現在 <span>{{ number_format($ranking_projects->first()->plansSumIncludedPaymentsSumPrice) }}円</span></div>
-                    <div>支援者 <span>{{ $ranking_projects->first()->plansSumIncludedPaymentsCount }}人</span></div>
+                    <div>現在 <span>{{ number_format($ranking_projects->first()->achievement_amount) }}円</span></div>
+                    <div>支援者 <span>{{ $ranking_projects->first()->payment_users_count }}人</span></div>
                     <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($ranking_projects->first()->end_date)) }}日</span></div>
                 </div>
             </div><!--/.img_box_03_L_item-->
@@ -438,7 +438,7 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="ib03R_04">
-                        <div>現在 <span>{{ number_format($project->plansSumIncludedPaymentsSumPrice) }}円</span></div>
+                        <div>現在 <span>{{ number_format($project->achievement_amount) }}円</span></div>
                         <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
@@ -489,7 +489,7 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="ib02_04">
-                        <div>現在 <span>{{ number_format($project->plansSumIncludedPaymentsSumPrice) }}円</span></div>
+                        <div>現在 <span>{{ number_format($project->achievement_amount) }}円</span></div>
                         <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
