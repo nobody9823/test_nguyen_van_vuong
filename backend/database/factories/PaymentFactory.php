@@ -26,6 +26,7 @@ class PaymentFactory extends Factory
     {
         return [
             'user_id' => User::inRandomOrder()->first()->id,
+            'project_id' => random_int(1, 100),
             'inviter_id' => $this->faker->numberBetween(1, 100),
             'price' => $this->faker->numberBetween(1000, 50000),
             'message_status' => 'ステータスなし',
