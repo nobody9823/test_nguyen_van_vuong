@@ -27,7 +27,7 @@ class SupporterPurchaseController extends Controller
      */
     // public function create()
     // {
-        //
+    //
     // }
 
     /**
@@ -38,7 +38,7 @@ class SupporterPurchaseController extends Controller
      */
     // public function store(Request $request)
     // {
-        //
+    //
     // }
 
     /**
@@ -49,7 +49,7 @@ class SupporterPurchaseController extends Controller
      */
     // public function show($id)
     // {
-        //
+    //
     // }
 
     /**
@@ -60,7 +60,7 @@ class SupporterPurchaseController extends Controller
      */
     // public function edit($id)
     // {
-        //
+    //
     // }
 
     /**
@@ -72,7 +72,7 @@ class SupporterPurchaseController extends Controller
      */
     // public function update(Request $request, $id)
     // {
-        //
+    //
     // }
 
     /**
@@ -83,7 +83,7 @@ class SupporterPurchaseController extends Controller
      */
     // public function destroy($id)
     // {
-        //
+    //
     // }
 
     /**
