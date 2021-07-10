@@ -31,6 +31,11 @@
                         {{ $project->content }}
                     </div>
                 </div><!--/ps_rank_01-->
+                <div class="ps_rank_01 m_b_3020">
+                    <div class="ps_rank_01_03 m_b_1510">
+                        {{ $project->ps_plan_content }}
+                    </div>
+                </div>
 
 
 
