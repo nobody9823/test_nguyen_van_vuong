@@ -277,16 +277,6 @@ class Project extends Model
         }
     }
 
-    // 紐づくプランが持つ'included_payments_count'の合計が高い順に並び替えてコレクションにして返す
-    // コレクションにしてから呼び出さないと使えない
-    public function scopeSortedByPaymentsCount($projects)
-    {
-        $projectsSortedByPaymentsCount = $projects->get()->sortByDesc(function ($project) {
-            return $project->plans->sum('included_payments_count');
-        })->values()->all();
-        return collect($projectsSortedByPaymentsCount);
-    }
-
     /**
      * Get Japanese formatted start time of project with day of the week
      *
