@@ -9,14 +9,14 @@
         支援者(ファン)管理
         <x-manage.display_index_count :props="$payments" />
     </div>
-    <form action="{{ route('admin.payment.index') }}" class="form-inline pr-3" method="get">
+    <form action="{{ route('admin.payment.index') }}" class="form-inline pr-3" method="get" style="position: relative">
         <p>
             <a class="btn btn-secondary mt-3 mr-3" data-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample">
                 詳細条件 ▼
             </a>
         </p>
-        <div class="collapse" id="collapseExample" style="position: absolute; top: 80px; left: 40vw;">
+        <div class="collapse" id="collapseExample" style="position: absolute; top: 55px; left: -100px;">
             <div class="card card-body">
                 <div class="form-group mb-2 flex-column">
                     <div class="form-check flex-column">
