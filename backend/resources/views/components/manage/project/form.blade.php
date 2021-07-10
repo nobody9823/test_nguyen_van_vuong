@@ -16,6 +16,12 @@
         class="form-control">{{old('content', optional($project ?? null)->content)}}</textarea>
 </div>
 
+<div class="form-group">
+    <label>プロジェクトサポーターリターン内容</label>
+    <textarea type="text" name="ps_plan_content"
+       class="form-control">{{old('ps_plan_content', optional($project ?? null)->ps_plan_content)}}</textarea>
+</div>
+
 <div class="form-row">
     <div class="col-md-11 mb-3">
         <label>目標金額</label>
