@@ -26,7 +26,9 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $projects = Project::search()->searchWithReleaseStatus($request->release_statuses)->sortBySelected($request->sort_type);
+        $projects = Project::search()
+        ->searchWithReleaseStatus($request->release_statuses)
+        ->sortBySelected($request->sort_type);
 
         //リレーション先OrderBy
         if ($request->sort_type === 'user_name_asc') {
@@ -214,14 +216,69 @@ class ProjectController extends Controller
     //     ]);
     // }
 
+    // /**
+    //  * @param  Project  $project
+    //  * @return \Illuminate\Http\JsonResponse
+    //  */
+    // public function release(Project $project)
+    // {
+    //     return $project->changeStatusToRelease() ?
+    //                 response()->json('success') : '';
+    // }
+
+    public function operate_projects(Request $request)
+    {
+        //今後も操作を増やせるように実装
+        if ($request->project_id) {
+            $this->changeStatus($request);
+        }
+        return redirect()->back();
+    }
+
     /**
      * @param  Project  $project
      * @return \Illuminate\Http\JsonResponse
      */
-    public function release(Project $project)
+    public function changeStatus($request)
     {
-        return $project->releaseProject() ?
-                    response()->json('success') : '';
+        $projects = Project::whereIn('id', $request->project_id)->get();
+        //ステータスが指定されていなかったら何もしない
+        if (!$request->change_status) {
+            \Session::flash('error', '掲載状態を選択してください。');
+            return;
+        }
+
+        //処理回数的にswitch->foreachが一番少なくて済むはず
+        switch ($request->change_status) {
+            case '---':
+                foreach ($projects as $project) {
+                    $project->changeStatusToDefault();
+                }
+                break;
+            case '承認待ち':
+                foreach ($projects as $project) {
+                    $project->changeStatusToPending();
+                }
+                break;
+            case '掲載中':
+                foreach ($projects as $project) {
+                    $project->changeStatusToRelease();
+                }
+                break;
+            case '掲載停止中':
+                foreach ($projects as $project) {
+                    $project->changeStatusToUnderSuspension();
+                }
+                break;
+            case '差し戻し':
+                foreach ($projects as $project) {
+                    $project->changeStatusToSendBack();
+                }
+                break;
+            default:
+                break;
+        }
+        return;
     }
 
     public function output_cheering_users_to_csv(Project $project)

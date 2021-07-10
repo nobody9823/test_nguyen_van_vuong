@@ -18,7 +18,8 @@
         プロジェクト管理
         <x-manage.display_index_count :props="$projects" />
     </div>
-    <form action="{{ route($role.'.project.index') }}" class="form-inline pr-3" method="get" style="position: relative">
+    <form action="{{ route($role.'.project.index') }}" class="form-inline pr-3" method="get" style="position: relative"
+        id='project_form'>
         <p>
             <a class="btn btn-secondary mt-3 mr-3" data-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample">
@@ -56,134 +57,155 @@
     </div>
 </div>
 <x-manage.search_terms :role="$role" model='project' />
+
 <div class="card-body">
-    @if($projects->count() <= 0) <p>表示する投稿はありません。</p>
-        @else
-        <table class="table">
-            <tr>
-                <th style="width:5%">ID</th>
-                <th style="width:20%">タイトル</th>
-                <th style="width:10%">ユーザー名/キュレーター</th>
-                <th style="width:10%">詳細</th>
-                <th style="width:10%">関連一覧画面</th>
-                <th style="width:10%">編集/削除</th>
-                @if($role === "admin")
-                <th style="width:10%; text-align:center;">いいね数</th>
-                @endif
-                <th style="width:15%">掲載状態</th>
-            </tr>
-            @foreach($projects as $project)
-            <tr>
-                <td>
-                    {{ $project->display_id }}
-                </td>
-                <td>
-                    {{ $project->title }}
-                </td>
-                <td>{{ $project->user->name }} / {{ $project->curator }}</td>
-                <td>
-                    <button class="btn btn-secondary" type="button" data-toggle="collapse"
-                        data-target="#collapse_detail{{ $project->id }}" aria-expanded="false"
-                        aria-controls="#collapse_detail{{ $project->id }}">
-                        詳細 ▼
-                    </button>
-
-                    <div class="collapse {{ $loop->index === 0?'show':'' }}" id="collapse_detail{{$project->id}}">
-                        <div class="card" style="border: none; background-color: #f8f9fa;">
-                            <a href="{{ route($role.'.project.show', ['project' => $project]) }}"
-                                class="btn btn-sm btn-primary mt-1">確認</a>
-                            <a href="{{ route($role.'.project.preview', ['project' => $project] )}}"
-                                class="btn btn-sm btn-success mt-1">プレビュー表示</a>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <button class="btn btn-secondary" type="button" data-toggle="collapse"
-                        data-target="#collapse{{ $project->id }}" aria-expanded="false"
-                        aria-controls="#collapse{{ $project->id }}">
-                        一覧 ▼
-                    </button>
-
-                    <div class="collapse {{ $loop->index === 0?'show':'' }}" id="collapse{{$project->id}}">
-                        <div class="card" style="border: none; background-color: #f8f9fa;">
-                            <a href="{{ route($role.'.plan.index', ['project' => $project]) }}"
-                                class="btn btn-sm btn-primary mt-1">リターン一覧</a>
-                            <a href="{{ route($role.'.comment.index', ['project' => $project] )}}"
-                                class="btn btn-sm btn-primary mt-1">コメント一覧</a>
-                            <a href="{{ route($role.'.report.index', ['project' => $project] )}}"
-                                class="btn btn-sm btn-primary mt-1">活動報告一覧</a>
-                        </div>
-                    </div>
-                </td>
-
-                <td>
-                    <button class="btn btn-secondary" type="button" data-toggle="collapse"
-                        data-target="#collapseExample{{ $project->id }}" aria-expanded="true"
-                        aria-controls="collapseExample">
-                        設定 ▼
-                    </button>
-                    <div class="collapse {{ $loop->index === 0?'show':null }}" id="collapseExample{{$project->id}}">
-                        <div class="card" style="border: none; background-color: #f8f9fa;">
-                            @if ($project->release_status !== ' 掲載中'&&$project->
-                            release_status!=='承認待ち'||$role==="admin")
-                            <a href="{{ route($role.'.project.edit', ['project' => $project]) }}"
-                                class="btn btn-sm btn-primary mt-1">編集</a>
-                            <form action="{{ route($role.'.project.destroy', ['project' => $project]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-sm btn-danger mt-1 w-100 btn-dell" type="submit">削除</button>
-                            </form>
-                            @endif
-                        </div>
-                    </div>
-                </td>
-                </form>
-                <td>
-                    <div class="d-flex flex-column justify-content-center">
-                        <div class="d-flex justify-content-center">
-                            <p>
-                                <img style="height:1em" src="/image/heart.jpg">
-                            </p>
-                            <p id="total_likes_{{ $project->id }}">
-                                {{ $project->total_likes }}
-                            </p>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    @if ($project->release_status === "---")
-                    <div class="card border-primary mb-3 text-center">
-                        <div class="card-header bg-transparent border-primary">---</div>
-                    </div>
-                    @elseif ($project->release_status === "差し戻し")
-                    <div class="card border-warning mb-3 text-center">
-                        <div class="card-header bg-transparent border-warning">差し戻し</div>
-                    </div>
-                    @elseif ($project->release_status === "承認待ち")
-                    <div class="card border-info mb-3 text-center">
-                        <div class="card-header bg-transparent border-info">承認待ち</div>
-                    </div>
-                    @elseif ($project->release_status === "掲載中")
-                    <div class="card border-success mb-3 text-center">
-                        <div class="card-header bg-transparent border-success">掲載中</div>
-                    </div>
-                    @elseif ($project->release_status === "掲載停止中")
-                    <div class="card border-secondary mb-3 text-center">
-                        <div class="card-header bg-transparent border-secondary">掲載停止中</div>
-                    </div>
-                    @endif
-                </td>
-            </tr>
+    <form id='operate_projects' action="{{ route('admin.project.operate_projects') }}" method="POST">
+        @csrf
+        <select name='change_status' class="form-control-inline" form='operate_projects'>
+            <option value="" style="display: none;">選択項目の掲載状態を変更</option>
+            @foreach (ProjectReleaseStatus::getValues() as $release_status)
+            <option value={{ $release_status }}>
+                {{ $release_status }}
+            </option>
             @endforeach
-        </table>
-        <div class="d-flex justify-content-center">
-            {{ $projects->appends(request()->input())->links() }}
-        </div>
-        @endif
+        </select>
+        <input class="btn btn-primary my-2 my-sm-0" form='operate_projects' type="submit" value="実行"></input>
+    </form>
 </div>
-@section('script')
-<script>
-    $(function(){
+@if($projects->count() <= 0) <p>表示する投稿はありません。</p>
+    @else
+    <table class="table">
+        <tr>
+            <th style="width:5%">選択</th>
+            <th style="width:5%">ID</th>
+            <th style="width:20%">タイトル</th>
+            <th style="width:10%">ユーザー名/キュレーター</th>
+            <th style="width:10%">詳細</th>
+            <th style="width:10%">関連一覧画面</th>
+            <th style="width:10%">編集/削除</th>
+            @if($role === "admin")
+            <th style="width:10%; text-align:center;">いいね数</th>
+            @endif
+            <th style="width:15%">掲載状態</th>
+        </tr>
+        @foreach($projects as $project)
+        <tr>
+            <td>
+                <input form="operate_projects" type="checkbox" name="project_id[]" id="project_id[]"
+                    value={{ $project->id }}>
+            </td>
+            <td>
+                {{ $project->display_id }}
+            </td>
+            <td>
+                {{ $project->title }}
+            </td>
+            <td>{{ $project->user->name }} / {{ $project->curator }}</td>
+            <td>
+                <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                    data-target="#collapse_detail{{ $project->id }}" aria-expanded="false"
+                    aria-controls="#collapse_detail{{ $project->id }}">
+                    詳細 ▼
+                </button>
+
+                <div class="collapse {{ $loop->index === 0?'show':'' }}" id="collapse_detail{{$project->id}}">
+                    <div class="card" style="border: none; background-color: #f8f9fa;">
+                        <a href="{{ route($role.'.project.show', ['project' => $project]) }}"
+                            class="btn btn-sm btn-primary mt-1">確認</a>
+                        <a href="{{ route($role.'.project.preview', ['project' => $project] )}}"
+                            class="btn btn-sm btn-success mt-1">プレビュー表示</a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                    data-target="#collapse{{ $project->id }}" aria-expanded="false"
+                    aria-controls="#collapse{{ $project->id }}">
+                    一覧 ▼
+                </button>
+
+                <div class="collapse {{ $loop->index === 0?'show':'' }}" id="collapse{{$project->id}}">
+                    <div class="card" style="border: none; background-color: #f8f9fa;">
+                        <a href="{{ route($role.'.plan.index', ['project' => $project]) }}"
+                            class="btn btn-sm btn-primary mt-1">リターン一覧</a>
+                        <a href="{{ route($role.'.payment.index', ['project' => $project] )}}" style="font-size: 0.5vw"
+                            class="btn btn-sm btn-primary mt-1">支援者(ファン)一覧</a>
+                        <a href="{{ route($role.'.report.index', ['project' => $project] )}}"
+                            class="btn btn-sm btn-primary mt-1">活動報告一覧</a>
+                        <a href="{{ route($role.'.comment.index', ['project' => $project] )}}"
+                            class="btn btn-sm btn-primary mt-1">コメント一覧</a>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                    data-target="#collapseExample{{ $project->id }}" aria-expanded="true"
+                    aria-controls="collapseExample">
+                    設定 ▼
+                </button>
+                <div class="collapse {{ $loop->index === 0?'show':null }}" id="collapseExample{{$project->id}}">
+                    <div class="card" style="border: none; background-color: #f8f9fa;">
+                        @if ($project->release_status !== ' 掲載中'&&$project->
+                        release_status!=='承認待ち'||$role==="admin")
+                        <a href="{{ route($role.'.project.edit', ['project' => $project]) }}"
+                            class="btn btn-sm btn-primary mt-1">編集</a>
+                        <form action="{{ route($role.'.project.destroy', ['project' => $project]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-danger mt-1 w-100 btn-dell" type="submit">削除</button>
+                        </form>
+                        @endif
+                    </div>
+                </div>
+            </td>
+            </form>
+            <td>
+                <div class="d-flex flex-column justify-content-center">
+                    <div class="d-flex justify-content-center">
+                        <p>
+                            <img style="height:1em" src="/image/heart.jpg">
+                        </p>
+                        <p id="total_likes_{{ $project->id }}">
+                            {{ $project->total_likes }}
+                        </p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                @if ($project->release_status === "---")
+                <div class="card border-primary mb-3 text-center">
+                    <div class="card-header bg-transparent border-primary">---</div>
+                </div>
+                @elseif ($project->release_status === "差し戻し")
+                <div class="card border-warning mb-3 text-center">
+                    <div class="card-header bg-transparent border-warning">差し戻し</div>
+                </div>
+                @elseif ($project->release_status === "承認待ち")
+                <div class="card border-info mb-3 text-center">
+                    <div class="card-header bg-transparent border-info">承認待ち</div>
+                </div>
+                @elseif ($project->release_status === "掲載中")
+                <div class="card border-success mb-3 text-center">
+                    <div class="card-header bg-transparent border-success">掲載中</div>
+                </div>
+                @elseif ($project->release_status === "掲載停止中")
+                <div class="card border-secondary mb-3 text-center">
+                    <div class="card-header bg-transparent border-secondary">掲載停止中</div>
+                </div>
+                @endif
+            </td>
+        </tr>
+        @endforeach
+    </table>
+    <div class="d-flex justify-content-center">
+        {{ $projects->appends(request()->input())->links() }}
+    </div>
+    @endif
+    </div>
+    @section('script')
+    <script>
+        $(function(){
     $(".btn-dell").click(function(){
     if(confirm("本当に削除しますか？")){
     //そのままsubmit（削除）
@@ -193,9 +215,9 @@
     }
     });
     });
-</script>
-<script>
-    function incrementLikes(projectId, incrementPoints){
+    </script>
+    <script>
+        function incrementLikes(projectId, incrementPoints){
         $.ajax({
             url: '/admin/project/' + projectId + '/increment_likes/',
             type: 'PATCH',
@@ -241,6 +263,6 @@
             location.reload();
         });
     }
-</script>
-@endsection
-@endsection
+    </script>
+    @endsection
+    @endsection
