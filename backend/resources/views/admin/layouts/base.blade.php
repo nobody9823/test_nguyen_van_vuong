@@ -90,11 +90,11 @@
             </div>
         </div>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.message.index') }}">
-            メッセージ管理
-        </a>
-    </li>
+    メッセージ管理
+    </a>
+    </li> --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.tag.index') }}">
             タグ管理
