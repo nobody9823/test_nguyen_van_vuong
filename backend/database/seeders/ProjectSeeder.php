@@ -33,9 +33,7 @@ class ProjectSeeder extends Seeder
             ->each(function (Project $project) {
                 $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
-                $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())->each(function (Plan $plan) {
-                    $plan->includedPayments()->attach(Payment::inRandomOrder()->first()->id);
-                });
+                $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
                 $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
                 $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->create());
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
@@ -46,10 +44,11 @@ class ProjectSeeder extends Seeder
             ->each(function (Project $project) {
                 $project->projectFiles()->saveMany(ProjectFile::factory(10)->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
+                $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())->each(function (Plan $plan) {
                     // $plan->includedPayments()->attach(Payment::inRandomOrder()->first()->id);
                     $plan->includedPayments()->save(Payment::factory()->make())
-                        ->each(function(Payment $payment){
+                        ->each(function (Payment $payment) {
                             $payment->token()->save(PaymentToken::factory()->make());
                         });
                 });
@@ -57,5 +56,12 @@ class ProjectSeeder extends Seeder
                 $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->create());
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
             });
+
+        // プラン作成後にpaymentを作成しなきゃいけないためここに記述
+        User::all()->each(function ($user) {
+            $user->payments()->saveMany(Payment::factory(rand(0, 3))->make())->each(function ($payment) {
+                $payment->includedPlans()->attach(Plan::inRandomOrder()->take(rand(1, 3))->pluck('id')->toArray());
+            });
+        });
     }
 }

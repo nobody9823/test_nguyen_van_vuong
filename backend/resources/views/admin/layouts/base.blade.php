@@ -78,8 +78,8 @@
                 <a class='nav-link-child' href="{{ route('admin.plan.index') }}">
                     リターン管理
                 </a>
-                <a class='nav-link-child' href="{{ route('admin.user_payment_included.index') }}">
-                    応募者管理
+                <a class='nav-link-child' href="{{ route('admin.payment.index') }}">
+                    支援者(ファン)管理
                 </a>
                 <a class='nav-link-child' href="{{ route('admin.report.index') }}">
                     活動報告管理
