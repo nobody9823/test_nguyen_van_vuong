@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\Plan;
 use App\Models\Payment;
+use App\Models\PaymentToken;
 use App\Models\Profile;
 use App\Models\Address;
 use App\Actions\PayPay\PayPay;
@@ -34,6 +35,7 @@ class ProjectControllerForPayPayTest extends TestCase
             $this->profile = $user->profile()->save(Profile::factory()->make());
             $this->profile = $user->address()->save(Address::factory()->make());
             $this->payment = $user->payments()->save(Payment::factory()->make());
+            $this->payment_token = $this->payment->token()->save(PaymentToken::factory()->make());
         });
 
         $this->project = Project::factory()->state([
@@ -89,7 +91,7 @@ class ProjectControllerForPayPayTest extends TestCase
                 "status" => "COMPLETED",
                 "acceptedAt" => 1625220437,
                 "refunds" => [],
-                "merchantPaymentId" => $this->payment->merchant_payment_id,
+                "merchantPaymentId" => $this->payment->token->token,
                 "amount" => [],
                 "requestedAt" => 1625220437,
                 "storeId" => "",

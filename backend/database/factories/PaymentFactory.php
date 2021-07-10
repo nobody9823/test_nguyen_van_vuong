@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Payment;
 use App\Models\User;
 use App\Traits\UniqueToken;
+use App\Enums\PaymentWay;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PaymentFactory extends Factory
@@ -28,8 +29,7 @@ class PaymentFactory extends Factory
             'inviter_id' => $this->faker->numberBetween(1, 100),
             'price' => $this->faker->numberBetween(1000, 50000),
             'message_status' => 'ステータスなし',
-            'merchant_payment_id' => UniqueToken::getToken(),
-            'pay_jp_id' => UniqueToken::getToken(),
+            'payment_way' => PaymentWay::getValues()[random_int(0, 2)],
             'payment_is_finished' => $this->faker->boolean(50),
             'remarks' => $this->faker->realText(100),
         ];

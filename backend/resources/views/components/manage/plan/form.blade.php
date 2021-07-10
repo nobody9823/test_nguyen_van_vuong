@@ -1,10 +1,10 @@
 <div class="form-group">
-    <label>プラン名</label>
+    <label>リターン名</label>
     <input type="text" name="title" class="form-control" value="{{ old('title', optional($plan)->title) }}">
 </div>
 
 <div class="form-group">
-    <label>プラン内容</label>
+    <label>リターン内容</label>
     <textarea type="text" name="content" class="form-control">{{old('content', optional($plan)->content)}}</textarea>
 </div>
 

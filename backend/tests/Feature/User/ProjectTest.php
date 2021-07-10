@@ -26,7 +26,10 @@ class ProjectTest extends TestCase
             ->has(Profile::factory())
             ->has(Project::factory()->released()
                 ->has(
-                    ProjectFile::factory())
+                        ProjectFile::factory()->state([
+                            'file_url' => 'public/sampleImage/now_printing.png',
+                            'file_content_type' => 'image_url',
+                    ]))
                 ->has(
                     Plan::factory()->state([
                         'price' => 1000

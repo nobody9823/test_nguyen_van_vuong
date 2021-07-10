@@ -76,7 +76,7 @@
             </a>
             <div class="collapse show" id="collapse_project">
                 <a class='nav-link-child' href="{{ route('admin.plan.index') }}">
-                    プラン管理
+                    リターン管理
                 </a>
                 <a class='nav-link-child' href="{{ route('admin.payment.index') }}">
                     支援者(ファン)管理

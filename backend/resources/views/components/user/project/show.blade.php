@@ -132,7 +132,7 @@
                 <div class="wlr_64_L inner_item">
                     <div class="pds_sec02_tit">{{ $project->title }}</div>
                     <div class="pds_sec02_txt">{{ $project->content }}</div>
-                    <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div>
+                    {{-- <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div> --}}
                 </div><!--/wlr_64_L-->
 
                 <div class="wlr_64_R">
@@ -269,7 +269,7 @@
                         </section>
                     </div>
                     <div class="plan-div">
-                        <h2>応援プラン</h2>
+                        <h2>応援リターン</h2>
                         @foreach($project->plans as $plan)
                         <x-user.plan-card :plan="$plan" :project="$project" />
                         @endforeach
@@ -313,7 +313,7 @@
         <div class="detail_tab_content_description">
             @elseif($project->isIncluded() === false)
             <div class="text-center" style="color:#ff1493">
-                <h2>※応援プランを支援された方のみ閲覧可能です。</h2>
+                <h2>※応援リターンを支援された方のみ閲覧可能です。</h2>
             </div>
             <div class="detail_tab_content_description" style="-ms-filter: blur(16px); filter: blur(16px);">
                 @endif

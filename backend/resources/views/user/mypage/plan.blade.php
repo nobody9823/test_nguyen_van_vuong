@@ -9,7 +9,7 @@
         <x-user.mypage-navigation-bar />
 
         <div class="fixedcontainer mypage_contents taikai_box">
-            <h2><i class="fas fa-lock"></i>支援プラン一覧</h2>
+            <h2><i class="fas fa-lock"></i>支援リターン一覧</h2>
 
             <div class="project-list my-page_project-list">
                 @foreach ($plans as $plan)
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="my-page_project_box my-page_project-plan_desc">
-                            <div class="my-page_project_tit_S"><i class="fas fa-sync-alt pri_color_f i_icon"></i>プラン内容
+                            <div class="my-page_project_tit_S"><i class="fas fa-sync-alt pri_color_f i_icon"></i>リターン内容
                             </div>
                             <div>{{ $plan->pivot->selected_option }}</div>
                             <div style="white-space: pre-line;">

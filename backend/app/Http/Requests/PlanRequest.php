@@ -61,12 +61,12 @@ class PlanRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => "プラン名を入力してください。",
-            'title.string' => "プラン名は文字で入力してください。",
-            'title.max' => "プラン名は255文字以内にしてください。",
-            'content.required' => "プラン内容を入力してください。",
-            'content.string' => "プラン内容は文字で入力してください。",
-            'content.max' => "プラン内容は20000文字以内にしてください。",
+            'title.required' => "リターン名を入力してください。",
+            'title.string' => "リターン名は文字で入力してください。",
+            'title.max' => "リターン名は255文字以内にしてください。",
+            'content.required' => "リターン内容を入力してください。",
+            'content.string' => "リターン内容は文字で入力してください。",
+            'content.max' => "リターン内容は20000文字以内にしてください。",
             'address_is_required.required' => "支援者の方の住所登録が必要かどうか記載してください。",
             'limit_of_supporters.required' => "個数を入力してください。",
             'limit_of_supporters.integer' => "個数を数字で入力してください。",
