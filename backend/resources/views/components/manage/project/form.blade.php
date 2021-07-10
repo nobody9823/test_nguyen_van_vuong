@@ -85,7 +85,7 @@
         placeholder="https://www.youtube.com/watch?v=xxxxxxxxxxxxxx">
     <section class="d-flex justify-content-left">
         <div class="col-sm-4">
-            {{ DisplayVideoHelper::getVideoAtManage(optional($projectVideo)->image_url) }}
+            {{ DisplayVideoHelper::getVideoAtManage(optional($projectVideo)->file_url) }}
         </div>
     </section>
 </div>
