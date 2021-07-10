@@ -149,9 +149,9 @@
                                                     {{ number_format($project->target_amount) }}円
                                                 </h5>
                                                 <h3>支援者総数 : </h3>
-                                                <h5 class="mb-3">{{ $project->payment_users_count }}人</h5>
+                                                <h5 class="mb-3">{{ $project->payments_count }}人</h5>
                                                 <h3>支援金総額 : </h3>
-                                                <h5 class="mb-3">{{ number_format($project->achievement_amount) }}
+                                                <h5 class="mb-3">{{ number_format($project->payments_sum_price) }}
                                                     円</h5>
                                                 <h3>目標額達成率 : </h3>
                                                 <h5 class="mb-3">{{ $project->getAchievementRate }}％</h5>
