@@ -75,7 +75,8 @@
                             <div class="as_i_01_L_01">リターン合計金額</div>
                             <div class="as_i_01_L_02 E-font">
                                 <input type="number" name="total_amount" id="total_amount" class="pay_input_count" readonly>
-                                <span>円</span></div>
+                                <span>円</span>
+                            </div>
                         </div>
                     </div><!--/.as_i_01_L-->
 
@@ -137,9 +138,11 @@
                                         <span id="errors" style="color: red;"></span>
                                     </div>
 
-                                    <div class="tab1_02">
-                                        <div class="tab1_02_01">セキュリティコード</div>
-                                        <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+                                    <div class="cvc_wrapper">
+                                        <div class="tab1_02">
+                                            <div class="tab1_02_01">セキュリティコード</div>
+                                            <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+                                        </div>
                                         <div class="tooltip1">
                                             <p>？</p>
                                             <div class="description1">カードの裏面にある末尾3桁の数字</div>
