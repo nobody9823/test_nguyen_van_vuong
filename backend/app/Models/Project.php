@@ -145,11 +145,12 @@ class Project extends Model
     // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        return $query->with(['plans' => function ($query) {
-            $query
-                ->withCount('includedPayments')
-                ->withSum('includedPayments', 'price');
-        }]);
+        // return $query->with(['plans' => function ($query) {
+        //     $query
+        //         ->withCount('includedPayments')
+        //         ->withSum('includedPayments', 'price');
+        // }]);
+        return $query->withCount('payments')->withSum('payments', 'price');
     }
 
     public function getLoadPaymentsCountAndSumPrice()
@@ -274,17 +275,17 @@ class Project extends Model
 
     // plansの持つ'included_payments_count'の合計値 => 支援者総数
     // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
-    public function getPaymentUsersCountAttribute()
-    {
-        return $this->plans->sum('included_payments_count');
-    }
+    // public function getPaymentUsersCountAttribute()
+    // {
+    //     return $this->plans->sum('included_payments_count');
+    // }
 
     // plansの持つ'included_payments_sum_price'の合計値 => 支援総金額
     // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
-    public function getAchievementAmountAttribute()
-    {
-        return $this->plans->sum('included_payments_sum_price');
-    }
+    // public function getAchievementAmountAttribute()
+    // {
+    //     return $this->plans->sum('included_payments_sum_price');
+    // }
 
     // 目標金額に対する支援総額の割合
     // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
@@ -292,7 +293,7 @@ class Project extends Model
     {
         // 金額の達成率の算出
         if ($this->target_amount > 0) {
-            return round($this->achievement_amount * 100 / $this->target_amount);
+            return round($this->payments_sum_price * 100 / $this->target_amount);
         } else { // ゼロ除算対策
             return 100;
         }
@@ -308,13 +309,6 @@ class Project extends Model
         return collect($projectsSortedByPaymentsCount);
     }
 
-    public function scopeSortedByPaymentsSumPrice($projects)
-    {
-        $projectsSortedByPaymentsSumPrice = $projects->get()->sortByDesc(function ($project) {
-            return $project->plans->sum('included_payments_sum_price');
-        })->values()->all();
-        return collect($projectsSortedByPaymentsSumPrice);
-    }
     /**
      * Get Japanese formatted start time of project with day of the week
      *
