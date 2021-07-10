@@ -76,6 +76,11 @@ class Project extends Model
         return $this->belongsTo('App\Models\User', 'user_id');
     }
 
+    public function payments()
+    {
+        return $this->hasMany('App\Models\Payment');
+    }
+
     public function likedUsers()
     {
         return $this->belongsToMany('App\Models\User', 'user_project_liked')

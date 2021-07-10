@@ -34,6 +34,11 @@ class Payment extends Model
     {
         return $this->belongsToMany('App\Models\Plan', 'App\Models\PlanPaymentIncluded');
     }
+    
+    public function project()
+    {
+        return $this->belongsTo('App\Models\Project');
+    }
 
     public function inviter()
     {
