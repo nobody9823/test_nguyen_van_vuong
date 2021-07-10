@@ -56,6 +56,7 @@ Route::middleware('auth:admin')->group(function () {
 
     //プロジェクト管理
     Route::resource('project', ProjectController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show']]);
+    Route::post('project/operate_projects', [ProjectController::class,'operate_projects'])->name('project.operate_projects');
     Route::get('project/{project}/release', [ProjectController::class, 'release'])->name('project.release');
     Route::get('project/{project}/preview', [ProjectController::class, 'preview'])->name('project.preview');
     Route::get('project/{project}/output_cheering_users_to_csv', [ProjectController::class, 'output_cheering_users_to_csv'])->name('project.output_cheering_users_to_csv');

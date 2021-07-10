@@ -330,10 +330,47 @@ class Project extends Model
         return $this->end_date->isoFormat('YYYY年MM月DD日(ddd)');
     }
 
-    public function releaseProject(){
-        $this->release_status = '掲載中';
-        return $this->save() ? true : false;
+    //-----------------掲載状態変更functions------------------------
+    public function changeStatusToRelease(){
+        DB::transaction(function () {
+            $this->release_status = '掲載中';
+            $this->save();
+        });
+        \Session::flash('flash_message', '掲載状態の変更が完了しました。');
     }
+
+    public function changeStatusToPending(){
+        DB::transaction(function () {
+            $this->release_status = '承認待ち';
+            $this->save();
+        });
+        \Session::flash('flash_message', '掲載状態の変更が完了しました。');
+    }
+
+    public function changeStatusToSendBack(){
+        DB::transaction(function () {
+            $this->release_status = '差し戻し';
+            $this->save();
+        });
+        \Session::flash('flash_message', '掲載状態の変更が完了しました。');
+    }
+
+    public function changeStatusToDefault(){
+        DB::transaction(function () {
+            $this->release_status = '---';
+            $this->save();
+        });
+        \Session::flash('flash_message', '掲載状態の変更が完了しました。');
+    }
+
+    public function changeStatusToUnderSuspension(){
+        DB::transaction(function () {
+            $this->release_status = '掲載停止中';
+            $this->save();
+        });
+        \Session::flash('flash_message', '掲載状態の変更が完了しました。');
+    }
+    //-----------------掲載状態変更functions------------------------
 
     // プロジェクトの持つリターンをログインしているユーザーが支援しているかを確認
     public function isIncluded()
