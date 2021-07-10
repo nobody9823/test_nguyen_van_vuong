@@ -73,7 +73,7 @@
                 <div class="pds_sec01_R">
 
                 <div class="pds_sec01_R_en01">現在の支援総額</div>
-                <div class="pds_sec01_R_en02 E-font">¥ {{ $project->achievement_amount }}</div>
+                <div class="pds_sec01_R_en02 E-font">¥ {{ $project->payments_sum_price }}</div>
 
 
                 <div class="pds_sec01_progress-bar">
@@ -87,7 +87,7 @@
 
                 <div class="pds_sec01_R_nin_base">
                     <div class="pds_sec01_R_nin01">支援者数</div>
-                    <div class="pds_sec01_R_nin02 E-font">{{ $project->payment_users_count }}<span>人</span></div>
+                    <div class="pds_sec01_R_nin02 E-font">{{ $project->payments_count }}<span>人</span></div>
                     <div class="pds_sec01_R_nin03">24時間以内に9人からの支援がありました(未実装)</div>
                 </div><!--/pds_sec01_R_nin01-->
 
@@ -194,7 +194,7 @@
     </div>
     <div class="detail_info_content">
         <p><i class="far fa-lightbulb pri_color_f i_icon"></i>達成額</p>
-        <div><span>{{ $project->achievement_amount }}</span>円</div>
+        <div><span>{{ $project->payments_sum_price }}</span>円</div>
         <p>
             <i class="fas fa-yen-sign pri_color_f i_icon"></i>目標金額 {{ number_format($project->target_amount) }}
             円</p>
@@ -209,7 +209,7 @@
     </div>
     @endif
     <p><i class="fas fa-hands-helping pri_color_f i_icon"></i>現在の支援者数</p>
-    <div><span>{{ $project->payment_users_count }}人</span></div>
+    <div><span>{{ $project->payments_count }}人</span></div>
     <p><i class="far fa-clock pri_color_f i_icon"></i>開催期間</p>
     <div>
         {{ $project->getStartDate() }}～<br>{{ $project->getEndDate() }}

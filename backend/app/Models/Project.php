@@ -145,20 +145,12 @@ class Project extends Model
     // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        // return $query->with(['plans' => function ($query) {
-        //     $query
-        //         ->withCount('includedPayments')
-        //         ->withSum('includedPayments', 'price');
-        // }]);
         return $query->withCount('payments')->withSum('payments', 'price');
     }
 
     public function getLoadPaymentsCountAndSumPrice()
     { 
-        return $this->load(['plans' => function($query){
-            $query->withCount('includedPayments')
-                  ->withSum('includedPayments', 'price');
-        }]);
+        return $this->loadCount('payments')->loadSum('payments', 'price');
     }
 
     public function scopeOrdeyByLikedUsers($query)
@@ -272,20 +264,6 @@ class Project extends Model
         $today = Carbon::now();
         return $end_date->diffInDays($today);
     }
-
-    // plansの持つ'included_payments_count'の合計値 => 支援者総数
-    // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
-    // public function getPaymentUsersCountAttribute()
-    // {
-    //     return $this->plans->sum('included_payments_count');
-    // }
-
-    // plansの持つ'included_payments_sum_price'の合計値 => 支援総金額
-    // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
-    // public function getAchievementAmountAttribute()
-    // {
-    //     return $this->plans->sum('included_payments_sum_price');
-    // }
 
     // 目標金額に対する支援総額の割合
     // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
