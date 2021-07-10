@@ -6,6 +6,7 @@ use App\Models\Payment;
 use App\Models\User;
 use App\Traits\UniqueToken;
 use App\Enums\PaymentWay;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PaymentFactory extends Factory
@@ -26,6 +27,7 @@ class PaymentFactory extends Factory
     {
         return [
             'user_id' => User::inRandomOrder()->first()->id,
+            'project_id' => Project::inRandomOrder()->first()->id,
             'inviter_id' => $this->faker->numberBetween(1, 100),
             'price' => $this->faker->numberBetween(1000, 50000),
             'message_status' => 'ステータスなし',

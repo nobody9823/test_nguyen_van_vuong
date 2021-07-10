@@ -49,8 +49,8 @@ class PaymentNotification extends Notification
                 ->subject('【FanReturn】リターンの購入が完了しました。')
                 ->view('user.mail.template.payment_finished',
                 [
-                    'billing_users_count' => $this->project->payment_users_count,
-                    'achievement_amount' => $this->project->achievement_amount,
+                    'billing_users_count' => $this->project->payments_count,
+                    'payments_sum_price' => $this->project->payments_sum_price,
                     'project_title' => $this->project->title,
                     'payment_id' => $this->payment->token->token
                 ]);

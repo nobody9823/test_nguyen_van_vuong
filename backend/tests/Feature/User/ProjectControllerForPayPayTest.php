@@ -31,13 +31,6 @@ class ProjectControllerForPayPayTest extends TestCase
 
         $this->supporter = User::factory()->hasProfile()->create();
 
-        $this->supporter->each(function ($user) {
-            $this->profile = $user->profile()->save(Profile::factory()->make());
-            $this->profile = $user->address()->save(Address::factory()->make());
-            $this->payment = $user->payments()->save(Payment::factory()->make());
-            $this->payment_token = $this->payment->token()->save(PaymentToken::factory()->make());
-        });
-
         $this->project = Project::factory()->state([
             'user_id' => $this->creator->id,
             'title' => 'test title',
@@ -48,6 +41,13 @@ class ProjectControllerForPayPayTest extends TestCase
             'start_date' => now(),
             'end_date' => now()
         ])->create();
+
+        $this->supporter->each(function ($user) {
+            $this->profile = $user->profile()->save(Profile::factory()->make());
+            $this->profile = $user->address()->save(Address::factory()->make());
+            $this->payment = $user->payments()->save(Payment::factory()->make());
+            $this->payment_token = $this->payment->token()->save(PaymentToken::factory()->make());
+        });
 
         $this->plan = Plan::factory()->state([
             'project_id' => $this->project->id,

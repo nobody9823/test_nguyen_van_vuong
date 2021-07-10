@@ -70,6 +70,7 @@ class ProjectControllerForPayJpTest extends TestCase
         $this->fail_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
 
         $this->success_payment = Payment::factory()->state([
+                    'project_id' => $this->project->id,
                     'user_id' => $this->supporter->id,
                     'price' => $this->plan->price,
                     'message_status' => 'ステータスなし',
@@ -93,6 +94,7 @@ class ProjectControllerForPayJpTest extends TestCase
         $this->fail_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
 
         $this->fail_payment = Payment::factory()->state([
+                'project_id' => $this->project->id,
                 'user_id' => $this->supporter->id,
                 'price' => $this->plan->price,
                 'message_status' => 'ステータスなし',

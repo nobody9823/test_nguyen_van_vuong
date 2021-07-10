@@ -63,7 +63,7 @@ class ProjectController extends Controller
         ->inRandomOrder()->take(5)->get();
 
         // ランキング(支援総額順)
-        $ranking_projects = Project::getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice()->sortedByPaymentsSumPrice()->skip(1)->take(5);
+        $ranking_projects = Project::getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price','DESC')->skip(1)->take(5)->get();
 
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
@@ -215,9 +215,11 @@ class ProjectController extends Controller
         $inviter = !empty($validated_request['inviter_code']) ? User::getInviterFromInviterCode($validated_request['inviter_code'])->first() : null;
         DB::beginTransaction();
         try {
+            // dd($this->payment);
             $plans = $this->plan->lockForUpdatePlansByIds(array_keys($validated_request['plans']))->get();
             $payment = $this->payment->fill(array_merge(
                 [
+                    'project_id' => $project->id,
                     'inviter_id' => !empty($validated_request['inviter_code']) ? $inviter->id : null,
                     'price' => $validated_request['total_amount'],
                     'message_status' => "ステータスなし",

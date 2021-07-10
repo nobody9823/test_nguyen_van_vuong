@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('project_id')->constrained('projects');
             $table->integer('inviter_id')->nullable();
             $table->integer('price');
             $table->enum('message_status', MessageStatus::getValues())->default('ステータスなし');

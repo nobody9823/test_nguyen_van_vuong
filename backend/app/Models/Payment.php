@@ -16,6 +16,7 @@ class Payment extends Model
     use HasFactory, SoftDeletes, includedPlans,SortBySelected,SearchFunctions;
 
     protected $fillable = [
+        'project_id',
         'inviter_id',
         'user_id',
         'price',
@@ -33,6 +34,11 @@ class Payment extends Model
     public function includedPlans()
     {
         return $this->belongsToMany('App\Models\Plan', 'App\Models\PlanPaymentIncluded');
+    }
+    
+    public function project()
+    {
+        return $this->belongsTo('App\Models\Project');
     }
 
     public function inviter()
