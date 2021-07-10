@@ -27,7 +27,7 @@ class ProjectFileFactory extends Factory
             'file_content_type' => 'image_url',
         ];
         $video_file = [
-            'file_url' => 'https://www.youtube.com/embed/HB4QrJyWqEw',
+            'file_url' => 'https://www.youtube.com/watch?v=HB4QrJyWqEw',
             'file_content_type' => 'video_url',
         ];
         $file_faker = Arr::random([
