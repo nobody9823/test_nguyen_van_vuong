@@ -16,6 +16,7 @@ class Payment extends Model
     use HasFactory, SoftDeletes, includedPlans,SortBySelected,SearchFunctions;
 
     protected $fillable = [
+        'project_id',
         'inviter_id',
         'user_id',
         'price',

@@ -215,9 +215,11 @@ class ProjectController extends Controller
         $inviter = !empty($validated_request['inviter_code']) ? User::getInviterFromInviterCode($validated_request['inviter_code'])->first() : null;
         DB::beginTransaction();
         try {
+            // dd($this->payment);
             $plans = $this->plan->lockForUpdatePlansByIds(array_keys($validated_request['plans']))->get();
             $payment = $this->payment->fill(array_merge(
                 [
+                    'project_id' => $project->id,
                     'inviter_id' => !empty($validated_request['inviter_code']) ? $inviter->id : null,
                     'price' => $validated_request['total_amount'],
                     'message_status' => "ステータスなし",
