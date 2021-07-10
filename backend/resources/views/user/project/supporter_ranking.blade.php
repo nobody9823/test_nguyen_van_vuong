@@ -180,7 +180,7 @@
                             <div class="ps_rank_item_04">35,000円</div>
                         </div><!--/ps_rank_02_rank_item_row--> --}}
 
-                        <div class="ps_rank_more_btn"><a class="toggle-hidden" style="cursor: pointer">続きの順位を表示　<i class="fas fa-chevron-down"></i></a></div>
+                        {{-- <div class="ps_rank_more_btn"><a class="toggle-hidden" style="cursor: pointer">続きの順位を表示　<i class="fas fa-chevron-down"></i></a></div> --}}
 
                     </div><!--/ps_rank_02_L-->
 
@@ -279,7 +279,7 @@
                             <div class="ps_rank_item_04">540件</div>
                         </div><!--/ps_rank_02_rank_item_row--> --}}
 
-                        <div class="ps_rank_more_btn"><a href="">続きの順位を表示　<i class="fas fa-chevron-down"></i></a></div>
+                        {{-- <div class="ps_rank_more_btn"><a href="">続きの順位を表示　<i class="fas fa-chevron-down"></i></a></div> --}}
 
                     </div><!--/ps_rank_02_R-->
                 </div><!--/ps_rank_02-->
