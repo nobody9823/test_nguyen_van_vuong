@@ -103,10 +103,10 @@
                     {{ $payment->price }}
                 </td>
                 <td>
-                    {{ $payment->includedPlans[0]->project->user->name }}
+                    {{ $payment->project->user->name }}
                 </td>
                 <td>
-                    {{ $payment->includedPlans[0]->project->title }}
+                    {{ $payment->project->title }}
                 </td>
                 <td>
                     <a class="btn btn-primary mt-1" data-toggle="modal"
@@ -119,8 +119,8 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="return_content_modal">
-                                        <a href="{{ route('admin.plan.index', ['project' => $payment->includedPlans[0]->project->id]) }}">
-                                        {{ $payment->includedPlans[0]->project->title }}
+                                        <a href="{{ route('admin.plan.index', ['project' => $payment->project->id]) }}">
+                                        {{ $payment->project->title }}
                                         </a>のリターン一覧
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -128,7 +128,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    @foreach ($payment->includedPlans as $plan)
+                                    @foreach ($payment->project->plans as $plan)
                                         {{ $plan->title }}</br>
                                     @endforeach
                                 </div>
