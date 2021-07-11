@@ -37,7 +37,6 @@ class MailToCheeringUsers extends Mailable
     public function build()
     {
          return $this->view('admin.mail.template.cheering_users_mail')
-                       ->from(\Auth::user()->email)
                          ->subject($this->subject)
                            ->with([
                              'subject' => $this->subject,
