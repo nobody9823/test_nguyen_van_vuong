@@ -48,7 +48,7 @@ class ProjectTest extends TestCase
                     0 => $this->plan->price
                 ],
                 "plans" => [
-                    $this->plan->id => "1"
+                    $this->plan->id => ['quantity' => "1"]
                 ],
                 "total_amount" => $this->plan->price,
                 "payment_way" => "credit",
@@ -78,7 +78,7 @@ class ProjectTest extends TestCase
                     0 => $this->plan->price
                 ],
                 "plans" => [
-                    $this->plan->id => "1"
+                    $this->plan->id => ['quantity' => "1"]
                 ],
                 "total_amount" => $this->plan->price,
                 "payment_way" => "paypay",
