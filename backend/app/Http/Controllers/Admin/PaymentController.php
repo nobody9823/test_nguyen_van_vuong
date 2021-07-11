@@ -20,6 +20,7 @@ class PaymentController extends Controller
                     ->NarrowDownByDate()
                     ->NarrowDownByPrice()
                     ->with(['user','inviter','includedPlans.project.user','comment'])
+                    ->withCount('includedPlans')
                     ->sortBySelected($request->sort_type);
 
         //リレーション先OrderBy

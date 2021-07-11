@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Arr;
 
 class ConfirmPaymentRequest extends FormRequest
 {
@@ -35,7 +36,7 @@ class ConfirmPaymentRequest extends FormRequest
             'payment_way' => ['required', 'string'],
             'payjp_token' => [Rule::requiredIf($request->payment_way === "credit")],
             'plans' => ['required', new CheckPlanAmount($this)],
-            'plans.*' => ['required', 'integer'],
+            "plans.*.quantity" => ['required', 'integer'],
             'total_amount' => ['required', 'integer'],
             'display_added_price' => ['nullable', 'integer'],
             'first_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
