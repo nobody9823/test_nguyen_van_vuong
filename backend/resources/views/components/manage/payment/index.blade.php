@@ -97,7 +97,7 @@
                     {{ $payment->user->name }}
                 </td>
                 <td>
-                    {{ $payment->inviter->name }}
+                    {{ optional($payment->inviter)->name }}
                 </td>
                 <td>
                     {{ $payment->price }}
@@ -109,9 +109,32 @@
                     {{ $payment->includedPlans[0]->project->title }}
                 </td>
                 <td>
-                    @foreach ($payment->includedPlans as $plan)
-                    {{ $plan->title }}<br>
-                    @endforeach
+                    <a class="btn btn-primary mt-1" data-toggle="modal"
+                                data-target="#return_index{{ $payment->id }}">
+                                リターン一覧
+                    </a>
+                    <div class="modal fade" id="return_index{{ $payment->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="return_content_modal" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="return_content_modal">
+                                        <a href="{{ route('admin.plan.index', ['project' => $payment->includedPlans[0]->project->id]) }}">
+                                        {{ $payment->includedPlans[0]->project->title }}
+                                        </a>のリターン一覧
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @foreach ($payment->includedPlans as $plan)
+                                        {{ $plan->title }}</br>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
                 <td>
                     <button type="button" class="btn btn-primary" data-toggle="modal"
