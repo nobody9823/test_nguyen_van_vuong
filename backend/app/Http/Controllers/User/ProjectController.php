@@ -198,7 +198,7 @@ class ProjectController extends Controller
             throw $e;
         }
         Auth::user()->load(['profile', 'address']);
-        return view('user.project.confirm_plan', ['project' => $project, 'plans' => $plans,'validated_request' => $request->all()]);
+        return view('user.project.confirm_plan', ['project' => $project, 'plans' => $plans->loadCount('includedPayments'),'validated_request' => $request->all()]);
     }
 
     /**
@@ -226,14 +226,12 @@ class ProjectController extends Controller
                     'payment_is_finished' => false
                 ], $request->all()
             ));
-            $this->user->payments()->save($payment)
-                ->each(function($payment) use ($project, $validated_request){
-                    $payment->includedPlansByArrayPlan($validated_request['plans']);
-                    if (!empty($validated_request['comments'])){
-                        $comment = $this->comment->fill(['project_id' =>  $project->id, 'content' => $validated_request['comments']]);
-                        $payment->comment()->save($comment);
-                    }
-                });
+            $this->user->payments()->save($payment);
+            $payment->includedPlansByArrayPlan($validated_request['plans']);
+            if (!empty($validated_request['comments'])){
+                $comment = $this->comment->fill(['project_id' =>  $project->id, 'content' => $validated_request['comments']]);
+                $payment->comment()->save($comment);
+            }
             $this->plan->updatePlansByIds($plans, $validated_request['plans']);
             $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
             $payment->token()->save(PaymentToken::make([
