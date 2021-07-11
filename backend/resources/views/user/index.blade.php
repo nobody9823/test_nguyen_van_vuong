@@ -462,7 +462,7 @@ use Carbon\Carbon;
 
         <div class="img_box_02">
 
-                @foreach($projects as $project)
+                @foreach($new_projects as $project)
                 <div class="img_box_02_item">
                     <div class="ib02_01 new_project_obi E-font">
                         <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">

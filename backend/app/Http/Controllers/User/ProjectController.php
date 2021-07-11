@@ -59,23 +59,22 @@ class ProjectController extends Controller
     {
         $tags = Tag::all();
         $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
-        $projects = Project::getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice()
-        ->inRandomOrder()->take(5)->get();
+        // TOP画面の一番上(ランダム)
+        $projects = Project::mainProjects()->inRandomOrder()->take(5)->get();
 
         // ランキング(支援総額順)
-        $ranking_projects = Project::getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price','DESC')->skip(1)->take(5)->get();
-
-        // 応援プロジェクト（目標金額の高い順）
-        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
-        //     ->inRandomOrder()->get();
-
-        // 応援プロジェクト（目標金額の高い順）
-        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
-        //     ->inRandomOrder()->get();
+        $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price','DESC')->skip(1)->take(5)->get();
 
         // 最新のプロジェクト
-        // $new_projects = Project::getReleasedProject()->seeking()->orderBy('created_at', 'DESC')
-        //     ->get();
+        $new_projects = Project::mainProjects()->orderBy('created_at', 'DESC')->get();
+
+        // 応援プロジェクト（目標金額の高い順）
+        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        //     ->inRandomOrder()->get();
+
+        // 応援プロジェクト（目標金額の高い順）
+        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        //     ->inRandomOrder()->get();
 
         // 人気のプロジェクト
         // $popularity_projects = Project::getReleasedProject()->seeking()->ordeyByLikedUsers()
@@ -90,15 +89,15 @@ class ProjectController extends Controller
         //     ->inRandomOrder()->get();
 
         return view('user.index', compact(
-            // 'new_projects',
             // 'cheer_projects',
             // 'popularity_projects',
             // 'nearly_deadline_projects',
             // 'nearly_open_projects',
-            'ranking_projects',
             'tags',
             'user_liked',
-            'projects'
+            'projects',
+            'ranking_projects',
+            'new_projects'
         ));
     }
 
