@@ -536,7 +536,9 @@ input[type=radio]:checked + .radio-fan::after {
 	.img_box_01_R_item{ min-height: auto;}
 	.ib01L_03{margin: 0 0 50px 0;}
 	.ib01R_03{margin: 0 0 30px 0;}
-
+    .ib01L_01 {display: flex; align-items: center; justify-content: center;}
+    .ib01L_01 img {max-width: 100vw; height: auto;}
+    .ib01R_01 img {max-width: 49vw; height: auto;}
 }
 
 .tit_L_01{ width: 100%;  font-size: 2rem; font-weight: bold; text-align: center; color:#00aebd ; margin: 0 auto 40px auto;}
@@ -642,6 +644,9 @@ input[type=radio]:checked + .radio-fan::after {
 	.ib03L_03{margin: 0 0 50px 0;}
 	.ib03R_03{margin: 0 0 30px 0;}
 	.ib03R_03 h3{ font-size: 1.2rem;}
+    .ib03L_01 {display: flex; align-items: center; justify-content: center;}
+    .ib03L_01 img {max-width: 100vw; height: auto;}
+    .ib03R_01 img {max-width: 49vw; height: auto;}
 
 }
 
