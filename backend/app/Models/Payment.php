@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Services\Payment\includedPlans;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
 use Carbon\Carbon;
@@ -13,7 +12,7 @@ use Request;
 
 class Payment extends Model
 {
-    use HasFactory, SoftDeletes, includedPlans,SortBySelected,SearchFunctions;
+    use HasFactory, SoftDeletes, SortBySelected, SearchFunctions;
 
     protected $fillable = [
         'project_id',
@@ -33,7 +32,9 @@ class Payment extends Model
 
     public function includedPlans()
     {
-        return $this->belongsToMany('App\Models\Plan', 'App\Models\PlanPaymentIncluded');
+        return $this->belongsToMany('App\Models\Plan', 'App\Models\PlanPaymentIncluded')
+            ->withPivot(['quantity'])
+            ->withTimestamps();
     }
 
     public function project()
@@ -51,7 +52,7 @@ class Payment extends Model
         return $this->hasOne('App\Models\Comment');
     }
 
-    public function token()
+    public function paymentToken()
     {
         return $this->hasOne('App\Models\PaymentToken');
     }

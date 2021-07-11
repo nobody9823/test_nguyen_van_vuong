@@ -79,7 +79,7 @@ class ProjectControllerForPayJpTest extends TestCase
                     'remarks' => 'test remarks'
                 ])->create();
 
-        $this->success_payment->token()->save(PaymentToken::factory()->state([
+        $this->success_payment->paymentToken()->save(PaymentToken::factory()->state([
             'token' => $this->success_token->id,
         ])->make());
 
@@ -103,7 +103,7 @@ class ProjectControllerForPayJpTest extends TestCase
                 'remarks' => 'test remarks'
             ])->create();
 
-        $this->fail_payment->token()->save(PaymentToken::factory()->state([
+        $this->fail_payment->paymentToken()->save(PaymentToken::factory()->state([
                 'token' => $this->fail_token->id
             ])->make());
 

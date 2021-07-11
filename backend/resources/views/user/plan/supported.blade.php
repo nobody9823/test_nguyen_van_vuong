@@ -31,7 +31,7 @@
 		<div class="av_box">
 			<div class="av_tit">支援ID</div>
 			<div class="av_txt">
-				{{ $payment->token->token }}<br>
+				{{ $payment->paymentToken->token }}<br>
 			</div>
 		</div><!--/av_box-->
 

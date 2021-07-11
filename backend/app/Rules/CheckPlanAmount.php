@@ -27,7 +27,7 @@ class CheckPlanAmount implements Rule
     public function passes($attribute, $value)
     {
         $plan = Plan::find(array_keys($value)[0]);
-        return $plan->limit_of_supporters >= array_values($value)[0];
+        return $plan->limit_of_supporters >= array_values($value)[0]['quantity'];
     }
 
     /**

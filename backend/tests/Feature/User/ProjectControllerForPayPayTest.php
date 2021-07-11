@@ -46,7 +46,7 @@ class ProjectControllerForPayPayTest extends TestCase
             $this->profile = $user->profile()->save(Profile::factory()->make());
             $this->profile = $user->address()->save(Address::factory()->make());
             $this->payment = $user->payments()->save(Payment::factory()->make());
-            $this->payment_token = $this->payment->token()->save(PaymentToken::factory()->make());
+            $this->payment_token = $this->payment->paymentToken()->save(PaymentToken::factory()->make());
         });
 
         $this->plan = Plan::factory()->state([
@@ -91,7 +91,7 @@ class ProjectControllerForPayPayTest extends TestCase
                 "status" => "COMPLETED",
                 "acceptedAt" => 1625220437,
                 "refunds" => [],
-                "merchantPaymentId" => $this->payment->token->token,
+                "merchantPaymentId" => $this->payment->paymentToken->token,
                 "amount" => [],
                 "requestedAt" => 1625220437,
                 "storeId" => "",

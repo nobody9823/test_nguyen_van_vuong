@@ -227,14 +227,14 @@ class ProjectController extends Controller
                 ], $request->all()
             ));
             $this->user->payments()->save($payment);
-            $payment->includedPlansByArrayPlan($validated_request['plans']);
+            $payment->includedPlans()->attach($validated_request['plans']);
             if (!empty($validated_request['comments'])){
                 $comment = $this->comment->fill(['project_id' =>  $project->id, 'content' => $validated_request['comments']]);
                 $payment->comment()->save($comment);
             }
             $this->plan->updatePlansByIds($plans, $validated_request['plans']);
             $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
-            $payment->token()->save(PaymentToken::make([
+            $payment->paymentToken()->save(PaymentToken::make([
                 'token' => !empty($validated_request['payjp_token']) ? $validated_request['payjp_token'] : $unique_token,
             ]));
             DB::commit();
@@ -260,7 +260,7 @@ class ProjectController extends Controller
      */
     public function paymentForPayJp(Project $project, Payment $payment)
     {
-        $response = $this->pay_jp->Payment($payment->price, $payment->token->token);
+        $response = $this->pay_jp->Payment($payment->price, $payment->paymentToken->token);
         DB::beginTransaction();
         try {
                 $payment->payment_is_finished = true;
@@ -278,7 +278,7 @@ class ProjectController extends Controller
 
     public function paymentForPayPay(Project $project, Payment $payment)
     {
-        $response = $this->pay_pay->getPaymentDetail($payment->token->token);
+        $response = $this->pay_pay->getPaymentDetail($payment->paymentToken->token);
 
         if($response['data']['status'] !== 'COMPLETED'){
             return redirect()->action([ProjectController::class, 'selectPlans'], ['project' => $project])->withError('決済処理に失敗しました。管理会社に連絡をお願いします。');
