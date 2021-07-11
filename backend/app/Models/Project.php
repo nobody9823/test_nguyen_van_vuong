@@ -150,8 +150,18 @@ class Project extends Model
     }
 
     public function getLoadPaymentsCountAndSumPrice()
-    { 
-        return $this->loadCount('payments')->loadSum('payments', 'price');
+    {
+        return $this
+            ->loadSum('payments', 'price')
+            ->loadCount([
+                'payments',
+                'payments as payments_count_within_a_day' => function ($query) {
+                    $query->where('created_at', '>=', Carbon::now()->subHours(24));
+                },
+            ])
+            ->load(['plans' => function ($query) {
+                $query->withCount('includedPayments');
+            }]);
     }
 
     public function scopeOrdeyByLikedUsers($query)

@@ -12,7 +12,7 @@ trait includedPlans {
     {
         $plans = $this->updatePlans($array_plan);
 
-        $this->includedPlans()->saveMany($plans);
+        $this->includedPlans()->attach($plans->pluck('id'));
     }
 
     protected function getPlansByIds($plan_ids)

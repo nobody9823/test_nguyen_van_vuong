@@ -88,7 +88,7 @@
                 <div class="pds_sec01_R_nin_base">
                     <div class="pds_sec01_R_nin01">支援者数</div>
                     <div class="pds_sec01_R_nin02 E-font">{{ $project->payments_count }}<span>人</span></div>
-                    <div class="pds_sec01_R_nin03">24時間以内に9人からの支援がありました(未実装)</div>
+                    <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div>
                 </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_nokori_base">
