@@ -164,7 +164,7 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $project->deleteProjectImages();
+            $project->deleteProjectFiles();
             $project->delete();
             DB::commit();
         } catch (\Exception $e) {

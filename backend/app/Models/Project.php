@@ -391,4 +391,14 @@ class Project extends Model
             $this->projectFiles()->save($projectVideo);
         };
     }
+
+    public function deleteProjectFiles(): void
+    {
+        foreach($this->projectFiles as $file){
+            if(strpos($file->file_url, 'sampleImage') === false && $file->file_content_type === 'image_url'){
+                Storage::delete($file->file_url);
+            };
+            $file->delete();
+        }
+    }
 }
