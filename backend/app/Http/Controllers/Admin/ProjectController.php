@@ -10,6 +10,7 @@ use App\Models\Plan;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\ProjectFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -194,13 +195,11 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    // FIXME #372 ソフトデリートする
-    // public function deleteImage(ProjectImage $projectImage)
-    // {
-    //     Storage::delete($projectImage->image_url);
-    //     $projectImage->delete();
-    //     return response()->json('success');
-    // }
+    public function deleteFile(ProjectFile $project_file)
+    {
+        $project_file->deleteFile();
+        return response()->json('success');
+    }
 
     /**
      * @param  Request  $request
