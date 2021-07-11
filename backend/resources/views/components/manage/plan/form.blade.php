@@ -70,7 +70,7 @@
 --}}
 <div class="form-group">
     <label>個数</label>
-    <input type="number" name="limit_of_supporters" class="form-control" value="{{ old('limit_of_supporters', optional($plan)->limit_of_supporters) }}">
+    <input type="number" name="limit_of_supporters" class="form-control" min="1" value="{{ old('limit_of_supporters', optional($plan)->limit_of_supporters) }}">
 </div>
 
 <div class="form-group">
