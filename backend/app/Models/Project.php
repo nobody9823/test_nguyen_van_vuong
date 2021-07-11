@@ -154,6 +154,11 @@ class Project extends Model
         return $this->loadCount('payments')->loadSum('payments', 'price');
     }
 
+    public function scopeMainProjects($query)
+    {
+        return $query->getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice();
+    }
+
     public function scopeOrdeyByLikedUsers($query)
     {
         // return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
