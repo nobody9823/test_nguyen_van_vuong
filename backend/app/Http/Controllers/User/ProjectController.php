@@ -199,7 +199,7 @@ class ProjectController extends Controller
             throw $e;
         }
         Auth::user()->load(['profile', 'address']);
-        return view('user.project.confirm_plan', ['project' => $project, 'plans' => $plans,'validated_request' => $request->all()]);
+        return view('user.project.confirm_plan', ['project' => $project, 'plans' => $plans->loadCount('includedPayments'),'validated_request' => $request->all()]);
     }
 
     /**
