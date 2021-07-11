@@ -121,7 +121,7 @@
                                     <h5 class="modal-title" id="return_content_modal">
                                         <a href="{{ route('admin.plan.index', ['project' => $payment->project->id]) }}">
                                         {{ $payment->project->title }}
-                                        </a>から購入したリターン一覧（合計{{ $payment->included_plans_count }}）
+                                        </a>から購入したリターン一覧
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="modal-body">
                                     @foreach ($payment->includedPlans as $plan)
-                                        {{ $plan->title }}</br>
+                                        {{ $plan->title }} </br>個数 : {{ $plan->pivot->quantity }}<br/><br/>
                                     @endforeach
                                 </div>
                             </div>
