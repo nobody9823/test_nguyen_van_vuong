@@ -1032,7 +1032,8 @@ input[type=radio]:checked + .radio-fan::after {
 
 .pds_sec02_tit{ font-size: 1.8rem; font-weight: bold; color: #00AEBD; width: 100%; margin: 0 0 15px 0;}
 .pds_sec02_txt{ font-size: 1.4rem; width: 100%; margin: 0 0 30px 0;}
-.pds_sec02_img{ width: 100%; margin: 0 0 15px 0;}
+.pds_sec02_img{ width: 100%; margin: 0 0 15px 0; text-align: center;}
+.pds_sec02_img img{ width: auto; height: auto; max-width: 352px; max-height: 234px; border-radius: 8px 8px 0px 0px;}
 .pds_sec02_01{ width: 100%; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; margin: 0 0 15px 0;}
 .pds_sec02_01_en{ font-size: 1.6rem; font-weight: bold;}
 .pds_sec02_01_nokori_nin{ font-size: 1.6rem; font-weight: bold;}
@@ -1068,7 +1069,8 @@ input[type=radio]:checked + .radio-fan::after {
 
 .as_01{ width: 100%; margin: 0 0 15px 0;}
 .as_02{ margin: 0 0 15px 0;}
-.as_img{ width: 100%; margin: 0 0 15px 0;}
+.as_img{ width: 100%; margin: 0 0 15px 0; text-align: center;}
+.as_img img{ width: auto; height: auto; max-width: 490px; max-height: 326px; border-radius: 8px 8px 0px 0px;}
 .as_tit{ width: 100%; margin: 0 0 15px 0; font-size: 1.6rem; font-weight: bold;}
 .as_txt{ width: 100%; margin: 0 0 15px 0; font-size: 1.4rem;}
 .as_03{ width: 100%; margin: 0 0 15px 0; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
