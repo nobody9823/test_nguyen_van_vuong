@@ -45,7 +45,6 @@ class PaymentNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->from(config('mail.from.address'))
                 ->subject('【FanReturn】リターンの購入が完了しました。')
                 ->view('user.mail.template.payment_finished',
                 [
