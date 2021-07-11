@@ -36,7 +36,7 @@ class ConfirmPaymentRequest extends FormRequest
             'payment_way' => ['required', 'string'],
             'payjp_token' => [Rule::requiredIf($request->payment_way === "credit")],
             'plans' => ['required', new CheckPlanAmount($this)],
-            "plans.*.quantity" => ['required', 'integer'],
+            'plans.*.quantity' => ['required', 'integer'],
             'total_amount' => ['required', 'integer'],
             'display_added_price' => ['nullable', 'integer'],
             'first_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
