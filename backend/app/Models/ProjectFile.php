@@ -17,6 +17,8 @@ class ProjectFile extends Model
         'file_content_type'
     ];
 
+    protected $dates = ['deleted_at'];
+
     /**
      * The attributes that should be cast to native types.
      *
