@@ -60,7 +60,7 @@ class ProjectController extends Controller
         $tags = Tag::all();
         $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
         // TOP画面の一番上(ランダム)
-        $projects = Project::mainProjects()->inRandomOrder()->where('id', 41)->take(5)->get();
+        $projects = Project::mainProjects()->inRandomOrder()->take(5)->get();
 
         // ランキング(支援総額順)
         $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price','DESC')->skip(1)->take(5)->get();
