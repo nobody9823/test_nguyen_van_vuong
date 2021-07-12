@@ -185,10 +185,11 @@ class ProjectController extends Controller
      */
     public function preview(Project $project)
     {
-        $plans = $project->plans;
+        $tags_ids = $project->projectTagTagging()->pluck('tag_id')->toArray();
+        $tags = Tag::whereIn('id',$tags_ids)->pluck('name');
         return view('admin.project.preview', [
             'project' => $project,
-            'plans' => $plans,
+            'tags' => $tags
         ]);
     }
 

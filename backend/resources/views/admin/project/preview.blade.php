@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 @section('content')
 <x-common.preview />
-<x-user.project.show :project="$project" />
+<x-user.project.show :project="$project" :tags="$tags" />
 @endsection
 
 @section('script')
