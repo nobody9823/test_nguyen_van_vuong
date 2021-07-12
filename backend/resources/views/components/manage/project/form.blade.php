@@ -56,20 +56,24 @@
         value="{{ old('end_date', optional($project ?? null)->end_date) }}">
 </div>
 
-<div class="d-flex flex-wrap">
-    @foreach($tags as $key => $value)
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="{{ $key }}" name="tags[]" id="flexCheckDefault"
-            {{ $projectTags !== null && in_array($key, $projectTags) ? 'checked' : '' }}>
-        <label class="form-check-label" for="flexCheckDefault">
-            {{ $value }}
-        </label>
+<div class="form-group">
+    <div>タグ選択</div>
+    <div class="d-flex flex-wrap">
+        @foreach($tags as $key => $value)
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="{{ $key }}" name="tags[]" id="{{ 'flexCheckDefault_'.$key }}"
+                {{ $projectTags !== null && in_array($key, $projectTags) ? 'checked' : '' }}>
+            <label class="form-check-label" for="{{ 'flexCheckDefault_'.$key }}">
+                {{ $value }}
+            </label>
+        </div>
+        <div>&emsp;&emsp;&emsp;</div>
+        @endforeach
     </div>
-    @endforeach
 </div>
 
 <div class="form-group">
-    <label>トップ画像</label>
+    <label>トップ画像</label><br>
     <input id='imageUploader' type="file" name="images[]" multiple="multiple">
 </div>
 
