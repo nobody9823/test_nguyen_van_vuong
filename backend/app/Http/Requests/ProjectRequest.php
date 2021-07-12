@@ -38,7 +38,7 @@ class ProjectRequest extends FormRequest
 
         return [
             'user_id' => ['required', 'integer'],
-            'title' => ['required', 'string', 'max:45'],
+            'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string', 'max:5000'],
             'ps_plan_content' => ['required', 'string', 'max:5000'],
             'target_amount' => ['required', 'integer', 'max:99999999'],

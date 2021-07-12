@@ -246,11 +246,6 @@
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
-                        <div class="form_item_tit">メールアドレス<span class="hissu_txt">必須</span></div>
-                        <input type="email" name="email" class="def_input_100p" value="{{ old('email', optional($user)->email) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
                         <div class="form_item_tit">性別<span class="hissu_txt">必須</span></div>
                         <div class="cp_ipselect cp_normal">
                             <select name="gender">

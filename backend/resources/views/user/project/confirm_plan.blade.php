@@ -100,6 +100,10 @@
             <a href="{{ route('user.plan.prepare_for_payment', ['project' => $project, 'validated_request' => $validated_request]) }}"  style="color: white">決済する</a>
         </div>
 
+        <div class="def_btn">
+            <a style="color: white" href="javascript:history.back()">戻る</あ>
+        </div>
+
         {{-- <div class="def_btn_02">内容を変更する</div> --}}
     </div>
 </div>
