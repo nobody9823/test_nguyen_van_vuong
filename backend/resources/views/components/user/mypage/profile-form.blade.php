@@ -98,14 +98,21 @@
         @csrf
         <div class="prof_edit_row">
             <div class="prof_edit_01">現在地<br><span>編集中</span></div>
-            <div class="prof_edit_editbox">
-                <select class="form-control mb-2" name="prefecture">
-                    {{-- <option value="0" selected>都道府県を選択</option> --}}
-                    @foreach(config('prefecture') as $index => $name)
-                    <option value="{{ $index }}" {{old('prefecture_id', optional(optional(Auth::user())->address)->prefecture_id) == $index ? 'selected' : ''}}>{{$name}}</option>
-                    @endforeach
-                </select>
-            </div>
+            <div class="prof_edit_editbox pee_select_hori">
+                <div class="cp_ipselect cp_normal">
+                    <select name="prefecture">
+                        @foreach(config('prefecture') as $index => $name)
+                        <option value="{{ $index }}" {{old('prefecture_id', optional(optional(Auth::user())->address)->prefecture_id) == $index ? 'selected' : ''}}>{{$name}}</option>
+                        @endforeach
+                    </select>
+                </div><!-- /.cp_ipselect -->
+                <div class="cp_ipselect cp_normal">
+					<select name="koukai">
+						<option value="yes">公開する</option>
+						<option value="no">公開しない</option>
+					</select>
+				</div><!-- cp_ipselect -->
+            </div><!-- prof_edit_editbox -->
             <div class="prof_edit_03">
                 <a href="javascript:document.prefectureForm.submit()">更新</a>
             </div>
