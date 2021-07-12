@@ -58,26 +58,26 @@
                                 {{-- 左側メッセージ一覧部分 --}}
                                 <div class="col-sm-4 chat_group_list" style="height:100vh; overflow-y:scroll;">
 
-                                    {{-- チャット中プラン --}}
+                                    {{-- チャット中リターン --}}
                                     @if ($chating_messages->isNotEmpty())
-                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>やりとり中支援プラン</p>
+                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>やりとり中支援リターン</p>
                                     @endif
                                     @foreach ($chating_messages as $message)
                                     <x-common.message.a_message_of_index :message="$message" guard='admin'
                                         :selectedMessage="isset($selected_message)?$selected_message:null" />
                                     @endforeach
-                                    {{-- チャット中プラン --}}
+                                    {{-- チャット中リターン --}}
 
-                                    {{-- 未チャットプラン --}}
+                                    {{-- 未チャットリターン --}}
                                     @if ($not_chating_messages->isNotEmpty())
-                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>やりとりしていない支援プラン
+                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>やりとりしていない支援リターン
                                     </p>
                                     @endif
                                     @foreach ($not_chating_messages as $message)
                                     <x-common.message.a_message_of_index :message="$message" guard='admin'
                                         :selectedMessage="isset($selected_message)?$selected_message:null" />
                                     @endforeach
-                                    {{-- 未チャットプラン --}}
+                                    {{-- 未チャットリターン --}}
 
                                     <div class="row justify-content-center mb-5" style="margin-top: 5px;">
                                         <a class="btn btn-info" style="display: none" id="more_btn">もっと見る</a>

@@ -65,12 +65,12 @@ class PlanController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->withErrors('プランの作成に失敗しました。管理会社にご連絡をお願いします。');
+            return redirect()->back()->withErrors('リターンの作成に失敗しました。管理会社にご連絡をお願いします。');
         }
 
         return redirect()
             ->action([PlanController::class, 'index'], ['project' => $project])
-            ->with('flash_message', 'プラン作成が成功しました。');
+            ->with('flash_message', 'リターン作成が成功しました。');
     }
 
     /**
@@ -119,12 +119,12 @@ class PlanController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->withErrors('プランの更新に失敗しました。管理会社にご連絡をお願いします。');
+            return redirect()->back()->withErrors('リターンの更新に失敗しました。管理会社にご連絡をお願いします。');
         }
 
         return redirect()
             ->action([PlanController::class, 'index'], ['project' => $project,])
-            ->with('flash_message', 'プラン更新が成功しました。');
+            ->with('flash_message', 'リターン更新が成功しました。');
     }
 
     /**
@@ -138,7 +138,7 @@ class PlanController extends Controller
         $plan->deleteImage();
         $plan->delete();
         $plans = Plan::paginate(10);
-        return redirect()->action([PlanController::class, 'index'], ['project' => $plan->project, 'plans' => $plans])->with('flash_message', 'プラン削除が成功しました。');
+        return redirect()->action([PlanController::class, 'index'], ['project' => $plan->project])->with('flash_message', 'リターン削除が成功しました。');
     }
 
     /**

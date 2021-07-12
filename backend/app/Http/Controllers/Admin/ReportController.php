@@ -21,7 +21,10 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        $reports = Report::search()->narrowDownWithProject()->sortBySelected($request->sort_type)->paginate(10);
+        $reports = Report::search()
+        ->narrowDownWithProject()
+        ->sortBySelected($request->sort_type)
+        ->paginate(10);
         return view('admin.report.index', ['project' => $request->project, 'reports' => $reports]);
     }
 
@@ -106,7 +109,7 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,Project $project, Report $report)
+    public function destroy(Request $request, Project $project, Report $report)
     {
         DB::beginTransaction();
         try {

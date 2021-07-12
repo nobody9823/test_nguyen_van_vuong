@@ -93,7 +93,7 @@ $(function () {
             el.append('<meta name="csrf-token" content="{{ csrf_token() }}">');
             // ajaxについての記述
             $.ajax({
-                url: '/admin/project/image/' + ImageId,
+                url: '/admin/project/file/' + ImageId,
                 type: 'POST',
                 data: {'project_image': ImageId, '_method': 'DELETE'},
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},

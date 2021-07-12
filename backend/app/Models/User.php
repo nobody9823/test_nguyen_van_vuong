@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\ImageCast;
 use App\Casts\HashMake;
+use App\Notifications\ResetPasswordNotification;
 use Auth;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes,SearchFunctions,SortBySelected;
+    use HasFactory, Notifiable, SoftDeletes, SearchFunctions, SortBySelected;
 
     /**
      * The attributes that are mass assignable.
@@ -83,6 +84,11 @@ class User extends Authenticatable
             PlanPaymentIncluded::whereIn('payment_id', $payment_ids)->delete();
             Payment::destroy($payment_ids);
         });
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     // NOTICE デザインにないのでコメントアウト
@@ -177,41 +183,35 @@ class User extends Authenticatable
         return $query->pluck('name', 'id');
     }
 
-    public function scopeGetCountOfSupportersWithProject($query, Project $project)
-    {
-        return $query->whereIn(
-            'id',
-            Payment::whereIn(
-                'id',
-                PlanPaymentIncluded::whereIn(
-                    'plan_id',
-                    Plan::where('project_id', $project->id)->pluck('id')->toArray()
-                )->pluck('id')->toArray()
-            )->pluck('id')->toArray()
-        )->count();
-    }
-
     // inviter_idが一致するpaymentsの数を集計して降順に並び替え
     public function scopeGetInvitersRankedByInvitedUsers($query, $project_id)
     {
-        return $query->whereIn(
-            'id',
-            UserProjectSupported::where('project_id', $project_id)->pluck('user_id')->toArray()
-        )->withCount(['invitedPayments' => function ($query) use ($project_id) {
-            $query->filterByProjectId($project_id);
+        return $query->withCount(['invitedPayments' => function ($query) use ($project_id) {
+            $query->whereIn(
+                'project_id',
+                Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
+            );
         }])
+        ->whereIn('id', Payment::select('inviter_id')->whereIn(
+            'project_id',
+            Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
+        ))
         ->orderBy('invited_payments_count', 'DESC');
     }
 
     // inviter_idが一致するpaymentsの支援総額から降順に並び替え
     public function scopeGetInvitersRankedByInvitedTotalAmount($query, $project_id)
     {
-        return $query->whereIn(
-            'id',
-            UserProjectSupported::where('project_id', $project_id)->pluck('user_id')->toArray()
-        )->withSum(['invitedPayments' => function ($query) use ($project_id) {
-            $query->filterByProjectId($project_id);
+        return $query->withSum(['invitedPayments' => function ($query) use ($project_id) {
+            $query->whereIn(
+                'project_id',
+                Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
+            );
         }], 'price')
+        ->whereIn('id', Payment::select('inviter_id')->whereIn(
+            'project_id',
+            Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
+        ))
         ->orderBy('invited_payments_sum_price', 'DESC');
     }
 

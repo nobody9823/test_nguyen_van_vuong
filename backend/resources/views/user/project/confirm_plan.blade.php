@@ -22,7 +22,6 @@
         <div class="av_box">
             <div class="av_tit">決済金額</div>
             <div class="av_txt">
-                購入者側の手数料要確認(支援金額：2,500円<br>システム利用料：220円（税込）)
                 <div>合計：{{ $validated_request['total_amount'] }}円</div>
             </div>
         </div><!--/av_box-->
@@ -32,7 +31,7 @@
             @foreach($plans as $plan)
             <div class="av_txt">
                 <div>{{ $plan->title }}<br>支援金額：{{ $plan->price }}円</div>
-                支援者：500人(未実装) <br>お届け予定：{{ $plan->delivery_date }}
+                支援者：{{ $plan->included_payments_count }}人 <br>お届け予定：{{ $plan->delivery_date }}
             </div>
             <br>
             @endforeach
@@ -56,13 +55,12 @@
             <div class="av_tit">お支払い方法</div>
             <div class="av_txt">
                 @if($validated_request['payment_way'] !== 'pay pay')
-                    {{ 'credit' }}<br>
-                    クレジットカード（VISA）<br>
-                    クレジットカード番号：1234567891011123<br>
-                    セキュリティコード：123<br>
-                    有効期限：6月2021年<br>
+                    {{ 'credit' }}
+                    クレジットカード
                 @else
                     {{ 'pay pay' }}
+                    Pay Pay
+                    「決済する」ボタンを押していただくと自動でお支払い画面へ移動します。
                 @endif
             </div>
         </div><!--/av_box-->

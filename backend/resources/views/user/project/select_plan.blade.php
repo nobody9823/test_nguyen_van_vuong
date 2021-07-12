@@ -75,7 +75,8 @@
                             <div class="as_i_01_L_01">リターン合計金額</div>
                             <div class="as_i_01_L_02 E-font">
                                 <input type="number" name="total_amount" id="total_amount" class="pay_input_count" readonly>
-                                <span>円</span></div>
+                                <span>円</span>
+                            </div>
                         </div>
                     </div><!--/.as_i_01_L-->
 
@@ -137,9 +138,11 @@
                                         <span id="errors" style="color: red;"></span>
                                     </div>
 
-                                    <div class="tab1_02">
-                                        <div class="tab1_02_01">セキュリティコード</div>
-                                        <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+                                    <div class="cvc_wrapper">
+                                        <div class="tab1_02">
+                                            <div class="tab1_02_01">セキュリティコード</div>
+                                            <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+                                        </div>
                                         <div class="tooltip1">
                                             <p>？</p>
                                             <div class="description1">カードの裏面にある末尾3桁の数字</div>
@@ -161,7 +164,7 @@
                                     有効期限が残り100日以上のクレジットカード（Visa/Mastercard JCB/Diners Club/American Express）でご利用いただけます。<br>
                                     デビットカード・プリペイドカードの利用は推奨しておりません。<br>
                                     利用される場合は注意事項を必ずご確認ください。<br>
-                                    このクレジットカード情報は当社では保持せず、決済代行会社であるGMOペイメントゲートウェイ株式会社にて安全に管理されます。
+                                    このクレジットカード情報は当社では保持いたしません。
                                     </div>
 
 
@@ -184,7 +187,10 @@
                             </div><!--/tab_content--> --}}
                             <div class="tab_content" id="tab5_content">
                                 <div class="tab_content_description">
-                                <p class="c-txtsp">PayPayでのお支払い</p>
+                                <p class="c-txtsp">
+                                    PayPayでのお支払い<br/>
+                                    以下の必要情報入力後確認画面から「決済する」を押していただくとPayPayの支払い画面へと移動します。
+                                </p>
                                 </div>
                             </div><!--/tab_content-->
                             {{-- <div class="tab_content" id="tab6_content">
@@ -204,7 +210,12 @@
                     <div class="as_i_txt">「性別」と「生年月日」は公開されません。プロジェクトの集計データとして、プロジェクトオーナーへ提供されます。</div>
 
                     <div class="as_i_04_02"><span>！</span>必ずお読みください</div>
-                    <div class="as_i_txt">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</div>
+                    <div class="as_i_txt">
+                        決済の領収書などお支払いに関するお問い合わせはこちらへお問い合わせください<br/>
+                        株式会社ICH<br/>
+                        個人情報保護対応窓口<br/>
+                        <a href="href="mailto:support@fanreturn.com">support@fanreturn.com</a>
+                    </div>
 
                 </div><!--/.as_i_04-->
 

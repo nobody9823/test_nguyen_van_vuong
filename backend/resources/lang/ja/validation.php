@@ -163,6 +163,7 @@ return [
         'certificate_files' => '身分証明書/登記簿謄本等確認書類',
         'certificate_files.*' => '身分証明書/登記簿謄本等確認書類',
         'plans' => 'リターン',
+        'plans.*.quantity' => 'リターンの数量',
         'payment_way' => '決済方法',
         'total_amount' => 'リターン合計金額',
         'display_added_price' => '上乗せ支援額',

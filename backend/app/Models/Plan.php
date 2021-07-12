@@ -131,7 +131,7 @@ class Plan extends Model
         foreach ($plans as $plan){
             foreach($plan_ids as $key => $value){
                 if ($plan->id === $key){
-                    $plan->limit_of_supporters -= $value;
+                    $plan->limit_of_supporters -= $value['quantity'];
                     $plan->save();
                 }
             }

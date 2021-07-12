@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('admin.layouts.mail_template')
 
-<body>
+@section('content')
 <p>
-  {{ $user->name }}様
+    {{ $user->name }}様
 </p>
 <p style="white-space: pre-line;">
-  {{ $description }}
+    {{ $description }}
 </p>
-</body>
-</html>
+@endsection
