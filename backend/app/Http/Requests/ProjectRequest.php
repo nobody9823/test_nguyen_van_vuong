@@ -70,17 +70,22 @@ class ProjectRequest extends FormRequest
         return $projectFiles;
     }
 
-    public function tagsToArray()
+    public function tagsToArray($project)
     {
         $tags = [];
         $data = $this->all();
+        ProjectTagTagging::where('project_id',$project->id)->whereNotIn('tag_id',$data['tags'])->delete();
+        
         if (!empty($data['tags']) && $data['tags'][0] !== null) {
             foreach ($data['tags'] as $tag) {
-                $tags[] = new ProjectTagTagging([
-                    'tag_id' => $tag
-                ]);
+                if(ProjectTagTagging::where('project_id',$project->id)->where('tag_id',$tag)->doesntExist()){
+                    $tags[] = new ProjectTagTagging([
+                        'tag_id' => $tag
+                    ]);
+                }
+                
             }
-        }
+        }        
         return $tags;
     }
 

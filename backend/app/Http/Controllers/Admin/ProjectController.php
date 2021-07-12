@@ -8,6 +8,7 @@ use App\Http\Requests\ProjectRequest;
 use App\Http\Requests\SearchRequest;
 use App\Models\Plan;
 use App\Models\Tag;
+use App\Models\ProjectTagTagging;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\ProjectFile;
@@ -72,11 +73,11 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ProjectRequest $request, Project $project)
-    {
+    { 
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            $project->projectTagTagging()->saveMany($request->tagsToArray());
+            $project->projectTagTagging()->saveMany($request->tagsToArray($project));
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
@@ -115,14 +116,15 @@ class ProjectController extends Controller
     {
         $users = User::pluckNameAndId();
         $tags = Tag::pluckNameAndId();
-        $projectTags = $project->tags->pluck('id')->toArray();
+        $project_tags = ProjectTagTagging::where('project_id',$project->id)->pluck('tag_id')->toArray();
+
         $projectImages = $project->projectFiles()->where('file_content_type', 'image_url')->get();
         $projectVideo = $project->projectFiles()->where('file_content_type', 'video_url')->first();
 
         return view('admin.project.edit', [
             'project' => $project,
             'tags' => $tags,
-            'projectTags' => $projectTags,
+            'project_tags' => $project_tags,
             'users' => $users,
             'projectImages' => $projectImages,
             'projectVideo' => $projectVideo,
@@ -141,7 +143,7 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            $project->projectTagTagging()->saveMany($request->tagsToArray());
+            $project->projectTagTagging()->saveMany($request->tagsToArray($project));
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
