@@ -88,7 +88,7 @@ use Carbon\Carbon;
 
                     <div class="ib01R_04">
                         <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
-                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}</span></div>
+                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
                 @endif
@@ -439,7 +439,7 @@ use Carbon\Carbon;
 
                     <div class="ib03R_04">
                         <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
-                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}</span></div>
+                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
                 @endif

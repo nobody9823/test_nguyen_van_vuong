@@ -34,7 +34,7 @@
                 </div><!--/pds_sec01_tag-->
 
                 <div class="pds_sec01_L">
-                    <div id="pds_sec01_slider">
+                    <div class="pds_sec01_slider {{ $project->projectFiles->count() === 1 ? 'slider-img-wrapper' : '' }}">
                     <ul id="slider">
                         @foreach($project->projectFiles as $project_file)
                             @if($project_file->file_content_type === 'image_url')
@@ -50,21 +50,23 @@
                             @endif
                         @endforeach
                     </ul>
-                    <ul id="thumbnail_slider">
-                        @foreach($project->projectFiles as $project_file)
-                            @if($project_file->file_content_type === 'image_url')
-                            <li class="thumbnail-item">
-                                <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
-                            </li>
-                            @elseif($project_file->file_content_type === 'video_url')
-                            <li class="thumbnail-item">
-                                <div class="iframe-wrap">
-                                    {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
-                                </div>
-                            </li>
-                            @endif
-                        @endforeach
-                    </ul>
+                    @if($project->projectFiles->count() > 1)
+                        <ul id="thumbnail_slider">
+                            @foreach($project->projectFiles as $project_file)
+                                @if($project_file->file_content_type === 'image_url')
+                                <li class="thumbnail-item">
+                                    <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                                </li>
+                                @elseif($project_file->file_content_type === 'video_url')
+                                <li class="thumbnail-item">
+                                    <div class="iframe-wrap">
+                                        {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
+                                    </div>
+                                </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    @endif
                     </div>
                 </div><!--/pds_sec01_L-->
 
