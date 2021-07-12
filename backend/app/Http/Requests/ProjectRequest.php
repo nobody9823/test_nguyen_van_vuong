@@ -73,11 +73,11 @@ class ProjectRequest extends FormRequest
     public function tagsToArray($project)
     {
         $tags = [];
-        $data = $this->all();
-        ProjectTagTagging::where('project_id',$project->id)->whereNotIn('tag_id',$data['tags'])->delete();
+        $tags_data = $this->all()['tags'];
+        ProjectTagTagging::where('project_id',$project->id)->whereNotIn('tag_id',$tags_data)->delete();
         
-        if (!empty($data['tags']) && $data['tags'][0] !== null) {
-            foreach ($data['tags'] as $tag) {
+        if (!empty($tags_data) && $tags_data[0] !== null) {
+            foreach ($tags_data as $tag) {
                 if(ProjectTagTagging::where('project_id',$project->id)->where('tag_id',$tag)->doesntExist()){
                     $tags[] = new ProjectTagTagging([
                         'tag_id' => $tag
