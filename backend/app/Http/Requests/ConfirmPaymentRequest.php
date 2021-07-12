@@ -43,7 +43,6 @@ class ConfirmPaymentRequest extends FormRequest
             'last_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'first_name' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
             'last_name' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
-            'email' => ['required', 'string', 'email'],
             'gender' => ['required', 'string', 'in:男性,女性,その他'],
             'phone_number' => ['required', 'string', 'min:10', 'max:11'],
             'postal_code' => ['required', 'string', 'size:7'],
