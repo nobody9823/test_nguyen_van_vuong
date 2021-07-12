@@ -1,10 +1,10 @@
 <div class="form-group">
-    <label>プラン名</label>
+    <label>リターン名</label>
     <input type="text" name="title" class="form-control" value="{{ old('title', optional($plan)->title) }}">
 </div>
 
 <div class="form-group">
-    <label>プラン内容</label>
+    <label>リターン内容</label>
     <textarea type="text" name="content" class="form-control">{{old('content', optional($plan)->content)}}</textarea>
 </div>
 
@@ -70,7 +70,7 @@
 --}}
 <div class="form-group">
     <label>個数</label>
-    <input type="number" name="limit_of_supporters" class="form-control" value="{{ old('limit_of_supporters', optional($plan)->limit_of_supporters) }}">
+    <input type="number" name="limit_of_supporters" class="form-control" min="1" value="{{ old('limit_of_supporters', optional($plan)->limit_of_supporters) }}">
 </div>
 
 <div class="form-group">

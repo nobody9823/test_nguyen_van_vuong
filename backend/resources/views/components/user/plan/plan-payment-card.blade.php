@@ -18,7 +18,7 @@
                 @if ($plan->limit_of_supporters > 0)
                     <div class="as_02">
                         <div class="cp_ipselect_02 cp_chb ">
-                            <select name="plans[{{$plan->id}}]amount[]" id="plan_amount_{{ $plan->id }}" onChange="Plans.planAmountIsChanged(this)" disabled>
+                            <select name="plans[{{$plan->id}}][quantity]" id="plan_amount_{{ $plan->id }}" onChange="Plans.planAmountIsChanged(this)" disabled>
                                 @for($i = 1; $i <= $plan->limit_of_supporters; $i ++)
                                     <option value="{{ $i }}">数量{{ $i }}</option>
                                 @endfor

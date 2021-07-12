@@ -1,1 +1,0 @@
-<x-manage.supporter_purchase.index guard="admin" :supporterPurchases="$supporter_purchases" />

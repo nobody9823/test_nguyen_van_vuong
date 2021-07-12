@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\Plan;
 use App\Models\Payment;
+use App\Models\PaymentToken;
 use App\Models\Profile;
 use App\Models\Address;
 use App\Actions\PayPay\PayPay;
@@ -30,12 +31,6 @@ class ProjectControllerForPayPayTest extends TestCase
 
         $this->supporter = User::factory()->hasProfile()->create();
 
-        $this->supporter->each(function ($user) {
-            $this->profile = $user->profile()->save(Profile::factory()->make());
-            $this->profile = $user->address()->save(Address::factory()->make());
-            $this->payment = $user->payments()->save(Payment::factory()->make());
-        });
-
         $this->project = Project::factory()->state([
             'user_id' => $this->creator->id,
             'title' => 'test title',
@@ -46,6 +41,13 @@ class ProjectControllerForPayPayTest extends TestCase
             'start_date' => now(),
             'end_date' => now()
         ])->create();
+
+        $this->supporter->each(function ($user) {
+            $this->profile = $user->profile()->save(Profile::factory()->make());
+            $this->profile = $user->address()->save(Address::factory()->make());
+            $this->payment = $user->payments()->save(Payment::factory()->make());
+            $this->payment_token = $this->payment->paymentToken()->save(PaymentToken::factory()->make());
+        });
 
         $this->plan = Plan::factory()->state([
             'project_id' => $this->project->id,
@@ -89,7 +91,7 @@ class ProjectControllerForPayPayTest extends TestCase
                 "status" => "COMPLETED",
                 "acceptedAt" => 1625220437,
                 "refunds" => [],
-                "merchantPaymentId" => $this->payment->merchant_payment_id,
+                "merchantPaymentId" => $this->payment->paymentToken->token,
                 "amount" => [],
                 "requestedAt" => 1625220437,
                 "storeId" => "",

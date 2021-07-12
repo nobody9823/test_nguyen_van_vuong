@@ -4,7 +4,7 @@
     role = 認証ガードを指定
     model = 対象モデルを指定
     --}}
-@if(Request::get('word') || Request::get('sort_type'))
+@if(Request::query())
 <div class="card-header">
     <span style="cursor: pointer;" data-toggle="collapse" data-target="#collapseSearchFilter" aria-expanded="false"
         aria-controls="collapseFilter">

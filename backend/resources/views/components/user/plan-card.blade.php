@@ -4,7 +4,7 @@
     </div>
     <div class="pds_sec02_01">
         <div class="pds_sec02_01_en">{{ $plan->price }}円</div>
-        <div class="pds_sec02_01_nokori_nin">残り：13人まで</div>
+        <div class="pds_sec02_01_nokori_nin">残り：{{ $plan->limit_of_supporters }}人まで</div>
     </div>
 
     @if ($plan->limit_of_supporters > 0)
@@ -24,7 +24,7 @@
     </div>
 
     <div class="pds_sec02_01">
-        <div class="pds_sec02_01_shien_nin">支援者：13人</div>
+        <div class="pds_sec02_01_shien_nin">支援者：{{ $plan->included_payments_count }}人</div>
         <div class="pds_sec02_01_day">お届け日：{{ $plan->delivery_date }}</div>
     </div>
 </div>

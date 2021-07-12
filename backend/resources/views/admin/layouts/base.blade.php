@@ -76,10 +76,10 @@
             </a>
             <div class="collapse show" id="collapse_project">
                 <a class='nav-link-child' href="{{ route('admin.plan.index') }}">
-                    プラン管理
+                    リターン管理
                 </a>
-                <a class='nav-link-child' href="{{ route('admin.user_payment_included.index') }}">
-                    応募者管理
+                <a class='nav-link-child' href="{{ route('admin.payment.index') }}">
+                    支援者(ファン)管理
                 </a>
                 <a class='nav-link-child' href="{{ route('admin.report.index') }}">
                     活動報告管理
@@ -90,11 +90,11 @@
             </div>
         </div>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.message.index') }}">
-            メッセージ管理
-        </a>
-    </li>
+    メッセージ管理
+    </a>
+    </li> --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.tag.index') }}">
             タグ管理

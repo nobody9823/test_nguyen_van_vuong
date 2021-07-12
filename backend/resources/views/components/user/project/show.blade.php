@@ -34,7 +34,7 @@
                 </div><!--/pds_sec01_tag-->
 
                 <div class="pds_sec01_L">
-                    <div id="pds_sec01_slider">
+                    <div class="pds_sec01_slider {{ $project->projectFiles->count() === 1 ? 'slider-img-wrapper' : '' }}">
                     <ul id="slider">
                         @foreach($project->projectFiles as $project_file)
                             @if($project_file->file_content_type === 'image_url')
@@ -44,27 +44,29 @@
                             @elseif($project_file->file_content_type === 'video_url')
                             <li class="slide-item">
                                 <div class="iframe-wrap">
-                                    <iframe width="854" height="480" src="{{ $project_file->file_url }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
                                 </div>
                             </li>
                             @endif
                         @endforeach
                     </ul>
-                    <ul id="thumbnail_slider">
-                        @foreach($project->projectFiles as $project_file)
-                            @if($project_file->file_content_type === 'image_url')
-                            <li class="thumbnail-item">
-                                <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
-                            </li>
-                            @elseif($project_file->file_content_type === 'video_url')
-                            <li class="thumbnail-item">
-                                <div class="iframe-wrap">
-                                    <iframe width="854" height="480" src="{{ $project_file->file_url }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                </div>
-                            </li>
-                            @endif
-                        @endforeach
-                    </ul>
+                    @if($project->projectFiles->count() > 1)
+                        <ul id="thumbnail_slider">
+                            @foreach($project->projectFiles as $project_file)
+                                @if($project_file->file_content_type === 'image_url')
+                                <li class="thumbnail-item">
+                                    <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                                </li>
+                                @elseif($project_file->file_content_type === 'video_url')
+                                <li class="thumbnail-item">
+                                    <div class="iframe-wrap">
+                                        {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
+                                    </div>
+                                </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    @endif
                     </div>
                 </div><!--/pds_sec01_L-->
 
@@ -73,13 +75,13 @@
                 <div class="pds_sec01_R">
 
                 <div class="pds_sec01_R_en01">現在の支援総額</div>
-                <div class="pds_sec01_R_en02 E-font">¥ {{ $project->getAchievementAmount() }}</div>
+                <div class="pds_sec01_R_en02 E-font">¥ {{ $project->payments_sum_price }}</div>
 
 
                 <div class="pds_sec01_progress-bar">
-                    <div class="progress-bar_par"><div>0%</div><div>100%（未実装）</div></div>
+                    <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
-                         <span style="width:60%;"></span>
+                        <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
                     </div>
                 </div>
 
@@ -87,8 +89,8 @@
 
                 <div class="pds_sec01_R_nin_base">
                     <div class="pds_sec01_R_nin01">支援者数</div>
-                    <div class="pds_sec01_R_nin02 E-font">{{ $project->getBillingUsersCount() }}<span>人</span></div>
-                    <div class="pds_sec01_R_nin03">24時間以内に9人からの支援がありました(未実装)</div>
+                    <div class="pds_sec01_R_nin02 E-font">{{ $project->payments_count }}<span>人</span></div>
+                    <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div>
                 </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_nokori_base">
@@ -132,7 +134,7 @@
                 <div class="wlr_64_L inner_item">
                     <div class="pds_sec02_tit">{{ $project->title }}</div>
                     <div class="pds_sec02_txt">{{ $project->content }}</div>
-                    <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div>
+                    {{-- <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div> --}}
                 </div><!--/wlr_64_L-->
 
                 <div class="wlr_64_R">
@@ -194,22 +196,22 @@
     </div>
     <div class="detail_info_content">
         <p><i class="far fa-lightbulb pri_color_f i_icon"></i>達成額</p>
-        <div><span>{{ $project->getAchievementAmount() }}</span>円</div>
+        <div><span>{{ $project->payments_sum_price }}</span>円</div>
         <p>
             <i class="fas fa-yen-sign pri_color_f i_icon"></i>目標金額 {{ number_format($project->target_amount) }}
             円</p>
-        @if($project->getAchievementRate() < 100) <div class="complete">
-            <div class="bar" style="width: {{ $project->getAchievementRate() }}%;"></div>
-            <div class="complete-text">{{ $project->getAchievementRate()}}%達成</div>
+        @if($project->achievement_rate < 100) <div class="complete">
+            <div class="bar" style="width: {{ $project->achievement_rate }}%;"></div>
+            <div class="complete-text">{{ $project->achievement_rate}}%達成</div>
     </div>
     @else
     {{--ここ達成率によってHTML変えるので注意--}}
     {{--<div class="complete_bar">
-        <img src="/image/complete-icon.png">{{ $project->getAchievementRate() }}%達成
+        <img src="/image/complete-icon.png">{{ $project->achievement_rate }}%達成
     </div>
     @endif
     <p><i class="fas fa-hands-helping pri_color_f i_icon"></i>現在の支援者数</p>
-    <div><span>{{ $project->getBillingUsersCount() }}人</span></div>
+    <div><span>{{ $project->payments_count }}人</span></div>
     <p><i class="far fa-clock pri_color_f i_icon"></i>開催期間</p>
     <div>
         {{ $project->getStartDate() }}～<br>{{ $project->getEndDate() }}
@@ -269,7 +271,7 @@
                         </section>
                     </div>
                     <div class="plan-div">
-                        <h2>応援プラン</h2>
+                        <h2>応援リターン</h2>
                         @foreach($project->plans as $plan)
                         <x-user.plan-card :plan="$plan" :project="$project" />
                         @endforeach
@@ -313,7 +315,7 @@
         <div class="detail_tab_content_description">
             @elseif($project->isIncluded() === false)
             <div class="text-center" style="color:#ff1493">
-                <h2>※応援プランを支援された方のみ閲覧可能です。</h2>
+                <h2>※応援リターンを支援された方のみ閲覧可能です。</h2>
             </div>
             <div class="detail_tab_content_description" style="-ms-filter: blur(16px); filter: blur(16px);">
                 @endif

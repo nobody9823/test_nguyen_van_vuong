@@ -20,7 +20,7 @@ class PaymentNotification extends Notification
      */
     public function __construct(Project $project, Payment $payment)
     {
-        $this->project = $project;
+        $this->project = $project->getLoadPaymentsCountAndSumPrice();
 
         $this->payment = $payment;
     }
@@ -45,19 +45,14 @@ class PaymentNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->from(config('mail.from.address'))
                 ->subject('【FanReturn】リターンの購入が完了しました。')
                 ->view('user.mail.template.payment_finished',
                 [
-                    'billing_users_count' => $this->project->getBillingUsersCount(),
-                    'achievement_amount' => $this->project->getAchievementAmount(),
+                    'billing_users_count' => $this->project->payments_count,
+                    'payments_sum_price' => $this->project->payments_sum_price,
                     'project_title' => $this->project->title,
-                    'payment_id' => $this->payment->merchant_payment_id
+                    'payment_id' => $this->payment->paymentToken->token
                 ]);
-                // ->with();
-                    // ->line('The introduction to the notification.')
-                    // ->action('Notification Action', url('/'))
-                    // ->line('Thank you for using our application!');
     }
 
     /**

@@ -155,7 +155,7 @@ trait SortBySelected
                 return $query->orderBy('release_status', 'desc');
                 break;
 
-            //プラン管理
+            //リターン管理
             case 'price_asc':
                 return $query->orderBy('price', 'asc');
                 break;

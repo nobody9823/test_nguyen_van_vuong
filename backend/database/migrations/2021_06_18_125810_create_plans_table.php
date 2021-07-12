@@ -19,7 +19,7 @@ class CreatePlansTable extends Migration
             $table->foreignId('project_id')->constrained('projects');
             $table->string('title');
             $table->string('content');
-            $table->integer('limit_of_supporters')->nullable();
+            $table->integer('limit_of_supporters');
             $table->date('delivery_date')->default(Carbon::maxValue());
             $table->integer('price')->default(0);
             $table->string('image_url');

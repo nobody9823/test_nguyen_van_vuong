@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class PlanPaymentIncluded extends Pivot
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     /**
      * @var string
@@ -17,11 +17,11 @@ class PlanPaymentIncluded extends Pivot
 
     public function plan()
     {
-        return $this->belongsTo('App\Models\Plan');
+        return $this->belongsTo('App\Models\Plan', 'plan_id');
     }
 
     public function payment()
     {
-        return $this->belongsTo('App\Models\Payment');
+        return $this->belongsTo('App\Models\Payment', 'payment_id');
     }
 }

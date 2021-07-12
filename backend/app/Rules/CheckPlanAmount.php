@@ -27,7 +27,7 @@ class CheckPlanAmount implements Rule
     public function passes($attribute, $value)
     {
         $plan = Plan::find(array_keys($value)[0]);
-        return $plan->limit_of_supporters >= array_values($value)[0];
+        return $plan->limit_of_supporters >= array_values($value)[0]['quantity'];
     }
 
     /**
@@ -37,6 +37,6 @@ class CheckPlanAmount implements Rule
      */
     public function message()
     {
-        return 'プランの購入数が不正です。確認をお願いします。';
+        return 'リターンの購入数が不正です。確認をお願いします。';
     }
 }

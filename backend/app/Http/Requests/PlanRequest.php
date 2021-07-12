@@ -32,21 +32,21 @@ class PlanRequest extends FormRequest
             'content' => ['required', 'string', 'max:2000'],
             'price' =>  ['integer', 'min:500', 'max:10000000', Rule::requiredIf($request->isMethod('post'))],
             'address_is_required' => ['required'],
-            'limit_of_supporters' => ['nullable','integer'],
+            'limit_of_supporters' => ['required','integer', 'min:1'],
             'delivery_date' => ['required', 'date_format:Y-m-d', 'after:now'],
             'image_url' => ['image',Rule::requiredIf($request->isMethod('post'))],
             // NOTE:現状オプションは使用しない為、コメントアウト
             // 'options' => ['array'],
             // 'options.*.name' => ['nullable', 'string'],
             // 'options.*.quantity' => ['nullable', 'integer'],
-        ]; 
+        ];
     }
 
     // NOTE:現状オプションは使用しない為、コメントアウト
     // public function optionsToArray():array
     // {
     //     $options = array();
-        
+
     //     foreach ($this->options as $option) {
     //         if(!empty($option['name']))
     //         $options[] = new Option([
@@ -61,15 +61,16 @@ class PlanRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => "プラン名を入力してください。",
-            'title.string' => "プラン名は文字で入力してください。",
-            'title.max' => "プラン名は255文字以内にしてください。",
-            'content.required' => "プラン内容を入力してください。",
-            'content.string' => "プラン内容は文字で入力してください。",
-            'content.max' => "プラン内容は20000文字以内にしてください。",
+            'title.required' => "リターン名を入力してください。",
+            'title.string' => "リターン名は文字で入力してください。",
+            'title.max' => "リターン名は255文字以内にしてください。",
+            'content.required' => "リターン内容を入力してください。",
+            'content.string' => "リターン内容は文字で入力してください。",
+            'content.max' => "リターン内容は20000文字以内にしてください。",
             'address_is_required.required' => "支援者の方の住所登録が必要かどうか記載してください。",
             'limit_of_supporters.required' => "個数を入力してください。",
             'limit_of_supporters.integer' => "個数を数字で入力してください。",
+            'limit_of_supporters.min' => "個数は１以上の値で入力してください。",
             'delivery_date.required' => "リターン提供日を入力してください。",
             'delivery_date.date_format' => "リターン提供日のフォーマットを確認してください。",
             'delivery_date.after' => "リターン提供日を現在時刻より後にしてください。",

@@ -25,6 +25,7 @@ class Project extends Model
         'user_id',
         'title',
         'content',
+        'ps_plan_content',
         'target_amount',
         'curator',
         'start_date',
@@ -32,11 +33,6 @@ class Project extends Model
     ];
 
     protected $dates = ['start_date', 'end_date'];
-
-    private int $achievement_amount = 0;
-    private int $achievement_rate = 0;
-    private int $included_users_count = 0;
-    private bool $achievement_is_calculated = false;
 
     public static function boot()
     {
@@ -47,7 +43,7 @@ class Project extends Model
             $project->projectTagTagging()->delete();
             $project->reports()->delete();
 
-            // プランのリレーション先も論理削除
+            // リターンのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
             $plan_payment_included_payment_ids = PlanPaymentIncluded::whereIn('plan_id', $plan_ids)->pluck('payment_id')->toArray();
             $payment_ids = Payment::whereIn('id', $plan_payment_included_payment_ids)->pluck('id')->toArray();
@@ -79,6 +75,11 @@ class Project extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany('App\Models\Payment');
     }
 
     public function likedUsers()
@@ -142,33 +143,30 @@ class Project extends Model
         return $query->where('talent_id', Auth::id())->getProjects();
     }
 
-    public function scopeTakeWithRelations($query, $int)
+    // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
+    public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        return $query->take($int)->with(['projectFiles', 'plans', 'plans.includedPayments', 'plans.includedPayments.user', 'reports']);
+        return $query->withCount('payments')->withSum('payments', 'price');
     }
 
-    public function scopeOrderByFundingAmount($query)
+    public function getLoadPaymentsCountAndSumPrice()
     {
-        return $query
-        // projectsテーブルにplan_payment_includedテーブルを結合する
-        ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('plan_payment_included', 'plans.id', '=', 'plan_payment_included.plan_id')
-        ->join('payments', 'plan_payment_included.payment_id', '=', 'payments.id')
-        // 結合テーブル内のproject_idが同じものは、プランの価格を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('SUM(payments.price) as funding_amount'))
-        ->groupBy('plans.project_id')->orderBy('funding_amount','DESC');
+        return $this
+            ->loadSum('payments', 'price')
+            ->loadCount([
+                'payments',
+                'payments as payments_count_within_a_day' => function ($query) {
+                    $query->where('created_at', '>=', Carbon::now()->subHours(24));
+                },
+            ])
+            ->load(['plans' => function ($query) {
+                $query->withCount('includedPayments');
+            }]);
     }
 
-    public function scopeOrderByNumberOfSupporters($query)
+    public function scopeMainProjects($query)
     {
-        return $query
-        // projectsテーブルにplans,user_plan_billingテーブルを結合する
-        ->join('plans', 'projects.id', '=', 'plans.project_id')
-        ->join('user_plan_billing', 'plans.id', '=', 'user_plan_billing.plan_id')
-        // 結合テーブル内のplans.project_idが同じものは、その人数を全て足す。
-        ->select('plans.project_id','projects.*',DB::raw('count(user_plan_billing.user_id) as number_of_user'))
-        ->groupBy('plans.project_id')
-        ->orderBy('number_of_user', 'DESC');
+        return $query->getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice();
     }
 
     public function scopeOrdeyByLikedUsers($query)
@@ -282,6 +280,19 @@ class Project extends Model
         $today = Carbon::now();
         return $end_date->diffInDays($today);
     }
+
+    // 目標金額に対する支援総額の割合
+    // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
+    public function getAchievementRateAttribute()
+    {
+        // 金額の達成率の算出
+        if ($this->target_amount > 0) {
+            return round($this->payments_sum_price * 100 / $this->target_amount);
+        } else { // ゼロ除算対策
+            return 100;
+        }
+    }
+
     /**
      * Get Japanese formatted start time of project with day of the week
      *
@@ -302,80 +313,49 @@ class Project extends Model
         return $this->end_date->isoFormat('YYYY年MM月DD日(ddd)');
     }
 
-    /**
-     * Get number of Billing users
-     *
-     * @return int
-     */
-    public function getBillingUsersCount(): int
-    {
-        $this->calculateAchieve();
-        return $this->included_users_count;
+    //-----------------掲載状態変更functions------------------------
+    public function changeStatusToRelease(){
+        DB::transaction(function () {
+            $this->release_status = '掲載中';
+            $this->save();
+        });
+        \Session::flash('flash_message', '掲載状態の変更が完了しました。');
     }
 
-    /**
-     * Get achievement amount of project
-     *
-     * @return int
-     */
-    public function getAchievementAmount(): int
-    {
-        $this->calculateAchieve();
-        return $this->achievement_amount;
+    public function changeStatusToPending(){
+        DB::transaction(function () {
+            $this->release_status = '承認待ち';
+            $this->save();
+        });
+        \Session::flash('flash_message', '掲載状態の変更が完了しました。');
     }
 
-    /**
-     * Get achievement rate of project
-     *
-     * @return int
-     */
-    public function getAchievementRate(): int
-    {
-        $this->calculateAchieve();
-        return $this->achievement_rate;
+    public function changeStatusToSendBack(){
+        DB::transaction(function () {
+            $this->release_status = '差し戻し';
+            $this->save();
+        });
+        \Session::flash('flash_message', '掲載状態の変更が完了しました。');
     }
 
-    /**
-     * Calculate achievement amount ,achievement rate and number of Billing users
-     *
-     * @return void
-     */
-    public function calculateAchieve(): void
-    {
-        //一回計算されてるならもうしないで返す
-        if ($this->achievement_is_calculated) {
-            return;
-        }
-
-        $plans =  $this->plans()->withCount('includedPayments')->get();
-        // 応援プランを支援したユーザーの総数
-        $included_users_count = 0;
-        // 現在の達成額
-        $achievement_amount = 0;
-
-        //それぞれのプランの応援人数から支援総額と応援人数の合計を算出
-        foreach($plans as $plan) {
-            $achievement_amount += $plan->price * $plan->included_payments_count;
-            $included_users_count += $plan->included_payments_count;
-        }
-        // 金額の達成率の算出
-        if ($this->target_amount > 0) {
-            $achievement_rate = round($achievement_amount * 100 / $this->target_amount);
-        } else { // ゼロ除算対策
-            $achievement_rate = 100;
-        }
-
-        $this->included_users_count = $included_users_count;
-        $this->achievement_amount = $achievement_amount;
-        $this->achievement_rate = $achievement_rate;
+    public function changeStatusToDefault(){
+        DB::transaction(function () {
+            $this->release_status = '---';
+            $this->save();
+        });
+        \Session::flash('flash_message', '掲載状態の変更が完了しました。');
     }
 
-    public function releaseProject(){
-        $this->release_status = '掲載中';
-        return $this->save() ? true : false;
+    public function changeStatusToUnderSuspension(){
+        DB::transaction(function () {
+            $this->release_status = '掲載停止中';
+            $this->save();
+        });
+        \Session::flash('flash_message', '掲載状態の変更が完了しました。');
     }
+    //-----------------掲載状態変更functions------------------------
 
-    // プロジェクトの持つプランをログインしているユーザーが支援しているかを確認
+    // プロジェクトの持つリターンをログインしているユーザーが支援しているかを確認
     public function isIncluded()
     {
         $plans = $this->plans()->whereIn(
@@ -412,10 +392,10 @@ class Project extends Model
         };
     }
 
-    public function deleteProjectImages(): void
+    public function deleteProjectFiles(): void
     {
         foreach($this->projectFiles as $file){
-            if(strpos($file->file_url, 'sampleImage') === false && $file->file_content_type === 'video_url'){
+            if(strpos($file->file_url, 'sampleImage') === false && $file->file_content_type === 'image_url'){
                 Storage::delete($file->file_url);
             };
             $file->delete();

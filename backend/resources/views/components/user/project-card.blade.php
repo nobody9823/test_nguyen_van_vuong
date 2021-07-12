@@ -30,8 +30,8 @@
             <li>終了：{{ date($project->end_date) }}</li>
         </ul>
         <div class="process">
-            <div class="bar" style="width: {{ $project->getAchievementRate() }}%;">
-                <span>{{ $project->getAchievementRate()}}%</span></div>
+            <div class="bar" style="width: {{ $project->getAchievementRate }}%;">
+                <span>{{ $project->getAchievementRate}}%</span></div>
         </div>
     </div>
     <div class="project-footer">
@@ -45,8 +45,8 @@
             <div class="project-result-02">募集終了</div>
         @endif
 
-        <div class="project-num"><span>支援者数</span>{{ $project->getBillingUsersCount() }}人</div>
-        <div class="project-num"><span>達成額</span>{{ number_format($project->getAchievementAmount()) }}円</div>
+        <div class="project-num"><span>支援者数</span>●人</div>
+        <div class="project-num"><span>達成額</span>●円</div>
         <div class="project-num"><span>目標金額</span>{{ number_format($project->target_amount) }}円</div>
     </div>
 </div>

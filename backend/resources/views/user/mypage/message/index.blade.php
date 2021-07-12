@@ -49,25 +49,25 @@
 
                 {{-- 検索結果踏まえて送信する用フォーム --}}
 
-                {{-- チャット中プラン --}}
+                {{-- チャット中リターン --}}
                 @if ($chating_messages->isNotEmpty())
-                <p style='background-color:#ddd;margin:10px 0px 0 0;'>やりとり中支援プラン</p>
+                <p style='background-color:#ddd;margin:10px 0px 0 0;'>やりとり中支援リターン</p>
                 @endif
                 @foreach ($chating_messages as $message)
                 <x-common.message.a_message_of_index :message="$message" guard='user'
                     :selectedMessage="isset($selected_message)?$selected_message:null" />
                 @endforeach
-                {{-- チャット中プラン --}}
+                {{-- チャット中リターン --}}
 
-                {{-- 未チャットプラン --}}
+                {{-- 未チャットリターン --}}
                 @if ($not_chating_messages->isNotEmpty())
-                <p style='background-color:#ddd;margin:10px 0px 0 0;'>やりとりしていない支援プラン</p>
+                <p style='background-color:#ddd;margin:10px 0px 0 0;'>やりとりしていない支援リターン</p>
                 @endif
                 @foreach ($not_chating_messages as $message)
                 <x-common.message.a_message_of_index :message="$message" guard='user'
                     :selectedMessage="isset($selected_message)?$selected_message:null" />
                 @endforeach
-                {{-- 未チャットプラン --}}
+                {{-- 未チャットリターン --}}
 
             </div>
 

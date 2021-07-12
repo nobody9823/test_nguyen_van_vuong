@@ -149,12 +149,12 @@
                                                     {{ number_format($project->target_amount) }}円
                                                 </h5>
                                                 <h3>支援者総数 : </h3>
-                                                <h5 class="mb-3">{{ $project->getBillingUsersCount() }}人</h5>
+                                                <h5 class="mb-3">{{ $project->payments_count }}人</h5>
                                                 <h3>支援金総額 : </h3>
-                                                <h5 class="mb-3">{{ number_format($project->getAchievementAmount()) }}
+                                                <h5 class="mb-3">{{ number_format($project->payments_sum_price) }}
                                                     円</h5>
                                                 <h3>目標額達成率 : </h3>
-                                                <h5 class="mb-3">{{ $project->getAchievementRate() }}％</h5>
+                                                <h5 class="mb-3">{{ $project->getAchievementRate }}％</h5>
                                                 <h3>プロジェクト終了まで : </h3>
                                                 <h5 class="mb-3">{{ $project->getEndDate() }}</h5>
                                             </div>
@@ -166,12 +166,12 @@
                     </div>
 
 
-                    {{--プラン一覧--}}
+                    {{--リターン一覧--}}
                     <div class="card border-info">
                         <div class="card-header" id="planListHead">
                             <a class="btn btn-link" data-toggle="collapse" data-target="#planListBody"
                                 aria-expanded="true" aria-controls="planListBody">
-                                <h5>プラン一覧▼</h5>
+                                <h5>リターン一覧▼</h5>
                             </a>
                         </div>
                         <div id="planListBody" class="collapse" aria-labelledby="planListHead"
@@ -201,7 +201,7 @@
                                                 </li>
                                                 <li class="list-group-item">
                                                     <h6 class="font-weight-bold mb-2" style="white-space: pre-line;">
-                                                        プラン内容</h6>
+                                                        リターン内容</h6>
                                                     {{ $plan->content }}
                                                 </li>
                                                 <li class="list-group-item">
@@ -266,12 +266,12 @@
                                         <div class="d-flex">
                                             <h3 class="font-weight-bold mb-4 flex-grow-1">{{ $report->title }}</h3>
                                             <div class="text-right">
-                                                <a href="{{ route($role.'.activity_report.edit', ['project' => $project, 'activity_report' => $report]) }}"
+                                                <a href="{{ route($role.'.report.edit', ['project' => $project, 'report' => $report]) }}"
                                                     class="btn btn-primary">編集</a>
                                                 <div style="display: inline-flex">
                                                     {{--FIXME 削除ボタン上手く動かないから誰か直して、あとプロジェクト詳細に戻したいからメソッド分けるかメソッド内で分岐がいる--}}
                                                     <form
-                                                        action="{{ route($role.'.activity_report.destroy', ['project' => $project, 'activity_report' => $report]) }}"
+                                                        action="{{ route($role.'.report.destroy', ['project' => $project, 'report' => $report]) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -320,7 +320,7 @@
                                         <tr>
                                             <th>名前</th>
                                             <th>メールアドレス</th>
-                                            <th>支援プラン</th>
+                                            <th>支援リターン</th>
                                             <th>支援額</th>
                                             <th>支援日</th>
                                             <th>お返し予定日</th>
@@ -342,7 +342,7 @@
                                             <td>{{ number_format($plan->price) }}円</td>
                                             <td>{{ date_format($user->created_at, "Y-m-d") }}</td>
                                             <td>{{ $plan->delivery_date }}</td>
-                                            <td>{{ PrefectureHelper::getPrefectures()[$user->address->prefecture].$user->address->city.$user->address->block.$user->address->building }}
+                                            <td>{{ $user->address->prefecture.$user->address->city.$user->address->block.$user->address->building }}
                                             </td>
                                         </tr>
                                         @endforeach
