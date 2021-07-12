@@ -351,8 +351,14 @@
 window.onload = function(){
     if (window.performance.navigation.type == 2){
         Plans.searchCheckedPlans();
-    }
+        let check_box = document.getElementsByClassName('plan_ids');
 
+        for (var i = 0, len = check_box.length; i < len; i++){
+            if (check_box[i].checked){
+                Plans.planIsChecked(check_box[i]);
+            }
+        }
+    }
     let check_box = document.getElementsByClassName('plan_ids');
 
     for (var i = 0, len = check_box.length; i < len; i++){
