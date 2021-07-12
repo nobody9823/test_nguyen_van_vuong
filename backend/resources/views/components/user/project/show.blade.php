@@ -28,8 +28,8 @@
 
                 <div class="pds_sec01_tit">{{ $project->title }}</div><!--/pds_sec01_tit-->
                 <div class="pds_sec01_tag">
-                    @foreach($project->tags as $tag)
-                    <span><a href="">#{{ $tag->name }}</a></span>
+                    @foreach($tags as $tag)
+                    <span><a href="">#{{ $tag }}</a></span>
                     @endforeach
                 </div><!--/pds_sec01_tag-->
 
