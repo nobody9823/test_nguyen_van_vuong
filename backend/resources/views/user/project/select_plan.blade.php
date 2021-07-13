@@ -264,7 +264,7 @@
 
                     <div class="form_item_row">
                         <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('address', optional($user->address)->postal_code) }}">
+                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('postal_code', optional($user->address)->postal_code) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
@@ -351,6 +351,20 @@
 window.onload = function(){
     if (window.performance.navigation.type == 2){
         Plans.searchCheckedPlans();
+        let check_box = document.getElementsByClassName('plan_ids');
+
+        for (var i = 0, len = check_box.length; i < len; i++){
+            if (check_box[i].checked){
+                Plans.planIsChecked(check_box[i]);
+            }
+        }
+    }
+    let check_box = document.getElementsByClassName('plan_ids');
+
+    for (var i = 0, len = check_box.length; i < len; i++){
+        if (check_box[i].checked){
+            Plans.planIsChecked(check_box[i]);
+        }
     }
 }
 </script>

@@ -11,7 +11,12 @@
             <div class="wlr_64_R">
                 <div class="as_01">
                     <div class="as_check">
-                        <input type="checkbox" name="plan_ids[]" class="plan_ids ac_list_checks checkbox-fan" onChange="Plans.planIsChecked(this)" id="{{ $plan->id }}" value="{{ $plan->price }}" {{ ($plan->limit_of_supporters > 0) === false ? 'disabled' : '' }}>
+                        <input type="checkbox" name="plan_ids[]" class="plan_ids ac_list_checks checkbox-fan" onChange="Plans.planIsChecked(this)" id="{{ $plan->id }}" value="{{ $plan->price }}"
+                            @if ( ($plan->limit_of_supporters > 0) === true && !empty(old('plans')) && in_array($plan->id, array_keys(old('plans'))) )
+                                checked
+                            @elseif (($plan->limit_of_supporters > 0) === false)
+                                'disabled'
+                            @endif>
                         <label for="{{ $plan->id }}" class="checkbox-fan_02">{{ $plan->price }}円</label>
                     </div>
                 </div>
@@ -20,7 +25,7 @@
                         <div class="cp_ipselect_02 cp_chb ">
                             <select name="plans[{{$plan->id}}][quantity]" id="plan_amount_{{ $plan->id }}" onChange="Plans.planAmountIsChanged(this)" disabled>
                                 @for($i = 1; $i <= $plan->limit_of_supporters; $i ++)
-                                    <option value="{{ $i }}">数量{{ $i }}</option>
+                                <option value="{{ $i }}" {{ !empty(old('plans')) && isset(old('plans')[$plan->id]) && old('plans')[$plan->id]['quantity'] == $i ? 'selected' : ''}}>数量{{ $i }}</option>
                                 @endfor
                             </select>
                         </div>
