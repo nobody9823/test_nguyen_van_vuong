@@ -164,7 +164,8 @@
                                     有効期限が残り100日以上のクレジットカード（Visa/Mastercard JCB/Diners Club/American Express）でご利用いただけます。<br>
                                     デビットカード・プリペイドカードの利用は推奨しておりません。<br>
                                     利用される場合は注意事項を必ずご確認ください。<br>
-                                    このクレジットカード情報は当社では保持いたしません。
+                                    このクレジットカード情報は当社では保持いたしません。<br>
+                                    <span style="color: red;">各決済ごとの領収書発行機能は提供しておりません。利用元のクレジットカード明細のご確認をお願いいたします。</span>
                                     </div>
 
 
@@ -189,7 +190,10 @@
                                 <div class="tab_content_description">
                                 <p class="c-txtsp">
                                     PayPayでのお支払い<br/>
-                                    以下の必要情報入力後確認画面から「決済する」を押していただくとPayPayの支払い画面へと移動します。
+                                    以下の必要情報入力後確認画面から「決済する」を押していただくとPayPayの支払い画面へと移動します。<br>
+                                    <span style="color: red;">バーコードまたはQRコードで支払いした領収書は発行しておりません。<br>
+                                    実際にPayPayを利用してお支払いをした店舗でご相談ください。<br>
+                                    なお、「請求書払い」をご利用の場合は、請求書発行元にお問い合わせください。</span>
                                 </p>
                                 </div>
                             </div><!--/tab_content-->
@@ -264,7 +268,7 @@
 
                     <div class="form_item_row">
                         <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('address', optional($user->address)->postal_code) }}">
+                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('postal_code', optional($user->address)->postal_code) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
@@ -351,6 +355,20 @@
 window.onload = function(){
     if (window.performance.navigation.type == 2){
         Plans.searchCheckedPlans();
+        let check_box = document.getElementsByClassName('plan_ids');
+
+        for (var i = 0, len = check_box.length; i < len; i++){
+            if (check_box[i].checked){
+                Plans.planIsChecked(check_box[i]);
+            }
+        }
+    }
+    let check_box = document.getElementsByClassName('plan_ids');
+
+    for (var i = 0, len = check_box.length; i < len; i++){
+        if (check_box[i].checked){
+            Plans.planIsChecked(check_box[i]);
+        }
     }
 }
 </script>
