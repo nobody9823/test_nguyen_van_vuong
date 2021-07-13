@@ -32,10 +32,6 @@ class ProjectRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-        if($request->tags){
-            // dd($request);
-        }
-
         // プロジェクト開始から終了までの期間は上限60日までしか設定出来ない。
         $start_date = new DateTime($request->start_date);
         $end_date_limit = ($start_date->modify("+60 day"))->format('Y-m-d H:i:s');
@@ -50,7 +46,7 @@ class ProjectRequest extends FormRequest
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
             'start_date' => ['required', 'date_format:Y-m-d H:i:s', 'after_or_equal:today'],
             'end_date' => ['required', 'date_format:Y-m-d H:i:s', 'after:start_date', "before:{$end_date_limit}"],
-            'tags' => ['required', 'string', new Tags($request)],
+            'tags' => ['required', new Tags($request)],
             'images' => [Rule::requiredIf($request->isMethod('post')), new ProjectImages($request)],
             'images.*' => ['image'], //images配列の中身を見る
             'video_url' => ['nullable', 'url', 'regex:#(https?://www.youtube.com/.*)(v=([-\w]{11}))#'],
@@ -108,7 +104,6 @@ class ProjectRequest extends FormRequest
     {
         return [
             'tags.required' => "タグを選択してください。",
-            'tags.string' => "不正なアクセスが検知されました。",
             'title.required' => "タイトルを入力してください。",
             'title.string' => "タイトルは文字で入力してください。",
             'title.max' => "タイトルは255文字以内にしてください。",
