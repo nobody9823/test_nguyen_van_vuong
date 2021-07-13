@@ -150,6 +150,7 @@ return [
     'attributes' => [
         'name' => '名前',
         'email' => 'メールアドレス',
+        'current_password' => '現在のパスワード',
         'password' => 'パスワード',
         'password_confirmation' => 'パスワード(確認)',
         'price' => '価格',
