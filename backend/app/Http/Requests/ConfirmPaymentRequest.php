@@ -75,6 +75,9 @@ class ConfirmPaymentRequest extends FormRequest
                 'birthday' => $birth_day->format('Y-m-d'),
             ]);
         }
+        if (is_null($this->input('building'))) {
+            $this->merge(['building' => ""]);
+        }
     }
 
     public function failedValidation(Validator $validator)
