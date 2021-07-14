@@ -104,32 +104,34 @@ if(isiOS) {
 		</a>
 
         <div class="other_site_header"></div>
-        <form method="get" action="{{ route('user.search') }}" name="word_search">
 		<ul id="js-global-nav" class="p-global-nav main-menu menu_base taso_menu">
 
-			<li class="menu-item nav_btn taso_li menuset_01">
-				<a href="★" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">はじめる</p>
+            <li class="menu-item nav_btn taso_li menuset_01">
+                <a href="★" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">はじめる</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-				<a href="★" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">さがす</p>
+                <a href="★" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">さがす</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-				<a href="★" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">ファンリターンとは</p>
+                <a href="★" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">ファンリターンとは</p>
 				</a>
 			</li>
-			<li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
-				<i class="fas fa-search"></i><input type="text" name="search_word" placeholder="キーワードを検索" value="{{ Request::get('search_word') }}">
-			</li>
-            <li class="menu-item nav_btn taso_li signup_btn" style="order: 5;">
-                <a href="javascript:word_search.submit()" class="top_menu-1 nav_btn_link" style="justify-content: center;">
-                    <p>検索</p>
-                </a>
-            </li>
+            <form method="get" action="{{ route('user.search') }}" name="word_search">
+                <li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
+                    <i class="fas fa-search"></i><input type="text" name="search_word" placeholder="キーワードを検索" value="{{ Request::get('search_word') }}">
+                </li>
+                <li class="menu-item nav_btn taso_li signup_btn" style="order: 5;">
+                    <a href="javascript:word_search.submit()" class="top_menu-1 nav_btn_link" style="justify-content: center;">
+                        <p>検索</p>
+                    </a>
+                </li>
+            </form>
+
 
 			{{-- <li id="menu-item-2" class="menu-item menu-item-2 nav_btn menu-item-has-children taso_li menuset_02">
 					<a href="#" id="top_menu-2" data-megamenu="js-megamenu2" class=" nav_btn_link taso_li_a">
@@ -263,7 +265,6 @@ if(isiOS) {
 			<!--▲ ★★★ログイン時-->
 
 		</ul>
-        </form>
 	</nav>
 
 </div><!--/drower-menu-list-->
