@@ -77,7 +77,8 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            $project->projectTagTagging()->saveMany($request->tagsToArray($project));
+            $project->tags()->attach($request->tags);
+
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
@@ -143,7 +144,7 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            $project->projectTagTagging()->saveMany($request->tagsToArray($project));
+            $project->tags()->sync($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
