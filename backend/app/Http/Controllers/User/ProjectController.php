@@ -121,10 +121,10 @@ class ProjectController extends Controller
                 return redirect()->route('user.index')->withErrors('読み込みに失敗しました。管理者にお問い合わせください。');
             }
         }
-       
+
         return view('user.project.show', [
             'inviter_code' => $this->inviter_code,
-            'project' => $project->getLoadPaymentsCountAndSumPrice(),
+            'project' => $project->getLoadPaymentsCountAndSumPrice()
         ]);
     }
 

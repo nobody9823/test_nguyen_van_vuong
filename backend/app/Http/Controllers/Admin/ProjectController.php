@@ -8,7 +8,6 @@ use App\Http\Requests\ProjectRequest;
 use App\Http\Requests\SearchRequest;
 use App\Models\Plan;
 use App\Models\Tag;
-use App\Models\ProjectTagTagging;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\ProjectFile;
@@ -78,7 +77,6 @@ class ProjectController extends Controller
         try {
             $project->fill($request->all())->save();
             $project->tags()->attach($request->tags);
-
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
@@ -117,8 +115,7 @@ class ProjectController extends Controller
     {
         $users = User::pluckNameAndId();
         $tags = Tag::pluckNameAndId();
-        $project_tags = ProjectTagTagging::where('project_id',$project->id)->pluck('tag_id')->toArray();
-
+        $project_tags = $project->tags->pluck('id')->toArray();
         $projectImages = $project->projectFiles()->where('file_content_type', 'image_url')->get();
         $projectVideo = $project->projectFiles()->where('file_content_type', 'video_url')->first();
 
@@ -186,12 +183,7 @@ class ProjectController extends Controller
      */
     public function preview(Project $project)
     {
-        $tags_ids = $project->projectTagTagging()->pluck('tag_id')->toArray();
-        $tags = Tag::whereIn('id',$tags_ids)->pluck('name');
-        return view('admin.project.preview', [
-            'project' => $project,
-            'tags' => $tags
-        ]);
+        return view('admin.project.preview', ['project' => $project,]);
     }
 
     /**
