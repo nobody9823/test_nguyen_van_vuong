@@ -69,9 +69,6 @@ Route::middleware(['guest:web', 'throttle:10'])->group(function () {
 });
 // --------------------Top Page-------------------
 Route::get('/question', [TopPageController::class, 'question'])->name('question');
-Route::get('/tradelaw', [TopPageController::class, 'tradelaw'])->name('tradelaw');
-Route::get('/terms', [TopPageController::class, 'terms'])->name('terms');
-Route::get('/privacy_policy', [TopPageController::class, 'privacyPolicy'])->name('privacy_policy');
 
 //---------------------Forgot Password-----------------------------------------------
 Route::get('/forgot_password', [PasswordResetController::class, 'forgotPassword'])->name('forgot_password');
