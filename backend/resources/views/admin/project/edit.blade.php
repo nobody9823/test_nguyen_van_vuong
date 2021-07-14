@@ -14,7 +14,7 @@
             @csrf
             @method('PUT')
 
-            <x-manage.project.form role="admin" :project="$project" :projectTags="$projectTags" :tags="$tags" :users="$users" :projectVideo="$projectVideo" />
+            <x-manage.project.form role="admin" :project="$project" :project_tags="$project_tags" :tags="$tags" :users="$users" :projectVideo="$projectVideo" />
 
         </form>
 

@@ -46,7 +46,7 @@ class ProjectRequest extends FormRequest
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
             'start_date' => ['required', 'date_format:Y-m-d H:i:s', 'after_or_equal:today'],
             'end_date' => ['required', 'date_format:Y-m-d H:i:s', 'after:start_date', "before:{$end_date_limit}"],
-            'tags.*' => ['required', 'string', new Tags($request)],
+            'tags' => ['required', new Tags($request)],
             'images' => [Rule::requiredIf($request->isMethod('post')), new ProjectImages($request)],
             'images.*' => ['image'], //images配列の中身を見る
             'video_url' => ['nullable', 'url', 'regex:#(https?://www.youtube.com/.*)(v=([-\w]{11}))#'],
@@ -70,20 +70,6 @@ class ProjectRequest extends FormRequest
         return $projectFiles;
     }
 
-    public function tagsToArray()
-    {
-        $tags = [];
-        $data = $this->all();
-        if (!empty($data['tags']) && $data['tags'][0] !== null) {
-            foreach ($data['tags'] as $tag) {
-                $tags[] = new ProjectTagTagging([
-                    'tag_id' => $tag
-                ]);
-            }
-        }
-        return $tags;
-    }
-
     public function projectVideo()
     {
         if (isset($this->all()['video_url']) && $this->all()['video_url'] !== null) {
@@ -98,10 +84,7 @@ class ProjectRequest extends FormRequest
     public function messages()
     {
         return [
-            'category_id.required' => "カテゴリーを入力してください。",
-            'category_id.integer' => "不正なアクセスが検知されました。管理会社へのお問い合わせをお願い致します。",
-            'talent_id.required' => "タレントを指定してください",
-            'talent_id.integer' => "不正なアクセスが検知されました。管理会社へのお問い合わせをお願い致します。",
+            'tags.required' => "タグを選択してください。",
             'title.required' => "タイトルを入力してください。",
             'title.string' => "タイトルは文字で入力してください。",
             'title.max' => "タイトルは255文字以内にしてください。",
