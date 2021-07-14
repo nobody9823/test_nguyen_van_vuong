@@ -16,7 +16,7 @@ class MyProjectController extends Controller
     public function index()
     {
         $projects = Auth::user()->projects()->get();
-        return view('user.my_project.index', ['projects' => $projects]);
+        return view('user.my_project.index', ['projects' => $projects->load('projectFiles')]);
     }
 
     /**
