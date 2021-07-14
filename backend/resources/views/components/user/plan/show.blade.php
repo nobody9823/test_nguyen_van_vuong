@@ -25,7 +25,7 @@
                 <div><span>{{ $plan->price }}</span>円</div>
                 <p>目標金額 {{ number_format($project->target_amount) }}円</p>
 
-                <p style="white-space: pre-line;">詳細<br>{{ $plan->content }}</p>
+                <p class="plan-content">詳細<br>{{ $plan->content }}</p>
                 <p>支援状況</p>
                 <div><span>{{ count($plan->includedPayments) }}人</span></div>
                 <p>残数 : {{ $plan->limit_of_supporters ?: "残数設定なし" }}</p>
