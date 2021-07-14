@@ -17,7 +17,7 @@
             このリターンを選択する
             <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'plan' => $plan]) }}" class="cover_link"></a>
         </div>
-    @elseif ($plan->limit_of_supporters < 0)
+    @elseif ($plan->limit_of_supporters <= 0)
         <div class="pds_sec02_01_btn">
             OUT OF STOCK
             <a class="cover_link"></a>
