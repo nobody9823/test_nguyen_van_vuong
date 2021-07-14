@@ -17,8 +17,7 @@ class TagSeeder extends Seeder
     {
         Tag::truncate();
         
-        Tag::factory()
-        ->state(new Sequence
+        Tag::factory()->count(10)->state(new Sequence
         (
             ['name' => 'ライバー'],
             ['name' => 'ブロガー'],
