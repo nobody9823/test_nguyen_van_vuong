@@ -15,5 +15,6 @@ class AdminSeeder extends Seeder
     {
         Admin::truncate();
         Admin::factory()->create();
+        Admin::factory()->valleyin()->create();
     }
 }
