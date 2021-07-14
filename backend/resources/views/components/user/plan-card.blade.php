@@ -7,16 +7,21 @@
         <div class="pds_sec02_01_nokori_nin">残り：{{ $plan->limit_of_supporters }}人まで</div>
     </div>
 
-    @if ($plan->limit_of_supporters > 0)
-    <div class="pds_sec02_01_btn">
-        このリターンを選択する
-        <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'plan' => $plan]) }}" class="cover_link"></a>
-    </div>
-    @else
-    <div class="pds_sec02_01_btn">
-        OUT OF STOCK
-        <a class="cover_link"></a>
-    </div>
+    @if ($project->end_date < now())
+        <div class="pds_sec02_01_btn">
+            FINISHED
+            <a class="cover_link"></a>
+        </div>
+    @elseif ($plan->limit_of_supporters > 0)
+        <div class="pds_sec02_01_btn">
+            このリターンを選択する
+            <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'plan' => $plan]) }}" class="cover_link"></a>
+        </div>
+    @elseif ($plan->limit_of_supporters <= 0)
+        <div class="pds_sec02_01_btn">
+            OUT OF STOCK
+            <a class="cover_link"></a>
+        </div>
     @endif
 
     <div class="pds_sec02_txt">

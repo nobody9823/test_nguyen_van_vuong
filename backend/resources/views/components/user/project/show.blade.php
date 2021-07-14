@@ -95,11 +95,18 @@
                 </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_btn_base">
-                    <div class="pds_sec01_R_btn01">
-                        <div class="more_btn_01_01">支援する</div>
-                        <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                        <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
-                    </div>
+                    @if ($project->end_date > now())
+                        <div class="pds_sec01_R_btn01">
+                            <div class="more_btn_01_01">支援する</div>
+                            <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                            <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
+                        </div>
+                    @else
+                        <div class="pds_sec01_R_btn01">
+                            <div class="more_btn_01_01">FINISHED</div>
+                            <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                        </div>
+                    @endif
                     @if($project->isIncluded() === true)
                     <div class="pds_sec01_R_btn01">
                         <div class="more_btn_01_01">プロジェクトサポーターになる</div>
