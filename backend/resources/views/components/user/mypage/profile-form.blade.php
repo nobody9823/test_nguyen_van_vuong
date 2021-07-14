@@ -101,17 +101,12 @@
             <div class="prof_edit_editbox pee_select_hori">
                 <div class="cp_ipselect cp_normal">
                     <select name="prefecture">
-                        @foreach(config('prefecture') as $index => $name)
-                        <option value="{{ $index }}" {{old('prefecture_id', optional(optional(Auth::user())->address)->prefecture_id) == $index ? 'selected' : ''}}>{{$name}}</option>
+                        @foreach( PrefectureHelper::getPrefectures() as $key => $value)
+                        <option value="{{ $value }}" {{optional(Auth::user()->address)->prefecture == $value || old('prefecture') === $value ?  'selected' : ''}}>{{$value}}</option>
                         @endforeach
                     </select>
                 </div><!-- /.cp_ipselect -->
-                <div class="cp_ipselect cp_normal">
-					<select name="koukai">
-						<option value="yes">公開する</option>
-						<option value="no">公開しない</option>
-					</select>
-				</div><!-- cp_ipselect -->
+
             </div><!-- prof_edit_editbox -->
             <div class="prof_edit_03">
                 <a href="javascript:document.prefectureForm.submit()">更新</a>
@@ -242,7 +237,7 @@
     </div>
     <div class="prof_edit_row">
         <div class="prof_edit_01">現在地</div>
-        <div class="prof_edit_02">{{ Auth::user()->address->PrefName }}</div>
+        <div class="prof_edit_02">{{ Auth::user()->address->prefecture }}</div>
         <div class="prof_edit_03">
             編集
             <a href="{{ route('user.profile', ['input_type' => 'prefecture_id']) }}" class="cover_link"></a></div>
