@@ -20,7 +20,7 @@ class PayJpTest extends TestCase
 
     public function testSuccessPayment()
     {
-        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret_for_test'));
+        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret'));
 
         $params = [
             'card' => [
@@ -37,7 +37,7 @@ class PayJpTest extends TestCase
     public function testFailByCardDeclined()
     {
         $this->expectException(Exception::class);
-        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret_for_test'));
+        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret'));
 
         $params = [
             'card' => [
@@ -53,7 +53,7 @@ class PayJpTest extends TestCase
     public function testFailByExpiredCard()
     {
         $this->expectException(Exception::class);
-        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret_for_test'));
+        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret'));
 
         $params = [
             'card' => [
@@ -69,7 +69,7 @@ class PayJpTest extends TestCase
     public function testFailByCardDeclinedByInvalidExpirationDate()
     {
         $this->expectException(Exception::class);
-        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret_for_test'));
+        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret'));
 
         $params = [
             'card' => [
