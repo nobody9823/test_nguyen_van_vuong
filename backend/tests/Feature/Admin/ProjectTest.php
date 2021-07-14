@@ -62,8 +62,6 @@ class ProjectTest extends TestCase
      */
     public function test_store()
     {
-        \Log::debug($this->tag->id);
-        
         Storage::fake('avatars');
         $file = UploadedFile::fake()->image('avatar.jpeg');
         $start_date = new Carbon($this->project->start_date);
