@@ -35,38 +35,34 @@
 
                 <div class="pds_sec01_L">
                     <div class="pds_sec01_slider {{ $project->projectFiles->count() === 1 ? 'slider-img-wrapper' : '' }}">
-                    <ul id="slider">
-                        @foreach($project->projectFiles as $project_file)
-                            @if($project_file->file_content_type === 'image_url')
-                            <li class="slide-item">
-                                <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
-                            </li>
-                            @elseif($project_file->file_content_type === 'video_url')
-                            <li class="slide-item">
-                                <div class="iframe-wrap">
-                                    {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
-                                </div>
-                            </li>
-                            @endif
-                        @endforeach
-                    </ul>
-                    @if($project->projectFiles->count() > 1)
-                        <ul id="thumbnail_slider">
+                        <ul id="slider">
                             @foreach($project->projectFiles as $project_file)
                                 @if($project_file->file_content_type === 'image_url')
-                                <li class="thumbnail-item">
+                                <li class="slide-item">
                                     <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
                                 </li>
                                 @elseif($project_file->file_content_type === 'video_url')
-                                <li class="thumbnail-item">
-                                    <div class="iframe-wrap">
-                                        {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
-                                    </div>
+                                <li class="slide-item">
+                                    {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
                                 </li>
                                 @endif
                             @endforeach
                         </ul>
-                    @endif
+                        @if($project->projectFiles->count() > 1)
+                            <ul id="thumbnail_slider">
+                                @foreach($project->projectFiles as $project_file)
+                                    @if($project_file->file_content_type === 'image_url')
+                                    <li class="thumbnail-item">
+                                        <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                                    </li>
+                                    @elseif($project_file->file_content_type === 'video_url')
+                                    <li class="thumbnail-item">
+                                        {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
+                                    </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 </div><!--/pds_sec01_L-->
 
