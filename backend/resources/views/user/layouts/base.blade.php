@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<script>
+var ua = navigator.userAgent.toLowerCase();
+var isiOS = (ua.indexOf('iphone') > -1) || (ua.indexOf('ipad') > -1);
+if(isiOS) {
+  var viewport = document.querySelector('meta[name="viewport"]');
+  if(viewport) {
+    var viewportContent = viewport.getAttribute('content');
+    viewport.setAttribute('content', viewportContent + ', user-scalable=no');
+  }
+}
+</script>
 <title></title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>

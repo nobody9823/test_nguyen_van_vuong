@@ -1,7 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
+*{-webkit-appearance: none; -webkit-text-size-adjust: 100%;}
 
-body {font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif;}
+body { font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif;}
 b, strong, .bold{	font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI semibold", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic", "Segoe UI", Verdana, Meiryo, sans-serif;}
 /* IEだけに適応 */
 _:lang(x)::-ms-backdrop, .selector {	font-family: "Segoe UI", Meiryo, sans-serif;}
@@ -24,6 +25,11 @@ h2 {
     font-size: 24px;/* IE8以下とAndroid4.3以下用フォールバック */
     font-size: calc(2rem + ((1vw - 0.64rem) * 0.7143));/* 20px~24pxで可変*/
     line-height: 1.3;
+}
+
+input, select {
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .f_c_pri{ color: #00AEBD;}
@@ -149,20 +155,26 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 .wm_signup_btn a { color: #fff;}
 
 #user_btn{display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; padding: 8px; background: #fff; width: 100%;}
+.login_after_user_btn #user_btn{ padding: 0px;}
 .user_btn_01{ width: 100%; display: flex; flex-wrap: wrap; align-items: center; align-content: center;}
 .user_btn_01_01{ width: 42px; height: 42px; background-position: center; background-size: cover;}
 .login_after_user_btn .user_btn_01_01{margin-right: auto; border-radius: 25px;}
+.user_btn_01_04 button{ font-size: 2rem; color:#00AEBD;}
+.login_after_user_btn .user_btn_01_01{margin-right: 5px; width: 38px;}
+.login_after_user_btn img{ border-radius: 21px; }
 .login_after_user_btn .user_btn_01_02{ display: none;}
 .user_btn_01_02{ font-size: 1.4rem; font-weight: bold; margin: 0 0 0 8px; color:#00AEBD; width: calc(100% - 120px); }
 .user_btn_01_03{ font-size: 2rem; width: 32px; text-align: center;}
 .user_btn_01_03 a{ color:#00AEBD;}
 .user_btn_01_04{ font-size: 2rem; width: 32px; text-align: center;}
-.user_btn_01_04 button{ font-size: 2rem; color:#00AEBD;}
+.user_btn_01_04 a{ color:#00AEBD;}
 
 .ninki_tag_li div{ width: 96%; margin: 0 2% 10px 2%;}
 .ninki_tag_li a {color: #00AEBD !important;}
 
 @media screen and (max-width: 1000px){
+	.login_after_user_btn #user_btn{ padding: 8px;}
+	.login_after_user_btn .user_btn_01_01{ width: 42px;}
 	.login_after_user_btn .user_btn_01_02{ display: block;}
 }
 
@@ -229,6 +241,7 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 	.login_btn .nav_btn_link{ display: inline;}
 	.signup_btn .nav_btn_link{ display: inline;}
 	.top_menu-1{ height: auto; padding:15px 7px;}
+
 }
 
 
@@ -911,57 +924,11 @@ input[type=radio]:checked + .radio-fan::after {
   width: 100%;
   margin: 0 auto 10px;
 }
-.slick-track {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.slide-item {
-    width: auto;
-}
-.slide-item img{
-    width: 100%;
-    height: 60vw;
-    border-radius: 8px;
-    object-fit: contain;
-}
-.thumbnail-item {
-    width: auto;
-    height: 10vw;
-}
-.thumbnail-item img{
-    width: auto;
-    height: 100%;
-	border-radius: 4px;
-    object-fit: contain;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.iframe-wrap{
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    position: relative;
-    padding-bottom: 66.75%; /*アスペクト比 16:9の場合の縦幅*/
-    height: 0;
-    overflow: hidden;
-}
-.iframe-wrap iframe{
-    position: absolute;
-    padding: 0%;
-    margin: 0%;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
 
 .slick-prev {left: 15px;z-index: 10;}
 .slick-next {right: 21px;z-index: 10;}
 .slick-prev:before { font-size: 1.60rem; padding: 0.4rem 0.8rem 0.4rem 0.6rem; color: #00AEBD; opacity: 0.7; content: "\f053"; font-family: "Font Awesome 5 Free"; font-weight: 900; border: solid 2px #00AEBD; border-radius: 50%;}
 .slick-next:before { font-size: 1.60rem; padding: 0.4rem 0.6rem 0.4rem 0.8rem; color: #00AEBD; opacity: 0.7; content: "\f054"; font-family: "Font Awesome 5 Free"; font-weight: 900; border: solid 2px #00AEBD; border-radius: 50%;}
-.slick-list {}
 
 .pc-Details-screen_base_top{ width: 100%; position: relative;}
 .pc-Details-screen_base_top:after{ content: ""; position: absolute; width: 100%; height: 100%; left: 0; top: 0; background: #F7FDFF; z-index: -1;}
@@ -976,6 +943,7 @@ input[type=radio]:checked + .radio-fan::after {
 .pds_sec01_L{ width: calc(55% - 15px); order: 3;}
 .slider-img-wrapper{ height: 425px; display: flex; justify-content: center; align-items: center;}
 .slider-img-wrapper img{ width: auto; height: auto; margin-left: auto; margin-right: auto;}
+.pds_sec01_slider{}
 
 .pds_sec01_R{ width: calc(45% - 15px); display: flex; flex-wrap: wrap; order: 4;}
 .pds_sec01_R_en01{ font-size: 1.6rem; font-weight: bold; color: #00AEBD; width: 100%;}
@@ -1160,7 +1128,7 @@ input[type=radio]:checked + .radio-fan::after {
 	height: 35px;
 	border: solid 1px #DBDBDB;
 	border-radius: 4px;
-	font-size: 1.6rem;
+	font-size: 1.4rem;
     font-weight: bold;
 }
 
@@ -1309,7 +1277,7 @@ input[name="tab_item"] {
 .as_i_01_L{ width: 50%; border-right: solid 1px #00AEBD;}
 .as_i_01_L > div{ width: 100%; padding: 20px 20%; }
 .as_i_01_L_01{ width: 100%; text-align: center; font-size: 1.6rem; font-weight: bold; padding: 0 0 15px 0; border-bottom: solid 1px #00AEBD; margin-bottom: 10px;}
-.as_i_01_L_02{ text-align: center; font-size: 2.8rem; font-weight: bold;}
+.as_i_01_L_02{ width: 100%; text-align: center; font-size: 2.8rem; font-weight: bold;}
 .as_i_01_L_02 span{  font-size: 2.0rem; font-weight: bold;}
 
 .as_i_01_R{ width: 50%;}
@@ -1336,10 +1304,10 @@ input[name="tab_item"] {
 
 @media screen and (max-width: 1000px){
 	.as_i_01_L{ width: 100%; border-right: none; border-bottom: solid 1px #00AEBD;}
-	.as_i_01_L_01{ max-width: 140px; text-align: center; font-size: 1.4rem; font-weight: bold; padding: 0 0 0 0; border-bottom: none; margin-bottom: 0px;}
-	.as_i_01_L_02{ text-align: center; font-size: 2.3rem; font-weight: bold;}
+	.as_i_01_L_01{ width: 50%; text-align: center; font-size: 1.4rem; font-weight: bold; padding: 0 0 0 0; border-bottom: none; margin-bottom: 0px;}
+	.as_i_01_L_02{ width: 50%; text-align: center; font-size: 2.3rem; font-weight: bold;}
 	.as_i_01_R{ width: 100%;}
-	.as_i_01_L > div{ width: 100%; padding: 20px 0; display: flex; align-items: center; align-content: center; justify-content:center; }
+	.as_i_01_L > div{ width: 100%; padding: 20px 0; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; }
 	.as_i_01_R > div{ width: 100%; padding: 20px 0; }
 }
 @media screen and (max-width: 768px){
@@ -1349,14 +1317,13 @@ input[name="tab_item"] {
 
 @media screen and (max-width: 400px){
 	.pay_input_count { width: 130px;}
-	.tab1_desc{display: flex; flex-wrap: wrap; align-items: center; align-content: center; flex-flow: column;}
 }
 
 
-.cvc_wrapper { display: flex; }
+
 .tab1_desc{display: flex; flex-wrap: wrap; align-items: center; align-content: center;}
 .tab1_01{ width: 49%; margin: 0 1% 0 0;}
-.tab1_02{ width: 24%; margin: 0 1% 0 0; flex-grow: 1; min-width: 120px}
+.tab1_02{ width: 24%; margin: 0 1% 0 0;}
 .tab1_03{ width: 24%; margin: 0 1% 0 0; display: flex; flex-wrap: wrap; align-items: center; align-content: center;}
 
 .tab1_04{ width: 100%; margin: 0 0 15px 0;}
@@ -1748,6 +1715,13 @@ width: 100%;
     border-color: #bee5eb;
 }
 
+/**slick画像設定**********/
 
+.slide-item{position: relative; width: 100%;}
+.slide-item:before { content:""; display: block; padding-top: 62.195%; }
+.slide-item img, .slide-item iframe { width: 100%; height: 100%; position: absolute; top: 0; left: 0; bottom: 0; right: 0; object-fit: contain; border-radius: 8px;}
 
-
+.thumbnail-item{position: relative; width: 95%;}
+.thumbnail-item:before { content:""; display: block; padding-top: 62.195%; }
+.thumbnail-item img, .thumbnail-item iframe { width: 100%; height: 100%; position: absolute; top: 0; left: 0; bottom: 0; right: 0; object-fit: contain; border-radius: 4px;}
+#thumbnail_slider .slick-slide{ margin: 0 7px 0 0;}

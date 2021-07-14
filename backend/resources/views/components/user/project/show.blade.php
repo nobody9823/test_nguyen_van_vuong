@@ -43,9 +43,7 @@
                                 </li>
                                 @elseif($project_file->file_content_type === 'video_url')
                                 <li class="slide-item">
-                                    <div class="iframe-wrap">
-                                        {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
-                                    </div>
+                                    {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
                                 </li>
                                 @endif
                             @endforeach
@@ -59,9 +57,7 @@
                                     </li>
                                     @elseif($project_file->file_content_type === 'video_url')
                                     <li class="thumbnail-item">
-                                        <div class="iframe-wrap">
-                                            {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
-                                        </div>
+                                        {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
                                     </li>
                                     @endif
                                 @endforeach
