@@ -64,6 +64,7 @@ main .section_base:first-of-type{ margin: 0px auto 100px auto;}
 
 .okini_link{ position: absolute; z-index: 2; bottom: 3px; right: 6px; font-size: 2.0rem; color: #fff;}
 .okini_link_L{ position: absolute; z-index: 2; bottom: 5px; right: 10px; font-size: 2.8rem; color: #fff;}
+.liked_project i{ text-shadow: 1px 0 7px #999;}
 
 
 .m_b_1510{margin-bottom: 15px;}
