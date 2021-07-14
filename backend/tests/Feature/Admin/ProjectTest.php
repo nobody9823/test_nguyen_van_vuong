@@ -13,7 +13,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Illuminate\Support\Facades\DB;
 
 class ProjectTest extends TestCase
 {
@@ -25,7 +24,7 @@ class ProjectTest extends TestCase
         // リレーションで色々詰まったのですべて書いちゃった
         $this->admin = Admin::factory()->create();
         $this->user = User::factory()->valleyin()->hasProfile()->create();
-        $this->tag = DB::table('tags')->insert(['id' => '1', 'name' => 'テストタグ']);
+        $this->tag = Tag::factory()->create();
         $this->project = Project::factory()->state([
             'user_id' => $this->user->id,
         ])->make();
@@ -63,6 +62,8 @@ class ProjectTest extends TestCase
      */
     public function test_store()
     {
+        \Log::debug($this->tag->id);
+        
         Storage::fake('avatars');
         $file = UploadedFile::fake()->image('avatar.jpeg');
         $start_date = new Carbon($this->project->start_date);
@@ -74,7 +75,7 @@ class ProjectTest extends TestCase
             'target_amount' => $this->project->target_amount,
             'ps_plan_content' => $this->project->ps_plan_content,
             'curator' => 'test_curator',
-            'tags' => ["1"],
+            'tags' => [$this->tag->id],
             'start_date' => $start_date->format('Y-m-d H:i:s'),
             'end_date' => $end_date->format('Y-m-d H:i:s'),
             'release_status' => $this->project->release_status,
@@ -128,7 +129,7 @@ class ProjectTest extends TestCase
                 'ps_plan_content' => $this->project->ps_plan_content,
                 'target_amount' => $this->project->target_amount,
                 'curator' => 'test_curator',
-                'tags' => ["1"],
+                'tags' => [$this->tag->id],
                 'start_date' => $start_date->format('Y-m-d H:i:s'),
                 'end_date' => $end_date->format('Y-m-d H:i:s'),
                 'release_status' => $this->project->release_status,

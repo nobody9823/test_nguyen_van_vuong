@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Project;
 use App\Models\Report;
 use App\Models\ProjectFile;
-use App\Models\ProjectTagTagging;
+use App\Models\Tag;
 use App\Models\UserProjectLiked;
 use App\Models\Plan;
 use App\Models\Payment;
@@ -34,7 +34,7 @@ class ProjectSeeder extends Seeder
                 $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
-                $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
+                $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
                 $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->create());
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
             });
@@ -55,7 +55,7 @@ class ProjectSeeder extends Seeder
                             ]
                         );
                 });
-                $project->projectTagTagging()->saveMany(ProjectTagTagging::factory(rand(1, 5))->create());
+                $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
                 $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->create());
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
                 $project->supportedUsers()->attach(User::inRandomOrder()->take(random_int(1, 10))->get()->pluck('id'));
