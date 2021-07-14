@@ -1,11 +1,11 @@
 @extends('admin.layouts.base')
 
-@section('title', "プラン編集")
+@section('title', "リターン編集")
 
 @section('content')
 
 <div class="card">
-    <div class="card-header">プラン編集</div>
+    <div class="card-header">リターン編集</div>
     <div class="card-body">
         <form action="{{ route('admin.plan.update', ['project' => $project, 'plan' => $plan]) }}" enctype="multipart/form-data" method="POST">
             @csrf

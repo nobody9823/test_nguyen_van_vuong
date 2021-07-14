@@ -45,12 +45,12 @@ class JoinPlan
             // payjpの処理のレスポンスを取得
             $response = PayJp::payment($plan, $request);
         }
-        // レスポンスがCOMPLETEDならユーザーをプランに参加させる処理を実行
+        // レスポンスがCOMPLETEDならユーザーをリターンに参加させる処理を実行
         if ($response !== null && $response === "COMPLETED") {
-            // ユーザーのプラン参加処理
+            // ユーザーのリターン参加処理
             DB::beginTransaction();
             try {
-                // options_tableの中から、プランに紐づいていてセッションのオプションタイトルと同じオプションの行をロックする。
+                // options_tableの中から、リターンに紐づいていてセッションのオプションタイトルと同じオプションの行をロックする。
                 $option = $plan->options()
                     ->where('name', $request->session()->get('selected_option'))
                     ->where( function ($query) {

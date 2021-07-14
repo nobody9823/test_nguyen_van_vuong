@@ -2,16 +2,6 @@
 
 @section('content')
 
-@if ($errors->any())
-<div class="error-message text-center">
-    <ul class="error-message-list">
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-
 <div class="Assist-input_base">
 
     <div class="as_header_01">
@@ -85,7 +75,8 @@
                             <div class="as_i_01_L_01">リターン合計金額</div>
                             <div class="as_i_01_L_02 E-font">
                                 <input type="number" name="total_amount" id="total_amount" class="pay_input_count" readonly>
-                                <span>円</span></div>
+                                <span>円</span>
+                            </div>
                         </div>
                     </div><!--/.as_i_01_L-->
 
@@ -144,11 +135,14 @@
                                     <div class="tab1_01">
                                         <div class="tab1_01_01">クレジットカード番号</div>
                                         <div name="number_form" id="number-form" class="payjs-outer"></div>
+                                        <span id="errors" style="color: red;"></span>
                                     </div>
 
-                                    <div class="tab1_02">
-                                        <div class="tab1_02_01">セキュリティコード</div>
-                                        <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+                                    <div class="cvc_wrapper">
+                                        <div class="tab1_02">
+                                            <div class="tab1_02_01">セキュリティコード</div>
+                                            <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+                                        </div>
                                         <div class="tooltip1">
                                             <p>？</p>
                                             <div class="description1">カードの裏面にある末尾3桁の数字</div>
@@ -170,7 +164,8 @@
                                     有効期限が残り100日以上のクレジットカード（Visa/Mastercard JCB/Diners Club/American Express）でご利用いただけます。<br>
                                     デビットカード・プリペイドカードの利用は推奨しておりません。<br>
                                     利用される場合は注意事項を必ずご確認ください。<br>
-                                    このクレジットカード情報は当社では保持せず、決済代行会社であるGMOペイメントゲートウェイ株式会社にて安全に管理されます。
+                                    このクレジットカード情報は当社では保持いたしません。<br>
+                                    <span style="color: red;">各決済ごとの領収書発行機能は提供しておりません。利用元のクレジットカード明細のご確認をお願いいたします。</span>
                                     </div>
 
 
@@ -193,7 +188,13 @@
                             </div><!--/tab_content--> --}}
                             <div class="tab_content" id="tab5_content">
                                 <div class="tab_content_description">
-                                <p class="c-txtsp">PayPayでのお支払い</p>
+                                <p class="c-txtsp">
+                                    PayPayでのお支払い<br/>
+                                    以下の必要情報入力後確認画面から「決済する」を押していただくとPayPayの支払い画面へと移動します。<br>
+                                    <span style="color: red;">バーコードまたはQRコードで支払いした領収書は発行しておりません。<br>
+                                    実際にPayPayを利用してお支払いをした店舗でご相談ください。<br>
+                                    なお、「請求書払い」をご利用の場合は、請求書発行元にお問い合わせください。</span>
+                                </p>
                                 </div>
                             </div><!--/tab_content-->
                             {{-- <div class="tab_content" id="tab6_content">
@@ -213,7 +214,12 @@
                     <div class="as_i_txt">「性別」と「生年月日」は公開されません。プロジェクトの集計データとして、プロジェクトオーナーへ提供されます。</div>
 
                     <div class="as_i_04_02"><span>！</span>必ずお読みください</div>
-                    <div class="as_i_txt">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</div>
+                    <div class="as_i_txt">
+                        決済の領収書などお支払いに関するお問い合わせはこちらへお問い合わせください<br/>
+                        株式会社ICH<br/>
+                        個人情報保護対応窓口<br/>
+                        <a href="href="mailto:support@fanreturn.com">support@fanreturn.com</a>
+                    </div>
 
                 </div><!--/.as_i_04-->
 
@@ -244,11 +250,6 @@
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
-                        <div class="form_item_tit">メールアドレス<span class="hissu_txt">必須</span></div>
-                        <input type="email" name="email" class="def_input_100p" value="{{ old('email', optional($user)->email) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
                         <div class="form_item_tit">性別<span class="hissu_txt">必須</span></div>
                         <div class="cp_ipselect cp_normal">
                             <select name="gender">
@@ -267,7 +268,7 @@
 
                     <div class="form_item_row">
                         <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('address', optional($user->address)->postal_code) }}">
+                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('postal_code', optional($user->address)->postal_code) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
@@ -354,6 +355,20 @@
 window.onload = function(){
     if (window.performance.navigation.type == 2){
         Plans.searchCheckedPlans();
+        let check_box = document.getElementsByClassName('plan_ids');
+
+        for (var i = 0, len = check_box.length; i < len; i++){
+            if (check_box[i].checked){
+                Plans.planIsChecked(check_box[i]);
+            }
+        }
+    }
+    let check_box = document.getElementsByClassName('plan_ids');
+
+    for (var i = 0, len = check_box.length; i < len; i++){
+        if (check_box[i].checked){
+            Plans.planIsChecked(check_box[i]);
+        }
     }
 }
 </script>
@@ -364,6 +379,25 @@ window.onload = function(){
 
     var elements = payjp.elements()
 
+    var errors = document.getElementById('errors');
+
+    let numEl = document.getElementById('number-form')
+
+    let exEl = document.getElementById('expiry-form')
+
+    let cvcEl = document.getElementById('cvc-form')
+
+    const checkCardNumber = (result) => {
+        if (result === undefined){
+            errors.innerHTML = 'カード情報が不正です。';
+            document.querySelector('#payjp_token').value = '';
+        } else {
+            errors.innerHTML = '';
+            document.querySelector('#payjp_token').value = result;
+            console.log(document.querySelector('#payjp_token'))
+        }
+    };
+
     // 入力フォームを分解して管理・配置できます
     var numberElement = elements.create('cardNumber')
     var expiryElement = elements.create('cardExpiry')
@@ -371,11 +405,27 @@ window.onload = function(){
     numberElement.mount('#number-form')
     expiryElement.mount('#expiry-form')
     cvcElement.mount('#cvc-form')
-    expiryElement.on('blur', function(event){
-        payjp.createToken(numberElement)
-        payjp.createToken(numberElement).then(function(r) {
-            document.querySelector('#payjp_token').value = r.id;
-        })
-    })
+
+    let config = { attribute: true, attributeOldValue: true}
+
+    const observer = new MutationObserver(mutationRecords => {
+            for (let MutationRecord of mutationRecords){
+                if(MutationRecord.target.classList.contains('PayjpElement--complete')){
+                    if (
+                            (exEl.classList.contains('PayjpElement--complete')) &&
+                            (cvcEl.classList.contains('PayjpElement--complete')) &&
+                            (numEl.classList.contains('PayjpElement--complete'))
+                        ){
+                            payjp.createToken(numberElement).then(function(r) {
+                                checkCardNumber(r.id);
+                            })
+                    }
+                }
+            }
+        });
+    observer.disconnect();
+    observer.observe(numEl, config);
+    observer.observe(exEl, config);
+    observer.observe(cvcEl, config);
 </script>
 @endsection

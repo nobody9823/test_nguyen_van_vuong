@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\Plan;
 use App\Models\Payment;
+use App\Models\PaymentToken;
 use Tests\TestCase;
 use Exception;
 use App\Traits\UniqueToken;
@@ -21,9 +22,9 @@ class ProjectControllerForPayJpTest extends TestCase
     {
         parent::setUp();
 
-        $this->creator = User::factory()->create();
+        $this->creator = User::factory()->hasProfile()->create();
 
-        $this->supporter = User::factory()->create();
+        $this->supporter = User::factory()->hasProfile()->create();
 
         $this->project = Project::factory()->state([
             'user_id' => $this->creator->id,
@@ -69,14 +70,18 @@ class ProjectControllerForPayJpTest extends TestCase
         $this->fail_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
 
         $this->success_payment = Payment::factory()->state([
+                    'project_id' => $this->project->id,
                     'user_id' => $this->supporter->id,
                     'price' => $this->plan->price,
                     'message_status' => 'ステータスなし',
-                    'merchant_payment_id' => UniqueToken::getToken(),
-                    'pay_jp_id' => $this->success_token->id,
+                    'payment_way' => 'PayJp',
                     'payment_is_finished' => false,
                     'remarks' => 'test remarks'
                 ])->create();
+
+        $this->success_payment->paymentToken()->save(PaymentToken::factory()->state([
+            'token' => $this->success_token->id,
+        ])->make());
 
         $params = [
             'card' => [
@@ -89,14 +94,18 @@ class ProjectControllerForPayJpTest extends TestCase
         $this->fail_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
 
         $this->fail_payment = Payment::factory()->state([
+                'project_id' => $this->project->id,
                 'user_id' => $this->supporter->id,
                 'price' => $this->plan->price,
                 'message_status' => 'ステータスなし',
-                'merchant_payment_id' => UniqueToken::getToken(),
-                'pay_jp_id' => $this->fail_token->id,
+                'payment_way' => 'PayJp',
                 'payment_is_finished' => false,
                 'remarks' => 'test remarks'
             ])->create();
+
+        $this->fail_payment->paymentToken()->save(PaymentToken::factory()->state([
+                'token' => $this->fail_token->id
+            ])->make());
 
         $this->url = "project/{$this->project->id}/plan/confirmPayment";
     }

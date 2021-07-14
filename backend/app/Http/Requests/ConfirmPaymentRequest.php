@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Arr;
 
 class ConfirmPaymentRequest extends FormRequest
 {
@@ -35,14 +36,13 @@ class ConfirmPaymentRequest extends FormRequest
             'payment_way' => ['required', 'string'],
             'payjp_token' => [Rule::requiredIf($request->payment_way === "credit")],
             'plans' => ['required', new CheckPlanAmount($this)],
-            'plans.*' => ['required', 'integer'],
+            'plans.*.quantity' => ['required', 'integer'],
             'total_amount' => ['required', 'integer'],
             'display_added_price' => ['nullable', 'integer'],
             'first_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'last_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'first_name' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
             'last_name' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
-            'email' => ['required', 'string', 'email'],
             'gender' => ['required', 'string', 'in:男性,女性,その他'],
             'phone_number' => ['required', 'string', 'min:10', 'max:11'],
             'postal_code' => ['required', 'string', 'size:7'],
@@ -54,8 +54,8 @@ class ConfirmPaymentRequest extends FormRequest
             'birth_year'  => ['required_with:birth_month,birth_day', 'string'],
             'birth_month' => ['required_with:birth_year,birth_day', 'string'],
             'birth_day'   => ['required_with:birth_year,birth_month', 'string'],
-            'remarks' => ['required', 'string', 'max:300'],
-            'comments' => ['required', 'string', 'max:300'],
+            'remarks' => ['nullable', 'string', 'max:300'],
+            'comments' => ['nullable', 'string', 'max:300'],
         ];
     }
 
@@ -74,6 +74,9 @@ class ConfirmPaymentRequest extends FormRequest
                 $birth_day =  new Carbon($birthDate),
                 'birthday' => $birth_day->format('Y-m-d'),
             ]);
+        }
+        if (is_null($this->input('building'))) {
+            $this->merge(['building' => ""]);
         }
     }
 

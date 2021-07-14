@@ -1,25 +1,25 @@
 @extends($role.'.layouts.base')
 
-@section('title', 'プラン詳細')
+@section('title', 'リターン詳細')
 
 @section('content')
 <header class="card-header d-flex align-items-center">
     <div class="flex-grow-1">
-        プラン詳細
+        リターン詳細
     </div>
     <div class="text-right">
-        <a href="{{ route($role.'.plan.index') }}" class="btn btn-outline-info">プラン一覧へ戻る</a>
+        <a href="{{ route($role.'.plan.index') }}" class="btn btn-outline-info">リターン一覧へ戻る</a>
     </div>
 </header>
 
 <article class="card mt-3">
     <header class="d-flex justify-content-between card-header">
         <h5>
-            プラン詳細
+            リターン詳細
         </h5>
         <div>
-            <a href="{{ route($role.'.plan.preview', ['project' => $plan->project, 'plan' => $plan]) }}"
-                class="btn btn-success">プレビュー</a>
+            <!-- <a href="{{ route($role.'.plan.preview', ['project' => $plan->project, 'plan' => $plan]) }}"
+                class="btn btn-success">プレビュー</a> -->
             @if($plan->project !== null && (($plan->project->release_status !== '掲載中' && $plan->project->release_status !== '承認待ち') || $role === "admin"))
             <a href="{{ route($role.'.plan.edit', ['project' => $plan->project, 'plan' => $plan]) }}"
                 class="btn btn-primary">編集</a>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="row row-col-2 pt-3" style="font-size: 20px">
                         <div class="col-sm-3">
-                            プラン内容
+                            リターン内容
                         </div>
                         <div class="col-sm-9" style="overflow-wrap: break-word;">
                             {{ $plan->content }}

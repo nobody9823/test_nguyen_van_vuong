@@ -10,6 +10,7 @@ use App\Models\Plan;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\ProjectFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,9 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $projects = Project::search()->searchWithReleaseStatus($request->release_statuses)->sortBySelected($request->sort_type);
+        $projects = Project::search()
+        ->searchWithReleaseStatus($request->release_statuses)
+        ->sortBySelected($request->sort_type);
 
         //リレーション先OrderBy
         if ($request->sort_type === 'user_name_asc') {
@@ -86,7 +89,7 @@ class ProjectController extends Controller
         return redirect()->action(
             [PlanController::class, 'create'],
             ['project' => $project, 'plans' => $project->plans]
-        )->with('flash_message', 'プロジェクト作成が成功しました。プランを作成してください。');
+        )->with('flash_message', 'プロジェクト作成が成功しました。リターンを作成してください。');
     }
 
     /**
@@ -97,8 +100,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load('projectFiles', 'plans', 'reports');
-        return view('admin.project.show', compact('project'));
+        $project = $project::where('projects.id',$project->id)->getWithPaymentsCountAndSumPrice()
+        ->with('projectFiles','plans','reports')->first();
+        return view('admin.project.show', ['project' => $project]);
     }
 
     /**
@@ -160,7 +164,7 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $project->deleteProjectImages();
+            $project->deleteProjectFiles();
             $project->delete();
             DB::commit();
         } catch (\Exception $e) {
@@ -191,13 +195,11 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    // FIXME #372 ソフトデリートする
-    // public function deleteImage(ProjectImage $projectImage)
-    // {
-    //     Storage::delete($projectImage->image_url);
-    //     $projectImage->delete();
-    //     return response()->json('success');
-    // }
+    public function deleteFile(ProjectFile $project_file)
+    {
+        $project_file->deleteFile();
+        return response()->json('success');
+    }
 
     /**
      * @param  Request  $request
@@ -214,14 +216,69 @@ class ProjectController extends Controller
     //     ]);
     // }
 
+    // /**
+    //  * @param  Project  $project
+    //  * @return \Illuminate\Http\JsonResponse
+    //  */
+    // public function release(Project $project)
+    // {
+    //     return $project->changeStatusToRelease() ?
+    //                 response()->json('success') : '';
+    // }
+
+    public function operate_projects(Request $request)
+    {
+        //今後も操作を増やせるように実装
+        if ($request->project_id) {
+            $this->changeStatus($request);
+        }
+        return redirect()->back();
+    }
+
     /**
      * @param  Project  $project
      * @return \Illuminate\Http\JsonResponse
      */
-    public function release(Project $project)
+    public function changeStatus($request)
     {
-        return $project->releaseProject() ?
-                    response()->json('success') : '';
+        $projects = Project::whereIn('id', $request->project_id)->get();
+        //ステータスが指定されていなかったら何もしない
+        if (!$request->change_status) {
+            \Session::flash('error', '掲載状態を選択してください。');
+            return;
+        }
+
+        //処理回数的にswitch->foreachが一番少なくて済むはず
+        switch ($request->change_status) {
+            case '---':
+                foreach ($projects as $project) {
+                    $project->changeStatusToDefault();
+                }
+                break;
+            case '承認待ち':
+                foreach ($projects as $project) {
+                    $project->changeStatusToPending();
+                }
+                break;
+            case '掲載中':
+                foreach ($projects as $project) {
+                    $project->changeStatusToRelease();
+                }
+                break;
+            case '掲載停止中':
+                foreach ($projects as $project) {
+                    $project->changeStatusToUnderSuspension();
+                }
+                break;
+            case '差し戻し':
+                foreach ($projects as $project) {
+                    $project->changeStatusToSendBack();
+                }
+                break;
+            default:
+                break;
+        }
+        return;
     }
 
     public function output_cheering_users_to_csv(Project $project)
@@ -250,7 +307,7 @@ class ProjectController extends Controller
 
             //保存しない形でファイルのアウトプットを作成（良く分かってないので文章変です。）
             $stream = fopen('php://output', 'w');
-            $csv_head = ['支援者名', 'メールアドレス', '支援プラン名', '支援額', '支援日', 'お返し予定日', '住所'];
+            $csv_head = ['支援者名', 'メールアドレス', '支援リターン名', '支援額', '支援日', 'お返し予定日', '住所'];
             //カラムとかデータを文字コード変換してさっき開いたファイルに挿入
             mb_convert_variables('SJIS', 'UTF-8', $csv_head);
             fputcsv($stream, $csv_head);

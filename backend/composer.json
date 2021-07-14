@@ -54,10 +54,7 @@
             "App\\Services\\Payment\\": "app/Services/Payment/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        },
-        "classmap": [
-            "app/Services/Payment/IncludedPlans.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {

@@ -16,7 +16,7 @@ use Carbon\Carbon;
         <div class="img_box_01_L">
             <div class="img_box_01_L_item">
                 <div class="ib01L_01">
-                    <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
+                    <img src="{{ Storage::url($projects->first()->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
                     <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
                     <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
                     @if ($user_liked->where('project_id',$projects->first()->id)->isEmpty())
@@ -27,16 +27,16 @@ use Carbon\Carbon;
                     </div>
                 </div>
 
-                <div class="ib01L_cate_tag">
+                {{-- <div class="ib01L_cate_tag">
                     @foreach($projects->first()->tags as $tag)
                         <a href="#" class="cate_tag_link">{{ $tag->name }}</a>
                     @endforeach
-                </div>
+                </div> --}}
 
                 <div class="ib01L_02">
                 <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
-                        <span style="width: {{ $projects->first()->getAchievementRate() }}%; max-width:100%"></span>
+                        <span style="width: {{ $projects->first()->achievement_rate }}%; max-width:100%"></span>
                     </div>
                 </div>
 
@@ -46,8 +46,8 @@ use Carbon\Carbon;
                 </div>
 
                 <div class="ib01L_04">
-                    <div>現在 <span>{{ number_format($projects->first()->getAchievementAmount()) }}円</span></div>
-                    <div>支援者 <span>{{ $projects->first()->getBillingUsersCount() }}人</span></div>
+                    <div>現在 <span>{{ number_format($projects->first()->payments_sum_price) }}円</span></div>
+                    <div>支援者 <span>{{ $projects->first()->payments_count }}人</span></div>
                     <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($projects->first()->end_date)) }}日</span></div>
                 </div>
             </div><!--/.img_box_01_L_item-->
@@ -58,7 +58,7 @@ use Carbon\Carbon;
                 @if(!$loop->first)
                 <div class="img_box_01_R_item">
                     <div class="ib01R_01">
-                        <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
+                        <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         <div class="okini_link liked_project" id="{{ $project->id }}">
                         @if ($user_liked->where('project_id',$project->id)->isEmpty())
@@ -72,13 +72,13 @@ use Carbon\Carbon;
                     <div class="ib01R_02">
                     <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                         <div class="progress-bar">
-                            <span style="width: {{ $project->getAchievementRate() }}%; max-width:100%"></span>
+                            <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
                         </div>
                     </div>
 
                     {{-- <div class="process">
-                        <div class="bar" style="width: {{ $project->getAchievementRate() }}%;">
-                            <span>{{ $project->getAchievementRate()}}%</span></div>
+                        <div class="bar" style="width: {{ $project->achievement_rate }}%;">
+                            <span>{{ $project->achievement_rate}}%</span></div>
                     </div> --}}
 
                     <div class="ib01R_03">
@@ -87,8 +87,8 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="ib01R_04">
-                        <div>現在 <span>{{ number_format($project->getAchievementAmount()) }}円</span></div>
-                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}</span></div>
+                        <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
+                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
                 @endif
@@ -121,14 +121,14 @@ use Carbon\Carbon;
 
 
 
-    <section id="pc-top_02" class="section_base">
+    {{-- <section id="pc-top_02" class="section_base">
         <div class="tit_L_01 E-font"><h2>CATEGORY</h2><div class="sub_tit_L">カテゴリー</div></div>
         <div class="cate_tag_01">
             @foreach($tags as $tag)
             <a href="★" class="cate_tag_link">{{$tag->name}}</a>
             @endforeach
         </div>
-    </section><!--/#pc-top_02-->
+    </section><!--/#pc-top_02--> --}}
 
 
 
@@ -351,10 +351,10 @@ use Carbon\Carbon;
         <div class="img_box_03_L">
             <div class="img_box_03_L_item">
                 <div class="ib03L_01">
-                    <img src="{{ Storage::url($projects->first()->projectFiles->first()->file_url) }}">
-                    <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>                    
-                    <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
-                        @if ($user_liked->where('project_id',$projects->first()->id)->isEmpty())
+                    <img src="{{ Storage::url($ranking_projects->first()->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
+                    <a href="{{ route('user.project.show', ['project' => $ranking_projects->first()]) }}" class="cover_link"></a>
+                    <div class="okini_link_L liked_project" id="{{ $ranking_projects->first()->id }}">
+                        @if ($user_liked->where('project_id',$ranking_projects->first()->id)->isEmpty())
                         <i class="far fa-heart"></i>
                         @else
                         <i class="fas fa-heart"></i>
@@ -376,19 +376,19 @@ use Carbon\Carbon;
                 <div class="ib01L_02">
                 <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
-                        <span style="width: {{ $projects->first()->getAchievementRate() }}%; max-width:100%"></span>
+                        <span style="width: {{ $ranking_projects->first()->achievement_rate }}%; max-width:100%"></span>
                     </div>
                 </div>
 
                 <div class="ib03L_03">
-                    <h2>{{ Str::limit($projects->first()->title, 46) }}</h2>
-                    <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
+                    <h2>{{ Str::limit($ranking_projects->first()->title, 46) }}</h2>
+                    <a href="{{ route('user.project.show', ['project' => $ranking_projects->first()]) }}" class="cover_link"></a>
                 </div>
 
                 <div class="ib03L_04">
-                    <div>現在 <span>{{ number_format($projects->first()->getAchievementAmount()) }}円</span></div>
-                    <div>支援者 <span>{{ $projects->first()->getBillingUsersCount() }}人</span></div>
-                    <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($projects->first()->end_date)) }}日</span></div>
+                    <div>現在 <span>{{ number_format($ranking_projects->first()->payments_sum_price) }}円</span></div>
+                    <div>支援者 <span>{{ $ranking_projects->first()->payments_count }}人</span></div>
+                    <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($ranking_projects->first()->end_date)) }}日</span></div>
                 </div>
             </div><!--/.img_box_03_L_item-->
         </div>
@@ -398,7 +398,7 @@ use Carbon\Carbon;
                 @if(!$loop->first)
                 <div class="img_box_03_R_item">
                     <div class="ib03R_01">
-                        <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
+                        <img src="{{ Storage::url($project->projectFiles->where('file_content_type', 'image_url')->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         <div class="okini_link liked_project" id="{{ $project->id }}">
                         @if ($user_liked->where('project_id',$project->id)->isEmpty())
@@ -423,13 +423,13 @@ use Carbon\Carbon;
                     <div class="ib03R_02">
                     <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                         <div class="progress-bar">
-                            <span style="width: {{ $project->getAchievementRate() }}%; max-width:100%"></span>
+                            <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
                         </div>
                     </div>
 
                     {{-- <div class="process">
-                        <div class="bar" style="width: {{ $project->getAchievementRate() }}%;">
-                            <span>{{ $project->getAchievementRate()}}%</span></div>
+                        <div class="bar" style="width: {{ $project->achievement_rate }}%;">
+                            <span>{{ $project->achievement_rate}}%</span></div>
                     </div> --}}
 
                     <div class="ib03R_03">
@@ -438,8 +438,8 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="ib03R_04">
-                        <div>現在 <span>{{ number_format($project->getAchievementAmount()) }}円</span></div>
-                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}</span></div>
+                        <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
+                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
                 @endif
@@ -447,11 +447,11 @@ use Carbon\Carbon;
         </div>
     </div><!--/.img_box_03-->
 
-    <div class="more_btn_01">
+    {{-- <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
         <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
         <a href="#" class="cover_link"></a>
-    </div>
+    </div> --}}
 
     </section><!--/#pc-top_04-->
 
@@ -462,10 +462,10 @@ use Carbon\Carbon;
 
         <div class="img_box_02">
 
-                @foreach($projects as $project)
+                @foreach($new_projects as $project)
                 <div class="img_box_02_item">
                     <div class="ib02_01 new_project_obi E-font">
-                        <img src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
+                        <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
                         <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         <div class="okini_link liked_project" id="{{ $project->id }}">
                         @if ($user_liked->where('project_id',$project->id)->isEmpty())
@@ -479,7 +479,7 @@ use Carbon\Carbon;
                     <div class="ib02_02">
                     <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                         <div class="progress-bar">
-                             <span style="width: {{ $project->getAchievementRate() }}%; max-width:100%"></span>
+                             <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
                         </div>
                     </div>
 
@@ -489,7 +489,7 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="ib02_04">
-                        <div>現在 <span>{{ number_format($project->getAchievementAmount()) }}円</span></div>
+                        <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
                         <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
                     </div>
                 </div><!--/.img_box_01_L_item-->
@@ -497,11 +497,11 @@ use Carbon\Carbon;
 
             </div>
 
-    <div class="more_btn_01">
+    {{-- <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
         <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
         <a href="★" class="cover_link"></a>
-    </div>
+    </div> --}}
 
     </section><!--/#pc-top_04-->
 

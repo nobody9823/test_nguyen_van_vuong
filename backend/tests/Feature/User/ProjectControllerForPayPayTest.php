@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\Plan;
 use App\Models\Payment;
+use App\Models\PaymentToken;
 use App\Models\Profile;
 use App\Models\Address;
 use App\Actions\PayPay\PayPay;
@@ -26,15 +27,9 @@ class ProjectControllerForPayPayTest extends TestCase
     {
         parent::setUp();
 
-        $this->creator = User::factory()->create();
+        $this->creator = User::factory()->hasProfile()->create();
 
-        $this->supporter = User::factory()->create();
-
-        $this->supporter->each(function ($user) {
-            $this->profile = $user->profile()->save(Profile::factory()->make());
-            $this->profile = $user->address()->save(Address::factory()->make());
-            $this->payment = $user->payments()->save(Payment::factory()->make());
-        });
+        $this->supporter = User::factory()->hasProfile()->create();
 
         $this->project = Project::factory()->state([
             'user_id' => $this->creator->id,
@@ -46,6 +41,13 @@ class ProjectControllerForPayPayTest extends TestCase
             'start_date' => now(),
             'end_date' => now()
         ])->create();
+
+        $this->supporter->each(function ($user) {
+            $this->profile = $user->profile()->save(Profile::factory()->make());
+            $this->profile = $user->address()->save(Address::factory()->make());
+            $this->payment = $user->payments()->save(Payment::factory()->make());
+            $this->payment_token = $this->payment->paymentToken()->save(PaymentToken::factory()->make());
+        });
 
         $this->plan = Plan::factory()->state([
             'project_id' => $this->project->id,
@@ -89,7 +91,7 @@ class ProjectControllerForPayPayTest extends TestCase
                 "status" => "COMPLETED",
                 "acceptedAt" => 1625220437,
                 "refunds" => [],
-                "merchantPaymentId" => $this->payment->merchant_payment_id,
+                "merchantPaymentId" => $this->payment->paymentToken->token,
                 "amount" => [],
                 "requestedAt" => 1625220437,
                 "storeId" => "",
@@ -129,56 +131,6 @@ class ProjectControllerForPayPayTest extends TestCase
         "comments" => "test comments",
         "birthday" => "1996-01-01",
         ];
-    }
-
-
-    /**
-     * test of create qr code is success
-     *
-     * @return void
-     */
-    public function testConfirmPaymentActionIsSuccess()
-    {
-        $this->withoutExceptionHandling();
-        $mock = \Mockery::mock(PayPay::class);
-        $mock->shouldReceive('createQrCode')
-            ->once()
-            ->andReturn($this->response_create_qr_code);
-
-        $this->app->bind(PayPayInterface::class, function () use ($mock) {
-            return $mock;
-        });
-
-        $response = $this->actingAs($this->supporter)
-                        ->post(route('user.plan.confirmPayment', array_merge(['project' => $this->project], $this->params)));
-        $response->assertOk();
-        $payments = $this->supporter->payments()->get();
-        $this->assertCount(2, $payments);
-    }
-
-    /**
-     * test of create qr code is fail
-     *
-     * @return void
-     */
-    public function testConfirmPaymentActionIsFail()
-    {
-        $this->withoutExceptionHandling();
-        $this->expectException(Exception::class);
-
-        $mock = \Mockery::mock(PayPay::class);
-        $mock->shouldReceive('createQrCode')
-            ->once()
-            ->andThrow(Exception::class);
-
-        $this->app->bind(PayPayInterface::class, function () use ($mock) {
-            return $mock;
-        });
-
-        ($this->actingAs($this->supporter)
-                        ->post(route('user.plan.confirmPayment', array_merge(['project' => $this->project], $this->params))))->execute(1);
-        $payments = $this->supporter->payments()->get();
-        $this->assertCount(1, $payments);
     }
 
     /**

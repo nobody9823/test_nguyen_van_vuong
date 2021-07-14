@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ReplyController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\TemporaryCompanyController;
 use App\Http\Controllers\Admin\TemporaryTalentController;
@@ -55,10 +56,11 @@ Route::middleware('auth:admin')->group(function () {
 
     //プロジェクト管理
     Route::resource('project', ProjectController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show']]);
+    Route::post('project/operate_projects', [ProjectController::class,'operate_projects'])->name('project.operate_projects');
     Route::get('project/{project}/release', [ProjectController::class, 'release'])->name('project.release');
     Route::get('project/{project}/preview', [ProjectController::class, 'preview'])->name('project.preview');
     Route::get('project/{project}/output_cheering_users_to_csv', [ProjectController::class, 'output_cheering_users_to_csv'])->name('project.output_cheering_users_to_csv');
-    // Route::delete('project/image/{project_image}', [ProjectController::class, 'deleteImage'])->name('project.image');
+    Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');
     // Route::patch('project/{project}/increment_likes', [ProjectController::class, 'incrementLikes'])->name('project.increment_likes');
     // Route::patch('project/{project}/decrement_likes', [ProjectController::class, 'decrementLikes'])->name('project.decrement_likes');
     Route::prefix('project/{project}')->group(function () {
@@ -77,11 +79,11 @@ Route::middleware('auth:admin')->group(function () {
     // Route::delete('plan/option/{option}', [PlanController::class, 'deleteOption'])->name('option.destroy');
     Route::delete('report/image/{report_image}', [ReportController::class, 'deleteImage'])->name('report.image');
 
-    // プラン管理
+    // リターン管理
     Route::resource('plan', PlanController::class, ['only' => ['index', 'show', 'destroy']]);
 
     // 応募者管理
-    Route::resource('user_payment_included', ActivityReportController::class, ['only' => ['index', 'show', 'destroy']]);
+    Route::resource('payment', PaymentController::class, ['only' => ['index', 'show', 'destroy']]);
 
     // 活動報告管理
     Route::resource('report', ReportController::class, ['only' => ['index', 'show']]);
@@ -90,7 +92,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('comment', CommentController::class, ['only' => ['index', 'show', 'destroy']]);
 
     //返信管理
-    Route::resource('reply', ReplyController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+    Route::post('reply/{comment}', [ReplyController::class,'store'])->name('reply.store');
+    Route::resource('reply', ReplyController::class, ['only' => ['update', 'destroy']]);
 
     //タグ管理
     Route::resource('tag', TagController::class, ['only' => ['index','create', 'store', 'edit', 'update', 'destroy']]);
@@ -101,8 +104,6 @@ Route::middleware('auth:admin')->group(function () {
     Route::put('message/{message_content}', [MessageController::class,'update'])->name('message_content.update');
     Route::delete('message/{message_content}', [MessageController::class,'destroy'])->name('message_content.destroy');
     Route::get('message/{message_content}/file_download', [MessageController::class,'file_download'])->name('message_content.file_download');
-
-    Route::resource('supporter_purchase', SupporterPurchaseController::class, ['only' => ['index']]);
 });
 
 // 上記以外のパラメーターを取得して、route('admin.dashboard')にリダイレクトする。

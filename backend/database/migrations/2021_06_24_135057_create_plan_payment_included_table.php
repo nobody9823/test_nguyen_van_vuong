@@ -17,6 +17,7 @@ class CreatePlanPaymentIncludedTable extends Migration
             $table->id();
             $table->foreignId('plan_id')->constrained('plans');
             $table->foreignId('payment_id')->constrained('payments');
+            $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
         });

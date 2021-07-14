@@ -21,6 +21,7 @@ Route::resource('project', ProjectController::class)->only('show')->middleware('
 Route::prefix('project/{project}')->middleware('auth', 'project.released')->group(function () {
     Route::get('plan/selectPlans/{plan?}', [ProjectController::class, 'selectPlans'])->name('plan.selectPlans');
     Route::post('plan/confirmPayment', [ProjectController::class, 'confirmPayment'])->name('plan.confirmPayment');
+    Route::get('plan/prepare_for_payment', [ProjectController::class, 'prepareForPayment'])->name('plan.prepare_for_payment');
     Route::get('plan/{payment}/paymentForPayJp', [ProjectController::class, 'paymentForPayJp'])->name('plan.paymentForPayJp');
     Route::get('plan/{payment}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
@@ -32,6 +33,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{plan}/success', [PlanController::class, 'success'])->name('plan.success');
     Route::post('comment/post', [CommentController::class, 'postComment'])->name('comment.post');
     Route::get('support', [ProjectController::class, 'support'])->name('project.support');
+    Route::get('supporter_ranking', [ProjectController::class, 'supporterRanking'])->name('project.supporter_ranking');
 });
 
 //---------------------Mypage-----------------------------------------------
@@ -72,8 +74,8 @@ Route::get('/terms', [TopPageController::class, 'terms'])->name('terms');
 Route::get('/privacy_policy', [TopPageController::class, 'privacyPolicy'])->name('privacy_policy');
 
 //---------------------Forgot Password-----------------------------------------------
-Route::get('/forgot_password', [MypageController::class, 'forgotPassword'])->name('forgot_password');
-Route::post('/send_reset_password_mail', [MypageController::class, 'sendResetPasswordMail'])->name('send_reset_password_mail');
+Route::get('/forgot_password', [PasswordResetController::class, 'forgotPassword'])->name('forgot_password');
+Route::post('/send_reset_password_mail', [PasswordResetController::class, 'sendResetPasswordMail'])->name('send_reset_password_mail');
 // --------------------password reset-------------------
 Route::get('/password_reset/{token}', [PasswordResetController::class, 'reset'])->name('password.reset');
 Route::post('/password_reset', [PasswordResetController::class, 'update'])->name('password.update');
