@@ -98,7 +98,7 @@
                     {{ $plan->title }}
                 </td>
                 <td>
-                    <p style="white-space: pre-line;">{{ Str::limit($plan->content, 200) }}</p>
+                    <p class="plan-content">{{ Str::limit($plan->content, 200) }}</p>
                 </td>
                 <td>
                     {{ number_format($plan->price) }}円
