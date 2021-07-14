@@ -27,8 +27,8 @@ class ChangeStartDateAndEndDateColumnsAtProjectTable extends Migration
     public function down()
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn('start_date');
-            $table->dropColumn('end_date');
+            $table->date('start_date')->change();
+            $table->date('end_date')->change();
         });
     }
 }
