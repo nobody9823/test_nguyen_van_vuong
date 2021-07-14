@@ -3,19 +3,19 @@
 namespace Database\Factories;
 
 use App\Enums\BankAccountType;
-use App\Models\BankAccount;
+use App\Models\Identification;
 use Faker\Factory as FakerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Str;
 
-class BankAccountFactory extends Factory
+class IdentificationFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = BankAccount::class;
+    protected $model = Identification::class;
 
     /**
      * Define the model's default state.
@@ -31,6 +31,8 @@ class BankAccountFactory extends Factory
             'account_type' => BankAccountType::getValues()[random_int(0,2)],
             'account_number' => str_repeat(random_int(0, 9), 7),
             'account_name' => Str::of($faker_en->name)->upper(),
+            'identify_image_1' => 'public/sampleImage/now_printing.png',
+            'identify_image_2' => 'public/sampleImage/now_printing.png',
         ];
     }
 }

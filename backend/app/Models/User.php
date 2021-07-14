@@ -62,7 +62,7 @@ class User extends Authenticatable
             $user->snsUser()->delete();
             $user->address()->delete();
             $user->snsLinks()->delete();
-            $user->bankAccount()->delete();
+            $user->identification()->delete();
             $user->profile()->delete();
 
             $project_ids = Project::where('user_id', $user->id)->pluck('id')->toArray();
@@ -151,9 +151,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\SnsLink');
     }
 
-    public function bankAccount()
+    public function identification()
     {
-        return $this->hasOne('App\Models\BankAccount');
+        return $this->hasOne('App\Models\Identification');
     }
 
     //--------------- local scopes -------------
