@@ -17,13 +17,13 @@ class CreateIdentificationsTable extends Migration
         Schema::create('identifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->string('bank_code')->comment('金融機関コード、先頭に０が入る可能性あるのでstring、4桁バリデーション');
-            $table->string('branch_code')->comment('支店コード、先頭に０が入る可能性あるのでstring、3桁バリデーション');
+            $table->string('bank_code')->default('')->comment('金融機関コード、先頭に０が入る可能性あるのでstring、4桁バリデーション');
+            $table->string('branch_code')->default('')->comment('支店コード、先頭に０が入る可能性あるのでstring、3桁バリデーション');
             $table->enum('account_type', BankAccountType::getValues());
-            $table->string('account_number')->comment('口座番号、先頭に０が入る可能性あるのでstring、7桁バリデーション');
-            $table->string('account_name')->comment('カタカナで姓名記入');
-            $table->string('identify_image_1');
-            $table->string('identify_image_2');
+            $table->string('account_number')->default('')->comment('口座番号、先頭に０が入る可能性あるのでstring、7桁バリデーション');
+            $table->string('account_name')->default('')->comment('カタカナで姓名記入');
+            $table->string('identify_image_1')->default('public/sampleImage/now_printing.png');
+            $table->string('identify_image_2')->default('public/sampleImage/now_printing.png');
             $table->softDeletes();
             $table->timestamps();
         });
