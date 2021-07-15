@@ -433,7 +433,13 @@ class ProjectController extends Controller
         $project = Project::where('id',$request->project_id)->first();
         $toggle_liked = $project->likedUsers()->toggle([Auth::id()]);
 
-        return $result = isset($toggle_liked["attached"][0]) ? "登録" : "削除";
+        return $result = !Auth::id() ? "未ログイン" : (isset($toggle_liked["attached"][0]) ? "登録" : "削除");
+
+        // if(Auth::id()){
+        //     return $result = isset($toggle_liked["attached"][0]) ? "登録" : "削除";
+        // } else {
+        //     return $result = "未ログイン";
+        // }
     }
 
     public function support(Project $project)
