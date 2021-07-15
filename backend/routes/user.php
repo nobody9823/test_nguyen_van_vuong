@@ -39,7 +39,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
 
 //---------------------Mypage-----------------------------------------------
 Route::group(['middleware' => ['auth:web']], function () {
-    Route::resource('my_project', MyProjectController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+    Route::resource('my_project', MyProjectController::class)->only(['index', 'create', 'store', 'edit', 'update'])->middleware('can:checkOwnProject,my_project');
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
     Route::get('/contribution_comments', [MypageController::class, 'contributionComments'])->name('contribution_comments');
     Route::get('/purchased_projects', [MypageController::class, 'purchasedProjects'])->name('purchased_projects');
