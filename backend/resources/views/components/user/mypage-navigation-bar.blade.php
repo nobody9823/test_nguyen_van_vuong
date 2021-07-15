@@ -48,7 +48,7 @@
             <div class="pbb_01_link">
                 マイプロジェクト管理
                 <i class="fas fa-chevron-right"></i>
-                <a href="{{ route('user.my_project.index') }}" class="cover_link"></a>
+                <a href="{{ route('user.project.index') }}" class="cover_link"></a>
             </div>
         </div>
     </div>
