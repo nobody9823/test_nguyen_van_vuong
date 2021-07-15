@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\ImageCast;
 use Auth;
+use Carbon\Carbon;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,6 +32,7 @@ class Plan extends Model
 
     protected $casts = [
         'image_url' => ImageCast::class,
+        'delivery_date' => 'datetime'
     ];
 
     public static function boot()
