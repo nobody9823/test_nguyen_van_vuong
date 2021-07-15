@@ -9,6 +9,7 @@ use App\Http\Controllers\User\TopPageController;
 use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\InquiryController;
 use App\Http\Controllers\User\MypageController;
+use App\Http\Controllers\User\MyProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\RegisterController;
 
@@ -38,6 +39,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
 
 //---------------------Mypage-----------------------------------------------
 Route::group(['middleware' => ['auth:web']], function () {
+    Route::resource('my_project', MyProjectController::class)->only(['index', 'create', 'store', 'edit', 'update']);
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
     Route::get('/contribution_comments', [MypageController::class, 'contributionComments'])->name('contribution_comments');
     Route::get('/purchased_projects', [MypageController::class, 'purchasedProjects'])->name('purchased_projects');
@@ -69,9 +71,6 @@ Route::middleware(['guest:web', 'throttle:10'])->group(function () {
 });
 // --------------------Top Page-------------------
 Route::get('/question', [TopPageController::class, 'question'])->name('question');
-Route::get('/tradelaw', [TopPageController::class, 'tradelaw'])->name('tradelaw');
-Route::get('/terms', [TopPageController::class, 'terms'])->name('terms');
-Route::get('/privacy_policy', [TopPageController::class, 'privacyPolicy'])->name('privacy_policy');
 
 //---------------------Forgot Password-----------------------------------------------
 Route::get('/forgot_password', [PasswordResetController::class, 'forgotPassword'])->name('forgot_password');
