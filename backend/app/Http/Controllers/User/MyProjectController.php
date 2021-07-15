@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MyProjectRequest;
 use App\Models\Project;
 use App\Models\ProjectFile;
 use App\Models\Plan;
@@ -98,9 +99,11 @@ class MyProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MyProjectRequest $request, Project $project)
     {
-        //
+        $project->fill($request->all())->save();
+
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with(['flash_message' => 'プロジェクトが更新されました。']);
     }
 
     /**
