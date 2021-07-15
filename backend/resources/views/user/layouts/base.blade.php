@@ -380,8 +380,11 @@ if(isiOS) {
     </p>
 
 </div><!--/wrapper-->
+</body>
 
-
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v11.0" nonce="KCBaCGBe"></script>
+<script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
 @yield('script')
 <script>
 $(window).on('load', function(){
@@ -524,5 +527,4 @@ const uncheckAll = () => {
 //全選択ボタンをクリックした時「uncheckAll」を実行
 uncheckBtn.addEventListener("click", uncheckAll, false);
 </script>
-</body>
 </html>
