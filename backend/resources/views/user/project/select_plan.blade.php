@@ -375,7 +375,7 @@ window.onload = function(){
 <script src="{{ asset('/js/Plans.js') }}"></script>
 <script src="https://js.pay.jp/v2/pay.js"></script>
 <script>
-    var payjp = Payjp('{{ config("app.pay_jp_key_for_test") }}')
+    var payjp = Payjp('{{ config("app.pay_jp_key") }}')
 
     var elements = payjp.elements()
 
