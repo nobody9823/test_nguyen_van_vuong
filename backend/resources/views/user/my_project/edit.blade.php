@@ -48,21 +48,15 @@
                     <x-user.my_project.main_content />
                 </section>
                 <section style="display: none;" id="return_section" class="my_project_section">
-                    <x-user.my_project.return />
+                    <x-user.my_project.return :project="$project" />
                 </section>
                 <section style="display: none;" id="identification_section" class="my_project_section">
                     <x-user.my_project.identification />
                 </section>
-                <div class="def_btn">
-                    <button type="submit" class="disable-btn">
-                        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
-                    </button>
-                </div>
             </div>
         </div>
 
     </div>
-
 
 </section>
 </div>
@@ -77,6 +71,22 @@ const selectEditTag = el => {
         myProjectSections[$i].style.display = 'none';
     };
     document.getElementById(el.value + '_section').style.display = 'block';
+};
+const DisplayPlanForm = () => {
+    let el = document.getElementById('plan_form_section');
+    if(el.style.display === 'none'){
+        el.style.display = 'block';
+    } else {
+        el.style.display = 'none';
+    };
+}
+const DisplayEditPlan = (el) => {
+    let PlanFormSections = document.querySelectorAll('.edit_plan_form_sections');
+    for(let $i = 0; $i < PlanFormSections.length; $i ++){
+        PlanFormSections[$i].style.display = 'none';
+    }
+    console.log(el);
+    document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
 }
 </script>
 @endsection
