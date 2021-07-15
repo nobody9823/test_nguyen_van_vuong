@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
+use App\Models\Tag;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -84,5 +86,18 @@ class MyProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * edit target amount
+     *
+     * @param Project
+     * @return \Illuminate\Http\Response
+     */
+    public function editMyProject(Project $project)
+    {
+        $tags = Tag::pluck('name', 'id');
+
+        return view('user.my_project.edit', ['project' => $project, 'tags' => $tags]);
     }
 }
