@@ -427,19 +427,18 @@ class ProjectController extends Controller
 
     public function ProjectLiked(Request $request)
     {
-        // ソフトデリートのレコードを削除する(仮で記載)
-        // UserProjectLiked::where('project_id',$request->project_id)->where('user_id',1)->withTrashed()->forceDelete();
-
         $project = Project::where('id',$request->project_id)->first();
-        $toggle_liked = $project->likedUsers()->toggle([Auth::id()]);
+        $exist_liked = UserProjectLiked::where('project_id',$request->project_id)->where('user_id',Auth::id())->exists();
 
-        return $result = !Auth::id() ? "未ログイン" : (isset($toggle_liked["attached"][0]) ? "登録" : "削除");
-
-        // if(Auth::id()){
-        //     return $result = isset($toggle_liked["attached"][0]) ? "登録" : "削除";
-        // } else {
-        //     return $result = "未ログイン";
-        // }
+        if(!Auth::id()){
+            return "未ログイン";
+        } elseif($exist_liked){
+            $project->likedUsers()->detach(Auth::id());
+            return "削除";
+        } else {
+            $project->likedUsers()->attach(Auth::id());
+            return "登録";
+        }
     }
 
     public function support(Project $project)
