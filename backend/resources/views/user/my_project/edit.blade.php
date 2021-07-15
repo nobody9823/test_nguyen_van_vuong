@@ -28,6 +28,8 @@
                     <label class="tab_item" for="main_content_tag">本文</label>
                     <input class="radio-fan" type="radio" id="return_tag" name="project_edit_tag" value="return" onClick="selectEditTag(this)">
                     <label class="tab_item" for="return_tag">リターン</label>
+                    <input class="radio-fan" type="radio" id="ps_return_tag" name="project_edit_tag" value="ps_return" onClick="selectEditTag(this)">
+                    <label class="tab_item" for="ps_return_tag">PSリターン</label>
                     <input class="radio-fan" type="radio" id="identification_tag" name="project_edit_tag" value="identification" onClick="selectEditTag(this)">
                     <label class="tab_item" for="identification_tag">本人確認</label>
                 </div>
@@ -49,6 +51,9 @@
                 </section>
                 <section style="display: none;" id="return_section" class="my_project_section">
                     <x-user.my_project.return :project="$project" />
+                </section>
+                <section style="display: none;" id="ps_return_section" class="my_project_section">
+                    <x-user.my_project.ps_return :project="$project" />
                 </section>
                 <section style="display: none;" id="identification_section" class="my_project_section">
                     <x-user.my_project.identification />
