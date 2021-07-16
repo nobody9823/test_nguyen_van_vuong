@@ -10,16 +10,18 @@ class ProjectCardLarge extends Component
 {
     public $project;
     public $userLiked;
+    public $test;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($project,$userLiked)
+    public function __construct($project,$userLiked,$test)
     {
         $this->project = $project;
         $this->userLiked = $userLiked;
+        $this->test = $test;
     }
 
     public function projectImageUrl() {

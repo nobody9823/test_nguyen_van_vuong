@@ -15,45 +15,11 @@ use Carbon\Carbon;
         <div class="img_box_01_L">
             <x-user.project.project-card-large :project="$projects->first()" :userLiked="$user_liked" />
         </div>
-
+        
         <div class="img_box_01_R">
             @foreach($projects as $project)
                 @if(!$loop->first)
-                <div class="img_box_01_R_item">
-                    <div class="ib01R_01">
-                        <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
-                        <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                        <div class="okini_link liked_project" id="{{ $project->id }}">
-                        @if ($user_liked->where('project_id',$project->id)->isEmpty())
-                        <i class="far fa-heart"></i>
-                        @else
-                        <i class="fas fa-heart"></i>
-                        @endif
-                        </div>
-                    </div>
-
-                    <div class="ib01R_02">
-                    <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                        <div class="progress-bar">
-                            <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
-                        </div>
-                    </div>
-
-                    {{-- <div class="process">
-                        <div class="bar" style="width: {{ $project->achievement_rate }}%;">
-                            <span>{{ $project->achievement_rate}}%</span></div>
-                    </div> --}}
-
-                    <div class="ib01R_03">
-                        <h3>{{ Str::limit($project->title, 46) }}</h3>
-                        <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                    </div>
-
-                    <div class="ib01R_04">
-                        <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
-                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
-                    </div>
-                </div><!--/.img_box_01_L_item-->
+                <x-user.project.project-card-large :project="$project" :userLiked="$user_liked" test="テスト" />
                 @endif
             @endforeach
         </div>
