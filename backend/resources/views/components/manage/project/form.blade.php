@@ -100,7 +100,6 @@
 <button type="submit" class="btn btn-primary">作成</button>
 @endif
 
-@section('script')
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 tinymce.init({
@@ -135,4 +134,3 @@ tinymce.init({
     }
 });
 </script>
-@endsection
