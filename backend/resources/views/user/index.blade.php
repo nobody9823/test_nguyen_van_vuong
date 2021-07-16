@@ -13,13 +13,17 @@ use Carbon\Carbon;
 
     <div class="img_box_01">
         <div class="img_box_01_L">
-            <x-user.project.project-card-large :project="$projects->first()" :userLiked="$user_liked" cardSize="large" />
+            <div class="img_box_01_L_item">
+                <x-user.project.project-card-large :project="$projects->first()" :userLiked="$user_liked" cardSize="large" />
+            </div>
         </div>
 
         <div class="img_box_01_R">
             @foreach($projects as $project)
                 @if(!$loop->first)
-                <x-user.project.project-card-large :project="$project" :userLiked="$user_liked" cardSize="" />
+                <div class="img_box_01_R_item">
+                    <x-user.project.project-card-large :project="$project" :userLiked="$user_liked" cardSize="" />
+                </div>
                 @endif
             @endforeach
         </div>
@@ -278,7 +282,9 @@ use Carbon\Carbon;
 
     <div class="img_box_03">
         <div class="img_box_03_L">
-            <x-user.project.project-card-large :project="$ranking_projects->first()" :userLiked="$user_liked" cardSize="large" />
+            <div class="img_box_01_L_item">
+                <x-user.project.project-card-large :project="$ranking_projects->first()" :userLiked="$user_liked" cardSize="large" />
+            </div>
         </div>
 
         <div class="img_box_03_R">
