@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
-class ProjectCardLarge extends Component
+class ProjectCard extends Component
 {
     public $project;
     public $userLiked;
@@ -44,6 +44,6 @@ class ProjectCardLarge extends Component
      */
     public function render()
     {
-        return view('components.user.project.project-card-large');
+        return view('components.user.project.project-card');
     }
 }
