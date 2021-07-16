@@ -12,7 +12,9 @@ use Carbon\Carbon;
     <section id="pc-top_01" class="section_base">
 
     <div class="img_box_01">
-        <x-user.project.project-card-large :projects="$projects" :userLiked="$user_liked" />
+        <div class="img_box_01_L">
+            <x-user.project.project-card-large :projects="$projects" :userLiked="$user_liked" />
+        </div>
 
         <div class="img_box_01_R">
             @foreach($projects as $project)
