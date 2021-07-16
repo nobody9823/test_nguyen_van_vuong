@@ -38,7 +38,7 @@
         <div class="def_outer_gray">
             <div class=" def_inner inner_item">
                 <section id="target_amount_section" class="my_project_section">
-                    <x-user.my_project.target_amount />
+                    <x-user.my_project.target_amount :project="$project" />
                 </section>
                 <section style="display: none;" id="overview_section" class="my_project_section">
                     <x-user.my_project.overview :tags="$tags" />
