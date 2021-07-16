@@ -13,6 +13,7 @@ use App\Models\Payment;
 use App\Models\Plan;
 use App\Models\PlanPaymentIncluded;
 use App\Models\Project;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -87,6 +88,9 @@ class MypageController extends Controller
     {
         DB::beginTransaction();
         try {
+            $user->profile->birthday = Carbon::create(
+                $request->year, $request->month, $request->day
+            );
             $user->fill($request->all())->save();
             $user->saveProfile($request->all());
             $user->saveAddress($request->all());

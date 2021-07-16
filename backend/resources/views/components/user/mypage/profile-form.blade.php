@@ -115,33 +115,35 @@
     </form>
 
 
-{{-- @elseif(Request::get('input_type') === 'birthday')
-<form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST">
+@elseif(Request::get('input_type') === 'birthday')
+
+<form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="birthdayForm">
     @method('PATCH')
     @csrf
     <div class="prof_edit_row">
         <div class="prof_edit_01">生年月日<br><span>編集中</span></div>
         <div class="prof_edit_editbox pee_select_hori">
             <div class="cp_ipselect cp_normal">
-                <select name="year">
+                <select id="year" name="year">
                     <option value="">年</option>
-                    <option value="1930">1930</option>
-                    <option value="2020">2020</option>
+                    <?php $years = array_reverse(range(today()->year - 100, today()->year)); ?>
+                    @foreach($years as $year)
+                        <option value="{{ $year }}" {{ old('year') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                    @endforeach
                 </select>
             </div>
+
             <div class="cp_ipselect cp_normal">
-                <select name="month">
+                <select id="month" name="month">
                     <option value="">月</option>
-                    <option value="1">1</option>
-                    <option value="12">12</option>
+                    @foreach(range(1, 12) as $month)
+                        <option value="{{ $month }}" {{ old('month') == $month ? 'selected' : '' }}>{{ $month }}</option>
+                    @endforeach
                 </select>
             </div>
+
             <div class="cp_ipselect cp_normal">
-                <select name="day">
-                    <option value="">日</option>
-                    <option value="1">1</option>
-                    <option value="31">31</option>
-                </select>
+                <select id="day" name="day" data-old-value="{{ old('day') }}"></select>
             </div>
             <div class="cp_ipselect cp_normal">
                 <select name="koukai">
@@ -151,10 +153,11 @@
             </div>
         </div>
         <div class="prof_edit_03">
-            <button type="submit">更新</button>
+            <a href="javascript:document.birthdayForm.submit()">更新</a>
         </div>
     </div>
-</form> --}}
+</form>
+
 @elseif(Request::get('input_type') === 'gender')
     <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="genderForm">
         @method('PATCH')
@@ -242,11 +245,17 @@
             編集
             <a href="{{ route('user.profile', ['input_type' => 'prefecture_id']) }}" class="cover_link"></a></div>
     </div>
-    {{-- <div class="prof_edit_row">
+    <div class="prof_edit_row">
         <div class="prof_edit_01">生年月日</div>
-        <div class="prof_edit_02">設定されていません</div>
+        <div class="prof_edit_02">
+            @if(isset(Auth::user()->profile->birthday))
+                {{ Auth::user()->profile->birthday }}
+            @else
+                設定されていません
+            @endif
+        </div>
         <div class="prof_edit_03">編集<a href="{{ route('user.profile', ['input_type' => 'birthday']) }}" class="cover_link"></a></div>
-    </div> --}}
+    </div>
     <div class="prof_edit_row">
         <div class="prof_edit_01">性別</div>
         <div class="prof_edit_02">

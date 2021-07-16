@@ -64,4 +64,5 @@
 
 @section('script')
 
+<script src="/js/birthday.js"></script>
 @endsection
