@@ -78,14 +78,18 @@
             </div>
         </div>
     </form>
-@elseif(Request::get('input_type') === 'inviter_code')
+@elseif(Request::get('input_type') === 'sns_links')
     <form action="{{ route('user.update_profile', ['user' => Auth::user()]) }}" method="POST" name="urlForm">
         @method('PATCH')
         @csrf
         <div class="prof_edit_row">
             <div class="prof_edit_01">URL<br><span>編集中</span></div>
             <div class="prof_edit_editbox">
-                <input name="url" type="text" placeholder="UserId" value="{{ old('url', Auth::user()->profile->inviter_code) }}"/>
+                <input name="twitter_url" type="text" placeholder="UserId">
+                <input name="instagram_url" type="text" placeholder="UserId">
+                <input name="youtube_url" type="text" placeholder="UserId">
+                <input name="tiktok_url" type="text" placeholder="UserId">
+                <input name="other_url" type="text" placeholder="UserId">
             </div>
             <div class="prof_edit_03">
                 <a href="javascript:document.urlForm.submit()">更新</a>
@@ -233,10 +237,14 @@
     </div>
     <div class="prof_edit_row">
         <div class="prof_edit_01">URL</div>
-        <div class="prof_edit_02">{{ Auth::user()->profile->inviter_code }}</div>
+        {{-- <div class="prof_edit_02">{{ Auth::user()->sns_links->twitter_url }}</div>
+        <div class="prof_edit_02">{{ Auth::user()->sns_links->instagram_url }}</div>
+        <div class="prof_edit_02">{{ Auth::user()->sns_links->youtube_url }}</div>
+        <div class="prof_edit_02">{{ Auth::user()->sns_links->tiktok_url }}</div>
+        <div class="prof_edit_02">{{ Auth::user()->sns_links->other_url }}</div> --}}
         <div class="prof_edit_03">
             編集
-            <a href="{{ route('user.profile', ['input_type' => 'inviter_code']) }}" class="cover_link"></a></div>
+            <a href="{{ route('user.profile', ['input_type' => 'sns_links']) }}" class="cover_link"></a></div>
     </div>
     <div class="prof_edit_row">
         <div class="prof_edit_01">現在地</div>

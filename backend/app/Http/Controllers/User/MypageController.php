@@ -94,6 +94,7 @@ class MypageController extends Controller
             $user->fill($request->all())->save();
             $user->saveProfile($request->all());
             $user->saveAddress($request->all());
+            $user->saveSnsLinks($request->all());
             DB::commit();
             return redirect()->route('user.profile')->with('flash_message', 'プロフィール更新が成功しました。');
         } catch(Exception $e) {

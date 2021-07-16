@@ -256,5 +256,15 @@ class User extends Authenticatable
             $this->address()->save($address->fill($value));
         }
     }
+
+    public function saveSnsLinks(array $value) :void
+    {
+        if (isset($this->sns_links)) {
+            $this->snsLinks()->save($this->sns_links->fill($value));
+        } else {
+            $sns_links = new SnsLink();
+            $this->snsLinks()->save($sns_links->fill($value));
+        }
+    }
     //--------------- functions -------------
 }
