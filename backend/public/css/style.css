@@ -538,8 +538,8 @@ input[type=radio]:checked + .radio-fan::after {
 .img_box_01_R .progress-bar_par div{ font-size: 0.8rem; color:#00aebd; }
 
 .ib01R_03{ padding: 0 10px; margin: 0 0 10px 0; position: relative;}
-.ib01R_03 h3{ font-size: 1.3rem; color: #707070;}
-.ib01R_04{display: flex; flex-wrap: wrap; align-items: center; align-content: center; padding: 0 10px; margin: 0 0 0px 0; position: absolute; bottom: 0;}
+.ib01R_03 h2{ font-size: 1.1rem; color: #707070;}
+.ib01R_04{display: flex; flex-wrap: wrap; align-items: center; align-content: center; padding: 0 10px; margin: 0 0 0px 0;}
 .ib01R_04 div{ margin: 0 12px 10px 0; font-size: 1rem;}
 .ib01R_04 div span{ font-weight: bold; color:#00aebd; }
 
