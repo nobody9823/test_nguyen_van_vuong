@@ -27,4 +27,16 @@ class AdminFactory extends Factory
             'password' => 'admin',
         ];
     }
+
+    public function valleyin()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'admin',
+                'email' => 'valleyin.projects@gmail.com',
+                'email_verified_at' => now(),
+                'password' => 'admin',
+            ];
+        });
+    }
 }

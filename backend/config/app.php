@@ -239,8 +239,6 @@ return [
     ],
 
     'basic_auth' => env('BASIC_AUTH', false),
-    'pay_jp_secret_for_test' => env('PAY_JP_SECRET_FOR_TEST'),
-    'pay_jp_key_for_test' => env('PAY_JP_KEY_FOR_TEST'),
     'pay_jp_secret' => env('PAY_JP_SECRET'),
     'pay_jp_key' => env('PAY_JP_KEY'),
     'pay_pay_key_for_test' => env('PAY_PAY_KEY_FOR_TEST'),

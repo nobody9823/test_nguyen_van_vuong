@@ -24,22 +24,12 @@ class ProjectPolicy
         //
     }
 
-    public function checkOwnProjectAsCompany(Company $company, Project $project, $action)
+    public function checkOwnProject(User $user, Project $project)
     {
-        return ($action === 'show' || $action === "preview")
-            ? $company->id === $project->talent->company_id
-            : $company->id === $project->talent->company_id
-                && $project->release_status !== '掲載中' && $project->release_status !== '承認待ち';
+        return $user->id === $project->user_id;
     }
 
-    public function checkOwnProjectAsTalent(Talent $talent, Project $project, $action)
-    {
-        return ($action === 'show' || $action === "preview")
-            ? $talent->id === $project->talent_id
-            : $talent->id === $project->talent_id
-                && $project->release_status !== '掲載中' && $project->release_status !== '承認待ち';
-    }
-
+    // FIXME: paymentsテーブルにproject_idが追加されたのでそれに合わせて要修正
     public function checkIsFinishedPayment(User $user, Project $project)
     {
         $plans = $project->plans()->whereIn(

@@ -62,15 +62,15 @@
                         現在のパスワードを忘れた方はこちらから
                     </a>
                 </div>
-                <div class="pee_now">*********</div>
+                <input name="current_password" type="password"/>
 
-                <div class="pee_tit">新しいパスワード<span class="prof_edit_editbox_desc">　半角英数字のみ</span></div>
-                <input name="new_password" type="password"/>
+                <div class="pee_tit">パスワード<span class="prof_edit_editbox_desc">　半角英数字のみ</span></div>
+                <input name="password" type="password"/>
 
-                <div class="pee_tit">新しいパスワード（確認用）
+                <div class="pee_tit">パスワード（確認用）
                     {{-- <span class="prof_edit_editbox_desc">　コピー＆ペースト不可</span> --}}
                 </div>
-                <input name="new_password_confirmation" type="password"/>
+                <input name="password_confirmation" type="password"/>
 
             </div>
             <div class="prof_edit_03">

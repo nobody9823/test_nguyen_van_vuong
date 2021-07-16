@@ -9,6 +9,8 @@ use App\Http\Controllers\User\TopPageController;
 use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\InquiryController;
 use App\Http\Controllers\User\MypageController;
+use App\Http\Controllers\User\MyProjectController;
+use App\Http\Controllers\User\MyPlanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\RegisterController;
 
@@ -19,7 +21,7 @@ Route::post('/project/{project}/liked', [ProjectController::class, 'ProjectLiked
 Route::resource('project', ProjectController::class)->only('show')->middleware('project.released');
 
 Route::prefix('project/{project}')->middleware('auth', 'project.released')->group(function () {
-    Route::get('plan/selectPlans/{plan?}', [ProjectController::class, 'selectPlans'])->name('plan.selectPlans');
+    Route::get('plan/selectPlans/{plan?}', [ProjectController::class, 'selectPlans'])->name('plan.selectPlans')->middleware('CheckProjectIsPublished');
     Route::post('plan/confirmPayment', [ProjectController::class, 'confirmPayment'])->name('plan.confirmPayment');
     Route::get('plan/prepare_for_payment', [ProjectController::class, 'prepareForPayment'])->name('plan.prepare_for_payment');
     Route::get('plan/{payment}/paymentForPayJp', [ProjectController::class, 'paymentForPayJp'])->name('plan.paymentForPayJp');
@@ -38,6 +40,14 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
 
 //---------------------Mypage-----------------------------------------------
 Route::group(['middleware' => ['auth:web']], function () {
+    Route::prefix('my_project')->group(function(){
+        Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+        Route::get('project/{project}/create_plan', [MyProjectController::class, 'createPlan'])->name('project.create_plan');
+        Route::prefix('project/{project}')->group(function(){
+            Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
+        });
+    });
+    Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_amount');
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
     Route::get('/contribution_comments', [MypageController::class, 'contributionComments'])->name('contribution_comments');
     Route::get('/purchased_projects', [MypageController::class, 'purchasedProjects'])->name('purchased_projects');
@@ -69,9 +79,6 @@ Route::middleware(['guest:web', 'throttle:10'])->group(function () {
 });
 // --------------------Top Page-------------------
 Route::get('/question', [TopPageController::class, 'question'])->name('question');
-Route::get('/tradelaw', [TopPageController::class, 'tradelaw'])->name('tradelaw');
-Route::get('/terms', [TopPageController::class, 'terms'])->name('terms');
-Route::get('/privacy_policy', [TopPageController::class, 'privacyPolicy'])->name('privacy_policy');
 
 //---------------------Forgot Password-----------------------------------------------
 Route::get('/forgot_password', [PasswordResetController::class, 'forgotPassword'])->name('forgot_password');

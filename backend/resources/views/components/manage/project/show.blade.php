@@ -200,9 +200,9 @@
                                                     {{ number_format( $plan->price) }}円
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <h6 class="font-weight-bold mb-2" style="white-space: pre-line;">
+                                                    <h6 class="font-weight-bold mb-2">
                                                         リターン内容</h6>
-                                                    {{ $plan->content }}
+                                                        <p class="plan-content">{{ $plan->content }}</p>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <h6 class="font-weight-bold mb-2">お返し予定日</h6>
