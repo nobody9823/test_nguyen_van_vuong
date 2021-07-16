@@ -41,7 +41,7 @@
                     <x-user.my_project.target_amount :project="$project" />
                 </section>
                 <section style="display: none;" id="overview_section" class="my_project_section">
-                    <x-user.my_project.overview :tags="$tags" />
+                    <x-user.my_project.overview :project="$project" :tags="$tags" />
                 </section>
                 <section style="display: none;" id="visual_section" class="my_project_section">
                     <x-user.my_project.visual />
