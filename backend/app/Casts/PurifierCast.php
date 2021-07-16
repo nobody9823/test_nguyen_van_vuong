@@ -18,6 +18,8 @@ class PurifierCast implements CastsAttributes
      */
     public function get($model, $key, $value, $attributes)
     {
+        // NOTICE: 動画もエディタに含めたい場合はこちらに切り替えてください。
+        // return Purifier::clean($value, 'youtube');
         return Purifier::clean($value);
     }
 
