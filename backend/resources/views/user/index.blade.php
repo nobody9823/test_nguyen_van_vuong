@@ -13,7 +13,7 @@ use Carbon\Carbon;
 
     <div class="img_box_01">
         <div class="img_box_01_L">
-            <x-user.project.project-card-large :projects="$projects" :userLiked="$user_liked" />
+            <x-user.project.project-card-large :project="$projects->first()" :userLiked="$user_liked" />
         </div>
 
         <div class="img_box_01_R">
@@ -312,7 +312,7 @@ use Carbon\Carbon;
 
     <div class="img_box_03">
         <div class="img_box_03_L">
-            <x-user.project.project-card-large :projects="$ranking_projects" :userLiked="$user_liked" />
+            <x-user.project.project-card-large :project="$ranking_projects->first()" :userLiked="$user_liked" />
         </div>
 
         <div class="img_box_03_R">

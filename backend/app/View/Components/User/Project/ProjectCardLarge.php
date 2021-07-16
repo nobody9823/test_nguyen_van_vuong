@@ -8,31 +8,30 @@ use Carbon\Carbon;
 
 class ProjectCardLarge extends Component
 {
-    public $projects;
+    public $project;
     public $userLiked;
-    public $carbon_now;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($projects,$userLiked)
+    public function __construct($project,$userLiked)
     {
-        $this->projects = $projects;
+        $this->project = $project;
         $this->userLiked = $userLiked;
     }
 
     public function projectImageUrl() {
-        return Storage::url($this->projects->first()->projectFiles()->where('file_content_type', 'image_url')->first()->file_url);
+        return Storage::url($this->project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url);
     }
 
     public function userLiked() {
-        return $this->userLiked->where('project_id',$this->projects->first()->id)->isEmpty();
+        return $this->userLiked->where('project_id',$this->project->id)->isEmpty();
     }
 
     public function daysLeft() {
-        return Carbon::now()->diffInDays(new Carbon($this->projects->first()->end_date));
+        return Carbon::now()->diffInDays(new Carbon($this->project->end_date));
     }
 
 
