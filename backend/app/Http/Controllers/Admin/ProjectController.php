@@ -72,7 +72,7 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ProjectRequest $request, Project $project)
-    { 
+    {
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
@@ -195,6 +195,15 @@ class ProjectController extends Controller
     {
         $project_file->deleteFile();
         return response()->json('success');
+    }
+
+    public function uploadEditorFile(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file',
+        ]);
+        $path = $request->file('file')->store('public/image');
+        return ['location' => Storage::url($path)];
     }
 
     /**
