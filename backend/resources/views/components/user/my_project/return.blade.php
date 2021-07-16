@@ -1,57 +1,53 @@
-<div class="form_item_row">
-    <div class="form_item_tit">タイトル<span class="hissu_txt">必須</span></div>
-    <input type="text" name="first_name" class="def_input_100p" value="">
+<div class="my_new_project_wrapper">
+
+    <section id="pc-top_04" class="section_base">
+        <div class="img_box_02">
+            @foreach($project->plans as $plan)
+            <div class="img_box_02_item">
+                <div class="ib02_01 E-font my_project_img_wrapper">
+                    <img src="{{ Storage::url($plan->image_url) }}">
+                    {{-- NOTICE: MyProjectController, show action --}}
+                    <a href="#show" class="cover_link"></a>
+                </div>
+
+                <div class="ib02_03">
+                    <h3>{{ Str::limit($project->title, 46) }}</h3>
+                    {{-- NOTICE: MyProjectController, show action--}}
+                    <a href="#show" class="cover_link"></a>
+                </div>
+
+                <div class="pds_sec02_01_btn">
+                    編集
+                    <a class="cover_link" onclick="DisplayEditPlan(this);" id="{{ $plan->id }}"></a>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </section>
+
+    @foreach($project->plans as $plan)
+    <section class="edit_plan_form_sections" id="edit_plan_form_section_{{ $plan->id }}" style="display: none;">
+        <form method="post" action="{{ route('user.plan.update', ['project' => $project, 'plan' => $plan]) }}" enctype="multipart/form-data">
+            @method('PATCH')
+            @csrf
+            <x-user.my_plan.plan-form :plan="$plan" />
+        </form>
+    </section>
+    @endforeach
+
+    {{--NOTICE: MyProjectController, create action --}}
+    <a href="javascript:DisplayPlanForm()" class="footer-over_L my_new_project">
+        <div class="footer-over_L_02">
+        <div class="footer-over_L_02_01">New Project</div>
+        <div class="footer-over_L_02_02">新規リターン作成はこちら</div>
+        </div>
+        <div class="footer-over_L_03"><i class="fas fa-chevron-right"></i></div>
+    </a>
 </div>
 
-<div class="form_item_row">
-    <div class="form_item_tit">金額<span class="hissu_txt">必須</span></div>
-    <input type="number" name="postal_code" class="p-postal-code def_input_100p" value="" placeholder="（例）100000">
-</div><!--/form_item_row-->
-
-<div class="form_item_row">
-    <div class="form_item_tit">本文<span class="hissu_txt">必須</span><span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-    <textarea name="remarks" class="def_textarea" rows="6"></textarea>
-</div>
-
-<div class="form_item_row">
-    <div class="form_item_tit">掲載開始日(日付、時刻)<span class="hissu_txt">必須</span></div>
-    <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="birth_year" class="form-control" name="birth_year" readonly>
-            <option value="{{ date('Y') }}">{{ date('Y') }}</option>
-        </select>
-    </div>
-    <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="birth_month" class="form-control" name="birth_month">
-            @for ($i = 1; $i <= 12; $i++)
-            <option value="{{ $i }}" {{ date('mm') == $i ? selected : '' }}>{{ $i }}</option>
-            @endfor
-        </select>
-    </div>
-    <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="birth_day" class="form-control" name="birth_day">
-            @for ($i = 1; $i <= 31; $i++)
-            <option value="{{ $i }}">{{ $i }}</option>
-            @endfor
-        </select>
-    </div>
-</div><!--/form_item_row-->
-
-<div class="form_item_row">
-    <div class="form_item_tit">画像<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-    <input type="file">
-</div>
-
-<div class="form_item_row">
-    <div class="form_item_tit">限定数</div>
-    <input type="number" name="postal_code" class="p-postal-code def_input_100p" value="" placeholder="（例）100000">
-</div>
-
-<div class="form_item_row">
-    <div class="form_item_tit">住所の有無<span class="hissu_txt">必須</span></div>
-    <div class="cp_ipselect cp_normal">
-        <select name="prefecture" class="p-region">
-            <option value="false">なし</option>
-            <option value="true">あり</option>
-        </select>
-    </div>
-</div>
+<section id="plan_form_section" style="display: none;">
+    <form method="post" action="{{ route('user.plan.store', ['project' => $project]) }}" enctype="multipart/form-data">
+        @csrf
+        <x-user.my_plan.plan-form :plan=null />
+    </form>
+</section>

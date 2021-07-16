@@ -13,7 +13,7 @@
         <div class="prof_page_R">
             <div class="my_new_project_wrapper">
                 {{--NOTICE: MyProjectController, create action --}}
-                <a href="#create" class="footer-over_L my_new_project">
+                <a href="{{ route('user.project.create') }}" class="footer-over_L my_new_project">
                     <div class="footer-over_L_02">
                     <div class="footer-over_L_02_01">New Project</div>
                     <div class="footer-over_L_02_02">新規プロジェクト作成はこちら</div>
