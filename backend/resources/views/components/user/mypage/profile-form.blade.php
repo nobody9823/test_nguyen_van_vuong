@@ -146,9 +146,9 @@
                 <select id="day" name="day" data-old-value="{{ old('day') }}"></select>
             </div>
             <div class="cp_ipselect cp_normal">
-                <select name="koukai">
-                    <option value="yes">公開する</option>
-                    <option value="no">公開しない</option>
+                <select name="birthday_is_published">
+                    <option value="1">公開する</option>
+                    <option value="0" >公開しない</option>
                 </select>
             </div>
         </div>
