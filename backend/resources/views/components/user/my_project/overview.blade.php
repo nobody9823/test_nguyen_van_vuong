@@ -1,21 +1,28 @@
+<form action="{{ route('user.project.update', ['project' => $project]) }}" method="post">
+    @csrf
+    @method('PUT')
 <div class="form_item_row">
     <div class="form_item_tit">タイトル<span class="hissu_txt">必須</span></div>
-    <input type="text" name="first_name" class="def_input_100p" value="">
+    <input type="text" name="title" class="def_input_100p" value="{{ old('title', optional($project)->title) }}">
 </div>
 
 <div class="form_item_row">
     <div class="form_item_tit">概要文<span class="nini_txt">任意</span>　<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-    <textarea name="remarks" class="def_textarea" rows="6"></textarea>
+    <textarea name="content" class="def_textarea" rows="6">{{ old('content', optional($project)->content) }}</textarea>
 </div>
 
 <div class="form_item_row">
     <div class="form_item_tit">タグ<span class="hissu_txt">必須</span></div>
-    <div class="cp_ipselect cp_normal">
-        <select name="prefecture" class="p-region">
-                <option value="non_selected">選択してください</option>
-            @foreach($tags as $key => $value)
-                <option value="{{ $key }}">{{ $value }}</option>
-            @endforeach
-        </select>
-    </div>
+    @foreach($tags as $key => $value)
+        <input type="checkbox" id="{{ $value }}" class="ac_list_checks" name="tags[]" value="{{ $key }}"
+            {{ old('tags.'.$key, in_array($value, $project->tags->pluck('name')->toArray()) ? $value : '' ) == $value ? 'checked' : '' }}>
+        <label for="{{ $value }}" class="checkbox-fan">{{ $value }}</label>
+    @endforeach
 </div>
+
+<div class="def_btn">
+    <button type="submit" class="disable-btn">
+        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
+    </button>
+</div>
+</form>
