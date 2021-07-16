@@ -114,11 +114,12 @@ tinymce.init({
     mobile: {
         theme: 'mobile',
         plugins: [ 'autosave', 'lists', 'autolink' ],
-        toolbar: [ 'undo', 'bold', 'italic', 'styleselect', 'image' ],
+        toolbar: [ 'undo', 'bold', 'italic', 'styleselect', 'image', 'forecolor', 'link' ],
+
     },
     plugins: [ 'code', 'lists', 'image', 'link', 'fullscreen', 'media', 'table'],
-    toolbar: ['undo redo | bold italic | forecolor backcolor | fontsizeselect | numlist bullist | table',
-        'link | image | media'],
+    toolbar: ['undo redo | bold italic | forecolor backcolor | fontsizeselect | numlist bullist | table | link | image | media',
+        'alignleft | aligncenter | alignright'],
     file_picker_types: 'image',
     images_upload_handler: function (blobInfo, success, failure) {
         let data = new FormData();
