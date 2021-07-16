@@ -102,7 +102,8 @@ class MyProjectController extends Controller
     public function update(MyProjectRequest $request, Project $project)
     {
         $project->fill($request->all())->save();
-
+        $project->tags()->detach();
+        $project->tags()->attach(array_values($request->tags));
         return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with(['flash_message' => 'プロジェクトが更新されました。']);
     }
 
