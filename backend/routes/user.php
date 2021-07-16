@@ -10,6 +10,7 @@ use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\InquiryController;
 use App\Http\Controllers\User\MypageController;
 use App\Http\Controllers\User\MyProjectController;
+use App\Http\Controllers\User\MyPlanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\RegisterController;
 
@@ -39,7 +40,13 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
 
 //---------------------Mypage-----------------------------------------------
 Route::group(['middleware' => ['auth:web']], function () {
-    Route::resource('my_project', MyProjectController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+    Route::prefix('my_project')->group(function(){
+        Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+        Route::get('project/{project}/create_plan', [MyProjectController::class, 'createPlan'])->name('project.create_plan');
+        Route::prefix('project/{project}')->group(function(){
+            Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
+        });
+    });
     Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_amount');
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
     Route::get('/contribution_comments', [MypageController::class, 'contributionComments'])->name('contribution_comments');

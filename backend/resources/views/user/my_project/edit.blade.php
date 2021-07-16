@@ -28,6 +28,8 @@
                     <label class="tab_item" for="main_content_tag">本文</label>
                     <input class="radio-fan" type="radio" id="return_tag" name="project_edit_tag" value="return" onClick="selectEditTag(this)">
                     <label class="tab_item" for="return_tag">リターン</label>
+                    <input class="radio-fan" type="radio" id="ps_return_tag" name="project_edit_tag" value="ps_return" onClick="selectEditTag(this)">
+                    <label class="tab_item" for="ps_return_tag">PSリターン</label>
                     <input class="radio-fan" type="radio" id="identification_tag" name="project_edit_tag" value="identification" onClick="selectEditTag(this)">
                     <label class="tab_item" for="identification_tag">本人確認</label>
                 </div>
@@ -48,21 +50,18 @@
                     <x-user.my_project.main_content />
                 </section>
                 <section style="display: none;" id="return_section" class="my_project_section">
-                    <x-user.my_project.return />
+                    <x-user.my_project.return :project="$project" />
+                </section>
+                <section style="display: none;" id="ps_return_section" class="my_project_section">
+                    <x-user.my_project.ps_return :project="$project" />
                 </section>
                 <section style="display: none;" id="identification_section" class="my_project_section">
                     <x-user.my_project.identification />
                 </section>
-                <div class="def_btn">
-                    <button type="submit" class="disable-btn">
-                        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
-                    </button>
-                </div>
             </div>
         </div>
 
     </div>
-
 
 </section>
 </div>
@@ -77,6 +76,22 @@ const selectEditTag = el => {
         myProjectSections[$i].style.display = 'none';
     };
     document.getElementById(el.value + '_section').style.display = 'block';
+};
+const DisplayPlanForm = () => {
+    let el = document.getElementById('plan_form_section');
+    if(el.style.display === 'none'){
+        el.style.display = 'block';
+    } else {
+        el.style.display = 'none';
+    };
+}
+const DisplayEditPlan = (el) => {
+    let PlanFormSections = document.querySelectorAll('.edit_plan_form_sections');
+    for(let $i = 0; $i < PlanFormSections.length; $i ++){
+        PlanFormSections[$i].style.display = 'none';
+    }
+    console.log(el);
+    document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
 }
 </script>
 @endsection

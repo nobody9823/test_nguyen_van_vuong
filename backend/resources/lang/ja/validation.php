@@ -185,5 +185,12 @@ return [
         'remarks' => '備考欄',
         'comments' => '任意コメント',
         'payjp_token' => 'クレジットカード情報',
+        'title' => 'タイトル',
+        'content' => '本文',
+        'price' => '金額',
+        'address_is_required' => '住所の有無',
+        'limit_of_supporters' => '限定数',
+        'delivery_date' => 'お届け予定日',
+        'image_url' => '画像',
     ],
 ];
