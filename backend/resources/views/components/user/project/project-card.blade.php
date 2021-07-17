@@ -1,10 +1,12 @@
-<div class="{{ empty($cardSize) ? 'ib01R_01' : 'ib01L_01' }}">
+<div class="{{ empty($cardSize) ? 'ib01R_01' : 'ib01L_01' }} {{$newProject()}}">
     <img src="{{ $projectImageUrl() }}">
     <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
     <div class="{{ empty($cardSize) ? 'okini_link' : 'okini_link_L' }} liked_project" id="{{ $project->id }}">
     <i class="{{ $userLiked() ? 'far fa-heart' : 'fas fa-heart' }}"></i>
     </div>
 </div>
+
+<div>{{ $newProject() }}</div>
 
 @if(!empty($cardSize))
 <div class="ib01L_cate_tag">

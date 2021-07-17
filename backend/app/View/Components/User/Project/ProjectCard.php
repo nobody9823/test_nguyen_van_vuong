@@ -36,6 +36,10 @@ class ProjectCard extends Component
         return Carbon::now()->diffInDays(new Carbon($this->project->end_date));
     }
 
+    public function newProject() {
+        // 掲載して1週間までは、class='new_project_obi E-font'となり、「NEW」のタグがプロジェクト写真に付与される。
+        return Carbon::now()->diffInDays(new Carbon($this->project->start_date)) < 7 ? 'new_project_obi E-font' : '' ;    
+    }
 
     /**
      * Get the view / contents that represent the component.
