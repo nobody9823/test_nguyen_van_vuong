@@ -540,6 +540,9 @@ input[type=radio]:checked + .radio-fan::after {
 .ib01R_03{ padding: 0 10px; margin: 0 0 10px 0; position: relative;}
 .ib01R_03 h2{ font-size: 1.1rem; color: #707070;}
 .ib01R_04{display: flex; flex-wrap: wrap; align-items: center; align-content: center; padding: 0 10px; margin: 0 0 0px 0;}
+@media screen and (min-width: 990px){
+	.ib01R_04{position: absolute; bottom: -7px;}
+}
 .ib01R_04 div{ margin: 0 12px 10px 0; font-size: 1rem;}
 .ib01R_04 div span{ font-weight: bold; color:#00aebd; }
 
@@ -597,7 +600,7 @@ input[type=radio]:checked + .radio-fan::after {
 
 .ib03L_rank{ display: flex; flex-wrap: wrap; align-items: center; align-content: center; padding: 0 15px;}
 .ib03L_rank_01{ margin: 0 10px 0 0;}
-.ib03L_rank_02{ margin: 0 10px 0 0; font-weight: bold; font-size: 2.6rem; color: #555353;}
+.ib03L_rank_02{ margin: 0 10px 0 0; font-weight: bold; font-size: 1.8rem; color: #555353;}
 .ib03L_rank_03{ font-weight: bold; font-size: 1.5rem; color: #EC111A;}
 
 .ib03R_rank{ display: flex; flex-wrap: wrap; align-items: center; align-content: center; padding: 0 10px;}
@@ -608,7 +611,7 @@ input[type=radio]:checked + .radio-fan::after {
 .rank_color_01{fill:#F5B82B;}
 .rank_color_02{fill:#BEBEBE;}
 .rank_color_03{fill:#BF9331;}
-.rank_color_04{fill:#00aebd;}
+.rank_color_04, .rank_color_05{fill:#00aebd;}
 
 .more_btn_01{display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; background: #00AEBD; border-radius: 31px; padding: 8px; margin: 30px auto 0 auto; width: 100%; max-width: 282px; position: relative;}
 .more_btn_01_01{ width: 80%; font-size: 2.2rem; font-weight: bold; color: #fff; text-align: center; }
