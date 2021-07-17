@@ -11,17 +11,19 @@ class ProjectCard extends Component
     public $project;
     public $userLiked;
     public $cardSize;
+    public $ranking;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($project,$userLiked,$cardSize)
+    public function __construct($project,$userLiked,$cardSize,$ranking)
     {
         $this->project = $project;
         $this->userLiked = $userLiked;
         $this->cardSize = $cardSize;
+        $this->ranking = $ranking;
     }
 
     public function projectImageUrl() {

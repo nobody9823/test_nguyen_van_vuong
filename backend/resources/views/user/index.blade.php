@@ -14,7 +14,7 @@ use Carbon\Carbon;
     <div class="img_box_01">
         <div class="img_box_01_L">
             <div class="img_box_01_L_item">
-                <x-user.project.project-card :project="$projects->first()" :userLiked="$user_liked" cardSize="large" />
+                <x-user.project.project-card :project="$projects->first()" :userLiked="$user_liked" cardSize="large" ranking="" />
             </div>
         </div>
 
@@ -22,7 +22,7 @@ use Carbon\Carbon;
             @foreach($projects as $project)
                 @if(!$loop->first)
                 <div class="img_box_01_R_item">
-                    <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" />
+                    <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" ranking="" />
                 </div>
                 @endif
             @endforeach
@@ -72,7 +72,7 @@ use Carbon\Carbon;
         <div class="img_box_02">
             @foreach($projects as $project)
             <div class="img_box_02_item">
-                <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" />
+                <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" ranking="" />
             </div>
             @endforeach
         </div>
@@ -86,7 +86,7 @@ use Carbon\Carbon;
     <div class="img_box_01">
         <div class="img_box_01_L">
             <div class="img_box_01_L_item">
-                <x-user.project.project-card :project="$ranking_projects->first()" :userLiked="$user_liked" cardSize="large" />
+                <x-user.project.project-card :project="$ranking_projects->first()" :userLiked="$user_liked" cardSize="large" ranking="1" />
             </div>
         </div>
 
@@ -94,7 +94,7 @@ use Carbon\Carbon;
             @foreach($ranking_projects as $key => $project)
                 @if(!$loop->first)
                 <div class="img_box_01_R_item">
-                    <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" />
+                    <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" :ranking="$key + 1" />
                 </div>
                 @endif
             @endforeach
@@ -117,7 +117,7 @@ use Carbon\Carbon;
         <div class="img_box_02">
             @foreach($new_projects as $project)
             <div class="img_box_02_item">
-                <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" />
+                <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" ranking="" />
             </div>
             @endforeach
         </div>
