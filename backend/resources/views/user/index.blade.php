@@ -66,215 +66,18 @@ use Carbon\Carbon;
 
 
 
-    {{-- <section id="pc-top_03" class="section_base">
+    <section id="pc-top_03" class="section_base">
         <div class="tit_L_01 E-font"><h2>PICK UP</h2><div class="sub_tit_L">ピックアップ</div></div>
 
         <div class="img_box_02">
-
+            @foreach($projects as $project)
             <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-
+                <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" />
+            </div>
+            @endforeach
         </div>
 
-    </section><!--/#pc-top_03--> --}}
+    </section><!--/#pc-top_03--> 
 
 
     <section id="pc-top_04" class="section_base">
@@ -312,14 +115,12 @@ use Carbon\Carbon;
         <div class="tit_L_01 E-font"><h2>NEW PROJECT</h2><div class="sub_tit_L">新規プロジェクト</div></div>
 
         <div class="img_box_02">
-
-                @foreach($new_projects as $project)
-                <div class="img_box_02_item">
-                    <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" />
-                </div>
-                @endforeach
-
+            @foreach($new_projects as $project)
+            <div class="img_box_02_item">
+                <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" />
             </div>
+            @endforeach
+        </div>
 
     {{-- <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>

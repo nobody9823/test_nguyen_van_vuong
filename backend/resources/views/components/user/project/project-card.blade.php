@@ -6,8 +6,6 @@
     </div>
 </div>
 
-<div>{{ $newProject() }}</div>
-
 @if(!empty($cardSize))
 <div class="ib01L_cate_tag">
     @foreach($project->tags as $tag)
