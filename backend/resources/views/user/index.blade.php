@@ -27,9 +27,9 @@ use Carbon\Carbon;
                 @endif
             @endforeach
         </div>
-    </div><!--/.img_box_01-->
+    </div>
 
-    </section><!--/#pc-top_01-->
+    </section>
 
 
     <style>
@@ -61,11 +61,11 @@ use Carbon\Carbon;
             <a href="★" class="cate_tag_link">{{$tag->name}}</a>
             @endforeach
         </div>
-    </section><!--/#pc-top_02--> --}}
+    </section> --}}
 
 
 
-
+    {{--
     <section id="pc-top_03" class="section_base">
         <div class="tit_L_01 E-font"><h2>PICK UP</h2><div class="sub_tit_L">ピックアップ</div></div>
 
@@ -77,7 +77,8 @@ use Carbon\Carbon;
             @endforeach
         </div>
 
-    </section><!--/#pc-top_03--> 
+    </section> --}}
+
 
 
     <section id="pc-top_04" class="section_base">
@@ -99,7 +100,7 @@ use Carbon\Carbon;
                 @endif
             @endforeach
         </div>
-    </div><!--/.img_box_01-->
+    </div>
 
     {{-- <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
@@ -107,7 +108,7 @@ use Carbon\Carbon;
         <a href="#" class="cover_link"></a>
     </div> --}}
 
-    </section><!--/#pc-top_04-->
+    </section>
 
 
 
@@ -128,7 +129,7 @@ use Carbon\Carbon;
         <a href="★" class="cover_link"></a>
     </div> --}}
 
-    </section><!--/#pc-top_04-->
+    </section>
 
     </div><!--/main_inner-->
     </main>
