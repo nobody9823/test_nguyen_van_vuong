@@ -83,23 +83,23 @@ use Carbon\Carbon;
     <section id="pc-top_04" class="section_base">
         <div class="tit_L_01 E-font"><h2>RANKING</h2><div class="sub_tit_L">ランキング</div></div>
 
-    <div class="img_box_03">
-        <div class="img_box_03_L">
+    <div class="img_box_01">
+        <div class="img_box_01_L">
             <div class="img_box_01_L_item">
                 <x-user.project.project-card :project="$ranking_projects->first()" :userLiked="$user_liked" cardSize="large" />
             </div>
         </div>
 
-        <div class="img_box_03_R">
+        <div class="img_box_01_R">
             @foreach($ranking_projects as $key => $project)
                 @if(!$loop->first)
-                <div class="img_box_03_R_item">
+                <div class="img_box_01_R_item">
                     <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" />
                 </div>
                 @endif
             @endforeach
         </div>
-    </div><!--/.img_box_03-->
+    </div><!--/.img_box_01-->
 
     {{-- <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
