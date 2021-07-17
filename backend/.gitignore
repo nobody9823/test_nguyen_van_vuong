@@ -4,6 +4,7 @@
 /storage/*.key
 /storage/app/public/image
 /storage/app/public/file
+/storage/app/purifier
 /vendor
 .env
 .env.backup
