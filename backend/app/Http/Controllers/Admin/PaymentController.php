@@ -16,9 +16,10 @@ class PaymentController extends Controller
     public function index(Request $request)
     {
         $payments = Payment::search()
+                    ->narrowDownPaymentToken()
                     ->narrowDownWithProject()
-                    ->NarrowDownByDate()
-                    ->NarrowDownByPrice()
+                    ->narrowDownByDate()
+                    ->narrowDownByPrice()
                     ->with(['user','inviter','includedPlans.project.user','comment'])
                     ->sortBySelected($request->sort_type);
 
