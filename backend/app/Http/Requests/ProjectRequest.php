@@ -39,14 +39,14 @@ class ProjectRequest extends FormRequest
         return [
             'user_id' => ['required', 'integer'],
             'title' => ['required', 'string', 'max:255'],
-            'content' => ['required', 'string', 'max:5000'],
-            'ps_plan_content' => ['required', 'string', 'max:5000'],
+            'content' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
+            'ps_plan_content' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
             'target_amount' => ['required', 'integer', 'max:99999999'],
             'curator' => ['required', 'string'],
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
             'start_date' => ['required', 'date_format:Y-m-d H:i:s', 'after_or_equal:today'],
             'end_date' => ['required', 'date_format:Y-m-d H:i:s', 'after:start_date', "before:{$end_date_limit}"],
-            'tags.*' => ['required', 'string', new Tags($request)],
+            'tags' => ['required', new Tags($request)],
             'images' => [Rule::requiredIf($request->isMethod('post')), new ProjectImages($request)],
             'images.*' => ['image'], //images配列の中身を見る
             'video_url' => ['nullable', 'url', 'regex:#(https?://www.youtube.com/.*)(v=([-\w]{11}))#'],
@@ -70,20 +70,6 @@ class ProjectRequest extends FormRequest
         return $projectFiles;
     }
 
-    public function tagsToArray()
-    {
-        $tags = [];
-        $data = $this->all();
-        if (!empty($data['tags']) && $data['tags'][0] !== null) {
-            foreach ($data['tags'] as $tag) {
-                $tags[] = new ProjectTagTagging([
-                    'tag_id' => $tag
-                ]);
-            }
-        }
-        return $tags;
-    }
-
     public function projectVideo()
     {
         if (isset($this->all()['video_url']) && $this->all()['video_url'] !== null) {
@@ -98,19 +84,16 @@ class ProjectRequest extends FormRequest
     public function messages()
     {
         return [
-            'category_id.required' => "カテゴリーを入力してください。",
-            'category_id.integer' => "不正なアクセスが検知されました。管理会社へのお問い合わせをお願い致します。",
-            'talent_id.required' => "タレントを指定してください",
-            'talent_id.integer' => "不正なアクセスが検知されました。管理会社へのお問い合わせをお願い致します。",
+            'tags.required' => "タグを選択してください。",
             'title.required' => "タイトルを入力してください。",
             'title.string' => "タイトルは文字で入力してください。",
             'title.max' => "タイトルは255文字以内にしてください。",
             'content.required' => "プロジェクト内容を入力してください。",
             'content.string' => "プロジェクト内容は文字で入力してください。",
-            'content.max' => "プロジェクト内容は5000文字以内にしてください。",
+            'content.max' => "プロジェクト内容は100000文字以内にしてください。",
             'ps_plan_content.required' => "プロジェクトサポーターリターン内容を入力してください。",
             'ps_plan_content.string' => "プロジェクトサポーターリターン内容は文字で入力してください。",
-            'ps_plan_content.max' => "プロジェクトサポーターリターン内容は5000文字以内にしてください。",
+            'ps_plan_content.max' => "プロジェクトサポーターリターン内容は100000文字以内にしてください。",
             'target_amount.required' => "目標金額を入力してください。",
             'target_amount.integer' => "目標金額は数字で入力してください。",
             'target_amount.max' => "目標金額は99,999,999円以内にしてください。",

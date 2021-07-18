@@ -15,10 +15,12 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/fortify": "^1.7",
         "laravel/framework": "^8.12",
+        "laravel/slack-notification-channel": "^2.3",
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
         "laravelcollective/html": "^6.2",
+        "mews/purifier": "^3.3",
         "nesbot/carbon": "2.43.0",
         "payjp/payjp-php": "~1.0",
         "paypayopa/php-sdk": "^1.0",
@@ -26,8 +28,7 @@
         "socialiteproviders/google": "^4.1",
         "socialiteproviders/line": "^4.1",
         "socialiteproviders/twitter": "^4.1",
-        "socialiteproviders/yahoo": "^4.1",
-        "laravel/slack-notification-channel": "^2.3"
+        "socialiteproviders/yahoo": "^4.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",

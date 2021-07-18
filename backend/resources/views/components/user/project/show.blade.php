@@ -35,38 +35,34 @@
 
                 <div class="pds_sec01_L">
                     <div class="pds_sec01_slider {{ $project->projectFiles->count() === 1 ? 'slider-img-wrapper' : '' }}">
-                    <ul id="slider">
-                        @foreach($project->projectFiles as $project_file)
-                            @if($project_file->file_content_type === 'image_url')
-                            <li class="slide-item">
-                                <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
-                            </li>
-                            @elseif($project_file->file_content_type === 'video_url')
-                            <li class="slide-item">
-                                <div class="iframe-wrap">
-                                    {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
-                                </div>
-                            </li>
-                            @endif
-                        @endforeach
-                    </ul>
-                    @if($project->projectFiles->count() > 1)
-                        <ul id="thumbnail_slider">
+                        <ul id="slider">
                             @foreach($project->projectFiles as $project_file)
                                 @if($project_file->file_content_type === 'image_url')
-                                <li class="thumbnail-item">
+                                <li class="slide-item">
                                     <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
                                 </li>
                                 @elseif($project_file->file_content_type === 'video_url')
-                                <li class="thumbnail-item">
-                                    <div class="iframe-wrap">
-                                        {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
-                                    </div>
+                                <li class="slide-item">
+                                    {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
                                 </li>
                                 @endif
                             @endforeach
                         </ul>
-                    @endif
+                        @if($project->projectFiles->count() > 1)
+                            <ul id="thumbnail_slider">
+                                @foreach($project->projectFiles as $project_file)
+                                    @if($project_file->file_content_type === 'image_url')
+                                    <li class="thumbnail-item">
+                                        <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                                    </li>
+                                    @elseif($project_file->file_content_type === 'video_url')
+                                    <li class="thumbnail-item">
+                                        {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
+                                    </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 </div><!--/pds_sec01_L-->
 
@@ -99,11 +95,18 @@
                 </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_btn_base">
-                    <div class="pds_sec01_R_btn01">
-                        <div class="more_btn_01_01">支援する</div>
-                        <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                        <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
-                    </div>
+                    @if ($project->end_date > now())
+                        <div class="pds_sec01_R_btn01">
+                            <div class="more_btn_01_01">支援する</div>
+                            <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                            <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
+                        </div>
+                    @else
+                        <div class="pds_sec01_R_btn01">
+                            <div class="more_btn_01_01">FINISHED</div>
+                            <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                        </div>
+                    @endif
                     @if($project->isIncluded() === true)
                     <div class="pds_sec01_R_btn01">
                         <div class="more_btn_01_01">プロジェクトサポーターになる</div>
@@ -133,7 +136,7 @@
 
                 <div class="wlr_64_L inner_item">
                     <div class="pds_sec02_tit">{{ $project->title }}</div>
-                    <div class="pds_sec02_txt">{{ $project->content }}</div>
+                    <div class="pds_sec02_txt">{!! $project->content !!}</div>
                     {{-- <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div> --}}
                 </div><!--/wlr_64_L-->
 

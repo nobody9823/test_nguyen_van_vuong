@@ -63,7 +63,7 @@ class ProjectController extends Controller
         $projects = Project::mainProjects()->inRandomOrder()->take(5)->get();
 
         // ランキング(支援総額順)
-        $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price','DESC')->skip(1)->take(5)->get();
+        $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price','DESC')->take(5)->get();
 
         // 最新のプロジェクト
         $new_projects = Project::mainProjects()->orderBy('created_at', 'DESC')->get();
@@ -214,7 +214,6 @@ class ProjectController extends Controller
         $inviter = !empty($validated_request['inviter_code']) ? User::getInviterFromInviterCode($validated_request['inviter_code'])->first() : null;
         DB::beginTransaction();
         try {
-            // dd($this->payment);
             $plans = $this->plan->lockForUpdatePlansByIds(array_keys($validated_request['plans']))->get();
             $payment = $this->payment->fill(array_merge(
                 [
@@ -428,18 +427,17 @@ class ProjectController extends Controller
 
     public function ProjectLiked(Request $request)
     {
-        $userLiked = UserProjectLiked::where('user_id', Auth::id())->where('project_id', $request->project_id)->first();
+        $project = Project::where('id',$request->project_id)->first();
+        $exist_liked = UserProjectLiked::where('project_id',$request->project_id)->where('user_id',Auth::id())->exists();
 
-        if (Auth::id() === null) {
-            return $result = "未ログイン";
-        } elseif ($userLiked !== null) {
-            $userLiked->delete();
-            return $result = "削除";
+        if(!Auth::id()){
+            return "未ログイン";
+        } elseif($exist_liked){
+            $project->likedUsers()->detach(Auth::id());
+            return "削除";
         } else {
-            $project_liked = new UserProjectLiked(['user_id' => Auth::id()]);
-            $project_liked->project_id = $request->project_id;
-            $project_liked->save();
-            return $result = "登録";
+            $project->likedUsers()->attach(Auth::id());
+            return "登録";
         }
     }
 

@@ -76,7 +76,7 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            $project->projectTagTagging()->saveMany($request->tagsToArray());
+            $project->tags()->attach($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
@@ -115,14 +115,14 @@ class ProjectController extends Controller
     {
         $users = User::pluckNameAndId();
         $tags = Tag::pluckNameAndId();
-        $projectTags = $project->tags->pluck('id')->toArray();
+        $project_tags = $project->tags->pluck('id')->toArray();
         $projectImages = $project->projectFiles()->where('file_content_type', 'image_url')->get();
         $projectVideo = $project->projectFiles()->where('file_content_type', 'video_url')->first();
 
         return view('admin.project.edit', [
             'project' => $project,
             'tags' => $tags,
-            'projectTags' => $projectTags,
+            'project_tags' => $project_tags,
             'users' => $users,
             'projectImages' => $projectImages,
             'projectVideo' => $projectVideo,
@@ -141,7 +141,7 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
-            $project->projectTagTagging()->saveMany($request->tagsToArray());
+            $project->tags()->sync($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
             DB::commit();
@@ -183,11 +183,7 @@ class ProjectController extends Controller
      */
     public function preview(Project $project)
     {
-        $plans = $project->plans;
-        return view('admin.project.preview', [
-            'project' => $project,
-            'plans' => $plans,
-        ]);
+        return view('admin.project.preview', ['project' => $project,]);
     }
 
     /**
@@ -199,6 +195,15 @@ class ProjectController extends Controller
     {
         $project_file->deleteFile();
         return response()->json('success');
+    }
+
+    public function uploadEditorFile(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file',
+        ]);
+        $path = $request->file('file')->store('public/image');
+        return ['location' => Storage::url($path)];
     }
 
     /**

@@ -16,7 +16,7 @@ class PayJp implements PayJpInterface
      */
     public function Payment(int $price, string $pay_jp_id): object
     {
-        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret_for_test'));
+        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret'));
         try {
             $result = \Payjp\Charge::create(array(
                         "card" => $pay_jp_id,
@@ -54,7 +54,7 @@ class PayJp implements PayJpInterface
      */
     public function Refund(string $pay_jp_id): object
     {
-        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret_for_test'));
+        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret'));
         $charge = \Payjp\Charge::retrieve($pay_jp_id);
         return $charge->refund();
     }

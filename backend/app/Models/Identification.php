@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use App\Casts\ImageCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BankAccount extends Model
+class Identification extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'bank_accounts';
+    protected $table = 'identifications';
 
     protected $fillable = [
         'bank_code',
@@ -18,9 +19,16 @@ class BankAccount extends Model
         'account_type',
         'account_number',
         'account_name',
+        'identify_image_1',
+        'identify_image_2',
     ];
 
     protected $dates = ['deleted_at'];
+
+    protected $casts = [
+        'identify_image_1' => ImageCast::class,
+        'identify_image_2' => ImageCast::class,
+    ];
 
     public function user()
     {
