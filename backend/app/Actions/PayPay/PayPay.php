@@ -29,7 +29,7 @@ class PayPay implements PayPayInterface
     }
 
     // QRコードを生成する関数
-    public function createQrCode(string $merchant_payment_id, int $price, Project $project, Payment $payment): ?array
+    public function createQrCode(string $merchant_payment_id, int $price, Project $project, Payment $payment): array
     {
         try {
             // 任意の支払い取引IDを生成(64桁以内)
