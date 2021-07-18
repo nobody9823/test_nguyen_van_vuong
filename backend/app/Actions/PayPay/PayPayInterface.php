@@ -7,7 +7,7 @@ use App\Models\Payment;
 
 interface PayPayInterface
 {
-    public function createQrCode(string $merchant_payment_id, int $price, Project $project, Payment $payment): ?array;
+    public function createQrCode(string $merchant_payment_id, int $price, Project $project, Payment $payment): array;
 
     public function getPaymentDetail(string $merchant_payment_id): array;
 
