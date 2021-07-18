@@ -7,7 +7,9 @@ use PayPay\OpenPaymentAPI\Client;
 use PayPay\OpenPaymentAPI\Models\CreateQrCodePayload;
 use PayPay\OpenPaymentAPI\Models\OrderItem;
 use App\Models\UserAddress;
+use Exception;
 use Illuminate\Http\Request;
+use Log;
 
 class PayPay implements PayPayInterface
 {
@@ -27,26 +29,31 @@ class PayPay implements PayPayInterface
     }
 
     // QRコードを生成する関数
-    public function createQrCode(string $merchant_payment_id, int $price, Project $project, Payment $payment): array
+    public function createQrCode(string $merchant_payment_id, int $price, Project $project, Payment $payment): ?array
     {
+        try {
+            // 任意の支払い取引IDを生成(64桁以内)
+            $this->CQCPayload->setMerchantPaymentId($merchant_payment_id);
+            $this->CQCPayload->setRequestedAt();
+            $this->CQCPayload->setCodeType("ORDER_QR");
 
-        // 任意の支払い取引IDを生成(64桁以内)
-        $this->CQCPayload->setMerchantPaymentId($merchant_payment_id);
-        $this->CQCPayload->setRequestedAt();
-        $this->CQCPayload->setCodeType("ORDER_QR");
+            $this->CQCPayload->setAmount([
+                'amount' => $price,
+                "currency" => "JPY"
+            ]);
 
-        $this->CQCPayload->setAmount([
-            'amount' => $price,
-            "currency" => "JPY"
-        ]);
+            // 支払いがウェブブラウザで発生している場合は WEB_LINK になります。
+            $this->CQCPayload->setRedirectType('WEB_LINK');
+            // 支払い後のリダイレクト先
+            $this->CQCPayload->setRedirectUrl(route('user.plan.payment_for_pay_pay', ['project' => $project, 'payment' => $payment]));
 
-        // 支払いがウェブブラウザで発生している場合は WEB_LINK になります。
-        $this->CQCPayload->setRedirectType('WEB_LINK');
-        // 支払い後のリダイレクト先
-        $this->CQCPayload->setRedirectUrl(route('user.plan.payment_for_pay_pay', ['project' => $project, 'payment' => $payment]));
+            // QRコードを生成
+            return $this->client->code->createQRCode($this->CQCPayload);
+        } catch (Exception $e) {
+            Log::alert($e->getMessage(), $e->getTrace());
+            throw $e;
+        }
 
-        // QRコードを生成
-        return $this->client->code->createQRCode($this->CQCPayload);
     }
 
     public function getPaymentDetail(string $merchant_payment_id): array
