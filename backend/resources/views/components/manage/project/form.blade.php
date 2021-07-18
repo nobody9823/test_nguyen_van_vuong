@@ -117,8 +117,8 @@ tinymce.init({
         toolbar: [ 'undo', 'bold', 'italic', 'styleselect', 'image', 'forecolor', 'link' ],
 
     },
-    plugins: [ 'code', 'lists', 'image', 'link', 'fullscreen', 'media', 'table'],
-    toolbar: ['undo redo | bold italic | forecolor backcolor | fontsizeselect | numlist bullist | table | link | image | media',
+    plugins: [ 'code', 'lists', 'image', 'link', 'fullscreen', 'table'],
+    toolbar: ['undo redo | bold italic | forecolor backcolor | fontsizeselect | numlist bullist | table | link | image',
         'alignleft | aligncenter | alignright'],
     file_picker_types: 'image',
     images_upload_handler: function (blobInfo, success, failure) {

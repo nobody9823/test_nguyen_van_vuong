@@ -9,7 +9,9 @@
 @endsection
 
 @section('header_content')
-<a class="navbar-brand" href="{{ route('admin.dashboard') }}">ファンリターン</a>
+<a class="navbar-brand h_logo_css_sp" title="FanReturn" rel="home" href="{{ route('admin.dashboard') }}">
+    <img src="{{ asset('image/logo-color.svg') }}">
+</a>
 
 {{--        left side menu--}}
 <ul class="navbar mr-auto">
@@ -20,7 +22,7 @@
     @if(Route::has('login'))
     @auth
     <li class="nav-item ">
-        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+        <a class="nav-link-child" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
             Logout</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST">

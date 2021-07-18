@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\PurifierCast;
 use Auth;
 use App\Models\UserProjectLiked;
 use App\Traits\SearchFunctions;
@@ -33,6 +34,11 @@ class Project extends Model
     ];
 
     protected $dates = ['start_date', 'end_date'];
+
+    protected $casts = [
+        'content' => PurifierCast::class,
+        'ps_plan_content' => PurifierCast::class,
+    ];
 
     public static function boot()
     {
