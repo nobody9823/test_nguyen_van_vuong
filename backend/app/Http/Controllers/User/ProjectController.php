@@ -454,11 +454,11 @@ class ProjectController extends Controller
     public function supporterRanking(Project $project)
     {
         $this->authorize('checkIsFinishedPayment', $project);
-        $users_ranked_by_users_count = User::getInvitersRankedByInvitedUsers($project->id)->take(100)->get();
+        $users_ranked_by_total_quantity = User::getInvitersRankedByInvitedUsers($project->id)->take(100)->get();
         $users_ranked_by_total_amount = User::getInvitersRankedByInvitedTotalAmount($project->id)->take(100)->get();
         return view('user.project.supporter_ranking',
             [
-                'users_ranked_by_users_count' => $users_ranked_by_users_count,
+                'users_ranked_by_total_quantity' => $users_ranked_by_total_quantity,
                 'users_ranked_by_total_amount' => $users_ranked_by_total_amount,
                 'project' => $project->getLoadPaymentsCountAndSumPrice(),
             ],
