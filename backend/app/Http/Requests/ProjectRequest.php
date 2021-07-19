@@ -44,7 +44,7 @@ class ProjectRequest extends FormRequest
             'target_amount' => ['required', 'integer', 'max:99999999'],
             'curator' => ['required', 'string'],
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
-            'start_date' => ['required', 'date_format:Y-m-d H:i:s', 'after_or_equal:today'],
+            'start_date' => ['required', 'date_format:Y-m-d H:i:s', $this->isMethod('post') ? 'after_or_equal:today' : ''],
             'end_date' => ['required', 'date_format:Y-m-d H:i:s', 'after:start_date', "before:{$end_date_limit}"],
             'tags' => ['required', new Tags($request)],
             'images' => [Rule::requiredIf($request->isMethod('post')), new ProjectImages($request)],
