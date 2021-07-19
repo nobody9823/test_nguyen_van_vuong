@@ -103,6 +103,39 @@ class MyProjectController extends Controller
     {
         $project->fill($request->all())->save();
 
+        if($request->has('tags')){
+            $project->tags()->detach();
+            $project->tags()->attach(array_values($request->tags));
+        }
+
+        if ($request->has('image_url')){
+            $file_array = [];
+            foreach($request->image_url as $key => $value){
+                if($request->file_ids !== null && in_array((string) $key, $request->file_ids, true)){
+                    $project_file = ProjectFile::find($key);
+                    $project_file->file_url = $value[0];
+                    $project_file->save();
+                } else {
+                    $file_array[] =
+                    ProjectFile::make([
+                        'file_url' => $value[0],
+                        'file_content_type' => 'image_url'
+                    ]);
+                };
+                if ($file_array !== []){
+                    $project->projectFiles()->saveMany($file_array);
+                }
+            }
+        }
+
+        if ($request->has('video_url') && $request->video_url !== null){
+            $project->projectFiles()->save(
+                ProjectFile::make([
+                    'file_url' => $request->video_url,
+                    'file_content_type' => 'video_url'
+                ])
+            );
+        }
         return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with(['flash_message' => 'プロジェクトが更新されました。']);
     }
 
