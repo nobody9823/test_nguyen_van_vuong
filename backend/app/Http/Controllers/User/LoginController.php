@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\SnsUser;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -58,7 +59,7 @@ class LoginController extends Controller
                 $oauth_user->user->save();
             }
             Auth::login($oauth_user->user);
-            return redirect()->action([MypageController::class, 'profile']);
+            return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'FanReturnへの登録が完了致しました。');
         }
         return '情報が取得できませんでした。';
     }

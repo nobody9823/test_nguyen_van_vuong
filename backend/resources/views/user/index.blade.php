@@ -12,91 +12,24 @@ use Carbon\Carbon;
     <section id="pc-top_01" class="section_base">
 
     <div class="img_box_01">
-
         <div class="img_box_01_L">
             <div class="img_box_01_L_item">
-                <div class="ib01L_01">
-                    <img src="{{ Storage::url($projects->first()->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
-                    <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
-                    <div class="okini_link_L liked_project" id="{{ $projects->first()->id }}">
-                    @if ($user_liked->where('project_id',$projects->first()->id)->isEmpty())
-                    <i class="far fa-heart"></i>
-                    @else
-                    <i class="fas fa-heart"></i>
-                    @endif
-                    </div>
-                </div>
-
-                {{-- <div class="ib01L_cate_tag">
-                    @foreach($projects->first()->tags as $tag)
-                        <a href="#" class="cate_tag_link">{{ $tag->name }}</a>
-                    @endforeach
-                </div> --}}
-
-                <div class="ib01L_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                        <span style="width: {{ $projects->first()->achievement_rate }}%; max-width:100%"></span>
-                    </div>
-                </div>
-
-                <div class="ib01L_03">
-                    <h2>{{ Str::limit($projects->first()->title, 46) }}</h2>
-                    <a href="{{ route('user.project.show', ['project' => $projects->first()]) }}" class="cover_link"></a>
-                </div>
-
-                <div class="ib01L_04">
-                    <div>現在 <span>{{ number_format($projects->first()->payments_sum_price) }}円</span></div>
-                    <div>支援者 <span>{{ $projects->first()->payments_count }}人</span></div>
-                    <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($projects->first()->end_date)) }}日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
+                <x-user.project.project-card :project="$projects->first()" :userLiked="$user_liked" cardSize="large" ranking="" />
+            </div>
         </div>
 
         <div class="img_box_01_R">
             @foreach($projects as $project)
                 @if(!$loop->first)
                 <div class="img_box_01_R_item">
-                    <div class="ib01R_01">
-                        <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
-                        <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                        <div class="okini_link liked_project" id="{{ $project->id }}">
-                        @if ($user_liked->where('project_id',$project->id)->isEmpty())
-                        <i class="far fa-heart"></i>
-                        @else
-                        <i class="fas fa-heart"></i>
-                        @endif
-                        </div>
-                    </div>
-
-                    <div class="ib01R_02">
-                    <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                        <div class="progress-bar">
-                            <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
-                        </div>
-                    </div>
-
-                    {{-- <div class="process">
-                        <div class="bar" style="width: {{ $project->achievement_rate }}%;">
-                            <span>{{ $project->achievement_rate}}%</span></div>
-                    </div> --}}
-
-                    <div class="ib01R_03">
-                        <h3>{{ Str::limit($project->title, 46) }}</h3>
-                        <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                    </div>
-
-                    <div class="ib01R_04">
-                        <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
-                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
-                    </div>
-                </div><!--/.img_box_01_L_item-->
+                    <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" ranking="" />
+                </div>
                 @endif
             @endforeach
         </div>
-    </div><!--/.img_box_01-->
+    </div>
 
-    </section><!--/#pc-top_01-->
+    </section>
 
 
     <style>
@@ -128,324 +61,46 @@ use Carbon\Carbon;
             <a href="★" class="cate_tag_link">{{$tag->name}}</a>
             @endforeach
         </div>
-    </section><!--/#pc-top_02--> --}}
+    </section> --}}
 
 
 
-
-    {{-- <section id="pc-top_03" class="section_base">
+    {{--
+    <section id="pc-top_03" class="section_base">
         <div class="tit_L_01 E-font"><h2>PICK UP</h2><div class="sub_tit_L">ピックアップ</div></div>
 
         <div class="img_box_02">
-
+            @foreach($projects as $project)
             <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-            <div class="img_box_02_item">
-                <div class="ib02_01">
-                    <img src="image/test_img.svg">
-                    <a href="★" class="cover_link"></a>
-                    <a href="★" class="okini_link"><i class="far fa-heart"></i></a>
-                </div>
-
-                <div class="ib02_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                         <span style="width:60%;"></span>
-                    </div>
-                </div>
-
-                <div class="ib02_03">
-                    <h3>タイトルテキストタイトルテキストタイトルテキスト…</h3>
-                    <a href="★" class="cover_link"></a>
-                </div>
-
-                <div class="ib02_04">
-                    <div>現在 <span>600,457円</span></div>
-                    <div>残り <span>21日</span></div>
-                </div>
-            </div><!--/.img_box_01_L_item-->
-
-
+                <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" ranking="" />
+            </div>
+            @endforeach
         </div>
 
-    </section><!--/#pc-top_03--> --}}
+    </section> --}}
+
 
 
     <section id="pc-top_04" class="section_base">
         <div class="tit_L_01 E-font"><h2>RANKING</h2><div class="sub_tit_L">ランキング</div></div>
 
-    <div class="img_box_03">
-        <div class="img_box_03_L">
-            <div class="img_box_03_L_item">
-                <div class="ib03L_01">
-                    <img src="{{ Storage::url($ranking_projects->first()->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
-                    <a href="{{ route('user.project.show', ['project' => $ranking_projects->first()]) }}" class="cover_link"></a>
-                    <div class="okini_link_L liked_project" id="{{ $ranking_projects->first()->id }}">
-                        @if ($user_liked->where('project_id',$ranking_projects->first()->id)->isEmpty())
-                        <i class="far fa-heart"></i>
-                        @else
-                        <i class="fas fa-heart"></i>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="ib03L_rank">
-                    <div class="ib03L_rank_01">
-                    <svg version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; width: 30px;" xml:space="preserve">
-                    <path id="" class="rank_color_01" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
-                        c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
-                        c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"/>
-                    </svg></div>
-                    <div class="ib03L_rank_02 E-font">1</div>
-                    <div class="ib03L_rank_03 E-font"></div>
-                </div>
-
-                <div class="ib01L_02">
-                <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                    <div class="progress-bar">
-                        <span style="width: {{ $ranking_projects->first()->achievement_rate }}%; max-width:100%"></span>
-                    </div>
-                </div>
-
-                <div class="ib03L_03">
-                    <h2>{{ Str::limit($ranking_projects->first()->title, 46) }}</h2>
-                    <a href="{{ route('user.project.show', ['project' => $ranking_projects->first()]) }}" class="cover_link"></a>
-                </div>
-
-                <div class="ib03L_04">
-                    <div>現在 <span>{{ number_format($ranking_projects->first()->payments_sum_price) }}円</span></div>
-                    <div>支援者 <span>{{ $ranking_projects->first()->payments_count }}人</span></div>
-                    <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($ranking_projects->first()->end_date)) }}日</span></div>
-                </div>
-            </div><!--/.img_box_03_L_item-->
+    <div class="img_box_01">
+        <div class="img_box_01_L">
+            <div class="img_box_01_L_item">
+                <x-user.project.project-card :project="$ranking_projects->first()" :userLiked="$user_liked" cardSize="large" ranking="1" />
+            </div>
         </div>
 
-        <div class="img_box_03_R">
+        <div class="img_box_01_R">
             @foreach($ranking_projects as $key => $project)
                 @if(!$loop->first)
-                <div class="img_box_03_R_item">
-                    <div class="ib03R_01">
-                        <img src="{{ Storage::url($project->projectFiles->where('file_content_type', 'image_url')->first()->file_url) }}">
-                        <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                        <div class="okini_link liked_project" id="{{ $project->id }}">
-                        @if ($user_liked->where('project_id',$project->id)->isEmpty())
-                        <i class="far fa-heart"></i>
-                        @else
-                        <i class="fas fa-heart"></i>
-                        @endif
-                        </div>
-                    </div>
-
-                    <div class="ib03R_rank">
-                        <div class="ib03R_rank_01">
-                        <svg version="1.1" id="レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; width: 23px;" xml:space="preserve">
-                        <path id="" class="rank_color_02" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
-                            c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
-                            c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"/>
-                        </svg></div>
-                        <div class="ib03R_rank_02 E-font">{{ $key + 1 }}</div>
-                        <div class="ib03R_rank_03 E-font"></div>
-                    </div>
-
-                    <div class="ib03R_02">
-                    <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                        <div class="progress-bar">
-                            <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
-                        </div>
-                    </div>
-
-                    {{-- <div class="process">
-                        <div class="bar" style="width: {{ $project->achievement_rate }}%;">
-                            <span>{{ $project->achievement_rate}}%</span></div>
-                    </div> --}}
-
-                    <div class="ib03R_03">
-                        <h3>{{ Str::limit($project->title, 46) }}</h3>
-                        <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                    </div>
-
-                    <div class="ib03R_04">
-                        <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
-                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
-                    </div>
-                </div><!--/.img_box_01_L_item-->
+                <div class="img_box_01_R_item">
+                    <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" :ranking="$key + 1" />
+                </div>
                 @endif
             @endforeach
         </div>
-    </div><!--/.img_box_03-->
+    </div>
 
     {{-- <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
@@ -453,7 +108,7 @@ use Carbon\Carbon;
         <a href="#" class="cover_link"></a>
     </div> --}}
 
-    </section><!--/#pc-top_04-->
+    </section>
 
 
 
@@ -461,41 +116,12 @@ use Carbon\Carbon;
         <div class="tit_L_01 E-font"><h2>NEW PROJECT</h2><div class="sub_tit_L">新規プロジェクト</div></div>
 
         <div class="img_box_02">
-
-                @foreach($new_projects as $project)
-                <div class="img_box_02_item">
-                    <div class="ib02_01 new_project_obi E-font">
-                        <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
-                        <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                        <div class="okini_link liked_project" id="{{ $project->id }}">
-                        @if ($user_liked->where('project_id',$project->id)->isEmpty())
-                        <i class="far fa-heart"></i>
-                        @else
-                        <i class="fas fa-heart"></i>
-                        @endif
-                        </div>
-                    </div>
-
-                    <div class="ib02_02">
-                    <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                        <div class="progress-bar">
-                             <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
-                        </div>
-                    </div>
-
-                    <div class="ib02_03">
-                        <h3>{{ Str::limit($project->title, 46) }}</h3>
-                        <a href="{{ route('user.project.show', ['project' => $project]) }}" class="cover_link"></a>
-                    </div>
-
-                    <div class="ib02_04">
-                        <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
-                        <div>残り <span>{{ Carbon::now()->diffInDays(new Carbon($project->end_date)) }}日</span></div>
-                    </div>
-                </div><!--/.img_box_01_L_item-->
-                @endforeach
-
+            @foreach($new_projects as $project)
+            <div class="img_box_02_item">
+                <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" ranking="" />
             </div>
+            @endforeach
+        </div>
 
     {{-- <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
@@ -503,7 +129,7 @@ use Carbon\Carbon;
         <a href="★" class="cover_link"></a>
     </div> --}}
 
-    </section><!--/#pc-top_04-->
+    </section>
 
     </div><!--/main_inner-->
     </main>

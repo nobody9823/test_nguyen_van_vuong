@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Mail\User\EmailVerification as UserEmailVerification;
 use App\Models\EmailVerification;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
@@ -147,7 +148,7 @@ class RegisterController extends Controller
                 return redirect()->action([RegisterController::class, 'create'], ['token' => $token])->withErrors("登録に失敗しました。もう一度入力してください。");
             }
                 Auth::login($user);
-                return redirect()->route('user.profile')->with('flash_message', 'FanReturnへの登録が完了致しました。');
+                return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'FanReturnへの登録が完了致しました。');
         }
     }
 }

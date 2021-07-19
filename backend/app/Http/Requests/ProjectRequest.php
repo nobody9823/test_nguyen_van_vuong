@@ -39,8 +39,8 @@ class ProjectRequest extends FormRequest
         return [
             'user_id' => ['required', 'integer'],
             'title' => ['required', 'string', 'max:255'],
-            'content' => ['required', 'string', 'max:5000'],
-            'ps_plan_content' => ['required', 'string', 'max:5000'],
+            'content' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
+            'ps_plan_content' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
             'target_amount' => ['required', 'integer', 'max:99999999'],
             'curator' => ['required', 'string'],
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
@@ -90,10 +90,10 @@ class ProjectRequest extends FormRequest
             'title.max' => "タイトルは255文字以内にしてください。",
             'content.required' => "プロジェクト内容を入力してください。",
             'content.string' => "プロジェクト内容は文字で入力してください。",
-            'content.max' => "プロジェクト内容は5000文字以内にしてください。",
+            'content.max' => "プロジェクト内容は100000文字以内にしてください。",
             'ps_plan_content.required' => "プロジェクトサポーターリターン内容を入力してください。",
             'ps_plan_content.string' => "プロジェクトサポーターリターン内容は文字で入力してください。",
-            'ps_plan_content.max' => "プロジェクトサポーターリターン内容は5000文字以内にしてください。",
+            'ps_plan_content.max' => "プロジェクトサポーターリターン内容は100000文字以内にしてください。",
             'target_amount.required' => "目標金額を入力してください。",
             'target_amount.integer' => "目標金額は数字で入力してください。",
             'target_amount.max' => "目標金額は99,999,999円以内にしてください。",
