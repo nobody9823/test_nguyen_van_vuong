@@ -26,9 +26,13 @@ class MyProjectRequest extends FormRequest
     {
         return [
             'title' => ['nullable', 'string', 'max:255'],
-            'content' => ['nullable', 'string', 'max:5000'],
+            'content' => ['nullable', 'string', 'max:10000'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['nullable', 'string'],
+            'image_url' => ['nullable', 'array'],
+            'image_url.*' => ['nullable', 'array'],
+            'image_url.*.*' => ['nullable', 'image'],
+            'video_url' => ['nullable', 'url', 'regex:#(https?://www.youtube.com/.*)(v=([-\w]{11}))#'],
             'target_amount' => ['nullable', 'integer', 'min:0'],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', 'after_or_equal:'.$request->route('project')->start_date],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', 'after:start_date', 'before_or_equal:'.$request->route('project')->end_date],
