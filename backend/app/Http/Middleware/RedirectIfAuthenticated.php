@@ -31,7 +31,7 @@ class RedirectIfAuthenticated
                 } elseif ($guard == 'company') {
                     return redirect('/company/dashboard');
                 } else {
-                    return redirect('/profile');
+                    return redirect()->intended(RouteServiceProvider::HOME);
                 }
             }
         }

@@ -63,7 +63,7 @@ class ProjectController extends Controller
         $projects = Project::mainProjects()->inRandomOrder()->take(5)->get();
 
         // ランキング(支援総額順)
-        $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price','DESC')->skip(1)->take(5)->get();
+        $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price','DESC')->take(5)->get();
 
         // 最新のプロジェクト
         $new_projects = Project::mainProjects()->orderBy('created_at', 'DESC')->get();

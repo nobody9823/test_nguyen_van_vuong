@@ -20,6 +20,15 @@
             <div class="card card-body">
                 <div class="form-group mb-2 flex-column">
                     <div class="form-check flex-column">
+                        <div class="form-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">支援ID</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ Request::get('payment_token') }}"
+                                name="payment_token" id="payment_token">
+                        </div>
+                    </div>
+                    <div class="form-check flex-column">
                         <label>
                             支援日
                         </label>
@@ -79,17 +88,21 @@
         @else
         <table class="table">
             <tr>
+                <th style="width:15%">支援ID</th>
                 <th style="width:5%">支援時刻</th>
                 <th style="width:5%">支援者名</th>
                 <th style="width:5%">招待者名</th>
                 <th style="width:5%">支援額</th>
                 <th style="width:10%">インフルエンサー名</th>
                 <th style="width:10%">プロジェクト名</th>
-                <th style="width:20%">支援プラン一覧</th>
+                <th style="width:10%">支援プラン一覧</th>
                 <th style="width:10%">メッセージ</th>
             </tr>
             @foreach($payments as $payment)
             <tr>
+                <td>
+                    {{ $payment->paymentToken->token }}
+                </td>
                 <td>
                     {{ $payment->created_at }}
                 </td>

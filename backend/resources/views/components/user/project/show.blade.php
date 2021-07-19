@@ -136,7 +136,7 @@
 
                 <div class="wlr_64_L inner_item">
                     <div class="pds_sec02_tit">{{ $project->title }}</div>
-                    <div class="pds_sec02_txt">{{ $project->content }}</div>
+                    <div class="pds_sec02_txt">{!! $project->content !!}</div>
                     {{-- <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div> --}}
                 </div><!--/wlr_64_L-->
 
