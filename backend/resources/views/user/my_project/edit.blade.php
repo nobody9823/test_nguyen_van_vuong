@@ -44,10 +44,10 @@
                     <x-user.my_project.overview :project="$project" :tags="$tags" />
                 </section>
                 <section style="display: none;" id="visual_section" class="my_project_section">
-                    <x-user.my_project.visual />
+                    <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()->toArray()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
                 </section>
                 <section style="display: none;" id="main_content_section" class="my_project_section">
-                    <x-user.my_project.main_content />
+                    <x-user.my_project.main_content :project="$project" />
                 </section>
                 <section style="display: none;" id="return_section" class="my_project_section">
                     <x-user.my_project.return :project="$project" />
@@ -92,6 +92,14 @@ const DisplayEditPlan = (el) => {
     }
     console.log(el);
     document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
+}
+const displayInputFile = (el) => {
+    let image = document.getElementById('project_image_' + el.id);
+    if (image.style.display === 'none'){
+        image.style.display = 'block';
+    } else if (image.style.display === 'block'){
+        image.style.display = 'none';
+    }
 }
 </script>
 @endsection
