@@ -218,7 +218,7 @@
                         決済の領収書などお支払いに関するお問い合わせはこちらへお問い合わせください<br/>
                         株式会社ICH<br/>
                         個人情報保護対応窓口<br/>
-                        <a href="href="mailto:support@fanreturn.com">support@fanreturn.com</a>
+                        <a href="mailto:support@fanreturn.com">support@fanreturn.com</a>
                     </div>
 
                 </div><!--/.as_i_04-->
