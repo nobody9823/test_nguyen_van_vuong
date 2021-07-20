@@ -409,4 +409,18 @@ class Project extends Model
             $file->delete();
         }
     }
+
+    public static function initialize()
+    {
+        return self::make([
+            'title' => '',
+            'content' => '',
+            'ps_plan_content' => '',
+            'target_amount' => 0,
+            'curator' => '',
+            'start_date' => Carbon::minValue(),
+            'end_date' => Carbon::maxValue(),
+            'release_status' => '---',
+        ]);
+    }
 }
