@@ -103,6 +103,12 @@ class MyProjectController extends Controller
     {
         $project->fill($request->all())->save();
 
+        Auth::user()->identification->fill($request->all())->save();
+
+        Auth::user()->profile->fill($request->all())->save();
+
+        Auth::user()->address->fill($request->all())->save();
+
         if($request->has('tags')){
             $project->tags()->detach();
             $project->tags()->attach(array_values($request->tags));

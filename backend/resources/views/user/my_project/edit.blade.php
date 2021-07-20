@@ -56,7 +56,7 @@
                     <x-user.my_project.ps_return :project="$project" />
                 </section>
                 <section style="display: none;" id="identification_section" class="my_project_section">
-                    <x-user.my_project.identification />
+                    <x-user.my_project.identification :project="$project" :user="Auth::user()" />
                 </section>
             </div>
         </div>
