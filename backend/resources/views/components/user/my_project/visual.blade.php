@@ -16,7 +16,7 @@
                         <img src="{{ Storage::url($projectImages[$i]['file_url']) }}">
                     @endif
                 </div>
-                <input type="file" name="image_url[{{ optional(optional($projectImages)[$i])['id'] }}][]" id="project_image_{{ $i }}" style="{{ optional($projectImages)[$i] !== null ? 'display: none;' : '' }}">
+                <input type="file" name="visual_image_url[{{ optional(optional($projectImages)[$i])['id'] }}][]" id="project_image_{{ $i }}" style="{{ optional($projectImages)[$i] !== null ? 'display: none;' : '' }}">
             </div>
         </div>
     @endfor
