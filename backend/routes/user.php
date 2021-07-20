@@ -93,6 +93,8 @@ Route::post('/inquiry/send', [InquiryController::class, 'sendInquiry'])->name('i
 
 // --------------------terms of service-------------------
 Route::get('/terms_of_service', [MypageController::class, 'termsOfService'])->name('terms_of_service');
+// --------------------PS terms of service-------------------
+Route::get('/ps_terms_of_service', [MypageController::class, 'PsTermsOfService'])->name('ps_terms_of_service');
 // --------------------privacy policy-------------------
 Route::get('/privacy_policy', [MypageController::class, 'privacyPolicy'])->name('privacy_policy');
 // --------------------trade law-------------------
