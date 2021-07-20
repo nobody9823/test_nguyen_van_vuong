@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Services\Project\ProjectService;
 use App\Http\Requests\MyProjectRequest;
+use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use App\Models\ProjectFile;
 use App\Models\Plan;
@@ -14,12 +16,19 @@ use Illuminate\Http\Request;
 
 class MyProjectController extends Controller
 {
-    public function __construct()
+
+    protected $project_service;
+
+    protected $user;
+
+    public function __construct(ProjectService $project_service)
     {
         $this->middleware(function ($request, $next) {
             $this->user = \Auth::user();
             return $next($request);
         });
+
+        $this->project_service = $project_service;
     }
 
     /**
@@ -94,46 +103,26 @@ class MyProjectController extends Controller
      */
     public function update(MyProjectRequest $request, Project $project)
     {
-        $project->fill($request->all())->save();
+        DB::beginTransaction();
+        try {
+            $project->fill($request->all())->save();
 
-        $this->user->identification->fill($request->all())->save();
+            $this->user->identification->fill($request->all())->save();
 
-        $this->user->profile->fill($request->all())->save();
+            $this->user->profile->fill($request->all())->save();
 
-        $this->user->address->fill($request->all())->save();
+            $this->user->address->fill($request->all())->save();
 
-        if($request->has('tags')){
-            $project->tags()->detach();
-            $project->tags()->attach(array_values($request->tags));
-        }
+            $this->project_service->attachTags($project, $request);
 
-        if ($request->has('image_url')){
-            $file_array = [];
-            foreach($request->image_url as $key => $value){
-                if($request->file_ids !== null && in_array((string) $key, $request->file_ids, true)){
-                    $project_file = ProjectFile::find($key);
-                    $project_file->file_url = $value[0];
-                    $project_file->save();
-                } else {
-                    $file_array[] =
-                    ProjectFile::make([
-                        'file_url' => $value[0],
-                        'file_content_type' => 'image_url'
-                    ]);
-                };
-                if ($file_array !== []){
-                    $project->projectFiles()->saveMany($file_array);
-                }
-            }
-        }
+            $this->project_service->saveImages($project, $request);
 
-        if ($request->has('video_url') && $request->video_url !== null){
-            $project->projectFiles()->save(
-                ProjectFile::make([
-                    'file_url' => $request->video_url,
-                    'file_content_type' => 'video_url'
-                ])
-            );
+            $this->project_service->saveVideoUrl($project, $request);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
         }
         return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with(['flash_message' => 'プロジェクトが更新されました。']);
     }
