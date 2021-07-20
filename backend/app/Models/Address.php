@@ -25,4 +25,15 @@ class Address extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+
+    public static function initialize()
+    {
+        return self::make([
+            'postal_code' => 0000000,
+            'prefecture' => '東京都',
+            'city' => '',
+            'block' => '',
+            'building' => ''
+        ]);
+    }
 }

@@ -34,4 +34,17 @@ class Identification extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public static function initialize()
+    {
+        return self::make([
+            'bank_code' => '',
+            'branch_code' => '',
+            'account_type' => '普通',
+            'account_number' => '',
+            'account_name' => '',
+            'identify_image_1' => 'public/sampleImage/now_printing.png',
+            'identify_image_2' => 'public/sampleImage/now_printing.png',
+        ]);
+    }
 }
