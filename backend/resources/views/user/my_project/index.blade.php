@@ -45,7 +45,7 @@
                             @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
                             編集
                             {{-- NOTICE: MyProjectController, edit action --}}
-                            <a class="cover_link" href="#edit"></a>
+                            <a class="cover_link" href="{{ route('user.project.edit', ['project' => $project]) }}"></a>
                             @elseif($project->release_status === '承認待ち' || $project->release_status === '掲載中')
                             {{ $project->release_status }}
                             <a class="cover_link"></a>
