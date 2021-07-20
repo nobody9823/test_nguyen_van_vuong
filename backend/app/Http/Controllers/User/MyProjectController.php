@@ -42,24 +42,9 @@ class MyProjectController extends Controller
     {
         $tags = Tag::pluck('name', 'id');
 
-        $project = $this->user->projects()
-                    ->save(Project::make(
-                        [
-                            'title' => '',
-                            'content' => '',
-                            'ps_plan_content' => '',
-                            'target_amount' => 0,
-                            'curator' => '',
-                            'start_date' => Carbon::minValue(),
-                            'end_date' => Carbon::maxValue(),
-                            'release_status' => '---',
-                        ])
-                    );
+        $project = $this->user->projects()->save(Project::initialize());
 
-        $project->projectFiles()->save(ProjectFile::make([
-            'file_url' => 'public/sampleImage/now_printing.png',
-            'file_content_type' => 'image_url',
-        ]));
+        $project->projectFiles()->save(ProjectFile::initialize());
 
         return view('user.my_project.edit', ['project' => $project, 'tags' => $tags]);
     }
