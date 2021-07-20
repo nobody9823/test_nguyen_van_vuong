@@ -14,6 +14,14 @@ use Illuminate\Http\Request;
 
 class MyProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = \Auth::user();
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +29,7 @@ class MyProjectController extends Controller
      */
     public function index()
     {
-        $projects = Auth::user()->projects()->get();
+        $projects = $this->user->projects()->get();
         return view('user.my_project.index', ['projects' => $projects->load('projectFiles')]);
     }
 
@@ -34,7 +42,7 @@ class MyProjectController extends Controller
     {
         $tags = Tag::pluck('name', 'id');
 
-        $project = Auth::user()->projects()
+        $project = $this->user->projects()
                     ->save(Project::make(
                         [
                             'title' => '',
@@ -103,11 +111,11 @@ class MyProjectController extends Controller
     {
         $project->fill($request->all())->save();
 
-        Auth::user()->identification->fill($request->all())->save();
+        $this->user->identification->fill($request->all())->save();
 
-        Auth::user()->profile->fill($request->all())->save();
+        $this->user->profile->fill($request->all())->save();
 
-        Auth::user()->address->fill($request->all())->save();
+        $this->user->address->fill($request->all())->save();
 
         if($request->has('tags')){
             $project->tags()->detach();
