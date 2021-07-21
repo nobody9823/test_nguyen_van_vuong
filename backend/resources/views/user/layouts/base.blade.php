@@ -112,7 +112,7 @@ if(isiOS) {
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-                <a href="★" class="top_menu-1 nav_btn_link">
+                <a href="{{ route('user.search') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">さがす</p>
 				</a>
 			</li>
