@@ -72,13 +72,13 @@ class MyProjectRequest extends FormRequest
             $this->offsetUnset('content');
         }
 
-        if ($this->has('start_date')){
+        if ($this->has('start_year') && $this->has('start_month') && $this->has('start_day') && $this->has('start_hour') && $this->has('start_minute')){
             $this->merge([
                 'start_date' => $this->start_year.'-'.$this->start_month.'-'.$this->start_day.' '.$this->start_hour.':'.$this->start_minute
             ]);
         }
 
-        if ($this->has('end_date')){
+        if ($this->has('end_year') && $this->has('end_month') && $this->has('end_day') && $this->has('end_hour') && $this->has('end_minute')){
             $this->merge([
                 'end_date' => $this->end_year.'-'.$this->end_month.'-'.$this->end_day.' '.$this->end_hour.':'.$this->end_minute
             ]);
