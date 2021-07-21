@@ -44,7 +44,7 @@ class ProjectRequest extends FormRequest
             'target_amount' => ['required', 'integer', 'max:99999999'],
             'curator' => ['required', 'string'],
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
-            'start_date' => ['required', 'date_format:Y-m-d H:i:s', $this->isMethod('post') ? 'after_or_equal:today' : ''],
+            'start_date' => ['required', 'date_format:Y-m-d H:i:s', $this->isMethod('post') ? 'after:1 week' : ''],            
             'end_date' => ['required', 'date_format:Y-m-d H:i:s', 'after:start_date', "before:{$end_date_limit}"],
             'tags' => ['required', new Tags($request)],
             'images' => [Rule::requiredIf($request->isMethod('post')), new ProjectImages($request)],
@@ -101,7 +101,7 @@ class ProjectRequest extends FormRequest
             'curator.string' => "キュレーターは文字列で入力してください。",
             'start_date.required' => "掲載開始日時を入力してください。",
             'start_date.date_format' => "掲載開始日時の形式を確認してください。",
-            'start_date.after_or_equal' => "掲載開始日時を本日以降にしてください",
+            'start_date.after' => "掲載開始日時を1週間後以降に設定してください",
             'end_date.required' => "掲載終了日時を入力してください。",
             'end_date.date_format' => "掲載終了日時の形式を確認してください。",
             'end_date.after' => "掲載終了日時を掲載開始日時より後にしてください。",
