@@ -444,11 +444,9 @@ class ProjectController extends Controller
     public function support(Project $project)
     {
         $this->authorize('checkIsFinishedPayment', $project);
-        $encrypted_code = Crypt::encrypt(Auth::user()->profile->inviter_code);
-        $invitation_url = route('user.project.show', ['project' => $project, 'inviter' => $encrypted_code]);
         Auth::user()->supportedProjects()->attach($project->id);
 
-        return view('user.project.support', ['invitation_url' => $invitation_url, 'project' => $project->getLoadPaymentsCountAndSumPrice()]);
+        return view('user.project.support', ['project' => $project->getLoadPaymentsCountAndSumPrice()]);
     }
 
     public function supporterRanking(Project $project)
