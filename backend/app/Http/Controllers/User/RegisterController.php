@@ -5,6 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Mail\User\EmailVerification as UserEmailVerification;
 use App\Models\EmailVerification;
 use App\Models\User;
+use App\Models\Profile;
+use App\Models\Address;
+use App\Models\SnsLink;
+use App\Models\Identification;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\StatefulGuard;
@@ -140,6 +144,10 @@ class RegisterController extends Controller
                     'password' => $request->password,
                     'email_verified_at' => Carbon::now(),
                 ]);
+                $user->profile()->save(Profile::initialize());
+                $user->address()->save(Address::initialize());
+                $user->snsLinks()->save(SnsLink::initialize());
+                $user->identification()->save(Identification::initialize());
                 $emailVerification->register();
                 $emailVerification->update();
                 DB::commit();
