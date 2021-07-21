@@ -112,7 +112,7 @@ if(isiOS) {
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-                <a href="★" class="top_menu-1 nav_btn_link">
+                <a href="{{ route('user.search') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">さがす</p>
 				</a>
 			</li>
@@ -354,7 +354,7 @@ if(isiOS) {
                 <div class="footer_logo"><img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}"></div>
                 <ul>
                     <li><a href="{{ route('user.project.index') }}">はじめる</a></li>
-                    <li><a href="#">さがす</a></li>
+                    <li><a href="{{ route('user.search') }}">さがす</a></li>
                     <li><a href="#">ファンリターンとは</a></li>
 
                     @guest('web')

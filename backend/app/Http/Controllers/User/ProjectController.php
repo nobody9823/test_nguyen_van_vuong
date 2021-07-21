@@ -361,11 +361,11 @@ class ProjectController extends Controller
                 break;
 
             case '3':
-                $projectsQuery->ordeyByFundingAmount();
+                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price','DESC');
                 break;
 
             case '4':
-                $projectsQuery->ordeyByNumberOfSupporters();
+                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_count','DESC');
                 break;
         }
 
@@ -397,7 +397,7 @@ class ProjectController extends Controller
         //     $projectsQuery->OnlyCheeringDisplay();
         // }
 
-        $projects = $projectsQuery->where('release_status', '掲載中')->with('tags')->paginate(9);
+        $projects = $projectsQuery->GetReleasedProject()->with('tags')->paginate(9);
 
         return view('user.search', compact('projects', 'tags'));
     }
