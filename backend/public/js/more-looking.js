@@ -11,7 +11,7 @@ function moreLooking(propsClassName,defaultNum,addNum,moreButtonName = 'more_loo
     // 取得したメッセージグループ数が$currentNumより多い時
     if ($currentNum < $propsLength) {
         // メッセージグループを8コまで表示してそれ以外はhideしておく
-        $('.' + propsClassName).each(function(index, element) {
+        $('.' + propsClassName).each(function(index) {
             if (index >= defaultNum) {
                 $(this).hide();
             }
