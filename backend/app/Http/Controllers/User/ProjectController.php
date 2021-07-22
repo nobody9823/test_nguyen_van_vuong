@@ -227,9 +227,7 @@ class ProjectController extends Controller
                 ], $request->all()
             ));
             $this->user->payments()->save($payment);
-            foreach($validated_request['plans'] as $key => $value){
-                PlanPaymentIncluded::create(['payment_id' => $payment->id, 'plan_id' => $key, 'quantity' => $value['quantity']]);
-            }
+            $payment->includedPlans()->attach($validated_request['plans']);
             if (!empty($validated_request['comments'])){
                 $comment = $this->comment->fill(['project_id' =>  $project->id, 'content' => $validated_request['comments']]);
                 $payment->comment()->save($comment);
