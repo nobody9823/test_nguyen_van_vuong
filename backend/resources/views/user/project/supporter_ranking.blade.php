@@ -133,54 +133,6 @@
                                 @endphp
                             @endforeach
 
-                            {{-- <div class="ps_rank_02_rank_item_row">
-                            <div class="ps_rank_item_01">
-                                <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
-                                <path id="" class="rank_color_02" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
-                                    c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
-                                    c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
-                                </svg>
-                            </div>
-                            <div class="ps_rank_item_02">2位</div>
-                            <div class="ps_rank_item_03">********</div>
-                            <div class="ps_rank_item_04">35,000円</div>
-                        </div><!--/ps_rank_02_rank_item_row-->
-
-                        <div class="ps_rank_02_rank_item_row">
-                            <div class="ps_rank_item_01">
-                                <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
-                                <path id="" class="rank_color_03" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
-                                    c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
-                                    c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
-                                </svg>
-                            </div>
-                            <div class="ps_rank_item_02">3位</div>
-                            <div class="ps_rank_item_03">********</div>
-                            <div class="ps_rank_item_04">35,000円</div>
-                        </div><!--/ps_rank_02_rank_item_row-->
-
-                        <div class="ps_rank_02_rank_item_row">
-                            <div class="ps_rank_item_01"></div>
-                            <div class="ps_rank_item_02">4位</div>
-                            <div class="ps_rank_item_03">********</div>
-                            <div class="ps_rank_item_04">35,000円</div>
-                        </div><!--/ps_rank_02_rank_item_row-->
-
-                        <div class="ps_rank_02_rank_item_row ps_rank_item_myrank ">
-                            <div class="ps_rank_item_01"></div>
-                            <div class="ps_rank_item_02">18位</div>
-                            <div class="ps_rank_item_03">ヤマダタロウ</div>
-                            <div class="ps_rank_item_04">35,000円</div>
-                        </div><!--/ps_rank_02_rank_item_row-->
-
-                        <div class="ps_rank_02_rank_item_row">
-                            <div class="ps_rank_item_01"></div>
-                            <div class="ps_rank_item_02">100位</div>
-                            <div class="ps_rank_item_03">********</div>
-                            <div class="ps_rank_item_04">35,000円</div>
-                        </div><!--/ps_rank_02_rank_item_row--> --}}
-
-                            {{-- <div class="ps_rank_more_btn"><a class="toggle-hidden" style="cursor: pointer">続きの順位を表示　<i class="fas fa-chevron-down"></i></a></div> --}}
                             <div class="row justify-content-center mb-5" style="margin-top: 5px;">
                                 <div class="ps_rank_more_btn" id="ranked_inviter_by_amount_more_looking_button">
                                     続きの順位を表示 <i class="fas fa-chevron-down"></i>
@@ -194,7 +146,6 @@
                         <!--/ps_rank_02_L-->
 
                         <div class="ps_rank_02_R ranked_inviter_of_count_list">
-
 
                             <div class="ps_rank_02_tit">紹介件数</div>
 
@@ -240,56 +191,6 @@
                                     表示を少なくする <i class="fas fa-chevron-down"></i>
                                 </div>
                             </div>
-
-                            {{-- <div class="ps_rank_02_rank_item_row">
-                            <div class="ps_rank_item_01">
-                                <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
-                                <path id="" class="rank_color_02" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
-                                    c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
-                                    c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
-                                </svg>
-                            </div>
-                            <div class="ps_rank_item_02">2位</div>
-                            <div class="ps_rank_item_03">********</div>
-                            <div class="ps_rank_item_04">540件</div>
-                        </div><!--/ps_rank_02_rank_item_row-->
-
-                        <div class="ps_rank_02_rank_item_row">
-                            <div class="ps_rank_item_01">
-                                <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 29.5 21" style="enable-background:new 0 0 29.5 21; " xml:space="preserve">
-                                <path id="" class="rank_color_03" d="M11.3,21H3.8c0,0-4.9-14.6-3.6-15.1c0.7-0.3,1.7,0.8,3,1.9c1.1,1.1,2.6,1.8,4.1,2h0.1
-                                    c0.1,0,0.2,0,0.3,0C11.1,9.2,13,0,14.6,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c1.5,0,3.4,9.2,6.7,9.8c0.1,0,0.2,0,0.3,0H22
-                                    c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
-                                </svg>
-                            </div>
-                            <div class="ps_rank_item_02">3位</div>
-                            <div class="ps_rank_item_03">********</div>
-                            <div class="ps_rank_item_04">540件</div>
-                        </div><!--/ps_rank_02_rank_item_row-->
-
-                        <div class="ps_rank_02_rank_item_row">
-                            <div class="ps_rank_item_01"></div>
-                            <div class="ps_rank_item_02">4位</div>
-                            <div class="ps_rank_item_03">********</div>
-                            <div class="ps_rank_item_04">540件</div>
-                        </div><!--/ps_rank_02_rank_item_row-->
-
-                        <div class="ps_rank_02_rank_item_row ps_rank_item_myrank ">
-                            <div class="ps_rank_item_01"></div>
-                            <div class="ps_rank_item_02">9位</div>
-                            <div class="ps_rank_item_03">ヤマダタロウ</div>
-                            <div class="ps_rank_item_04">540件</div>
-                        </div><!--/ps_rank_02_rank_item_row-->
-
-                        <div class="ps_rank_02_rank_item_row">
-                            <div class="ps_rank_item_01"></div>
-                            <div class="ps_rank_item_02">100位</div>
-                            <div class="ps_rank_item_03">********</div>
-                            <div class="ps_rank_item_04">540件</div>
-                        </div><!--/ps_rank_02_rank_item_row--> --}}
-
-                            {{-- <div class="ps_rank_more_btn"><a href="">続きの順位を表示　<i class="fas fa-chevron-down"></i></a></div> --}}
-
                         </div>
                         <!--/ps_rank_02_R-->
                     </div>
