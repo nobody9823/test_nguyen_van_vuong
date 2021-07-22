@@ -123,7 +123,7 @@ if(isiOS) {
 			</li>
             <form method="get" action="{{ route('user.search') }}" name="word_search">
                 <li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
-                    <i class="fas fa-search"></i><input type="text" name="word" placeholder="キーワードを検索" value="{{ Request::get('search_word') }}">
+                    <i class="fas fa-search"></i><input type="text" name="word" placeholder="キーワードを検索" value="{{ Request::get('word') }}">
                 </li>
                 <li class="menu-item nav_btn taso_li signup_btn" style="order: 5;">
                     <a href="javascript:word_search.submit()" class="top_menu-1 nav_btn_link" style="justify-content: center;">
