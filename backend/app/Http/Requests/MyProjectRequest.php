@@ -112,4 +112,18 @@ class MyProjectRequest extends FormRequest
         }
 
     }
+
+    public function messages()
+    {
+        return [
+            'video_url.regex' => ':attributeは正しいURLを指定してください。例）https://www.youtube.com/watch?v=ABCDEFG',
+            'first_name_kana.regex' => ':attributeは全角のカタカナを指定してください。',
+            'last_name_kana.regex' => ':attributeは全角のカタカナを指定してください。',
+            'first_name.regex' => ':attributeは全角の漢字、またはひらがなを指定してください。',
+            'last_name.regex' => ':attributeは全角の漢字、またはひらがなを指定してください。',
+            'birthday.date_format' => ':attributeの形式は、「年-月-日」 で指定してください。',
+            'start_date.date_format' => ':attributeの形式は、「年-月-日 時：分」 で指定してください。',
+            'end_date.date_format' => ':attributeの形式は、「年-月-日 時：分」 で指定してください。',
+        ];
+    }
 }

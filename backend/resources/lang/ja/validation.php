@@ -161,7 +161,7 @@ return [
         'phone_number' => '電話番号',
         'bank_code' => '金融機関コード・銀行コード',
         'branch_code' => '支店番号',
-        'account_type' => '口座種別', => '金融機関コード・銀行コード',
+        'account_type' => '口座種別',
         'account_number' => '口座番号',
         'account_name' => '口座名義',
         'branch_code' => '支店番号',
