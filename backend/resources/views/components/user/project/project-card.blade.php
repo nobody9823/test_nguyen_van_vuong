@@ -8,7 +8,7 @@
 
 @if(!empty($ranking))
 <div class="ib03L_rank">
-    <div class="ib03L_rank_01"><x-user.crown :ranking="$ranking" page="top" /></div>
+    <div class="ib03L_rank_01"><x-user.crown :ranking="$ranking" size="large" /></div>
     <div class="ib03L_rank_02 E-font">{{ $ranking }}</div>
     <div class="ib03L_rank_03 E-font"></div>
 </div>

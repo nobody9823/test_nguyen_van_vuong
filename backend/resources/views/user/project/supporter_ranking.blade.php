@@ -115,11 +115,11 @@
                                         class="ps_rank_02_rank_item_row ranked_inviter_by_amount {{ $project_supporter->email === Auth::user()->email ? 'ps_rank_item_myrank' : '' }}">
                                         <div class="ps_rank_item_01">
                                             @if ($total_amount_rank === 1)
-                                                <x-user.crown ranking="1" page="ps_ranking" />
+                                                <x-user.crown ranking="1" size="" />
                                             @elseif($total_amount_rank === 2)
-                                                <x-user.crown ranking="2" page="ps_ranking" />
+                                                <x-user.crown ranking="2" size="" />
                                             @elseif($total_amount_rank === 3)
-                                                <x-user.crown ranking="3" page="ps_ranking" />
+                                                <x-user.crown ranking="3" size="" />
                                             @endif
                                         </div>
                                         <div class="ps_rank_item_02">{{ $total_amount_rank }}位</div>
@@ -214,11 +214,11 @@
                                         class="ps_rank_02_rank_item_row ranked_inviter_of_count {{ $project_supporter->email === Auth::user()->email ? 'ps_rank_item_myrank' : '' }}">
                                         <div class="ps_rank_item_01">
                                             @if ($total_quantity_rank === 1)
-                                                <x-user.crown ranking="1" page="ps_ranking" />
+                                                <x-user.crown ranking="1" size="" />
                                             @elseif($total_quantity_rank === 2)
-                                                <x-user.crown ranking="2" page="ps_ranking" />
+                                                <x-user.crown ranking="2" size="" />
                                             @elseif($total_quantity_rank === 3)
-                                                <x-user.crown ranking="3" page="ps_ranking" />
+                                                <x-user.crown ranking="3" size="" />
                                             @endif
                                         </div>
                                         <div class="ps_rank_item_02">{{ $total_quantity_rank }}位</div>
