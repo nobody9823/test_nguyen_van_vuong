@@ -127,28 +127,10 @@ class Project extends Model
 
 
     //--------------local scope----------------//
-    public function scopeGetProjectsWithPaginate($query)
-    {
-        return $query->with('user')->orderBy('created_at', 'desc')->paginate(10);
-    }
 
     public function scopeGetReleasedProject($query)
     {
         return $query->where('release_status', '掲載中');
-    }
-
-    //company_id = Auth::id()のtalentを持つprojectを持ってくる
-    public function scopeGetProjectsByCompany($query)
-    {
-        return $query
-        ->whereIn('talent_id', Talent::select('id')
-        ->where('company_id', Auth::id()))->getProjects();
-    }
-
-    //talent_id = Auth::id()のprojectを持ってくる
-    public function scopeGetProjectsByTalent($query)
-    {
-        return $query->where('talent_id', Auth::id())->getProjects();
     }
 
     // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
@@ -176,7 +158,7 @@ class Project extends Model
     {
         return $query->getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice();
     }
-
+    
     public function scopeOrdeyByLikedUsers($query)
     {
         // return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
@@ -188,19 +170,11 @@ class Project extends Model
         return $query->orderBy(\DB::raw('abs(datediff(CURDATE(), end_date))'), "ASC");
     }
 
-    public function scopeOrderByNearlyOpen($query)
-    {
-        return $query->where('start_date', '>', Carbon::now())->orderBy(\DB::raw('abs(datediff(CURDATE(), start_date))'), "ASC");
-    }
-
-    public function scopeOnlyBillingDisplay($query)
-    {
-        return $query
-        ->whereIn('projects.id',Plan::select('project_id')
-        ->whereIn('id',UserPlanBilling::select('plan_id')
-        ->whereIn('user_id',User::select('id')->where('id', Auth::id())
-        )));
-    }
+    // NOTE:現状「もうすぐ公開のプロジェクト」は無い為、コメントアウト
+    // public function scopeOrderByNearlyOpen($query)
+    // {
+    //     return $query->where('start_date', '>', Carbon::now())->orderBy(\DB::raw('abs(datediff(CURDATE(), start_date))'), "ASC");
+    // }
 
     public function scopeBeforeSeeking($query)
     {
@@ -220,42 +194,6 @@ class Project extends Model
     public function scopeDaysLeftSeeking($query,$start_or_end_date)
     {
         return $query->whereBetween($start_or_end_date, [Carbon::now(), Carbon::now()->addWeek(1)]);
-    }
-
-    public function scopeSearchByArrayWords($query, $words)
-    {
-        if($words[0] !== ""){
-            foreach($words as $word){
-            $query->where(function ($query) use ($word){
-                    $query->orWhereIn('talent_id',Talent::select('id')->where('name', 'like', "%$word%"));
-                    $query->orWhere('title', 'like', "%$word%");
-                    $query->orWhere('explanation', 'like', "%$word%");
-                });
-            }
-        }
-
-        return $query;
-    }
-
-    public function scopeSearchWords($query, $word, $role)
-    {
-        // dd($role);
-        if($role === 'user'){
-            return $query->where('title', 'like', "%$word%")
-                         ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
-                         ddd("user");
-        } else if($role === 'admin'){
-            return $query->where('title', 'like', "%$word%")
-                         ->orWhere('curator', 'like', "%$word%")
-                         ->orWhere('id', 'like', "%$word%")
-                         ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
-                         ddd("admin");
-        }
-    }
-
-    public function scopeSearchWordWithTalentId($query, $talents)
-    {
-        return $query->orWhereIn('talent_id', $talents);
     }
 
     public function scopeSearchWithReleaseStatus($query, $release_statuses)
@@ -278,6 +216,21 @@ class Project extends Model
                     $query->SearchWords($word, $role);
                 });
             }
+        }
+    }
+
+    public function scopeSearchWords($query, $word, $role)
+    {
+        if($role === 'user'){
+            return $query->where('title', 'like', "%$word%")
+                         ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                         ddd("user");
+        } else if($role === 'admin'){
+            return $query->where('title', 'like', "%$word%")
+                         ->orWhere('curator', 'like', "%$word%")
+                         ->orWhere('id', 'like', "%$word%")
+                         ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                         ddd("admin");
         }
     }
     //--------------local scope----------------//
@@ -310,26 +263,6 @@ class Project extends Model
         } else { // ゼロ除算対策
             return 100;
         }
-    }
-
-    /**
-     * Get Japanese formatted start time of project with day of the week
-     *
-     * @return string
-     */
-    public function getStartDate()
-    {
-        return $this->start_date->isoFormat('YYYY年MM月DD日(ddd)');
-    }
-
-    /**
-     * Get Japanese formatted end time of project with day of the week
-     *
-     * @return string
-     */
-    public function getEndDate()
-    {
-        return $this->end_date->isoFormat('YYYY年MM月DD日(ddd)');
     }
 
     //-----------------掲載状態変更functions------------------------
