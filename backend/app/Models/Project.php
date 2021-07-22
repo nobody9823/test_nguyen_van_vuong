@@ -265,6 +265,26 @@ class Project extends Model
         }
     }
 
+    /**
+     * Get Japanese formatted start time of project with day of the week
+     *
+     * @return string
+     */
+    public function getStartDate()
+    {
+        return $this->start_date->isoFormat('YYYY年MM月DD日(ddd)');
+    }
+
+    /**
+     * Get Japanese formatted end time of project with day of the week
+     *
+     * @return string
+     */
+    public function getEndDate()
+    {
+        return $this->end_date->isoFormat('YYYY年MM月DD日(ddd)');
+    }
+
     //-----------------掲載状態変更functions------------------------
     public function changeStatusToRelease(){
         DB::transaction(function () {
