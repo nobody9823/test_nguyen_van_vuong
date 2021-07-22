@@ -322,6 +322,7 @@ class ProjectController extends Controller
                 )
             );
         }
+        $projectsQuery->search();
         // こちらはデザインにはなかったのでコメントアウト致しました。
         // //フリーワード絞り込み
         // if ($request->free_word) {
