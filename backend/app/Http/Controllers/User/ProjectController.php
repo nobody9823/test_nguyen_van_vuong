@@ -20,6 +20,7 @@ use App\Actions\PayPay\PayPayInterface;
 use App\Http\Requests\ConfirmPaymentRequest;
 use App\Http\Requests\ConsultProjectSendRequest;
 use App\Mail\User\ConsultProject;
+use App\Models\PlanPaymentIncluded;
 use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
 use Exception;
@@ -226,7 +227,9 @@ class ProjectController extends Controller
                 ], $request->all()
             ));
             $this->user->payments()->save($payment);
-            $payment->includedPlans()->attach($validated_request['plans']);
+            foreach($validated_request['plans'] as $key => $value){
+                PlanPaymentIncluded::create(['payment_id' => $payment->id, 'plan_id' => $key, 'quantity' => $value['quantity']]);
+            }
             if (!empty($validated_request['comments'])){
                 $comment = $this->comment->fill(['project_id' =>  $project->id, 'content' => $validated_request['comments']]);
                 $payment->comment()->save($comment);
