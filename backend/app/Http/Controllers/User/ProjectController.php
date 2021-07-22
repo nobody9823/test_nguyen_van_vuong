@@ -322,23 +322,10 @@ class ProjectController extends Controller
                 )
             );
         }
-        // こちらはデザインにはなかったのでコメントアウト致しました。
-        // //フリーワード絞り込み
-        // if ($request->free_word) {
-        //     // 全角スペースを半角スペースに変換
-        //     $words = str_replace("　", " ", $request->free_word);
-        //     // 半角スペースごとに区切って配列に代入
-        //     $array_words = explode(" ", $words);
-        //     //この部分今のところタイトルと説明文でしか検索できてないです...アイドル名がなぜかうまくいかなかったのでまたやります...
-        //     foreach ($array_words as $array_word) {
-        //         $projectsQuery->where(function ($projectsQuery) use ($array_word) {
-        //             $projectsQuery->Where('projects.title', 'like', "%$array_word%")
-        //                 ->orWhere('explanation', 'like', "%$array_word%")
-        //                 ->orWhereIn('talent_id', Talent::select('id')
-        //                 ->where('name', 'like', "%$array_word%"));
-        //         });
-        //     }
-        // }
+
+        // ワード検索
+        $projectsQuery->search($role="user");
+       
         // sort_typeによって順序変更
         // 0 => 人気順(募集中のお気に入り数順),   1 => 新着順,   2 => 終了日が近い順,   3 => 支援総額順,   4 => 支援者数順
         switch ($request->sort_type) {
