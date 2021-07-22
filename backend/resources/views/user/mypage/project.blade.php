@@ -48,7 +48,6 @@
                 </div><!--/su_pr_01-->
 
                 <div class="su_pr_02">
-                    <x-user.invitation-url :project="$project" />
                     <div class="m_b_1510">
                         <div class="def_btn">
                             <a href="{{ route('user.project.support', ['project' => $project]) }}" style="color: white">
