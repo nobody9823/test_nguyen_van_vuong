@@ -14,15 +14,55 @@ class DateFormatService {
         $this->today = Carbon::now();
     }
 
-    public function getDiffCompareWithToday($date = null)
+    /**
+     * check argument date is before today
+     *
+     * @param $date
+     *
+     * @return boolean
+     */
+    protected function checkDateBeforeToday($date)
     {
-        if ($date !== null){
-            $this->diff_date = $this->today->diffInDays($date);
-        }
-        return $this->diff_date > 0 ? $this->diff_date : null;
+        return $this->today->gt($date);
     }
 
-    public function forJapanese($date = null)
+    /**
+     * check argument date is after today
+     *
+     * @param $date
+     *
+     * @return boolean
+     */
+    protected function checkDateAfterToday($date)
+    {
+        return $this->today->lt($date);
+    }
+
+    /**
+     * get diff compare with today
+     *
+     * @param $date
+     *
+     * @return number
+     */
+    public function getDiffCompareWithToday($date = null)
+    {
+        if ($date !== null && $this->checkDateBeforeToday($date)){
+            $this->diff_date = $this->today->diffInDays($date);
+        } else if ($date !== null && $this->checkDateAfterToday($date)){
+            $this->diff_date = - $this->today->diffInDays($date);
+        }
+        return $this->diff_date;
+    }
+
+    /**
+     * format date for japanese
+     *
+     * @param $date
+     *
+     * @return mixed
+     */
+    public function forJapanese($date)
     {
         if ($date != null){
             $date = Carbon::parse($date);
