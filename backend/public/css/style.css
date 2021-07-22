@@ -1557,7 +1557,7 @@ input[name="tab_item"] {
 .ps_rank_item_03{ width: calc(50% - 50px); margin-right: 10px; }
 .ps_rank_item_04{ width: calc(50% - 50px); text-align: right;}
 .ps_rank_item_myrank{ color: #00AEBD;}
-.ps_rank_more_btn{ width: 100%; text-align: right; font-size: 1.2rem; margin:20px 0 10px 0;}
+.ps_rank_more_btn{ width: 100%; text-align: right; font-size: 1.2rem; margin:20px 0 10px 0;cursor: pointer;}
 .ps_rank_more_btn a{color: #1C81D8;}
 
 @media screen and (max-width: 768px){
