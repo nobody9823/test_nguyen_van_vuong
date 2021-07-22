@@ -7,14 +7,18 @@ use Illuminate\View\Component;
 class SupporterRanking extends Component
 {
     public $project;
+    public $usersRankedByTotalAmount;
+    public $usersRankedByTotalQuantity;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($project)
+    public function __construct($project, $usersRankedByTotalAmount, $usersRankedByTotalQuantity)
     {
         $this->project = $project;
+        $this->usersRankedByTotalAmount = $usersRankedByTotalAmount;
+        $this->usersRankedByTotalQuantity = $usersRankedByTotalQuantity;
     }
 
     /**
