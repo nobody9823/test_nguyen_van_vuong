@@ -237,9 +237,20 @@ class Project extends Model
         return $query;
     }
 
-    public function scopeSearchWord($query, $word)
+    public function scopeSearchWords($query, $word, $role)
     {
-        return $query->where('title', 'like', "%$word%");
+        // dd($role);
+        if($role === 'user'){
+            return $query->where('title', 'like', "%$word%")
+                         ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                         ddd("user");
+        } else if($role === 'admin'){
+            return $query->where('title', 'like', "%$word%")
+                         ->orWhere('curator', 'like', "%$word%")
+                         ->orWhere('id', 'like', "%$word%")
+                         ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                         ddd("admin");
+        }
     }
 
     public function scopeSearchWordWithTalentId($query, $talents)
@@ -259,12 +270,12 @@ class Project extends Model
         return $query;
     }
 
-    public function scopeSearch($query)
+    public function scopeSearch($query,$role)
     {
         if ($this->getSearchWordInArray()) {
             foreach ($this->getSearchWordInArray() as $word) {
-                $query->where(function ($query) use ($word) {
-                    $query->where('title', 'like', "%$word%")->orWhere('curator', 'like', "%$word%")->orWhere('id', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                $query->where(function ($query) use ($word, $role) {
+                    $query->SearchWords($word, $role);
                 });
             }
         }
