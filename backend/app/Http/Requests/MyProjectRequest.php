@@ -29,7 +29,7 @@ class MyProjectRequest extends FormRequest
     {
         return [
             'title' => ['nullable', 'string', 'max:255'],
-            'content' => ['nullable', 'string', 'max:10000'],
+            'content' => ['nullable', 'string', 'max:100000'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['nullable', 'string'],
             'image_url' => ['nullable', 'array'],
@@ -39,7 +39,7 @@ class MyProjectRequest extends FormRequest
             'target_amount' => ['nullable', 'integer', 'min:0'],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', 'after_or_equal:'.$request->route('project')->start_date],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', 'after:start_date', 'before_or_equal:'.$request->route('project')->end_date],
-            'ps_plan_content' => ['nullable', 'string', 'max:2000'],
+            'ps_plan_content' => ['nullable', 'string', 'max:100000'],
             'first_name_kana' => ['nullable', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'last_name_kana' => ['nullable', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'first_name' => ['nullable', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],

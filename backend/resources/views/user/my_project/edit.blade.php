@@ -4,7 +4,6 @@
 
 <div class="Assist-input_base">
 <section class="section_base">
-
     <div class="pc-Details-screen_base_top inner_item">
 
         <div class="pds_inner">
@@ -69,6 +68,7 @@
 
 @section('script')
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
+<script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 const selectEditTag = el => {
     let myProjectSections = document.querySelectorAll('.my_project_section');
@@ -101,5 +101,39 @@ const displayInputFile = (el) => {
         image.style.display = 'none';
     }
 }
+</script>
+<script>
+tinymce.init({
+    selector: '.tiny_editor',
+    language: 'ja',
+    branding: false,
+    elementpath: false,
+    height: 500,
+    forced_root_block : false,
+    menubar: false,
+    entity_encoding: 'raw',
+    mobile: {
+        theme: 'mobile',
+        plugins: [ 'autosave', 'lists', 'autolink' ],
+        toolbar: [ 'undo', 'bold', 'italic', 'styleselect', 'image', 'forecolor', 'link' ],
+
+    },
+    plugins: [ 'code', 'lists', 'image', 'link', 'fullscreen', 'table'],
+    toolbar: ['undo redo | bold italic | forecolor backcolor | fontsizeselect | numlist bullist | table | link | image',
+        'alignleft | aligncenter | alignright'],
+    file_picker_types: 'image',
+    images_upload_handler: function (blobInfo, success, failure) {
+        let data = new FormData();
+        data.append('file', blobInfo.blob(), blobInfo.filename());
+        axios.post('/admin/project/upload_editor_file', data)
+            .then(function (res) {
+                success(res.data.location);
+            })
+            .catch(function (err) {
+                console.log(err);
+                failure('HTTP Error: ' + err.message);
+            });
+    }
+});
 </script>
 @endsection
