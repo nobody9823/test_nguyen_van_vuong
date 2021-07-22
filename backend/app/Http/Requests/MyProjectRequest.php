@@ -40,10 +40,10 @@ class MyProjectRequest extends FormRequest
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', 'after_or_equal:'.$request->route('project')->start_date],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', 'after:start_date', 'before_or_equal:'.$request->route('project')->end_date],
             'ps_plan_content' => ['nullable', 'string', 'max:2000'],
-            'first_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
-            'last_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
-            'first_name' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
-            'last_name' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
+            'first_name_kana' => ['nullable', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
+            'last_name_kana' => ['nullable', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
+            'first_name' => ['nullable', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
+            'last_name' => ['nullable', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
             'phone_number' =>['nullable', 'string'],
             'postal_code' => ['nullable', 'string'],
             'prefecture' => ['nullable', 'string'],
@@ -72,13 +72,13 @@ class MyProjectRequest extends FormRequest
             $this->offsetUnset('content');
         }
 
-        if ($this->has('start_date')){
+        if ($this->has('start_year') && $this->has('start_month') && $this->has('start_day') && $this->has('start_hour') && $this->has('start_minute')){
             $this->merge([
                 'start_date' => $this->start_year.'-'.$this->start_month.'-'.$this->start_day.' '.$this->start_hour.':'.$this->start_minute
             ]);
         }
 
-        if ($this->has('end_date')){
+        if ($this->has('end_year') && $this->has('end_month') && $this->has('end_day') && $this->has('end_hour') && $this->has('end_minute')){
             $this->merge([
                 'end_date' => $this->end_year.'-'.$this->end_month.'-'.$this->end_day.' '.$this->end_hour.':'.$this->end_minute
             ]);
@@ -111,5 +111,19 @@ class MyProjectRequest extends FormRequest
             $this->merge(['building' => ""]);
         }
 
+    }
+
+    public function messages()
+    {
+        return [
+            'video_url.regex' => ':attributeは正しいURLを指定してください。例）https://www.youtube.com/watch?v=ABCDEFG',
+            'first_name_kana.regex' => ':attributeは全角のカタカナを指定してください。',
+            'last_name_kana.regex' => ':attributeは全角のカタカナを指定してください。',
+            'first_name.regex' => ':attributeは全角の漢字、またはひらがなを指定してください。',
+            'last_name.regex' => ':attributeは全角の漢字、またはひらがなを指定してください。',
+            'birthday.date_format' => ':attributeの形式は、「年-月-日」 で指定してください。',
+            'start_date.date_format' => ':attributeの形式は、「年-月-日 時：分」 で指定してください。',
+            'end_date.date_format' => ':attributeの形式は、「年-月-日 時：分」 で指定してください。',
+        ];
     }
 }

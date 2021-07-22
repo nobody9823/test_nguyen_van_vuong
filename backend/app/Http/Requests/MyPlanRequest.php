@@ -82,4 +82,12 @@ class MyPlanRequest extends FormRequest
             $this->merge(['image_url' => "public/sampleImage/now_printing.png"]);
         };
     }
+
+    public function messages()
+    {
+        return [
+            'delivery_date.date_format' => ':attributeの形式は、「年-月-日」で指定してください。',
+            'delivery_date.after' => ':attributeには、昨日以降の日付を指定してください。',
+        ];
+    }
 }
