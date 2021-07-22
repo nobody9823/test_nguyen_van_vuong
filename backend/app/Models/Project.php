@@ -224,15 +224,14 @@ class Project extends Model
         if($role === 'user'){
             return $query->where('title', 'like', "%$word%")
                          ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
-                         ddd("user");
         } else if($role === 'admin'){
             return $query->where('title', 'like', "%$word%")
                          ->orWhere('curator', 'like', "%$word%")
                          ->orWhere('id', 'like', "%$word%")
                          ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
-                         ddd("admin");
         }
     }
+    
     //--------------local scope----------------//
 
 
