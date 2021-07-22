@@ -25,7 +25,7 @@
                         </div>
                         <div class="su_pr_01_03 m_b_1510">
                             <div>目標金額は¥{{ number_format($project->target_amount) }}</div>
-                            <div>支援者数：{{ $project->supportedUsers()->count() }}</div>
+                            <div>支援者数：{{ $project->payments_count }}</div>
                             @if (DateFormat::getDiffCompareWithToday($project->end_date) > 0)
                                 <div>募集終了まで残り：{{ DateFormat::getDiffCompareWithToday($project->end_date) }}日</div>
                             @else
