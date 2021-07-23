@@ -17,7 +17,6 @@ use App\Http\Controllers\Admin\ReplyController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\TalentController;
-use App\Http\Controllers\Admin\TemporaryCompanyController;
 use App\Http\Controllers\Admin\TemporaryTalentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WorkAttendanceController;
