@@ -21,7 +21,6 @@ use App\Http\Controllers\Admin\TemporaryTalentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WorkAttendanceController;
 use App\Http\Controllers\Admin\WorkShiftController;
-use App\Http\Controllers\Admin\SupporterPurchaseController;
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
