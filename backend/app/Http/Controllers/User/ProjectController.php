@@ -219,7 +219,7 @@ class ProjectController extends Controller
             $payment = $this->payment->fill(array_merge(
                 [
                     'project_id' => $project->id,
-                    'inviter_id' => !empty($validated_request['inviter_code']) ? $inviter->id : null,
+                    'inviter_id' => !empty($validated_request['inviter_code']) && !empty($inviter) ? $inviter->id : null,
                     'price' => $validated_request['total_amount'],
                     'message_status' => "ステータスなし",
                     'payment_way' => !empty($validated_request['payjp_token']) ? 'PayJp' : 'PayPay',
@@ -326,7 +326,6 @@ class ProjectController extends Controller
 
         // ワード検索
         $projectsQuery->search($role="user");
-       
         // sort_typeによって順序変更
         // 0 => 人気順(募集中のお気に入り数順),   1 => 新着順,   2 => 終了日が近い順,   3 => 支援総額順,   4 => 支援者数順
         switch ($request->sort_type) {
