@@ -248,7 +248,7 @@
     </div>
     <div class="prof_edit_row">
         <div class="prof_edit_01">現在地</div>
-        <div class="prof_edit_02">{{ Auth::user()->address->prefecture }}</div>
+        <div class="prof_edit_02">{{ optional(Auth::user()->address)->prefecture }}</div>
         <div class="prof_edit_03">
             編集
             <a href="{{ route('user.profile', ['input_type' => 'prefecture_id']) }}" class="cover_link"></a></div>
