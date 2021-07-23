@@ -85,11 +85,11 @@
         <div class="prof_edit_row">
             <div class="prof_edit_01">URL<br><span>編集中</span></div>
             <div class="prof_edit_editbox">
-                <input name="twitter_url" type="text" placeholder="UserId">
-                <input name="instagram_url" type="text" placeholder="UserId">
-                <input name="youtube_url" type="text" placeholder="UserId">
-                <input name="tiktok_url" type="text" placeholder="UserId">
-                <input name="other_url" type="text" placeholder="UserId">
+                <input name="twitter_url" type="text" placeholder="twiiter">
+                <input name="instagram_url" type="text" placeholder="instagram">
+                <input name="youtube_url" type="text" placeholder="youtube">
+                <input name="tiktok_url" type="text" placeholder="tiktok">
+                <input name="other_url" type="text" placeholder="other">
             </div>
             <div class="prof_edit_03">
                 <a href="javascript:document.urlForm.submit()">更新</a>
