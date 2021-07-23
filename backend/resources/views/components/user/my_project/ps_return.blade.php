@@ -1,4 +1,4 @@
-<form action="{{ route('user.project.update', ['project' => $project]) }}" method="post">
+<form action="{{ route('user.my_project.project.update', ['project' => $project]) }}" method="post">
     @csrf
     @method('PUT')
     <div class="form_item_row">

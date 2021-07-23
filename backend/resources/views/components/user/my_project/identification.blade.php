@@ -1,4 +1,4 @@
-<form action="{{ route('user.project.update', ['project' => $project]) }}" method="post" class="h-adr">
+<form action="{{ route('user.my_project.project.update', ['project' => $project]) }}" method="post" class="h-adr">
     @csrf
     @method('PUT')
 <span class="p-country-name" style="display:none;">Japan</span>
