@@ -42,6 +42,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
 Route::group(['middleware' => ['auth:web']], function () {
     Route::prefix('my_project')->group(function(){
         Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+        Route::post('project/{project}/apply', [MyProjectController::class, 'apply'])->name('project.apply');
         Route::get('project/{project}/create_plan', [MyProjectController::class, 'createPlan'])->name('project.create_plan');
         Route::prefix('project/{project}')->group(function(){
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
