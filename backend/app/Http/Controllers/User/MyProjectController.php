@@ -12,8 +12,10 @@ use App\Models\Plan;
 use App\Models\Tag;
 use Carbon\Carbon;
 use Auth;
+use Exception;
 use Illuminate\Http\Request;
 use Storage;
+use Log;
 
 class MyProjectController extends Controller
 {
@@ -146,5 +148,17 @@ class MyProjectController extends Controller
         ]);
         $path = $request->file('file')->store('public/image');
         return ['location' => Storage::url($path)];
+    }
+
+    public function apply(Project $project)
+    {
+        try {
+            $project->release_status = '承認待ち';
+            $project->update();
+            return redirect()->action([MyProjectController::class, 'index'], ['projects' => $this->user->projects()->get()->load('projectFiles')])->with(['flash_message' => 'プロジェクトの申請が完了しました。']);
+        } catch (Exception $e) {
+            Log::alert($e->getMessage(), $e->getTrace());
+            throw $e;
+        }
     }
 }
