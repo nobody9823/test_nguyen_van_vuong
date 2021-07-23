@@ -27,10 +27,6 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{payment}/paymentForPayJp', [ProjectController::class, 'paymentForPayJp'])->name('plan.paymentForPayJp');
     Route::get('plan/{payment}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
-    Route::get('plan/{plan}/select_payment', [PlanController::class, 'selectPayment'])->name('plan.select_payment');
-    Route::get('plan/{plan}/join_for_payjp/{unique_token}', [PlanController::class, 'joinPlanForPayJp'])->name('plan.join_for_payjp');
-    Route::get('plan/{plan}/join_for_paypay/{unique_token}', [PlanController::class, 'joinPlanForPayPay'])->name('plan.join_for_paypay');
-    Route::get('plan/{plan}/success', [PlanController::class, 'success'])->name('plan.success');
     Route::post('comment/post', [CommentController::class, 'postComment'])->name('comment.post');
     Route::get('support', [ProjectController::class, 'support'])->name('project.support');
     Route::get('supporter_ranking', [ProjectController::class, 'supporterRanking'])->name('project.supporter_ranking');

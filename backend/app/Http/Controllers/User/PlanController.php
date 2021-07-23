@@ -124,8 +124,5 @@ class PlanController extends Controller
     }
     return redirect()->action([PlanController::class, 'success'], ['project' => $project, 'plan' => $plan]);
   }
-
-  public function success(){
-    return view('user.plan.success');
-  }
+  
 }
