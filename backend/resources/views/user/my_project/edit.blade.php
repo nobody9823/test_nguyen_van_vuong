@@ -69,6 +69,7 @@
 @section('script')
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
 <script>
 const selectEditTag = el => {
     let myProjectSections = document.querySelectorAll('.my_project_section');
@@ -125,7 +126,7 @@ tinymce.init({
     images_upload_handler: function (blobInfo, success, failure) {
         let data = new FormData();
         data.append('file', blobInfo.blob(), blobInfo.filename());
-        axios.post('/admin/project/upload_editor_file', data)
+        axios.post('/my_project/project/upload_editor_file', data)
             .then(function (res) {
                 success(res.data.location);
             })

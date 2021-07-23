@@ -13,6 +13,7 @@ use App\Models\Tag;
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Http\Request;
+use Storage;
 
 class MyProjectController extends Controller
 {
@@ -136,5 +137,14 @@ class MyProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function uploadEditorFile(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file',
+        ]);
+        $path = $request->file('file')->store('public/image');
+        return ['location' => Storage::url($path)];
     }
 }
