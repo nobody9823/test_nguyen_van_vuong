@@ -102,21 +102,21 @@ class MyProjectControllerTest extends TestCase
 
     public function testIndexAction()
     {
-        $response = $this->get(route('user.project.index'));
+        $response = $this->get(route('user.my_project.project.index'));
 
         $response->assertOk();
     }
 
     public function testCreateAction()
     {
-        $response = $this->get(route('user.project.create'));
+        $response = $this->get(route('user.my_project.project.create'));
 
         $response->assertOk();
     }
 
     public function testEditAction()
     {
-        $response = $this->get(route('user.project.edit', [ 'project' => $this->project ]));
+        $response = $this->get(route('user.my_project.project.edit', [ 'project' => $this->project ]));
 
         $response->assertOk();
     }
@@ -125,53 +125,53 @@ class MyProjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project ], $this->target_amount_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project ], $this->target_amount_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project]));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project]));
     }
 
     public function testUpdateActionWhenEditOverView()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project ], $this->overview_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project ], $this->overview_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project]));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project]));
     }
 
     public function testUpdateActionWhenEditVisual()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project ], $this->visual_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project ], $this->visual_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project]));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project]));
     }
 
     public function testUpdateActionWhenEditMainContent()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project ], $this->main_content_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project ], $this->main_content_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project]));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project]));
     }
 
     public function testUpdateActionWhenEditPsReturn()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project ], $this->ps_return_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project ], $this->ps_return_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project]));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project]));
     }
 
     public function testUpdateActionWhenEditIdentification()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project ], $this->ps_return_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project ], $this->ps_return_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project]));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project]));
     }
 }
