@@ -114,7 +114,7 @@ tinymce.init({
     mobile: {
         theme: 'mobile',
         plugins: [ 'autosave', 'lists', 'autolink' ],
-        toolbar: [ 'undo', 'bold', 'italic', 'styleselect', 'image', 'forecolor', 'link' ],
+        toolbar: [ 'undo', 'bold', 'italic', 'styleselect', 'image', 'link' ],
 
     },
     plugins: [ 'code', 'lists', 'image', 'link', 'fullscreen', 'table'],
