@@ -154,8 +154,7 @@ class Payment extends Model
         return $query;
     }
 
-
-    public function scopeGetAddedPaymentAmount()
+    public function getAddedPaymentAmountAttribute()
     {
         $total_amount = 0;
         foreach($this->includedPlans as $plan){
