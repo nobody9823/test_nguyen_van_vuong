@@ -32,13 +32,14 @@ class MypageController extends Controller
     // 購入履歴
     public function paymentHistory()
     {
-        $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project']);
+        $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project'])->paginate(1);
 
-        dd($payments);
+        $project = $payments->first()->includedPlans()->first()->project->getLoadPaymentsCountAndSumPrice();
         // FIXME 画面ができたら適用
-        // return view('user.mypage.payment', [
-        //     'payments' => $payments,
-        // ]);
+        return view('user.mypage.payment', [
+            'payments' => $payments,
+            'project' => $project
+        ]);
     }
 
     // 投稿コメント一覧

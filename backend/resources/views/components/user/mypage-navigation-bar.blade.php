@@ -15,10 +15,10 @@
                 <a href="{{ route('user.purchased_projects') }}" class="cover_link"></a>
             </div>
             <div class="pbb_01_link">お気に入りプロジェクト<i class="fas fa-chevron-right"></i>
-                <a href="{{ route('user.payment_history') }}" class="cover_link"></a>
+                <a href="{{ route('user.liked_projects') }}" class="cover_link"></a>
             </div>
             <div class="pbb_01_link">購入履歴<i class="fas fa-chevron-right"></i>
-                <a href="{{ route('user.liked_projects') }}" class="cover_link"></a>
+                <a href="{{ route('user.payment_history') }}" class="cover_link"></a>
             </div>
             <div class="pbb_01_link">投稿コメント一覧<i class="fas fa-chevron-right"></i>
                 <a href="{{ route('user.contribution_comments') }}" class="cover_link"></a>
