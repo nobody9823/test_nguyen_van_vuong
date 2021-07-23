@@ -39,7 +39,7 @@
                                 <span>支援総額 : </span>{{ number_format($payment->price) }}円
                             </div>
                             <div>
-                                <span>上乗せ金額 : </span>{{ number_format($payment->getAddedPaymentAmount()) }}円
+                                <span>上乗せ金額 : </span>{{ number_format($payment->added_payment_amount) }}円
                             </div>
                             <div>
                                 <span>支援ID : </span>{{ $payment->paymentToken->token }}
