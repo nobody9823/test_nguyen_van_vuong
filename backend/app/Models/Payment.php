@@ -153,4 +153,14 @@ class Payment extends Model
         }
         return $query;
     }
+
+
+    public function scopeGetAddedPaymentAmount()
+    {
+        $total_amount = 0;
+        foreach($this->includedPlans as $plan){
+            $total_amount += ($plan->price * $plan->pivot->quantity);
+        }
+        return $this->price - $total_amount;
+    }
 }
