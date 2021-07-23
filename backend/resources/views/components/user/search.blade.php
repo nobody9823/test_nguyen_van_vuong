@@ -3,7 +3,7 @@
     <div>
         <p>全体検索</p>
         <div>
-            <input type="text" name="free_word" placeholder="キーワードから探す" id="keyword_search" value="{{ $free_word }}">
+            <input type="text" name="word" placeholder="キーワードから探す" id="keyword_search" value="{{ $word }}">
         </div>
     </div>
     <!--スマホ用絞り込み検索アコーディオン-->

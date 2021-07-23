@@ -7036,7 +7036,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: #fff;
 }
 
 a.bg-dark:hover,
@@ -10907,3 +10907,6 @@ a.text-dark:focus {
   }
 }
 
+.plan-content{
+  white-space: pre-line;
+}

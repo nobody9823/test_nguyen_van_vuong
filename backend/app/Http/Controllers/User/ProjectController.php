@@ -63,7 +63,7 @@ class ProjectController extends Controller
         $projects = Project::mainProjects()->inRandomOrder()->take(5)->get();
 
         // ランキング(支援総額順)
-        $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price','DESC')->skip(1)->take(5)->get();
+        $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price','DESC')->take(5)->get();
 
         // 最新のプロジェクト
         $new_projects = Project::mainProjects()->orderBy('created_at', 'DESC')->get();
@@ -214,7 +214,6 @@ class ProjectController extends Controller
         $inviter = !empty($validated_request['inviter_code']) ? User::getInviterFromInviterCode($validated_request['inviter_code'])->first() : null;
         DB::beginTransaction();
         try {
-            // dd($this->payment);
             $plans = $this->plan->lockForUpdatePlansByIds(array_keys($validated_request['plans']))->get();
             $payment = $this->payment->fill(array_merge(
                 [
@@ -323,23 +322,10 @@ class ProjectController extends Controller
                 )
             );
         }
-        // こちらはデザインにはなかったのでコメントアウト致しました。
-        // //フリーワード絞り込み
-        // if ($request->free_word) {
-        //     // 全角スペースを半角スペースに変換
-        //     $words = str_replace("　", " ", $request->free_word);
-        //     // 半角スペースごとに区切って配列に代入
-        //     $array_words = explode(" ", $words);
-        //     //この部分今のところタイトルと説明文でしか検索できてないです...アイドル名がなぜかうまくいかなかったのでまたやります...
-        //     foreach ($array_words as $array_word) {
-        //         $projectsQuery->where(function ($projectsQuery) use ($array_word) {
-        //             $projectsQuery->Where('projects.title', 'like', "%$array_word%")
-        //                 ->orWhere('explanation', 'like', "%$array_word%")
-        //                 ->orWhereIn('talent_id', Talent::select('id')
-        //                 ->where('name', 'like', "%$array_word%"));
-        //         });
-        //     }
-        // }
+
+        // ワード検索
+        $projectsQuery->search($role="user");
+       
         // sort_typeによって順序変更
         // 0 => 人気順(募集中のお気に入り数順),   1 => 新着順,   2 => 終了日が近い順,   3 => 支援総額順,   4 => 支援者数順
         switch ($request->sort_type) {
@@ -362,11 +348,11 @@ class ProjectController extends Controller
                 break;
 
             case '3':
-                $projectsQuery->ordeyByFundingAmount();
+                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price','DESC');
                 break;
 
             case '4':
-                $projectsQuery->ordeyByNumberOfSupporters();
+                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_count','DESC');
                 break;
         }
 
@@ -398,7 +384,7 @@ class ProjectController extends Controller
         //     $projectsQuery->OnlyCheeringDisplay();
         // }
 
-        $projects = $projectsQuery->where('release_status', '掲載中')->with('tags')->paginate(9);
+        $projects = $projectsQuery->GetReleasedProject()->with('tags')->paginate(9);
 
         return view('user.search', compact('projects', 'tags'));
     }
@@ -428,39 +414,36 @@ class ProjectController extends Controller
 
     public function ProjectLiked(Request $request)
     {
-        $userLiked = UserProjectLiked::where('user_id', Auth::id())->where('project_id', $request->project_id)->first();
+        $project = Project::where('id',$request->project_id)->first();
+        $exist_liked = UserProjectLiked::where('project_id',$request->project_id)->where('user_id',Auth::id())->exists();
 
-        if (Auth::id() === null) {
-            return $result = "未ログイン";
-        } elseif ($userLiked !== null) {
-            $userLiked->delete();
-            return $result = "削除";
+        if(!Auth::id()){
+            return "未ログイン";
+        } elseif($exist_liked){
+            $project->likedUsers()->detach(Auth::id());
+            return "削除";
         } else {
-            $project_liked = new UserProjectLiked(['user_id' => Auth::id()]);
-            $project_liked->project_id = $request->project_id;
-            $project_liked->save();
-            return $result = "登録";
+            $project->likedUsers()->attach(Auth::id());
+            return "登録";
         }
     }
 
     public function support(Project $project)
     {
         $this->authorize('checkIsFinishedPayment', $project);
-        $encrypted_code = Crypt::encrypt(Auth::user()->profile->inviter_code);
-        $invitation_url = route('user.project.show', ['project' => $project, 'inviter' => $encrypted_code]);
         Auth::user()->supportedProjects()->attach($project->id);
 
-        return view('user.project.support', ['invitation_url' => $invitation_url, 'project' => $project->getLoadPaymentsCountAndSumPrice()]);
+        return view('user.project.support', ['project' => $project->getLoadPaymentsCountAndSumPrice()]);
     }
 
     public function supporterRanking(Project $project)
     {
         $this->authorize('checkIsFinishedPayment', $project);
-        $users_ranked_by_users_count = User::getInvitersRankedByInvitedUsers($project->id)->take(100)->get();
+        $users_ranked_by_total_quantity = User::getInvitersRankedByInvitedUsers($project->id)->take(100)->get();
         $users_ranked_by_total_amount = User::getInvitersRankedByInvitedTotalAmount($project->id)->take(100)->get();
         return view('user.project.supporter_ranking',
             [
-                'users_ranked_by_users_count' => $users_ranked_by_users_count,
+                'users_ranked_by_total_quantity' => $users_ranked_by_total_quantity,
                 'users_ranked_by_total_amount' => $users_ranked_by_total_amount,
                 'project' => $project->getLoadPaymentsCountAndSumPrice(),
             ],

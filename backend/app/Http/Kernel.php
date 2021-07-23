@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'talent.own' => \App\Http\Middleware\CheckOwnedByTalent::class,
         'join.plan' => \App\Http\Middleware\JoinPlan::class,
         'project.released' => \App\Http\Middleware\CheckWhetherReleasedProject::class,
+        'CheckProjectIsPublished' => \App\Http\Middleware\CheckProjectIsPublished::class,
     ];
 }

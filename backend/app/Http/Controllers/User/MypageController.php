@@ -123,6 +123,10 @@ class MypageController extends Controller
         return view('user.commission');
     }
 
+    public function PsTermsOfService()
+    {
+        return view('user.ps_terms_of_service');
+    }
     public function termsOfService()
     {
         return view('user.terms_of_service');

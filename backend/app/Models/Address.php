@@ -30,4 +30,14 @@ class Address extends Model
         return config('prefecture.'.$this->prefecture_id);
     }
 
+    public static function initialize()
+    {
+        return self::make([
+            'postal_code' => 0000000,
+            'prefecture' => '東京都',
+            'city' => '',
+            'block' => '',
+            'building' => ''
+        ]);
+    }
 }

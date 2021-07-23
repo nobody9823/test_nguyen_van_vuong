@@ -6,7 +6,7 @@ use App\Models\Tag;
 use Illuminate\Contracts\Validation\Rule;
 
 class Tags implements Rule
-{
+{ 
     /**
      * Create a new rule instance.
      *

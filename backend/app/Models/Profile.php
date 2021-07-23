@@ -83,4 +83,22 @@ class Profile extends Model
         }
         return null;
     }
+
+    public static function initialize()
+    {
+        return self::make([
+            'first_name' => '',
+            'last_name' => '',
+            'first_name_kana' => '',
+            'last_name_kana' => '',
+            'birthday' => Carbon::minValue(),
+            'gender' => 'その他',
+            'introduction' => '',
+            'phone_number' => '00000000000',
+            'birthday_is_published' => false,
+            'gender_is_published' => false,
+            'image_url' => 'public/sampleImage/my-page.svg',
+            'inviter_code' => '',
+        ]);
+    }
 }

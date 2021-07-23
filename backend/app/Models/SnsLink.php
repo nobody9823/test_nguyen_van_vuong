@@ -24,4 +24,15 @@ class SnsLink extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public static function initialize()
+    {
+        return self::make([
+            'twitter_url' => '',
+            'instagram_url' => '',
+            'youtube_url' => '',
+            'tiktok_url' => '',
+            'other_url' => '',
+        ]);
+    }
 }

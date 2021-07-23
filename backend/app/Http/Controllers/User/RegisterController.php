@@ -5,6 +5,11 @@ namespace App\Http\Controllers\User;
 use App\Mail\User\EmailVerification as UserEmailVerification;
 use App\Models\EmailVerification;
 use App\Models\User;
+use App\Models\Profile;
+use App\Models\Address;
+use App\Models\SnsLink;
+use App\Models\Identification;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
@@ -139,6 +144,10 @@ class RegisterController extends Controller
                     'password' => $request->password,
                     'email_verified_at' => Carbon::now(),
                 ]);
+                $user->profile()->save(Profile::initialize());
+                $user->address()->save(Address::initialize());
+                $user->snsLinks()->save(SnsLink::initialize());
+                $user->identification()->save(Identification::initialize());
                 $emailVerification->register();
                 $emailVerification->update();
                 DB::commit();
@@ -147,7 +156,7 @@ class RegisterController extends Controller
                 return redirect()->action([RegisterController::class, 'create'], ['token' => $token])->withErrors("登録に失敗しました。もう一度入力してください。");
             }
                 Auth::login($user);
-                return redirect()->route('user.profile')->with('flash_message', 'FanReturnへの登録が完了致しました。');
+                return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'FanReturnへの登録が完了致しました。');
         }
     }
 }

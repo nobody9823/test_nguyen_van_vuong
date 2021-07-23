@@ -47,7 +47,7 @@ class ProjectControllerForPayJpTest extends TestCase
             'limit_of_supporters' => 50
         ])->create();
 
-        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret_for_test'));
+        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret'));
 
         $params = [
             'card' => [
