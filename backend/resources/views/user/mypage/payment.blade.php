@@ -33,7 +33,19 @@
                             @endif
                         </div><!--/su_pr_01_03-->
                     </div><!--/su_pr_01-->
-
+                    <div class="su_pr_02">
+                        <div class="su_pr_02_04 m_b_1510">
+                            <div>
+                                <span>支援総額 : </span>{{ number_format($payment->price) }}円
+                            </div>
+                            <div>
+                                <span>上乗せ金額 : </span>{{ number_format($payment->getAddedPaymentAmount()) }}円
+                            </div>
+                            <div>
+                                <span>支援ID : </span>{{ $payment->paymentToken->token }}
+                            </div>
+                        </div>
+                    </div>
                     @foreach($payment->includedPlans as $plan)
                         <div class="su_pr_02">
                             <div class="su_pr_02_01 m_b_1510">リターン名</div>
