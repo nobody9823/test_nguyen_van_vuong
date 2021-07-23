@@ -44,7 +44,7 @@
 
         <div class="def_btn">
             <a href="{{ route('user.project.support', ['project' => $project]) }}" style="color: white">
-                プロジェクトサポーターになる
+                プロジェクトサポーター(PS)になる
             </a>
         </div>
 	</div><!--/av_box_base-->

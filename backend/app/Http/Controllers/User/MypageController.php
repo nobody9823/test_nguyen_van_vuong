@@ -56,14 +56,10 @@ class MypageController extends Controller
     {
         $projects = Project::whereIn(
             'id',
-            Plan::query()->select('project_id')->whereIn(
-                'id',
-                PlanPaymentIncluded::query()->select('plan_id')->whereIn(
-                    'payment_id',
-                    Payment::query()->select('id')->where('user_id', Auth::id())
-                )
-            )
-        )->with(['projectFiles', 'tags', 'likedUsers'])->get();
+            Payment::select('project_id')->where('user_id', Auth::id())
+        )->with(['projectFiles' => function ($query) {
+            $query->where('file_content_type', 'image_url');
+        }, 'tags'])->getWithPaymentsCountAndSumPrice()->paginate(1);
         return view('user.mypage.project', [
             'projects' => $projects,
         ]);
