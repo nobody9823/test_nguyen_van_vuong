@@ -35,7 +35,6 @@ class ProjectSeeder extends Seeder
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
                 $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
-                $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->create());
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
             });
 
@@ -45,18 +44,17 @@ class ProjectSeeder extends Seeder
                 $project->projectFiles()->saveMany(ProjectFile::factory(10)->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
-                $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())->each(function (Plan $plan) {
-                    $plan->includedPayments()
-                        ->attach(
-                            [
-                                Payment::factory()
-                                    ->for(User::inRandomOrder()->first())
-                                    ->has(PaymentToken::factory())->create()->id => ['quantity' => random_int(1, 3)]
-                            ]
-                        );
-                });
+                // $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())->each(function (Plan $plan) {
+                //     $plan->includedPayments()
+                //         ->attach(
+                //             [
+                //                 Payment::factory()
+                //                     ->for(User::inRandomOrder()->first())
+                //                     ->has(PaymentToken::factory())->create()->id => ['quantity' => random_int(1, 3)]
+                //             ]
+                //         );
+                // });
                 $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
-                $project->comments()->saveMany(Comment::factory(rand(1, 5))->hasReply()->create());
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
                 $project->supportedUsers()->attach(User::inRandomOrder()->take(random_int(1, 10))->get()->pluck('id'));
             });
