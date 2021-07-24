@@ -120,7 +120,7 @@ class RegisterController extends Controller
             return view('user.pre_register')
                 ->with(['message' => 'メールアドレスの認証に失敗しました。管理者にお問い合わせください。']);
         }
-        return view('user.register')
+        return view('user.auth.register')
             ->with(['token' => $emailVerification->token]);
     }
 
