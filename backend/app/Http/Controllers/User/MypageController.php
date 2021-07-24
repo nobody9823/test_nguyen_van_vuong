@@ -116,18 +116,23 @@ class MypageController extends Controller
 
     public function PsTermsOfService()
     {
-        return view('user.ps_terms_of_service');
+        return view('user.footer.ps_terms_of_service');
     }
     public function termsOfService()
     {
-        return view('user.terms_of_service');
+        return view('user.footer.terms_of_service');
     }
     public function privacyPolicy()
     {
-        return view('user.privacy_policy');
+        return view('user.footer.privacy_policy');
     }
     public function tradeLaw()
     {
-        return view('user.trade_law');
+        return view('user.footer.trade_law');
     }
+
+    // public function question()
+    // {
+    //     return view('user.footer.question');
+    // }
 }
