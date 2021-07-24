@@ -45,9 +45,7 @@
 
                 <div class="ps_rank_img m_b_1510">
                     <img
-                        src="{{ Storage::url(
-    $project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url,
-) }}">
+                        src="{{ Storage::url(optional($project->projectFiles()->where('file_content_type', 'image_url')->first())->file_url) }}">
                 </div>
                 <div class="m_b_3020">
                     <div class="pds_sec01_progress-bar m_b_1510">
