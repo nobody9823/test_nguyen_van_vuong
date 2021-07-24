@@ -19,8 +19,6 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\TemporaryTalentController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\WorkAttendanceController;
-use App\Http\Controllers\Admin\WorkShiftController;
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
