@@ -956,7 +956,7 @@ input[type=radio]:checked + .radio-fan::after {
 
 .def_inner{ width: 100%; max-width: 1000px; margin: 0 auto; padding-top: 50px; padding-bottom: 50px;}
 .def_textarea{width: 100%; border: solid 1px #DBDBDB; border-radius: 4px;}
-.def_btn{width: 100%; max-width: 400px; font-size: 1.8rem; font-weight: bold; text-align: center; padding: 15px; background: #00AEBD; margin: 0 auto 15px auto; position: relative; color: #fff; border-radius: 6px;}
+.def_btn{width: 100%; max-width: 400px; font-size: 1.8rem; font-weight: bold; text-align: center; padding: 15px; background: #00AEBD; margin: 15px auto 15px auto; position: relative; color: #fff; border-radius: 6px;}
 .def_btn_02{width: 100%; max-width: 400px; font-size: 1.8rem; font-weight: bold; text-align: center; padding: 15px; background: #fff; margin: 0 auto 15px auto; position: relative; color: #00AEBD; border-radius: 6px; border: solid 1px #00AEBD;}
 .def_input_50p{ width: 50%; height: 47px; padding: 10px; border: solid 1px #DBDBDB; border-radius: 4px;font-size: 1.6rem;}
 .def_input_50p::placeholder{ color: #ddd;font-size: 1.4rem;}
@@ -1302,6 +1302,12 @@ input[name="tab_item"] {
 .form_item_row{ display: flex; flex-wrap: wrap; align-items: center; align-content: center; width: 100%; max-width: 600px; margin: 0 auto 20px auto;}
 .form_item_tit{ width: 100%; font-size: 1.4rem; font-weight: bold; margin-bottom: 7px;}
 .form_item_tit_desc{ font-size: 1.2rem; font-weight: normal; padding: 0 0 0 10px; }
+
+.date_attention{
+	margin-left: 5px;
+	font-size: 5px;
+	color:rgb(139, 139, 139);
+}
 
 @media screen and (max-width: 1000px){
 	.tab1_01{ width: 49%; margin: 0 1% 0 0;}
