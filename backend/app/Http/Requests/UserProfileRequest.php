@@ -38,4 +38,23 @@ class UserProfileRequest extends FormRequest
             'gender_is_published' => ['nullable', 'boolean'],
         ];
     }
+
+    public function prepareForValidation()
+    {
+        if (is_null($this->input('twitter_url'))) {
+            $this->merge(['twitter_url' => ""]);
+        }
+        if (is_null($this->input('instagram_url'))) {
+            $this->merge(['instagram_url' => ""]);
+        }
+        if (is_null($this->input('youtube_url'))) {
+            $this->merge(['youtube_url' => ""]);
+        }
+        if (is_null($this->input('tiktok_url'))) {
+            $this->merge(['tiktok_url' => ""]);
+        }
+        if (is_null($this->input('other_url'))) {
+            $this->merge(['other_url' => ""]);
+        }
+    }
 }

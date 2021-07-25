@@ -85,11 +85,11 @@
         <div class="prof_edit_row">
             <div class="prof_edit_01">URL<br><span>編集中</span></div>
             <div class="prof_edit_editbox">
-                <input name="twitter_url" type="text" placeholder="twiiter">
-                <input name="instagram_url" type="text" placeholder="instagram">
-                <input name="youtube_url" type="text" placeholder="youtube">
-                <input name="tiktok_url" type="text" placeholder="tiktok">
-                <input name="other_url" type="text" placeholder="other">
+                <input name="twitter_url" type="text" placeholder="twitter" value="{{ old('twitter_url', Auth::user()->snsLink->twitter_url) }}">
+                <input name="instagram_url" type="text" placeholder="instagram" value="{{ old('instagram_url', Auth::user()->snsLink->instagram_url) }}">
+                <input name="youtube_url" type="text" placeholder="youtube" value="{{ old('youtube_url', Auth::user()->snsLink->youtube_url) }}">
+                <input name="tiktok_url" type="text" placeholder="tiktok" value="{{ old('tiktok_url', Auth::user()->snsLink->tiktok_url) }}">
+                <input name="other_url" type="text" placeholder="other" value="{{ old('other_url', Auth::user()->snsLink->other_url) }}">
             </div>
             <div class="prof_edit_03">
                 <a href="javascript:document.urlForm.submit()">更新</a>

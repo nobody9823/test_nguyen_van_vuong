@@ -61,7 +61,7 @@ class User extends Authenticatable
         static::deleting(function (User $user) {
             $user->snsUser()->delete();
             $user->address()->delete();
-            $user->snsLinks()->delete();
+            $user->snsLink()->delete();
             $user->identification()->delete();
             $user->profile()->delete();
 
@@ -158,9 +158,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Reply');
     }
 
-    public function snsLinks()
+    public function snsLink()
     {
-        return $this->hasMany('App\Models\SnsLink');
+        return $this->hasOne('App\Models\SnsLink');
     }
 
     public function identification()
@@ -263,13 +263,13 @@ class User extends Authenticatable
         }
     }
 
-    public function saveSnsLinks(array $value) :void
+    public function saveSnsLink(array $value) :void
     {
-        if (isset($this->sns_links)) {
-            $this->snsLinks()->save($this->sns_links->fill($value));
+        if (isset($this->snsLink)) {
+            $this->snsLink()->save($this->snsLink->fill($value));
         } else {
-            $sns_links = new SnsLink();
-            $this->snsLinks()->save($sns_links->fill($value));
+            $snsLink = new SnsLink();
+            $this->snsLink()->save($snsLink->fill($value));
         }
     }
     //--------------- functions -------------
