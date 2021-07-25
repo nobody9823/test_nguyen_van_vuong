@@ -89,7 +89,7 @@
         @if(Request::get('project'))
         <form action="{{ route('admin.project.output_purchases_list_to_csv', ['project' => Request::get('project')]) }}">
             @csrf
-            <button class="btn btn-secondary">CSV</button>
+            <button class="btn btn-secondary">CSV出力</button>
         </form>
         @endif
         <table class="table">
