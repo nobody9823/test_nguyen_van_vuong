@@ -27,9 +27,9 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $projects = Project::search($role="admin")
-        ->searchWithReleaseStatus($request->release_statuses)
-        ->sortBySelected($request->sort_type);
+        $projects = Project::search($role = "admin")
+            ->searchWithReleaseStatus($request->release_statuses)
+            ->sortBySelected($request->sort_type);
 
         //リレーション先OrderBy
         if ($request->sort_type === 'user_name_asc') {
@@ -100,8 +100,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project = $project::where('projects.id',$project->id)->getWithPaymentsCountAndSumPrice()
-        ->with('projectFiles','plans','reports')->first();
+        $project = $project::where('projects.id', $project->id)->getWithPaymentsCountAndSumPrice()
+            ->with('projectFiles', 'plans', 'reports')->first();
         return view('admin.project.show', ['project' => $project]);
     }
 
@@ -286,46 +286,63 @@ class ProjectController extends Controller
         return;
     }
 
-    public function output_cheering_users_to_csv(Project $project)
+    public function outputPurchasesListToCsv(Project $project)
     {
         //ページ遷移させずにダウンロードさせるためにstreamed responseとして返す
         $response = new StreamedResponse(function () use ($project) {
-            $project->load('plans', 'plans.users');
-            $data = [];
-            $plans = $project->plans;
-            //プロジェクト詳細画面出力情報に合わせてデータを作成
-            foreach ($plans as $plan) {
-                foreach ($plan->users as $user) {
-                    foreach ($user->userAddresses as $user_address) {
-                        $data[] = [
-                        $user->name,
-                            $user->email,
-                            $plan->title,
-                            $plan->price,
-                            $user->pivot->created_at,
-                            $plan->estimated_return_date,
-                            $user_address->address,
-                        ];
-                    }
-                }
-            }
+            $project->load(['payments' => function ($query) {
+                $query->with(['user.profile', 'user.address', 'includedPlans', 'paymentToken']);
+            }]);
+            $payments = $project->payments;
 
             //保存しない形でファイルのアウトプットを作成（良く分かってないので文章変です。）
             $stream = fopen('php://output', 'w');
-            $csv_head = ['支援者名', 'メールアドレス', '支援リターン名', '支援額', '支援日', 'お返し予定日', '住所'];
-            //カラムとかデータを文字コード変換してさっき開いたファイルに挿入
-            mb_convert_variables('SJIS', 'UTF-8', $csv_head);
-            fputcsv($stream, $csv_head);
-            foreach ($data as $low) {
-                mb_convert_variables('SJIS', 'UTF-8', $low);
-                fputcsv($stream, $low);
+
+            $payment_csv_head = ['支援ID', '支援者名', 'メールアドレス', 'お届け先', '上乗せ課金額', '支援総額', '支援日'];
+            mb_convert_variables('SJIS', 'UTF-8', $payment_csv_head);
+            fputcsv($stream, $payment_csv_head);
+
+            //プロジェクト詳細画面出力情報に合わせてデータを作成
+            foreach ($payments as $payment) {
+                $payment_data = [
+                    $payment->paymentToken->token,
+                    $payment->user->profile->last_name . $payment->user->profile->first_name,
+                    $payment->user->email,
+                    $payment->user->address->postal_code . $payment->user->address->prefecture . $payment->user->address->city . $payment->user->address->block . $payment->user->address->building,
+                    $payment->added_payment_amount,
+                    $payment->price,
+                    $payment->created_at,
+                ];
+
+                mb_convert_variables('SJIS', 'UTF-8', $payment_data);
+                fputcsv($stream, $payment_data);
+
+                $included_plan_csv_head = ['支援リターン名', 'リターン金額', '個数', '合計'];
+                mb_convert_variables('SJIS', 'UTF-8', $included_plan_csv_head);
+                fputcsv($stream, $included_plan_csv_head);
+
+                $included_plan_data = [];
+
+                foreach ($payment->includedPlans as $plan) {
+                    $included_plan_data[] = [
+                        $plan->title,
+                        $plan->price,
+                        $plan->pivot->quantity,
+                        $plan->price * $plan->pivot->quantity,
+                    ];
+                }
+
+                foreach ($included_plan_data as $included_plan_low) {
+                    mb_convert_variables('SJIS', 'UTF-8', $included_plan_low);
+                    fputcsv($stream, $included_plan_low);
+                }
             }
+
             fclose($stream);
         });
         //レスポンスにヘッダーつけて返す
-        $project_title = $project->title;
         $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', "attachment; filename=cheering_user_list_${project_title}.csv");
+        $response->headers->set('Content-Disposition', 'attachment; filename=' . $project->title . '_purchases_list.csv');
         return $response;
     }
 
@@ -345,8 +362,8 @@ class ProjectController extends Controller
         if ($project->release_status === "承認待ち") {
             $project->release_status = "差し戻し";
             return $project->save() ?
-            redirect()->back()->with('flash_message', "差し戻しが完了しました。") :
-            redirect()->back()->withErrors('差し戻しに失敗しました。');
+                redirect()->back()->with('flash_message', "差し戻しが完了しました。") :
+                redirect()->back()->withErrors('差し戻しに失敗しました。');
         }
         redirect()->back()->withErrors('差し戻しに失敗しました。');
     }
@@ -356,8 +373,8 @@ class ProjectController extends Controller
         if ($project->release_status === "掲載中") {
             $project->release_status = "掲載停止中";
             return $project->save() ?
-            redirect()->back()->with('flash_message', "掲載停止しました。") :
-            redirect()->back()->withErrors('掲載停止に失敗しました。');
+                redirect()->back()->with('flash_message', "掲載停止しました。") :
+                redirect()->back()->withErrors('掲載停止に失敗しました。');
         }
         redirect()->back()->withErrors('掲載停止に失敗しました。');
     }

@@ -86,6 +86,12 @@
 <div class="card-body">
     @if($payments->count() <= 0) <p>表示する投稿はありません。</p>
         @else
+        @if(Request::get('project'))
+        <form action="{{ route('admin.project.output_purchases_list_to_csv', ['project' => Request::get('project')]) }}">
+            @csrf
+            <button class="btn btn-secondary">CSV</button>
+        </form>
+        @endif
         <table class="table">
             <tr>
                 <th style="width:15%">支援ID</th>
