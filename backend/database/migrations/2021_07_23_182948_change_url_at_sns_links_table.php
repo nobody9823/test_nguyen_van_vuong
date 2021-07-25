@@ -30,7 +30,11 @@ class ChangeUrlAtSnsLinksTable extends Migration
     public function down()
     {
         Schema::table('sns_links', function (Blueprint $table) {
-            Schema::dropIfExists('sns_links');
+            $table->string('twitter_url')->change();
+            $table->string('instagram_url')->change();
+            $table->string('youtube_url')->change();
+            $table->string('tiktok_url')->change();
+            $table->string('other_url')->change();
         });
     }
 }
