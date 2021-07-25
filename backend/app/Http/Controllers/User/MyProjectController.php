@@ -3,17 +3,37 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Services\Project\ProjectService;
 use App\Http\Requests\MyProjectRequest;
+use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use App\Models\ProjectFile;
 use App\Models\Plan;
 use App\Models\Tag;
 use Carbon\Carbon;
 use Auth;
+use Exception;
 use Illuminate\Http\Request;
+use Storage;
+use Log;
 
 class MyProjectController extends Controller
 {
+
+    protected $project_service;
+
+    protected $user;
+
+    public function __construct(ProjectService $project_service)
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = \Auth::user();
+            return $next($request);
+        });
+
+        $this->project_service = $project_service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +41,7 @@ class MyProjectController extends Controller
      */
     public function index()
     {
-        $projects = Auth::user()->projects()->get();
+        $projects = $this->user->projects()->get();
         return view('user.my_project.index', ['projects' => $projects->load('projectFiles')]);
     }
 
@@ -34,24 +54,9 @@ class MyProjectController extends Controller
     {
         $tags = Tag::pluck('name', 'id');
 
-        $project = Auth::user()->projects()
-                    ->save(Project::make(
-                        [
-                            'title' => '',
-                            'content' => '',
-                            'ps_plan_content' => '',
-                            'target_amount' => 0,
-                            'curator' => '',
-                            'start_date' => Carbon::minValue(),
-                            'end_date' => Carbon::maxValue(),
-                            'release_status' => '---',
-                        ])
-                    );
+        $project = $this->user->projects()->save(Project::initialize());
 
-        $project->projectFiles()->save(ProjectFile::make([
-            'file_url' => 'public/sampleImage/now_printing.png',
-            'file_content_type' => 'image_url',
-        ]));
+        $project->projectFiles()->save(ProjectFile::initialize());
 
         return view('user.my_project.edit', ['project' => $project, 'tags' => $tags]);
     }
@@ -101,8 +106,27 @@ class MyProjectController extends Controller
      */
     public function update(MyProjectRequest $request, Project $project)
     {
-        $project->fill($request->all())->save();
+        DB::beginTransaction();
+        try {
+            $project->fill($request->all())->save();
 
+            $this->user->identification->fill($request->all())->save();
+
+            $this->user->profile->fill($request->all())->save();
+
+            $this->user->address->fill($request->all())->save();
+
+            $this->project_service->attachTags($project, $request);
+
+            $this->project_service->saveImages($project, $request);
+
+            $this->project_service->saveVideoUrl($project, $request);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
         return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with(['flash_message' => 'プロジェクトが更新されました。']);
     }
 
@@ -115,5 +139,26 @@ class MyProjectController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function uploadEditorFile(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file',
+        ]);
+        $path = $request->file('file')->store('public/image');
+        return ['location' => Storage::url($path)];
+    }
+
+    public function apply(Project $project)
+    {
+        try {
+            $project->release_status = '承認待ち';
+            $project->update();
+            return redirect()->action([MyProjectController::class, 'index'], ['projects' => $this->user->projects()->get()->load('projectFiles')])->with(['flash_message' => 'プロジェクトの申請が完了しました。']);
+        } catch (Exception $e) {
+            Log::alert($e->getMessage(), $e->getTrace());
+            throw $e;
+        }
     }
 }

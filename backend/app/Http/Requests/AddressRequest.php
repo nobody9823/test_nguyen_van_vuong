@@ -32,6 +32,13 @@ class AddressRequest extends FormRequest
         ];
     }
 
+    protected function prepareForValidation()
+    {
+        if (is_null($this->input('building'))) {
+            $this->merge(['building' => ""]);
+        }
+    }
+
     public function messages()
     {
         return [

@@ -4,7 +4,6 @@
 
 <div class="Assist-input_base">
 <section class="section_base">
-
     <div class="pc-Details-screen_base_top inner_item">
 
         <div class="pds_inner">
@@ -38,16 +37,16 @@
         <div class="def_outer_gray">
             <div class=" def_inner inner_item">
                 <section id="target_amount_section" class="my_project_section">
-                    <x-user.my_project.target_amount />
+                    <x-user.my_project.target_amount :project="$project" />
                 </section>
                 <section style="display: none;" id="overview_section" class="my_project_section">
-                    <x-user.my_project.overview :tags="$tags" />
+                    <x-user.my_project.overview :project="$project" :tags="$tags" />
                 </section>
                 <section style="display: none;" id="visual_section" class="my_project_section">
-                    <x-user.my_project.visual />
+                    <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()->toArray()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
                 </section>
                 <section style="display: none;" id="main_content_section" class="my_project_section">
-                    <x-user.my_project.main_content />
+                    <x-user.my_project.main_content :project="$project" />
                 </section>
                 <section style="display: none;" id="return_section" class="my_project_section">
                     <x-user.my_project.return :project="$project" />
@@ -56,7 +55,7 @@
                     <x-user.my_project.ps_return :project="$project" />
                 </section>
                 <section style="display: none;" id="identification_section" class="my_project_section">
-                    <x-user.my_project.identification />
+                    <x-user.my_project.identification :project="$project" :user="Auth::user()" />
                 </section>
             </div>
         </div>
@@ -69,6 +68,8 @@
 
 @section('script')
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
+<script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
 <script>
 const selectEditTag = el => {
     let myProjectSections = document.querySelectorAll('.my_project_section');
@@ -93,5 +94,47 @@ const DisplayEditPlan = (el) => {
     console.log(el);
     document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
 }
+const displayInputFile = (el) => {
+    let image = document.getElementById('project_image_' + el.id);
+    if (image.style.display === 'none'){
+        image.style.display = 'block';
+    } else if (image.style.display === 'block'){
+        image.style.display = 'none';
+    }
+}
+</script>
+<script>
+tinymce.init({
+    selector: '.tiny_editor',
+    language: 'ja',
+    branding: false,
+    elementpath: false,
+    height: 500,
+    forced_root_block : false,
+    menubar: false,
+    entity_encoding: 'raw',
+    mobile: {
+        theme: 'mobile',
+        plugins: [ 'autosave', 'lists', 'autolink' ],
+        toolbar: [ 'undo', 'bold', 'italic', 'styleselect', 'image', 'link' ],
+
+    },
+    plugins: [ 'code', 'lists', 'image', 'link', 'fullscreen', 'table'],
+    toolbar: ['undo redo | bold italic | forecolor backcolor | fontsizeselect | numlist bullist | table | link | image',
+        'alignleft | aligncenter | alignright'],
+    file_picker_types: 'image',
+    images_upload_handler: function (blobInfo, success, failure) {
+        let data = new FormData();
+        data.append('file', blobInfo.blob(), blobInfo.filename());
+        axios.post('/my_project/project/upload_editor_file', data)
+            .then(function (res) {
+                success(res.data.location);
+            })
+            .catch(function (err) {
+                console.log(err);
+                failure('HTTP Error: ' + err.message);
+            });
+    }
+});
 </script>
 @endsection

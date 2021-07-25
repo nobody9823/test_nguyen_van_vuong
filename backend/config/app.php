@@ -180,6 +180,7 @@ return [
         App\Providers\CompanyLoginServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
         App\Providers\SlackServiceProvider::class,
+        App\Providers\DateFormatServiceProvider::class,
         // 追加
     ],
 
@@ -236,6 +237,7 @@ return [
         'PrefectureHelper' => App\Helpers\PrefectureHelper::class,
         'ProjectReleaseStatus' => App\Enums\ProjectReleaseStatus::class,
         'Slack' => App\Services\Slack\SlackFacade::class,
+        'DateFormat' => App\Services\Date\DateFormatFacade::class,
     ],
 
     'basic_auth' => env('BASIC_AUTH', false),

@@ -17,6 +17,7 @@ if(isiOS) {
 <title></title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" rel="stylesheet">
@@ -112,7 +113,7 @@ if(isiOS) {
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-                <a href="★" class="top_menu-1 nav_btn_link">
+                <a href="{{ route('user.search') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">さがす</p>
 				</a>
 			</li>
@@ -123,10 +124,8 @@ if(isiOS) {
 			</li>
             <form method="get" action="{{ route('user.search') }}" name="word_search">
                 <li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
-                    <i class="fas fa-search"></i><input type="text" name="search_word" placeholder="キーワードを検索" value="{{ Request::get('search_word') }}">
-                </li>
-                <li class="menu-item nav_btn taso_li signup_btn" style="order: 5;">
-                    <a href="javascript:word_search.submit()" class="top_menu-1 nav_btn_link" style="justify-content: center;">
+                    <i class="fas fa-search"></i><input type="text" name="word" placeholder="キーワードを検索" value="{{ Request::get('word') }}">
+                    <a href="javascript:word_search.submit()" class="top_menu-1 nav_btn_link signup_btn" style="justify-content: center;">
                         <p>検索</p>
                     </a>
                 </li>
@@ -335,7 +334,7 @@ if(isiOS) {
                     <div class="footer_item"><a href="★">ヘルプ</a></div>
                     <div class="footer_item"><a href="★">お問い合わせ</a></div> --}}
                     <div class="footer_item"><a href="{{ route('user.terms_of_service') }}">利用規約</a></div>
-                    {{-- <div class="footer_item"><a href="★">細則</a></div> --}}
+                    <div class="footer_item"><a href="{{ route('user.ps_terms_of_service') }}">プロジェクトサポーター利用規約</a></div>
                     <div class="footer_item"><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></div>
                     <div class="footer_item"><a href="{{ route('user.trade_law') }}">特定商取引法に基づく表記</a></div>
                     {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div> --}}
@@ -354,7 +353,7 @@ if(isiOS) {
                 <div class="footer_logo"><img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}"></div>
                 <ul>
                     <li><a href="{{ route('user.project.index') }}">はじめる</a></li>
-                    <li><a href="#">さがす</a></li>
+                    <li><a href="{{ route('user.search') }}">さがす</a></li>
                     <li><a href="#">ファンリターンとは</a></li>
 
                     @guest('web')

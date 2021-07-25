@@ -61,7 +61,7 @@ class User extends Authenticatable
         static::deleting(function (User $user) {
             $user->snsUser()->delete();
             $user->address()->delete();
-            $user->snsLinks()->delete();
+            $user->snsLink()->delete();
             $user->identification()->delete();
             $user->profile()->delete();
 
@@ -112,6 +112,18 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Payment', 'inviter_id', 'id');
     }
 
+    public function invitedPlanPaymentIncluded()
+    {
+        return $this->hasManyThrough(
+            'App\Models\PlanPaymentIncluded',
+            'App\Models\Payment',
+            'inviter_id',
+            'payment_id',
+            'id',
+            'id'
+        );
+    }
+
     public function likedProjects()
     {
         return $this->belongsToMany('App\Models\Project', 'user_project_liked')
@@ -146,9 +158,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Reply');
     }
 
-    public function snsLinks()
+    public function snsLink()
     {
-        return $this->hasMany('App\Models\SnsLink');
+        return $this->hasOne('App\Models\SnsLink');
     }
 
     public function identification()
@@ -183,30 +195,24 @@ class User extends Authenticatable
         return $query->pluck('name', 'id');
     }
 
-    // inviter_idが一致するpaymentsの数を集計して降順に並び替え
+    // inviter_idが一致するpaymentsに紐づくplan_payment_includedのquantityカラムの合計を集計して降順に並び替え
     public function scopeGetInvitersRankedByInvitedUsers($query, $project_id)
     {
-        return $query->withCount(['invitedPayments' => function ($query) use ($project_id) {
-            $query->whereIn(
-                'project_id',
-                Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
-            );
-        }])
+        return $query->withSum(['invitedPlanPaymentIncluded' => function ($query) use ($project_id) {
+            $query->where('payments.project_id', $project_id);
+        }], 'quantity')
         ->whereIn('id', Payment::select('inviter_id')->whereIn(
             'project_id',
             Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
         ))
-        ->orderBy('invited_payments_count', 'DESC');
+        ->orderBy('invited_plan_payment_included_sum_quantity', 'DESC');
     }
 
     // inviter_idが一致するpaymentsの支援総額から降順に並び替え
     public function scopeGetInvitersRankedByInvitedTotalAmount($query, $project_id)
     {
         return $query->withSum(['invitedPayments' => function ($query) use ($project_id) {
-            $query->whereIn(
-                'project_id',
-                Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
-            );
+            $query->where('project_id', $project_id);
         }], 'price')
         ->whereIn('id', Payment::select('inviter_id')->whereIn(
             'project_id',
@@ -254,6 +260,16 @@ class User extends Authenticatable
         } else {
             $address = new Address();
             $this->address()->save($address->fill($value));
+        }
+    }
+
+    public function saveSnsLink(array $value) :void
+    {
+        if (isset($this->snsLink)) {
+            $this->snsLink()->save($this->snsLink->fill($value));
+        } else {
+            $snsLink = new SnsLink();
+            $this->snsLink()->save($snsLink->fill($value));
         }
     }
     //--------------- functions -------------

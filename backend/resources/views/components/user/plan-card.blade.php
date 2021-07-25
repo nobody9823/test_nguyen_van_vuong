@@ -7,6 +7,10 @@
         <div class="pds_sec02_01_nokori_nin">残り：{{ $plan->limit_of_supporters }}人まで</div>
     </div>
 
+    <div class="pds_sec02_txt">
+        {{ $plan->content }}
+    </div>
+
     @if ($project->end_date < now())
         <div class="pds_sec02_01_btn">
             FINISHED
@@ -24,9 +28,6 @@
         </div>
     @endif
 
-    <div class="pds_sec02_txt">
-        {{ $plan->content }}
-    </div>
 
     <div class="pds_sec02_01">
         <div class="pds_sec02_01_shien_nin">支援者：{{ $plan->included_payments_count }}人</div>

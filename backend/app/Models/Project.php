@@ -36,6 +36,8 @@ class Project extends Model
     protected $dates = ['start_date', 'end_date'];
 
     protected $casts = [
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
         'content' => PurifierCast::class,
         'ps_plan_content' => PurifierCast::class,
     ];
@@ -125,28 +127,10 @@ class Project extends Model
 
 
     //--------------local scope----------------//
-    public function scopeGetProjectsWithPaginate($query)
-    {
-        return $query->with('user')->orderBy('created_at', 'desc')->paginate(10);
-    }
 
     public function scopeGetReleasedProject($query)
     {
         return $query->where('release_status', '掲載中');
-    }
-
-    //company_id = Auth::id()のtalentを持つprojectを持ってくる
-    public function scopeGetProjectsByCompany($query)
-    {
-        return $query
-        ->whereIn('talent_id', Talent::select('id')
-        ->where('company_id', Auth::id()))->getProjects();
-    }
-
-    //talent_id = Auth::id()のprojectを持ってくる
-    public function scopeGetProjectsByTalent($query)
-    {
-        return $query->where('talent_id', Auth::id())->getProjects();
     }
 
     // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
@@ -174,7 +158,7 @@ class Project extends Model
     {
         return $query->getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice();
     }
-
+    
     public function scopeOrdeyByLikedUsers($query)
     {
         // return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
@@ -186,19 +170,11 @@ class Project extends Model
         return $query->orderBy(\DB::raw('abs(datediff(CURDATE(), end_date))'), "ASC");
     }
 
-    public function scopeOrderByNearlyOpen($query)
-    {
-        return $query->where('start_date', '>', Carbon::now())->orderBy(\DB::raw('abs(datediff(CURDATE(), start_date))'), "ASC");
-    }
-
-    public function scopeOnlyBillingDisplay($query)
-    {
-        return $query
-        ->whereIn('projects.id',Plan::select('project_id')
-        ->whereIn('id',UserPlanBilling::select('plan_id')
-        ->whereIn('user_id',User::select('id')->where('id', Auth::id())
-        )));
-    }
+    // NOTE:現状「もうすぐ公開のプロジェクト」は無い為、コメントアウト
+    // public function scopeOrderByNearlyOpen($query)
+    // {
+    //     return $query->where('start_date', '>', Carbon::now())->orderBy(\DB::raw('abs(datediff(CURDATE(), start_date))'), "ASC");
+    // }
 
     public function scopeBeforeSeeking($query)
     {
@@ -220,31 +196,6 @@ class Project extends Model
         return $query->whereBetween($start_or_end_date, [Carbon::now(), Carbon::now()->addWeek(1)]);
     }
 
-    public function scopeSearchByArrayWords($query, $words)
-    {
-        if($words[0] !== ""){
-            foreach($words as $word){
-            $query->where(function ($query) use ($word){
-                    $query->orWhereIn('talent_id',Talent::select('id')->where('name', 'like', "%$word%"));
-                    $query->orWhere('title', 'like', "%$word%");
-                    $query->orWhere('explanation', 'like', "%$word%");
-                });
-            }
-        }
-
-        return $query;
-    }
-
-    public function scopeSearchWord($query, $word)
-    {
-        return $query->where('title', 'like', "%$word%");
-    }
-
-    public function scopeSearchWordWithTalentId($query, $talents)
-    {
-        return $query->orWhereIn('talent_id', $talents);
-    }
-
     public function scopeSearchWithReleaseStatus($query, $release_statuses)
     {
         if (is_array($release_statuses) && optional($release_statuses)[0] !== null){
@@ -257,16 +208,30 @@ class Project extends Model
         return $query;
     }
 
-    public function scopeSearch($query)
+    public function scopeSearch($query,$role)
     {
         if ($this->getSearchWordInArray()) {
             foreach ($this->getSearchWordInArray() as $word) {
-                $query->where(function ($query) use ($word) {
-                    $query->where('title', 'like', "%$word%")->orWhere('curator', 'like', "%$word%")->orWhere('id', 'like', "%$word%")->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                $query->where(function ($query) use ($word, $role) {
+                    $query->SearchWords($word, $role);
                 });
             }
         }
     }
+
+    public function scopeSearchWords($query, $word, $role)
+    {
+        if($role === 'user'){
+            return $query->where('title', 'like', "%$word%")
+                         ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+        } else if($role === 'admin'){
+            return $query->where('title', 'like', "%$word%")
+                         ->orWhere('curator', 'like', "%$word%")
+                         ->orWhere('id', 'like', "%$word%")
+                         ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+        }
+    }
+    
     //--------------local scope----------------//
 
 
@@ -406,5 +371,19 @@ class Project extends Model
             };
             $file->delete();
         }
+    }
+
+    public static function initialize()
+    {
+        return self::make([
+            'title' => '',
+            'content' => '',
+            'ps_plan_content' => '',
+            'target_amount' => 0,
+            'curator' => '',
+            'start_date' => Carbon::minValue(),
+            'end_date' => Carbon::maxValue(),
+            'release_status' => '---',
+        ]);
     }
 }

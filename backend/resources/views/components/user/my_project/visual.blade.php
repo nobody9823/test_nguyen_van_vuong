@@ -1,17 +1,34 @@
+<form action="{{ route('user.project.update', ['project' => $project]) }}" method="post" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
 <div class="form_item_row">
-    <div class="form_item_tit">メイン画像<span class="nini_txt">任意</span>　<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-    <input type="file">
-</div>
+    <div class="form_item_tit">画像<span class="nini_txt">任意</span></div>
 
-<div class="form_item_row">
-    <div class="form_item_tit">サブ画像<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-    <input type="file">
-    <input type="file">
-    <input type="file">
-    <input type="file">
+    @for($i = 0; $i <= 4; $i ++)
+        <div style="width: 50%;">
+            @if(optional($projectImages)[$i] !== null)
+                <input type="checkbox" id="{{ $i }}" class="ac_list_checks" name="file_ids[]" value="{{ $projectImages[$i]['id'] }}" onClick="displayInputFile(this)">
+                <label for="{{ $i }}" class="checkbox-fan">画像{{ $i +1 }}</label>
+            @endif
+            <div>
+                <div class="ib02_01 E-font my_project_img_wrapper">
+                    @if(optional($projectImages)[$i] !== null)
+                        <img src="{{ Storage::url($projectImages[$i]['file_url']) }}">
+                    @endif
+                </div>
+                <input type="file" name="visual_image_url[{{ optional(optional($projectImages)[$i])['id'] }}][]" id="project_image_{{ $i }}" style="{{ optional($projectImages)[$i] !== null ? 'display: none;' : '' }}">
+            </div>
+        </div>
+    @endfor
 </div>
 
 <div class="form_item_row">
     <div class="form_item_tit">動画</div>
-    <input type="text" name="video_url" class="def_input_100p" value="">
+    <input type="text" name="video_url" class="def_input_100p" value="{{ old('video_url', optional($projectVideo)->file_url) }}">
 </div>
+<div class="def_btn">
+    <button type="submit" class="disable-btn">
+        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
+    </button>
+</div>
+</form>

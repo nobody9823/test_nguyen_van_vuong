@@ -4,19 +4,16 @@ namespace App\View\Components\User;
 
 use Illuminate\View\Component;
 
-class ProjectBannerCard extends Component
+class SupporterDescription extends Component
 {
-    public $sectionTitle;
-    public $props;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($sectionTitle, $props)
+    public function __construct()
     {
-        $this->sectionTitle = $sectionTitle;
-        $this->props = $props;
+        //
     }
 
     /**
@@ -26,6 +23,6 @@ class ProjectBannerCard extends Component
      */
     public function render()
     {
-        return view('components.user.project-banner-card');
+        return view('components.user.supporter-description');
     }
 }

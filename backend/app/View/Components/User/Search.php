@@ -24,7 +24,6 @@ class Search extends Component
         $this->sort_type = $request->get('sort_type');
         $this->word = $request->get('word');
         $this->tag_id = $request->get('tag_id');
-        $this->free_word = $request->get('free_word');
         $this->holding_check = $request->get('holding_check');
         $this->cheered_check = $request->get('cheered_check');
     }
