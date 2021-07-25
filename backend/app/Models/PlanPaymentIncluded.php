@@ -15,6 +15,12 @@ class PlanPaymentIncluded extends Pivot
      */
     protected $table = 'plan_payment_included';
 
+    protected $fillable = [
+        'payment_id',
+        'plan_id',
+        'quantity'
+    ];
+
     public function plan()
     {
         return $this->belongsTo('App\Models\Plan', 'plan_id');

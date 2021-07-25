@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Address;
 use App\Models\Identification;
+use App\Models\Payment;
 use App\Models\Profile;
 use Illuminate\Database\Seeder;
 

@@ -9,7 +9,9 @@
         <div class="sub_tit_L">マイプロジェクト</div>
     </div>
     <div class="prof_page_base inner_item">
-        <x-user.mypage-navigation-bar/>
+        <div class="prof_page_L">
+            <x-user.mypage-navigation-bar/>
+        </div>
         <div class="prof_page_R">
             <div class="my_new_project_wrapper">
                 {{--NOTICE: MyProjectController, create action --}}
@@ -31,8 +33,18 @@
                             <a href="#show" class="cover_link"></a>
                         </div>
 
-                        <div class="ib02_02">
+                        <div class="ib02_02 my_project_release_status">
+                            <div>
                             ({{ $project->release_status === '---' ? '申請前' : $project->release_status }})
+                            </div>
+                            @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
+                                <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="my_project_apply disable-btn">
+                                        <p style="font-weight: bold;color: #fff;">申請する</p>
+                                    </button>
+                                </form>
+                            @endif
                         </div>
 
                         <div class="ib02_03">
@@ -45,7 +57,7 @@
                             @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
                             編集
                             {{-- NOTICE: MyProjectController, edit action --}}
-                            <a class="cover_link" href="#edit"></a>
+                            <a class="cover_link" href="{{ route('user.project.edit', ['project' => $project]) }}"></a>
                             @elseif($project->release_status === '承認待ち' || $project->release_status === '掲載中')
                             {{ $project->release_status }}
                             <a class="cover_link"></a>

@@ -40,4 +40,12 @@ class ProjectFile extends Model
         };
         $this->delete();
     }
+
+    public static function initialize()
+    {
+        return self::make([
+            'file_url' => 'public/sampleImage/now_printing.png',
+            'file_content_type' => 'image_url',
+        ]);
+    }
 }

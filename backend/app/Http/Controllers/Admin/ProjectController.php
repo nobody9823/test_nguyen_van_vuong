@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $projects = Project::search()
+        $projects = Project::search($role="admin")
         ->searchWithReleaseStatus($request->release_statuses)
         ->sortBySelected($request->sort_type);
 

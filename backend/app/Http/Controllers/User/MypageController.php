@@ -13,6 +13,7 @@ use App\Models\Payment;
 use App\Models\Plan;
 use App\Models\PlanPaymentIncluded;
 use App\Models\Project;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -32,13 +33,14 @@ class MypageController extends Controller
     // 購入履歴
     public function paymentHistory()
     {
-        $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project']);
+        $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project'])->paginate(1);
 
-        dd($payments);
+        $project = $payments->first()->includedPlans()->first()->project->getLoadPaymentsCountAndSumPrice();
         // FIXME 画面ができたら適用
-        // return view('user.mypage.payment', [
-        //     'payments' => $payments,
-        // ]);
+        return view('user.mypage.payment', [
+            'payments' => $payments,
+            'project' => $project
+        ]);
     }
 
     // 投稿コメント一覧
@@ -55,14 +57,10 @@ class MypageController extends Controller
     {
         $projects = Project::whereIn(
             'id',
-            Plan::query()->select('project_id')->whereIn(
-                'id',
-                PlanPaymentIncluded::query()->select('plan_id')->whereIn(
-                    'payment_id',
-                    Payment::query()->select('id')->where('user_id', Auth::id())
-                )
-            )
-        )->with(['projectFiles', 'tags', 'likedUsers'])->get();
+            Payment::select('project_id')->where('user_id', Auth::id())
+        )->with(['projectFiles' => function ($query) {
+            $query->where('file_content_type', 'image_url');
+        }, 'tags'])->getWithPaymentsCountAndSumPrice()->paginate(1);
         return view('user.mypage.project', [
             'projects' => $projects,
         ]);
@@ -87,8 +85,15 @@ class MypageController extends Controller
     {
         DB::beginTransaction();
         try {
+            if(isset($request->day)) {
+                $user->profile->birthday = Carbon::create(
+                    $request->year, $request->month, $request->day
+                );
+            }
             $user->fill($request->all())->save();
             $user->saveProfile($request->all());
+            $user->saveAddress($request->all());
+            $user->saveSnsLink($request->all());
             DB::commit();
             return redirect()->route('user.profile')->with('flash_message', 'プロフィール更新が成功しました。');
         } catch(Exception $e) {
@@ -117,6 +122,10 @@ class MypageController extends Controller
         return view('user.commission');
     }
 
+    public function PsTermsOfService()
+    {
+        return view('user.ps_terms_of_service');
+    }
     public function termsOfService()
     {
         return view('user.terms_of_service');
