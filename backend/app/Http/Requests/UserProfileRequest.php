@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\Password;
 use App\Rules\CurrentPassword;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class UserProfileRequest extends FormRequest
@@ -41,6 +42,13 @@ class UserProfileRequest extends FormRequest
 
     public function prepareForValidation()
     {
+        if (is_null($this->input('email'))) {
+            $this->merge(['email' => Auth::user()->email]);
+        } elseif (is_null($this->input('email')) && is_null($this->input('email_confirmation'))) {
+            $this->merge(['email' => Auth::user()->email]);
+            $this->merge(['email_confirmation' => Auth::user()->email]);
+        }
+
         if (is_null($this->input('twitter_url'))) {
             $this->merge(['twitter_url' => ""]);
         }

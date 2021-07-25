@@ -38,12 +38,12 @@
                 <div class="pee_now">{{ Auth::user()->email }}</div>
 
                 <div class="pee_tit">新しいメールアドレス<span class="prof_edit_editbox_desc">　半角英数字のみ</span></div>
-                <input name="email" type="email"/>
+                <input name="email" type="email" required/>
 
                 <div class="pee_tit">新しいメールアドレス（確認用）
                     {{-- <span class="prof_edit_editbox_desc">　コピー＆ペースト不可</span> --}}
                 </div>
-                <input name="email_confirmation" type="email"/>
+                <input name="email_confirmation" type="email" required/>
             </div>
             <div class="prof_edit_03">
                 <a href="javascript:document.mailForm.submit()">更新</a>
