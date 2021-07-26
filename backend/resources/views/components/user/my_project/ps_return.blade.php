@@ -1,4 +1,4 @@
-<form action="{{ route('user.project.update', ['project' => $project, 'current_tag' => 'ps_return']) }}" method="post">
+<form action="{{ route('user.project.update', ['project' => $project, 'current_tab' => 'ps_return']) }}" method="post">
     @csrf
     @method('PUT')
     <div class="form_item_row">

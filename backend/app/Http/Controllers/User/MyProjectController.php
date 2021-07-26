@@ -132,7 +132,7 @@ class MyProjectController extends Controller
             DB::rollback();
             throw $e;
         }
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => $this->my_project_tab_service->getNextTab($request->current_tag)])->with(['flash_message' => 'プロジェクトが更新されました。']);
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => $this->my_project_tab_service->getNextTab($request->current_tab)])->with(['flash_message' => 'プロジェクトが更新されました。']);
     }
 
     /**

@@ -27,7 +27,7 @@
 
     @foreach($project->plans as $plan)
     <section class="edit_plan_form_sections" id="edit_plan_form_section_{{ $plan->id }}" style="display: none;">
-        <form method="post" action="{{ route('user.plan.update', ['project' => $project, 'plan' => $plan , 'current_tag' => 'return']) }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('user.plan.update', ['project' => $project, 'plan' => $plan , 'current_tab' => 'return']) }}" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
             <x-user.my_plan.plan-form :plan="$plan" />
@@ -46,7 +46,7 @@
 </div>
 
 <section id="plan_form_section" style="display: none;">
-    <form method="post" action="{{ route('user.plan.store', ['project' => $project, 'current_tag' => 'return']) }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('user.plan.store', ['project' => $project, 'current_tab' => 'return']) }}" enctype="multipart/form-data">
         @csrf
         <x-user.my_plan.plan-form :plan=null />
     </form>

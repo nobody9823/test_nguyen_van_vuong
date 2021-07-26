@@ -1,4 +1,4 @@
-<form action="{{ route('user.project.update', ['project' => $project, 'current_tag' => 'visual']) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('user.project.update', ['project' => $project, 'current_tab' => 'visual']) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 <div class="form_item_row">
