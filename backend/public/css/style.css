@@ -90,12 +90,12 @@ main .section_base:first-of-type{ margin: 0px auto 100px auto;}
 .menuset_04{ order: 4;}
 .menuset_05{ order: 5;}
 .menuset_06{display: none !important;}
-.login_btn{ background: #fff; width: 96px; border: solid 1px #00AEBD; border-radius: 5px;}
-.signup_btn{ background: #00AEBD; width: 96px; border-radius: 5px;}
+.login_btn{ background: #fff; border: solid 1px #00AEBD; border-radius: 5px; margin: 0 8px 0 0;}
+.signup_btn{ background: #00AEBD; border-radius: 5px;}
 .signup_btn a { color: #fff;}
 .signup_btn p { color: #fff;}
 
-.header_serch_box {display: flex; align-items: center; border-bottom: solid 2px #00AEBD; margin: 0 0 0 25px; height: 33px;}
+.header_serch_box {display: flex; align-items: center; border-bottom: solid 2px #00AEBD; margin: 0 16px 0 0; height: 33px;}
 .header_serch_box input{ border: none; padding: 0 0 0 5px; height: 100%; }
 .header_serch_box input::placeholder { font-size: 1rem; color: #CBCBCB;}
 .header_serch_box i{font-size: 1.7rem;  color: #00AEBD;}
@@ -140,7 +140,7 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 .h_logo_css_sp{display:none;}
 #branding{display:flex;flex-wrap:wrap;justify-content:space-between; height:80px; padding:0 5px;line-height:1; width:240px;}
 #header_03{display:none;}
-#menu{width: 760px;display:flex;flex-wrap:wrap;align-items:center; background:#fff;}
+#menu{display:flex;flex-wrap:wrap;align-items:center; background:#fff;}
 .navgation_inner{width:100%;}
 .drower_disc{display:none;}
 .nav_btn_tit_L{color:#00AEBD;}
@@ -149,7 +149,7 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 .nav_btn_link:hover{opacity:0.7;}
 .taso_menu > .taso_li > .taso_ul{top:65px;}
 
-.top_menu-1{ height:33px; border-radius:5px;padding:0 20px;}
+.top_menu-1{ height:33px; border-radius:5px;padding:0 16px;}
 #header_wrap{ width: 100%; min-height: 80px; box-shadow: 0px 2px 5px 0px rgba(157,157,157,0.16); }
 #header{width:100%;max-width:1100px; min-height:80px; display: flex; flex-flow: wrap; justify-content:space-between;}
 
