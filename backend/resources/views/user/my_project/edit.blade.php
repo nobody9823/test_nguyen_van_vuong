@@ -23,8 +23,6 @@
                     <label class="tab_item" for="overview_tag">概要</label>
                     <input class="radio-fan" type="radio" id="visual_tag" name="project_edit_tag" value="visual" onClick="selectEditTag(this)">
                     <label class="tab_item" for="visual_tag">ビジュアル</label>
-                    <input class="radio-fan" type="radio" id="main_content_tag" name="project_edit_tag" value="main_content" onClick="selectEditTag(this)">
-                    <label class="tab_item" for="main_content_tag">本文</label>
                     <input class="radio-fan" type="radio" id="return_tag" name="project_edit_tag" value="return" onClick="selectEditTag(this)">
                     <label class="tab_item" for="return_tag">リターン</label>
                     <input class="radio-fan" type="radio" id="ps_return_tag" name="project_edit_tag" value="ps_return" onClick="selectEditTag(this)">
@@ -44,9 +42,6 @@
                 </section>
                 <section style="display: none;" id="visual_section" class="my_project_section">
                     <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()->toArray()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
-                </section>
-                <section style="display: none;" id="main_content_section" class="my_project_section">
-                    <x-user.my_project.main_content :project="$project" />
                 </section>
                 <section style="display: none;" id="return_section" class="my_project_section">
                     <x-user.my_project.return :project="$project" />
