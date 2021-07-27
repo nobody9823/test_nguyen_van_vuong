@@ -1,8 +1,8 @@
-<form action="{{ route('user.project.update', ['project' => $project]) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('user.project.update', ['project' => $project, 'current_tab' => 'visual']) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 <div class="form_item_row">
-    <div class="form_item_tit">画像<span class="nini_txt">任意</span></div>
+    <div class="form_item_tit">スライド画像設定<span class="nini_txt">任意</span></div>
 
     @for($i = 0; $i <= 4; $i ++)
         <div style="width: 50%;">
@@ -23,7 +23,7 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">動画</div>
+    <div class="form_item_tit">スライドYouTube動画URL設定</div>
     <input type="text" name="video_url" class="def_input_100p" value="{{ old('video_url', optional($projectVideo)->file_url) }}">
 </div>
 <div class="def_btn">

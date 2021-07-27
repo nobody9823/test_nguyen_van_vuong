@@ -30,7 +30,7 @@ class MyPlanRequest extends FormRequest
             'content' => ['nullable', 'string', 'max:2000'],
             'price' => ['required', 'integer', 'max:10000000'],
             'address_is_required' => ['required', 'boolean'],
-            'limit_of_supporters' => ['required','integer', 'min:1'],
+            'limit_of_supporters' => ['required', 'integer', 'min:1'],
             'delivery_date' => ['required', 'date_format:Y-m-d', "after:{$project_end_date}"],
             'image_url' => ['nullable', 'image']
         ];
@@ -38,40 +38,40 @@ class MyPlanRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if($this->title === null){
+        if ($this->title === null) {
             $this->merge([
                 'title' => ''
             ]);
         };
 
-        if($this->input('content') === null){
+        if ($this->input('content') === null) {
             $this->merge([
                 'content' => ''
             ]);
         };
-        if ($this->limit_of_supporters === null){
+        if ($this->limit_of_supporters === null) {
             $this->merge([
                 'limit_of_supporters' => 1
             ]);
         }
 
-        if($this->delivery_month === "00"){
+        if ($this->delivery_month === "00") {
             $this->merge([
                 'delivery_month' => date('m')
             ]);
         };
 
-        if ($this->delivery_day === "00"){
+        if ($this->delivery_day === "00") {
             $this->merge([
                 'delivery_day' => date('y')
             ]);
         }
 
         $this->merge([
-            'delivery_date' => $this->delivery_year.'-'.$this->delivery_month.'-'.$this->delivery_day
+            'delivery_date' => $this->delivery_year . '-' . $this->delivery_month . '-' . $this->delivery_day
         ]);
 
-        if ($this->price === null){
+        if ($this->price === null) {
             $this->merge([
                 'price' => 0
             ]);
@@ -80,9 +80,9 @@ class MyPlanRequest extends FormRequest
 
     protected function passedValidation()
     {
-        if($this->image_url === null){
+        if ($this->image_url === null && !isset($this->route('plan')->image_url)) {
             $this->merge(['image_url' => "public/sampleImage/now_printing.png"]);
-        };
+        }
     }
 
     public function messages()

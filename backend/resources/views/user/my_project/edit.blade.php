@@ -17,39 +17,40 @@
         <div class="as_i_03">
             <div class="as_i_03_01">
                 <div class="tab_container">
-                    <input class="radio-fan" type="radio" id="target_amount_tag" name="project_edit_tag" value="target_amount" onClick="selectEditTag(this)" checked>
+                    <input class="radio-fan" type="radio" id="target_amount_tag" name="project_edit_tag" value="target_amount" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'target_amount' || Request::get('next_tab') === null ? 'checked' : '' }}>
                     <label class="tab_item" for="target_amount_tag">目標金額</label>
-                    <input class="radio-fan" type="radio" id="overview_tag" name="project_edit_tag" value="overview" onClick="selectEditTag(this)">
+                    <input class="radio-fan" type="radio" id="overview_tag" name="project_edit_tag" value="overview" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'overview' ? 'checked' : '' }}>
                     <label class="tab_item" for="overview_tag">概要</label>
-                    <input class="radio-fan" type="radio" id="visual_tag" name="project_edit_tag" value="visual" onClick="selectEditTag(this)">
-                    <label class="tab_item" for="visual_tag">ビジュアル</label>
-                    <input class="radio-fan" type="radio" id="return_tag" name="project_edit_tag" value="return" onClick="selectEditTag(this)">
+                    <input class="radio-fan" type="radio" id="visual_tag" name="project_edit_tag" value="visual" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'visual' ? 'checked' : '' }}>
+                    <label class="tab_item" for="visual_tag">Top画像</label>
+                    <input class="radio-fan" type="radio" id="return_tag" name="project_edit_tag" value="return" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'return' ? 'checked' : '' }}>
                     <label class="tab_item" for="return_tag">リターン</label>
-                    <input class="radio-fan" type="radio" id="ps_return_tag" name="project_edit_tag" value="ps_return" onClick="selectEditTag(this)">
+                    <input class="radio-fan" type="radio" id="ps_return_tag" name="project_edit_tag" value="ps_return" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'ps_return' ? 'checked' : '' }}>
                     <label class="tab_item" for="ps_return_tag">PSリターン</label>
-                    <input class="radio-fan" type="radio" id="identification_tag" name="project_edit_tag" value="identification" onClick="selectEditTag(this)">
+                    <input class="radio-fan" type="radio" id="identification_tag" name="project_edit_tag" value="identification" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'identification' ? 'checked' : '' }}>
                     <label class="tab_item" for="identification_tag">本人確認</label>
                 </div>
             </div>
         </div>
+
         <div class="def_outer_gray">
             <div class=" def_inner inner_item">
-                <section id="target_amount_section" class="my_project_section">
+                <section style="{{ Request::get('next_tab') === 'target_amount' || Request::get('next_tab') === null ? '' : 'display: none;' }}" id="target_amount_section" class="my_project_section">
                     <x-user.my_project.target_amount :project="$project" />
                 </section>
-                <section style="display: none;" id="overview_section" class="my_project_section">
+                <section style="{{ Request::get('next_tab') === 'overview' ? '' : 'display: none;' }}" id="overview_section" class="my_project_section">
                     <x-user.my_project.overview :project="$project" :tags="$tags" />
                 </section>
-                <section style="display: none;" id="visual_section" class="my_project_section">
+                <section style="{{ Request::get('next_tab') === 'visual' ? '' : 'display: none;' }}" id="visual_section" class="my_project_section">
                     <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()->toArray()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
                 </section>
-                <section style="display: none;" id="return_section" class="my_project_section">
+                <section style="{{ Request::get('next_tab') === 'return' ? '' : 'display: none;' }}" id="return_section" class="my_project_section">
                     <x-user.my_project.return :project="$project" />
                 </section>
-                <section style="display: none;" id="ps_return_section" class="my_project_section">
+                <section style="{{ Request::get('next_tab') === 'ps_return' ? '' : 'display: none;' }}" id="ps_return_section" class="my_project_section">
                     <x-user.my_project.ps_return :project="$project" />
                 </section>
-                <section style="display: none;" id="identification_section" class="my_project_section">
+                <section style="{{ Request::get('next_tab') === 'identification' ? '' : 'display: none;' }}" id="identification_section" class="my_project_section">
                     <x-user.my_project.identification :project="$project" :user="Auth::user()" />
                 </section>
             </div>
