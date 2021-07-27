@@ -100,17 +100,21 @@ function uploadProjectImage (input, projectId, projectFileId) {
         axios.post(`/my_project/project/${projectId}/uploadProjectImage/${projectFileId}?current_tab=visual`, formData)
         .then((res) => {
             console.log(res);
+            location.replace(res.data.redirect_url);
         })
-        .catch((res) => {
-            console.log(res);
+        .catch((err) => {
+            console.log(err.response);
+            alert(err.response.data.errors.file);
         });
     } else {
         axios.post(`/my_project/project/${projectId}/uploadProjectImage?current_tab=visual`, formData)
         .then((res) => {
             console.log(res);
+            location.replace(res.data.redirect_url);
         })
-        .catch((res) => {
-            console.log(res);
+        .catch((err) => {
+            console.log(err.response);
+            alert(err.response.data.errors.file);
         });
     }
 }

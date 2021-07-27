@@ -156,13 +156,12 @@ class MyProjectController extends Controller
 
     public function uploadProjectImage(Project $project, ProjectFile $project_file = null, ProjectFileRequest $request)
     {
-        $request->validate([
-            'file' => 'required|image',
-        ]);
         $this->project_service->saveImage($project, $project_file, $request);
 
+        session()->flash('flash_message', 'スライド画像の更新が完了しました。');
         return response()->json([
             'status' => 200,
+            'redirect_url' => route('user.project.edit', ['project' => $project, 'next_tab' => 'visual']),
         ], 200);
     }
 

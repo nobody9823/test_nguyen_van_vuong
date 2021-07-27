@@ -32,10 +32,11 @@ class ProjectFileRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $res = response()->json([
-            'status' => 422,
-            'errors' => $validator->errors(),
-        ], 422);
-        throw new HttpResponseException($res);
+        throw new HttpResponseException(
+            response()->json([
+                'status' => 422,
+                'errors' => $validator->errors()->toArray(),
+            ], 422)
+        );
     }
 }
