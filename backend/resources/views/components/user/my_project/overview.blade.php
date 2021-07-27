@@ -24,9 +24,5 @@
     @endforeach
 </div>
 
-<div class="def_btn">
-    <button type="submit" class="disable-btn">
-        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
-    </button>
-</div>
+<x-common.save_back_button />
 </form>

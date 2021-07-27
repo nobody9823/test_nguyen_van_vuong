@@ -26,9 +26,6 @@
     <div class="form_item_tit">スライドYouTube動画URL設定</div>
     <input type="text" name="video_url" class="def_input_100p" value="{{ old('video_url', optional($projectVideo)->file_url) }}">
 </div>
-<div class="def_btn">
-    <button type="submit" class="disable-btn">
-        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
-    </button>
-</div>
+
+<x-common.save_back_button />
 </form>
