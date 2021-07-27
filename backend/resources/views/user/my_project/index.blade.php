@@ -15,7 +15,7 @@
         <div class="prof_page_R">
             <div class="my_new_project_wrapper">
                 {{--NOTICE: MyProjectController, create action --}}
-                <a href="{{ route('user.project.create') }}" class="footer-over_L my_new_project">
+                <a href="{{ route('user.my_project.project.create') }}" class="footer-over_L my_new_project">
                     <div class="footer-over_L_02">
                     <div class="footer-over_L_02_01">New Project</div>
                     <div class="footer-over_L_02_02">新規プロジェクト作成はこちら</div>
@@ -30,7 +30,7 @@
                         <div class="ib02_01 E-font my_project_img_wrapper">
                             <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
                             {{-- NOTICE: MyProjectController, show action --}}
-                            <a href="#show" class="cover_link"></a>
+                            <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         </div>
 
                         <div class="ib02_02 my_project_release_status">
@@ -57,7 +57,7 @@
                             @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
                             編集
                             {{-- NOTICE: MyProjectController, edit action --}}
-                            <a class="cover_link" href="{{ route('user.project.edit', ['project' => $project]) }}"></a>
+                            <a class="cover_link" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
                             @elseif($project->release_status === '承認待ち' || $project->release_status === '掲載中')
                             {{ $project->release_status }}
                             <a class="cover_link"></a>

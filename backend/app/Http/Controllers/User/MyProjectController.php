@@ -78,16 +78,17 @@ class MyProjectController extends Controller
     }
 
     // NOTICE こちらのshowでキャンプファイアのダッシュボード的な扱いになるかと思います。
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     //
-    // }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Project $project)
+    {
+        $project->getWithPaymentsCountAndSumPrice();
+        return view('user.my_project.show', ['project' => $project]);
+    }
 
     /**
      * Show the form for editing the specified resource.

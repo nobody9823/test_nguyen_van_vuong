@@ -9,7 +9,7 @@
 @endif
 
 <div class="def_btn">
-    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.project.index') }}">
+    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.index') }}">
         プロジェクト一覧へ戻る
     </a>
 </div>
