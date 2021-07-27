@@ -68,7 +68,7 @@
         <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
             <select id="birth_year" class="form-control" name="end_year" readonly onchange="dateValidation(this, 'end_year', 'end_month', 'end_day')">
                 <option value='' disabled selected style='display:none;'>年</option>
-                @for($i = (int) date('Y'); $i <= (int) date('Y') + 2; $i ++) 
+                @for($i = (int) date('Y'); $i <= (int) date('Y') + 2; $i ++)
                 <option value="{{ $i }}"
                     {{ old('end_year', optional(optional($project)->end_date)->year) == $i ? 'selected' : '' }}>{{ $i }}
                 </option>
