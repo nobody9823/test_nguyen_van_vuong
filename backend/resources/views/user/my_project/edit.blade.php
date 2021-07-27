@@ -18,17 +18,35 @@
             <div class="as_i_03_01">
                 <div class="tab_container">
                     <input class="radio-fan" type="radio" id="target_amount_tag" name="project_edit_tag" value="target_amount" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'target_amount' || Request::get('next_tab') === null ? 'checked' : '' }}>
-                    <label class="tab_item" for="target_amount_tag">目標金額</label>
+                    <label class="tab_item" for="target_amount_tag">
+                        目標金額
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::TargetAmountTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                     <input class="radio-fan" type="radio" id="overview_tag" name="project_edit_tag" value="overview" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'overview' ? 'checked' : '' }}>
-                    <label class="tab_item" for="overview_tag">概要</label>
+                    <label class="tab_item" for="overview_tag">
+                        概要
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::OverviewTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                     <input class="radio-fan" type="radio" id="visual_tag" name="project_edit_tag" value="visual" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'visual' ? 'checked' : '' }}>
-                    <label class="tab_item" for="visual_tag">Top画像</label>
+                    <label class="tab_item" for="visual_tag">
+                        Top画像
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::VisualTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                     <input class="radio-fan" type="radio" id="return_tag" name="project_edit_tag" value="return" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'return' ? 'checked' : '' }}>
-                    <label class="tab_item" for="return_tag">リターン</label>
+                    <label class="tab_item" for="return_tag">
+                        リターン
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::ReturnTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                     <input class="radio-fan" type="radio" id="ps_return_tag" name="project_edit_tag" value="ps_return" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'ps_return' ? 'checked' : '' }}>
-                    <label class="tab_item" for="ps_return_tag">PSリターン</label>
+                    <label class="tab_item" for="ps_return_tag">
+                        PSリターン
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::PSReturnTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                     <input class="radio-fan" type="radio" id="identification_tag" name="project_edit_tag" value="identification" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'identification' ? 'checked' : '' }}>
-                    <label class="tab_item" for="identification_tag">本人確認</label>
+                    <label class="tab_item" for="identification_tag">
+                        本人確認
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::IdentificationTabIsFilled() === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                 </div>
             </div>
         </div>
