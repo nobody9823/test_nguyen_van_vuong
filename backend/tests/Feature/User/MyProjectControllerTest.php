@@ -125,44 +125,44 @@ class MyProjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project, 'current_tab' => 'target_tab' ], $this->target_amount_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project, 'current_tab' => 'target_tab' ], $this->target_amount_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project, 'next_tab' => 'overview']));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'overview']));
     }
 
     public function testUpdateActionWhenEditOverView()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project, 'current_tab' => 'overview' ], $this->overview_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project, 'current_tab' => 'overview' ], $this->overview_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project, 'next_tab' => 'visual']));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'visual']));
     }
 
     public function testUpdateActionWhenEditVisual()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project, 'current_tab' => 'visual' ], $this->visual_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project, 'current_tab' => 'visual' ], $this->visual_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project, 'next_tab' => 'return']));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'return']));
     }
 
     public function testUpdateActionWhenEditPsReturn()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project, 'current_tab' => 'ps_return' ], $this->ps_return_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project, 'current_tab' => 'ps_return' ], $this->ps_return_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project, 'next_tab' => 'identification']));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'identification']));
     }
 
     public function testUpdateActionWhenEditIdentification()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.project.update', [ 'project' => $this->project, 'current_tab' => 'identification' ], $this->ps_return_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project, 'current_tab' => 'identification' ], $this->ps_return_params));
 
-        $response->assertRedirect(route('user.project.edit', ['project' => $this->project, 'next_tab' => 'target_amount']));
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'target_amount']));
     }
 }
