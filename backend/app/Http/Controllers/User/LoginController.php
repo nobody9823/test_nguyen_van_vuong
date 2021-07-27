@@ -51,7 +51,7 @@ class LoginController extends Controller
                     $user->save();
                     $user->profile()->save(Profile::initialize());
                     $user->address()->save(Address::initialize());
-                    $user->snsLinks()->save(SnsLink::initialize());
+                    $user->snsLink()->save(SnsLink::initialize());
                     $user->identification()->save(Identification::initialize());
                     $oauth_user = SnsUser::create([
                         'user_id' => $user->id,
@@ -73,7 +73,7 @@ class LoginController extends Controller
                     $oauth_user->user->save();
                     $oauth_user->user->profile()->save(Profile::initialize());
                     $oauth_user->user->address()->save(Address::initialize());
-                    $oauth_user->user->snsLinks()->save(SnsLink::initialize());
+                    $oauth_user->user->snsLink()->save(SnsLink::initialize());
                     $oauth_user->user->identification()->save(Identification::initialize());
                 } catch (\Exception $e){
                     DB::rollback();

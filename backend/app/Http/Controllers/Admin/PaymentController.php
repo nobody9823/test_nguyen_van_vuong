@@ -20,7 +20,12 @@ class PaymentController extends Controller
                     ->narrowDownWithProject()
                     ->narrowDownByDate()
                     ->narrowDownByPrice()
-                    ->with(['user','inviter','includedPlans.project.user','comment'])
+                    ->with([
+                        'user' => function ($query) {
+                            $query->with(['profile', 'address']);
+                        },
+                        'inviter', 'comment'
+                    ])
                     ->sortBySelected($request->sort_type);
 
         //リレーション先OrderBy

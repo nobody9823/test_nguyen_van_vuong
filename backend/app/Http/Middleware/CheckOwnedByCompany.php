@@ -24,8 +24,6 @@ class CheckOwnedByCompany
         $plan = $request->route()->parameter('plan');
         $activity_report = $request->route()->parameter('activity_report');
         $activity_report_image = $request->route()->parameter('activity_report_image');
-        $talent = $request->route()->parameter('talent');
-        $temporary_talent = $request->route()->parameter('temporary_talent');
         $supporter_comment = $request->route()->parameter('supporter_comment');
         $replies_to_supporter_comment = $request->route()->parameter('replies_to_supporter_comment');
 
@@ -42,14 +40,6 @@ class CheckOwnedByCompany
             if ($activity_report && (Auth::id() !== $activity_report->project->talent->company_id)) {
                 abort(403, "アクセス権限がありません。");
             }
-        }
-        //talentが自社のものか確認
-        if ($talent && (Auth::id() !== $talent->company_id)) {
-            abort(403, "アクセス権限がありません。");
-        }
-        //temporary_talentが自社のものか確認
-        if ($temporary_talent && (Auth::id() !== $temporary_talent->company_id)) {
-            abort(403, "アクセス権限がありません。");
         }
         //project_imageが自社のものか確認
         if ($project_image && (Auth::id() !== $project_image->project->talent->company_id)) {

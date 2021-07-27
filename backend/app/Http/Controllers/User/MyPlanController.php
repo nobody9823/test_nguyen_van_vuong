@@ -6,11 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\MyProjectController;
 use App\Http\Requests\MyPlanRequest;
 use Illuminate\Http\Request;
+use App\Services\View\EditMyProjectTabService;
 use App\Models\Project;
 use App\Models\Plan;
 
 class MyPlanController extends Controller
 {
+    protected $my_project_tab_service;
+
+    public function __construct(EditMyProjectTabService $my_project_tab_service)
+    {
+        $this->my_project_tab_service = $my_project_tab_service;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +47,7 @@ class MyPlanController extends Controller
     public function store(MyPlanRequest $request, Project $project)
     {
         $project->plans()->save(Plan::make($request->all()));
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with(['flash_message' => 'リターンが作成されました。']);
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => $this->my_project_tab_service->getNextTab($request->current_tag)])->with(['flash_message' => 'リターンが作成されました。']);
     }
 
     /**
@@ -75,7 +82,7 @@ class MyPlanController extends Controller
     public function update(Project $project, Plan $plan, MyPlanRequest $request)
     {
         $plan->fill($request->all())->save();
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with(['flash_message' => 'リターンが更新されました。']);
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => $this->my_project_tab_service->getNextTab($request->current_tag)])->with(['flash_message' => 'リターンが更新されました。']);
     }
 
     /**

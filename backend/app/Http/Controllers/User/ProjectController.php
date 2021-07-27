@@ -312,6 +312,7 @@ class ProjectController extends Controller
         } else {
             $tags = null;
         }
+        $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
 
         //カテゴリ絞り込み
         if ($request->tag_id) {
@@ -386,7 +387,7 @@ class ProjectController extends Controller
 
         $projects = $projectsQuery->GetReleasedProject()->with('tags')->paginate(9);
 
-        return view('user.search', compact('projects', 'tags'));
+        return view('user.search', compact('projects', 'tags', 'user_liked'));
     }
 
     public function consultProject()

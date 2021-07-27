@@ -26,7 +26,7 @@ class MyProjectRequest extends FormRequest
      * @return array
      */
     public function rules(Request $request)
-    {
+    {        
         return [
             'title' => ['nullable', 'string', 'max:255'],
             'content' => ['nullable', 'string', 'max:100000'],
@@ -111,6 +111,14 @@ class MyProjectRequest extends FormRequest
             $this->merge(['building' => ""]);
         }
 
+        // youtubeが短縮urlだった場合、通常のurlに変換する。その後通常通りバリデーションにかける
+        if($this->input('video_url')){
+            $short_url = $this->input('video_url');
+            $headers = get_headers($short_url, 1);
+            $original_url = isset($headers['Location']) ? $headers['Location'] : $short_url;
+            
+            $this->merge(['video_url' => $original_url]);
+        }
     }
 
     public function messages()

@@ -86,6 +86,12 @@
 <div class="card-body">
     @if($payments->count() <= 0) <p>表示する投稿はありません。</p>
         @else
+        @if(Request::get('project'))
+        <form action="{{ route('admin.project.output_purchases_list_to_csv', ['project' => Request::get('project')]) }}">
+            @csrf
+            <button class="btn btn-secondary">CSV出力</button>
+        </form>
+        @endif
         <table class="table">
             <tr>
                 <th style="width:15%">支援ID</th>
@@ -107,13 +113,53 @@
                     {{ $payment->created_at }}
                 </td>
                 <td>
-                    {{ $payment->user->name }}
+                    <a class="mt-1" data-toggle="modal"
+                                data-target="#user_index{{ $payment->id }}">
+                        {{ $payment->user->name }}
+                    </a>
+                    <div class="modal fade" id="user_index{{ $payment->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="user_content_modal" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="user_content_modal">
+                                        {{ $payment->user->name }}
+                                        {{ $payment->user->email }}
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>姓:{{ optional($payment->user->profile)->last_name }}</p>
+                                    <p>名:{{ optional($payment->user->profile)->first_name }}</p>
+                                    <p>姓(カナ):{{ optional($payment->user->profile)->last_name_kana }}</p>
+                                    <p>名(カナ):{{ optional($payment->user->profile)->first_name_kana }}</p>
+                                    <p>生年月日:{{ optional($payment->user->profile)->birthday }}</p>
+                                    <p>公開状態:{{ optional($payment->user->profile)->birthday_is_published ?'公開中':'非公開中' }}</p>
+                                    <p>性別:{{ optional($payment->user->profile)->gender }}</p>
+                                    <p>公開状態:{{ optional($payment->user->profile)->gender_is_published ?'公開中':'非公開中' }}</p>
+                                    <p>紹介文:{{ optional($payment->user->profile)->introduction }}</p>
+                                    <p>画像:
+                                        <img style="max-height:5vw;"
+                                            src="{{ Storage::url(optional($payment->user->profile)->image_url) }}">
+                                    </p>
+                                    <p></p>
+                                    <p>郵便番号:{{ optional($payment->user->address)->postal_code }}</p>
+                                    <p>都道府県:{{ optional($payment->user->address)->prefecture }}</p>
+                                    <p>住所1(市町村など):{{ optional($payment->user->address)->city }}</p>
+                                    <p>住所2(番地など):{{ optional($payment->user->address)->block }}</p>
+                                    <p>住所3(建物番号など):{{ optional($payment->user->address)->building }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
                 <td>
                     {{ optional($payment->inviter)->name }}
                 </td>
                 <td>
-                    {{ $payment->price }}
+                    {{ $payment->price }}円
                 </td>
                 <td>
                     {{ $payment->project->user->name }}

@@ -13,6 +13,7 @@ use App\Models\Payment;
 use App\Models\Plan;
 use App\Models\PlanPaymentIncluded;
 use App\Models\Project;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ class MypageController extends Controller
     {
         $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project'])->paginate(1);
 
-        $project = $payments->first()->includedPlans()->first()->project->getLoadPaymentsCountAndSumPrice();
+        $project = $payments->first() !== null ? $payments->first()->includedPlans()->first()->project->getLoadPaymentsCountAndSumPrice() : null;
         // FIXME 画面ができたら適用
         return view('user.mypage.payment', [
             'payments' => $payments,
@@ -84,8 +85,15 @@ class MypageController extends Controller
     {
         DB::beginTransaction();
         try {
+            if(isset($request->day)) {
+                $user->profile->birthday = Carbon::create(
+                    $request->year, $request->month, $request->day
+                );
+            }
             $user->fill($request->all())->save();
             $user->saveProfile($request->all());
+            $user->saveAddress($request->all());
+            $user->saveSnsLink($request->all());
             DB::commit();
             return redirect()->route('user.profile')->with('flash_message', 'プロフィール更新が成功しました。');
         } catch(Exception $e) {

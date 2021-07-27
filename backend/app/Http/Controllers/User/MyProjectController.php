@@ -10,6 +10,7 @@ use App\Models\Project;
 use App\Models\ProjectFile;
 use App\Models\Plan;
 use App\Models\Tag;
+use App\Services\View\EditMyProjectTabService;
 use Carbon\Carbon;
 use Auth;
 use Exception;
@@ -24,7 +25,9 @@ class MyProjectController extends Controller
 
     protected $user;
 
-    public function __construct(ProjectService $project_service)
+    protected $my_project_tab_service;
+
+    public function __construct(ProjectService $project_service, EditMyProjectTabService $my_project_tab_service)
     {
         $this->middleware(function ($request, $next) {
             $this->user = \Auth::user();
@@ -32,6 +35,8 @@ class MyProjectController extends Controller
         });
 
         $this->project_service = $project_service;
+
+        $this->my_project_tab_service = $my_project_tab_service;
     }
 
     /**
@@ -128,7 +133,7 @@ class MyProjectController extends Controller
             DB::rollback();
             throw $e;
         }
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with(['flash_message' => 'プロジェクトが更新されました。']);
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => $this->my_project_tab_service->getNextTab($request->current_tab)])->with(['flash_message' => 'プロジェクトが更新されました。']);
     }
 
     /**
