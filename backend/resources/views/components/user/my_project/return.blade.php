@@ -44,12 +44,7 @@
         <div class="footer-over_L_03"><i class="fas fa-chevron-right"></i></div>
     </a>
     
-    <br>
-    <div class="def_btn">
-        <button type="submit" class="disable-btn">
-            <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">プロジェクト一覧へ戻る</p>
-        </button>
-    </div>
+    <x-common.save_back_button saveButton="unnecessary" />
 </div>
 
 <section id="plan_form_section" style="display: none;">
