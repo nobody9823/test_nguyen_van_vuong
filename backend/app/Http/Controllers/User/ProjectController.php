@@ -36,7 +36,6 @@ use Mail;
 
 class ProjectController extends Controller
 {
-
     public function __construct(PayJpInterface $pay_jp_interface, PayPayInterface $pay_pay_interface, Payment $payment, Comment $comment, Plan $plan)
     {
         $this->middleware(function ($request, $next) {
@@ -64,10 +63,10 @@ class ProjectController extends Controller
         $projects = Project::mainProjects()->inRandomOrder()->take(5)->get();
 
         // ランキング(支援総額順)
-        $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price','DESC')->take(5)->get();
+        $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price', 'DESC')->take(5)->get();
 
         // 最新のプロジェクト
-        $new_projects = Project::mainProjects()->orderBy('created_at', 'DESC')->get();
+        $new_projects = Project::mainProjects()->orderBy('start_date', 'DESC')->get();
 
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
@@ -171,13 +170,15 @@ class ProjectController extends Controller
      */
     public function selectPlans(Request $request, Project $project, Plan $plan)
     {
-        return view('user.project.select_plan',
+        return view(
+            'user.project.select_plan',
             [
                 'project' => $project,
                 'inviter_code' => $request->inviter_code,
                 'user' => $this->user,
                 'plans' => $plan->id !== null ? $plan : $project->plans
-            ]);
+            ]
+        );
     }
 
     /**
@@ -224,11 +225,12 @@ class ProjectController extends Controller
                     'message_status' => "ステータスなし",
                     'payment_way' => !empty($validated_request['payjp_token']) ? 'PayJp' : 'PayPay',
                     'payment_is_finished' => false
-                ], $request->all()
+                ],
+                $request->all()
             ));
             $this->user->payments()->save($payment);
             $payment->includedPlans()->attach($validated_request['plans']);
-            if (!empty($validated_request['comments'])){
+            if (!empty($validated_request['comments'])) {
                 $comment = $this->comment->fill(['project_id' =>  $project->id, 'content' => $validated_request['comments']]);
                 $payment->comment()->save($comment);
             }
@@ -238,14 +240,14 @@ class ProjectController extends Controller
                 'token' => !empty($validated_request['payjp_token']) ? $validated_request['payjp_token'] : $unique_token,
             ]));
             DB::commit();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             DB::rollback();
             throw $e;
         }
 
-        if ($validated_request['payment_way'] === 'credit'){
+        if ($validated_request['payment_way'] === 'credit') {
             return redirect()->action([ProjectController::class, 'paymentForPayJp'], ['project' => $project, 'payment' => $payment]);
-        } else if ($validated_request['payment_way'] === 'paypay'){
+        } elseif ($validated_request['payment_way'] === 'paypay') {
             return redirect()->away($qr_code['data']['url']);
         }
     }
@@ -263,15 +265,15 @@ class ProjectController extends Controller
         $response = $this->pay_jp->Payment($payment->price, $payment->paymentToken->token);
         DB::beginTransaction();
         try {
-                $payment->payment_is_finished = true;
-                $payment->save();
-                DB::commit();
-            } catch (\Exception $e) {
-                DB::rollback();
-                $this->pay_jp->Refund($response->id);
-                throw $e;
-            }
-            $this->user->notify(new PaymentNotification($project, $payment));
+            $payment->payment_is_finished = true;
+            $payment->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            $this->pay_jp->Refund($response->id);
+            throw $e;
+        }
+        $this->user->notify(new PaymentNotification($project, $payment));
 
         return view('user.plan.supported', ['project' => $project->getLoadPaymentsCountAndSumPrice(), 'payment' => $payment]);
     }
@@ -280,7 +282,7 @@ class ProjectController extends Controller
     {
         $response = $this->pay_pay->getPaymentDetail($payment->paymentToken->token);
 
-        if($response['data']['status'] !== 'COMPLETED'){
+        if ($response['data']['status'] !== 'COMPLETED') {
             return redirect()->action([ProjectController::class, 'selectPlans'], ['project' => $project])->withError('決済処理に失敗しました。管理会社に連絡をお願いします。');
         }
 
@@ -307,7 +309,7 @@ class ProjectController extends Controller
     public function search(Request $request)
     {
         $projectsQuery = Project::query();
-        if($request->tag_id){
+        if ($request->tag_id) {
             $tags = Tag::pluck("name", "id");
         } else {
             $tags = null;
@@ -316,9 +318,11 @@ class ProjectController extends Controller
 
         //カテゴリ絞り込み
         if ($request->tag_id) {
-            $projectsQuery->whereIn('id',
+            $projectsQuery->whereIn(
+                'id',
                 ProjectTagTagging::query()->select('project_id')
-                ->whereIn('tag_id',
+                ->whereIn(
+                    'tag_id',
                     Tag::query()->select('id')
                     ->find($request->tag_id)
                 )
@@ -339,7 +343,7 @@ class ProjectController extends Controller
                 break;
 
             case '2':
-                if(strstr($request->fullUrl(), '/search?sort_type=2')){
+                if (strstr($request->fullUrl(), '/search?sort_type=2')) {
                     // ヘッダーメニューの「募集終了が近いプロジェクトの場合」(現在掲載中且つ、残り1週間で終了)
                     $projectsQuery->daysLeftSeeking('end_date')->orderByNearlyDeadline();
                 } else {
@@ -349,11 +353,11 @@ class ProjectController extends Controller
                 break;
 
             case '3':
-                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price','DESC');
+                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price', 'DESC');
                 break;
 
             case '4':
-                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_count','DESC');
+                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_count', 'DESC');
                 break;
         }
 
@@ -405,7 +409,7 @@ class ProjectController extends Controller
             Mail::to(config('mail.customer_support.address'))->send(new ConsultProject($request->all()));
             DB::commit();
             return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             // NOTICE Slackにログを送信できるみたいなので今後時間があったら実装してみても良いかもしれないです。
             Log::error($e->getMessage(), $e->getTrace());
@@ -415,12 +419,12 @@ class ProjectController extends Controller
 
     public function ProjectLiked(Request $request)
     {
-        $project = Project::where('id',$request->project_id)->first();
-        $exist_liked = UserProjectLiked::where('project_id',$request->project_id)->where('user_id',Auth::id())->exists();
+        $project = Project::where('id', $request->project_id)->first();
+        $exist_liked = UserProjectLiked::where('project_id', $request->project_id)->where('user_id', Auth::id())->exists();
 
-        if(!Auth::id()){
+        if (!Auth::id()) {
             return "未ログイン";
-        } elseif($exist_liked){
+        } elseif ($exist_liked) {
             $project->likedUsers()->detach(Auth::id());
             return "削除";
         } else {
@@ -442,7 +446,8 @@ class ProjectController extends Controller
         $this->authorize('checkIsFinishedPayment', $project);
         $users_ranked_by_total_quantity = User::getInvitersRankedByInvitedUsers($project->id)->take(100)->get();
         $users_ranked_by_total_amount = User::getInvitersRankedByInvitedTotalAmount($project->id)->take(100)->get();
-        return view('user.project.supporter_ranking',
+        return view(
+            'user.project.supporter_ranking',
             [
                 'users_ranked_by_total_quantity' => $users_ranked_by_total_quantity,
                 'users_ranked_by_total_amount' => $users_ranked_by_total_amount,
