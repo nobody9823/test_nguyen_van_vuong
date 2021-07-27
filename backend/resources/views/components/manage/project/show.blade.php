@@ -154,7 +154,7 @@
                                                 <h5 class="mb-3">{{ number_format($project->payments_sum_price) }}
                                                     円</h5>
                                                 <h3>目標額達成率 : </h3>
-                                                <h5 class="mb-3">{{ $project->getAchievementRate }}％</h5>
+                                                <h5 class="mb-3">{{ $project->achievement_rate }}％</h5>
                                                 <h3>プロジェクト終了まで : </h3>
                                                 <h5 class="mb-3">{{ $project->getEndDate() }}</h5>
                                             </div>

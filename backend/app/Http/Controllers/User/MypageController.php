@@ -35,7 +35,7 @@ class MypageController extends Controller
     {
         $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project'])->paginate(1);
 
-        $project = $payments->first()->includedPlans()->first()->project->getLoadPaymentsCountAndSumPrice();
+        $project = $payments->first() !== null ? $payments->first()->includedPlans()->first()->project->getLoadPaymentsCountAndSumPrice() : null;
         // FIXME 画面ができたら適用
         return view('user.mypage.payment', [
             'payments' => $payments,

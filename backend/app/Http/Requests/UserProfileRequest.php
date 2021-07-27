@@ -44,8 +44,10 @@ class UserProfileRequest extends FormRequest
     {
         if (is_null($this->input('email')) && is_null($this->input('email_confirmation'))) {
             $this->merge(['email' => Auth::user()->email]);
+            $this->merge(['email_confirmation' => Auth::user()->email]);
         } elseif (is_null($this->input('email'))) {
             $this->merge(['email' => Auth::user()->email]);
+            $this->merge(['email_confirmation' => Auth::user()->email]);
         }
 
         if (is_null($this->input('twitter_url'))) {
