@@ -123,9 +123,17 @@
     <div class="form_item_tit">口座名義<span class="hissu_txt">必須</span></div>
     <input type="text" name="account_name" class="def_input_100p" value="{{ old('account_name', optional($user->identification)->account_number) }}">
 </div>
+
+<br>
 <div class="def_btn">
     <button type="submit" class="disable-btn">
         <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
+    </button>
+</div>
+
+<div class="def_btn">
+    <button type="submit" class="disable-btn">
+        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">プロジェクト一覧へ戻る</p>
     </button>
 </div>
 </form>

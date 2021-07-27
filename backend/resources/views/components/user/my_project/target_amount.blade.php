@@ -120,12 +120,20 @@
                 @endfor
             </select>
         </div>
+    </div>
+        
+        <br>
         <div class="def_btn">
             <button type="submit" class="disable-btn">
                 <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
             </button>
         </div>
-    </div>
+
+        <div class="def_btn">
+            <button type="submit" class="disable-btn">
+                <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">プロジェクト一覧へ戻る</p>
+            </button>
+        </div>
 </form>
 
 <script src={{ asset('/js/blade-functions.js') }}></script>
