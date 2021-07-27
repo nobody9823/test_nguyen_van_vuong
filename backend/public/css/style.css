@@ -488,6 +488,10 @@ input[type=radio]:checked + .radio-fan::after {
     opacity: 1;
 }
 
+.fa, .green {
+	color: #00AEBD;
+	display: none;
+}
 
 
 /**PC-top********************************************************************/

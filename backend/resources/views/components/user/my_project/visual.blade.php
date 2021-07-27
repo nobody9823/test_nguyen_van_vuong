@@ -2,7 +2,7 @@
     @csrf
     @method('PUT')
 <div class="form_item_row">
-    <div class="form_item_tit">画像<span class="nini_txt">任意</span></div>
+    <div class="form_item_tit">スライド画像設定<span class="nini_txt">任意</span></div>
 
     @for($i = 0; $i <= 4; $i ++)
         <div style="width: 50%;">
@@ -23,12 +23,9 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">動画</div>
+    <div class="form_item_tit">スライドYouTube動画URL設定</div>
     <input type="text" name="video_url" class="def_input_100p" value="{{ old('video_url', optional($projectVideo)->file_url) }}">
 </div>
-<div class="def_btn">
-    <button type="submit" class="disable-btn">
-        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
-    </button>
-</div>
+
+<x-common.save_back_button />
 </form>
