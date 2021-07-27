@@ -43,6 +43,8 @@
         </div>
         <div class="footer-over_L_03"><i class="fas fa-chevron-right"></i></div>
     </a>
+    
+    <x-common.save_back_button saveButton="unnecessary" />
 </div>
 
 <section id="plan_form_section" style="display: none;">
