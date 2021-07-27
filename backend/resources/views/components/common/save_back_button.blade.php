@@ -9,7 +9,7 @@
 @endif
 
 <div class="def_btn">
-    <button type="submit" class="disable-btn">
-        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">プロジェクト一覧へ戻る</p>
-    </button>
+    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.project.index') }}">
+        プロジェクト一覧へ戻る
+    </a>
 </div>
