@@ -102,21 +102,21 @@ class MyProjectControllerTest extends TestCase
 
     public function testIndexAction()
     {
-        $response = $this->get(route('user.project.index'));
+        $response = $this->get(route('user.my_project.project.index'));
 
         $response->assertOk();
     }
 
     public function testCreateAction()
     {
-        $response = $this->get(route('user.project.create'));
+        $response = $this->get(route('user.my_project.project.create'));
 
         $response->assertOk();
     }
 
     public function testEditAction()
     {
-        $response = $this->get(route('user.project.edit', [ 'project' => $this->project ]));
+        $response = $this->get(route('user.my_project.project.edit', [ 'project' => $this->project ]));
 
         $response->assertOk();
     }
