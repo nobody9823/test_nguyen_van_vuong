@@ -2,25 +2,28 @@
     @csrf
     @method('PUT')
 <div class="form_item_row">
-    <div class="form_item_tit">スライド画像設定<span class="nini_txt">任意</span></div>
+    <div class="form_item_tit">スライド画像変更<span class="nini_txt">任意</span></div>
 
-    @for($i = 0; $i <= 4; $i ++)
+    @foreach($projectImages as $project_image)
         <div style="width: 50%;">
-            @if(optional($projectImages)[$i] !== null)
-                <input type="checkbox" id="{{ $i }}" class="ac_list_checks" name="file_ids[]" value="{{ $projectImages[$i]['id'] }}" onClick="displayInputFile(this)">
-                <label for="{{ $i }}" class="checkbox-fan">画像{{ $i +1 }}</label>
-            @endif
             <div>
                 <div class="ib02_01 E-font my_project_img_wrapper">
-                    @if(optional($projectImages)[$i] !== null)
-                        <img src="{{ Storage::url($projectImages[$i]['file_url']) }}">
-                    @endif
+                    <img src="{{ Storage::url($project_image->file_url) }}">
                 </div>
-                <input type="file" name="visual_image_url[{{ optional(optional($projectImages)[$i])['id'] }}][]" id="project_image_{{ $i }}" style="{{ optional($projectImages)[$i] !== null ? 'display: none;' : '' }}">
+                <input type="file" onChange="uploadProjectImage(this, {{ $project->id }}, {{ $project_image->id }})">
             </div>
         </div>
-    @endfor
+    @endforeach
 </div>
+<div class="form_item_row">
+    <div style="width: 50%;">
+        <div>
+            <div class="form_item_tit">スライド画像追加<span class="nini_txt">任意</span></div>
+            <input type="file" onChange="uploadProjectImage(this, {{ $project->id }})">
+        </div>
+    </div>
+</div>
+
 
 <div class="form_item_row">
     <div class="form_item_tit">スライドYouTube動画URL設定</div>
