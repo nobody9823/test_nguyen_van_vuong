@@ -13,6 +13,7 @@ use App\Models\Payment;
 use App\Models\Plan;
 use App\Models\PlanPaymentIncluded;
 use App\Models\Project;
+use App\Models\UserProjectLiked;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
@@ -69,8 +70,10 @@ class MypageController extends Controller
     // お気に入りプロジェクト一覧
     public function likedProjects()
     {
-        return view('user.mypage.project', [
-            'projects' => Auth::user()->likedProjects->load(['projectFiles', 'tags', 'likedUsers'])
+        $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
+        return view('user.mypage.liked_project', [
+            'projects' => Auth::user()->likedProjects->load(['projectFiles', 'tags', 'likedUsers']),
+            'user_liked' => $user_liked,
         ]);
     }
 
