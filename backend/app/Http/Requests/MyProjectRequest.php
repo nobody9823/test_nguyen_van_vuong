@@ -149,6 +149,11 @@ class MyProjectRequest extends FormRequest
                     'identify_image_2' => Auth::user()->identification->identify_image_2
                 ]);
             }
+            if ($this->has('phone_number')){
+                $this->merge([
+                    'phone_number' => Auth::user()->profile->phone_number
+                ]);
+            }
         }
     }
 
