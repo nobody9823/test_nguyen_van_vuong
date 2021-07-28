@@ -26,7 +26,8 @@ class Project extends Model
         'user_id',
         'title',
         'content',
-        'ps_plan_content',
+        'reward_by_total_amount',
+        'reward_by_total_quantity',
         'target_amount',
         'curator',
         'start_date',
@@ -39,7 +40,8 @@ class Project extends Model
         'start_date' => 'datetime',
         'end_date' => 'datetime',
         'content' => PurifierCast::class,
-        'ps_plan_content' => PurifierCast::class,
+        'reward_by_total_amount' => PurifierCast::class,
+        'reward_by_total_quantity' => PurifierCast::class,
     ];
 
     public static function boot()
