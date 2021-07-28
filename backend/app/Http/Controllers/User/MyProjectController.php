@@ -60,8 +60,6 @@ class MyProjectController extends Controller
     {
         $project = $this->user->projects()->save(Project::initialize());
 
-        $project->projectFiles()->save(ProjectFile::initialize());
-
         return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project]);
     }
 
