@@ -1706,3 +1706,9 @@ width: 100%;
 .my_new_project_wrapper {margin: 15px 0 15px 0;}
 .my_new_project {width: 100%;}
 .project_image_row {justify-content: space-around;}
+.ps_plan_form_wrapper {flex-direction: row; display: flex; align-items: center; justify-content: space-evenly; width: 100%;}
+.ps_plan_form_item {width:48%; margin-bottom: 40px;}
+@media screen and (max-width: 768px){
+    .ps_plan_form_wrapper {flex-direction: column;}
+    .ps_plan_form_item {width:100%}
+}
