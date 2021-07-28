@@ -1705,3 +1705,4 @@ width: 100%;
 .my_project_img_wrapper {overflow: hidden; display: flex; justify-content: center; align-items: center;}
 .my_new_project_wrapper {margin: 15px 0 15px 0;}
 .my_new_project {width: 100%;}
+.project_image_row {justify-content: space-around;}

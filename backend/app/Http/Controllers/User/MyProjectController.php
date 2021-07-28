@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Services\Project\ProjectService;
 use App\Http\Requests\MyProjectRequest;
+use App\Http\Requests\ProjectFileRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use App\Models\ProjectFile;
@@ -122,8 +123,6 @@ class MyProjectController extends Controller
 
             $this->project_service->attachTags($project, $request);
 
-            $this->project_service->saveImages($project, $request);
-
             $this->project_service->saveVideoUrl($project, $request);
 
             DB::commit();
@@ -152,6 +151,17 @@ class MyProjectController extends Controller
         ]);
         $path = $request->file('file')->store('public/image');
         return ['location' => Storage::url($path)];
+    }
+
+    public function uploadProjectImage(Project $project, ProjectFile $project_file = null, ProjectFileRequest $request)
+    {
+        $this->project_service->saveImage($project, $project_file, $request);
+
+        session()->flash('flash_message', 'スライド画像の更新が完了しました。');
+        return response()->json([
+            'status' => 200,
+            'redirect_url' => route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'visual']),
+        ], 200);
     }
 
     public function apply(Project $project)
