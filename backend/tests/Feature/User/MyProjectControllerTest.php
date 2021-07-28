@@ -25,23 +25,20 @@ class MyProjectControllerTest extends TestCase
         parent::setUp();
 
         $this->users = User::factory()
-            ->has(Identification::factory())
-            ->has(Address::factory())
-            ->has(Profile::factory())
+        ->has(Identification::factory())
+        ->has(Address::factory())
+        ->has(Profile::factory())
+        ->has(Project::factory()->released()
             ->has(
-                Project::factory()->released()
-                    ->has(
-                        ProjectFile::factory()->state([
-                            'file_url' => 'public/sampleImage/now_printing.png',
-                            'file_content_type' => 'image_url',
-                        ])
-                    )
-                    ->has(
-                        Plan::factory()->state([
-                            'price' => 1000
-                        ])
-                    )
-            )->count(10)->create();
+                    ProjectFile::factory()->state([
+                        'file_url' => 'public/sampleImage/now_printing.png',
+                        'file_content_type' => 'image_url',
+                ]))
+            ->has(
+                Plan::factory()->state([
+                    'price' => 1000
+                ]))
+        )->count(10)->create();
 
         $this->user = $this->users->first();
 
@@ -60,7 +57,7 @@ class MyProjectControllerTest extends TestCase
         $this->overview_params = [
             'title' => 'test title',
             'overview' => 'test overview',
-            'tags' => [1, 2, 3]
+            'tags' => [ 1, 2, 3 ]
         ];
 
         Storage::fake('avatars');
@@ -75,12 +72,8 @@ class MyProjectControllerTest extends TestCase
             'main_content' => 'test main content'
         ];
 
-        $this->reward_total_amount_params = [
-            'reward_total_amount' => 'test reward total amount'
-        ];
-
-        $this->reward_total_quantity_params = [
-            'reward_total_quantity' => 'test reward total quantity'
+        $this->ps_return_params = [
+            'ps_plan_content' => 'test ps plan content'
         ];
 
         $this->identification_params = [
@@ -123,7 +116,7 @@ class MyProjectControllerTest extends TestCase
 
     public function testEditAction()
     {
-        $response = $this->get(route('user.my_project.project.edit', ['project' => $this->project]));
+        $response = $this->get(route('user.my_project.project.edit', [ 'project' => $this->project ]));
 
         $response->assertOk();
     }
@@ -132,7 +125,7 @@ class MyProjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->project, 'current_tab' => 'target_tab'], $this->target_amount_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project, 'current_tab' => 'target_tab' ], $this->target_amount_params));
 
         $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'overview']));
     }
@@ -141,7 +134,7 @@ class MyProjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->project, 'current_tab' => 'overview'], $this->overview_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project, 'current_tab' => 'overview' ], $this->overview_params));
 
         $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'visual']));
     }
@@ -150,35 +143,25 @@ class MyProjectControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->project, 'current_tab' => 'visual'], $this->visual_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project, 'current_tab' => 'visual' ], $this->visual_params));
 
         $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'return']));
     }
 
-    // FIXME: 下二つのテストはPSリターンのアクションの修正をした際に実装します。
-    // public function testUpdateActionWhenEditRewardTotalQuantity()
-    // {
-    //     $this->withoutExceptionHandling();
+    public function testUpdateActionWhenEditPsReturn()
+    {
+        $this->withoutExceptionHandling();
 
-    //     $response = $this->put(route('user.my_project.project.update', ['project' => $this->project, 'current_tab' => 'ps_return'], $this->reward_total_amount_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project, 'current_tab' => 'ps_return' ], $this->ps_return_params));
 
-    //     $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'identification']));
-    // }
-
-    // public function testUpdateActionWhenEditRewardTotalAmount()
-    // {
-    //     $this->withoutExceptionHandling();
-
-    //     $response = $this->put(route('user.my_project.project.update', ['project' => $this->project, 'current_tab' => 'ps_return'], $this->reward_total_quantity_params));
-
-    //     $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'identification']));
-    // }
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'identification']));
+    }
 
     public function testUpdateActionWhenEditIdentification()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->project, 'current_tab' => 'identification'], $this->identification_params));
+        $response = $this->put(route('user.my_project.project.update', [ 'project' => $this->project, 'current_tab' => 'identification' ], $this->ps_return_params));
 
         $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'target_amount']));
     }
