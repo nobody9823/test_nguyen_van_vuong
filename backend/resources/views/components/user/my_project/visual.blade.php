@@ -16,7 +16,7 @@
     @endforeach
 </div>
 
-<form action="{{ route('user.project.update', ['project' => $project, 'current_tab' => 'visual']) }}" method="post">
+<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'visual']) }}" method="post">
     @csrf
     @method('PUT')
     <div class="form_item_row">
@@ -32,7 +32,7 @@
     </div>
 
     <div class="def_btn">
-        <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.project.index') }}">
+        <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.index') }}">
             プロジェクト一覧へ戻る
         </a>
     </div>

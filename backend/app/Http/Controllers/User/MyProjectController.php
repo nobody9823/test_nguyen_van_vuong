@@ -162,7 +162,7 @@ class MyProjectController extends Controller
         session()->flash('flash_message', 'スライド画像の更新が完了しました。');
         return response()->json([
             'status' => 200,
-            'redirect_url' => route('user.project.edit', ['project' => $project, 'next_tab' => 'visual']),
+            'redirect_url' => route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'visual']),
         ], 200);
     }
 
