@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use BenSampo\Enum\Rules\EnumValue;
 use App\Enums\BankAccountType;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class MyProjectRequest extends FormRequest
 {
@@ -133,8 +134,21 @@ class MyProjectRequest extends FormRequest
             $short_url = $this->input('video_url');
             $headers = get_headers($short_url, 1);
             $original_url = isset($headers['Location']) ? $headers['Location'] : $short_url;
-            
+
             $this->merge(['video_url' => $original_url]);
+        }
+
+        if ($this->current_tab === 'identification'){
+            if ($this->identify_image_1 === null){
+                $this->merge([
+                    'identify_image_1' => Auth::user()->identification->identify_image_1
+                ]);
+            }
+            if ($this->identify_image_2 === null){
+                $this->merge([
+                    'identify_image_2' => Auth::user()->identification->identify_image_2
+                ]);
+            }
         }
     }
 
