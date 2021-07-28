@@ -1,5 +1,4 @@
 <!-- マイプロジェクトの「保存する」「プロジェクト一覧へ戻る」ボタン -->
-<br>
 @if(!isset($saveButton))
 <div class="def_btn">
     <button type="submit" class="disable-btn">

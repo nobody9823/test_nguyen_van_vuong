@@ -5,45 +5,49 @@ namespace App\Services\Project;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\ProjectFile;
+use Exception;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Log;
 
 class ProjectService
 {
-    protected $file_array = [];
-
     public function attachTags(Project $project, Request $request)
     {
-        if($request->has('tags')){
+        if ($request->has('tags')) {
             $project->tags()->detach();
             $project->tags()->attach(array_values($request->tags));
+        } else if ($request->has('tags') === false && $request->current_tab === 'overview'){
+            $project->tags()->detach();
         }
     }
 
-    public function saveImages(Project $project, Request $request)
+    public function saveImage(Project $project, ProjectFile $project_file = null, Request $request)
     {
-        if ($request->has('visual_image_url')){
-
-            foreach($request->visual_image_url as $key => $value){
-                if($request->file_ids !== null && in_array((string) $key, $request->file_ids, true)){
-                    $project_file = ProjectFile::find($key);
-                    $project_file->file_url = $value[0];
-                    $project_file->save();
-                } else {
-                    $this->file_array[] =
+        try {
+            if (isset($project_file)) {
+                $project_file->file_url = $request->file;
+                $project_file->save();
+            } else {
+                $project->projectFiles()->save(
                     ProjectFile::make([
-                        'file_url' => $value[0],
+                        'file_url' => $request->file,
                         'file_content_type' => 'image_url'
-                    ]);
-                };
-                if ($this->file_array !== []){
-                    $project->projectFiles()->saveMany($this->file_array);
-                }
-            }
+                    ])
+                );
+            };
+        } catch (Exception $e) {
+            Log::alert($e->getMessage(), $e->getTrace());
+            $res = response()->json([
+                'status' => 500,
+                'errors' => $e->getMessage(),
+            ], 500);
+            throw new HttpResponseException($res);
         }
     }
 
     public function saveVideoUrl(Project $project, Request $request)
     {
-        if ($request->has('video_url') && $request->video_url !== null){
+        if ($request->has('video_url') && $request->video_url !== null) {
             $project->projectFiles()->save(
                 ProjectFile::make([
                     'file_url' => $request->video_url,

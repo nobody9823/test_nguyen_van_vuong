@@ -60,7 +60,7 @@
                     <x-user.my_project.overview :project="$project" :tags="$tags" />
                 </section>
                 <section style="{{ Request::get('next_tab') === 'visual' ? '' : 'display: none;' }}" id="visual_section" class="my_project_section">
-                    <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()->toArray()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
+                    <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
                 </section>
                 <section style="{{ Request::get('next_tab') === 'return' ? '' : 'display: none;' }}" id="return_section" class="my_project_section">
                     <x-user.my_project.return :project="$project" />
@@ -108,12 +108,32 @@ const DisplayEditPlan = (el) => {
     console.log(el);
     document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
 }
-const displayInputFile = (el) => {
-    let image = document.getElementById('project_image_' + el.id);
-    if (image.style.display === 'none'){
-        image.style.display = 'block';
-    } else if (image.style.display === 'block'){
-        image.style.display = 'none';
+</script>
+<script>
+function uploadProjectImage (input, projectId, projectFileId) {
+    const formData = new FormData();
+    formData.append('file',input.files[0]);
+
+    if (projectFileId) {
+        axios.post(`/my_project/project/${projectId}/uploadProjectImage/${projectFileId}?current_tab=visual`, formData)
+        .then((res) => {
+            console.log(res);
+            location.replace(res.data.redirect_url);
+        })
+        .catch((err) => {
+            console.log(err.response);
+            alert(err.response.data.errors.file);
+        });
+    } else {
+        axios.post(`/my_project/project/${projectId}/uploadProjectImage?current_tab=visual`, formData)
+        .then((res) => {
+            console.log(res);
+            location.replace(res.data.redirect_url);
+        })
+        .catch((err) => {
+            console.log(err.response);
+            alert(err.response.data.errors.file);
+        });
     }
 }
 </script>
