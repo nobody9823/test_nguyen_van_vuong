@@ -20,7 +20,7 @@ use function PHPUnit\Framework\isEmpty;
 
 class Project extends Model
 {
-    use HasFactory, SoftDeletes,SearchFunctions,SortBySelected;
+    use HasFactory, SoftDeletes, SearchFunctions, SortBySelected;
 
     protected $fillable = [
         'user_id',
@@ -45,7 +45,7 @@ class Project extends Model
     public static function boot()
     {
         parent::boot();
-        static::deleting(function(Project $project){
+        static::deleting(function (Project $project) {
             // プロジェクト画像と動画の論理削除
             $project->projectFiles()->delete();
             $project->projectTagTagging()->delete();
@@ -66,7 +66,7 @@ class Project extends Model
             Comment::destroy($comment_ids);
             // user project liked の論理削除
             UserProjectLiked::where('project_id', $project->id)
-                            ->update(array('deleted_at' => Carbon::now()));
+                ->update(array('deleted_at' => Carbon::now()));
         });
     }
 
@@ -158,7 +158,7 @@ class Project extends Model
     {
         return $query->getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice();
     }
-    
+
     public function scopeOrdeyByLikedUsers($query)
     {
         // return $query->withCount('users')->orderByRaw('users_count + added_like DESC');
@@ -191,16 +191,16 @@ class Project extends Model
         return $query->where('end_date', '<', Carbon::now());
     }
 
-    public function scopeDaysLeftSeeking($query,$start_or_end_date)
+    public function scopeDaysLeftSeeking($query, $start_or_end_date)
     {
         return $query->whereBetween($start_or_end_date, [Carbon::now(), Carbon::now()->addWeek(1)]);
     }
 
     public function scopeSearchWithReleaseStatus($query, $release_statuses)
     {
-        if (is_array($release_statuses) && optional($release_statuses)[0] !== null){
-            $query->where(function($query) use ($release_statuses){
-                foreach($release_statuses as $release_status){
+        if (is_array($release_statuses) && optional($release_statuses)[0] !== null) {
+            $query->where(function ($query) use ($release_statuses) {
+                foreach ($release_statuses as $release_status) {
                     $query->orWhere('release_status', $release_status);
                 }
             });
@@ -208,7 +208,7 @@ class Project extends Model
         return $query;
     }
 
-    public function scopeSearch($query,$role)
+    public function scopeSearch($query, $role)
     {
         if ($this->getSearchWordInArray()) {
             foreach ($this->getSearchWordInArray() as $word) {
@@ -221,17 +221,17 @@ class Project extends Model
 
     public function scopeSearchWords($query, $word, $role)
     {
-        if($role === 'user'){
+        if ($role === 'user') {
             return $query->where('title', 'like', "%$word%")
-                         ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
-        } else if($role === 'admin'){
+                ->orWhereIn('user_id', User::select('id')->where('name', 'like', "%$word%"));
+        } else if ($role === 'admin') {
             return $query->where('title', 'like', "%$word%")
-                         ->orWhere('curator', 'like', "%$word%")
-                         ->orWhere('id', 'like', "%$word%")
-                         ->orWhereIn('user_id',User::select('id')->where('name', 'like', "%$word%"));
+                ->orWhere('curator', 'like', "%$word%")
+                ->orWhere('id', 'like', "%$word%")
+                ->orWhereIn('user_id', User::select('id')->where('name', 'like', "%$word%"));
         }
     }
-    
+
     //--------------local scope----------------//
 
 
@@ -242,7 +242,7 @@ class Project extends Model
 
     public function getDisplayIdAttribute()
     {
-        return 'PR'.sprintf('%05d', $this->id);
+        return 'PR' . sprintf('%05d', $this->id);
     }
 
     public function getNumberOfDaysLeftAttribute()
@@ -285,7 +285,8 @@ class Project extends Model
     }
 
     //-----------------掲載状態変更functions------------------------
-    public function changeStatusToRelease(){
+    public function changeStatusToRelease()
+    {
         DB::transaction(function () {
             $this->release_status = '掲載中';
             $this->save();
@@ -293,7 +294,8 @@ class Project extends Model
         \Session::flash('flash_message', '掲載状態の変更が完了しました。');
     }
 
-    public function changeStatusToPending(){
+    public function changeStatusToPending()
+    {
         DB::transaction(function () {
             $this->release_status = '承認待ち';
             $this->save();
@@ -301,7 +303,8 @@ class Project extends Model
         \Session::flash('flash_message', '掲載状態の変更が完了しました。');
     }
 
-    public function changeStatusToSendBack(){
+    public function changeStatusToSendBack()
+    {
         DB::transaction(function () {
             $this->release_status = '差し戻し';
             $this->save();
@@ -309,7 +312,8 @@ class Project extends Model
         \Session::flash('flash_message', '掲載状態の変更が完了しました。');
     }
 
-    public function changeStatusToDefault(){
+    public function changeStatusToDefault()
+    {
         DB::transaction(function () {
             $this->release_status = '---';
             $this->save();
@@ -317,7 +321,8 @@ class Project extends Model
         \Session::flash('flash_message', '掲載状態の変更が完了しました。');
     }
 
-    public function changeStatusToUnderSuspension(){
+    public function changeStatusToUnderSuspension()
+    {
         DB::transaction(function () {
             $this->release_status = '掲載停止中';
             $this->save();
@@ -330,10 +335,15 @@ class Project extends Model
     public function isIncluded()
     {
         $plans = $this->plans()->whereIn(
-            'id',PlanPaymentIncluded::query()->select('plan_id')->whereIn(
-            'payment_id',Payment::query()->select('id')->where(
-            'user_id', Auth::id()
-        )))->get();
+            'id',
+            PlanPaymentIncluded::query()->select('plan_id')->whereIn(
+                'payment_id',
+                Payment::query()->select('id')->where(
+                    'user_id',
+                    Auth::id()
+                )
+            )
+        )->get();
         $is_included = false;
         if (!$plans->isEmpty()) {
             $is_included = true;
@@ -343,7 +353,7 @@ class Project extends Model
 
     public function saveProjectImages(array $images): void
     {
-        if (!empty($images) && $images[0] !== null){
+        if (!empty($images) && $images[0] !== null) {
             $this->projectFiles()->saveMany($images);
         }
     }
@@ -353,11 +363,11 @@ class Project extends Model
         // ユーザーがURLを入力していないor更新する際にURLが変更されていない場合
         if (optional($projectVideo)->file_url === null || optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === optional($projectVideo)->file_url) {
             return false;
-        // 新規作成の時or更新する際に動画のURLが存在しない場合
-        } elseif(optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === null && optional($projectVideo)->file_url !== null){
+            // 新規作成の時or更新する際に動画のURLが存在しない場合
+        } elseif (optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === null && optional($projectVideo)->file_url !== null) {
             $this->projectFiles()->save($projectVideo);
             // プロジェクト更新時に既に埋め込んでいるURLから別のURLに変更した場合
-        } elseif(optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url !== optional($projectVideo)->file_url){
+        } elseif (optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url !== optional($projectVideo)->file_url) {
             $this->projectFiles()->where('file_content_type', 'video_url')->first()->delete();
             $this->projectFiles()->save($projectVideo);
         };
@@ -365,8 +375,8 @@ class Project extends Model
 
     public function deleteProjectFiles(): void
     {
-        foreach($this->projectFiles as $file){
-            if(strpos($file->file_url, 'sampleImage') === false && $file->file_content_type === 'image_url'){
+        foreach ($this->projectFiles as $file) {
+            if (strpos($file->file_url, 'sampleImage') === false && $file->file_content_type === 'image_url') {
                 Storage::delete($file->file_url);
             };
             $file->delete();
@@ -378,7 +388,8 @@ class Project extends Model
         return self::make([
             'title' => '',
             'content' => '',
-            'ps_plan_content' => '',
+            'reward_by_total_amount' => '',
+            'reward_by_total_quantity' => '',
             'target_amount' => 0,
             'curator' => '',
             'start_date' => Carbon::minValue(),
