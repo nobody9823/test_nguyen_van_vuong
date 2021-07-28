@@ -50,20 +50,22 @@ class UserProfileRequest extends FormRequest
             $this->merge(['email_confirmation' => Auth::user()->email]);
         }
 
-        if (is_null($this->input('twitter_url'))) {
-            $this->merge(['twitter_url' => ""]);
-        }
-        if (is_null($this->input('instagram_url'))) {
-            $this->merge(['instagram_url' => ""]);
-        }
-        if (is_null($this->input('youtube_url'))) {
-            $this->merge(['youtube_url' => ""]);
-        }
-        if (is_null($this->input('tiktok_url'))) {
-            $this->merge(['tiktok_url' => ""]);
-        }
-        if (is_null($this->input('other_url'))) {
-            $this->merge(['other_url' => ""]);
+        if ($this->input('input_type') === 'sns_links') {
+            if (is_null($this->input('twitter_url'))) {
+                $this->merge(['twitter_url' => ""]);
+            }
+            if (is_null($this->input('instagram_url'))) {
+                $this->merge(['instagram_url' => ""]);
+            }
+            if (is_null($this->input('youtube_url'))) {
+                $this->merge(['youtube_url' => ""]);
+            }
+            if (is_null($this->input('tiktok_url'))) {
+                $this->merge(['tiktok_url' => ""]);
+            }
+            if (is_null($this->input('other_url'))) {
+                $this->merge(['other_url' => ""]);
+            }
         }
     }
 }
