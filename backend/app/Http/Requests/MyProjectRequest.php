@@ -26,7 +26,7 @@ class MyProjectRequest extends FormRequest
      * @return array
      */
     public function rules(Request $request)
-    {        
+    {
         return [
             'title' => ['nullable', 'string', 'max:255'],
             'content' => ['nullable', 'string', 'max:100000'],
@@ -76,6 +76,12 @@ class MyProjectRequest extends FormRequest
 
     protected function prepareForValidation()
     {
+        if ($this->current_tab === 'target_amount' && $this->target_amount === null){
+            $this->merge([
+                'target_amount' => 0
+            ]);
+        }
+
         if ($this->has('title') && $this->title === null) {
             $this->offsetUnset('title');
         }
