@@ -1,4 +1,4 @@
-<form action="{{ route('user.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr">
+<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr">
     @csrf
     @method('PUT')
 <span class="p-country-name" style="display:none;">Japan</span>
@@ -89,8 +89,8 @@
 
 <div class="form_item_row">
     <div class="form_item_tit">画像<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-    <input type="file">
-    <input type="file">
+    <input type="file" name="identify_image_1">
+    <input type="file" name="identify_image_2">
 </div>
 
 <div class="form_item_row">

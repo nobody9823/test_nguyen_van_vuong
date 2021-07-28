@@ -16,6 +16,8 @@ class ProjectService
         if ($request->has('tags')) {
             $project->tags()->detach();
             $project->tags()->attach(array_values($request->tags));
+        } else if ($request->has('tags') === false && $request->current_tab === 'overview'){
+            $project->tags()->detach();
         }
     }
 
