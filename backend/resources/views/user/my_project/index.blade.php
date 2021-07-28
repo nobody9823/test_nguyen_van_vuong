@@ -28,7 +28,11 @@
                     @foreach($projects as $project)
                     <div class="img_box_02_item">
                         <div class="ib02_01 E-font my_project_img_wrapper">
-                            <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
+                            @if ($project->projectFiles()->where('file_content_type', 'image_url')->count() > 0)
+                                <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
+                            @else
+                                <img src={{ Storage::url('public/sampleImage/now_printing.png') }}>
+                            @endif
                             {{-- NOTICE: MyProjectController, show action --}}
                             <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         </div>
