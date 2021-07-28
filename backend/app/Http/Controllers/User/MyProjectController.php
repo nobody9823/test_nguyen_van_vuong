@@ -57,13 +57,11 @@ class MyProjectController extends Controller
      */
     public function create()
     {
-        $tags = Tag::pluck('name', 'id');
-
         $project = $this->user->projects()->save(Project::initialize());
 
         $project->projectFiles()->save(ProjectFile::initialize());
 
-        return view('user.my_project.edit', ['project' => $project, 'tags' => $tags]);
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project]);
     }
 
     /**

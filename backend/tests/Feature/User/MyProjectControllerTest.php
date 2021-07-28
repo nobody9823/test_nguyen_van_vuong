@@ -111,7 +111,7 @@ class MyProjectControllerTest extends TestCase
     {
         $response = $this->get(route('user.my_project.project.create'));
 
-        $response->assertOk();
+        $response->assertRedirect(route('user.my_project.project.edit', [ 'project' => Project::orderby('id', 'desc')->first() ]));
     }
 
     public function testEditAction()
