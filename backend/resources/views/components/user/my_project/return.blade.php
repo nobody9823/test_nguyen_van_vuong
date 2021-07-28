@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="ib02_03">
-                    <h3>{{ Str::limit($project->title, 46) }}</h3>
+                    <h3>{{ Str::limit($plan->title, 46) }}</h3>
                     {{-- NOTICE: MyProjectController, show action--}}
                     <a href="#show" class="cover_link"></a>
                 </div>
