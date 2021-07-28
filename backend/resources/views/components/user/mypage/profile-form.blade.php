@@ -79,7 +79,7 @@
         </div>
     </form>
 @elseif(Request::get('input_type') === 'sns_links')
-    <form action="{{ route('user.update_profile', ['user' => $authUser]) }}" method="POST" name="urlForm">
+    <form action="{{ route('user.update_profile', ['user' => $authUser, 'input_type' => 'sns_links']) }}" method="POST" name="urlForm">
         @method('PATCH')
         @csrf
         <div class="prof_edit_row">

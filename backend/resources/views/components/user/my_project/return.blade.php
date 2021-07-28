@@ -43,8 +43,6 @@
         </div>
         <div class="footer-over_L_03"><i class="fas fa-chevron-right"></i></div>
     </a>
-    
-    <x-common.save_back_button saveButton="unnecessary" />
 </div>
 
 <section id="plan_form_section" style="display: none;">
@@ -53,3 +51,10 @@
         <x-user.my_plan.plan-form :plan=null />
     </form>
 </section>
+
+<div class="def_btn">
+    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'ps_return']) }}">
+        次へ進む
+    </a>
+</div>
+<x-common.save_back_button saveButton="unnecessary" />
