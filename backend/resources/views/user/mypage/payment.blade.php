@@ -61,7 +61,7 @@
                             </div><!--/su_pr_02_04-->
                             <div class="su_pr_02_05 m_b_1510">
                                 商品の紹介文：
-                                <span class="target">
+                                <span class="more_looking_target">
                                     {{ $plan->content }}
                                 </span>
                             </div>
@@ -93,6 +93,6 @@
 <script src={{ asset('/js/blade-functions.js') }}></script>
 <script>
     window.addEventListener('load', ()=>{
-        omit('target',150);
+        omit('more_looking_target',150);
     });
 </script>
