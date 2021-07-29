@@ -7,7 +7,7 @@
     <section id="pc-top_04" class="section_base">
         <div class="prof_page_base inner_item">
             
-            <div class="tit_L_01 E-font"><h2>NEW PROJECT</h2><div class="sub_tit_L">新規プロジェクト</div></div>
+            <div class="tit_L_01 E-font"><h2>LIKE PROJECT</h2><div class="sub_tit_L">お気に入りプロジェクト</div></div>
     
             <div class="prof_page_L">
                 <x-user.mypage-navigation-bar/>
