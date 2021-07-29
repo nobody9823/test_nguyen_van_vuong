@@ -308,8 +308,8 @@ footer a{ color: #707070;}
 
 	.footer_under{ padding: 10px 15px; }
 	.footer_logo { margin: 0 0 15px 0; width: 100%;}
-	.footer_under ul { justify-content: space-between; }
-	.footer_under ul li{ margin: 0 0 15px 0;  width: calc(50% - 6px);}
+	.footer_under ul { display: block; }
+	.footer_under ul li{ margin: 0 0 15px 0;}
 }
 @media screen and (max-width: 390px){
 	.footer-over_L{ padding: 10px 10px;}
