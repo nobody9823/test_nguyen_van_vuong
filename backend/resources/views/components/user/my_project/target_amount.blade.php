@@ -8,7 +8,18 @@
     </div>
 
     <div class="form_item_row">
-        <div class="form_item_tit">掲載開始日(日付、時刻)<span class="hissu_txt">必須</span><small class="date_attention" style="font-size: 5px;color:rgb(139, 139, 139)">存在しない日付は選択できません。</small></div>
+        <div class="form_item_tit">
+            掲載開始日(日付、時刻)
+            <span class="hissu_txt">必須</span>
+            <br/>
+            <span style="font-weight: normal;font-size: 1.2rem;">
+                ※存在しない日付は選択できません。
+            </span>
+            <br/>
+            <span style="font-weight: normal;font-size: 1.2rem;">
+                ※審査期間があるため、2週間以降の日付を設定してください。
+            </span>
+        </div>
         <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
             <select class="form-control" name="start_year" readonly required onchange="dateValidation(this, 'start_year', 'start_month', 'start_day')">
                 <option value='' disabled selected style='display:none;'>年</option>
@@ -64,7 +75,15 @@
     </div>
 
     <div class="form_item_row">
-        <div class="form_item_tit">掲載終了日(日付、時刻)<span class="hissu_txt">必須</span><small class="date_attention" style="font-size: 5px;color:rgb(139, 139, 139)">存在しない日付は選択できません。</small></div>
+        <div class="form_item_tit">
+            掲載終了日(日付、時刻)
+            <span class="hissu_txt">必須</span>
+            <br/>
+            <span style="font-weight: normal;font-size: 1.2rem;">
+                ※存在しない日付は選択できません。
+            </span>
+            <br/>
+        </div>
         <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
             <select class="form-control" name="end_year" readonly onchange="dateValidation(this, 'end_year', 'end_month', 'end_day')">
                 <option value='' disabled selected style='display:none;'>年</option>
@@ -121,7 +140,7 @@
             </select>
         </div>
     </div>
-        
+
     <x-common.save_back_button />
 </form>
 
