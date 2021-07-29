@@ -5,7 +5,7 @@
         </a>
         <div class="line-it-button" data-lang="ja" data-type="share-c" data-ver="3" data-url="{{ $invitationUrl() }}" data-color="default" data-size="large" data-count="false" style="display: none;"></div>
         <div data-href="{{ $invitationUrl() }}">
-            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ $invitationUrl() }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?quote=私が応援しているプロジェクトです！応援お願いします！&hashtag=fanreturn&hashtag=ファンリターン&u={{ $invitationUrl() }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
                 <img class="" src="{{ asset('image/sns_03.svg') }}">
             </a>
         </div>
