@@ -1,6 +1,13 @@
 <div class="form_item_row" style="margin-bottom: 40px;">
-    <div class="form_item_tit">スライド画像追加<span class="nini_txt">任意</span></div>
-    <input type="file" onChange="uploadProjectImage(this, {{ $project->id }})">
+    <div class="form_item_tit" style="margin-bottom: 10px">スライド画像追加<span class="nini_txt">任意</span></div>
+    <div class="input_file_button_wrapper">
+        <label>
+            <input type="file" hidden onChange="uploadProjectImage(this, {{ $project->id }})">
+            <a class="input_file_button">
+                ファイルを追加する
+            </a>
+        </label>
+    </div>
 </div>
 
 <div class="form_item_row project_image_row">
@@ -11,7 +18,14 @@
             <div class="ib02_01 E-font my_project_img_wrapper">
                 <img id="project_file_{{ $project_image->id }}" src="{{ Storage::url($project_image->file_url) }}">
             </div>
-            <input style="margin-bottom: 40px;" type="file" onChange="uploadProjectImage(this, {{ $project->id }}, {{ $project_image->id }})">
+            <div class="input_file_button_wrapper">
+                <label>
+                    <input hidden type="file" onChange="uploadProjectImage(this, {{ $project->id }}, {{ $project_image->id }})">
+                    <a class="input_file_button">
+                        ファイルを変更する
+                    </a>
+                </label>
+            </div>
         </div>
     @endforeach
 </div>

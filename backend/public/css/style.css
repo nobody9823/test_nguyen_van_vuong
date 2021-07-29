@@ -1703,6 +1703,9 @@ width: 100%;
 .project_image_row {justify-content: space-around;}
 .ps_plan_form_wrapper {flex-direction: row; display: flex; align-items: center; justify-content: space-evenly; width: 100%;}
 .ps_plan_form_item {width:48%; margin-bottom: 40px;}
+.input_file_button_wrapper {text-align: center; margin-bottom: 40px;}
+.input_file_button{ width: 100%; text-align: center; font-size: 1.4rem; padding: 10px; background:  #00AEBD; color: #fff; cursor: pointer;}
+.input_file_button:hover { opacity: 0.7;}
 @media screen and (max-width: 768px){
     .ps_plan_form_wrapper {flex-direction: column;}
     .ps_plan_form_item {width:100%}
