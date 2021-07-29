@@ -1,4 +1,4 @@
-<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr">
+<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 <span class="p-country-name" style="display:none;">Japan</span>
@@ -88,6 +88,11 @@
 </div>
 
 <div class="form_item_row">
+    @if (optional($user)->identification->identify_image_1 !== null)
+        <div class="ib02_01 E-font my_project_img_wrapper">
+            <img src="{{ Storage::url($user->identification->identify_image_1) }}">
+        </div>
+    @endif
     <div class="form_item_tit" style="margin-bottom: 10px">画像1</div>
     <div class="input_file_button_wrapper">
         <label>
@@ -97,6 +102,13 @@
             </a>
         </label>
     </div>
+</div>
+<div class="form_item_row">
+    @if (optional($user)->identification->identify_image_2 !== null)
+        <div class="ib02_01 E-font my_project_img_wrapper">
+            <img src="{{ Storage::url($user->identification->identify_image_2) }}">
+        </div>
+    @endif
     <div class="form_item_tit" style="margin-bottom: 10px">画像2</div>
     <div class="input_file_button_wrapper">
         <label>

@@ -47,8 +47,6 @@
     @if (optional($plan)->image_url !== null)
         <div class="ib02_01 E-font my_project_img_wrapper">
             <img src="{{ Storage::url($plan->image_url) }}">
-            {{-- NOTICE: MyProjectController, show action --}}
-            <a href="#show" class="cover_link"></a>
         </div>
     @endif
     <div class="form_item_tit" style="margin-bottom: 10px">画像</div>
