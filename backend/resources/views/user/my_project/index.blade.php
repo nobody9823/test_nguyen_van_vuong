@@ -42,7 +42,7 @@
                             ({{ $project->release_status === '---' ? '申請前' : $project->release_status }})
                             </div>
                             @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
-                                <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST">
+                                <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
                                     @csrf
                                     <button type="submit" class="my_project_apply disable-btn">
                                         <p style="font-weight: bold;color: #fff;">申請する</p>
