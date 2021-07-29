@@ -47,12 +47,17 @@
     @if (optional($plan)->image_url !== null)
         <div class="ib02_01 E-font my_project_img_wrapper">
             <img src="{{ Storage::url($plan->image_url) }}">
-            {{-- NOTICE: MyProjectController, show action --}}
-            <a href="#show" class="cover_link"></a>
         </div>
     @endif
-    <div class="form_item_tit">画像<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-    <input type="file" name="image_url">
+    <div class="form_item_tit" style="margin-bottom: 10px">画像</div>
+    <div class="input_file_button_wrapper">
+        <label>
+            <input type="file" name="image_url" hidden>
+            <a class="input_file_button">
+                ファイルを選択する
+            </a>
+        </label>
+    </div>
 </div>
 
 <div class="form_item_row">
