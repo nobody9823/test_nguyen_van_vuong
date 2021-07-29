@@ -932,7 +932,7 @@ input[type=radio]:checked + .radio-fan::after {
 .pds_sec01_R_nokori02{ font-size: 5.4rem; font-weight: bold; color: #00AEBD;}
 .pds_sec01_R_nokori02 span{ font-size: 3rem; font-weight: bold;}
 .pds_sec01_R_btn_base{ width: 100%; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
-.pds_sec01_R_btn01{ font-size: 3rem; font-weight: bold; background: #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; padding: 11px; border-radius: 32px; width: 60%; position: relative;}
+.pds_sec01_R_btn01{ font-size: 3rem; font-weight: bold; background: #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; padding: 11px; border-radius: 32px; width: 60%; position: relative;margin-top: 5px;}
 .pds_sec01_R_btn02{ width: 38%;}
 
 
