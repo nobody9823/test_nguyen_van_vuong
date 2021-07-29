@@ -9,10 +9,9 @@ use App\Http\Requests\ProjectFileRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use App\Models\ProjectFile;
-use App\Models\Plan;
 use App\Models\Tag;
+use App\Notifications\MyProjectAppliedMail;
 use App\Services\View\EditMyProjectTabService;
-use Carbon\Carbon;
 use Auth;
 use Exception;
 use Illuminate\Http\Request;
@@ -167,6 +166,7 @@ class MyProjectController extends Controller
         try {
             $project->release_status = '承認待ち';
             $project->update();
+            Auth::user()->notify(new MyProjectAppliedMail($project));
             return redirect()->action([MyProjectController::class, 'index'], ['projects' => $this->user->projects()->get()->load('projectFiles')])->with(['flash_message' => 'プロジェクトの申請が完了しました。']);
         } catch (Exception $e) {
             Log::alert($e->getMessage(), $e->getTrace());

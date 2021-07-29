@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use BenSampo\Enum\Rules\EnumValue;
 use App\Enums\BankAccountType;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
@@ -39,7 +40,7 @@ class MyProjectRequest extends FormRequest
             'image_url.*.*' => ['nullable', 'image'],
             'video_url' => ['nullable', 'url', 'regex:#(https?://www.youtube.com/.*)(v=([-\w]{11}))#'],
             'target_amount' => ['nullable', 'integer', 'min:0'],
-            'start_date' => ['nullable', 'date_format:Y-m-d H:i', 'after_or_equal:+7 day'],
+            'start_date' => ['nullable', 'date_format:Y-m-d H:i', /*'after_or_equal:+14 day'*/],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', 'after:start_date'],
             'reward_by_total_amount' => ['nullable', 'string', 'max:100000'],
             'reward_by_total_quantity' => ['nullable', 'string', 'max:100000'],
@@ -79,6 +80,12 @@ class MyProjectRequest extends FormRequest
 
     protected function prepareForValidation()
     {
+        if ($this->current_tab === 'target_amount' && $this->target_amount === null) {
+            $this->merge([
+                'target_amount' => 0
+            ]);
+        }
+
         if ($this->has('title') && $this->title === null) {
             $this->offsetUnset('title');
         }
@@ -132,6 +139,79 @@ class MyProjectRequest extends FormRequest
             $original_url = isset($headers['Location']) ? $headers['Location'] : $short_url;
 
             $this->merge(['video_url' => $original_url]);
+        }
+
+        if ($this->current_tab === 'identification') {
+            if (!$this->filled('first_name_kana')) {
+                $this->merge([
+                    'first_name_kana' => ''
+                ]);
+            }
+            if (!$this->filled('last_name_kana')) {
+                $this->merge([
+                    'last_name_kana' => ''
+                ]);
+            }
+            if (!$this->filled('first_name')) {
+                $this->merge([
+                    'first_name' => ''
+                ]);
+            }
+            if (!$this->filled('last_name')) {
+                $this->merge([
+                    'last_name' => ''
+                ]);
+            }
+            if (!$this->filled('identify_image_1')) {
+                $this->merge([
+                    'identify_image_1' => Auth::user()->identification->identify_image_1 !== null ? Auth::user()->identification->identify_image_1 : 'public/sampleImage/now_printing.png'
+                ]);
+            }
+            if (!$this->filled('identify_image_2')) {
+                $this->merge([
+                    'identify_image_2' => Auth::user()->identification->identify_image_2 !== null ? Auth::user()->identification->identify_image_2 : 'public/sampleImage/now_printing.png'
+                ]);
+            }
+            if (!$this->filled('phone_number')) {
+                $this->merge([
+                    'phone_number' => ''
+                ]);
+            }
+            if (!$this->filled('city')) {
+                $this->merge([
+                    'city' => ''
+                ]);
+            }
+            if (!$this->filled('block')) {
+                $this->merge([
+                    'block' => ''
+                ]);
+            }
+            if (!$this->filled('postal_code')) {
+                $this->merge([
+                    'postal_code' => ''
+                ]);
+            }
+            if (!$this->filled('bank_code')) {
+                $this->merge([
+                    'bank_code' => ''
+                ]);
+            }
+            if (!$this->filled('branch_code')) {
+                $this->merge([
+                    'branch_code' => ''
+                ]);
+            }
+            if (!$this->filled('account_number')) {
+                $this->merge([
+                    'account_number' => ''
+                ]);
+            }
+            if (!$this->filled('account_name')) {
+                $this->merge([
+                    'account_name' => ''
+                ]);
+            }
         }
     }
 
