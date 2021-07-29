@@ -85,11 +85,11 @@
         <div class="prof_edit_row">
             <div class="prof_edit_01">URL<br><span>編集中</span></div>
             <div class="prof_edit_editbox">
-                <input name="twitter_url" type="text" placeholder="twitter" value="{{ old('twitter_url', Auth::user()->snsLink->twitter_url) }}">
-                <input name="instagram_url" type="text" placeholder="instagram" value="{{ old('instagram_url', Auth::user()->snsLink->instagram_url) }}">
-                <input name="youtube_url" type="text" placeholder="youtube" value="{{ old('youtube_url', Auth::user()->snsLink->youtube_url) }}">
-                <input name="tiktok_url" type="text" placeholder="tiktok" value="{{ old('tiktok_url', Auth::user()->snsLink->tiktok_url) }}">
-                <input name="other_url" type="text" placeholder="other" value="{{ old('other_url', Auth::user()->snsLink->other_url) }}">
+                <img src="{{ asset('image/twitter.png') }}" alt=""><input name="twitter_url" type="text" placeholder="twitter" value="{{ old('twitter_url', Auth::user()->snsLink->twitter_url) }}">
+                <img src="{{ asset('image/instagram.png') }}" alt=""><input name="instagram_url" type="text" placeholder="instagram" value="{{ old('instagram_url', Auth::user()->snsLink->instagram_url) }}">
+                <img src="{{ asset('image/youtube.png') }}" alt=""><input name="youtube_url" type="text" placeholder="youtube" value="{{ old('youtube_url', Auth::user()->snsLink->youtube_url) }}">
+                <img src="{{ asset('image/tiktok.png') }}" alt=""><input name="tiktok_url" type="text" placeholder="tiktok" value="{{ old('tiktok_url', Auth::user()->snsLink->tiktok_url) }}">
+                <img src="{{ asset('image/other_sns.png') }}" alt=""><input name="other_url" type="text" placeholder="other" value="{{ old('other_url', Auth::user()->snsLink->other_url) }}">
             </div>
             <div class="prof_edit_03">
                 <a href="javascript:document.urlForm.submit()">更新</a>
@@ -237,6 +237,21 @@
     </div>
     <div class="prof_edit_row">
         <div class="prof_edit_01">URL</div>
+        @if (Auth::user()->snsLink->twitter_url)
+        <a href="{{ Auth::user()->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
+        @endif
+        @if (Auth::user()->snsLink->instagram_url)
+        <a href="{{ Auth::user()->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
+        @endif
+        @if (Auth::user()->snsLink->youtube_url)
+        <a href="{{ Auth::user()->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
+        @endif
+        @if (Auth::user()->snsLink->tiktok_url)
+        <a href="{{ Auth::user()->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
+        @endif
+        @if (Auth::user()->snsLink->other_url)
+        <a href="{{ Auth::user()->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
+        @endif
         {{-- <div class="prof_edit_02">{{ Auth::user()->snsLink->twitter_url }}</div>
         <div class="prof_edit_02">{{ Auth::user()->snsLink->instagram_url }}</div>
         <div class="prof_edit_02">{{ Auth::user()->snsLink->youtube_url }}</div>
