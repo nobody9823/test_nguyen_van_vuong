@@ -88,9 +88,24 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">画像<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-    <input type="file" name="identify_image_1">
-    <input type="file" name="identify_image_2">
+    <div class="form_item_tit" style="margin-bottom: 10px">画像1</div>
+    <div class="input_file_button_wrapper">
+        <label>
+            <input type="file" name="identify_image_1" hidden>
+            <a class="input_file_button">
+                ファイルを選択する
+            </a>
+        </label>
+    </div>
+    <div class="form_item_tit" style="margin-bottom: 10px">画像2</div>
+    <div class="input_file_button_wrapper">
+        <label>
+            <input type="file" name="identify_image_2" hidden>
+            <a class="input_file_button">
+                ファイルを選択する
+            </a>
+        </label>
+    </div>
 </div>
 
 <div class="form_item_row">
