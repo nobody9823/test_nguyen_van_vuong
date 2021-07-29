@@ -18,17 +18,35 @@
             <div class="as_i_03_01">
                 <div class="tab_container">
                     <input class="radio-fan" type="radio" id="target_amount_tag" name="project_edit_tag" value="target_amount" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'target_amount' || Request::get('next_tab') === null ? 'checked' : '' }}>
-                    <label class="tab_item" for="target_amount_tag">目標金額</label>
+                    <label class="tab_item" for="target_amount_tag">
+                        目標金額
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::TargetAmountTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                     <input class="radio-fan" type="radio" id="overview_tag" name="project_edit_tag" value="overview" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'overview' ? 'checked' : '' }}>
-                    <label class="tab_item" for="overview_tag">概要</label>
+                    <label class="tab_item" for="overview_tag">
+                        概要
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::OverviewTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                     <input class="radio-fan" type="radio" id="visual_tag" name="project_edit_tag" value="visual" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'visual' ? 'checked' : '' }}>
-                    <label class="tab_item" for="visual_tag">Top画像</label>
+                    <label class="tab_item" for="visual_tag">
+                        Top画像
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::VisualTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                     <input class="radio-fan" type="radio" id="return_tag" name="project_edit_tag" value="return" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'return' ? 'checked' : '' }}>
-                    <label class="tab_item" for="return_tag">リターン</label>
+                    <label class="tab_item" for="return_tag">
+                        リターン
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::ReturnTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                     <input class="radio-fan" type="radio" id="ps_return_tag" name="project_edit_tag" value="ps_return" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'ps_return' ? 'checked' : '' }}>
-                    <label class="tab_item" for="ps_return_tag">PSリターン</label>
+                    <label class="tab_item" for="ps_return_tag">
+                        PSリターン
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::PSReturnTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                     <input class="radio-fan" type="radio" id="identification_tag" name="project_edit_tag" value="identification" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'identification' ? 'checked' : '' }}>
-                    <label class="tab_item" for="identification_tag">本人確認</label>
+                    <label class="tab_item" for="identification_tag">
+                        本人確認
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::IdentificationTabIsFilled() === true ? 'display: contents;' : '' }}"></i>
+                    </label>
                 </div>
             </div>
         </div>
@@ -42,7 +60,7 @@
                     <x-user.my_project.overview :project="$project" :tags="$tags" />
                 </section>
                 <section style="{{ Request::get('next_tab') === 'visual' ? '' : 'display: none;' }}" id="visual_section" class="my_project_section">
-                    <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()->toArray()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
+                    <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
                 </section>
                 <section style="{{ Request::get('next_tab') === 'return' ? '' : 'display: none;' }}" id="return_section" class="my_project_section">
                     <x-user.my_project.return :project="$project" />
@@ -90,12 +108,32 @@ const DisplayEditPlan = (el) => {
     console.log(el);
     document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
 }
-const displayInputFile = (el) => {
-    let image = document.getElementById('project_image_' + el.id);
-    if (image.style.display === 'none'){
-        image.style.display = 'block';
-    } else if (image.style.display === 'block'){
-        image.style.display = 'none';
+</script>
+<script>
+function uploadProjectImage (input, projectId, projectFileId) {
+    const formData = new FormData();
+    formData.append('file',input.files[0]);
+
+    if (projectFileId) {
+        axios.post(`/my_project/project/${projectId}/uploadProjectImage/${projectFileId}?current_tab=visual`, formData)
+        .then((res) => {
+            console.log(res);
+            location.replace(res.data.redirect_url);
+        })
+        .catch((err) => {
+            console.log(err.response);
+            alert(err.response.data.errors.file);
+        });
+    } else {
+        axios.post(`/my_project/project/${projectId}/uploadProjectImage?current_tab=visual`, formData)
+        .then((res) => {
+            console.log(res);
+            location.replace(res.data.redirect_url);
+        })
+        .catch((err) => {
+            console.log(err.response);
+            alert(err.response.data.errors.file);
+        });
     }
 }
 </script>

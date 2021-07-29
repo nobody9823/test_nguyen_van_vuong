@@ -34,13 +34,16 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
 
 //---------------------Mypage-----------------------------------------------
 Route::group(['middleware' => ['auth:web']], function () {
-    Route::prefix('my_project')->group(function(){
-        Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+    Route::prefix('my_project')->group(function () {
         Route::post('project/upload_editor_file', [MyProjectController::class, 'uploadEditorFile'])->name('project.upload_editor_file');
+        Route::post('project/{project}/uploadProjectImage/{project_file?}', [MyProjectController::class, 'uploadProjectImage'])->name('project.uploadProjectImage');
         Route::post('project/{project}/apply', [MyProjectController::class, 'apply'])->name('project.apply');
         Route::get('project/{project}/create_plan', [MyProjectController::class, 'createPlan'])->name('project.create_plan');
-        Route::prefix('project/{project}')->group(function(){
+        Route::prefix('project/{project}')->group(function () {
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
+        });
+        Route::name('my_project.')->group(function () {
+            Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update']);
         });
     });
     Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_amount');

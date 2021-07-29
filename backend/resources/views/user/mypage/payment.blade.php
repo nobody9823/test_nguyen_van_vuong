@@ -60,11 +60,13 @@
                                 <div>お届け予定日：{{ DateFormat::forJapanese($plan->delivery_date) }}</div>
                             </div><!--/su_pr_02_04-->
                             <div class="su_pr_02_05 m_b_1510">
-                                商品の紹介文：{{ $plan->content }}
+                                商品の紹介文：
+                                <span class="more_looking_target">
+                                    {{ $plan->content }}
+                                </span>
                             </div>
                         </div><!--/su_pr_02-->
                     @endforeach
-                    <div class="su_pr_more_btn"><a href="">もっと見る　<i class="fas fa-chevron-down"></i></a></div>
                 </div><!--/su_pr_base-->
             </div>
         @endforeach
@@ -87,3 +89,10 @@
     @endif
 </section>
 @endsection
+
+<script src={{ asset('/js/blade-functions.js') }}></script>
+<script>
+    window.addEventListener('load', ()=>{
+        omit('more_looking_target',150);
+    });
+</script>

@@ -15,7 +15,7 @@
         <div class="prof_page_R">
             <div class="my_new_project_wrapper">
                 {{--NOTICE: MyProjectController, create action --}}
-                <a href="{{ route('user.project.create') }}" class="footer-over_L my_new_project">
+                <a href="{{ route('user.my_project.project.create') }}" class="footer-over_L my_new_project">
                     <div class="footer-over_L_02">
                     <div class="footer-over_L_02_01">New Project</div>
                     <div class="footer-over_L_02_02">新規プロジェクト作成はこちら</div>
@@ -28,9 +28,13 @@
                     @foreach($projects as $project)
                     <div class="img_box_02_item">
                         <div class="ib02_01 E-font my_project_img_wrapper">
-                            <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
+                            @if ($project->projectFiles()->where('file_content_type', 'image_url')->count() > 0)
+                                <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
+                            @else
+                                <img src={{ Storage::url('public/sampleImage/now_printing.png') }}>
+                            @endif
                             {{-- NOTICE: MyProjectController, show action --}}
-                            <a href="#show" class="cover_link"></a>
+                            <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         </div>
 
                         <div class="ib02_02 my_project_release_status">
@@ -38,7 +42,7 @@
                             ({{ $project->release_status === '---' ? '申請前' : $project->release_status }})
                             </div>
                             @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
-                                <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST">
+                                <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
                                     @csrf
                                     <button type="submit" class="my_project_apply disable-btn">
                                         <p style="font-weight: bold;color: #fff;">申請する</p>
@@ -57,7 +61,7 @@
                             @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
                             編集
                             {{-- NOTICE: MyProjectController, edit action --}}
-                            <a class="cover_link" href="{{ route('user.project.edit', ['project' => $project]) }}"></a>
+                            <a class="cover_link" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
                             @elseif($project->release_status === '承認待ち' || $project->release_status === '掲載中')
                             {{ $project->release_status }}
                             <a class="cover_link"></a>
