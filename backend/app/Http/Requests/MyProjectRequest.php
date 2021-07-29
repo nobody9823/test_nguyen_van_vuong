@@ -141,72 +141,72 @@ class MyProjectRequest extends FormRequest
         }
 
         if ($this->current_tab === 'identification'){
-            if ($this->has('first_name_kana')){
+            if (!$this->filled('first_name_kana')){
                 $this->merge([
                     'first_name_kana' => ''
                 ]);
             }
-            if ($this->has('last_name_kana')){
+            if (!$this->filled('last_name_kana')){
                 $this->merge([
                     'last_name_kana' => ''
                 ]);
             }
-            if ($this->has('first_name')){
+            if (!$this->filled('first_name')){
                 $this->merge([
                     'first_name' => ''
                 ]);
             }
-            if ($this->has('last_name')){
+            if (!$this->filled('last_name')){
                 $this->merge([
                     'last_name' => ''
                 ]);
             }
-            if ($this->identify_image_1 === null){
+            if (!$this->filled('identify_image_1')){
                 $this->merge([
-                    'identify_image_1' => Auth::user()->identification->identify_image_1
+                    'identify_image_1' => Auth::user()->identification->identify_image_1 !== null ? Auth::user()->identification->identify_image_1 : 'public/sampleImage/now_printing.png'
                 ]);
             }
-            if ($this->identify_image_2 === null){
+            if (!$this->filled('identify_image_2')){
                 $this->merge([
-                    'identify_image_2' => Auth::user()->identification->identify_image_2
+                    'identify_image_2' => Auth::user()->identification->identify_image_2 !== null ? Auth::user()->identification->identify_image_2 : 'public/sampleImage/now_printing.png'
                 ]);
             }
-            if ($this->has('phone_number')){
+            if (!$this->filled('phone_number')){
                 $this->merge([
-                    'phone_number' => Auth::user()->profile->phone_number
+                    'phone_number' => ''
                 ]);
             }
-            if ($this->has('city')){
+            if (!$this->filled('city')){
                 $this->merge([
                     'city' => ''
                 ]);
             }
-            if ($this->has('block')){
+            if (!$this->filled('block')){
                 $this->merge([
                     'block' => ''
                 ]);
             }
-            if ($this->has('postal_code')){
+            if (!$this->filled('postal_code')){
                 $this->merge([
                     'postal_code' => ''
                 ]);
             }
-            if ($this->has('bank_code')){
+            if (!$this->filled('bank_code')){
                 $this->merge([
                     'bank_code' => ''
                 ]);
             }
-            if($this->has('branch_code')){
+            if(!$this->filled('branch_code')){
                 $this->merge([
                     'branch_code' => ''
                 ]);
             }
-            if($this->has('account_number')){
+            if(!$this->filled('account_number')){
                 $this->merge([
                     'account_number' => ''
                 ]);
             }
-            if ($this->has('account_name')){
+            if (!$this->filled('account_name')){
                 $this->merge([
                     'account_name' => ''
                 ]);
