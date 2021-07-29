@@ -10,7 +10,7 @@
     </div>
     <div class="prof_page_base inner_item">
         <x-user.mypage-navigation-bar/>
-        <x-user.mypage.profile-form />
+        <x-user.mypage.profile-form :authUser="Auth::user()" />
     </div>
     {{-- <div class="tit_L_01 E-font" style="margin: 50px 0 0 0;">
         <h2>EMAIL</h2>
