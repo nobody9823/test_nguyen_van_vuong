@@ -7,6 +7,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use BenSampo\Enum\Rules\EnumValue;
 use App\Enums\BankAccountType;
 use Carbon\Carbon;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class MyProjectRequest extends FormRequest
 {
@@ -26,7 +28,7 @@ class MyProjectRequest extends FormRequest
      * @return array
      */
     public function rules(Request $request)
-    {        
+    {
         return [
             'title' => ['nullable', 'string', 'max:255'],
             'content' => ['nullable', 'string', 'max:100000'],
@@ -39,7 +41,8 @@ class MyProjectRequest extends FormRequest
             'target_amount' => ['nullable', 'integer', 'min:0'],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', 'after_or_equal:+7 day'],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', 'after:start_date'],
-            'ps_plan_content' => ['nullable', 'string', 'max:100000'],
+            'reward_by_total_amount' => ['nullable', 'string', 'max:100000'],
+            'reward_by_total_quantity' => ['nullable', 'string', 'max:100000'],
             'first_name_kana' => ['nullable', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'last_name_kana' => ['nullable', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'first_name' => ['nullable', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
@@ -123,11 +126,11 @@ class MyProjectRequest extends FormRequest
         }
 
         // youtubeが短縮urlだった場合、通常のurlに変換する。その後通常通りバリデーションにかける
-        if($this->input('video_url')){
+        if ($this->input('video_url')) {
             $short_url = $this->input('video_url');
             $headers = get_headers($short_url, 1);
             $original_url = isset($headers['Location']) ? $headers['Location'] : $short_url;
-            
+
             $this->merge(['video_url' => $original_url]);
         }
     }

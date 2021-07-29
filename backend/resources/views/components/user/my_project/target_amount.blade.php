@@ -1,4 +1,4 @@
-<form action="{{ route('user.project.update', ['project' => $project, 'current_tab' => 'target_amount']) }}" method="post">
+<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'target_amount']) }}" method="post">
     @csrf
     @method('PUT')
     <div class="form_item_row">
@@ -120,12 +120,9 @@
                 @endfor
             </select>
         </div>
-        <div class="def_btn">
-            <button type="submit" class="disable-btn">
-                <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
-            </button>
-        </div>
     </div>
+        
+    <x-common.save_back_button />
 </form>
 
 <script src={{ asset('/js/blade-functions.js') }}></script>

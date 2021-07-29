@@ -108,7 +108,7 @@ if(isiOS) {
 		<ul id="js-global-nav" class="p-global-nav main-menu menu_base taso_menu">
 
             <li class="menu-item nav_btn taso_li menuset_01">
-                <a href="{{ route('user.project.index') }}" class="top_menu-1 nav_btn_link">
+                <a href="{{ route('user.my_project.project.index') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">はじめる</p>
 				</a>
 			</li>
@@ -196,7 +196,7 @@ if(isiOS) {
 				<input type="checkbox" id="ta_menu-3"><label for="ta_menu-3" class="taso_li_a_label"><span class="pd"><i class="fas fa-chevron-down"></i></span></label>
 					<ul class="taso_ul pri_W_b taso_ul_ko" style="background: #fff; padding: 10px 10px 0 10px;">
 						<li class="taso_li taso_li_ko ninki_tag_li">
-							<div class="pbb_01_link" style="border-bottom: none;">マイプロジェクト管理<i class="fas fa-chevron-right"></i><a href="{{ route('user.project.index') }}" class="cover_link"></a></div>
+							<div class="pbb_01_link" style="border-bottom: none;">マイプロジェクト管理<i class="fas fa-chevron-right"></i><a href="{{ route('user.my_project.project.index') }}" class="cover_link"></a></div>
 						</li>
 					</ul>
 			</li>
@@ -352,7 +352,7 @@ if(isiOS) {
             <div class="footer_under_inner">
                 <div class="footer_logo"><img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}"></div>
                 <ul>
-                    <li><a href="{{ route('user.project.index') }}">はじめる</a></li>
+                    <li><a href="{{ route('user.my_project.project.index') }}">はじめる</a></li>
                     <li><a href="{{ route('user.search') }}">さがす</a></li>
                     <li><a href="#">ファンリターンとは</a></li>
 

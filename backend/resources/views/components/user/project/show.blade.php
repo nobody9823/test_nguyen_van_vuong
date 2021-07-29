@@ -113,6 +113,11 @@
                         <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
                         <a href="{{ route('user.project.support', ['project' => $project]) }}" class="cover_link"></a>
                     </div>
+                    <div class="pds_sec01_R_btn01">
+                        <div class="more_btn_01_01">ランキングを見る</div>
+                        <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                        <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
+                    </div>
                     @endif
                     <div class="pds_sec01_R_btn02">
                         <div class="footer_sns_icon dis_f_wra_alc">

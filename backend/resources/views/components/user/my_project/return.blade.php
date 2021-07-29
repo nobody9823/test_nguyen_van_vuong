@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="ib02_03">
-                    <h3>{{ Str::limit($project->title, 46) }}</h3>
+                    <h3>{{ Str::limit($plan->title, 46) }}</h3>
                     {{-- NOTICE: MyProjectController, show action--}}
                     <a href="#show" class="cover_link"></a>
                 </div>
@@ -51,3 +51,10 @@
         <x-user.my_plan.plan-form :plan=null />
     </form>
 </section>
+
+<div class="def_btn">
+    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'ps_return']) }}">
+        次へ進む
+    </a>
+</div>
+<x-common.save_back_button saveButton="unnecessary" />

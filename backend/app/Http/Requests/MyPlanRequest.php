@@ -23,13 +23,15 @@ class MyPlanRequest extends FormRequest
      */
     public function rules()
     {
+        $project_end_date = $this->route('project')->end_date->format('Y-m-d H:i:s');
+        
         return [
             'title' => ['nullable', 'string', 'max:45'],
             'content' => ['nullable', 'string', 'max:2000'],
             'price' => ['required', 'integer', 'max:10000000'],
             'address_is_required' => ['required', 'boolean'],
             'limit_of_supporters' => ['required', 'integer', 'min:1'],
-            'delivery_date' => ['required', 'date_format:Y-m-d', 'after:yesterday'],
+            'delivery_date' => ['required', 'date_format:Y-m-d', "after:{$project_end_date}"],
             'image_url' => ['nullable', 'image']
         ];
     }
@@ -87,7 +89,7 @@ class MyPlanRequest extends FormRequest
     {
         return [
             'delivery_date.date_format' => ':attributeの形式は、「年-月-日」で指定してください。',
-            'delivery_date.after' => ':attributeには、昨日以降の日付を指定してください。',
+            'delivery_date.after' => ':attributeには、プロジェクト掲載終了日以降の日付を指定してください。',
         ];
     }
 }
