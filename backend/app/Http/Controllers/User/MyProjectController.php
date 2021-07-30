@@ -20,7 +20,6 @@ use Log;
 
 class MyProjectController extends Controller
 {
-
     protected $project_service;
 
     protected $user;
@@ -127,7 +126,11 @@ class MyProjectController extends Controller
             DB::rollback();
             throw $e;
         }
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => $this->my_project_tab_service->getNextTab($request->current_tab)])->with(['flash_message' => 'プロジェクトが更新されました。']);
+        if ($request->current_tab === 'identification') {
+            return redirect()->action([MyProjectController::class, 'index'])->with(['flash_message' => 'プロジェクトが更新されました。']);
+        } else {
+            return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => $this->my_project_tab_service->getNextTab($request->current_tab)])->with(['flash_message' => 'プロジェクトが更新されました。']);
+        }
     }
 
     /**
