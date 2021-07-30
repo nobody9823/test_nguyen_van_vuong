@@ -13,7 +13,7 @@ class CreateCuratorProjectManagingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('curator_project_managings', function (Blueprint $table) {
+        Schema::create('curator_project_managing', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained('projects');
             $table->foreignId('curator_id')->constrained('curators');
