@@ -88,35 +88,69 @@
 </div>
 
 <div class="form_item_row">
-    @if (optional($user)->identification->identify_image_1 !== null)
-        <div class="ib02_01 E-font my_project_img_wrapper">
-            <img src="{{ Storage::url($user->identification->identify_image_1) }}">
-        </div>
-    @endif
-    <div class="form_item_tit" style="margin-bottom: 10px">画像1</div>
-    <div class="input_file_button_wrapper">
-        <label>
-            <input type="file" hidden onChange="uploadIdentifyImage(this, {{ $project->id }}, 'identify_image_1', {{ $user->identification->id }})">
-            <a class="input_file_button">
-                ファイルを選択する
-            </a>
-        </label>
+    <div class="form_item_tit">
+        本人確認書類
+        <span class="hissu_txt">必須</span>
     </div>
-</div>
-<div class="form_item_row">
-    @if (optional($user)->identification->identify_image_2 !== null)
-        <div class="ib02_01 E-font my_project_img_wrapper">
-            <img src="{{ Storage::url($user->identification->identify_image_2) }}">
+    <div class="identify_image_wrapper">
+        <div>
+            <div style="text-align: center;">
+                @if (optional($user)->identification->identify_image_1 !== null)
+                    <div class="ib02_01 E-font my_project_img_wrapper identify_img">
+                        <img src="{{ Storage::url($user->identification->identify_image_1) }}">
+                    </div>
+                @endif
+                <div class="form_item_tit" style="margin-bottom: 10px">本人確認書類1</div>
+                <div class="input_file_button_wrapper">
+                    <label>
+                        <input type="file" hidden onChange="uploadIdentifyImage(this, {{ $project->id }}, 'identify_image_1', {{ $user->identification->id }})">
+                        <a class="input_file_button">
+                            ファイルを選択する
+                        </a>
+                    </label>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                @if (optional($user)->identification->identify_image_2 !== null)
+                    <div class="ib02_01 E-font my_project_img_wrapper identify_img">
+                        <img src="{{ Storage::url($user->identification->identify_image_2) }}">
+                    </div>
+                @endif
+                <div class="form_item_tit" style="margin-bottom: 10px">本人確認書類2</div>
+                <div class="input_file_button_wrapper">
+                    <label>
+                        <input type="file" hidden onChange="uploadIdentifyImage(this, {{ $project->id }}, 'identify_image_2', {{ $user->identification->id }})">
+                        <a class="input_file_button">
+                            ファイルを選択する
+                        </a>
+                    </label>
+                </div>
+            </div>
         </div>
-    @endif
-    <div class="form_item_tit" style="margin-bottom: 10px">画像2</div>
-    <div class="input_file_button_wrapper">
-        <label>
-            <input type="file" hidden onChange="uploadIdentifyImage(this, {{ $project->id }}, 'identify_image_2', {{ $user->identification->id }})">
-            <a class="input_file_button">
-                ファイルを選択する
-            </a>
-        </label>
+        <div class="identify_image_description">
+            <h4 style="color: #e65d65">以下の注意事項をご確認ください。</h4>
+            <strong>2枚（表裏両面）</strong>
+            <ul>
+                <li>運転免許証</li>
+                <li>
+                    健康保険被保険者証<br/>
+                    ※保険者番号、被保険者等記号・番号・QRコードについては撮影時に隠してください
+                </li>
+                <li>
+                    パスポート（顔写真と所持人記入欄（要住所記入）のページ）<br/>
+                    ※2020年1月以前に発行されたもの
+                </li>
+            </ul>
+            <strong>1枚（表面）</strong>
+            <ul>
+                <li>個人番号カード/マイナンバーカード（表面のみ。通知カードは不可）</li>
+                <li>在留カード</li>
+                <li>
+                    住民票の写し<br/>
+                    ※本籍・マイナンバーの表記がないもの
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 
