@@ -109,6 +109,7 @@ const DisplayEditPlan = (el) => {
     document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
 }
 </script>
+{{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
 <script>
 function uploadProjectImage (input, projectId, projectFileId) {
     const formData = new FormData();
