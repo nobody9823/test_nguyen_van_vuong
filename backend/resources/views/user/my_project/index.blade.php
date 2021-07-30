@@ -28,13 +28,14 @@
                     @foreach($projects as $project)
                     <div class="img_box_02_item my_project_img_box_wrapper">
                         <div class="ib02_01 E-font my_project_img_wrapper">
-                            @if ($project->projectFiles()->where('file_content_type', 'image_url')->count() > 0)
-                                <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
-                            @else
-                                <img src={{ Storage::url('public/sampleImage/now_printing.png') }}>
-                            @endif
+                            <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}">
+                                @if ($project->projectFiles()->where('file_content_type', 'image_url')->count() > 0)
+                                    <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
+                                @else
+                                    <img src={{ Storage::url('public/sampleImage/now_printing.png') }}>
+                                @endif
+                            </a>
                             {{-- NOTICE: MyProjectController, show action --}}
-                            <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}" class="cover_link"></a>
                         </div>
 
                         <div class="my_project_img_content_wrapper">
@@ -53,9 +54,10 @@
                             </div>
 
                             <div class="ib02_03">
-                                <h3>{{ Str::limit($project->title, 46) }}</h3>
-                                {{-- NOTICE: MyProjectController, show action--}}
-                                <a href="#show" class="cover_link"></a>
+                                <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}">
+                                    <h3>{{ Str::limit($project->title, 46) }}</h3>
+                                    {{-- NOTICE: MyProjectController, show action--}}
+                                </a>
                             </div>
                         </div>
 
