@@ -2,6 +2,7 @@
 
 namespace App\Services\Project;
 
+use App\Models\Identification;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\ProjectFile;
@@ -16,12 +17,12 @@ class ProjectService
         if ($request->has('tags')) {
             $project->tags()->detach();
             $project->tags()->attach(array_values($request->tags));
-        } else if ($request->has('tags') === false && $request->current_tab === 'overview'){
+        } else if ($request->has('tags') === false && $request->current_tab === 'overview') {
             $project->tags()->detach();
         }
     }
 
-    public function saveImage(Project $project, ProjectFile $project_file = null, Request $request)
+    public function saveProjectImage(Project $project, ProjectFile $project_file = null, Request $request)
     {
         try {
             if (isset($project_file)) {
@@ -54,6 +55,22 @@ class ProjectService
                     'file_content_type' => 'video_url'
                 ])
             );
+        }
+    }
+
+    public function saveIdentifyImage(Identification $identification, Request $request)
+    {
+        try {
+            $column_name = $request->column_name;
+            $identification->$column_name = $request->file;
+            $identification->save();
+        } catch (Exception $e) {
+            Log::alert($e->getMessage(), $e->getTrace());
+            $res = response()->json([
+                'status' => 500,
+                'errors' => $e->getMessage(),
+            ], 500);
+            throw new HttpResponseException($res);
         }
     }
 }
