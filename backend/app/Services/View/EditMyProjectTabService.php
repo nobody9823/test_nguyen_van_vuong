@@ -77,7 +77,7 @@ class EditMyProjectTabService
 
     public function PSReturnTabIsFilled(Project $project)
     {
-        if ($project->reward_by_total_amount !== "" && $project->reward_by_total_quantity) {
+        if ($project->reward_by_total_amount !== "" && $project->reward_by_total_quantity !== "") {
             return true;
         };
         return false;
