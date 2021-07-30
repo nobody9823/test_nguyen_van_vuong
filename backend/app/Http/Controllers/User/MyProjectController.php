@@ -5,7 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Services\Project\ProjectService;
 use App\Http\Requests\MyProjectRequest;
-use App\Http\Requests\ProjectFileRequest;
+use App\Http\Requests\AxiosUploadFileRequest;
+use App\Models\Identification;
 use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use App\Models\ProjectFile;
@@ -153,14 +154,25 @@ class MyProjectController extends Controller
         return ['location' => Storage::url($path)];
     }
 
-    public function uploadProjectImage(Project $project, ProjectFile $project_file = null, ProjectFileRequest $request)
+    public function uploadProjectImage(Project $project, ProjectFile $project_file = null, AxiosUploadFileRequest $request)
     {
-        $this->project_service->saveImage($project, $project_file, $request);
+        $this->project_service->saveProjectImage($project, $project_file, $request);
 
         session()->flash('flash_message', 'スライド画像の更新が完了しました。');
         return response()->json([
             'status' => 200,
             'redirect_url' => route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'visual']),
+        ], 200);
+    }
+
+    public function uploadIdentifyImage(Project $project, Identification $identification, AxiosUploadFileRequest $request)
+    {
+        $this->project_service->saveIdentifyImage($identification, $request);
+
+        session()->flash('flash_message', '本人確認書類の更新が完了しました。');
+        return response()->json([
+            'status' => 200,
+            'redirect_url' => route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'identification']),
         ], 200);
     }
 
