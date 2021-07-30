@@ -5,8 +5,8 @@
 <div class="Assist-input_base">
     <div class="def_inner inner_item">
         <div class="tit_L_01 E-font">
-            <h2>CREATE NEW PROJECT</h2>
-            <div class="sub_tit_L">新規プロジェクト作成</div>
+            <h2>EDIT PROJECT</h2>
+            <div class="sub_tit_L">プロジェクト編集</div>
         </div>
         <div class="as_i_03">
             <div class="as_i_03_01">
