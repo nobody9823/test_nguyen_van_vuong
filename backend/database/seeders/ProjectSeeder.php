@@ -11,6 +11,7 @@ use App\Models\Plan;
 use App\Models\Payment;
 use App\Models\PaymentToken;
 use App\Models\Comment;
+use App\Models\Curator;
 use App\Models\User;
 use App\Models\UserPlanBilling;
 use App\Models\MessageContent;
@@ -36,6 +37,7 @@ class ProjectSeeder extends Seeder
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
                 $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
+                $project->managingCurators()->save(Curator::inRandomOrder()->first());
             });
 
         // 公開中
@@ -57,6 +59,7 @@ class ProjectSeeder extends Seeder
                 $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
                 $project->supportedUsers()->attach(User::inRandomOrder()->take(random_int(1, 10))->get()->pluck('id'));
+                $project->managingCurators()->save(Curator::inRandomOrder()->first());
             });
     }
 }
