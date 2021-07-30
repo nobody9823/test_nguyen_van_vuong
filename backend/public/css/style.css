@@ -1544,9 +1544,9 @@ input[name="tab_item"] {
 
 
 .ps_rank_base{display: flex; flex-wrap: wrap; justify-content:space-between;}
-.ps_rank_img{ width: 240px; border-radius: 4px; display: flex; justify-content: center; align-items: center;}
-.ps_rank_img img{ width: 240px; height: 150px; border-radius: 4px; object-fit: contain;}
-.ps_rank_01{width: calc(100% - 260px);}
+.ps_rank_img{ width: 40%; border-radius: 4px; display: flex; justify-content: center; align-items: center;}
+.ps_rank_img img{ width: calc(80% - 15px); height: auto; border-radius: 4px; object-fit: contain;}
+.ps_rank_01{width: 60%;}
 .ps_rank_01_01{ width: 100%; font-size: 1.2rem; font-weight: bold; color: #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; }
 .ps_rank_01_01 div{ margin-right: 2rem;}
 .ps_rank_01_02{ width: 100%; font-size: 1.4rem;}
