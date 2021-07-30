@@ -10,6 +10,8 @@ class CuratorProjectManaging extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'curator_project_managing';
+
     public function curators()
     {
         return $this->belongsTo('App\Models\Curator');
