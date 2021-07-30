@@ -17,6 +17,12 @@
 //         }
 //     }
 // }
+// 「年」「月」が選択されてない時に呼び出すalert
+const emptyYearAndMonth = () => {
+    alert('「年」または「月」を選択してください。');
+}
+let startDayHtml;
+let endDayHtml;
 
 function setStartDay() {
     // 年の値を取得
@@ -25,19 +31,26 @@ function setStartDay() {
     // 月の値を取得
     const startMonthVal = document.getElementById('start_month').value;
 
-    // 日のセレクトボックスに挿入するHTML
-    let startDayHtml = '<option value="">日</option>';
+    // 日のセレクトボックスを取得
+    const startDaySelectBox = document.getElementById('start_day');
 
     // 年月が有効な値の場合のみ日付の選択肢を加える
     if (startYearVal !== '' && startMonthVal !== '') {
-      // 特定の年月の最後の日付を取得する
-      const startLastDay = (new Date(startYearVal, startMonthVal, 0)).getDate();
-      // optionを組み立てる
-      for (let startDay = 1; startDay <= startLastDay; startDay++) {
-        startDayHtml += '<option value="' + startDay + '">' + startDay + '</option>';
-      }
+
+        startDaySelectBox.removeEventListener('click', emptyYearAndMonth);
+
+        // 特定の年月の最後の日付を取得する
+        const startLastDay = (new Date(startYearVal, startMonthVal, 0)).getDate();
+
+        // optionを組み立てる
+        startDayHtml = '<option value="">日</option>';
+        for (let startDay = 1; startDay <= startLastDay; startDay++) {
+            startDayHtml += '<option value="' + startDay + '">' + startDay + '</option>';
+        }
+    } else {
+        startDaySelectBox.addEventListener('click', emptyYearAndMonth)
     }
-    document.getElementById('start_day').innerHTML = startDayHtml;
+    startDaySelectBox.innerHTML = startDayHtml;
 };
 
 function setEndDay() {
@@ -47,19 +60,24 @@ function setEndDay() {
     // 月の値を取得
     const endMonthVal = document.getElementById('end_month').value;
 
-    // 日のセレクトボックスに挿入するHTML
-    let endDayHtml = '<option value="">日</option>';
+    // 日のセレクトボックスを取得
+    const endDaySelectBox = document.getElementById('end_day');
 
     // 年月が有効な値の場合のみ日付の選択肢を加える
     if (endYearVal !== '' && endMonthVal !== '') {
-      // 特定の年月の最後の日付を取得する
-      const endLastDay = (new Date(endYearVal, endMonthVal, 0)).getDate();
-      // optionを組み立てる
-      for (let endDay = 1; endDay <= endLastDay; endDay++) {
-        endDayHtml += '<option value="' + endDay + '">' + endDay + '</option>';
-      }
+
+        endDaySelectBox.removeEventListener('click', emptyYearAndMonth);
+        // 特定の年月の最後の日付を取得する
+        const endLastDay = (new Date(endYearVal, endMonthVal, 0)).getDate();
+        // optionを組み立てる
+        endDayHtml += '<option value="">日</option>';
+        for (let endDay = 1; endDay <= endLastDay; endDay++) {
+            endDayHtml += '<option value="' + endDay + '">' + endDay + '</option>';
+        }
+    } else {
+        endDaySelectBox.addEventListener('click', emptyYearAndMonth)
     }
-    document.getElementById('end_day').innerHTML = endDayHtml;
+    endDaySelectBox.innerHTML = endDayHtml;
 };
 
 window.onload = function () {
