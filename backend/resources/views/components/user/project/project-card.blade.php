@@ -40,4 +40,4 @@
         <div>支援者 <span>{{ $project->payments_count }}人</span></div>
         <div>残り <span>{{ $daysLeft() }}日</span></div>
     </div>
-@endif
+@endisset
