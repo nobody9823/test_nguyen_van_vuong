@@ -1,4 +1,4 @@
-<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr" enctype="multipart/form-data">
+<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr">
     @csrf
     @method('PUT')
 <span class="p-country-name" style="display:none;">Japan</span>
@@ -96,7 +96,7 @@
     <div class="form_item_tit" style="margin-bottom: 10px">画像1</div>
     <div class="input_file_button_wrapper">
         <label>
-            <input type="file" name="identify_image_1" hidden>
+            <input type="file" hidden onChange="uploadIdentifyImage(this, {{ $project->id }}, 'identify_image_1', {{ $user->identification->id }})">
             <a class="input_file_button">
                 ファイルを選択する
             </a>
@@ -112,7 +112,7 @@
     <div class="form_item_tit" style="margin-bottom: 10px">画像2</div>
     <div class="input_file_button_wrapper">
         <label>
-            <input type="file" name="identify_image_2" hidden>
+            <input type="file" hidden onChange="uploadIdentifyImage(this, {{ $project->id }}, 'identify_image_2', {{ $user->identification->id }})">
             <a class="input_file_button">
                 ファイルを選択する
             </a>

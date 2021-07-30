@@ -136,6 +136,20 @@ function uploadProjectImage (input, projectId, projectFileId) {
         });
     }
 }
+function uploadIdentifyImage (input, projectId, columnName, identificationId) {
+    const formData = new FormData();
+    formData.append('file',input.files[0]);
+
+    axios.post(`/my_project/project/${projectId}/uploadIdentifyImage/${identificationId}?column_name=${columnName}`, formData)
+    .then((res) => {
+        console.log(res);
+        location.replace(res.data.redirect_url);
+    })
+    .catch((err) => {
+        console.log(err.response);
+        alert(err.response.data.errors.file);
+    });
+}
 </script>
 <script>
 tinymce.init({
