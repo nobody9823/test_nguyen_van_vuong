@@ -126,7 +126,10 @@ class Project extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
-
+    public function managingCurators()
+    {
+        return $this->belongsToMany('App\Models\Curator', 'App\Models\CuratorProjectManaging');
+    }
 
     //--------------local scope----------------//
 

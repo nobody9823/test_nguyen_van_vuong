@@ -102,6 +102,7 @@ const DisplayEditPlan = (el) => {
     document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
 }
 </script>
+{{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
 <script>
 function uploadProjectImage (input, projectId, projectFileId) {
     const formData = new FormData();
@@ -128,6 +129,20 @@ function uploadProjectImage (input, projectId, projectFileId) {
             alert(err.response.data.errors.file);
         });
     }
+}
+function uploadIdentifyImage (input, projectId, columnName, identificationId) {
+    const formData = new FormData();
+    formData.append('file',input.files[0]);
+
+    axios.post(`/my_project/project/${projectId}/uploadIdentifyImage/${identificationId}?column_name=${columnName}`, formData)
+    .then((res) => {
+        console.log(res);
+        location.replace(res.data.redirect_url);
+    })
+    .catch((err) => {
+        console.log(err.response);
+        alert(err.response.data.errors.file);
+    });
 }
 </script>
 <script>
