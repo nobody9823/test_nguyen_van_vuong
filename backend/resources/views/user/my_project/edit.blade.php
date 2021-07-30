@@ -3,17 +3,11 @@
 @section('content')
 
 <div class="Assist-input_base">
-<section class="section_base">
-    <div class="pc-Details-screen_base_top inner_item">
-
-        <div class="pds_inner">
-            <div class="pds_sec01">
-                <div class="as_header_02 inner_item">プロジェクト詳細画面</div>
-            </div>
+    <div class="def_inner inner_item">
+        <div class="tit_L_01 E-font">
+            <h2>EDIT PROJECT</h2>
+            <div class="sub_tit_L">プロジェクト編集</div>
         </div>
-    </div>
-
-    <div class=" def_inner inner_item">
         <div class="as_i_03">
             <div class="as_i_03_01">
                 <div class="tab_container">
@@ -76,7 +70,6 @@
 
     </div>
 
-</section>
 </div>
 @endsection
 
