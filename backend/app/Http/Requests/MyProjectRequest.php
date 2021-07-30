@@ -78,6 +78,7 @@ class MyProjectRequest extends FormRequest
         });
     }
 
+    // FIXME: ここは落ち着いたらリファクタリングしましょう.....
     protected function prepareForValidation()
     {
         if ($this->current_tab === 'target_amount' && $this->target_amount === null) {
@@ -106,11 +107,18 @@ class MyProjectRequest extends FormRequest
             ]);
         }
 
-        if ($this->ps_plan_content === null) {
-            $this->merge([
-                'ps_plan_content' => ''
-            ]);
-        };
+        if ($this->current_tab === 'ps_return') {
+            if ($this->reward_by_total_amount === null) {
+                $this->merge([
+                    'reward_by_total_amount' => ''
+                ]);
+            };
+            if ($this->reward_by_total_quantity === null) {
+                $this->merge([
+                    'reward_by_total_quantity' => ''
+                ]);
+            };
+        }
 
         if ($this->has('phone_number')) {
             $this->phone_number = (string) $this->phone_number;
