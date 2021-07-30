@@ -80,7 +80,8 @@
                     {{ old('checkbox')?'checked':'' }} onchange="all_checkbox_toggle(this)">選択</th>
             <th style="width:5%">ID</th>
             <th style="width:20%">タイトル</th>
-            <th style="width:10%">ユーザー名/キュレーター</th>
+            <th style="width:10%">ユーザー名</th>
+            <th style="width:10%">キュレーター</th>
             <th style="width:10%">詳細</th>
             <th style="width:10%">関連一覧画面</th>
             <th style="width:10%">編集/削除</th>
@@ -101,7 +102,8 @@
             <td>
                 {{ $project->title }}
             </td>
-            <td>{{ $project->user->name }} / {{ $project->curator }}</td>
+            <td>{{ $project->user->name }}</td>
+            <td>{{ $project->curator }}</td>
             <td>
                 <button class="btn btn-secondary" type="button" data-toggle="collapse"
                     data-target="#collapse_detail{{ $project->id }}" aria-expanded="false"
