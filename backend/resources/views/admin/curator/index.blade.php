@@ -1,0 +1,1 @@
+<x-manage.curator.index role="admin" :projects="$projects" />
