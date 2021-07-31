@@ -812,6 +812,7 @@ input[type=radio]:checked + .radio-fan::after {
 .prof_page_L{ width: 210px; }
 .prof_img_box{ width: 210px; margin: 0 auto;}
 .prof_img{ width: 100%; border-radius: 10px; overflow: hidden;}
+.prof_img img {height: 150px; object-fit: contain;}
 .prof_img_name{width: 100%; font-size: 1.6rem; color: #00AEBD; text-align: center; margin: 10px 0 0 0;}
 
 .prof_btn_box_base{ color: #00AEBD;}
@@ -1595,7 +1596,7 @@ input[name="tab_item"] {
 	.ps_rank_02_tit{ font-size: 1.4rem;}
 	.ps_rank_02_rank_item_row{ font-size: 1.4rem;}
 	.ps_rank_more_btn{text-align: center;}
-	
+
 	.ps_rank_02_return_L{padding: 0 0 0 0; width: 100%; border-right: none; order: 5;}
 	.ps_rank_02_return_R{padding: 0 0 0 0; width: 100%; order: 6;}
 	.ps_rank_02_return_tit{ font-size: 1.4rem;}
