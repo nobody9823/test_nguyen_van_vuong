@@ -68,5 +68,9 @@ class UserProfileRequest extends FormRequest
                 $this->merge(['other_url' => ""]);
             }
         }
+
+        if ($this->has('introduction') && is_null($this->input('introduction'))) {
+            $this->merge(['introduction' => ""]);
+        }
     }
 }
