@@ -2,11 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Company;
 use App\Models\Payment;
 use App\Models\PlanPaymentIncluded;
 use App\Models\Project;
-use App\Models\Talent;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
