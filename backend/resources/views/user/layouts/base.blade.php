@@ -339,11 +339,11 @@ if(isiOS) {
                     <div class="footer_item"><a href="{{ route('user.trade_law') }}">特定商取引法に基づく表記</a></div>
                     {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div>
                     <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
-                    <div class="footer_sns_icon">
+                    {{-- <div class="footer_sns_icon">
                         <a href="★"><img class="" src="{{ asset('image/sns_01.svg') }}"></a>
                         <a href="★"><img class="" src="{{ asset('image/sns_02.svg') }}"></a>
                         <a href="★"><img class="" src="{{ asset('image/sns_03.svg') }}"></a>
-                    </div>
+                    </div> --}}
                 </div>
             </div><!--/.footer_inner-->
         </div><!--/.footer_main-->
