@@ -38,7 +38,7 @@ class MyProjectRequest extends FormRequest
             'image_url' => ['nullable', 'array'],
             'image_url.*' => ['nullable', 'array'],
             'image_url.*.*' => ['nullable', 'image'],
-            'video_url' => ['nullable', 'url', 'regex:#(https?://www.youtube.com/.*)(v=([-\w]{11}))#'],
+            'video_url' => ['nullable', 'url', 'regex:#(https?\:\/\/)(www\.youtube\.com\/watch\?v=|youtu\.be\/)+[\S]{11}#'],
             'target_amount' => ['nullable', 'integer', 'min:0'],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', /*'after_or_equal:+14 day'*/],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', 'after:start_date'],
@@ -140,15 +140,6 @@ class MyProjectRequest extends FormRequest
             $this->merge(['building' => ""]);
         }
 
-        // youtubeが短縮urlだった場合、通常のurlに変換する。その後通常通りバリデーションにかける
-        if ($this->input('video_url')) {
-            $short_url = $this->input('video_url');
-            $headers = get_headers($short_url, 1);
-            $original_url = isset($headers['Location']) ? $headers['Location'] : $short_url;
-
-            $this->merge(['video_url' => $original_url]);
-        }
-
         if ($this->current_tab === 'identification') {
             if (!$this->filled('first_name_kana')) {
                 $this->merge([
@@ -220,6 +211,69 @@ class MyProjectRequest extends FormRequest
                     'account_name' => ''
                 ]);
             }
+        }
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        switch ($this->current_tab) {
+            case 'target_amount':
+                $redirect_route = redirect()
+                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'target_amount'])
+                    ->withErrors($validator)
+                    ->withInput();
+                break;
+
+            case 'overview':
+                $redirect_route = redirect()
+                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'overview'])
+                    ->withErrors($validator)
+                    ->withInput();
+                break;
+
+            case 'visual':
+                $redirect_route = redirect()
+                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'visual'])
+                    ->withErrors($validator)
+                    ->withInput();
+                break;
+
+            case 'ps_return':
+                $redirect_route = redirect()
+                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'ps_return'])
+                    ->withErrors($validator)
+                    ->withInput();
+                break;
+
+            case 'identification':
+                $redirect_route = redirect()
+                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'identification'])
+                    ->withErrors($validator)
+                    ->withInput();
+                break;
+
+            default:
+                $redirect_route = redirect()
+                    ->route('user.my_project.project.edit', ['project' => $this->route('project')])
+                    ->withErrors($validator)
+                    ->withInput();
+                break;
+        }
+
+        throw new HttpResponseException(
+            $redirect_route
+        );
+    }
+
+    public function passedValidation()
+    {
+        // youtubeが短縮urlだった場合、通常のurlに変換する。その後通常通りバリデーションにかける
+        if ($this->input('video_url')) {
+            $short_url = $this->input('video_url');
+            $headers = get_headers($short_url, 1);
+            $original_url = isset($headers['Location']) ? $headers['Location'] : $short_url;
+
+            $this->merge(['video_url' => $original_url]);
         }
     }
 
