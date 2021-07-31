@@ -170,7 +170,7 @@ class MyProjectController extends Controller
 
     public function uploadIdentifyImage(Project $project, Identification $identification, AxiosUploadFileRequest $request)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnIdentificationImage', $identification);
         $this->project_service->saveIdentifyImage($identification, $request);
 
         session()->flash('flash_message', '本人確認書類の更新が完了しました。');
