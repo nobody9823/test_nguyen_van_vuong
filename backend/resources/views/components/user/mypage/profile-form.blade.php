@@ -302,8 +302,8 @@
     <div class="prof_edit_row">
         <div class="prof_edit_01">自己紹介</div>
         <div class="prof_edit_02">
-        @if(isset($authUser->profile->introduction))
-            {{ $authUser->profile->introduction }}
+        @if($authUser->profile->introduction !== '')
+            <p>{{ $authUser->profile->introduction }}</p>
         @else
             設定されていません
         @endif

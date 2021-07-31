@@ -830,6 +830,7 @@ input[type=radio]:checked + .radio-fan::after {
 .prof_edit_01{ width:20%;  color: #00AEBD; font-weight: bold; position: relative;}
 .prof_edit_01 span{ font-size: 1.4rem; font-weight: normal; color: #EC111A;}
 .prof_edit_02{ width: 70%; position: relative;}
+.prof_edit_02 p{ white-space: pre-wrap;}
 .my_sns_icon_wrapper {display: flex; justify-content: space-around;}
 .prof_edit_03{ width: 3rem; font-size: 1.5rem; font-weight: bold; position: relative; color: #1C81D8;}
 .prof_edit_taikai_btn{ width: 100%; text-align: right; font-size: 1.4rem; margin: 7px 0 0 0; }
