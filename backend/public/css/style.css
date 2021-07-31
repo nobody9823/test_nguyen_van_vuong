@@ -1555,7 +1555,7 @@ input[name="tab_item"] {
 .ps_rank_01_03{ width: 100%; font-size: 1.2rem; white-space: pre-line;}
 
 .ps_rank_return_text{ width: 100%; white-space: pre-line;}
-.ps_rank_return_text img{ width: initial;}
+.ps_rank_return_text img{ width:initial; max-width: 100%;height: auto;}
 
 .ps_rank_02{ width: 100%; display: flex; flex-wrap: wrap; justify-content:space-between;}
 
