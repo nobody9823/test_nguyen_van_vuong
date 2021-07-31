@@ -631,8 +631,8 @@ input[type=radio]:checked + .radio-fan::after {
 .rank_color_04, .rank_color_05{fill:#00aebd;}
 
 .more_btn_01{display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; background: #00AEBD; border-radius: 31px; padding: 8px; margin: 30px auto 0 auto; width: 100%; max-width: 282px; position: relative;}
-.more_btn_01_01{ width: 80%; font-size: 2.2rem; font-weight: bold; color: #fff; text-align: center; }
-.more_btn_01_02{ width: 20%; font-size: 2.5rem; color: #fff;}
+.more_btn_01_01{ width: 85%; font-size: 2.2rem; font-weight: bold; color: #fff; text-align: center; }
+.more_btn_01_02{ width: 15%; font-size: 2.5rem; color: #fff;}
 
 .new_project_obi{ position: relative; overflow: hidden;}
 .new_project_obi:before{ content: "NEW"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
@@ -940,9 +940,12 @@ input[type=radio]:checked + .radio-fan::after {
 .pds_sec01_R_nokori01{ font-size: 1.6rem; font-weight: bold; color: #00AEBD;}
 .pds_sec01_R_nokori02{ font-size: 5.4rem; font-weight: bold; color: #00AEBD;}
 .pds_sec01_R_nokori02 span{ font-size: 3rem; font-weight: bold;}
-.pds_sec01_R_btn_base{ width: 100%; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
-.pds_sec01_R_btn01{ font-size: 3rem; font-weight: bold; background: #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; padding: 11px; border-radius: 32px; width: 60%; position: relative;margin-top: 5px;}
-.pds_sec01_R_btn02{ width: 38%;}
+.pds_sec01_R_btn_base{ width: 100%; display: flex; flex-direction: column;}
+.pds_sec01_R_btn01_wrapper {display: flex; justify-content: space-between; align-items: center;}
+.pds_sec01_R_btn01{ font-size: 3rem; font-weight: bold; background: #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; padding: 11px; border-radius: 32px; width: 100%; position: relative;margin-top: 5px;}
+.pds_sec01_R_btn02{ width: 100%;}
+.project_sns_icon{width: 100%; display: flex; justify-content: flex-end;}
+.project_sns_icon img{ width: 32px; margin-right: 10px;}
 
 
 @media screen and (max-width: 768px){
@@ -959,6 +962,7 @@ input[type=radio]:checked + .radio-fan::after {
 	.pds_sec01_R_nokori02{ font-size: 3.6rem;}
 	.pds_sec01_R_nokori02 span{ font-size: 2.2rem;}
     .slider-img-wrapper{ height: 298px; }
+    .project_sns_icon img{ width: 30px; margin-right: 5px;}
 
 }
 
