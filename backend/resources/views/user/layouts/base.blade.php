@@ -350,22 +350,28 @@ if(isiOS) {
 
         <div class="footer_under">
             <div class="footer_under_inner">
-                <div class="footer_logo"><img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}"></div>
-                <ul>
+                <div class="footer_logo">
+                    <img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
+                </div>
+                <ul class="footer_list">
                     <li><a href="{{ route('user.my_project.project.index') }}">はじめる</a></li>
                     <li><a href="{{ route('user.search') }}">さがす</a></li>
                     <li><a href="#">ファンリターンとは</a></li>
 
                     @guest('web')
-                    <li class="menu-item nav_btn taso_li menuset_03 login_btn">
-                        <a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
-                            <p class="nav_btn_tit_L">ログイン</p>
-                        </a>
+                    <li>
+                        <div class="menuset_03 wm_login_btn">
+                            <a href="{{ route('login') }}">
+                                ログイン
+                            </a>
+                        </div>
                     </li>
-                    <li class="menu-item nav_btn taso_li menuset_03 signup_btn">
-                        <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
-                            <p>新規登録</p>
-                        </a>
+                    <li>
+                        <div class="menuset_03 wm_signup_btn">
+                            <a href="{{ route('user.pre_create') }}">
+                                新規登録
+                            </a>
+                        </div>
                     </li>
                     @endguest
 
