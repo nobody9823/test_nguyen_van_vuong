@@ -580,11 +580,13 @@ input[type=radio]:checked + .radio-fan::after {
 .img_box_02::after{  content:"";  display: block;  width: calc(25% - 12px);}
 
 .img_box_02_item{ width: calc(25% - 12px); margin-bottom: 15px;  box-shadow: 0px 3px 8px 0px rgba(173,173,173,0.15); border-radius: 8px; min-height: 275px; position: relative;}
+.my_project_img_box_wrapper { display: flex; flex-flow: column; justify-content: space-between; };
 .ib02_01{ height: 150px; border-radius: 8px; margin: 0 0 10px 0; position: relative; text-align: center;}
 .ib02_01 img { width: auto; height: auto; max-width: 240px; max-height: 150px; border-radius: 8px 8px 0px 0px;}
 .ib02_02{ padding: 0 10px; margin: 0 0 10px 0;}
 .ib02_02 .progress-bar{ width: 100%; height: 7px; background: #eee; border-radius: 5px;}
 .ib02_02 .progress-bar span { display:block; height: 7px; border-radius: 5px; background: #00aebd; background: -moz-linear-gradient(left,  #00aebd 0%, #fff200 100%); background: -webkit-linear-gradient(left,  #00aebd 0%,#fff200 100%); background: linear-gradient(to right,  #00aebd 0%,#fff200 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00aebd', endColorstr='#fff200',GradientType=1 ); }
+.my_project_img_content_wrapper {flex-grow: 1;};
 .my_project_release_status {display: flex; justify-content: space-between;}
 .my_project_apply { width: 100%; text-align: center; font-weight: bold; padding: 0 10px; background:  #00AEBD; margin: 0 0 15px 0; position: relative; color: #fff;}
 .my_project_apply:hover { opacity: 0.7;}
@@ -1703,6 +1705,12 @@ width: 100%;
 .my_new_project_wrapper {margin: 15px 0 15px 0;}
 .my_new_project {width: 100%;}
 .project_image_row {justify-content: space-around;}
+.identify_image_wrapper {display: flex; flex-direction: row; align-items: center;}
+.identify_image_description {font-size: 1.2rem; margin-left: 20px;}
+.identify_image_description h4 {font-size: 14px;}
+.identify_image_description ul {display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; padding-inline-start: 20px;}
+.identify_image_description ul li {list-style-type: disc;}
+.identify_img {height: 110px;}
 .ps_plan_form_wrapper {flex-direction: row; display: flex; align-items: center; justify-content: space-evenly; width: 100%;}
 .ps_plan_form_item {width:48%; margin-bottom: 40px;}
 .input_file_button_wrapper {text-align: center; margin-bottom: 40px;}
@@ -1711,4 +1719,5 @@ width: 100%;
 @media screen and (max-width: 768px){
     .ps_plan_form_wrapper {flex-direction: column;}
     .ps_plan_form_item {width:100%}
+    .identify_image_wrapper {display: flex; flex-direction: column;}
 }
