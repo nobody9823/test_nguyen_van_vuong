@@ -1554,6 +1554,9 @@ input[name="tab_item"] {
 .ps_rank_01_02{ width: 100%; font-size: 1.4rem;}
 .ps_rank_01_03{ width: 100%; font-size: 1.2rem; white-space: pre-line;}
 
+.ps_rank_return_text{ width: 100%; white-space: pre-line;}
+.ps_rank_return_text img{ width: initial;}
+
 .ps_rank_02{ width: 100%; display: flex; flex-wrap: wrap; justify-content:space-between;}
 
 .ps_rank_myrank_large_L{ width: 50%; padding: 20px 20px; border-right: solid 1px #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; font-size: 1.8rem; font-weight: bold; color: #00AEBD; background: #F7FDFF; order: 1;}
@@ -1575,6 +1578,10 @@ input[name="tab_item"] {
 .ps_rank_more_btn{ width: 100%; text-align: right; font-size: 1.2rem; margin:20px 0 10px 0;cursor: pointer;}
 .ps_rank_more_btn a{color: #1C81D8;}
 
+.ps_rank_02_return_L{margin: 20px 0 0 0 ; width: 50%; padding: 3px 20px 3px 0; border-right: solid 1px #00AEBD; display: flex; flex-wrap: wrap; justify-content:space-between; align-content: flex-start; order: 5;}
+.ps_rank_02_return_R{margin: 20px 0 0 0 ; width: 50%; padding: 3px 0px 3px 20px; display: flex; flex-wrap: wrap; justify-content:space-between; align-content: flex-start; order: 6;}
+.ps_rank_02_return_tit{ font-size: 1.8rem; font-weight: bold; color: #00AEBD; }
+
 @media screen and (max-width: 768px){
 	#Project-supporter-ranking .prof_page_L{ display: none;}
 
@@ -1583,11 +1590,15 @@ input[name="tab_item"] {
 
 	.ps_rank_myrank_large_L{ width: 100%; border-right: none; font-size: 1.6rem; order: 1;}
 	.ps_rank_myrank_large_R{ width: 100%; font-size: 1.6rem; order: 3;}
-	.ps_rank_02_L{ width: 100%; border-right: none; order: 2;}
-	.ps_rank_02_R{ width: 100%; order: 4;}
+	.ps_rank_02_L{padding: 0 0 0 0; width: 100%; border-right: none; order: 2;}
+	.ps_rank_02_R{padding: 0 0 0 0; width: 100%; order: 4;}
 	.ps_rank_02_tit{ font-size: 1.4rem;}
 	.ps_rank_02_rank_item_row{ font-size: 1.4rem;}
 	.ps_rank_more_btn{text-align: center;}
+	
+	.ps_rank_02_return_L{padding: 0 0 0 0; width: 100%; border-right: none; order: 5;}
+	.ps_rank_02_return_R{padding: 0 0 0 0; width: 100%; order: 6;}
+	.ps_rank_02_return_tit{ font-size: 1.4rem;}
 }
 
 
