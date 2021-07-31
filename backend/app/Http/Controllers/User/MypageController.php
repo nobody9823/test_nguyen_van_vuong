@@ -88,13 +88,6 @@ class MypageController extends Controller
     {
         DB::beginTransaction();
         try {
-            if (isset($request->day)) {
-                $user->profile->birthday = Carbon::create(
-                    $request->year,
-                    $request->month,
-                    $request->day
-                );
-            }
             $user->fill($request->all())->save();
             $user->saveProfile($request->all());
             $user->saveAddress($request->all());

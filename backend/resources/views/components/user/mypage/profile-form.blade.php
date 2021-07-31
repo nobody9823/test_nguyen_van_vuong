@@ -148,7 +148,7 @@
             </div>
 
             <div class="cp_ipselect cp_normal">
-                <select id="day" name="day" data-old-value="{{ old('day') }}"></select>
+                <select id="day" name="day" data-old-value="{{ old('day', $authUser->profile->getDayOfBirth()) }}"></select>
             </div>
             <div class="cp_ipselect cp_normal">
                 <select name="birthday_is_published">
