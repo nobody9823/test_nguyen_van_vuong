@@ -74,6 +74,7 @@ class MyPlanController extends Controller
      */
     public function update(Project $project, Plan $plan, MyPlanRequest $request)
     {
+        $this->authorize('checkOwnPlan', $plan);
         $plan->fill($request->all())->save();
         return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => 'return'])->with(['flash_message' => 'リターンが更新されました。']);
     }
