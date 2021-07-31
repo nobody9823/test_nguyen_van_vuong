@@ -240,21 +240,23 @@
     @endif
     <div class="prof_edit_row">
         <div class="prof_edit_01">URL</div>
-        @if ($authUser->snsLink->twitter_url)
-        <a href="{{ $authUser->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
-        @endif
-        @if ($authUser->snsLink->instagram_url)
-        <a href="{{ $authUser->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
-        @endif
-        @if ($authUser->snsLink->youtube_url)
-        <a href="{{ $authUser->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
-        @endif
-        @if ($authUser->snsLink->tiktok_url)
-        <a href="{{ $authUser->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
-        @endif
-        @if ($authUser->snsLink->other_url)
-        <a href="{{ $authUser->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
-        @endif
+        <div class="prof_edit_02 my_sns_icon_wrapper">
+            @if ($authUser->snsLink->twitter_url)
+            <a href="{{ $authUser->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
+            @endif
+            @if ($authUser->snsLink->instagram_url)
+            <a href="{{ $authUser->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
+            @endif
+            @if ($authUser->snsLink->youtube_url)
+            <a href="{{ $authUser->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
+            @endif
+            @if ($authUser->snsLink->tiktok_url)
+            <a href="{{ $authUser->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
+            @endif
+            @if ($authUser->snsLink->other_url)
+            <a href="{{ $authUser->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
+            @endif
+        </div>
         {{-- <div class="prof_edit_02">{{ $authUser->snsLink->twitter_url }}</div>
         <div class="prof_edit_02">{{ $authUser->snsLink->instagram_url }}</div>
         <div class="prof_edit_02">{{ $authUser->snsLink->youtube_url }}</div>
@@ -263,7 +265,8 @@
 
         <div class="prof_edit_03">
             編集
-            <a href="{{ route('user.profile', ['input_type' => 'sns_links']) }}" class="cover_link"></a></div>
+            <a href="{{ route('user.profile', ['input_type' => 'sns_links']) }}" class="cover_link"></a>
+        </div>
     </div>
     <div class="prof_edit_row">
         <div class="prof_edit_01">現在地</div>
