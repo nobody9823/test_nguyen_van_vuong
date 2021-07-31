@@ -283,7 +283,8 @@ footer a{ color: #707070;}
 .footer_main_03{ width: 25%; padding:20px 0 20px 20px;}
 .footer_tit{ width: 100%; font-size: 1.6rem; color:#00AEBD ; margin: 0 0 20px 0; }
 .footer_item{ margin: 0 0 15px 0;}
-.footer_sns_icon img{ width: 32px;}
+.footer_sns_icon { display: flex;}
+.footer_sns_icon img{ width: 32px; margin-right: 10px;}
 .dis_f_wra_alc{display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content: space-around;}
 
 .footer_under{ background: #fff; padding: 30px 0; }

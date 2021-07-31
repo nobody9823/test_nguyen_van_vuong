@@ -319,13 +319,13 @@ if(isiOS) {
                     <div class="footer_item"><a href="★">テキストテキストテキストテキストテキストテキスト</a></div>
                     <div class="footer_item"><a href="★">テキストテキスト</a></div>
                     <div class="footer_item"><a href="★">テキストテキストテキストテキスト</a></div>
-                </div>
+                </div> --}}
 
                 <div class="footer_main_02">
                     <div class="footer_tit">プロジェクトをはじめる</div>
-                    <div class="footer_item"><a href="★">プロジェクト掲載</a></div>
-                    <div class="footer_item"><a href="★">プロジェクトを作る</a></div>
-                </div> --}}
+                    {{-- <div class="footer_item"><a href="★">プロジェクト掲載</a></div> --}}
+                    <div class="footer_item"><a href="{{ route('user.my_project.project.index') }}">プロジェクトを作る</a></div>
+                </div>
 
                 <div class="footer_main_03">
                     <div class="footer_tit">fanreturnについて</div>
@@ -337,9 +337,9 @@ if(isiOS) {
                     <div class="footer_item"><a href="{{ route('user.ps_terms_of_service') }}">プロジェクトサポーター利用規約</a></div>
                     <div class="footer_item"><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></div>
                     <div class="footer_item"><a href="{{ route('user.trade_law') }}">特定商取引法に基づく表記</a></div>
-                    {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div> --}}
-                    {{-- <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
-                    <div class="footer_sns_icon dis_f_wra_alc">
+                    {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div>
+                    <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
+                    <div class="footer_sns_icon">
                         <a href="★"><img class="" src="{{ asset('image/sns_01.svg') }}"></a>
                         <a href="★"><img class="" src="{{ asset('image/sns_02.svg') }}"></a>
                         <a href="★"><img class="" src="{{ asset('image/sns_03.svg') }}"></a>
@@ -356,7 +356,7 @@ if(isiOS) {
                 <ul class="footer_list">
                     <li><a href="{{ route('user.my_project.project.index') }}">はじめる</a></li>
                     <li><a href="{{ route('user.search') }}">さがす</a></li>
-                    <li><a href="#">ファンリターンとは</a></li>
+                    {{-- <li><a href="#">ファンリターンとは</a></li> --}}
 
                     @guest('web')
                     <li>
