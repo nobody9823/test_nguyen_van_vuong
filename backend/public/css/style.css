@@ -1725,6 +1725,8 @@ width: 100%;
 .my_project_img_wrapper {overflow: hidden; display: flex; justify-content: center; align-items: center;}
 .my_new_project_wrapper {margin: 15px 0 15px 0;}
 .my_new_project {width: 100%;}
+.publish_date_wrapper {display: flex; flex-direction: row;}
+.publish_date_after_month {display: flex;}
 .project_image_row {justify-content: space-around;}
 .identify_image_wrapper {display: flex; flex-direction: row; align-items: center;}
 .identify_image_description {font-size: 1.2rem; margin-left: 20px;}
@@ -1740,5 +1742,6 @@ width: 100%;
 @media screen and (max-width: 768px){
     .ps_plan_form_wrapper {flex-direction: column;}
     .ps_plan_form_item {width:100%}
+    .publish_date_wrapper {flex-direction: column;}
     .identify_image_wrapper {display: flex; flex-direction: column;}
 }

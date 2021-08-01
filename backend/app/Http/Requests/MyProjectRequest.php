@@ -95,15 +95,15 @@ class MyProjectRequest extends FormRequest
             $this->offsetUnset('content');
         }
 
-        if ($this->has('start_year') && $this->has('start_month') && $this->has('start_day') && $this->has('start_hour') && $this->has('start_minute')) {
+        if ($this->filled(['start_year', 'start_month', 'start_day', 'start_hour', 'start_minute'])) {
             $this->merge([
-                'start_date' => $this->start_year . '-' . $this->start_month . '-' . $this->start_day . ' ' . $this->start_hour . ':' . $this->start_minute
+                'start_date' => $this->start_year . '-' . $this->start_month . '-' . sprintf('%02d', $this->start_day) . ' ' . $this->start_hour . ':' . $this->start_minute
             ]);
         }
 
-        if ($this->has('end_year') && $this->has('end_month') && $this->has('end_day') && $this->has('end_hour') && $this->has('end_minute')) {
+        if ($this->filled(['end_year', 'end_month', 'end_day', 'end_hour', 'end_minute'])) {
             $this->merge([
-                'end_date' => $this->end_year . '-' . $this->end_month . '-' . $this->end_day . ' ' . $this->end_hour . ':' . $this->end_minute
+                'end_date' => $this->end_year . '-' . $this->end_month . '-' . sprintf('%02d', $this->end_day) . ' ' . $this->end_hour . ':' . $this->end_minute
             ]);
         }
 
