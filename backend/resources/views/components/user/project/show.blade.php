@@ -108,11 +108,25 @@
                                 <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
                             </div>
                         @endif
-                        <div class="project_sns_icon">
-                            <a href="#"><img class="" src="{{ asset('image/sns_01.svg') }}"></a>
-                            <a href="#"><img class="" src="{{ asset('image/sns_02.svg') }}"></a>
-                            <a href="#"><img class="" src="{{ asset('image/sns_03.svg') }}"></a>
-                        </div>
+                        @isset($project->user->snsLink)
+                            <div class="project_sns_icon">
+                                @if ($project->user->snsLink->twitter_url)
+                                <a href="{{ $project->user->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
+                                @endif
+                                @if ($project->user->snsLink->instagram_url)
+                                <a href="{{ $project->user->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
+                                @endif
+                                @if ($project->user->snsLink->youtube_url)
+                                <a href="{{ $project->user->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
+                                @endif
+                                @if ($project->user->snsLink->tiktok_url)
+                                <a href="{{ $project->user->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
+                                @endif
+                                @if ($project->user->snsLink->other_url)
+                                <a href="{{ $project->user->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
+                                @endif
+                            </div>
+                        @endisset
                     </div>
                     @if($project->isIncluded() === true)
                     <div class="pds_sec01_R_btn01">
