@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class MyPlanRequest extends FormRequest
 {
@@ -24,7 +26,7 @@ class MyPlanRequest extends FormRequest
     public function rules()
     {
         $project_end_date = $this->route('project')->end_date->format('Y-m-d H:i:s');
-        
+
         return [
             'title' => ['nullable', 'string', 'max:45'],
             'content' => ['nullable', 'string', 'max:2000'],
@@ -76,6 +78,16 @@ class MyPlanRequest extends FormRequest
                 'price' => 0
             ]);
         }
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            redirect()
+                ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'return'])
+                ->withErrors($validator)
+                ->withInput()
+        );
     }
 
     protected function passedValidation()

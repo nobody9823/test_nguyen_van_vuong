@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::prefix('my_project')->group(function () {
         Route::post('project/upload_editor_file', [MyProjectController::class, 'uploadEditorFile'])->name('project.upload_editor_file');
         Route::post('project/{project}/uploadProjectImage/{project_file?}', [MyProjectController::class, 'uploadProjectImage'])->name('project.uploadProjectImage');
+        Route::post('project/{project}/uploadIdentifyImage/{identification}', [MyProjectController::class, 'uploadIdentifyImage'])->name('uploadIdentifyImage');
         Route::post('project/{project}/apply', [MyProjectController::class, 'apply'])->name('project.apply');
         Route::get('project/{project}/create_plan', [MyProjectController::class, 'createPlan'])->name('project.create_plan');
         Route::prefix('project/{project}')->group(function () {
