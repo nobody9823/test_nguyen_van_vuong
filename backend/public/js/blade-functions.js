@@ -19,7 +19,7 @@
 // }
 // 「年」「月」が選択されてない時に呼び出すalert
 const emptyYearAndMonth = () => {
-    alert('「年」または「月」を選択してください。');
+    alert('「年」または「月」が選択されていません。');
 }
 let startDayHtml;
 let endDayHtml;
