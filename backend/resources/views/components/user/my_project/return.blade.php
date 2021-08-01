@@ -18,7 +18,7 @@
 
                 <div class="pds_sec02_01_btn">
                     編集
-                    <a class="cover_link" onclick="DisplayEditPlan(this);" id="{{ $plan->id }}"></a>
+                    <a class="cover_link" onclick="DisplayEditPlan({{ $plan->id }});" id="{{ $plan->id }}"></a>
                 </div>
             </div>
             @endforeach

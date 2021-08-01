@@ -76,6 +76,7 @@
 @section('script')
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src={{ asset('/js/blade-functions.js') }}></script>
 
 <script>
 const selectEditTag = el => {
@@ -93,13 +94,28 @@ const DisplayPlanForm = () => {
         el.style.display = 'none';
     };
 }
-const DisplayEditPlan = (el) => {
+const DisplayEditPlan = (planId) => {
     let PlanFormSections = document.querySelectorAll('.edit_plan_form_sections');
     for(let $i = 0; $i < PlanFormSections.length; $i ++){
         PlanFormSections[$i].style.display = 'none';
     }
-    console.log(el);
-    document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
+    document.getElementById('edit_plan_form_section_' + planId).style.display = 'block';
+}
+// パラメーターから値を取得する関数
+function getParam(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+if (getParam('status') == 422) {
+    getParam('plan') != null
+        ? DisplayEditPlan(getParam('plan'))
+        : DisplayPlanForm();
 }
 </script>
 {{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
