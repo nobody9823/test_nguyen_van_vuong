@@ -71,7 +71,7 @@ class LoginController extends Controller
                 DB::beginTransaction();
                 try {
                     $oauth_user->user->name = $sns_name;
-                    $oauth_user->user->email = $sns_email ?? Str::random(16) . '@' . $request->provider;
+                    $oauth_user->user->email = $sns_email;
                     $oauth_user->user->save();
                     $oauth_user->user->profile()->save(Profile::initialize());
                     $oauth_user->user->address()->save(Address::initialize());
