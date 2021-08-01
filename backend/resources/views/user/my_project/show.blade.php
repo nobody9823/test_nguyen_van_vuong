@@ -14,7 +14,11 @@
             <div class="prof_page_R">
                 <div class="su_pr_base">
                     <a href="{{ route('user.my_project.project.edit', ['project' => $project]) }}">
-                        <div class="su_pr_img m_b_1510"><img class="" src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}"></div>
+                        @if ($project->projectFiles()->where('file_content_type', 'image_url')->exists())
+                            <div class="su_pr_img m_b_1510"><img class="" src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}"></div>
+                        @else
+                            <div class="su_pr_img m_b_1510"><img class="" src="{{ Storage::url('public/sampleImage/now_printing.png') }}"></div>
+                        @endif
                     </a>
                     <div class="su_pr_01 m_b_1510">
                         <div class="su_pr_01_01 m_b_1510">タイトル名 : {{ $project->title === '' ? 'なし' : $project->title }}</div>

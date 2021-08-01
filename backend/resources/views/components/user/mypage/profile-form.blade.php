@@ -85,11 +85,12 @@
         <div class="prof_edit_row">
             <div class="prof_edit_01">URL<br><span>編集中</span></div>
             <div class="prof_edit_editbox">
-                <input name="twitter_url" type="text" placeholder="twitter" value="{{ old('twitter_url', $authUser->snsLink->twitter_url) }}">
-                <input name="instagram_url" type="text" placeholder="instagram" value="{{ old('instagram_url', $authUser->snsLink->instagram_url) }}">
-                <input name="youtube_url" type="text" placeholder="youtube" value="{{ old('youtube_url', $authUser->snsLink->youtube_url) }}">
-                <input name="tiktok_url" type="text" placeholder="tiktok" value="{{ old('tiktok_url', $authUser->snsLink->tiktok_url) }}">
-                <input name="other_url" type="text" placeholder="other" value="{{ old('other_url', $authUser->snsLink->other_url) }}">
+                <img src="{{ asset('image/twitter.png') }}" alt=""><input name="twitter_url" type="text" placeholder="twitter" value="{{ old('twitter_url', $authUser->snsLink->twitter_url) }}">
+                <img src="{{ asset('image/instagram.png') }}" alt=""><input name="instagram_url" type="text" placeholder="instagram" value="{{ old('instagram_url', $authUser->snsLink->instagram_url) }}">
+                <img src="{{ asset('image/youtube.png') }}" alt=""><input name="youtube_url" type="text" placeholder="youtube" value="{{ old('youtube_url', $authUser->snsLink->youtube_url) }}">
+                <img src="{{ asset('image/tiktok.png') }}" alt=""><input name="tiktok_url" type="text" placeholder="tiktok" value="{{ old('tiktok_url', $authUser->snsLink->tiktok_url) }}">
+                <img src="{{ asset('image/other_sns.png') }}" alt=""><input name="other_url" type="text" placeholder="other" value="{{ old('other_url', $authUser->snsLink->other_url) }}">
+
             </div>
             <div class="prof_edit_03">
                 <a href="javascript:document.urlForm.submit()">更新</a>
@@ -147,7 +148,7 @@
             </div>
 
             <div class="cp_ipselect cp_normal">
-                <select id="day" name="day" data-old-value="{{ old('day') }}"></select>
+                <select id="day" name="day" data-old-value="{{ old('day', $authUser->profile->getDayOfBirth()) }}"></select>
             </div>
             <div class="cp_ipselect cp_normal">
                 <select name="birthday_is_published">
@@ -239,14 +240,33 @@
     @endif
     <div class="prof_edit_row">
         <div class="prof_edit_01">URL</div>
+        <div class="prof_edit_02 my_sns_icon_wrapper">
+            @if ($authUser->snsLink->twitter_url)
+            <a href="{{ $authUser->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
+            @endif
+            @if ($authUser->snsLink->instagram_url)
+            <a href="{{ $authUser->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
+            @endif
+            @if ($authUser->snsLink->youtube_url)
+            <a href="{{ $authUser->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
+            @endif
+            @if ($authUser->snsLink->tiktok_url)
+            <a href="{{ $authUser->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
+            @endif
+            @if ($authUser->snsLink->other_url)
+            <a href="{{ $authUser->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
+            @endif
+        </div>
         {{-- <div class="prof_edit_02">{{ $authUser->snsLink->twitter_url }}</div>
         <div class="prof_edit_02">{{ $authUser->snsLink->instagram_url }}</div>
         <div class="prof_edit_02">{{ $authUser->snsLink->youtube_url }}</div>
         <div class="prof_edit_02">{{ $authUser->snsLink->tiktok_url }}</div>
         <div class="prof_edit_02">{{ $authUser->snsLink->other_url }}</div> --}}
+
         <div class="prof_edit_03">
             編集
-            <a href="{{ route('user.profile', ['input_type' => 'sns_links']) }}" class="cover_link"></a></div>
+            <a href="{{ route('user.profile', ['input_type' => 'sns_links']) }}" class="cover_link"></a>
+        </div>
     </div>
     <div class="prof_edit_row">
         <div class="prof_edit_01">現在地</div>
@@ -282,8 +302,8 @@
     <div class="prof_edit_row">
         <div class="prof_edit_01">自己紹介</div>
         <div class="prof_edit_02">
-        @if(isset($authUser->profile->introduction))
-            {{ $authUser->profile->introduction }}
+        @if($authUser->profile->introduction !== '')
+            <p>{{ $authUser->profile->introduction }}</p>
         @else
             設定されていません
         @endif

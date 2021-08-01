@@ -3,17 +3,11 @@
 @section('content')
 
 <div class="Assist-input_base">
-<section class="section_base">
-    <div class="pc-Details-screen_base_top inner_item">
-
-        <div class="pds_inner">
-            <div class="pds_sec01">
-                <div class="as_header_02 inner_item">プロジェクト詳細画面</div>
-            </div>
+    <div class="def_inner inner_item">
+        <div class="tit_L_01 E-font">
+            <h2>EDIT PROJECT</h2>
+            <div class="sub_tit_L">プロジェクト編集</div>
         </div>
-    </div>
-
-    <div class=" def_inner inner_item">
         <div class="as_i_03">
             <div class="as_i_03_01">
                 <div class="tab_container">
@@ -76,7 +70,6 @@
 
     </div>
 
-</section>
 </div>
 @endsection
 
@@ -109,6 +102,7 @@ const DisplayEditPlan = (el) => {
     document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
 }
 </script>
+{{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
 <script>
 function uploadProjectImage (input, projectId, projectFileId) {
     const formData = new FormData();
@@ -135,6 +129,20 @@ function uploadProjectImage (input, projectId, projectFileId) {
             alert(err.response.data.errors.file);
         });
     }
+}
+function uploadIdentifyImage (input, projectId, columnName, identificationId) {
+    const formData = new FormData();
+    formData.append('file',input.files[0]);
+
+    axios.post(`/my_project/project/${projectId}/uploadIdentifyImage/${identificationId}?column_name=${columnName}`, formData)
+    .then((res) => {
+        console.log(res);
+        location.replace(res.data.redirect_url);
+    })
+    .catch((err) => {
+        console.log(err.response);
+        alert(err.response.data.errors.file);
+    });
 }
 </script>
 <script>

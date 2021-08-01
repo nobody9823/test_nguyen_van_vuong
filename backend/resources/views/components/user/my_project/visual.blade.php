@@ -46,6 +46,12 @@
     </div>
 
     <div class="def_btn">
+        <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'return']) }}">
+            次へ進む
+        </a>
+    </div>
+
+    <div class="def_btn">
         <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.index') }}">
             プロジェクト一覧へ戻る
         </a>
