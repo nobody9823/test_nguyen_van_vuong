@@ -94,6 +94,7 @@ class MyProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $this->authorize('checkOwnProject', $project);
         $tags = Tag::pluck('name', 'id');
 
         return view('user.my_project.edit', ['project' => $project, 'tags' => $tags]);
@@ -108,6 +109,7 @@ class MyProjectController extends Controller
      */
     public function update(MyProjectRequest $request, Project $project)
     {
+        $this->authorize('checkOwnProject', $project);
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
@@ -156,6 +158,11 @@ class MyProjectController extends Controller
 
     public function uploadProjectImage(Project $project, ProjectFile $project_file = null, AxiosUploadFileRequest $request)
     {
+        if (!is_null($project_file)) {
+            $this->authorize('checkOwnProjectFiles', $project_file);
+        } else {
+            $this->authorize('checkOwnProject', $project);
+        }
         $this->project_service->saveProjectImage($project, $project_file, $request);
 
         session()->flash('flash_message', 'スライド画像の更新が完了しました。');
@@ -167,6 +174,7 @@ class MyProjectController extends Controller
 
     public function uploadIdentifyImage(Project $project, Identification $identification, AxiosUploadFileRequest $request)
     {
+        $this->authorize('checkOwnIdentificationImage', $identification);
         $this->project_service->saveIdentifyImage($identification, $request);
 
         session()->flash('flash_message', '本人確認書類の更新が完了しました。');
