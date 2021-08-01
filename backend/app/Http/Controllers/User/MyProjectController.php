@@ -158,7 +158,11 @@ class MyProjectController extends Controller
 
     public function uploadProjectImage(Project $project, ProjectFile $project_file = null, AxiosUploadFileRequest $request)
     {
-        $this->authorize('checkOwnProjectFiles', $project_file);
+        if (!is_null($project_file)) {
+            $this->authorize('checkOwnProjectFiles', $project_file);
+        } else {
+            $this->authorize('checkOwnProject', $project);
+        }
         $this->project_service->saveProjectImage($project, $project_file, $request);
 
         session()->flash('flash_message', 'スライド画像の更新が完了しました。');
