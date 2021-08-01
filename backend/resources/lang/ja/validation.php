@@ -192,6 +192,7 @@ return [
         'birth_month' => '生年月日（月）',
         'birth_day' => '生年月日（日）',
         'birth_day' => '生年月日',
+        'introduction' => '自己紹介',
         'remarks' => '備考欄',
         'comments' => '任意コメント',
         'payjp_token' => 'クレジットカード情報',

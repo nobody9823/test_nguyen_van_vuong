@@ -88,18 +88,13 @@ class MypageController extends Controller
     {
         DB::beginTransaction();
         try {
-            if(isset($request->day)) {
-                $user->profile->birthday = Carbon::create(
-                    $request->year, $request->month, $request->day
-                );
-            }
             $user->fill($request->all())->save();
             $user->saveProfile($request->all());
             $user->saveAddress($request->all());
             $user->saveSnsLink($request->all());
             DB::commit();
             return redirect()->route('user.profile')->with('flash_message', 'プロフィール更新が成功しました。');
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::alert($e->getMessage(), $e->getTrace());
             return redirect()->back()->withErrors("プロフィールの更新に失敗しました。管理者にお問い合わせください。");
