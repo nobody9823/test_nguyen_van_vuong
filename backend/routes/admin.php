@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ReplyController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\CuratorController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Models\Project;
