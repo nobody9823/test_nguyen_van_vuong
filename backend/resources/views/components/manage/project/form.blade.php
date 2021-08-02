@@ -39,8 +39,9 @@
 
 <div class="form-group">
     <label>キュレーター</label>
-    <input type="text" name="curator" class="form-control"
-        value="{{ old('curator', optional($project ?? null)->curator) }}">
+    <div class="dropdown">
+        {{ Form::select('curator_id', $curators, old('curator_id', optional($project ?? null)->managingCurators), ['class' => 'form-control', 'placeholder' => '選択してください。']) }}
+    </div>
 </div>
 
 <div>
