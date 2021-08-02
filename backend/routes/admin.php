@@ -94,6 +94,9 @@ Route::middleware('auth:admin')->group(function () {
     //タグ管理
     Route::resource('tag', TagController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
 
+    // キュレーター管理
+    Route::resource('curator', CuratorController::class, ['only' => ['index']]);
+
     // メッセージ管理
     Route::resource('message', MessageController::class)->only(['index', 'show']);
     Route::post('message/{user_plan_cheering}', [MessageController::class, 'store'])->name('message_content.store');
