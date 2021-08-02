@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\Project;
+use App\Http\Controllers\Controller;
+use App\Models\Curator;
 
 class CuratorController extends Controller
 {
@@ -14,9 +15,9 @@ class CuratorController extends Controller
      */
     public function index()
     {
-        $project = Project::paginate(10);
+        $curators = Curator::with('managingProjects')->paginate(10);
 
-        return view('admin.curator.index', ['project' => $project]);
+        return view('admin.curator.index', ['curators' => $curators]);
     }
 
     /**
