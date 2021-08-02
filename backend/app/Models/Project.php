@@ -29,7 +29,6 @@ class Project extends Model
         'reward_by_total_amount',
         'reward_by_total_quantity',
         'target_amount',
-        'curator',
         'start_date',
         'end_date',
     ];
