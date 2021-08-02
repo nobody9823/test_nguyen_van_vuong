@@ -51,6 +51,16 @@
                                         </button>
                                     </form>
                                 @endif
+
+                                @if ($project->release_status !== '掲載中' || $project->release_status !== '承認待ち')
+                                    <form action="{{ route('user.my_project.project.destroy', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="my_project_apply disable-btn">
+                                            <p style="font-weight: bold;color: #fff;">削除する</p>
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
 
                             <div class="ib02_03">
