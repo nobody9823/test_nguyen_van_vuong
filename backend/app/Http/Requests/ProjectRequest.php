@@ -43,7 +43,7 @@ class ProjectRequest extends FormRequest
             'reward_by_total_amount' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
             'reward_by_total_amount' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
             'target_amount' => ['required', 'integer', 'max:99999999'],
-            'curator' => ['required', 'string'],
+            'curator_id' => ['required', 'integer'],
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
             'start_date' => ['required', 'date_format:Y-m-d H:i:s', $this->isMethod('post') ? 'after:1 week' : ''],
             'end_date' => ['required', 'date_format:Y-m-d H:i:s', 'after:start_date', "before:{$end_date_limit}"],
@@ -107,8 +107,8 @@ class ProjectRequest extends FormRequest
             'target_amount.required' => "目標金額を入力してください。",
             'target_amount.integer' => "目標金額は数字で入力してください。",
             'target_amount.max' => "目標金額は99,999,999円以内にしてください。",
-            'curator.required' => "キュレーターを入力してください。",
-            'curator.string' => "キュレーターは文字列で入力してください。",
+            'curator_id.required' => "キュレーターを入力してください。",
+            'curator_id.integer' => "キュレーターは数字で入力してください。",
             'start_date.required' => "掲載開始日時を入力してください。",
             'start_date.date_format' => "掲載開始日時の形式を確認してください。",
             'start_date.after' => "掲載開始日時を1週間後以降に設定してください",
