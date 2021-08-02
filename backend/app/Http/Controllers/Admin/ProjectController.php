@@ -14,6 +14,7 @@ use App\Models\ProjectFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\ProjectIsPublishedMail;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -350,9 +351,12 @@ class ProjectController extends Controller
     {
         if ($project->release_status === "承認待ち" || $project->release_status === "掲載停止中") {
             $project->release_status = "掲載中";
-            return $project->save() ?
-                redirect()->back()->with('flash_message', "掲載しました。") :
-                redirect()->back()->withErrors('掲載に失敗しました。');
+            if ($project->save()){
+                $project->user->notify(new ProjectIsPublishedMail($project));
+                return redirect()->back()->with('flash_message', "掲載しました。");
+            } else {
+                return redirect()->back()->withErrors('掲載に失敗しました。');
+            }
         }
         return redirect()->back()->withErrors('掲載に失敗しました。');
     }
