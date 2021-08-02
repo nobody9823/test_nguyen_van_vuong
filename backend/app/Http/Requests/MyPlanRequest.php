@@ -84,7 +84,7 @@ class MyPlanRequest extends FormRequest
     {
         throw new HttpResponseException(
             redirect()
-                ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'return'])
+                ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'return', 'status' => 422, 'plan' => $this->route('plan')])
                 ->withErrors($validator)
                 ->withInput()
         );
