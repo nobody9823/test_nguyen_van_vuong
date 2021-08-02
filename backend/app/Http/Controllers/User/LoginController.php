@@ -36,7 +36,10 @@ class LoginController extends Controller
             return redirect('/'); //許可しなかった際のリダイレクト先を指定
         }
         $sns_user_id = $sns_user->getId();
-        $sns_email = $sns_user->getEmail()?? Str::random(16).'@'.$request->provider;
+        $sns_email = $sns_user->getEmail();
+        if (is_null($sns_email)) {
+            return redirect()->action([ProjectController::class, 'index'])->withErrors(['メールアドレスの取得に失敗しました。', 'ログインを行うSNSのメールアドレスの共有設定を「有効」にして再度ログインを行ってください。']);
+        }
         $sns_name = $sns_user->getName();
         // 登録済ならログイン。未登録ならアカウント登録してログイン
         if (!is_null($sns_user_id)) {
@@ -64,20 +67,19 @@ class LoginController extends Controller
                     Log::alert($th->getMessage());
                     return redirect()->action([ProjectController::class, 'index'])->withErrors('ログインに失敗しました。管理会社に確認をお願いします。');
                 }
-
             } elseif (($oauth_user->user->email !== $sns_email) || ($oauth_user->user->name !== $sns_name)) {
                 DB::beginTransaction();
                 try {
                     $oauth_user->user->name = $sns_name;
-                    $oauth_user->user->email = $sns_email?? Str::random(16).'@'.$request->provider;
+                    $oauth_user->user->email = $sns_email;
                     $oauth_user->user->save();
                     $oauth_user->user->profile()->save(Profile::initialize());
                     $oauth_user->user->address()->save(Address::initialize());
                     $oauth_user->user->snsLink()->save(SnsLink::initialize());
                     $oauth_user->user->identification()->save(Identification::initialize());
-                } catch (\Exception $e){
+                } catch (\Exception $e) {
                     DB::rollback();
-                    Log::alert($th->getMessage());
+                    Log::alert($e->getMessage());
                     return redirect()->action([ProjectController::class, 'index'])->withErrors('ログインに失敗しました。管理会社に確認をお願いします。');
                 }
             }
