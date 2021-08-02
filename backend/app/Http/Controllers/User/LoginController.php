@@ -38,7 +38,7 @@ class LoginController extends Controller
         $sns_user_id = $sns_user->getId();
         $sns_email = $sns_user->getEmail();
         if (is_null($sns_email)) {
-            return redirect('/login')->withErrors(['メールアドレスの共有設定が「無効」となっているため、SNSでのログインができませんでした。', 'こちらからメールアドレスとパスワードを用いた会員登録をお願い致します。']);
+            return redirect()->action([RegisterController::class, 'preCreate'])->withErrors(['メールアドレスの共有設定が「無効」となっているため、SNSでのログインができませんでした。', 'こちらからメールアドレスとパスワードを用いた会員登録をお願い致します。']);
         }
         $sns_name = $sns_user->getName();
         // 登録済ならログイン。未登録ならアカウント登録してログイン
