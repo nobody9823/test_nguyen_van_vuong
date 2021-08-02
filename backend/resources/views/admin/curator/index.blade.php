@@ -1,1 +1,1 @@
-<x-manage.curator.index role="admin" :projects="$projects" />
+<x-manage.curator.index role="admin" :curators="$curators" />
