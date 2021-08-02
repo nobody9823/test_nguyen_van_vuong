@@ -38,7 +38,7 @@ class LoginController extends Controller
         $sns_user_id = $sns_user->getId();
         $sns_email = $sns_user->getEmail();
         if (is_null($sns_email)) {
-            return redirect()->action([ProjectController::class, 'index'])->withErrors(['メールアドレスの取得に失敗しました。', 'ログインを行うSNSのメールアドレスの共有設定を「有効」にして再度ログインを行ってください。']);
+            return redirect()->action([ProjectController::class, 'login'])->withErrors(['メールアドレスの共有設定が「無効」となっているため、SNSでのログインができませんでした。', 'こちらからメールアドレスとパスワードを用いた会員登録をお願い致します。']);
         }
         $sns_name = $sns_user->getName();
         // 登録済ならログイン。未登録ならアカウント登録してログイン
