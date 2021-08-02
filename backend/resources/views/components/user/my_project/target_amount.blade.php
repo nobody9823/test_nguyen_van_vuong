@@ -140,5 +140,3 @@
 
     <x-common.save_back_button />
 </form>
-
-<script src={{ asset('/js/blade-functions.js') }}></script>
