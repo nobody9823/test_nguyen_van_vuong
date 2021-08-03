@@ -171,6 +171,7 @@ tinymce.init({
     forced_root_block : false,
     menubar: false,
     entity_encoding: 'raw',
+    relative_urls : false,
     mobile: {
         theme: 'mobile',
         plugins: [ 'autosave', 'lists', 'autolink' ],
