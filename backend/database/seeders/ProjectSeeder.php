@@ -30,7 +30,10 @@ class ProjectSeeder extends Seeder
     {
         Project::truncate();
 
-        Project::factory(30)->create()
+        Project::factory(30)
+            ->state([
+                'curator_id' => rand(1, 10)
+            ])->create()
             ->each(function (Project $project) {
                 $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
@@ -40,7 +43,11 @@ class ProjectSeeder extends Seeder
             });
 
         // 公開中
-        Project::factory(10)->released()->create()
+        Project::factory(10)->released()
+            ->state([
+                'curator_id' => rand(1, 10)
+            ])
+            ->create()
             ->each(function (Project $project) {
                 $project->projectFiles()->saveMany(ProjectFile::factory(10)->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
