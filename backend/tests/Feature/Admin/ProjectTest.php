@@ -29,6 +29,7 @@ class ProjectTest extends TestCase
         $this->tag = Tag::factory()->create();
         $this->project = Project::factory()->state([
             'user_id' => $this->user->id,
+            'curator_id' => $this->curator->id,
         ])->make();
     }
 
