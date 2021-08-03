@@ -33,9 +33,6 @@
                     <div class="ps_rank_01_02 m_b_1510">
                         {{ $project->title }}
                     </div>
-                    <div class="ps_rank_01_03 m_b_1510">
-                        {!! Str::limit($project->content, 400) !!}
-                    </div>
                 </div>
 
                 <div class="ps_rank_02 m_b_4030">

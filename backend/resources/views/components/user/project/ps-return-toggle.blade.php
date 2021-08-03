@@ -22,11 +22,9 @@
 
 <script>
     jQuery(function ($) {
-        // 質問の答えをあらかじめ非表示
-        $(".return_content").css("display", "none");
         //質問をクリック
         $(".return_opener").click(function () {
-            $(this).toggleClass("open");
+            $(this).toggleClass("return_open");
             //thisにopenクラスを付与
             $(this).next().slideToggle(300);
             //thisのcontentを展開、開いていれば閉じる
@@ -58,7 +56,7 @@
       
     }
     
-    .return_opener.open:after {
+    .return_opener.return_open:after {
       -webkit-transform: rotate(-45deg);
       transform: rotate(-45deg);
       top: 45%;
