@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin;
 
 use App\Models\Admin;
+use App\Models\Curator;
 use App\Models\Plan;
 use App\Models\Project;
 use App\Models\Tag;
@@ -23,6 +24,7 @@ class ProjectTest extends TestCase
         parent::setUp();
         // リレーションで色々詰まったのですべて書いちゃった
         $this->admin = Admin::factory()->create();
+        $this->curator = Curator::factory()->create();
         $this->user = User::factory()->valleyin()->hasProfile()->create();
         $this->tag = Tag::factory()->create();
         $this->project = Project::factory()->state([
@@ -74,7 +76,7 @@ class ProjectTest extends TestCase
             'target_amount' => $this->project->target_amount,
             'reward_by_total_amount' => $this->project->reward_by_total_amount,
             'reward_by_total_quantity' => $this->project->reward_by_total_quantity,
-            'curator' => 'test_curator',
+            'curator_id' => $this->curator->id,
             'tags' => [$this->tag->id],
             'start_date' => $start_date->format('Y-m-d H:i:s'),
             'end_date' => $end_date->format('Y-m-d H:i:s'),
@@ -131,7 +133,7 @@ class ProjectTest extends TestCase
             'reward_by_total_amount' => $this->project->reward_by_total_amount,
             'reward_by_total_quantity' => $this->project->reward_by_total_quantity,
             'target_amount' => $this->project->target_amount,
-            'curator' => 'test_curator',
+            'curator_id' => $this->curator->id,
             'tags' => [$this->tag->id],
             'start_date' => $start_date->format('Y-m-d H:i:s'),
             'end_date' => $end_date->format('Y-m-d H:i:s'),
