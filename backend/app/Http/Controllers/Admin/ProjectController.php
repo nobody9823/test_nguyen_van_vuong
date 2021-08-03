@@ -82,7 +82,7 @@ class ProjectController extends Controller
             $project->tags()->attach($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
-            $project->managingCurators()->attach($request->curator_id);
+            Curator::find($request->curator_id)->managingProjects()->save($project);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -150,12 +150,7 @@ class ProjectController extends Controller
             $project->tags()->sync($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
-            if($project->managingCurators->isEmpty()){
-                $project->managingCurators()->attach($request->curator_id);
-            } else {
-                $project->managingCurators()->detach();
-                $project->managingCurators()->attach($request->curator_id);
-            }
+            Curator::find($request->curator_id)->managingProjects()->save($project);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
