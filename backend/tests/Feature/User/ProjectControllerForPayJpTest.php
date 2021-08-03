@@ -32,7 +32,6 @@ class ProjectControllerForPayJpTest extends TestCase
             'content' => 'test content',
             'target_amount' => 10000000,
             'release_status' => '掲載中',
-            'curator' => 'test_curator',
             'start_date' => now(),
             'end_date' => now()
         ])->create();
