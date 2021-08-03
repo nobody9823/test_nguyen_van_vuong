@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LikeCalculationRequest;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Requests\SearchRequest;
+use App\Notifications\ProjectIsPublishedMail;
 use App\Models\Plan;
 use App\Models\Tag;
 use App\Models\User;
@@ -14,10 +15,10 @@ use App\Models\ProjectFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Notifications\ProjectIsPublishedMail;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Mail;
 
 class ProjectController extends Controller
 {
@@ -247,7 +248,7 @@ class ProjectController extends Controller
      */
     public function changeStatus($request)
     {
-        $projects = Project::whereIn('id', $request->project_id)->get();
+        $projects = Project::whereIn('id', $request->project_id)->with('user')->get();
         //ステータスが指定されていなかったら何もしない
         if (!$request->change_status) {
             \Session::flash('error', '掲載状態を選択してください。');
@@ -269,6 +270,7 @@ class ProjectController extends Controller
             case '掲載中':
                 foreach ($projects as $project) {
                     $project->changeStatusToRelease();
+                    $project->user->notify(new ProjectIsPublishedMail($project));
                 }
                 break;
             case '掲載停止中':
