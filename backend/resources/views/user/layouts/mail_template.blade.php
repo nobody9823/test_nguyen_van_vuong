@@ -7,7 +7,7 @@
 
     <p>=============================</p>
     <p>お問い合わせ窓口</p>
-    <p>株式会社ICH<br/>
+    <p>FanReturn<br/>
     カスタマーサポート
     <a href="mailto:support@fanreturn.com">
         support@fanreturn.com
