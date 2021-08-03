@@ -23,6 +23,7 @@ const emptyYearAndMonth = () => {
 }
 let startDayHtml;
 let endDayHtml;
+let birthDayHtml;
 
 function setStartDay() {
     // 年の値を取得
@@ -80,14 +81,45 @@ function setEndDay() {
     endDaySelectBox.innerHTML = endDayHtml;
 };
 
+function setBirthDay() {
+    // 年の値を取得
+    const birthYearVal = document.getElementById('birth_year').value;
+
+    // 月の値を取得
+    const birthMonthVal = document.getElementById('birth_month').value;
+
+    // 日のセレクトボックスを取得
+    const birthDaySelectBox = document.getElementById('birth_day');
+
+    // 年月が有効な値の場合のみ日付の選択肢を加える
+    if (birthYearVal !== '' && birthMonthVal !== '') {
+
+        birthDaySelectBox.removeEventListener('click', emptyYearAndMonth);
+        // 特定の年月の最後の日付を取得する
+        const birthLastDay = (new Date(birthYearVal, birthMonthVal, 0)).getDate();
+        // optionを組み立てる
+        birthDayHtml += '<option value="">日</option>';
+        for (let birthDay = 1; birthDay <= birthLastDay; birthDay++) {
+            birthDayHtml += '<option value="' + birthDay + '">' + birthDay + '</option>';
+        }
+    } else {
+        birthDaySelectBox.addEventListener('click', emptyYearAndMonth)
+    }
+    birthDaySelectBox.innerHTML = birthDayHtml;
+};
+
 window.onload = function () {
     setStartDay();
     setEndDay();
+    setBirthDay();
     document.getElementById('start_year').addEventListener('change', setStartDay);
     document.getElementById('start_month').addEventListener('change', setStartDay);
 
     document.getElementById('end_year').addEventListener('change', setEndDay);
     document.getElementById('end_month').addEventListener('change', setEndDay);
+
+    document.getElementById('birth_year').addEventListener('change', setBirthDay);
+    document.getElementById('birth_month').addEventListener('change', setBirthDay);
 
     // リダイレクトした場合に元の入力値を復元する
     const startDayElem = document.getElementById('start_day');
@@ -95,6 +127,9 @@ window.onload = function () {
 
     const endDayElem = document.getElementById('end_day');
     endDayElem.value = endDayElem.getAttribute('data-old-value');
+
+    const birthDayElem = document.getElementById('birth_day');
+    birthDayElem.value = birthDayElem.getAttribute('data-old-value');
 }
 
 // もっと見る機能
