@@ -181,23 +181,7 @@
                         </div>
                     </div>
 
-                    <div class="ps_rank_02_return_L">
-                        <div class="ps_rank_02_return_tit">リターン内容(紹介支援総額)</div>
-    
-                        <!--/ps_rank_01-->
-                        <div class="ps_rank_return_text m_b_1510">
-                            {!! $project->reward_by_total_amount !!}
-                        </div>
-                    </div>
-
-                    <div class="ps_rank_02_return_R">
-
-                        <div class="ps_rank_02_return_tit">リターン内容(紹介件数)</div>
-                        <!--/ps_rank_01-->
-                        <div class="ps_rank_return_text m_b_1510">
-                            {!! $project->reward_by_total_quantity !!}
-                        </div>
-                    </div>
+                    <x-user.project.ps-return-toggle :project="$project" />
                     <!--/ps_rank_02_R-->
                 </div>
                 <!--/ps_rank_02-->
@@ -212,12 +196,12 @@
 </section>
 <!--/.section_base-->
 
-<script src="{{ asset('/js/more-looking.js') }}"></script>
+<script src="{{ asset('/js/blade-functions.js') }}"></script>
 <script type="text/javascript">
     window.addEventListener('DOMContentLoaded', () => {
         moreLooking('ranked_inviter_by_amount', 5, 30, 'ranked_inviter_by_amount_more_looking_button',
             'ranked_inviter_by_amount_closed_button');
         moreLooking('ranked_inviter_of_count', 5, 30, 'ranked_inviter_of_count_more_looking_button',
             'ranked_inviter_of_count_closed_button');
-    })
+    });
 </script>

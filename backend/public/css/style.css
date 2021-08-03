@@ -1588,8 +1588,8 @@ input[name="tab_item"] {
 .ps_rank_more_btn{ width: 100%; text-align: right; font-size: 1.2rem; margin:20px 0 10px 0;cursor: pointer;}
 .ps_rank_more_btn a{color: #1C81D8;}
 
-.ps_rank_02_return_L{margin: 20px 0 0 0 ; width: 50%; padding: 3px 20px 3px 0; border-right: solid 1px #00AEBD; display: flex; flex-wrap: wrap; justify-content:space-between; align-content: flex-start; order: 5;}
-.ps_rank_02_return_R{margin: 20px 0 0 0 ; width: 50%; padding: 3px 0px 3px 20px; display: flex; flex-wrap: wrap; justify-content:space-between; align-content: flex-start; order: 6;}
+.ps_rank_02_return_L{margin: 20px 0 0 0 ; width: 50%; padding: 3px 20px 3px 0; border-right: solid 1px #00AEBD; order: 5;}
+.ps_rank_02_return_R{margin: 20px 0 0 0 ; width: 50%; padding: 3px 0px 3px 20px; order: 6;}
 .ps_rank_02_return_tit{ font-size: 1.8rem; font-weight: bold; color: #00AEBD; }
 
 @media screen and (max-width: 768px){
