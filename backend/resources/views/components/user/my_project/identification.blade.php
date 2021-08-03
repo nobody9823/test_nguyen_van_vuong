@@ -61,7 +61,7 @@
 
 <div class="form_item_row">
     <div class="form_item_tit">生年月日<span class="hissu_txt">必須</span></div>
-    <div class="cp_ipselect cp_normal">
+    <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
         <select id="birth_year" name="birth_year">
             <option value="">年</option>
             @foreach(array_reverse(range(today()->year - 100, today()->year)) as $birth_year)
@@ -70,7 +70,7 @@
         </select>
     </div>
 
-    <div class="cp_ipselect cp_normal">
+    <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
         <select id="birth_month" name="birth_month">
             <option value="">月</option>
             @foreach(range(1, 12) as $birth_month)
