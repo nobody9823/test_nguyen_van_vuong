@@ -26,6 +26,7 @@ class ProjectFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1, 50),
+            'curator_id' => $this->faker->numberBetween(1, 11),
             'title' => Arr::random([
                 'インフルエンサーの「やりたい」が叶う”それがファンリターン',
                 'インフルエンサーの「やりたい」が叶う”それがファンリターン',
