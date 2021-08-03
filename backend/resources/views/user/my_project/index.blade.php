@@ -41,9 +41,9 @@
                         <div class="my_project_img_content_wrapper">
                             <div class="ib02_02 my_project_release_status">
                                 <div>
-                                ({{ $project->release_status === '---' ? '申請前' : $project->release_status }})
+                                ({{ $project->release_status === ProjectReleaseStatus::getValue('Default') ? '申請前' : $project->release_status }})
                                 </div>
-                                @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
+                                @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
                                     <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
                                         @csrf
                                         <button type="submit" class="my_project_apply disable-btn">
@@ -52,7 +52,7 @@
                                     </form>
                                 @endif
 
-                                @if ($project->release_status !== '掲載中' || $project->release_status !== '承認待ち')
+                                @if ($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack'))
                                     <form action="{{ route('user.my_project.project.destroy', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
                                         @csrf
                                         @method('DELETE')
