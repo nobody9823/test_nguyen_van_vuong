@@ -52,4 +52,9 @@ class Curator extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Project', 'App\Models\CuratorProjectManaging');
     }
+
+    public function scopePluckNameAndId($query)
+    {
+        return $query->pluck('name', 'id');
+    }
 }

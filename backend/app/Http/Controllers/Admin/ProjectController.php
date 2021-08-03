@@ -9,6 +9,7 @@ use App\Http\Requests\SearchRequest;
 use App\Models\Plan;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Curator;
 use App\Models\Project;
 use App\Models\ProjectFile;
 use Exception;
@@ -45,7 +46,7 @@ class ProjectController extends Controller
                 return $project->total_likes;
             })->paginate(10);
         } else {
-            $projects = $projects->paginate(10);
+            $projects = $projects->with('managingCurators')->paginate(10);
         }
         return view('admin.project.index', ['projects' => $projects]);
     }
@@ -58,10 +59,12 @@ class ProjectController extends Controller
     public function create()
     {
         $users = User::pluckNameAndId();
+        $curators = Curator::pluckNameAndId();
         $tags = Tag::pluckNameAndId();
         return view('admin.project.create', [
             'tags' => $tags,
-            'users' => $users
+            'users' => $users,
+            'curators' => $curators,
         ]);
     }
 
@@ -79,6 +82,7 @@ class ProjectController extends Controller
             $project->tags()->attach($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
+            $project->managingCurators()->attach($request->curator_id);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -114,6 +118,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $users = User::pluckNameAndId();
+        $curators = Curator::pluckNameAndId();
         $tags = Tag::pluckNameAndId();
         $project_tags = $project->tags->pluck('id')->toArray();
         $projectImages = $project->projectFiles()->where('file_content_type', 'image_url')->get();
@@ -126,6 +131,7 @@ class ProjectController extends Controller
             'users' => $users,
             'projectImages' => $projectImages,
             'projectVideo' => $projectVideo,
+            'curators' => $curators,
         ]);
     }
 
@@ -144,6 +150,12 @@ class ProjectController extends Controller
             $project->tags()->sync($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
+            if($project->managingCurators->isEmpty()){
+                $project->managingCurators()->attach($request->curator_id);
+            } else {
+                $project->managingCurators()->detach();
+                $project->managingCurators()->attach($request->curator_id);
+            }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
