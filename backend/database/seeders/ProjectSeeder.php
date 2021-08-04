@@ -30,18 +30,24 @@ class ProjectSeeder extends Seeder
     {
         Project::truncate();
 
-        Project::factory(30)->create()
+        Project::factory(30)
+            ->state([
+                'curator_id' => rand(1, 10)
+            ])->create()
             ->each(function (Project $project) {
                 $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
                 $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
-                $project->managingCurators()->save(Curator::inRandomOrder()->first());
             });
 
         // 公開中
-        Project::factory(10)->released()->create()
+        Project::factory(10)->released()
+            ->state([
+                'curator_id' => rand(1, 10)
+            ])
+            ->create()
             ->each(function (Project $project) {
                 $project->projectFiles()->saveMany(ProjectFile::factory(10)->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
@@ -59,7 +65,6 @@ class ProjectSeeder extends Seeder
                 $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
                 $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
                 $project->supportedUsers()->attach(User::inRandomOrder()->take(random_int(1, 10))->get()->pluck('id'));
-                $project->managingCurators()->save(Curator::inRandomOrder()->first());
             });
     }
 }

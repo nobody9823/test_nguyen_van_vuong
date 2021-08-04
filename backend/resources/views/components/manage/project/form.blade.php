@@ -40,7 +40,7 @@
 <div class="form-group">
     <label>キュレーター</label>
     <div class="dropdown">
-        {{ Form::select('curator_id', $curators, old('curator_id', optional($project ?? null)->managingCurators), ['class' => 'form-control', 'placeholder' => '選択してください。']) }}
+        {{ Form::select('curator_id', $curators, old('curator_id', optional($project ?? null)->curator), ['class' => 'form-control', 'placeholder' => '選択してください。']) }}
     </div>
 </div>
 
