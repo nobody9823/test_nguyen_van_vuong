@@ -1728,6 +1728,7 @@ width: 100%;
 .publish_date_wrapper {display: flex; flex-direction: row;}
 .publish_date_after_month {display: flex;}
 .project_image_row {justify-content: space-around;}
+.plan_image_wrapper {text-align: center;}
 .identify_image_wrapper {display: flex; flex-direction: row; align-items: center;}
 .identify_image_description {font-size: 1.2rem; margin-left: 20px;}
 .identify_image_description h4 {font-size: 14px;}

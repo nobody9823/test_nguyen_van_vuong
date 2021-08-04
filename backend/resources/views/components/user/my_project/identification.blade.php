@@ -92,15 +92,13 @@
     <div class="identify_image_wrapper">
         <div>
             <div style="text-align: center;">
-                @if (optional($user)->identification->identify_image_1 !== null)
-                    <div id="identify_image_1" class="ib02_01 E-font my_project_img_wrapper identify_img">
-                        <img src="{{ Storage::url($user->identification->identify_image_1) }}">
-                    </div>
-                @endif
+                <div id="identify_image_1" class="ib02_01 E-font my_project_img_wrapper identify_img">
+                    <img src="{{ Storage::url($user->identification->identify_image_1) }}">
+                </div>
                 <div class="form_item_tit" style="margin-bottom: 10px">本人確認書類1</div>
                 <div class="input_file_button_wrapper">
                     <label>
-                        <input name="identify_image_1" type="file" hidden onChange="previewIdentifyImage(this, 'identify_image_1')">
+                        <input name="identify_image_1" type="file" hidden onChange="previewUploadedImage(this, 'identify_image_1')">
                         <a class="input_file_button">
                             ファイルを選択する
                         </a>
@@ -108,15 +106,13 @@
                 </div>
             </div>
             <div style="text-align: center;">
-                @if (optional($user)->identification->identify_image_2 !== null)
-                    <div id="identify_image_2" class="ib02_01 E-font my_project_img_wrapper identify_img">
-                        <img src="{{ Storage::url($user->identification->identify_image_2) }}">
-                    </div>
-                @endif
+                <div id="identify_image_2" class="ib02_01 E-font my_project_img_wrapper identify_img">
+                    <img src="{{ Storage::url($user->identification->identify_image_2) }}">
+                </div>
                 <div class="form_item_tit" style="margin-bottom: 10px">本人確認書類2</div>
                 <div class="input_file_button_wrapper">
                     <label>
-                        <input name="identify_image_2" type="file" hidden onChange="previewIdentifyImage(this, 'identify_image_2')">
+                        <input name="identify_image_2" type="file" hidden onChange="previewUploadedImage(this, 'identify_image_2')">
                         <a class="input_file_button">
                             ファイルを選択する
                         </a>
