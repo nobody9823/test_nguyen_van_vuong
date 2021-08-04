@@ -301,28 +301,25 @@
                     <div class="form_item_row">
                         <div class="form_item_tit">生年月日<span class="hissu_txt">必須</span></div>
                         <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-                            <select id="birth_year" class="form-control" name="birth_year">
-                                <option value="">----</option>
-                                @for ($i = 1980; $i <= 2005; $i++)
-                                <option value="{{ $i }}"@if(old('birth_year', optional($user->profile)->getYearOfBirth()) == $i) selected @endif>{{ $i }}</option>
-                                @endfor
+                            <select id="birth_year" name="birth_year">
+                                <option value="">年</option>
+                                @foreach(array_reverse(range(today()->year - 100, today()->year)) as $birth_year)
+                                    <option value="{{ $birth_year }}" {{ old('birth_year', $user->profile->getYearOfBirth()) == $birth_year ? 'selected' : '' }}>{{ $birth_year }}</option>
+                                @endforeach
                             </select>
                         </div>
+
                         <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-                            <select id="birth_month" class="form-control" name="birth_month">
-                                <option value="">--</option>
-                                @for ($i = 1; $i <= 12; $i++)
-                                <option value="{{ $i }}"@if(old('birth_month', optional($user->profile)->getMonthOfBirth()) == $i) selected @endif>{{ $i }}</option>
-                                @endfor
+                            <select id="birth_month" name="birth_month">
+                                <option value="">月</option>
+                                @foreach(range(1, 12) as $birth_month)
+                                    <option value="{{ $birth_month }}" {{ old('birth_month', $user->profile->getMonthOfBirth()) == $birth_month ? 'selected' : '' }}>{{ $birth_month }}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <div class="cp_ipselect cp_normal" >
-                            <select id="birth_day" class="form-control" name="birth_day">
-                                <option value="">--</option>
-                                @for ($i = 1; $i <= 31; $i++)
-                                <option value="{{ $i }}"@if(old('birth_day', optional($user->profile)->getDayOfBirth()) == $i) selected @endif>{{ $i }}</option>
-                                @endfor
-                            </select>
+
+                        <div class="cp_ipselect cp_normal">
+                            <select id="birth_day" name="birth_day" data-old-value="{{ old('birth_day', $user->profile->getDayOfBirth()) }}"></select>
                         </div>
                     </div><!--/form_item_row-->
 
@@ -351,8 +348,47 @@
 
 @section('script')
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
+
 <script>
+const emptyYearAndMonth = () => {
+    alert('「年」または「月」が選択されていません。');
+}
+let birthDayHtml;
+function setBirthDay() {
+    // 年の値を取得
+    const birthYearVal = document.getElementById('birth_year').value;
+
+    // 月の値を取得
+    const birthMonthVal = document.getElementById('birth_month').value;
+
+    // 日のセレクトボックスを取得
+    const birthDaySelectBox = document.getElementById('birth_day');
+
+    // 年月が有効な値の場合のみ日付の選択肢を加える
+    if (birthYearVal !== '' && birthMonthVal !== '') {
+
+        birthDaySelectBox.removeEventListener('click', emptyYearAndMonth);
+        // 特定の年月の最後の日付を取得する
+        const birthLastDay = (new Date(birthYearVal, birthMonthVal, 0)).getDate();
+        // optionを組み立てる
+        birthDayHtml += '<option value="">日</option>';
+        for (let birthDay = 1; birthDay <= birthLastDay; birthDay++) {
+            birthDayHtml += '<option value="' + birthDay + '">' + birthDay + '</option>';
+        }
+    } else {
+        birthDaySelectBox.addEventListener('click', emptyYearAndMonth)
+    }
+    birthDaySelectBox.innerHTML = birthDayHtml;
+};
 window.onload = function(){
+    setBirthDay();
+
+    document.getElementById('birth_year').addEventListener('change', setBirthDay);
+    document.getElementById('birth_month').addEventListener('change', setBirthDay);
+
+    const birthDayElem = document.getElementById('birth_day');
+    birthDayElem.value = birthDayElem.getAttribute('data-old-value');
+
     if (window.performance.navigation.type == 2){
         Plans.searchCheckedPlans();
         let check_box = document.getElementsByClassName('plan_ids');
