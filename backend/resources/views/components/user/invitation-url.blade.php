@@ -7,7 +7,7 @@
         <a href="https://social-plugins.line.me/lineit/share?url={{ $invitationUrl() }}&text=私が応援しているプロジェクトです！応援お願いします！" target="_blank"><img src="{{ asset('image/sns_02.svg') }}"></a>
 
         <div data-href="{{ $invitationUrl() }}">
-            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?quote=私が応援しているプロジェクトです！応援お願いします！&hashtag=fanreturn&hashtag=ファンリターン&u={{ $invitationUrl() }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?quote=私が応援しているプロジェクトです！応援お願いします！&u={{ $invitationUrl() }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
                 <img class="" src="{{ asset('image/sns_03.svg') }}">
             </a>
         </div>
