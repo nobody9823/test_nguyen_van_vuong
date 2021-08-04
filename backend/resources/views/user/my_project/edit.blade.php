@@ -146,19 +146,22 @@ function uploadProjectImage (input, projectId, projectFileId) {
         });
     }
 }
-function uploadIdentifyImage (input, projectId, columnName, identificationId) {
-    const formData = new FormData();
-    formData.append('file',input.files[0]);
-
-    axios.post(`/my_project/project/${projectId}/uploadIdentifyImage/${identificationId}?column_name=${columnName}`, formData)
-    .then((res) => {
-        console.log(res);
-        location.replace(res.data.redirect_url);
-    })
-    .catch((err) => {
-        console.log(err.response);
-        alert(err.response.data.errors.file);
-    });
+function previewIdentifyImage (input, imageId) {
+    const file = input.files[0];
+    if (file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'image/png' && file.type != 'application/pdf') {
+      alert('.jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています')
+      return
+    }
+    const preview = document.getElementById(imageId);
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const imageUrl = e.target.result; // URLはevent.target.resultで呼び出せる
+        const img = document.createElement("img"); // img要素を作成
+        img.src = imageUrl; // URLをimg要素にセット
+        preview.removeChild(preview.firstElementChild);
+        preview.appendChild(img); // #previewの中に追加
+    }
+    reader.readAsDataURL(file);
 }
 </script>
 <script>
