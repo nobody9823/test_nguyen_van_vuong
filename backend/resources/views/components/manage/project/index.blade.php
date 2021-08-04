@@ -127,8 +127,10 @@
                                     </p>
                                     <p>Email:<a href="mailto:{{ $project->user->email }}">{{ $project->user->email }}</a></p>
                                     <p>プロフィール画像:
-                                        <img style="max-height:5vw;"
-                                            src="{{ Storage::url(optional($project->user->profile)->image_url) }}">
+                                        <div class="text-center">
+                                            <img style="max-height:15vw; object-fit: contain;"
+                                                src="{{ Storage::url(optional($project->user->profile)->image_url) }}">
+                                        </div>
                                     </p>
                                     <p>SNS:
                                         <div class="d-flex justify-content-around">
@@ -170,18 +172,20 @@
                                     <p>口座種別:{{ optional($project->user->identification)->account_type }}</p>
                                     <p>口座番号:{{ optional($project->user->identification)->account_number }}</p>
                                     <p>口座名義人名:{{ optional($project->user->identification)->account_name }}</p>
-                                    <p>本人確認書類１:
-                                        <a href="{{ route('admin.user.download_identify_image', ['user' => $project->user, 'column_name' => 'identify_image_1']) }}">
-                                            <img style="max-height:15vw;"
+                                    <p>本人確認書類１:</p>
+                                    <div class="text-center">
+                                        <a class="text-center" href="{{ route('admin.user.download_identify_image', ['user' => $project->user, 'column_name' => 'identify_image_1']) }}">
+                                            <img style="max-height:15vw; object-fit: contain;"
                                                 src="{{ Storage::url(optional($project->user->identification)->identify_image_1) }}">
                                         </a>
-                                    </p>
-                                    <p>本人確認書類２:
+                                    </div>
+                                    <p>本人確認書類２:</p>
+                                    <div class="text-center">
                                         <a href="{{ route('admin.user.download_identify_image', ['user' => $project->user, 'column_name' => 'identify_image_2']) }}">
-                                            <img style="max-height:15vw;;"
+                                            <img style="max-height:15vw; object-fit: contain;"
                                                 src="{{ Storage::url(optional($project->user->identification)->identify_image_2) }}">
                                         </a>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
