@@ -14,7 +14,7 @@ class PasswordResetController extends Controller
 {
     public function forgotPassword()
     {
-        return view('user.forgot_password');
+        return view('user.auth.forgot_password');
     }
 
     public function sendResetPasswordMail(Request $request)
@@ -35,7 +35,7 @@ class PasswordResetController extends Controller
 
     public function reset($token)
     {
-        return view('user.password_reset', ['token' => $token]);
+        return view('user.auth.password_reset', ['token' => $token]);
     }
 
     public function update(PasswordRequest $request)

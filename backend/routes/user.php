@@ -78,7 +78,7 @@ Route::middleware(['guest:web', 'throttle:10'])->group(function () {
     });
 });
 // --------------------Top Page-------------------
-Route::get('/question', [TopPageController::class, 'question'])->name('question');
+Route::get('/question', [MypageController::class, 'question'])->name('question');
 
 //---------------------Forgot Password-----------------------------------------------
 Route::get('/forgot_password', [PasswordResetController::class, 'forgotPassword'])->name('forgot_password');
