@@ -108,7 +108,7 @@ if(isiOS) {
 		<ul id="js-global-nav" class="p-global-nav main-menu menu_base taso_menu">
 
             <li class="menu-item nav_btn taso_li menuset_01">
-                <a href="{{ route('user.project.index') }}" class="top_menu-1 nav_btn_link">
+                <a href="{{ route('user.my_project.project.index') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">はじめる</p>
 				</a>
 			</li>
@@ -196,7 +196,7 @@ if(isiOS) {
 				<input type="checkbox" id="ta_menu-3"><label for="ta_menu-3" class="taso_li_a_label"><span class="pd"><i class="fas fa-chevron-down"></i></span></label>
 					<ul class="taso_ul pri_W_b taso_ul_ko" style="background: #fff; padding: 10px 10px 0 10px;">
 						<li class="taso_li taso_li_ko ninki_tag_li">
-							<div class="pbb_01_link" style="border-bottom: none;">マイプロジェクト管理<i class="fas fa-chevron-right"></i><a href="{{ route('user.project.index') }}" class="cover_link"></a></div>
+							<div class="pbb_01_link" style="border-bottom: none;">マイプロジェクト管理<i class="fas fa-chevron-right"></i><a href="{{ route('user.my_project.project.index') }}" class="cover_link"></a></div>
 						</li>
 					</ul>
 			</li>
@@ -319,13 +319,13 @@ if(isiOS) {
                     <div class="footer_item"><a href="★">テキストテキストテキストテキストテキストテキスト</a></div>
                     <div class="footer_item"><a href="★">テキストテキスト</a></div>
                     <div class="footer_item"><a href="★">テキストテキストテキストテキスト</a></div>
-                </div>
+                </div> --}}
 
                 <div class="footer_main_02">
                     <div class="footer_tit">プロジェクトをはじめる</div>
-                    <div class="footer_item"><a href="★">プロジェクト掲載</a></div>
-                    <div class="footer_item"><a href="★">プロジェクトを作る</a></div>
-                </div> --}}
+                    {{-- <div class="footer_item"><a href="★">プロジェクト掲載</a></div> --}}
+                    <div class="footer_item"><a href="{{ route('user.my_project.project.index') }}">プロジェクトを作る</a></div>
+                </div>
 
                 <div class="footer_main_03">
                     <div class="footer_tit">fanreturnについて</div>
@@ -337,35 +337,41 @@ if(isiOS) {
                     <div class="footer_item"><a href="{{ route('user.ps_terms_of_service') }}">プロジェクトサポーター利用規約</a></div>
                     <div class="footer_item"><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></div>
                     <div class="footer_item"><a href="{{ route('user.trade_law') }}">特定商取引法に基づく表記</a></div>
-                    {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div> --}}
-                    {{-- <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
-                    <div class="footer_sns_icon dis_f_wra_alc">
+                    {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div>
+                    <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
+                    {{-- <div class="footer_sns_icon">
                         <a href="★"><img class="" src="{{ asset('image/sns_01.svg') }}"></a>
                         <a href="★"><img class="" src="{{ asset('image/sns_02.svg') }}"></a>
                         <a href="★"><img class="" src="{{ asset('image/sns_03.svg') }}"></a>
-                    </div>
+                    </div> --}}
                 </div>
             </div><!--/.footer_inner-->
         </div><!--/.footer_main-->
 
         <div class="footer_under">
             <div class="footer_under_inner">
-                <div class="footer_logo"><img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}"></div>
-                <ul>
-                    <li><a href="{{ route('user.project.index') }}">はじめる</a></li>
+                <div class="footer_logo">
+                    <img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
+                </div>
+                <ul class="footer_list">
+                    <li><a href="{{ route('user.my_project.project.index') }}">はじめる</a></li>
                     <li><a href="{{ route('user.search') }}">さがす</a></li>
-                    <li><a href="#">ファンリターンとは</a></li>
+                    {{-- <li><a href="#">ファンリターンとは</a></li> --}}
 
                     @guest('web')
-                    <li class="menu-item nav_btn taso_li menuset_03 login_btn">
-                        <a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
-                            <p class="nav_btn_tit_L">ログイン</p>
-                        </a>
+                    <li>
+                        <div class="menuset_03 wm_login_btn">
+                            <a href="{{ route('login') }}">
+                                ログイン
+                            </a>
+                        </div>
                     </li>
-                    <li class="menu-item nav_btn taso_li menuset_03 signup_btn">
-                        <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
-                            <p>新規登録</p>
-                        </a>
+                    <li>
+                        <div class="menuset_03 wm_signup_btn">
+                            <a href="{{ route('user.pre_create') }}">
+                                新規登録
+                            </a>
+                        </div>
                     </li>
                     @endguest
 

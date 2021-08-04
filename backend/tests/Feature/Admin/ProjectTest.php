@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin;
 
 use App\Models\Admin;
+use App\Models\Curator;
 use App\Models\Plan;
 use App\Models\Project;
 use App\Models\Tag;
@@ -18,17 +19,17 @@ class ProjectTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp() :void
+    public function setUp(): void
     {
         parent::setUp();
         // リレーションで色々詰まったのですべて書いちゃった
         $this->admin = Admin::factory()->create();
+        $this->curator = Curator::factory()->create();
         $this->user = User::factory()->valleyin()->hasProfile()->create();
         $this->tag = Tag::factory()->create();
         $this->project = Project::factory()->state([
             'user_id' => $this->user->id,
         ])->make();
-        
     }
 
     /**
@@ -71,15 +72,16 @@ class ProjectTest extends TestCase
             'title' => $this->project->title,
             'content' => $this->project->content,
             'target_amount' => $this->project->target_amount,
-            'ps_plan_content' => $this->project->ps_plan_content,
-            'curator' => 'test_curator',
+            'reward_by_total_amount' => $this->project->reward_by_total_amount,
+            'reward_by_total_quantity' => $this->project->reward_by_total_quantity,
+            'curator_id' => $this->curator->id,
             'tags' => [$this->tag->id],
             'start_date' => $start_date->format('Y-m-d H:i:s'),
             'end_date' => $end_date->format('Y-m-d H:i:s'),
             'release_status' => $this->project->release_status,
             'images' => [$file],
         ]);
-        $response->assertRedirect('/admin/project/'.Project::first()->id.'/plan/create');
+        $response->assertRedirect('/admin/project/' . Project::first()->id . '/plan/create');
     }
 
     /**
@@ -121,18 +123,19 @@ class ProjectTest extends TestCase
         $start_date = new Carbon($this->project->start_date);
         $end_date = new Carbon($this->project->end_date);
         $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.edit', ['project' => $this->project]))->put(route('admin.project.update', ['project' => $this->project]), [
-                'user_id' => $this->project->user_id,
-                'title' => $this->project->title,
-                'content' => $this->project->content,
-                'ps_plan_content' => $this->project->ps_plan_content,
-                'target_amount' => $this->project->target_amount,
-                'curator' => 'test_curator',
-                'tags' => [$this->tag->id],
-                'start_date' => $start_date->format('Y-m-d H:i:s'),
-                'end_date' => $end_date->format('Y-m-d H:i:s'),
-                'release_status' => $this->project->release_status,
-                'images' => [$file],
-            ]);
+            'user_id' => $this->project->user_id,
+            'title' => $this->project->title,
+            'content' => $this->project->content,
+            'reward_by_total_amount' => $this->project->reward_by_total_amount,
+            'reward_by_total_quantity' => $this->project->reward_by_total_quantity,
+            'target_amount' => $this->project->target_amount,
+            'curator_id' => $this->curator->id,
+            'tags' => [$this->tag->id],
+            'start_date' => $start_date->format('Y-m-d H:i:s'),
+            'end_date' => $end_date->format('Y-m-d H:i:s'),
+            'release_status' => $this->project->release_status,
+            'images' => [$file],
+        ]);
         $response->assertRedirect(route('admin.project.index'));
     }
 

@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class ProfileForm extends Component
 {
+    public $authUser;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($authUser)
     {
-        //
+        $this->authUser = $authUser->loadExists('snsUser')->load(['snsLink', 'address', 'profile']);
     }
 
     /**

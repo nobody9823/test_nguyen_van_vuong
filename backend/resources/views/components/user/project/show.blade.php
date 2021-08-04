@@ -95,32 +95,51 @@
                 </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_btn_base">
-                    @if ($project->end_date > now())
-                        <div class="pds_sec01_R_btn01">
-                            <div class="more_btn_01_01">支援する</div>
-                            <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                            <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
-                        </div>
-                    @else
-                        <div class="pds_sec01_R_btn01">
-                            <div class="more_btn_01_01">FINISHED</div>
-                            <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                        </div>
-                    @endif
+                    <div class="pds_sec01_R_btn01_wrapper">
+                        @if ($project->end_date > now())
+                            <div class="pds_sec01_R_btn01">
+                                <div class="more_btn_01_01">支援する</div>
+                                <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                                <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
+                            </div>
+                        @else
+                            <div class="pds_sec01_R_btn01">
+                                <div class="more_btn_01_01">FINISHED</div>
+                                <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                            </div>
+                        @endif
+                        @isset($project->user->snsLink)
+                            <div class="project_sns_icon">
+                                @if ($project->user->snsLink->twitter_url)
+                                <a href="{{ $project->user->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
+                                @endif
+                                @if ($project->user->snsLink->instagram_url)
+                                <a href="{{ $project->user->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
+                                @endif
+                                @if ($project->user->snsLink->youtube_url)
+                                <a href="{{ $project->user->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
+                                @endif
+                                @if ($project->user->snsLink->tiktok_url)
+                                <a href="{{ $project->user->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
+                                @endif
+                                @if ($project->user->snsLink->other_url)
+                                <a href="{{ $project->user->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
+                                @endif
+                            </div>
+                        @endisset
+                    </div>
                     @if($project->isIncluded() === true)
                     <div class="pds_sec01_R_btn01">
                         <div class="more_btn_01_01">プロジェクトサポーターになる</div>
                         <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
                         <a href="{{ route('user.project.support', ['project' => $project]) }}" class="cover_link"></a>
                     </div>
-                    @endif
-                    <div class="pds_sec01_R_btn02">
-                        <div class="footer_sns_icon dis_f_wra_alc">
-                            <a href="#"><img class="" src="{{ asset('image/sns_01.svg') }}"></a>
-                            <a href="#"><img class="" src="{{ asset('image/sns_02.svg') }}"></a>
-                            <a href="#"><img class="" src="{{ asset('image/sns_03.svg') }}"></a>
-                        </div>
+                    <div class="pds_sec01_R_btn01">
+                        <div class="more_btn_01_01">PSランキングを見る</div>
+                        <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                        <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
                     </div>
+                    @endif
                 </div><!--/pds_sec01_R_nin01-->
 
                 </div><!--/pds_sec01_R-->

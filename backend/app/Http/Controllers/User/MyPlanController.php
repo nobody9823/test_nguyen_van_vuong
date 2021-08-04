@@ -40,7 +40,7 @@ class MyPlanController extends Controller
     public function store(MyPlanRequest $request, Project $project)
     {
         $project->plans()->save(Plan::make($request->all()));
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with(['flash_message' => 'リターンが作成されました。']);
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => 'return'])->with(['flash_message' => 'リターンが作成されました。']);
     }
 
     /**
@@ -74,8 +74,9 @@ class MyPlanController extends Controller
      */
     public function update(Project $project, Plan $plan, MyPlanRequest $request)
     {
+        $this->authorize('checkOwnPlan', $plan);
         $plan->fill($request->all())->save();
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with(['flash_message' => 'リターンが更新されました。']);
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => 'return'])->with(['flash_message' => 'リターンが更新されました。']);
     }
 
     /**

@@ -16,10 +16,16 @@
         class="form-control">{{old('content', optional($project ?? null)->content)}}</textarea>
 </div>
 
+<label>プロジェクトサポーターリターン内容</label>
 <div class="form-group">
-    <label>プロジェクトサポーターリターン内容</label>
-    <textarea type="text" name="ps_plan_content"
-       class="form-control">{{old('ps_plan_content', optional($project ?? null)->ps_plan_content)}}</textarea>
+    <label>支援総額順リターン内容</label>
+    <textarea type="text" name="reward_by_total_amount"
+       class="form-control">{{old('reward_by_total_amount', optional($project ?? null)->reward_by_total_amount)}}</textarea>
+</div>
+<div class="form-group">
+    <label>支援件数順リターン内容</label>
+    <textarea type="text" name="reward_by_total_quantity"
+       class="form-control">{{old('reward_by_total_quantity', optional($project ?? null)->reward_by_total_quantity)}}</textarea>
 </div>
 
 <div class="form-row">
@@ -33,8 +39,9 @@
 
 <div class="form-group">
     <label>キュレーター</label>
-    <input type="text" name="curator" class="form-control"
-        value="{{ old('curator', optional($project ?? null)->curator) }}">
+    <div class="dropdown">
+        {{ Form::select('curator_id', $curators, old('curator_id', optional($project ?? null)->managingCurators), ['class' => 'form-control', 'placeholder' => '選択してください。']) }}
+    </div>
 </div>
 
 <div>
@@ -111,6 +118,7 @@ tinymce.init({
     forced_root_block : false,
     menubar: false,
     entity_encoding: 'raw',
+    relative_urls : false,
     mobile: {
         theme: 'mobile',
         plugins: [ 'autosave', 'lists', 'autolink' ],

@@ -69,6 +69,11 @@
             </a> --}}
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.curator.index')}}">
+            キュレーター管理
+        </a>
+    </li>
+    <li class="nav-item">
         <div class="nav-link">
             <a class="nav-link_2" href="{{ route('admin.project.index') }}">
                 プロジェクト管理

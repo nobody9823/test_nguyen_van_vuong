@@ -1,4 +1,4 @@
-<form action="{{ route('user.project.update', ['project' => $project]) }}" method="post" class="h-adr">
+<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr">
     @csrf
     @method('PUT')
 <span class="p-country-name" style="display:none;">Japan</span>
@@ -62,35 +62,93 @@
 <div class="form_item_row">
     <div class="form_item_tit">生年月日<span class="hissu_txt">必須</span></div>
     <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="birth_year" class="form-control" name="birth_year">
-            <option value="">----</option>
-            @for ($i = 1980; $i <= 2005; $i++)
-            <option value="{{ $i }}"@if(old('birth_year', optional($user->profile)->getYearOfBirth()) == $i) selected @endif>{{ $i }}</option>
-            @endfor
+        <select id="birth_year" name="birth_year">
+            <option value="">年</option>
+            @foreach(array_reverse(range(today()->year - 100, today()->year)) as $birth_year)
+                <option value="{{ $birth_year }}" {{ old('birth_year', $user->profile->getYearOfBirth()) == $birth_year ? 'selected' : '' }}>{{ $birth_year }}</option>
+            @endforeach
         </select>
     </div>
+
     <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="birth_month" class="form-control" name="birth_month">
-            <option value="">--</option>
-            @for ($i = 1; $i <= 12; $i++)
-            <option value="{{ $i }}"@if(old('birth_month', optional($user->profile)->getMonthOfBirth()) == $i) selected @endif>{{ $i }}</option>
-            @endfor
+        <select id="birth_month" name="birth_month">
+            <option value="">月</option>
+            @foreach(range(1, 12) as $birth_month)
+                <option value="{{ $birth_month }}" {{ old('birth_month', $user->profile->getMonthOfBirth()) == $birth_month ? 'selected' : '' }}>{{ $birth_month }}</option>
+            @endforeach
         </select>
     </div>
-    <div class="cp_ipselect cp_normal" >
-        <select id="birth_day" class="form-control" name="birth_day">
-            <option value="">--</option>
-            @for ($i = 1; $i <= 31; $i++)
-            <option value="{{ $i }}"@if(old('birth_day', optional($user->profile)->getDayOfBirth()) == $i) selected @endif>{{ $i }}</option>
-            @endfor
-        </select>
+
+    <div class="cp_ipselect cp_normal">
+        <select id="birth_day" name="birth_day" data-old-value="{{ old('birth_day', $user->profile->getDayOfBirth()) }}"></select>
     </div>
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">画像<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
-    <input type="file">
-    <input type="file">
+    <div class="form_item_tit">
+        本人確認書類
+        <span class="hissu_txt">必須</span>
+    </div>
+    <div class="identify_image_wrapper">
+        <div>
+            <div style="text-align: center;">
+                @if (optional($user)->identification->identify_image_1 !== null)
+                    <div class="ib02_01 E-font my_project_img_wrapper identify_img">
+                        <img src="{{ Storage::url($user->identification->identify_image_1) }}">
+                    </div>
+                @endif
+                <div class="form_item_tit" style="margin-bottom: 10px">本人確認書類1</div>
+                <div class="input_file_button_wrapper">
+                    <label>
+                        <input type="file" hidden onChange="uploadIdentifyImage(this, {{ $project->id }}, 'identify_image_1', {{ $user->identification->id }})">
+                        <a class="input_file_button">
+                            ファイルを選択する
+                        </a>
+                    </label>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                @if (optional($user)->identification->identify_image_2 !== null)
+                    <div class="ib02_01 E-font my_project_img_wrapper identify_img">
+                        <img src="{{ Storage::url($user->identification->identify_image_2) }}">
+                    </div>
+                @endif
+                <div class="form_item_tit" style="margin-bottom: 10px">本人確認書類2</div>
+                <div class="input_file_button_wrapper">
+                    <label>
+                        <input type="file" hidden onChange="uploadIdentifyImage(this, {{ $project->id }}, 'identify_image_2', {{ $user->identification->id }})">
+                        <a class="input_file_button">
+                            ファイルを選択する
+                        </a>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="identify_image_description">
+            <h4 style="color: #e65d65">以下の注意事項をご確認ください。</h4>
+            <strong>2枚（表裏両面）</strong>
+            <ul>
+                <li>運転免許証</li>
+                <li>
+                    健康保険被保険者証<br/>
+                    ※保険者番号、被保険者等記号・番号・QRコードについては撮影時に隠してください
+                </li>
+                <li>
+                    パスポート（顔写真と所持人記入欄（要住所記入）のページ）<br/>
+                    ※2020年1月以前に発行されたもの
+                </li>
+            </ul>
+            <strong>1枚（表面）</strong>
+            <ul>
+                <li>個人番号カード/マイナンバーカード（表面のみ。通知カードは不可）</li>
+                <li>在留カード</li>
+                <li>
+                    住民票の写し<br/>
+                    ※本籍・マイナンバーの表記がないもの
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <div class="form_item_row">
@@ -123,9 +181,6 @@
     <div class="form_item_tit">口座名義<span class="hissu_txt">必須</span></div>
     <input type="text" name="account_name" class="def_input_100p" value="{{ old('account_name', optional($user->identification)->account_number) }}">
 </div>
-<div class="def_btn">
-    <button type="submit" class="disable-btn">
-        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
-    </button>
-</div>
+
+<x-common.save_back_button />
 </form>

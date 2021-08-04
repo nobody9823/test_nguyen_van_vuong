@@ -1,4 +1,4 @@
-<form action="{{ route('user.project.update', ['project' => $project]) }}" method="post">
+<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'overview']) }}" method="post">
     @csrf
     @method('PUT')
 <div class="form_item_row">
@@ -24,9 +24,5 @@
     @endforeach
 </div>
 
-<div class="def_btn">
-    <button type="submit" class="disable-btn">
-        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
-    </button>
-</div>
+<x-common.save_back_button />
 </form>

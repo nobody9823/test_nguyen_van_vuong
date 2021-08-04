@@ -19,7 +19,13 @@
                     検索結果:{{$projects->total().'件中'.$projects->firstItem().'~'.$projects->lastItem()}}件を表示
                 </h2>
                 <div class="project-list">
-                    <x-user.project-card :projects="$projects" />
+                    @foreach($projects as $project)
+                    <div class="img_box_01_R">
+                        <div class="img_box_01_R_item">
+                            <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" ranking="" />
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
                 {{ $projects->appends(request()->input())->links() }}
             </div>

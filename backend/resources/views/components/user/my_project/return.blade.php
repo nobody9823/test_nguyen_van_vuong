@@ -11,14 +11,14 @@
                 </div>
 
                 <div class="ib02_03">
-                    <h3>{{ Str::limit($project->title, 46) }}</h3>
+                    <h3>{{ Str::limit($plan->title, 46) }}</h3>
                     {{-- NOTICE: MyProjectController, show action--}}
                     <a href="#show" class="cover_link"></a>
                 </div>
 
                 <div class="pds_sec02_01_btn">
                     編集
-                    <a class="cover_link" onclick="DisplayEditPlan(this);" id="{{ $plan->id }}"></a>
+                    <a class="cover_link" onclick="DisplayEditPlan({{ $plan->id }});" id="{{ $plan->id }}"></a>
                 </div>
             </div>
             @endforeach
@@ -27,7 +27,7 @@
 
     @foreach($project->plans as $plan)
     <section class="edit_plan_form_sections" id="edit_plan_form_section_{{ $plan->id }}" style="display: none;">
-        <form method="post" action="{{ route('user.plan.update', ['project' => $project, 'plan' => $plan]) }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('user.plan.update', ['project' => $project, 'plan' => $plan , 'current_tab' => 'return']) }}" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
             <x-user.my_plan.plan-form :plan="$plan" />
@@ -46,8 +46,15 @@
 </div>
 
 <section id="plan_form_section" style="display: none;">
-    <form method="post" action="{{ route('user.plan.store', ['project' => $project]) }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('user.plan.store', ['project' => $project, 'current_tab' => 'return']) }}" enctype="multipart/form-data">
         @csrf
         <x-user.my_plan.plan-form :plan=null />
     </form>
 </section>
+
+<div class="def_btn">
+    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'ps_return']) }}">
+        次へ進む
+    </a>
+</div>
+<x-common.save_back_button saveButton="unnecessary" />

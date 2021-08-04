@@ -146,7 +146,7 @@ class RegisterController extends Controller
                 ]);
                 $user->profile()->save(Profile::initialize());
                 $user->address()->save(Address::initialize());
-                $user->snsLinks()->save(SnsLink::initialize());
+                $user->snsLink()->save(SnsLink::initialize());
                 $user->identification()->save(Identification::initialize());
                 $emailVerification->register();
                 $emailVerification->update();

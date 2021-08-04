@@ -181,6 +181,7 @@ return [
         \SocialiteProviders\Manager\ServiceProvider::class,
         App\Providers\SlackServiceProvider::class,
         App\Providers\DateFormatServiceProvider::class,
+        App\Providers\EditMyProjectTabServiceProvider::class,
         // 追加
     ],
 
@@ -238,6 +239,7 @@ return [
         'ProjectReleaseStatus' => App\Enums\ProjectReleaseStatus::class,
         'Slack' => App\Services\Slack\SlackFacade::class,
         'DateFormat' => App\Services\Date\DateFormatFacade::class,
+        'EditMyProjectTab' => App\Services\View\EditMyProjectTabFacade::class,
     ],
 
     'basic_auth' => env('BASIC_AUTH', false),

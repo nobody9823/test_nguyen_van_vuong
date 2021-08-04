@@ -1,11 +1,13 @@
 <div class="prof_page_L">
 
     <div class="prof_img_box">
-        @if(isset(Auth::user()->profile))
-        <img class="prof_img" src="{{ Storage::url(Auth::user()->profile->image_url) }}">
-        @else
-        <img class="prof_img" src="image/my-page.svg">
-        @endif
+        <div class="prof_img">
+            @if(isset(Auth::user()->profile))
+            <img src="{{ Storage::url(Auth::user()->profile->image_url) }}">
+            @else
+            <img src="image/my-page.svg">
+            @endif
+        </div>
         <div class="prof_img_name">{{ Auth::user()->name }}</div>
     </div>
     <div class="prof_btn_box_base">
@@ -48,7 +50,7 @@
             <div class="pbb_01_link">
                 マイプロジェクト管理
                 <i class="fas fa-chevron-right"></i>
-                <a href="{{ route('user.project.index') }}" class="cover_link"></a>
+                <a href="{{ route('user.my_project.project.index') }}" class="cover_link"></a>
             </div>
         </div>
     </div>

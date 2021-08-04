@@ -13,6 +13,8 @@ use App\Models\Payment;
 use App\Models\Plan;
 use App\Models\PlanPaymentIncluded;
 use App\Models\Project;
+use App\Models\UserProjectLiked;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +36,7 @@ class MypageController extends Controller
     {
         $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project'])->paginate(1);
 
-        $project = $payments->first()->includedPlans()->first()->project->getLoadPaymentsCountAndSumPrice();
+        $project = $payments->first() !== null ? $payments->first()->includedPlans()->first()->project->getLoadPaymentsCountAndSumPrice() : null;
         // FIXME 画面ができたら適用
         return view('user.mypage.payment', [
             'payments' => $payments,
@@ -68,8 +70,10 @@ class MypageController extends Controller
     // お気に入りプロジェクト一覧
     public function likedProjects()
     {
-        return view('user.mypage.project', [
-            'projects' => Auth::user()->likedProjects->load(['projectFiles', 'tags', 'likedUsers'])
+        $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
+        return view('user.mypage.liked_project', [
+            'projects' => Auth::user()->likedProjects->load(['projectFiles', 'tags', 'likedUsers']),
+            'user_liked' => $user_liked,
         ]);
     }
 
@@ -86,9 +90,11 @@ class MypageController extends Controller
         try {
             $user->fill($request->all())->save();
             $user->saveProfile($request->all());
+            $user->saveAddress($request->all());
+            $user->saveSnsLink($request->all());
             DB::commit();
             return redirect()->route('user.profile')->with('flash_message', 'プロフィール更新が成功しました。');
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::alert($e->getMessage(), $e->getTrace());
             return redirect()->back()->withErrors("プロフィールの更新に失敗しました。管理者にお問い合わせください。");
