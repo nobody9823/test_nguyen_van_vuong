@@ -126,7 +126,7 @@ class Project extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
-    public function managingCurators()
+    public function curator()
     {
         return $this->belongsTo('App\Models\Curator', 'curator_id');
     }
