@@ -4,22 +4,22 @@
 <span class="p-country-name" style="display:none;">Japan</span>
 <div class="form_item_row">
     <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>
-    <input type="text" name="first_name" class="def_input_100p" value="{{ old('first_name', optional($user->profile)->first_name) }}">
-</div>
-
-<div class="form_item_row">
-    <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
     <input type="text" name="last_name" class="def_input_100p" value="{{ old('last_name', optional($user->profile)->last_name) }}">
 </div>
 
 <div class="form_item_row">
+    <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
+    <input type="text" name="first_name" class="def_input_100p" value="{{ old('first_name', optional($user->profile)->first_name) }}">
+</div>
+
+<div class="form_item_row">
     <div class="form_item_tit">セイ（全角）<span class="hissu_txt">必須</span></div>
-    <input type="text" name="first_name_kana" class="def_input_100p" value="{{ old('first_name_kana', optional($user->profile)->first_name_kana) }}">
+    <input type="text" name="last_name_kana" class="def_input_100p" value="{{ old('last_name_kana', optional($user->profile)->last_name_kana) }}">
 </div>
 
 <div class="form_item_row">
     <div class="form_item_tit">メイ（全角）<span class="hissu_txt">必須</span></div>
-    <input type="text" name="last_name_kana" class="def_input_100p" value="{{ old('last_name_kana', optional($user->profile)->last_name_kana) }}">
+    <input type="text" name="first_name_kana" class="def_input_100p" value="{{ old('first_name_kana', optional($user->profile)->first_name_kana) }}">
 </div>
 
 <div class="form_item_row">
