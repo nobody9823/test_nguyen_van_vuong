@@ -1,6 +1,13 @@
 <div class="form_item_row" style="margin-bottom: 40px;">
-    <div class="form_item_tit">スライド画像追加<span class="nini_txt">任意</span></div>
-    <input type="file" onChange="uploadProjectImage(this, {{ $project->id }})">
+    <div class="form_item_tit" style="margin-bottom: 10px">スライド画像追加<span class="nini_txt">任意</span></div>
+    <div class="input_file_button_wrapper">
+        <label>
+            <input type="file" hidden onChange="uploadProjectImage(this, {{ $project->id }})">
+            <a class="input_file_button">
+                ファイルを追加する
+            </a>
+        </label>
+    </div>
 </div>
 
 <div class="form_item_row project_image_row">
@@ -12,7 +19,14 @@
                 <img id="project_file_{{ $project_image->id }}" src="{{ Storage::url($project_image->file_url) }}">
                 <button id="{{ $project_image->id }}" class="js-image_delete project_image-delete"><i class="fas fa-times-circle"></i></button>
             </div>
-            <input style="margin-bottom: 40px;" type="file" onChange="uploadProjectImage(this, {{ $project->id }}, {{ $project_image->id }})">
+            <div class="input_file_button_wrapper">
+                <label>
+                    <input hidden type="file" onChange="uploadProjectImage(this, {{ $project->id }}, {{ $project_image->id }})">
+                    <a class="input_file_button">
+                        ファイルを変更する
+                    </a>
+                </label>
+            </div>
         </div>
     @endforeach
 </div>
@@ -30,6 +44,12 @@
             {{-- FIXME: 動画URLの方は保存ボタンを押さないと保存できないのでボタン名を変えています。 --}}
             <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">動画URLを保存する</p>
         </button>
+    </div>
+
+    <div class="def_btn">
+        <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'return']) }}">
+            次へ進む
+        </a>
     </div>
 
     <div class="def_btn">

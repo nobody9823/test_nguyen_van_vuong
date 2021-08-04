@@ -37,12 +37,6 @@
                         {!! Str::limit($project->content, 400) !!}
                     </div>
                 </div>
-                <!--/ps_rank_01-->
-                <div class="ps_rank_01 m_b_3020">
-                    <div class="ps_rank_01_03 m_b_1510">
-                        {!! $project->ps_plan_content !!}
-                    </div>
-                </div>
 
                 <div class="ps_rank_02 m_b_4030">
                     @php
@@ -138,6 +132,7 @@
                         </div>
 
                     </div>
+
                     <!--/ps_rank_02_L-->
 
                     <div class="ps_rank_02_R ranked_inviter_of_count_list">
@@ -183,6 +178,24 @@
                             <div class="ps_rank_more_btn" id="ranked_inviter_of_count_closed_button">
                                 表示を少なくする <i class="fas fa-chevron-down"></i>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="ps_rank_02_return_L">
+                        <div class="ps_rank_02_return_tit">リターン内容(紹介支援総額)</div>
+    
+                        <!--/ps_rank_01-->
+                        <div class="ps_rank_return_text m_b_1510">
+                            {!! $project->reward_by_total_amount !!}
+                        </div>
+                    </div>
+
+                    <div class="ps_rank_02_return_R">
+
+                        <div class="ps_rank_02_return_tit">リターン内容(紹介件数)</div>
+                        <!--/ps_rank_01-->
+                        <div class="ps_rank_return_text m_b_1510">
+                            {!! $project->reward_by_total_quantity !!}
                         </div>
                     </div>
                     <!--/ps_rank_02_R-->

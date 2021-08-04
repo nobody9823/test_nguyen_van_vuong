@@ -179,6 +179,6 @@ class MyProjectControllerTest extends TestCase
 
         $response = $this->put(route('user.my_project.project.update', ['project' => $this->project, 'current_tab' => 'identification'], $this->identification_params));
 
-        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->project, 'next_tab' => 'target_amount']));
+        $response->assertRedirect(route('user.my_project.project.index'));
     }
 }

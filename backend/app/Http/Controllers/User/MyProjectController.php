@@ -5,14 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Services\Project\ProjectService;
 use App\Http\Requests\MyProjectRequest;
-use App\Http\Requests\ProjectFileRequest;
+use App\Http\Requests\AxiosUploadFileRequest;
+use App\Models\Identification;
 use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use App\Models\ProjectFile;
-use App\Models\Plan;
 use App\Models\Tag;
+use App\Notifications\MyProjectAppliedMail;
 use App\Services\View\EditMyProjectTabService;
-use Carbon\Carbon;
 use Auth;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,7 +21,6 @@ use Log;
 
 class MyProjectController extends Controller
 {
-
     protected $project_service;
 
     protected $user;
@@ -95,6 +94,7 @@ class MyProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        $this->authorize('checkOwnProject', $project);
         $tags = Tag::pluck('name', 'id');
 
         return view('user.my_project.edit', ['project' => $project, 'tags' => $tags]);
@@ -109,6 +109,7 @@ class MyProjectController extends Controller
      */
     public function update(MyProjectRequest $request, Project $project)
     {
+        $this->authorize('checkOwnProject', $project);
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
@@ -128,7 +129,11 @@ class MyProjectController extends Controller
             DB::rollback();
             throw $e;
         }
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => $this->my_project_tab_service->getNextTab($request->current_tab)])->with(['flash_message' => 'プロジェクトが更新されました。']);
+        if ($request->current_tab === 'identification') {
+            return redirect()->action([MyProjectController::class, 'index'])->with(['flash_message' => 'プロジェクトが更新されました。']);
+        } else {
+            return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => $this->my_project_tab_service->getNextTab($request->current_tab)])->with(['flash_message' => 'プロジェクトが更新されました。']);
+        }
     }
 
     /**
@@ -137,9 +142,11 @@ class MyProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        return $project->delete() ?
+            redirect()->action([MyProjectController::class, 'index'])->with(['flash_message' => 'プロジェクトが削除されました。']) :
+            redirect()->action([MyProjectController::class, 'index'])->withErrors('プロジェクトの削除に失敗しました。');
     }
 
     /**
@@ -162,9 +169,14 @@ class MyProjectController extends Controller
         return ['location' => Storage::url($path)];
     }
 
-    public function uploadProjectImage(Project $project, ProjectFile $project_file = null, ProjectFileRequest $request)
+    public function uploadProjectImage(Project $project, ProjectFile $project_file = null, AxiosUploadFileRequest $request)
     {
-        $this->project_service->saveImage($project, $project_file, $request);
+        if (!is_null($project_file)) {
+            $this->authorize('checkOwnProjectFiles', $project_file);
+        } else {
+            $this->authorize('checkOwnProject', $project);
+        }
+        $this->project_service->saveProjectImage($project, $project_file, $request);
 
         session()->flash('flash_message', 'スライド画像の更新が完了しました。');
         return response()->json([
@@ -173,11 +185,24 @@ class MyProjectController extends Controller
         ], 200);
     }
 
+    public function uploadIdentifyImage(Project $project, Identification $identification, AxiosUploadFileRequest $request)
+    {
+        $this->authorize('checkOwnIdentificationImage', $identification);
+        $this->project_service->saveIdentifyImage($identification, $request);
+
+        session()->flash('flash_message', '本人確認書類の更新が完了しました。');
+        return response()->json([
+            'status' => 200,
+            'redirect_url' => route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'identification']),
+        ], 200);
+    }
+
     public function apply(Project $project)
     {
         try {
             $project->release_status = '承認待ち';
             $project->update();
+            Auth::user()->notify(new MyProjectAppliedMail($project));
             return redirect()->action([MyProjectController::class, 'index'], ['projects' => $this->user->projects()->get()->load('projectFiles')])->with(['flash_message' => 'プロジェクトの申請が完了しました。']);
         } catch (Exception $e) {
             Log::alert($e->getMessage(), $e->getTrace());

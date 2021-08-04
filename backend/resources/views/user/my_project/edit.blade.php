@@ -3,17 +3,11 @@
 @section('content')
 
 <div class="Assist-input_base">
-<section class="section_base">
-    <div class="pc-Details-screen_base_top inner_item">
-
-        <div class="pds_inner">
-            <div class="pds_sec01">
-                <div class="as_header_02 inner_item">プロジェクト詳細画面</div>
-            </div>
+    <div class="def_inner inner_item">
+        <div class="tit_L_01 E-font">
+            <h2>EDIT PROJECT</h2>
+            <div class="sub_tit_L">プロジェクト編集</div>
         </div>
-    </div>
-
-    <div class=" def_inner inner_item">
         <div class="as_i_03">
             <div class="as_i_03_01">
                 <div class="tab_container">
@@ -76,13 +70,13 @@
 
     </div>
 
-</section>
 </div>
 @endsection
 
 @section('script')
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src={{ asset('/js/blade-functions.js') }}></script>
 
 
 <script>
@@ -142,15 +136,31 @@ const DisplayPlanForm = () => {
         el.style.display = 'none';
     };
 }
-const DisplayEditPlan = (el) => {
+const DisplayEditPlan = (planId) => {
     let PlanFormSections = document.querySelectorAll('.edit_plan_form_sections');
     for(let $i = 0; $i < PlanFormSections.length; $i ++){
         PlanFormSections[$i].style.display = 'none';
     }
-    console.log(el);
-    document.getElementById('edit_plan_form_section_' + el.id).style.display = 'block';
+    document.getElementById('edit_plan_form_section_' + planId).style.display = 'block';
+}
+// パラメーターから値を取得する関数
+function getParam(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+if (getParam('status') == 422) {
+    getParam('plan') != null
+        ? DisplayEditPlan(getParam('plan'))
+        : DisplayPlanForm();
 }
 </script>
+{{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
 <script>
 function uploadProjectImage (input, projectId, projectFileId) {
     const formData = new FormData();
@@ -178,6 +188,20 @@ function uploadProjectImage (input, projectId, projectFileId) {
         });
     }
 }
+function uploadIdentifyImage (input, projectId, columnName, identificationId) {
+    const formData = new FormData();
+    formData.append('file',input.files[0]);
+
+    axios.post(`/my_project/project/${projectId}/uploadIdentifyImage/${identificationId}?column_name=${columnName}`, formData)
+    .then((res) => {
+        console.log(res);
+        location.replace(res.data.redirect_url);
+    })
+    .catch((err) => {
+        console.log(err.response);
+        alert(err.response.data.errors.file);
+    });
+}
 </script>
 <script>
 tinymce.init({
@@ -189,6 +213,7 @@ tinymce.init({
     forced_root_block : false,
     menubar: false,
     entity_encoding: 'raw',
+    relative_urls : false,
     mobile: {
         theme: 'mobile',
         plugins: [ 'autosave', 'lists', 'autolink' ],

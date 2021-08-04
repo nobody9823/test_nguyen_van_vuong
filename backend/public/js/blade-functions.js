@@ -2,25 +2,139 @@
 // チェックしたい要素のonchangeに指定
 // 利用例
 /* <select id="birth_month" class="form-control" name="end_month" onchange="dateValidation(this, 'end_year', 'end_month', 'end_day')"> */
-function dateValidation(element, year, month, day) {
-    var year = document.getElementsByName(year)[0].value;
-    var month = document.getElementsByName(month)[0].value;
-    var day = document.getElementsByName(day)[0].value;
-    if (year && month && day) {
-        var date = new Date(year, month - 1, day);
-        if (
-            date.getFullYear() != year ||
-            date.getMonth() != month - 1 ||
-            date.getDate() != day
-        ) {
-            return (element.value = "");
+// function dateValidation(element, year, month, day) {
+//     var year = document.getElementsByName(year)[0].value;
+//     var month = document.getElementsByName(month)[0].value;
+//     var day = document.getElementsByName(day)[0].value;
+//     if (year && month && day) {
+//         var date = new Date(year, month - 1, day);
+//         if (
+//             date.getFullYear() != year ||
+//             date.getMonth() != month - 1 ||
+//             date.getDate() != day
+//         ) {
+//             return (element.value = "");
+//         }
+//     }
+// }
+// 「年」「月」が選択されてない時に呼び出すalert
+const emptyYearAndMonth = () => {
+    alert('「年」または「月」が選択されていません。');
+}
+let startDayHtml;
+let endDayHtml;
+let birthDayHtml;
+
+function setStartDay() {
+    // 年の値を取得
+    const startYearVal = document.getElementById('start_year').value;
+
+    // 月の値を取得
+    const startMonthVal = document.getElementById('start_month').value;
+
+    // 日のセレクトボックスを取得
+    const startDaySelectBox = document.getElementById('start_day');
+
+    // 年月が有効な値の場合のみ日付の選択肢を加える
+    if (startYearVal !== '' && startMonthVal !== '') {
+
+        startDaySelectBox.removeEventListener('click', emptyYearAndMonth);
+
+        // 特定の年月の最後の日付を取得する
+        const startLastDay = (new Date(startYearVal, startMonthVal, 0)).getDate();
+
+        // optionを組み立てる
+        startDayHtml = '<option value="">日</option>';
+        for (let startDay = 1; startDay <= startLastDay; startDay++) {
+            startDayHtml += '<option value="' + startDay + '">' + startDay + '</option>';
         }
+    } else {
+        startDaySelectBox.addEventListener('click', emptyYearAndMonth)
     }
+    startDaySelectBox.innerHTML = startDayHtml;
+};
+
+function setEndDay() {
+    // 年の値を取得
+    const endYearVal = document.getElementById('end_year').value;
+
+    // 月の値を取得
+    const endMonthVal = document.getElementById('end_month').value;
+
+    // 日のセレクトボックスを取得
+    const endDaySelectBox = document.getElementById('end_day');
+
+    // 年月が有効な値の場合のみ日付の選択肢を加える
+    if (endYearVal !== '' && endMonthVal !== '') {
+
+        endDaySelectBox.removeEventListener('click', emptyYearAndMonth);
+        // 特定の年月の最後の日付を取得する
+        const endLastDay = (new Date(endYearVal, endMonthVal, 0)).getDate();
+        // optionを組み立てる
+        endDayHtml += '<option value="">日</option>';
+        for (let endDay = 1; endDay <= endLastDay; endDay++) {
+            endDayHtml += '<option value="' + endDay + '">' + endDay + '</option>';
+        }
+    } else {
+        endDaySelectBox.addEventListener('click', emptyYearAndMonth)
+    }
+    endDaySelectBox.innerHTML = endDayHtml;
+};
+
+function setBirthDay() {
+    // 年の値を取得
+    const birthYearVal = document.getElementById('birth_year').value;
+
+    // 月の値を取得
+    const birthMonthVal = document.getElementById('birth_month').value;
+
+    // 日のセレクトボックスを取得
+    const birthDaySelectBox = document.getElementById('birth_day');
+
+    // 年月が有効な値の場合のみ日付の選択肢を加える
+    if (birthYearVal !== '' && birthMonthVal !== '') {
+
+        birthDaySelectBox.removeEventListener('click', emptyYearAndMonth);
+        // 特定の年月の最後の日付を取得する
+        const birthLastDay = (new Date(birthYearVal, birthMonthVal, 0)).getDate();
+        // optionを組み立てる
+        birthDayHtml += '<option value="">日</option>';
+        for (let birthDay = 1; birthDay <= birthLastDay; birthDay++) {
+            birthDayHtml += '<option value="' + birthDay + '">' + birthDay + '</option>';
+        }
+    } else {
+        birthDaySelectBox.addEventListener('click', emptyYearAndMonth)
+    }
+    birthDaySelectBox.innerHTML = birthDayHtml;
+};
+
+window.onload = function () {
+    setStartDay();
+    setEndDay();
+    setBirthDay();
+    document.getElementById('start_year').addEventListener('change', setStartDay);
+    document.getElementById('start_month').addEventListener('change', setStartDay);
+
+    document.getElementById('end_year').addEventListener('change', setEndDay);
+    document.getElementById('end_month').addEventListener('change', setEndDay);
+
+    document.getElementById('birth_year').addEventListener('change', setBirthDay);
+    document.getElementById('birth_month').addEventListener('change', setBirthDay);
+
+    // リダイレクトした場合に元の入力値を復元する
+    const startDayElem = document.getElementById('start_day');
+    startDayElem.value = startDayElem.getAttribute('data-old-value');
+
+    const endDayElem = document.getElementById('end_day');
+    endDayElem.value = endDayElem.getAttribute('data-old-value');
+
+    const birthDayElem = document.getElementById('birth_day');
+    birthDayElem.value = birthDayElem.getAttribute('data-old-value');
 }
 
 // もっと見る機能
 // 利用例 (JqueryのためDOMContentLoadedしたあとじゃなきゃ多分動かない)
-/* 
+/*
 <script src="{{ asset('/js/more-looking.js') }}"></script>
 <script type="text/javascript">
     window.addEventListener('DOMContentLoaded', () => {
@@ -29,7 +143,7 @@ function dateValidation(element, year, month, day) {
         moreLooking('ranked_inviter_of_count', 5, 30, 'ranked_inviter_of_count_more_looking_button',
             'ranked_inviter_of_count_closed_button');
     })
-</script> 
+</script>
 */
 function moreLooking(
     propsClassName,
