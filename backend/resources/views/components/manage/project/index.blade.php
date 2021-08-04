@@ -103,7 +103,7 @@
                 {{ $project->title }}
             </td>
             <td>{{ $project->user->name }}</td>
-            <td>{{ $project->managingCurators ? $project->managingCurators->name : '未定' }}</td>
+            <td>{{ $project->curator ? $project->curator->name : '未定' }}</td>
             <td>
                 <button class="btn btn-secondary" type="button" data-toggle="collapse"
                     data-target="#collapse_detail{{ $project->id }}" aria-expanded="false"
