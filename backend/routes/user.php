@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
         });
         Route::name('my_project.')->group(function () {
-            Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update']);
+            Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
         });
     });
     Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_amount');
