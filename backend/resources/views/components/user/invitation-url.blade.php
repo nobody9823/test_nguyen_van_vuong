@@ -1,6 +1,6 @@
 <div class="m_b_1510">
     <div class="av_sns_btn dis_f_wra_alc">
-        <a href="https://twitter.com/share?&text=私が応援しているプロジェクトです！応援お願いします！%0a%23fanreturn%20%23ファンリターン%0a&url={{ $invitationUrl() }}">
+        <a href="https://twitter.com/share?&text=私が応援しているプロジェクトです！応援お願いします！%0a%23fanreturn%20%23ファンリターン%0a&url={{ $invitationUrl() }}" target="_blank">
             <img class="" src="{{ asset('image/sns_01.svg') }}">
         </a>
 
