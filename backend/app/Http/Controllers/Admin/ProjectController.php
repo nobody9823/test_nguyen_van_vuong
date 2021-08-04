@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LikeCalculationRequest;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Requests\SearchRequest;
+use App\Notifications\ProjectIsPublishedMail;
 use App\Models\Plan;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Curator;
 use App\Models\Project;
 use App\Models\ProjectFile;
 use Exception;
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Mail;
 
 class ProjectController extends Controller
 {
@@ -45,7 +48,7 @@ class ProjectController extends Controller
                 return $project->total_likes;
             })->paginate(10);
         } else {
-            $projects = $projects->paginate(10);
+            $projects = $projects->with('managingCurators')->paginate(10);
         }
         return view('admin.project.index', ['projects' => $projects]);
     }
@@ -58,10 +61,12 @@ class ProjectController extends Controller
     public function create()
     {
         $users = User::pluckNameAndId();
+        $curators = Curator::pluckNameAndId();
         $tags = Tag::pluckNameAndId();
         return view('admin.project.create', [
             'tags' => $tags,
-            'users' => $users
+            'users' => $users,
+            'curators' => $curators,
         ]);
     }
 
@@ -79,6 +84,7 @@ class ProjectController extends Controller
             $project->tags()->attach($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
+            $project->managingCurators()->attach($request->curator_id);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -114,6 +120,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $users = User::pluckNameAndId();
+        $curators = Curator::pluckNameAndId();
         $tags = Tag::pluckNameAndId();
         $project_tags = $project->tags->pluck('id')->toArray();
         $projectImages = $project->projectFiles()->where('file_content_type', 'image_url')->get();
@@ -126,6 +133,7 @@ class ProjectController extends Controller
             'users' => $users,
             'projectImages' => $projectImages,
             'projectVideo' => $projectVideo,
+            'curators' => $curators,
         ]);
     }
 
@@ -144,6 +152,12 @@ class ProjectController extends Controller
             $project->tags()->sync($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
+            if($project->managingCurators->isEmpty()){
+                $project->managingCurators()->attach($request->curator_id);
+            } else {
+                $project->managingCurators()->detach();
+                $project->managingCurators()->attach($request->curator_id);
+            }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -246,7 +260,7 @@ class ProjectController extends Controller
      */
     public function changeStatus($request)
     {
-        $projects = Project::whereIn('id', $request->project_id)->get();
+        $projects = Project::whereIn('id', $request->project_id)->with('user')->get();
         //ステータスが指定されていなかったら何もしない
         if (!$request->change_status) {
             \Session::flash('error', '掲載状態を選択してください。');
@@ -268,6 +282,7 @@ class ProjectController extends Controller
             case '掲載中':
                 foreach ($projects as $project) {
                     $project->changeStatusToRelease();
+                    $project->user->notify(new ProjectIsPublishedMail($project));
                 }
                 break;
             case '掲載停止中':
@@ -350,9 +365,12 @@ class ProjectController extends Controller
     {
         if ($project->release_status === "承認待ち" || $project->release_status === "掲載停止中") {
             $project->release_status = "掲載中";
-            return $project->save() ?
-                redirect()->back()->with('flash_message', "掲載しました。") :
-                redirect()->back()->withErrors('掲載に失敗しました。');
+            if ($project->save()){
+                $project->user->notify(new ProjectIsPublishedMail($project));
+                return redirect()->back()->with('flash_message', "掲載しました。");
+            } else {
+                return redirect()->back()->withErrors('掲載に失敗しました。');
+            }
         }
         return redirect()->back()->withErrors('掲載に失敗しました。');
     }
