@@ -48,7 +48,7 @@ class ProjectController extends Controller
                 return $project->total_likes;
             })->paginate(10);
         } else {
-            $projects = $projects->with('managingCurators')->paginate(10);
+            $projects = $projects->with('curator')->paginate(10);
         }
         return view('admin.project.index', ['projects' => $projects]);
     }
@@ -84,7 +84,7 @@ class ProjectController extends Controller
             $project->tags()->attach($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
-            $project->managingCurators()->attach($request->curator_id);
+            $project->curator()->associate(Curator::find($request->curator_id))->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -152,12 +152,7 @@ class ProjectController extends Controller
             $project->tags()->sync($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
-            if($project->managingCurators->isEmpty()){
-                $project->managingCurators()->attach($request->curator_id);
-            } else {
-                $project->managingCurators()->detach();
-                $project->managingCurators()->attach($request->curator_id);
-            }
+            $project->curator()->associate(Curator::find($request->curator_id))->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

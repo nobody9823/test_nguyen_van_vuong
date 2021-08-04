@@ -29,6 +29,7 @@ class ProjectTest extends TestCase
         $this->tag = Tag::factory()->create();
         $this->project = Project::factory()->state([
             'user_id' => $this->user->id,
+            'curator_id' => $this->curator->id,
         ])->make();
     }
 
@@ -39,6 +40,7 @@ class ProjectTest extends TestCase
      */
     public function test_index()
     {
+        $this->withoutExceptionHandling();
         $response = $this->actingAs($this->admin, 'admin')->get(route('admin.project.index'));
         $response->assertViewIs('admin.project.index');
         $response->assertOk();
@@ -51,6 +53,7 @@ class ProjectTest extends TestCase
      */
     public function test_create()
     {
+        $this->withoutExceptionHandling();
         $response = $this->actingAs($this->admin, 'admin')->get(route('admin.project.create'));
         $response->assertViewIs('admin.project.create');
         $response->assertOk();
@@ -91,6 +94,7 @@ class ProjectTest extends TestCase
      */
     public function test_show()
     {
+        $this->withoutExceptionHandling();
         $this->project->save();
         $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.index'))->get(route('admin.project.show', ['project' => $this->project]));
         $response->assertOk();
@@ -104,6 +108,7 @@ class ProjectTest extends TestCase
      */
     public function test_edit()
     {
+        $this->withoutExceptionHandling();
         $this->project->save();
         $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.index'))->get(route('admin.project.edit', ['project' => $this->project]));
         $response->assertOk();

@@ -66,7 +66,7 @@ class RegisterController extends Controller
 
     public function preCreate()
     {
-        return view('user.pre_register');
+        return view('user.auth.pre_register');
     }
 
     public function preRegister(Request $request)
@@ -85,7 +85,7 @@ class RegisterController extends Controller
             } catch (\Throwable $e) {
                 DB::rollBack();
                 Log::warning("メールアドレス変更処理に失敗しました。 {$e->getMessage()}", $e->getTrace());
-                return view('user.pre_register')
+                return view('user.auth.pre_register')
                     ->with([
                         'email' => $request->email,
                         'error' => 'メールアドレスの登録に失敗しました。',
@@ -93,7 +93,7 @@ class RegisterController extends Controller
             }
             Mail::to($request->email)->send(new UserEmailVerification($emailVerification));
 
-            return view('user.pre_registered');
+            return view('user.auth.pre_registered');
         }
     }
 
@@ -103,7 +103,7 @@ class RegisterController extends Controller
         $emailVerification = EmailVerification::findByToken($token)
                                 ->tokenIsVerified()->first();
         if (empty($emailVerification) || $emailVerification->isRegister()) {
-            return view('user.pre_register')->with('error', '有効期限が切れているか、無効なアクセスです。もう一度お試しください。');
+            return view('user.auth.pre_register')->with('error', '有効期限が切れているか、無効なアクセスです。もう一度お試しください。');
         }
 
         // ステータスをメール認証済みに変更する
@@ -117,10 +117,10 @@ class RegisterController extends Controller
         } catch (\Throwable $e) {
             DB::rollBack();
             Log::warning("メールアドレスの認証に失敗しました: email: {$emailVerification->email}", $e->getTrace());
-            return view('user.pre_register')
+            return view('user.auth.pre_register')
                 ->with(['message' => 'メールアドレスの認証に失敗しました。管理者にお問い合わせください。']);
         }
-        return view('user.register')
+        return view('user.auth.register')
             ->with(['token' => $emailVerification->token]);
     }
 

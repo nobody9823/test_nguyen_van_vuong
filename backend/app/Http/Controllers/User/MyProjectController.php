@@ -142,9 +142,11 @@ class MyProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        return $project->delete() ?
+            redirect()->action([MyProjectController::class, 'index'])->with(['flash_message' => 'プロジェクトが削除されました。']) :
+            redirect()->action([MyProjectController::class, 'index'])->withErrors('プロジェクトの削除に失敗しました。');
     }
 
     public function uploadEditorFile(Request $request)

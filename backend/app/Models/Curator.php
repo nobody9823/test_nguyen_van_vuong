@@ -48,9 +48,9 @@ class Curator extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    public function managingProjects()
+    public function projects()
     {
-        return $this->belongsToMany('App\Models\Project', 'App\Models\CuratorProjectManaging');
+        return $this->hasMany('App\Models\Project');
     }
 
     public function scopePluckNameAndId($query)
