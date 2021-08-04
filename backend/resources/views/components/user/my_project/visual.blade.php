@@ -8,8 +8,9 @@
 
     @foreach($projectImages as $project_image)
         <div>
-            <div class="ib02_01 E-font my_project_img_wrapper">
+            <div class="ib02_01 E-font my_project_img_wrapper my_project_img_wrapper_show">
                 <img id="project_file_{{ $project_image->id }}" src="{{ Storage::url($project_image->file_url) }}">
+                <button id="{{ $project_image->id }}" class="js-image_delete project_image-delete"><i class="fas fa-times-circle"></i></button>
             </div>
             <input style="margin-bottom: 40px;" type="file" onChange="uploadProjectImage(this, {{ $project->id }}, {{ $project_image->id }})">
         </div>

@@ -84,6 +84,48 @@
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
+
+<script>
+    $(function() {
+        $(".js-image_delete").click(function() {
+            var deleteConfirm = confirm('削除してもよろしいですか？');
+
+            if (deleteConfirm === true) {
+                
+                var el = $(this);
+                var ImageId = el.attr('id');
+
+                el.append('<meta name="csrf-token" content="{{ csrf_token() }}">');
+
+                $.ajax({
+                        url: '/my_project/project/file/' + ImageId,
+                        type: 'POST',
+                        data: {
+                            'project_image': ImageId,
+                            '_method': 'DELETE'
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+
+                        success: function(msg) {
+                            if (msg === 'success') {
+                                alert("削除が成功しました。");
+                                el.parents('div.image-card').remove();
+                            } else {
+                                alert("エラーが起こりました。");
+                            }
+                        }
+                    })
+
+                    .fail(function() {
+                        alert('エラーが起こりました。');
+                    });
+            }
+        })
+    })
+</script>
+
 <script>
 const selectEditTag = el => {
     let myProjectSections = document.querySelectorAll('.my_project_section');
