@@ -15,7 +15,7 @@ class CuratorController extends Controller
      */
     public function index()
     {
-        $curators = Curator::with('managingProjects')->paginate(10);
+        $curators = Curator::with('projects')->paginate(10);
 
         return view('admin.curator.index', ['curators' => $curators]);
     }
