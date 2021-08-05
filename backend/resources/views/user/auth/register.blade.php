@@ -11,12 +11,12 @@
         <form action="{{ route('user.register',['token' => $token]) }}" method="POST">
             @csrf
             <div class="form_item_row">
-                <div class="form_item_tit">ユーザーID<span class="form_item_tit_desc">※全角・半角英数字3-20文字</span></div>
-                <input name="name" type="text" value="" class="def_input_100p" placeholder="ユーザーID">
+                <div class="form_item_tit">ユーザー名<span class="form_item_tit_desc">※英数字、漢字、平仮名、カタカナも可</span></div>
+                <input name="name" type="text" value="" class="def_input_100p" placeholder="ユーザー名">
             </div><!--/form_item_row-->
 
             <div class="form_item_row">
-                <div class="form_item_tit">パスワード<span class="form_item_tit_desc">※半角英数字6文字以上</span></div>
+                <div class="form_item_tit">パスワード<span class="form_item_tit_desc">※半角英数字8文字以上</span></div>
                 <input name="password" type="password" value="" class="def_input_100p" placeholder="パスワード">
             </div><!--/form_item_row-->
 
@@ -36,7 +36,7 @@
             </div>
 
             <div class="nm_s_txt">
-                ※ FanReturn.comからのメールアドレスが受信拒否設定に含まれていないかご確認ください。<br>
+                ※ mail@fanreturn.comからのメールアドレスが受信拒否設定に含まれていないかご確認ください。<br>
                 ※ FanReturnからのメールマガジン/各種お知らせをお送りさせていただきます。<br>
                 （不要な場合は登録後に解除できます。）<br>
                 ※ 携帯キャリアのメールアドレスでは、応援購入後などにシステムからのメールが届かない場合がありますのでご注意ください。<br>
