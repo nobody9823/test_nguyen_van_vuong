@@ -2,9 +2,15 @@
     @csrf
     @method('PUT')
     <div class="form_item_row">
-        <div class="form_item_tit">目標金額<span class="hissu_txt">必須</span></div>
+
+        <div class="form_item_tit">
+            <div class="spinner-wrapper">
+                <div class="spinner" id="spinner_target_amount"></div>
+                <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_target_amount"></i>
+            </div>
+            目標金額<span class="hissu_txt">必須</span></div>
         <input type="number" name="target_amount" class="p-postal-code def_input_100p"
-        value="{{ old('target_amount', optional($project)->target_amount) }}" placeholder="（例）100000">
+        value="{{ old('target_amount', optional($project)->target_amount) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
     </div>
 
     <div class="form_item_row">
