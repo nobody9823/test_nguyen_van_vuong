@@ -5,13 +5,11 @@
     <div class="def_inner inner_item">
         <div class="ps_desc_base">
             <div class="tit_L_01 E-font">
-                <h2>SUPPORTER</h2>
-                <div class="sub_tit_L">プロジェクトサポーター</div>
+                <h2>PROJECT SUPPORTER</h2>
+                <div class="sub_tit_L">プロジェクトサポーター(PS)とは</div>
             </div>
             <div class="ps_rank_img m_b_1510">
-                <img class=""
-                    src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')
-                        ->first()->file_url,) }}">
+                <img class="" src="{{ Storage::url(optional($project->projectFiles()->where('file_content_type', 'image_url')->first())->file_url) }}">
             </div>
             <div class="ps_rank_01 m_b_3020">
                 <div class="pds_sec01_progress-bar m_b_1510">
