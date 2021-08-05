@@ -811,6 +811,7 @@ input[type=radio]:checked + .radio-fan::after {
 
 
 .prof_page_base{ width: 100%; max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content:space-between;}
+.prof_page_base_not_flex{ width: 100%; max-width: 1000px; margin: 0 auto;}
 
 .prof_page_L{ width: 210px; }
 .prof_img_box{ width: 210px; margin: 0 auto;}
