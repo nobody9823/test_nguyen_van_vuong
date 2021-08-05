@@ -173,6 +173,7 @@
                                     <p>口座番号:{{ optional($project->user->identification)->account_number }}</p>
                                     <p>口座名義人名:{{ optional($project->user->identification)->account_name }}</p>
                                     <p>本人確認書類１:</p>
+                                    <span class="text-danger">※クリックすると画像をダウンロードできます。</span>
                                     <div class="text-center">
                                         <a class="text-center" href="{{ route('admin.user.download_identify_image', ['user' => $project->user, 'column_name' => 'identify_image_1']) }}">
                                             <img style="max-height:15vw; object-fit: contain;"
@@ -180,6 +181,7 @@
                                         </a>
                                     </div>
                                     <p>本人確認書類２:</p>
+                                    <span class="text-danger">※クリックすると画像をダウンロードできます。</span>
                                     <div class="text-center">
                                         <a href="{{ route('admin.user.download_identify_image', ['user' => $project->user, 'column_name' => 'identify_image_2']) }}">
                                             <img style="max-height:15vw; object-fit: contain;"
