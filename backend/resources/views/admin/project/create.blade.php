@@ -12,7 +12,7 @@
         <form action="{{ route('admin.project.store') }}" enctype="multipart/form-data" method="post">
             @csrf
             <x-manage.project.form :project="null" :project_tags="null" :tags="$tags" :users="$users"
-                :projectVideo="null" />
+                :projectVideo="null" :curators="$curators" />
 
         </form>
 

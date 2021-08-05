@@ -41,7 +41,6 @@ class ProjectFactory extends Factory
             'release_status' => Arr::random(
                 ProjectReleaseStatus::getValues()
             ),
-            'curator' => $this->faker->name,
             'start_date' => $this->faker->dateTimeBetween($startDate = '2 week', $endDate = '1 month'),
             'end_date' => $this->faker->dateTimeBetween($startDate = '1 month', $endDate = '2 month'),
             'target_amount' => $this->faker->randomDigit * 100000,

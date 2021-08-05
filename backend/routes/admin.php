@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ReplyController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\CuratorController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Models\Project;
@@ -93,6 +94,9 @@ Route::middleware('auth:admin')->group(function () {
 
     //タグ管理
     Route::resource('tag', TagController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
+
+    // キュレーター管理
+    Route::resource('curator', CuratorController::class, ['only' => ['index']]);
 
     // メッセージ管理
     Route::resource('message', MessageController::class)->only(['index', 'show']);

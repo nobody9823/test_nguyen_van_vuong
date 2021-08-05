@@ -24,12 +24,12 @@ class Project extends Model
 
     protected $fillable = [
         'user_id',
+        'curator_id',
         'title',
         'content',
         'reward_by_total_amount',
         'reward_by_total_quantity',
         'target_amount',
-        'curator',
         'start_date',
         'end_date',
     ];
@@ -126,9 +126,9 @@ class Project extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
-    public function managingCurators()
+    public function curator()
     {
-        return $this->belongsToMany('App\Models\Curator', 'App\Models\CuratorProjectManaging');
+        return $this->belongsTo('App\Models\Curator', 'curator_id');
     }
 
     //--------------local scope----------------//
