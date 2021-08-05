@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\user\project;
+namespace App\View\Components\User\Project;
 
 use Illuminate\View\Component;
 
