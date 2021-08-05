@@ -101,6 +101,9 @@
                     プロジェクトサポーター(PS)になる
                 </a>
             </div>
+            <div class="def_btn">ランキングを見る
+                <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
+            </div>
         </div>
         <!--/av_box_base-->
     </div>
