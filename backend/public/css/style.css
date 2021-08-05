@@ -1745,3 +1745,8 @@ width: 100%;
     .publish_date_wrapper {flex-direction: column;}
     .identify_image_wrapper {display: flex; flex-direction: column;}
 }
+
+.disclaimer{
+	font-weight: normal;
+	font-size: 1.2rem;
+}

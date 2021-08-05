@@ -7,7 +7,7 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">概要文<span class="nini_txt">任意</span>　<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
+    <div class="form_item_tit">概要文<span class="nini_txt">任意</span>　<span class="disclaimer">※300文字以内で入力してください</span></div>
     <textarea name="content" class="def_textarea tiny_editor" rows="6">{{ old('content', optional($project)->content) }}</textarea>
 </div>
 
