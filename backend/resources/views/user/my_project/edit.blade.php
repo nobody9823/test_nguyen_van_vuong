@@ -220,9 +220,8 @@ tinymce.init({
     relative_urls : false,
     mobile: {
         theme: 'mobile',
-        plugins: [ 'autosave', 'lists', 'autolink' ],
-        toolbar: [ 'undo', 'bold', 'italic', 'styleselect', 'image', 'link' ],
-
+        plugins: 'autosave lists autolink',
+        toolbar: ['bold italic | fontsizeselect| undo redo | link | image'],
     },
     plugins: [ 'code', 'lists', 'image', 'link', 'fullscreen', 'table'],
     toolbar: ['undo redo | bold italic | forecolor backcolor | fontsizeselect | numlist bullist | table | link | image',
