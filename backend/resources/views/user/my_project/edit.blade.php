@@ -79,6 +79,48 @@
 <script src={{ asset('/js/blade-functions.js') }}></script>
 <script src={{ asset('/js/update-myProject.js') }}></script>
 
+
+<script>
+    $(function() {
+        $(".js-image_delete").click(function() {
+            var deleteConfirm = confirm('削除してもよろしいですか？');
+
+            if (deleteConfirm === true) {
+                
+                var el = $(this);
+                var ImageId = el.attr('id');
+
+                el.append('<meta name="csrf-token" content="{{ csrf_token() }}">');
+
+                $.ajax({
+                        url: '/my_project/project/file/' + ImageId,
+                        type: 'POST',
+                        data: {
+                            'project_image': ImageId,
+                            '_method': 'DELETE'
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+
+                        success: function(msg) {
+                            if (msg === 'success') {
+                                alert("削除が成功しました。");
+                                el.parents('div.js-image__card').remove();
+                            } else {
+                                alert("エラーが起こりました。");
+                            }
+                        }
+                    })
+
+                    .fail(function() {
+                        alert('エラーが起こりました。');
+                    });
+            }
+        })
+    })
+</script>
+
 <script>
 const selectEditTag = el => {
     let myProjectSections = document.querySelectorAll('.my_project_section');
@@ -147,19 +189,22 @@ function uploadProjectImage (input, projectId, projectFileId) {
         });
     }
 }
-function uploadIdentifyImage (input, projectId, columnName, identificationId) {
-    const formData = new FormData();
-    formData.append('file',input.files[0]);
-
-    axios.post(`/my_project/project/${projectId}/uploadIdentifyImage/${identificationId}?column_name=${columnName}`, formData)
-    .then((res) => {
-        console.log(res);
-        location.replace(res.data.redirect_url);
-    })
-    .catch((err) => {
-        console.log(err.response);
-        alert(err.response.data.errors.file);
-    });
+function previewUploadedImage (input, columnName) {
+    const file = input.files[0];
+    if (file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'image/png' && file.type != 'application/pdf') {
+      alert('.jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています')
+      return
+    }
+    const preview = document.getElementById(columnName);
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const imageUrl = e.target.result; // URLはevent.target.resultで呼び出せる
+        const img = document.createElement("img"); // img要素を作成
+        img.src = imageUrl; // URLをimg要素にセット
+        preview.removeChild(preview.firstElementChild);
+        preview.appendChild(img); // #previewの中に追加
+    }
+    reader.readAsDataURL(file);
 }
 </script>
 <script>

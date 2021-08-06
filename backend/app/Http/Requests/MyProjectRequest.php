@@ -39,7 +39,7 @@ class MyProjectRequest extends FormRequest
             'image_url.*' => ['nullable', 'array'],
             'image_url.*.*' => ['nullable', 'image'],
             'video_url' => ['nullable', 'url', 'regex:#(https?\:\/\/)(www\.youtube\.com\/watch\?v=|youtu\.be\/)+[\S]{11}#'],
-            'target_amount' => ['nullable', 'integer', 'min:0'],
+            'target_amount' => ['nullable', 'integer', 'min:10000','max:99999999'],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', /*'after_or_equal:+14 day'*/],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', 'after:start_date'],
             'reward_by_total_amount' => ['nullable', 'string', 'max:100000'],

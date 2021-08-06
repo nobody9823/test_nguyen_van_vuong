@@ -391,7 +391,7 @@ class ProjectController extends Controller
 
         $projects = $projectsQuery->GetReleasedProject()->with('tags')->paginate(9);
 
-        return view('user.search', compact('projects', 'tags', 'user_liked'));
+        return view('user.project.search', compact('projects', 'tags', 'user_liked'));
     }
 
     public function consultProject()

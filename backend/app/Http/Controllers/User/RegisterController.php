@@ -10,6 +10,7 @@ use App\Models\Address;
 use App\Models\SnsLink;
 use App\Models\Identification;
 use App\Providers\RouteServiceProvider;
+use App\Rules\Password;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
@@ -59,14 +60,14 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => ['required', 'string', 'confirmed', new Password],
             'password_confirmation' => 'required|string',
         ]);
     }
 
     public function preCreate()
     {
-        return view('user.pre_register');
+        return view('user.auth.pre_register');
     }
 
     public function preRegister(Request $request)
@@ -85,7 +86,7 @@ class RegisterController extends Controller
             } catch (\Throwable $e) {
                 DB::rollBack();
                 Log::warning("メールアドレス変更処理に失敗しました。 {$e->getMessage()}", $e->getTrace());
-                return view('user.pre_register')
+                return view('user.auth.pre_register')
                     ->with([
                         'email' => $request->email,
                         'error' => 'メールアドレスの登録に失敗しました。',
@@ -93,7 +94,7 @@ class RegisterController extends Controller
             }
             Mail::to($request->email)->send(new UserEmailVerification($emailVerification));
 
-            return view('user.pre_registered');
+            return view('user.auth.pre_registered');
         }
     }
 
@@ -101,9 +102,9 @@ class RegisterController extends Controller
     {
         // 有効なtokenか確認する
         $emailVerification = EmailVerification::findByToken($token)
-                                ->tokenIsVerified()->first();
+            ->tokenIsVerified()->first();
         if (empty($emailVerification) || $emailVerification->isRegister()) {
-            return view('user.pre_register')->with('error', '有効期限が切れているか、無効なアクセスです。もう一度お試しください。');
+            return view('user.auth.pre_register')->with('error', '有効期限が切れているか、無効なアクセスです。もう一度お試しください。');
         }
 
         // ステータスをメール認証済みに変更する
@@ -117,10 +118,10 @@ class RegisterController extends Controller
         } catch (\Throwable $e) {
             DB::rollBack();
             Log::warning("メールアドレスの認証に失敗しました: email: {$emailVerification->email}", $e->getTrace());
-            return view('user.pre_register')
+            return view('user.auth.pre_register')
                 ->with(['message' => 'メールアドレスの認証に失敗しました。管理者にお問い合わせください。']);
         }
-        return view('user.register')
+        return view('user.auth.register')
             ->with(['token' => $emailVerification->token]);
     }
 
@@ -137,7 +138,7 @@ class RegisterController extends Controller
             DB::beginTransaction();
             try {
                 $emailVerification = EmailVerification::findByToken($token)
-                                        ->tokenIsVerified()->first();
+                    ->tokenIsVerified()->first();
                 $user = User::create([
                     'name' => $request->name,
                     'email' => $emailVerification->email,
@@ -151,12 +152,12 @@ class RegisterController extends Controller
                 $emailVerification->register();
                 $emailVerification->update();
                 DB::commit();
-            } catch(\Throwable $e){
+            } catch (\Throwable $e) {
                 DB::rollback();
                 return redirect()->action([RegisterController::class, 'create'], ['token' => $token])->withErrors("登録に失敗しました。もう一度入力してください。");
             }
-                Auth::login($user);
-                return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'FanReturnへの登録が完了致しました。');
+            Auth::login($user);
+            return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'FanReturnへの登録が完了致しました。');
         }
     }
 }

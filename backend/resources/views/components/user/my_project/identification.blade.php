@@ -1,25 +1,25 @@
-<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr">
+<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 <span class="p-country-name" style="display:none;">Japan</span>
 <div class="form_item_row">
     <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>
-    <input type="text" name="first_name" class="def_input_100p" value="{{ old('first_name', optional($user->profile)->first_name) }}">
-</div>
-
-<div class="form_item_row">
-    <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
     <input type="text" name="last_name" class="def_input_100p" value="{{ old('last_name', optional($user->profile)->last_name) }}">
 </div>
 
 <div class="form_item_row">
+    <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
+    <input type="text" name="first_name" class="def_input_100p" value="{{ old('first_name', optional($user->profile)->first_name) }}">
+</div>
+
+<div class="form_item_row">
     <div class="form_item_tit">セイ（全角）<span class="hissu_txt">必須</span></div>
-    <input type="text" name="first_name_kana" class="def_input_100p" value="{{ old('first_name_kana', optional($user->profile)->first_name_kana) }}">
+    <input type="text" name="last_name_kana" class="def_input_100p" value="{{ old('last_name_kana', optional($user->profile)->last_name_kana) }}">
 </div>
 
 <div class="form_item_row">
     <div class="form_item_tit">メイ（全角）<span class="hissu_txt">必須</span></div>
-    <input type="text" name="last_name_kana" class="def_input_100p" value="{{ old('last_name_kana', optional($user->profile)->last_name_kana) }}">
+    <input type="text" name="first_name_kana" class="def_input_100p" value="{{ old('first_name_kana', optional($user->profile)->first_name_kana) }}">
 </div>
 
 <div class="form_item_row">
@@ -92,15 +92,13 @@
     <div class="identify_image_wrapper">
         <div>
             <div style="text-align: center;">
-                @if (optional($user)->identification->identify_image_1 !== null)
-                    <div class="ib02_01 E-font my_project_img_wrapper identify_img">
-                        <img src="{{ Storage::url($user->identification->identify_image_1) }}">
-                    </div>
-                @endif
+                <div id="identify_image_1" class="ib02_01 E-font my_project_img_wrapper identify_img">
+                    <img src="{{ Storage::url($user->identification->identify_image_1) }}">
+                </div>
                 <div class="form_item_tit" style="margin-bottom: 10px">本人確認書類1</div>
                 <div class="input_file_button_wrapper">
                     <label>
-                        <input type="file" hidden onChange="uploadIdentifyImage(this, {{ $project->id }}, 'identify_image_1', {{ $user->identification->id }})">
+                        <input name="identify_image_1" type="file" hidden onChange="previewUploadedImage(this, 'identify_image_1')">
                         <a class="input_file_button">
                             ファイルを選択する
                         </a>
@@ -108,15 +106,13 @@
                 </div>
             </div>
             <div style="text-align: center;">
-                @if (optional($user)->identification->identify_image_2 !== null)
-                    <div class="ib02_01 E-font my_project_img_wrapper identify_img">
-                        <img src="{{ Storage::url($user->identification->identify_image_2) }}">
-                    </div>
-                @endif
+                <div id="identify_image_2" class="ib02_01 E-font my_project_img_wrapper identify_img">
+                    <img src="{{ Storage::url($user->identification->identify_image_2) }}">
+                </div>
                 <div class="form_item_tit" style="margin-bottom: 10px">本人確認書類2</div>
                 <div class="input_file_button_wrapper">
                     <label>
-                        <input type="file" hidden onChange="uploadIdentifyImage(this, {{ $project->id }}, 'identify_image_2', {{ $user->identification->id }})">
+                        <input name="identify_image_2" type="file" hidden onChange="previewUploadedImage(this, 'identify_image_2')">
                         <a class="input_file_button">
                             ファイルを選択する
                         </a>
@@ -130,8 +126,7 @@
             <ul>
                 <li>運転免許証</li>
                 <li>
-                    健康保険被保険者証<br/>
-                    ※保険者番号、被保険者等記号・番号・QRコードについては撮影時に隠してください
+                    健康保険被保険者証
                 </li>
                 <li>
                     パスポート（顔写真と所持人記入欄（要住所記入）のページ）<br/>
@@ -152,7 +147,17 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">金融機関コード・銀行コード<span class="hissu_txt">必須</span></div>
+    <div class="form_item_tit">
+        金融機関コード・銀行コード
+        <span class="hissu_txt">必須</span>
+    <br/>
+        <span>
+            <a href="https://www.zenginkyo.or.jp/abstract/outline/organization/member-01/" target="_blank">
+                <i class="fas fa-external-link-alt"></i>
+                金融機関コードが不明な方はこちら
+            </a>
+        </span>
+    </div>
     <input type="number" name="bank_code" class="def_input_100p" value="{{ old('bank_code', optional($user->identification)->bank_code) }}">
 </div>
 

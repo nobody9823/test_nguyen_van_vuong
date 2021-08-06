@@ -8,6 +8,9 @@
     </div>
 
     <div class="pds_sec02_txt">
+        {{ $plan->title }}
+    </div>
+    <div class="pds_sec02_txt">
         {{ $plan->content }}
     </div>
 

@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
         });
+        Route::delete('project/file/{project_file}', [MyProjectController::class, 'deleteFile'])->name('project_image.destroy');
+        // Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');
     });
     Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_amount');
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
@@ -79,7 +81,7 @@ Route::middleware(['guest:web', 'throttle:10'])->group(function () {
     });
 });
 // --------------------Top Page-------------------
-Route::get('/question', [TopPageController::class, 'question'])->name('question');
+Route::get('/question', [MypageController::class, 'question'])->name('question');
 
 //---------------------Forgot Password-----------------------------------------------
 Route::get('/forgot_password', [PasswordResetController::class, 'forgotPassword'])->name('forgot_password');

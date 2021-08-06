@@ -45,6 +45,7 @@ Route::middleware('auth:admin')->group(function () {
         Route::resource('address', AddressController::class, ['only' => ['create', 'store', 'update']]);
         Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::resource('profile', ProfileController::class, ['only' => ['create', 'store', 'update']]);
+        Route::get('download_identify_image', [UserController::class, 'downloadIdentifyImage'])->name('user.download_identify_image');
     });
 
     //プロフィール管理

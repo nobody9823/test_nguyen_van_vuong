@@ -1,13 +1,13 @@
-<div class="m_b_1510">
+<div style="width: 100%">
     <div class="av_sns_btn dis_f_wra_alc">
-        <a href="https://twitter.com/share?&text=私が応援しているプロジェクトです！応援お願いします！%0a&url={{ $invitationUrl() }}%0a&hashtags=fanreturn,ファンリターン">
+        <a href="https://twitter.com/share?&text=私が応援しているプロジェクトです！応援お願いします！%0a%23fanreturn%20%23ファンリターン%0a&url={{ $invitationUrl() }}" target="_blank">
             <img class="" src="{{ asset('image/sns_01.svg') }}">
         </a>
 
         <a href="https://social-plugins.line.me/lineit/share?url={{ $invitationUrl() }}&text=私が応援しているプロジェクトです！応援お願いします！" target="_blank"><img src="{{ asset('image/sns_02.svg') }}"></a>
 
         <div data-href="{{ $invitationUrl() }}">
-            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?quote=私が応援しているプロジェクトです！応援お願いします！&hashtag=fanreturn&hashtag=ファンリターン&u={{ $invitationUrl() }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?quote=私が応援しているプロジェクトです！応援お願いします！&u={{ $invitationUrl() }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
                 <img class="" src="{{ asset('image/sns_03.svg') }}">
             </a>
         </div>
@@ -18,6 +18,13 @@
         <p id="js-copyalert" style="display: none">コピーできました！</p>
     </div>
 </div>
+@if ($rankingButton === true)
+<div class="m_b_4030" style="width: 100%">
+    <div class="def_btn">ランキングを見る
+        <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
+    </div>
+</div>
+@endif
 
 <script>
     $(function() {
