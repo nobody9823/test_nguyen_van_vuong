@@ -68,11 +68,11 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">住所の有無<span class="hissu_txt">必須</span></div>
+    <div class="form_item_tit">住所情報の取得<small>(※リターンを配送する場合等に利用)</small><span class="hissu_txt">必須</span></div>
     <div class="cp_ipselect cp_normal">
         <select name="address_is_required" class="p-region">
-            <option value=0 {{ optional($plan)->address_is_required === 0 ? 'selected' : '' }}>なし</option>
-            <option value=1 {{ optional($plan)->address_is_required === 1 ? 'selected' : '' }}>あり</option>
+            <option value=0 {{ optional($plan)->address_is_required === 0 ? 'selected' : '' }}>要</option>
+            <option value=1 {{ optional($plan)->address_is_required === 1 ? 'selected' : '' }}>不要</option>
         </select>
     </div>
 </div>
