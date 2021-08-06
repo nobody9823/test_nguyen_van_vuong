@@ -128,7 +128,7 @@ class ProjectTest extends TestCase
             'content' => $this->project->content,
             'reward_by_total_amount' => $this->project->reward_by_total_amount,
             'reward_by_total_quantity' => $this->project->reward_by_total_quantity,
-            'target_amount' => $this->project->target_amount * 0.1,
+            'target_amount' => $this->project->target_amount,
             'curator_id' => $this->curator->id,
             'tags' => [$this->tag->id],
             'start_date' => $start_date->format('Y-m-d H:i:s'),
