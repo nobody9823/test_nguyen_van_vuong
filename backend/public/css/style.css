@@ -1607,7 +1607,7 @@ input[name="tab_item"] {
 	.ps_rank_02_rank_item_row{ font-size: 1.4rem;}
 	.ps_rank_more_btn{text-align: center;}
 
-	.ps_rank_02_return_L{padding: 0 0 0 0; width: 100%; order: 5;border-right: none; border-top: solid 1px #00AEBD; padding-top: 10px;}
+	.ps_rank_02_return_L{padding: 0 0 0 0; width: 100%; order: 5;border-right: none; border-top: solid 1px #00AEBD; border-bottom: 1px solid #00AEBD; padding-top: 10px;}
 	.ps_rank_02_return_R{padding: 0 0 0 0; width: 100%; order: 6;}
 	.ps_rank_02_return_tit{ font-size: 1.4rem;}
 }
