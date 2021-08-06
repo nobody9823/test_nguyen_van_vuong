@@ -218,44 +218,6 @@ tinymce.init({
     menubar: false,
     entity_encoding: 'raw',
     relative_urls : false,
-    setup: function(editor) {
-        editor.on('input', function(e){
-            const projectId = "{{ $project->id }}";
-
-            var Timer = null;
-
-            var savedTimer = null;
-
-            var data = {};
-
-            data['content'] = tinyMCE.activeEditor.getContent();
-
-            if (Timer) { clearTimeout(Timer); }
-            Timer = setTimeout(() => {uploadProject(data, projectId);}, 1000);
-
-            const uploadProject = (data, projectId) => {
-                document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'block';
-                axios.post(`/my_project/uploadProject/${projectId}`, data).then(res => {
-                    if(res.data.result === true){
-                        document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
-                        displayIcon(document.getElementById('saved_' + Object.keys(data)[0]));
-                    }
-                }).catch(res => {
-                    console.log(res);
-                });
-            }
-
-            const displayIcon = (el) => {
-                el.style.display = 'contents';
-                setTimeout(() => { dissaperIcon(el); }, 3000);
-            }
-
-            const dissaperIcon = (el) => {
-                el.style.display = 'none';
-                clearTimeout(savedTimer);
-            }
-        });
-    },
     mobile: {
         theme: 'mobile',
         plugins: [ 'autosave', 'lists', 'autolink' ],
@@ -277,6 +239,19 @@ tinymce.init({
                 console.log(err);
                 failure('HTTP Error: ' + err.message);
             });
+    },
+    init_instance_callback: function (editor) {
+        const projectId = {{ $project->id }};
+        editor.on('change', function () {
+            // 変更した要素の取得
+            updateMyProject.textInput(
+                {
+                    name: editor.getElement().name,
+                    value: editor.getContent(),
+                },
+                projectId
+            )
+        });
     }
 });
 </script>
