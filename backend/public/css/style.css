@@ -1760,6 +1760,41 @@ width: 100%;
     .identify_image_wrapper {display: flex; flex-direction: column;}
 }
 
+div.spinner {
+	height: 21px;
+	width: 21px;
+	border-radius: 50%;
+	border: dashed 1px #252525;
+	display: none;
+	-webkit-animation-name: loader-spin;
+			animation-name: loader-spin;
+	-webkit-animation-duration: 2s;
+			animation-duration: 2s;
+	-webkit-animation-iteration-count: infinite;
+			animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+			animation-timing-function: linear;
+}
+
+div.spinner.large {
+	width: 43px;
+	height: 43px;
+	border-width: 3px;
+}
+
+@-webkit-keyframes loader-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+div.spinner-wrapper {
+	margin: 16px;
+}
+
 .disclaimer{
 	font-weight: normal;
 	font-size: 1.2rem;

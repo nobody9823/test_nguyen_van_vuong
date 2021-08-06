@@ -36,6 +36,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
 Route::group(['middleware' => ['auth:web']], function () {
     Route::prefix('my_project')->group(function () {
         Route::post('project/upload_editor_file', [MyProjectController::class, 'uploadEditorFile'])->name('project.upload_editor_file');
+        Route::post('uploadProject/{project}', [MyProjectController::class, 'uploadProject']);
         Route::post('project/{project}/uploadProjectImage/{project_file?}', [MyProjectController::class, 'uploadProjectImage'])->name('project.uploadProjectImage');
         Route::post('project/{project}/uploadIdentifyImage/{identification}', [MyProjectController::class, 'uploadIdentifyImage'])->name('uploadIdentifyImage');
         Route::post('project/{project}/apply', [MyProjectController::class, 'apply'])->name('project.apply');

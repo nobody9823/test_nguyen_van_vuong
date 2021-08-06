@@ -197,4 +197,9 @@ class MyProjectController extends Controller
             throw $e;
         }
     }
+
+    public function uploadProject(MyProjectRequest $request, Project $project)
+    {
+        return response()->json(['result' => $project->fill($request->all())->save()]);
+    }
 }
