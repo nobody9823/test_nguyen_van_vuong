@@ -32,6 +32,14 @@ const updateMyProject = (() => {
 
     var birthDay = document.getElementById('birth_day');
 
+    var postal_code = document.getElementById('postal_code');
+
+    var prefecture = document.getElementById('prefecture');
+
+    var city = document.getElementById('city');
+
+    var block = document.getElementById('block');
+
     const displayIcon = (el) => {
         el.style.display = 'contents';
         setTimeout(() => { dissaperIcon(el); }, 3000);
@@ -122,7 +130,17 @@ const updateMyProject = (() => {
                     data[birthDay.name] = birthDay.value;
                     setTimer(data, projectId, 'text');
                 }
-            };
+            } else if (el.name == 'postal_code'){
+                if (postal_code.value !== "" && prefecture.value !== "" && city.value !== "" && block.value !== "")
+                {
+                    data = {};
+                    data[postal_code.name] = postal_code.value;
+                    data[prefecture.name] = prefecture.value;
+                    data[city.name] = city.value;
+                    data[block.name] = block.value;
+                    setTimer(data, projectId, 'text');
+                }
+            }
         },
 
         inputIsChecked: (el, projectId) => {

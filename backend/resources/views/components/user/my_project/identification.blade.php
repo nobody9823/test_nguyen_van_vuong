@@ -58,8 +58,8 @@
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_postal_code"></i>
     </div>
     <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-    <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p"
-        value="{{ old('postal_code', optional($user->address)->postal_code) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
+    <input type="number" id="postal_code" name="postal_code" class="p-postal-code def_input_100p"
+        value="{{ old('postal_code', optional($user->address)->postal_code) }}" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
 </div>
 
 <div class="form_item_row">
@@ -69,7 +69,7 @@
     </div>
     <div class="form_item_tit">都道府県<span class="hissu_txt">必須</span></div>
     <div class="cp_ipselect cp_normal">
-        <select name="prefecture" class="p-region" onchange="updateMyProject.textInput(this, {{ $project->id }})">
+        <select id="prefecture" name="prefecture" class="p-region" oninput="updateMyProject.textInput(this, {{ $project->id }})">
                 <option value="non_selected">選択してください</option>
             @for($i = 1; $i <= 47; $i++)
                 <option value="{{ PrefectureHelper::getPrefectures()[$i] }}" {{ optional($user->address)->prefecture === PrefectureHelper::getPrefectures()[$i] || old('prefecture') === PrefectureHelper::getPrefectures()[$i] ? 'selected' : '' }}>{{ PrefectureHelper::getPrefectures()[$i] }}</option>
@@ -84,8 +84,8 @@
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_city"></i>
     </div>
     <div class="form_item_tit">市区町村<span class="hissu_txt">必須</span></div>
-    <input type="text" name="city" class="p-locality def_input_100p"
-        value="{{ old('city', optional($user->address)->city) }}" onchange="updateMyProject.textInput(this, {{ $project->id }})">
+    <input type="text" id="city" name="city" class="p-locality def_input_100p"
+        value="{{ old('city', optional($user->address)->city) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
 </div>
 
 <div class="form_item_row">
@@ -94,8 +94,8 @@
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_block"></i>
     </div>
     <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
-    <input type="text" name="block" class="p-street-address def_input_100p"
-        value="{{ old('block', optional($user->address)->block) }}" onchange="updateMyProject.textInput(this, {{ $project->id }})">
+    <input type="text" id="block" name="block" class="p-street-address def_input_100p"
+        value="{{ old('block', optional($user->address)->block) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
 </div>
 
 <div class="form_item_row">
