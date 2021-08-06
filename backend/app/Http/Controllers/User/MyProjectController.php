@@ -149,6 +149,17 @@ class MyProjectController extends Controller
             redirect()->action([MyProjectController::class, 'index'])->withErrors('プロジェクトの削除に失敗しました。');
     }
 
+    /**
+     * @param  ProjectImage  $projectImage
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function deleteFile(ProjectFile $project_file)
+    {
+        $project_file->deleteFile();
+        return response()->json('success');
+    }
+
     public function uploadEditorFile(Request $request)
     {
         $request->validate([
