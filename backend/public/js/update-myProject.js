@@ -26,6 +26,12 @@ const updateMyProject = (() => {
 
     var endMinute = document.getElementById('end_minute');
 
+    var birthYear = document.getElementById('birth_year');
+
+    var birthMonth = document.getElementById('birth_month');
+
+    var birthDay = document.getElementById('birth_day');
+
     const displayIcon = (el) => {
         el.style.display = 'contents';
         setTimeout(() => { dissaperIcon(el); }, 3000);
@@ -36,9 +42,13 @@ const updateMyProject = (() => {
         clearTimeout(savedTimer);
     }
 
-    const setTimer = (data, projectId) => {
+    const setTimer = (data, projectId, inputType) => {
         if (Timer) {clearTimeout(Timer);}
-        Timer = setTimeout(() => {uploadProject(data, projectId);}, 1000)
+        if (inputType == 'text') {
+            Timer = setTimeout(() => {uploadProject(data, projectId);}, 1000)
+        } else if (inputType == 'image') {
+            Timer = setTimeout(() => {uploadProjectImage(data, projectId);}, 1000)
+        }
     }
 
     const uploadProject = (data, projectId) => {
@@ -54,11 +64,27 @@ const updateMyProject = (() => {
         });
     }
 
+    const uploadProjectImage = (data, projectId) => {
+        document.getElementById('spinner_' + data.name).style.display = 'block';
+
+        axios.post(`/my_project/uploadProject/${projectId}`, data.value).then(res => {
+            if(res.data.result === true){
+                document.getElementById('spinner_' + data.name).style.display = 'none';
+                displayIcon(document.getElementById('saved_' + data.name));
+            }
+        }).catch(res => {
+            console.log(res);
+        });
+    }
+
     return {
         textInput: (el, projectId) => {
             data = {};
             data[el.name] = el.value;
-            setTimer(data, projectId);
+            setTimer(data, projectId, 'text');
+        },
+        imageInput: (el, projectId) => {
+            setTimer(el, projectId, 'image');
         },
 
         checkDateIsFilled: (el, projectId) => {
@@ -72,7 +98,7 @@ const updateMyProject = (() => {
                     data[startDay.name] = startDay.value;
                     data[startHour.name] = startHour.value;
                     data[startMinute.name] = startMinute.value;
-                    setTimer(data, projectId);
+                    setTimer(data, projectId, 'text');
                 }
             } else if (el.name.indexOf('end') !== -1){
                 if (endYear.value !== "" && endMonth.value !== "" && endDay.value !== "" && endHour.value !== "" && endMinute.value !== "")
@@ -84,7 +110,17 @@ const updateMyProject = (() => {
                     data[endDay.name] = endDay.value;
                     data[endHour.name] = endHour.value;
                     data[endMinute.name] = endMinute.value;
-                    setTimer(data, projectId);
+                    setTimer(data, projectId, 'text');
+                }
+            } else if (el.name.indexOf('birth') !== -1){
+                if (birthYear.value !== "" && birthMonth.value !== "" && birthDay.value !== "")
+                {
+                    data = {};
+                    data["birth_date"] = 'birth_date';
+                    data[birthYear.name] = birthYear.value;
+                    data[birthMonth.name] = birthMonth.value;
+                    data[birthDay.name] = birthDay.value;
+                    setTimer(data, projectId, 'text');
                 }
             };
         },
@@ -97,7 +133,7 @@ const updateMyProject = (() => {
                     data['tags'][i] = el.childNodes[i].value;
                 }
             }
-            setTimer(data, projectId);
+            setTimer(data, projectId, 'text');
         }
     }
 })();

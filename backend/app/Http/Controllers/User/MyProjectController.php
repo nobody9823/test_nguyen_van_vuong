@@ -203,10 +203,13 @@ class MyProjectController extends Controller
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
+            $this->user->identification->fill($request->all())->save();
+            $this->user->profile->fill($request->all())->save();
+            $this->user->address->fill($request->all())->save();
             $this->project_service->attachTags($project, $request);
             DB::commit();
             return response()->json(['result' => true]);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['result' => false]);
         }

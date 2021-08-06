@@ -206,6 +206,18 @@ function previewUploadedImage (input, columnName) {
     }
     reader.readAsDataURL(file);
 }
+function uploadedImageHandler (input, columnName, projectId) {
+    previewUploadedImage(input, columnName);
+    const el = new FormData();
+    el.append(columnName, input.files[0]);
+    updateMyProject.imageInput(
+        {
+            name: columnName,
+            value: el,
+        },
+        projectId
+    );
+}
 </script>
 <script>
 tinymce.init({
