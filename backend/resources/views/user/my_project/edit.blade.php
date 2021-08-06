@@ -105,7 +105,7 @@
                         success: function(msg) {
                             if (msg === 'success') {
                                 alert("削除が成功しました。");
-                                el.parents('div.image-card').remove();
+                                el.parents('div.js-image__card').remove();
                             } else {
                                 alert("エラーが起こりました。");
                             }
