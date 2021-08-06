@@ -987,6 +987,8 @@ input[type=radio]:checked + .radio-fan::after {
 .def_outer_blue{ width: 100%; background: #F7FDFF;}
 .def_outer_gray{ width: 100%; background: #F8F8F8;}
 
+.attention_message{color: red;text-align: center;margin:0 0 10px 0;}
+
 @media screen and (max-width: 768px){
 .def_btn{font-size: 1.6rem;}
 .def_btn_02{font-size: 1.6rem;}
