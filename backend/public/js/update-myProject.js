@@ -87,6 +87,17 @@ const updateMyProject = (() => {
                     setTimer(data, projectId);
                 }
             };
+        },
+
+        inputIsChecked: (el, projectId) => {
+            data = {};
+            data['tags'] = {};
+            for(i = 0; i < el.childNodes.length; i++){
+                if (el.childNodes[i].type === 'checkbox' && el.childNodes[i].checked){
+                    data['tags'][i] = el.childNodes[i].value;
+                }
+            }
+            setTimer(data, projectId);
         }
     }
 })();

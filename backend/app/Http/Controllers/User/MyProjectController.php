@@ -200,6 +200,15 @@ class MyProjectController extends Controller
 
     public function uploadProject(MyProjectRequest $request, Project $project)
     {
-        return response()->json(['result' => $project->fill($request->all())->save()]);
+        DB::beginTransaction();
+        try {
+            $project->fill($request->all())->save();
+            $this->project_service->attachTags($project, $request);
+            DB::commit();
+            return response()->json(['result' => true]);
+        } catch (\Exception $e){
+            DB::rollback();
+            return response()->json(['result' => false]);
+        }
     }
 }
