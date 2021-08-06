@@ -57,20 +57,4 @@ class ProjectService
             );
         }
     }
-
-    public function saveIdentifyImage(Identification $identification, Request $request)
-    {
-        try {
-            $column_name = $request->column_name;
-            $identification->$column_name = $request->file;
-            $identification->save();
-        } catch (Exception $e) {
-            Log::alert($e->getMessage(), $e->getTrace());
-            $res = response()->json([
-                'status' => 500,
-                'errors' => $e->getMessage(),
-            ], 500);
-            throw new HttpResponseException($res);
-        }
-    }
 }

@@ -185,18 +185,6 @@ class MyProjectController extends Controller
         ], 200);
     }
 
-    public function uploadIdentifyImage(Project $project, Identification $identification, AxiosUploadFileRequest $request)
-    {
-        $this->authorize('checkOwnIdentificationImage', $identification);
-        $this->project_service->saveIdentifyImage($identification, $request);
-
-        session()->flash('flash_message', '本人確認書類の更新が完了しました。');
-        return response()->json([
-            'status' => 200,
-            'redirect_url' => route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'identification']),
-        ], 200);
-    }
-
     public function apply(Project $project)
     {
         try {
