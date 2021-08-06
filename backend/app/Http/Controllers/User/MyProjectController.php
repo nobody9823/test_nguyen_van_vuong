@@ -204,10 +204,12 @@ class MyProjectController extends Controller
         try {
             $project->fill($request->all())->save();
             $this->project_service->attachTags($project, $request);
+            $this->project_service->saveVideoUrl($project, $request);
             DB::commit();
             return response()->json(['result' => true]);
         } catch (\Exception $e){
             DB::rollback();
+            throw $e;
             return response()->json(['result' => false]);
         }
     }
