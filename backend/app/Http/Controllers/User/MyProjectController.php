@@ -59,7 +59,7 @@ class MyProjectController extends Controller
     {
         $project = $this->user->projects()->save(Project::initialize());
 
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project]);
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with('attention_message', '※申請には本人確認が必須となります。早めにご記入ください。');
     }
 
     /**
