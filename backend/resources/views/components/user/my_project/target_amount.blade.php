@@ -2,7 +2,6 @@
     @csrf
     @method('PUT')
     <div class="form_item_row">
-        <p>※本人確認書類をご用意ください</p>
         <div class="form_item_tit">目標金額<span class="hissu_txt">必須</span></div>
         <input type="number" name="target_amount" class="p-postal-code def_input_100p"
         value="{{ old('target_amount', optional($project)->target_amount) }}" placeholder="（例）100000">
