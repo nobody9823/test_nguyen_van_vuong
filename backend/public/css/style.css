@@ -710,7 +710,14 @@ input[type=radio]:checked + .radio-fan::after {
 	height: 43px;
 }
 
-
+@media screen and (max-width: 768px){
+	.cp_width_50{ 
+		width: 50%; 
+		border: solid 1px #0f0f0f;
+		border-radius: 4px;
+	}
+	
+}
 
 
 .acd-check{
@@ -1739,7 +1746,7 @@ width: 100%;
 .my_new_project_wrapper {margin: 15px 0 15px 0;}
 .my_new_project {width: 100%;}
 .publish_date_wrapper {display: flex; flex-direction: row;}
-.publish_date_after_month {display: flex;}
+.publish_date_after_month {display: flex;flex-wrap: wrap;}
 .project_image_row {justify-content: space-around;}
 .plan_image_wrapper {text-align: center;}
 .identify_image_wrapper {display: flex; flex-direction: row; align-items: center;}
