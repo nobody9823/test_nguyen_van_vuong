@@ -45,7 +45,7 @@
                 </select>
             </div>
             <div class="publish_date_after_month">
-                <div class="cp_ipselect cp_normal">
+                <div class="cp_ipselect cp_normal cp_width_50">
                     <select class="form-control" id="start_month" name="start_month" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>月</option>
                         @for ($i = 1; $i <= 12; $i++)
@@ -56,10 +56,10 @@
                         @endfor
                     </select>
                 </div>
-                <div class="cp_ipselect cp_normal">
+                <div class="cp_ipselect cp_normal cp_width_50">
                     <select class="form-control" id="start_day" name="start_day" data-old-value="{{ old('start_day', $project->start_date->day) }}" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})"></select>
                 </div>
-                <div class="cp_ipselect cp_normal">
+                <div class="cp_ipselect cp_normal cp_width_50">
                     <select class="form-control" id="start_hour" name="start_hour" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>時</option>
                         @for ($i = 0; $i <= 23; $i++)
@@ -70,7 +70,7 @@
                         @endfor
                     </select>
                 </div>
-                <div class="cp_ipselect cp_normal">
+                <div class="cp_ipselect cp_normal cp_width_50">
                     <select class="form-control" id="start_minute" name="start_minute" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>分</option>
                         @for ($i = 0; $i <= 59; $i++)
@@ -114,7 +114,7 @@
                 </select>
             </div>
             <div class="publish_date_after_month">
-                <div class="cp_ipselect cp_normal">
+                <div class="cp_ipselect cp_normal cp_width_50">
                     <select class="form-control" id="end_month" name="end_month" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>月</option>
                         @for ($i = 1; $i <= 12; $i++)
@@ -125,10 +125,10 @@
                         @endfor
                     </select>
                 </div>
-                <div class="cp_ipselect cp_normal">
+                <div class="cp_ipselect cp_normal cp_width_50">
                     <select class="form-control" id="end_day" name="end_day" data-old-value="{{ old('end_day', $project->end_date->day) }}" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})"></select>
                 </div>
-                <div class="cp_ipselect cp_normal">
+                <div class="cp_ipselect cp_normal cp_width_50">
                     <select class="form-control" name="end_hour" id="end_hour" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>時</option>
                         @for ($i = 0; $i <= 23; $i++)
@@ -139,7 +139,7 @@
                         @endfor
                     </select>
                 </div>
-                <div class="cp_ipselect cp_normal">
+                <div class="cp_ipselect cp_normal cp_width_50">
                     <select class="form-control" name="end_minute" id="end_minute" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>分</option>
                         @for ($i = 0; $i <= 60; $i++)
