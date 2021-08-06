@@ -86,7 +86,7 @@
             var deleteConfirm = confirm('削除してもよろしいですか？');
 
             if (deleteConfirm === true) {
-                
+
                 var el = $(this);
                 var ImageId = el.attr('id');
 
@@ -238,6 +238,19 @@ tinymce.init({
                 console.log(err);
                 failure('HTTP Error: ' + err.message);
             });
+    },
+    init_instance_callback: function (editor) {
+        const projectId = {{ $project->id }};
+        editor.on('change', function () {
+            // 変更した要素の取得
+            updateMyProject.textInput(
+                {
+                    name: editor.getElement().name,
+                    value: editor.getContent(),
+                },
+                projectId
+            )
+        });
     }
 });
 </script>
