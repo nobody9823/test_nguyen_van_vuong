@@ -45,6 +45,11 @@
             </div>
         </div>
 
+        @if (session('attention_message'))
+        <p class="attention_message">
+            {{ session('attention_message') }}
+        </p>
+        @endif
         <div class="def_outer_gray">
             <div class=" def_inner inner_item">
                 <section style="{{ Request::get('next_tab') === 'target_amount' || Request::get('next_tab') === null ? '' : 'display: none;' }}" id="target_amount_section" class="my_project_section">

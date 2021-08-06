@@ -59,7 +59,7 @@ class MyProjectController extends Controller
     {
         $project = $this->user->projects()->save(Project::initialize());
 
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project]);
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with('attention_message', '※申請には本人確認が必須となります。早めにご記入ください。');
     }
 
     /**
@@ -207,10 +207,12 @@ class MyProjectController extends Controller
             $this->user->profile->fill($request->all())->save();
             $this->user->address->fill($request->all())->save();
             $this->project_service->attachTags($project, $request);
+            $this->project_service->saveVideoUrl($project, $request);
             DB::commit();
             return response()->json(['result' => true]);
         } catch (\Exception $e) {
             DB::rollback();
+            throw $e;
             return response()->json(['result' => false]);
         }
     }
