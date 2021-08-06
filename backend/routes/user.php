@@ -43,6 +43,9 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::prefix('project/{project}')->group(function () {
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
         });
+        Route::prefix('project/{project}')->group(function () {
+            Route::resource('comment', CommentController::class)->only(['index']);
+        });
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
         });

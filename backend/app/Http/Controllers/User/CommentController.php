@@ -9,6 +9,10 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
+    public function index(){
+        return view('user.comment.index');
+    }
+
     public function postComment(CommentRequest $request, Project $project,Comment $comment){
         $comment->content = $request->content;
         $comment->project_id = $project->id;
