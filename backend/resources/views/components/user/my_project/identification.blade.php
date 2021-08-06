@@ -152,7 +152,17 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">金融機関コード・銀行コード<span class="hissu_txt">必須</span></div>
+    <div class="form_item_tit">
+        金融機関コード・銀行コード
+        <span class="hissu_txt">必須</span>
+    <br/>
+        <span>
+            <a href="https://www.zenginkyo.or.jp/abstract/outline/organization/member-01/" target="_blank">
+                <i class="fas fa-external-link-alt"></i>
+                金融機関コードが不明な方はこちら
+            </a>
+        </span>
+    </div>
     <input type="number" name="bank_code" class="def_input_100p" value="{{ old('bank_code', optional($user->identification)->bank_code) }}">
 </div>
 
