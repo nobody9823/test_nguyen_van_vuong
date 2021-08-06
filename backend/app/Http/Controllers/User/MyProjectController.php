@@ -202,7 +202,7 @@ class MyProjectController extends Controller
     {
         DB::beginTransaction();
         try {
-            $project->fill($request->all());
+            $project->fill($request->all())->save();
             $this->project_service->attachTags($project, $request);
             DB::commit();
             return response()->json(['result' => true]);
