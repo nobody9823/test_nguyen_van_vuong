@@ -31,6 +31,9 @@
 <div class="form-row">
     <div class="col-md-11 mb-3">
         <label>目標金額</label>
+        <ul>
+            <li>目標金額は最低10,000円から設定可能です。</li>
+        </ul>
         <input type="number" name="target_amount" class="form-control mb-2 mr-sm-2" min="0"
             value="{{ old('target_amount', optional($project ?? null)->target_amount) }}" step="10000">
     </div>
