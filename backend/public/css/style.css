@@ -1002,7 +1002,7 @@ input[type=radio]:checked + .radio-fan::after {
 	.wlr_64_R{ width: 100%;}
 }
 
-.pds_sec02_box_base{ background: #F7FDFF;  padding: 15px;}
+.pds_sec02_box_base{ background: #F7FDFF;  padding: 15px; margin-bottom: 20px;}
 .pds_sec02_box{ margin: 0px 0 0 0;}
 
 .pds_sec02_tit{ font-size: 1.8rem; font-weight: bold; color: #00AEBD; width: 100%; margin: 0 0 15px 0;}
@@ -1059,7 +1059,7 @@ input[type=radio]:checked + .radio-fan::after {
 	.as_h_01_txt{ font-size: 1.2rem; padding: 8px 0 0 0;}
 	.as_header_02{ font-size: 1.4rem;}
 	.as_header_03{ font-size: 1.2rem;}
-	.pds_sec02_box_base{ padding: 15px 0;}
+	.pds_sec02_box_base{ padding: 15px 0; margin-bottom: 10px;}
 	.pds_sec02_tit{  margin: 40px 0 15px 0;}
 	.pds_sec02_txt{ font-size: 1.2rem;}
 	.pds_sec02_01_btn{ font-size: 1.6rem;}
