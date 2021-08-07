@@ -131,6 +131,25 @@ use Carbon\Carbon;
 
     </section>
 
+    <section id="pc-top_04" class="section_base">
+        <div class="tit_L_01 E-font"><h2>COMPLETD PROJECT</h2><div class="sub_tit_L">掲載終了プロジェクト</div></div>
+
+        <div class="img_box_02">
+            @foreach($complete_projects as $project)
+            <div class="img_box_02_item">
+                <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" ranking="" />
+            </div>
+            @endforeach
+        </div>
+
+    {{-- <div class="more_btn_01">
+        <div class="more_btn_01_01">もっと見る</div>
+        <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+        <a href="★" class="cover_link"></a>
+    </div> --}}
+
+    </section>
+
     </div><!--/main_inner-->
     </main>
 
