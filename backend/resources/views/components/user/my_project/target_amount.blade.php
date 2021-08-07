@@ -2,27 +2,40 @@
     @csrf
     @method('PUT')
     <div class="form_item_row">
-        <div class="form_item_tit">目標金額<span class="hissu_txt">必須</span></div>
+
+        <div class="form_item_tit">
+        <div class="spinner-wrapper">
+            <div class="spinner" id="spinner_target_amount"></div>
+            <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_target_amount"></i>
+        </div>
+        目標金額<span class="hissu_txt">必須</span></div>
+        <span class="disclaimer">
+            ※目標金額は最低10,000円から設定可能です。
+        </span>
         <input type="number" name="target_amount" class="p-postal-code def_input_100p"
-        value="{{ old('target_amount', optional($project)->target_amount) }}" placeholder="（例）100000">
+        value="{{ old('target_amount', optional($project)->target_amount) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">
+            <div class="spinner-wrapper">
+                <div class="spinner" id="spinner_start_date"></div>
+                <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_start_date"></i>
+            </div>
             掲載開始日(日付、時刻)
             <span class="hissu_txt">必須</span>
             <br/>
-            <span style="font-weight: normal;font-size: 1.2rem;">
+            <span class="disclaimer">
                 ※存在しない日付は選択できません。
             </span>
             <br/>
-            <span style="font-weight: normal;font-size: 1.2rem;">
+            <span class="disclaimer">
                 ※審査期間があるため、2週間以降の日付を設定してください。
             </span>
         </div>
         <div class="publish_date_wrapper">
             <div class="cp_ipselect cp_normal">
-                <select class="form-control" id="start_year" name="start_year">
+                <select class="form-control" id="start_year" name="start_year" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                     <option value='' disabled selected style='display:none;'>年</option>
                     @for($i = (int) date('Y'); $i <= (int) date('Y') + 2; $i ++)
                     <option value="{{ $i }}"
@@ -33,8 +46,8 @@
                 </select>
             </div>
             <div class="publish_date_after_month">
-                <div class="cp_ipselect cp_normal">
-                    <select class="form-control" id="start_month" name="start_month">
+                <div class="cp_ipselect cp_normal cp_width_50">
+                    <select class="form-control" id="start_month" name="start_month" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>月</option>
                         @for ($i = 1; $i <= 12; $i++)
                         <option value="{{ sprintf('%02d', $i) }}"
@@ -44,11 +57,11 @@
                         @endfor
                     </select>
                 </div>
-                <div class="cp_ipselect cp_normal">
-                    <select class="form-control" id="start_day" name="start_day" data-old-value="{{ old('start_day', $project->start_date->day) }}"></select>
+                <div class="cp_ipselect cp_normal cp_width_50">
+                    <select class="form-control" id="start_day" name="start_day" data-old-value="{{ old('start_day', $project->start_date->day) }}" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})"></select>
                 </div>
-                <div class="cp_ipselect cp_normal">
-                    <select class="form-control" name="start_hour">
+                <div class="cp_ipselect cp_normal cp_width_50">
+                    <select class="form-control" id="start_hour" name="start_hour" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>時</option>
                         @for ($i = 0; $i <= 23; $i++)
                         <option value="{{ sprintf('%02d', $i) }}"
@@ -58,8 +71,8 @@
                         @endfor
                     </select>
                 </div>
-                <div class="cp_ipselect cp_normal">
-                    <select class="form-control" name="start_minute">
+                <div class="cp_ipselect cp_normal cp_width_50">
+                    <select class="form-control" id="start_minute" name="start_minute" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>分</option>
                         @for ($i = 0; $i <= 59; $i++)
                         <option value="{{ sprintf('%02d', $i) }}"
@@ -75,20 +88,24 @@
 
     <div class="form_item_row">
         <div class="form_item_tit">
+            <div class="spinner-wrapper">
+                <div class="spinner" id="spinner_end_date"></div>
+                <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_end_date"></i>
+            </div>
             掲載終了日(日付、時刻)
             <span class="hissu_txt">必須</span>
             <br/>
-            <span style="font-weight: normal;font-size: 1.2rem;">
+            <span class="disclaimer">
                 ※存在しない日付は選択できません。
             </span>
             <br/>
-            <span style="font-weight: normal;font-size: 1.2rem;">
+            <span class="disclaimer">
                 ※掲載期間は最長60日で設定してください
             </span>
         </div>
         <div class="publish_date_wrapper">
             <div class="cp_ipselect cp_normal">
-                <select class="form-control" id="end_year" name="end_year">
+                <select class="form-control" id="end_year" name="end_year" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                     <option value='' disabled selected style='display:none;'>年</option>
                     @for($i = (int) date('Y'); $i <= (int) date('Y') + 2; $i ++)
                     <option value="{{ $i }}"
@@ -98,8 +115,8 @@
                 </select>
             </div>
             <div class="publish_date_after_month">
-                <div class="cp_ipselect cp_normal">
-                    <select class="form-control" id="end_month" name="end_month">
+                <div class="cp_ipselect cp_normal cp_width_50">
+                    <select class="form-control" id="end_month" name="end_month" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>月</option>
                         @for ($i = 1; $i <= 12; $i++)
                         <option value="{{ sprintf('%02d', $i) }}"
@@ -109,11 +126,11 @@
                         @endfor
                     </select>
                 </div>
-                <div class="cp_ipselect cp_normal">
-                    <select class="form-control" id="end_day" name="end_day" data-old-value="{{ old('end_day', $project->end_date->day) }}"></select>
+                <div class="cp_ipselect cp_normal cp_width_50">
+                    <select class="form-control" id="end_day" name="end_day" data-old-value="{{ old('end_day', $project->end_date->day) }}" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})"></select>
                 </div>
-                <div class="cp_ipselect cp_normal">
-                    <select class="form-control" name="end_hour">
+                <div class="cp_ipselect cp_normal cp_width_50">
+                    <select class="form-control" name="end_hour" id="end_hour" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>時</option>
                         @for ($i = 0; $i <= 23; $i++)
                         <option value="{{ sprintf('%02d', $i) }}"
@@ -123,8 +140,8 @@
                         @endfor
                     </select>
                 </div>
-                <div class="cp_ipselect cp_normal">
-                    <select class="form-control" name="end_minute">
+                <div class="cp_ipselect cp_normal cp_width_50">
+                    <select class="form-control" name="end_minute" id="end_minute" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
                         <option value='' disabled selected style='display:none;'>分</option>
                         @for ($i = 0; $i <= 60; $i++)
                         <option value="{{ sprintf('%02d', $i) }}"

@@ -8,6 +8,9 @@
     </div>
 
     <div class="pds_sec02_txt">
+        {{ $plan->title }}
+    </div>
+    <div class="pds_sec02_txt">
         {{ $plan->content }}
     </div>
 
@@ -19,7 +22,7 @@
     @elseif ($plan->limit_of_supporters > 0)
         <div class="pds_sec02_01_btn">
             このリターンを選択する
-            <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'plan' => $plan]) }}" class="cover_link"></a>
+            <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'plan' => $plan, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
         </div>
     @elseif ($plan->limit_of_supporters <= 0)
         <div class="pds_sec02_01_btn">

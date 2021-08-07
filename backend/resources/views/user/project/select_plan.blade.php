@@ -324,12 +324,12 @@
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
-                        <div class="form_item_tit">備考欄<span class="nini_txt">任意</span>　<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
+                        <div class="form_item_tit">備考欄<span class="nini_txt">任意</span>　<span class="disclaimer">※300文字以内で入力してください</span></div>
                         <textarea name="remarks" class="def_textarea" rows="6">{{ old('remarks') }}</textarea>
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
-                        <div class="form_item_tit">応援コメント<span class="nini_txt">任意</span>　<span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
+                        <div class="form_item_tit">応援コメント<span class="nini_txt">任意</span>　<span class="disclaimer">※300文字以内で入力してください</span></div>
                         <textarea name="comments" class="def_textarea" rows="6">{{ old('comments') }}</textarea>
                     </div><!--/form_item_row-->
                     <div class="def_btn">

@@ -45,6 +45,11 @@
             </div>
         </div>
 
+        @if (session('attention_message'))
+        <p class="attention_message">
+            {{ session('attention_message') }}
+        </p>
+        @endif
         <div class="def_outer_gray">
             <div class=" def_inner inner_item">
                 <section style="{{ Request::get('next_tab') === 'target_amount' || Request::get('next_tab') === null ? '' : 'display: none;' }}" id="target_amount_section" class="my_project_section">
@@ -77,6 +82,49 @@
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src={{ asset('/js/blade-functions.js') }}></script>
+<script src={{ asset('/js/update-myProject.js') }}></script>
+
+
+<script>
+    $(function() {
+        $(".js-image_delete").click(function() {
+            var deleteConfirm = confirm('削除してもよろしいですか？');
+
+            if (deleteConfirm === true) {
+
+                var el = $(this);
+                var ImageId = el.attr('id');
+
+                el.append('<meta name="csrf-token" content="{{ csrf_token() }}">');
+
+                $.ajax({
+                        url: '/my_project/project/file/' + ImageId,
+                        type: 'POST',
+                        data: {
+                            'project_image': ImageId,
+                            '_method': 'DELETE'
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+
+                        success: function(msg) {
+                            if (msg === 'success') {
+                                alert("削除が成功しました。");
+                                el.parents('div.js-image__card').remove();
+                            } else {
+                                alert("エラーが起こりました。");
+                            }
+                        }
+                    })
+
+                    .fail(function() {
+                        alert('エラーが起こりました。');
+                    });
+            }
+        })
+    })
+</script>
 
 <script>
 const selectEditTag = el => {
@@ -146,19 +194,34 @@ function uploadProjectImage (input, projectId, projectFileId) {
         });
     }
 }
-function uploadIdentifyImage (input, projectId, columnName, identificationId) {
-    const formData = new FormData();
-    formData.append('file',input.files[0]);
-
-    axios.post(`/my_project/project/${projectId}/uploadIdentifyImage/${identificationId}?column_name=${columnName}`, formData)
-    .then((res) => {
-        console.log(res);
-        location.replace(res.data.redirect_url);
-    })
-    .catch((err) => {
-        console.log(err.response);
-        alert(err.response.data.errors.file);
-    });
+function previewUploadedImage (input, columnName) {
+    const file = input.files[0];
+    if (file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'image/png' && file.type != 'application/pdf') {
+      alert('.jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています')
+      return
+    }
+    const preview = document.getElementById(columnName);
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const imageUrl = e.target.result; // URLはevent.target.resultで呼び出せる
+        const img = document.createElement("img"); // img要素を作成
+        img.src = imageUrl; // URLをimg要素にセット
+        preview.removeChild(preview.firstElementChild);
+        preview.appendChild(img); // #previewの中に追加
+    }
+    reader.readAsDataURL(file);
+}
+function uploadedImageHandler (input, columnName, projectId) {
+    previewUploadedImage(input, columnName);
+    const el = new FormData();
+    el.append(columnName, input.files[0]);
+    updateMyProject.imageInput(
+        {
+            name: columnName,
+            value: el,
+        },
+        projectId
+    );
 }
 </script>
 <script>
@@ -174,9 +237,8 @@ tinymce.init({
     relative_urls : false,
     mobile: {
         theme: 'mobile',
-        plugins: [ 'autosave', 'lists', 'autolink' ],
-        toolbar: [ 'undo', 'bold', 'italic', 'styleselect', 'image', 'link' ],
-
+        plugins: 'autosave lists autolink',
+        toolbar: ['bold italic | fontsizeselect| undo redo | link | image'],
     },
     plugins: [ 'code', 'lists', 'image', 'link', 'fullscreen', 'table'],
     toolbar: ['undo redo | bold italic | forecolor backcolor | fontsizeselect | numlist bullist | table | link | image',
@@ -193,6 +255,19 @@ tinymce.init({
                 console.log(err);
                 failure('HTTP Error: ' + err.message);
             });
+    },
+    init_instance_callback: function (editor) {
+        const projectId = {{ $project->id }};
+        editor.on('change', function () {
+            // 変更した要素の取得
+            updateMyProject.textInput(
+                {
+                    name: editor.getElement().name,
+                    value: editor.getContent(),
+                },
+                projectId
+            )
+        });
     }
 });
 </script>
