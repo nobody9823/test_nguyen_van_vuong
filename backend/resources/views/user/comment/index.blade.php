@@ -17,9 +17,11 @@
           <div class="test">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
             <div>
               <span class="message-user-name">山田 太郎&emsp;</span><span>コメント時刻 : 12:00</span>
+              <a href=""><i class="fas fa-chevron-circle-down fa-lg fa-fw icons_mobile"></i></a>
             </div>
+
           </div>
-          <div class="icons">
+          <div class="icons_pc">
               <a href=""><i class="fas fa-reply fa-2x fa-fw"></i></a>&emsp;
               <a href=""><i class="far fa-trash-alt fa-2x fa-fw"></i></a>
           </div>
@@ -30,9 +32,10 @@
           <div class="test reply">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
             <div>
               <span class="message-user-name">山田 太郎&emsp;</span><span>コメント時刻 : 12:00</span>
+              <a href=""><i class="fas fa-chevron-circle-down fa-lg fa-fw icons_mobile"></i></a>
             </div>
           </div>
-          <div class="icons">
+          <div class="icons_pc">
               <a href=""><i class="far fa-trash-alt fa-2x fa-fw"></i></a>
           </div>
       </div>
@@ -62,8 +65,13 @@
   font-size: 85%;
 }
 
-.icons{
+.icons_pc{
   color: #00AEBD;
+}
+
+.icons_mobile{
+  color: #00AEBD;
+  visibility:hidden;
 }
 
 .message-user-name{
@@ -76,5 +84,17 @@
 
 .reply-user{
   margin-left: 65px;
+}
+
+@media (max-width: 767px) {
+  .test_img{ margin: 30px 0 10px 0; }
+	.reply{ width: calc(100% - 75px);} 
+  .reply-user{ margin-left: 0px; }
+  .icons_pc{ margin: 20px 0 40px 0; display: none; }
+  .icons_mobile{ 
+    visibility: visible;
+    position: relative;
+    left: calc(100% - 235px);
+  }
 }
 </style>
