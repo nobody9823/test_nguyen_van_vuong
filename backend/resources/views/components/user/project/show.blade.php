@@ -165,7 +165,7 @@
                     </div>
                     <div class="pds_sec02_box_base">
                         @foreach($project->plans as $plan)
-                        <x-user.plan-card :plan="$plan" :project="$project" />
+                        <x-user.plan-card :plan="$plan" :project="$project" :inviterCode="$inviterCode" />
                         @endforeach
                     </div><!--/pds_sec02_box_base-->
                 </div><!--/wlr_64_R-->

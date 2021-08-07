@@ -1,4 +1,4 @@
-<div class=" def_inner inner_item">
+<div class="def_inner inner_item">
     <div class="ps_desc_base">
         <div class="tit_L_01 E-font">
             <h2>SUPPORTER</h2>

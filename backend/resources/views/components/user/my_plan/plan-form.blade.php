@@ -4,7 +4,7 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">本文<span class="hissu_txt">必須</span><span style="font-weight: normal;font-size: 1.2rem;">※300文字以内で入力してください</span></div>
+    <div class="form_item_tit">本文<span class="hissu_txt">必須</span><span class="disclaimer">※300文字以内で入力してください</span></div>
     <textarea name="content" class="def_textarea" rows="6">{{ old('content', optional($plan)->content) }}</textarea>
 </div>
 
@@ -43,29 +43,36 @@
     <input type="number" name="price" class="p-postal-code def_input_100p" value="{{ old('price', optional($plan)->price) }}" placeholder="（例）100000">
 </div>
 
-<div class="form_item_row">
-    @if (optional($plan)->image_url !== null)
-        <div class="ib02_01 E-font my_project_img_wrapper">
-            <img src="{{ Storage::url($plan->image_url) }}">
+<div class="form_item_row" style="display: flex; flex-direction: column">
+    <div class="form_item_tit">リターン画像<span class="hissu_txt">必須</span></div>
+    <div class="plan_image_wrapper">
+        @if (optional($plan)->image_url !== null)
+            <div id="image_url" class="ib02_01 E-font my_project_img_wrapper">
+                <img src="{{ Storage::url($plan->image_url) }}">
+            </div>
+        @else
+            <div id="image_url" class="ib02_01 E-font my_project_img_wrapper">
+                <img src="{{ Storage::url('public/sampleImage/now_printing.png') }}">
+            </div>
+        @endif
+        <div class="form_item_tit"></div>
+        <div class="input_file_button_wrapper">
+            <label>
+                <input type="file" name="image_url" hidden onChange="previewUploadedImage(this, 'image_url')">
+                <a class="input_file_button">
+                    ファイルを選択する
+                </a>
+            </label>
         </div>
-    @endif
-    <div class="form_item_tit" style="margin-bottom: 10px">画像</div>
-    <div class="input_file_button_wrapper">
-        <label>
-            <input type="file" name="image_url" hidden>
-            <a class="input_file_button">
-                ファイルを選択する
-            </a>
-        </label>
     </div>
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">住所の有無<span class="hissu_txt">必須</span></div>
+    <div class="form_item_tit">住所情報の取得<small>(※リターンを配送する場合等に利用)</small><span class="hissu_txt">必須</span></div>
     <div class="cp_ipselect cp_normal">
         <select name="address_is_required" class="p-region">
-            <option value=0 {{ optional($plan)->address_is_required === 0 ? 'selected' : '' }}>なし</option>
-            <option value=1 {{ optional($plan)->address_is_required === 1 ? 'selected' : '' }}>あり</option>
+            <option value=0 {{ optional($plan)->address_is_required === 0 ? 'selected' : '' }}>要</option>
+            <option value=1 {{ optional($plan)->address_is_required === 1 ? 'selected' : '' }}>不要</option>
         </select>
     </div>
 </div>

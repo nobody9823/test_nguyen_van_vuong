@@ -14,9 +14,10 @@
     <div class="form_item_tit">スライド画像変更<span class="nini_txt">任意</span></div>
 
     @foreach($projectImages as $project_image)
-        <div>
-            <div class="ib02_01 E-font my_project_img_wrapper">
+        <div class="js-image__card">
+            <div class="ib02_01 E-font my_project_img_wrapper my_project_img_wrapper_show">
                 <img id="project_file_{{ $project_image->id }}" src="{{ Storage::url($project_image->file_url) }}">
+                <button id="{{ $project_image->id }}" class="js-image_delete project_image-delete"><i class="fas fa-times-circle"></i></button>
             </div>
             <div class="input_file_button_wrapper">
                 <label>
@@ -34,8 +35,14 @@
     @csrf
     @method('PUT')
     <div class="form_item_row">
-        <div class="form_item_tit">スライドYouTube動画URL設定</div>
-        <input type="text" name="video_url" class="def_input_100p" value="{{ old('video_url', optional($projectVideo)->file_url) }}">
+        <div class="form_item_tit">
+            <div class="spinner-wrapper">
+                <div class="spinner" id="spinner_video_url"></div>
+                <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_video_url"></i>
+            </div>
+            スライドYouTube動画URL設定
+        </div>
+        <input type="text" name="video_url" class="def_input_100p" value="{{ old('video_url', optional($projectVideo)->file_url) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
     </div>
 
     <div class="def_btn">

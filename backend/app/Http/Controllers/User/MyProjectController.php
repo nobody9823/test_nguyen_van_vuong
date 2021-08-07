@@ -59,7 +59,7 @@ class MyProjectController extends Controller
     {
         $project = $this->user->projects()->save(Project::initialize());
 
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project]);
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with('attention_message', '※申請には本人確認が必須となります。早めにご記入ください。');
     }
 
     /**
@@ -149,6 +149,17 @@ class MyProjectController extends Controller
             redirect()->action([MyProjectController::class, 'index'])->withErrors('プロジェクトの削除に失敗しました。');
     }
 
+    /**
+     * @param  ProjectImage  $projectImage
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function deleteFile(ProjectFile $project_file)
+    {
+        $project_file->deleteFile();
+        return response()->json('success');
+    }
+
     public function uploadEditorFile(Request $request)
     {
         $request->validate([
@@ -174,18 +185,6 @@ class MyProjectController extends Controller
         ], 200);
     }
 
-    public function uploadIdentifyImage(Project $project, Identification $identification, AxiosUploadFileRequest $request)
-    {
-        $this->authorize('checkOwnIdentificationImage', $identification);
-        $this->project_service->saveIdentifyImage($identification, $request);
-
-        session()->flash('flash_message', '本人確認書類の更新が完了しました。');
-        return response()->json([
-            'status' => 200,
-            'redirect_url' => route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'identification']),
-        ], 200);
-    }
-
     public function apply(Project $project)
     {
         try {
@@ -196,6 +195,25 @@ class MyProjectController extends Controller
         } catch (Exception $e) {
             Log::alert($e->getMessage(), $e->getTrace());
             throw $e;
+        }
+    }
+
+    public function uploadProject(MyProjectRequest $request, Project $project)
+    {
+        DB::beginTransaction();
+        try {
+            $project->fill($request->all())->save();
+            $this->user->identification->fill($request->all())->save();
+            $this->user->profile->fill($request->all())->save();
+            $this->user->address->fill($request->all())->save();
+            $this->project_service->attachTags($project, $request);
+            $this->project_service->saveVideoUrl($project, $request);
+            DB::commit();
+            return response()->json(['result' => true]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+            return response()->json(['result' => false]);
         }
     }
 }

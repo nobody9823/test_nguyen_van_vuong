@@ -9,14 +9,16 @@ use Illuminate\View\Component;
 class InvitationUrl extends Component
 {
     public $project;
+    public $rankingButton;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($project)
+    public function __construct($project, $rankingButton)
     {
         $this->project = $project;
+        $this->rankingButton = $rankingButton;
     }
 
     public function invitationUrl()
