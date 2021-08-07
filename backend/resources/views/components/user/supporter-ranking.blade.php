@@ -55,10 +55,14 @@
                     @endphp
                     @if ($project_supporter->email === Auth::user()->email)
                         <div class="ps_rank_myrank_large_L m_b_4030">
-                            <div class="ps_rank_myrank_large_01">{{ $total_amount_rank }}位</div>
-                            <div class="ps_rank_myrank_large_02">{{ $project_supporter->name }}</div>
-                            <div class="ps_rank_myrank_large_03">
-                                {{ number_format($project_supporter->invited_payments_sum_price) }}円</div>
+                            <div class="ps_rank_02_tit">あなたの紹介支援総額ランキング</div>
+                            <div class="ps_rank_myrank_large_L_items">
+                                <div class="ps_rank_myrank_large_01">{{ $total_amount_rank }}位</div>
+                                <div class="ps_rank_myrank_large_02">{{ $project_supporter->name }}</div>
+                                <div class="ps_rank_myrank_large_03">
+                                    {{ number_format($project_supporter->invited_payments_sum_price) }}円
+                                </div>
+                            </div>
                         </div>
                     @endif
                     @php
@@ -78,10 +82,14 @@
                     @endphp
                     @if ($project_supporter->email === Auth::user()->email)
                         <div class="ps_rank_myrank_large_R m_b_4030">
-                            <div class="ps_rank_myrank_large_01">{{ $total_quantity_rank }}位</div>
-                            <div class="ps_rank_myrank_large_02">{{ $project_supporter->name }}</div>
-                            <div class="ps_rank_myrank_large_03">
-                                {{ $project_supporter->invited_plan_payment_included_sum_quantity }}件</div>
+                            <div class="ps_rank_02_tit">あなたの紹介件数ランキング</div>
+                            <div class="ps_rank_myrank_large_L_items">
+                                <div class="ps_rank_myrank_large_01">{{ $total_quantity_rank }}位</div>
+                                <div class="ps_rank_myrank_large_02">{{ $project_supporter->name }}</div>
+                                <div class="ps_rank_myrank_large_03">
+                                    {{ $project_supporter->invited_plan_payment_included_sum_quantity }}件
+                                </div>
+                            </div>
                         </div>
                     @endif
                     @php
@@ -92,7 +100,7 @@
 
                 <div class="ps_rank_02_L ranked_inviter_by_amount_list">
 
-                    <div class="ps_rank_02_tit">紹介支援総額</div>
+                    <div class="ps_rank_02_tit">紹介支援総額ランキング</div>
 
                     @php
                         $total_amount_rank = 1;
@@ -134,14 +142,14 @@
                             表示を少なくする <i class="fas fa-chevron-down"></i>
                         </div>
                     </div>
-
+                    <div class="ps_rank_myrank_border"></div>
                 </div>
 
                 <!--/ps_rank_02_L-->
 
                 <div class="ps_rank_02_R ranked_inviter_of_count_list">
 
-                    <div class="ps_rank_02_tit">紹介件数</div>
+                    <div class="ps_rank_02_tit">紹介件数ランキング</div>
 
                     @php
                         $total_quantity_rank = 1;
