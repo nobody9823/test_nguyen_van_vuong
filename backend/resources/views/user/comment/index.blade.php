@@ -9,21 +9,23 @@
       <div class="sub_tit_L">コメント一覧</div>
   </div>
 
-<!-- ------------------------------------------------------------------------------------------ -->
   <div class="prof_page_base inner_item">
     <div class="comment_page">
       <div class="prof_edit_row" style="{{ isset($test) ? '' : 'border-bottom: none;' }}">
           <img src="/storage/sampleImage/my-page.svg" alt="" class="user_image">
           <div class="comment">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
             <div>
-              <span class="comment_information">山田 太郎&emsp;</span><span>コメント時刻 : 12:00</span>
-              <a href=""><i class="fas fa-chevron-circle-down fa-lg fa-fw icons_mobile"></i></a>
+              <span class="comment_information">山田 太郎&emsp;</span><span>12:00</span>
             </div>
 
           </div>
-          <div class="icons_pc">
-              <a href=""><i class="fas fa-reply fa-2x fa-fw"></i></a>&emsp;
-              <a href=""><i class="far fa-trash-alt fa-2x fa-fw"></i></a>
+          <div class="icons">
+              <i class="fas fa-reply fa-2x fa-fw" id="open_modal"></i>&emsp;
+              <form action="" method="POST">
+                @csrf
+                @method('DELETE')
+                <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment"></i>
+              </form>
           </div>
       </div>
       
@@ -31,20 +33,58 @@
           <img src="/storage/sampleImage/my-page.svg" alt="" class="user_image reply_user">
           <div class="comment reply">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
             <div>
-              <span class="comment_information">山田 太郎&emsp;</span><span>コメント時刻 : 12:00</span>
-              <a href=""><i class="fas fa-chevron-circle-down fa-lg fa-fw icons_mobile"></i></a>
+              <span class="comment_information">山田 太郎&emsp;</span><span>12:00</span>
             </div>
           </div>
-          <div class="icons_pc">
-              <a href=""><i class="far fa-trash-alt fa-2x fa-fw"></i></a>
+          <div class="icons">
+              <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment"></i>
           </div>
       </div>
     </div>
   </div>
-
-  <!-- ------------------------------------------------------------------------------------------ -->
-
 </section>
+
+<!-- モーダルエリアここから -->
+<section id="modal_area" class="modal_area">
+  <div id="modal_bg" class="modal_bg"></div>
+  <div class="modal_wrapper">
+    <div class="modalContents">
+      <div>
+          <div class="av_tit">
+            <p style="text-align: center;">返信コメント</p>
+            <!-- <span class="av_tit_span_01">&emsp;※◯文字まで</span> -->
+          </div>
+          <textarea name="" class="input_reply"></textarea>
+      </div>
+      <div class="def_btn">
+        <a href="" class="disable-btn">
+          <p style="font-size: 1.8rem; font-weight: bold; color: #fff;">送信</p>
+        </a>
+      </div>
+    </div>
+    <div id="close_modal" class="close_modal"><i class="fas fa-times fa-lg"></i></div>
+  </div>
+</section>
+
+@endsection
+
+@section('script')
+<script src="{{ asset('/js/confirm.js') }}"></script>
+<script>
+  (function () {
+  const modal_area = document.getElementById('modal_area');
+  const open_modal = document.getElementById('open_modal');
+  const close_modal = document.getElementById('close_modal');
+  const modal_bg = document.getElementById('modal_bg');
+  const toggle = [open_modal,close_modal,modal_bg];
+  
+  for(let i=0, len=toggle.length ; i<len ; i++){
+    toggle[i].addEventListener('click',function(){
+      modal_area.classList.toggle('is_show');
+    },false);
+  }
+}());
+</script>
 @endsection
 
 <style>
@@ -65,13 +105,9 @@
   font-size: 85%;
 }
 
-.icons_pc{
+.icons{
   color: #00AEBD;
-}
-
-.icons_mobile{
-  color: #00AEBD;
-  visibility:hidden;
+  display: flex;
 }
 
 .comment_information{
@@ -90,11 +126,64 @@
   .user_image{ margin: 30px 0 10px 0; }
 	.reply{ width: calc(100% - 75px);} 
   .reply_user{ margin-left: 0px; }
-  .icons_pc{ margin: 20px 0 40px 0; display: none; }
-  .icons_mobile{ 
-    visibility: visible;
+  .icons{ 
     position: relative;
-    left: calc(100% - 235px);
+    left: calc(100% - 270px);
+    bottom: 29px;
+    font-size: 80%;
   }
+}
+
+/* モーダルウィンドウ */
+.modal_area {
+  visibility: hidden; 
+  opacity : 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: .5s;
+}
+
+.modal_bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30,30,30,0.9);
+}
+
+.modal_wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+  height: 60%;
+  width: 70%;
+  max-width: 500px;
+  padding: 10px 30px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.close_modal {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.is_show {
+  visibility: visible;
+  opacity : 1;
+}
+
+.input_reply{
+  width: 100%;
+  height: 70%;
+  padding: 10px;
+  margin: 0 0 10px 0;
+  border: solid 1px #DBDBDB;
+  border-radius: 4px;
 }
 </style>
