@@ -13,10 +13,10 @@
   <div class="prof_page_base inner_item">
     <div class="comment_page">
       <div class="prof_edit_row" style="{{ isset($test) ? '' : 'border-bottom: none;' }}">
-          <img src="/storage/sampleImage/my-page.svg" alt="" class="test_img">
-          <div class="test">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
+          <img src="/storage/sampleImage/my-page.svg" alt="" class="user_image">
+          <div class="comment">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
             <div>
-              <span class="message-user-name">山田 太郎&emsp;</span><span>コメント時刻 : 12:00</span>
+              <span class="comment_information">山田 太郎&emsp;</span><span>コメント時刻 : 12:00</span>
               <a href=""><i class="fas fa-chevron-circle-down fa-lg fa-fw icons_mobile"></i></a>
             </div>
 
@@ -28,10 +28,10 @@
       </div>
       
       <div class="prof_edit_row">
-          <img src="/storage/sampleImage/my-page.svg" alt="" class="test_img reply-user">
-          <div class="test reply">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
+          <img src="/storage/sampleImage/my-page.svg" alt="" class="user_image reply_user">
+          <div class="comment reply">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
             <div>
-              <span class="message-user-name">山田 太郎&emsp;</span><span>コメント時刻 : 12:00</span>
+              <span class="comment_information">山田 太郎&emsp;</span><span>コメント時刻 : 12:00</span>
               <a href=""><i class="fas fa-chevron-circle-down fa-lg fa-fw icons_mobile"></i></a>
             </div>
           </div>
@@ -52,16 +52,16 @@
   width: 100%;
 }
 
-.test_img{
+.user_image{
   border-radius: 50%;
 }
 
-.test{
+.comment{
   width: 80%;
   line-height: 35px;
 }
 
-.test div{
+.comment div{
   font-size: 85%;
 }
 
@@ -74,7 +74,7 @@
   visibility:hidden;
 }
 
-.message-user-name{
+.comment_information{
   color: #00AEBD;
 }
 
@@ -82,14 +82,14 @@
   width: 790px;
 }
 
-.reply-user{
+.reply_user{
   margin-left: 65px;
 }
 
 @media (max-width: 767px) {
-  .test_img{ margin: 30px 0 10px 0; }
+  .user_image{ margin: 30px 0 10px 0; }
 	.reply{ width: calc(100% - 75px);} 
-  .reply-user{ margin-left: 0px; }
+  .reply_user{ margin-left: 0px; }
   .icons_pc{ margin: 20px 0 40px 0; display: none; }
   .icons_mobile{ 
     visibility: visible;
