@@ -13,13 +13,13 @@
     <div class="comment_page">
       <div class="prof_edit_row" style="{{ isset($test) ? '' : 'border-bottom: none;' }}">
           <img src="/storage/sampleImage/my-page.svg" alt="" class="user_image">
-          <div class="comment">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
+          <div class="comment_content">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
             <div>
               <span class="comment_information">山田 太郎&emsp;</span><span>12:00</span>
             </div>
 
           </div>
-          <div class="icons">
+          <div class="comment_icons">
               <i class="fas fa-reply fa-2x fa-fw" id="open_modal"></i>&emsp;
               <form action="" method="POST">
                 @csrf
@@ -31,12 +31,12 @@
       
       <div class="prof_edit_row">
           <img src="/storage/sampleImage/my-page.svg" alt="" class="user_image reply_user">
-          <div class="comment reply">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
+          <div class="comment_content reply_content">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
             <div>
               <span class="comment_information">山田 太郎&emsp;</span><span>12:00</span>
             </div>
           </div>
-          <div class="icons">
+          <div class="comment_icons">
               <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment"></i>
           </div>
       </div>
@@ -44,7 +44,7 @@
   </div>
 </section>
 
-<!-- モーダルエリアここから -->
+<!-- モーダルウィンドウ -->
 <section id="modal_area" class="modal_area">
   <div id="modal_bg" class="modal_bg"></div>
   <div class="modal_wrapper">
@@ -52,7 +52,6 @@
       <div>
           <div class="av_tit">
             <p style="text-align: center;">返信コメント</p>
-            <!-- <span class="av_tit_span_01">&emsp;※◯文字まで</span> -->
           </div>
           <textarea name="" class="input_reply"></textarea>
       </div>
@@ -86,104 +85,3 @@
 }());
 </script>
 @endsection
-
-<style>
-.comment_page{ 
-  width: 100%;
-}
-
-.user_image{
-  border-radius: 50%;
-}
-
-.comment{
-  width: 80%;
-  line-height: 35px;
-}
-
-.comment div{
-  font-size: 85%;
-}
-
-.icons{
-  color: #00AEBD;
-  display: flex;
-}
-
-.comment_information{
-  color: #00AEBD;
-}
-
-.reply{
-  width: 790px;
-}
-
-.reply_user{
-  margin-left: 65px;
-}
-
-@media (max-width: 767px) {
-  .user_image{ margin: 30px 0 10px 0; }
-	.reply{ width: calc(100% - 75px);} 
-  .reply_user{ margin-left: 0px; }
-  .icons{ 
-    position: relative;
-    left: calc(100% - 270px);
-    bottom: 29px;
-    font-size: 80%;
-  }
-}
-
-/* モーダルウィンドウ */
-.modal_area {
-  visibility: hidden; 
-  opacity : 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transition: .5s;
-}
-
-.modal_bg {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(30,30,30,0.9);
-}
-
-.modal_wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform:translate(-50%,-50%);
-  height: 60%;
-  width: 70%;
-  max-width: 500px;
-  padding: 10px 30px;
-  background-color: #fff;
-  border-radius: 10px;
-}
-
-.close_modal {
-  position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  cursor: pointer;
-}
-
-.is_show {
-  visibility: visible;
-  opacity : 1;
-}
-
-.input_reply{
-  width: 100%;
-  height: 70%;
-  padding: 10px;
-  margin: 0 0 10px 0;
-  border: solid 1px #DBDBDB;
-  border-radius: 4px;
-}
-</style>
