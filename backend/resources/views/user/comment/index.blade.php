@@ -71,17 +71,120 @@
 <script src="{{ asset('/js/confirm.js') }}"></script>
 <script>
   (function () {
-  const modal_area = document.getElementById('modal_area');
-  const open_modal = document.getElementById('open_modal');
-  const close_modal = document.getElementById('close_modal');
-  const modal_bg = document.getElementById('modal_bg');
-  const toggle = [open_modal,close_modal,modal_bg];
-  
-  for(let i=0, len=toggle.length ; i<len ; i++){
-    toggle[i].addEventListener('click',function(){
-      modal_area.classList.toggle('is_show');
-    },false);
-  }
+    const modal_area = document.getElementById('modal_area');
+    const open_modal = document.getElementById('open_modal');
+    const close_modal = document.getElementById('close_modal');
+    const modal_bg = document.getElementById('modal_bg');
+    const toggle = [open_modal,close_modal,modal_bg];
+    
+    for(let i=0, len=toggle.length ; i<len ; i++){
+      toggle[i].addEventListener('click',function(){
+        modal_area.classList.toggle('is_show');
+      },false);
+    }
 }());
 </script>
 @endsection
+
+<style>
+/* コメント関連 */
+.comment_page { 
+  width: 100%;
+}
+
+.user_image {
+  border-radius: 50%;
+}
+
+.comment_content {
+  width: 80%;
+  line-height: 35px;
+}
+
+.comment_content div {
+  font-size: 85%;
+}
+
+.comment_icons {
+  color: #00AEBD;
+  display: flex;
+}
+
+.comment_content span:first-child {
+  color: #00AEBD;
+}
+
+.reply_content {
+  width: 790px;
+}
+
+.reply_user {
+  margin-left: 65px;
+}
+
+@media (max-width: 767px) {
+  .user_image{ margin: 30px 0 10px 0; }
+	.reply_content{ width: calc(100% - 75px);} 
+  .reply_user{ margin-left: 0px; }
+  .comment_icons{ 
+    position: relative;
+    left: calc(100% - 270px);
+    bottom: 29px;
+    font-size: 80%;
+  }
+}
+
+/* モーダルウィンドウ */
+.modal_area {
+  visibility: hidden; 
+  opacity : 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: .5s;
+}
+
+.modal_bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30,30,30,0.9);
+}
+
+.modal_wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+  height: 60%;
+  width: 70%;
+  max-width: 500px;
+  padding: 10px 30px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.close_modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.is_show {
+  visibility: visible;
+  opacity : 1;
+}
+
+.input_reply{
+  width: 100%;
+  height: 65%;
+  padding: 10px;
+  margin: 0 0 10px 0;
+  border: solid 1px #DBDBDB;
+  border-radius: 4px;
+}
+/* ここまでモーダルウィンドウ */
+</style>
