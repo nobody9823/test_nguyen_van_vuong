@@ -122,7 +122,7 @@
   .reply_user{ margin-left: 0px; }
   .comment_icons{ 
     position: relative;
-    left: calc(100% - 270px);
+    left: calc(100% - 240px);
     bottom: 29px;
     font-size: 80%;
   }
