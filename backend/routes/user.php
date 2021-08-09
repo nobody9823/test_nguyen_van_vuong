@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth:web']], function () {
         });
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+            Route::get('reward_sample', [MyProjectController::class, 'rewardSample'])->name('reward_sample');
         });
         Route::delete('project/file/{project_file}', [MyProjectController::class, 'deleteFile'])->name('project_image.destroy');
         // Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');
