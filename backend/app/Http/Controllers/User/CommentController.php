@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 use App\Models\Project;
 use App\Models\Comment;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function index(){
-        return view('user.comment.index');
+    public function index(Request $request){
+        $comments = Comment::where('project_id',$request->route('project'))->orderBy('created_at','DESC')->paginate(10);
+        
+        return view('user.comment.index',[
+            'comments' => $comments
+        ]);
     }
 
     public function postComment(CommentRequest $request, Project $project,Comment $comment){
