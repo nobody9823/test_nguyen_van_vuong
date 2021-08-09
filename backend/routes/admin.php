@@ -97,7 +97,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('tag', TagController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
 
     // キュレーター管理
-    Route::resource('curator', CuratorController::class, ['only' => ['index']]);
+    Route::resource('curator', CuratorController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
 
     // メッセージ管理
     Route::resource('message', MessageController::class)->only(['index', 'show']);

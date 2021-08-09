@@ -14,7 +14,7 @@
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
     <div class="text-right">
-        <a href="" class="btn btn-outline-success">新規作成</a>
+        <a href="{{ route('admin.curator.create') }}" class="btn btn-outline-success">新規作成</a>
     </div>
 </div>
 

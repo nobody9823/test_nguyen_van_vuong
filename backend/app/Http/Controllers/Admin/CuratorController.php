@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CuratorRequest;
 use App\Models\Curator;
 
 class CuratorController extends Controller
@@ -25,10 +26,10 @@ class CuratorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {
+        return view('admin.curator.create');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -36,10 +37,12 @@ class CuratorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
+    public function store(CuratorRequest $request, Curator $curator)
+    {
+        return $curator->fill($request->all())->save()
+            ? redirect()->action([CuratorController::class, 'index'])->with('flash_message', 'キュレーターの作成が成功しました。')
+            : redirect()->action([CuratorController::class, 'index'])->withErrors('キュレーターの作成が失敗しました。管理会社にご連絡ください。');
+    }
 
     /**
      * Display the specified resource.
