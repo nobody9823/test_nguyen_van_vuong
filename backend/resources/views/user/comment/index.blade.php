@@ -22,7 +22,9 @@
 
           </div>
           <div class="comment_icons">
+              @if(!$comment->reply)
               <i class="fas fa-reply fa-2x fa-fw" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
+              @endif
               <form action="" method="POST">
                 @csrf
                 @method('DELETE')
@@ -53,9 +55,9 @@
 
   <!-- モーダルウィンドウ -->
   <div id="{{ 'modal_area_'.$key }}" class="modal_area">
-    <div id="modal_bg" class="modal_bg"></div>
+    <div class="modal_back_ground"></div>
     <div class="modal_wrapper">
-      <div class="modalContents">
+      <div>
         <div>
             <div class="av_tit">
               <p style="text-align: center;">返信コメント</p>
@@ -68,7 +70,9 @@
           </a>
         </div>
       </div>
-      <div id="{{ 'close_modal_'.$key }}" class="close_modal" onclick="toggleModal(this.id)"><i class="fas fa-times fa-lg"></i></div>
+      <div id="{{ 'close_modal_'.$key }}" class="close_modal" onclick="toggleModal(this.id)">
+        <i class="fas fa-times fa-lg"></i>
+      </div>
     </div>
   </div>
   @endforeach
@@ -142,7 +146,7 @@
   transition: .5s;
 }
 
-.modal_bg {
+.modal_back_ground {
   width: 100%;
   height: 100%;
   background-color: rgba(30,30,30,0.9);
