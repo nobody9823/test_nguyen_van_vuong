@@ -61,10 +61,10 @@ class CuratorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function edit($id)
-    // {
-    //     //
-    // }
+    public function edit(Curator $curator)
+    {
+        return view('admin.curator.edit', compact('curator'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -73,10 +73,12 @@ class CuratorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
+    public function update(CuratorRequest $request, Curator $curator)
+    {
+        return $curator->fill($request->all())->save()
+            ? redirect()->action([CuratorController::class, 'index'])->with('flash_message', 'キュレーターの更新が成功しました。')
+            : redirect()->action([CuratorController::class, 'index'])->withErrors('キュレーターの更新が失敗しました。管理会社にご連絡ください。');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -84,8 +86,10 @@ class CuratorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+    public function destroy(Curator $curator)
+    {
+        return $curator->delete()
+            ? redirect()->action([CuratorController::class, 'index'])->with('flash_message', 'キュレーターの削除が成功しました。')
+            : redirect()->action([CuratorController::class, 'index'])->withErrors('キュレーターの削除が失敗しました。管理会社にご連絡ください。');
+    }
 }

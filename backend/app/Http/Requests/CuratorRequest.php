@@ -27,7 +27,7 @@ class CuratorRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', Rule::unique('curators')->whereNull('deleted_at')],
+            'email' => ['required', 'email', Rule::unique('curators')->ignore($this->route('curator'))->whereNull('deleted_at')],
             'password' => [Rule::requiredIf($this->isMethod('post')), new Password, 'confirmed'],
             'password_confirmation' => [Rule::requiredIf($this->isMethod('post'))],
         ];
