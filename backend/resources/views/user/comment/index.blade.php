@@ -15,7 +15,7 @@
           <img src="/storage/sampleImage/my-page.svg" alt="" class="user_image">
           <div class="comment_content">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
             <div>
-              <span class="comment_information">山田 太郎&emsp;</span><span>12:00</span>
+              <span>山田 太郎&emsp;</span><span>12:00</span>
             </div>
 
           </div>
@@ -33,7 +33,7 @@
           <img src="/storage/sampleImage/my-page.svg" alt="" class="user_image reply_user">
           <div class="comment_content reply_content">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
             <div>
-              <span class="comment_information">山田 太郎&emsp;</span><span>12:00</span>
+              <span>山田 太郎&emsp;</span><span>12:00</span>
             </div>
           </div>
           <div class="comment_icons">
