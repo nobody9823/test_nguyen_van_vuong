@@ -152,6 +152,7 @@ class ProjectController extends Controller
             $project->tags()->sync($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
+            $project->curator()->associate($request->curator_id)->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -394,7 +395,7 @@ class ProjectController extends Controller
     public function associateCurator(Project $project, Request $request)
     {
         $request->validate([
-            'curator_id' => 'exists:curators,id',
+            'curator_id' => 'nullable|exists:curators,id',
         ], [
             'curator_id.exists' => '選択されたキュレーターは存在しておりません。',
         ]);
