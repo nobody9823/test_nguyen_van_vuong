@@ -127,9 +127,9 @@
   .reply_user{ margin-left: 0px; }
   .comment_icons{ 
     position: relative;
-    left: calc(100% - 220px);
-    bottom: 29px;
-    font-size: 80%;
+    left: calc(100% - 210px);
+    bottom: 28px;
+    font-size: 60%;
   }
 }
 
