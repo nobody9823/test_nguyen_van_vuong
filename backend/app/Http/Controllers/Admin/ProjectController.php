@@ -152,7 +152,6 @@ class ProjectController extends Controller
             $project->tags()->sync($request->tags);
             $project->saveProjectImages($request->imagesToArray());
             $project->saveProjectVideo($request->projectVideo());
-            $project->curator()->associate(Curator::find($request->curator_id))->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -360,7 +359,7 @@ class ProjectController extends Controller
     {
         if ($project->release_status === "承認待ち" || $project->release_status === "掲載停止中") {
             $project->release_status = "掲載中";
-            if ($project->save()){
+            if ($project->save()) {
                 $project->user->notify(new ProjectIsPublishedMail($project));
                 return redirect()->back()->with('flash_message', "掲載しました。");
             } else {
@@ -390,6 +389,18 @@ class ProjectController extends Controller
                 redirect()->back()->withErrors('掲載停止に失敗しました。');
         }
         redirect()->back()->withErrors('掲載停止に失敗しました。');
+    }
+
+    public function associateCurator(Project $project, Request $request)
+    {
+        $request->validate([
+            'curator_id' => 'exists:curators,id',
+        ], [
+            'curator_id.exists' => '選択されたキュレーターは存在しておりません。',
+        ]);
+        return $project->curator()->associate($request->curator_id)->save()
+            ? redirect()->action([ProjectController::class, 'index'])->with('flash_message', '担当するキュレーターの更新が完了しました。')
+            : redirect()->action([ProjectController::class, 'index'])->with('flash_message', '担当するキュレーターの更新に失敗しました。管理者にご連絡ください。');
     }
 
     // public function incrementLikes(LikeCalculationRequest $request, Project $project)

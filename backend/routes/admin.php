@@ -59,6 +59,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('project/{project}/output_purchases_list_to_csv', [ProjectController::class, 'outputPurchasesListToCsv'])->name('project.output_purchases_list_to_csv');
     Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');
     Route::post('project/upload_editor_file', [ProjectController::class, 'uploadEditorFile'])->name('upload_editor_file');
+    Route::put('project/{project}/associate_curator', [ProjectController::class, 'associateCurator'])->name('project.associate_curator');
     // Route::patch('project/{project}/increment_likes', [ProjectController::class, 'incrementLikes'])->name('project.increment_likes');
     // Route::patch('project/{project}/decrement_likes', [ProjectController::class, 'decrementLikes'])->name('project.decrement_likes');
     Route::prefix('project/{project}')->group(function () {
