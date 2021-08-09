@@ -45,7 +45,7 @@
     <select name="curator_id" class="form-control">
         <option value="">未定</option>
         @foreach ($curators as $id => $name)
-            <option value="{{ $id }}" {{ old('curator_id', optional($project->curator)->id) === $id ? 'selected' : '' }}>{{ $name }}</option>
+            <option value="{{ $id }}" {{ old('curator_id', optional(optional($project)->curator)->id) === $id ? 'selected' : '' }}>{{ $name }}</option>
         @endforeach
     </select>
 </div>
