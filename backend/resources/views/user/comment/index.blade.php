@@ -9,19 +9,20 @@
       <div class="sub_tit_L">コメント一覧</div>
   </div>
 
-  @foreach($comments as $comment)
+  @foreach($comments as $key => $comment)
   <div class="prof_page_base inner_item">
     <div class="comment_page">
       <div class="prof_edit_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
           <img src="{{ Storage::url(optional($comment->project->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
           <div class="comment_content">{{ $comment->content }}<br>
             <div>
-              <span>{{ $comment->project->user->name }}&emsp;</span><span>{{ $comment->created_at->format('Y年m月d日 h:m') }}</span>
+              <span>{{ $comment->project->user->name }}&emsp;</span>
+              <span>{{ $comment->created_at->format('Y年m月d日 h:m') }}</span>
             </div>
 
           </div>
           <div class="comment_icons">
-              <i class="fas fa-reply fa-2x fa-fw" id="open_modal"></i>&emsp;
+              <i class="fas fa-reply fa-2x fa-fw" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
               <form action="" method="POST">
                 @csrf
                 @method('DELETE')
@@ -38,7 +39,7 @@
         <div class="comment_content reply_content">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
           <div>
             {{-- こちらはCRUD処理作成時にコメントアウトを解除します。
-            <span>{{ $comment->reply->user->name }}&emsp;</span><span>{{ $comment->reply->created_at }}</span> --}}
+            <span>{{ $comment->reply->user->name }}&emsp;</span><span>{{ $comment->reply->created_at->format('Y年m月d日 h:m') }}</span> --}}
             <span>山田 太郎&emsp;</span><span>2021年08月09日 11:08</span>
           </div>
         </div>
@@ -49,28 +50,28 @@
       @endif
     </div>
   </div>
-  @endforeach
-</section>
 
-<!-- モーダルウィンドウ -->
-<section id="modal_area" class="modal_area">
-  <div id="modal_bg" class="modal_bg"></div>
-  <div class="modal_wrapper">
-    <div class="modalContents">
-      <div>
-          <div class="av_tit">
-            <p style="text-align: center;">返信コメント</p>
-          </div>
-          <textarea name="" class="input_reply"></textarea>
+  <!-- モーダルウィンドウ -->
+  <div id="{{ 'modal_area_'.$key }}" class="modal_area">
+    <div id="modal_bg" class="modal_bg"></div>
+    <div class="modal_wrapper">
+      <div class="modalContents">
+        <div>
+            <div class="av_tit">
+              <p style="text-align: center;">返信コメント</p>
+            </div>
+            <textarea name="" class="input_reply"></textarea>
+        </div>
+        <div class="def_btn">
+          <a href="" class="disable-btn">
+            <p style="font-size: 1.8rem; font-weight: bold; color: #fff;">送信</p>
+          </a>
+        </div>
       </div>
-      <div class="def_btn">
-        <a href="" class="disable-btn">
-          <p style="font-size: 1.8rem; font-weight: bold; color: #fff;">送信</p>
-        </a>
-      </div>
+      <div id="{{ 'close_modal_'.$key }}" class="close_modal" onclick="toggleModal(this.id)"><i class="fas fa-times fa-lg"></i></div>
     </div>
-    <div id="close_modal" class="close_modal"><i class="fas fa-times fa-lg"></i></div>
   </div>
+  @endforeach
 </section>
 
 @endsection

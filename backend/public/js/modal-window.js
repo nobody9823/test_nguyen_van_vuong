@@ -1,13 +1,10 @@
-(function () {
-  const modal_area = document.getElementById('modal_area');
-  const open_modal = document.getElementById('open_modal');
-  const close_modal = document.getElementById('close_modal');
-  const modal_bg = document.getElementById('modal_bg');
-  const toggle = [open_modal,close_modal,modal_bg];
-  
-  for(let i=0, len=toggle.length ; i<len ; i++){
-    toggle[i].addEventListener('click',function(){
-      modal_area.classList.toggle('is_show');
-    },false);
+function toggleModal(id) {
+  if (id.includes('open_modal_')) {
+    var comment_id = id.replace('open_modal_', '');
+  } else if (id.includes('close_modal_')) {
+    var comment_id = id.replace('close_modal_', '');
   }
-}());
+  
+  let modalArea = document.getElementById('modal_area_' + comment_id);
+  modalArea.classList.toggle('is_show');
+}
