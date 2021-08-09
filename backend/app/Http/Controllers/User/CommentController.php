@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function index(Request $request){
-        $comments = Comment::where('project_id',$request->route('project'))
-        ->with('project.user.profile', 'reply.user.profile')->orderBy('created_at','DESC')->paginate(10);
+    public function index(Project $project){
+        $comments = $project->comments()->with('project.user.profile', 'reply.user.profile')
+                            ->orderBy('created_at', 'DESC')->get();
         
         return view('user.comment.index',[
             'comments' => $comments
