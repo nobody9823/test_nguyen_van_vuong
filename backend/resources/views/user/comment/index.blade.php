@@ -125,6 +125,9 @@
   .user_image{ margin: 30px 0 10px 0; }
 	.reply_content{ width: calc(100% - 75px);} 
   .reply_user{ margin-left: 0px; }
+  .comment_content div {
+    font-size: 77%;
+  }
   .comment_icons{ 
     position: relative;
     left: calc(100% - 210px);
