@@ -569,7 +569,11 @@ input[type=radio]:checked + .radio-fan::after {
     .ib01L_01 img {max-width: 100vw;}
     .ib01L_04 {position: static;}
 }
-
+@media screen and (max-width: 1000px){
+	.supporter_count{
+		display: none;
+	}
+}
 .tit_L_01{ width: 100%;  font-size: 2rem; font-weight: bold; text-align: center; color:#00aebd ; margin: 0 auto 40px auto;}
 .tit_L_01 h2{ font-size: 4.0rem; font-weight: bold;}
 .sub_tit_L{ font-size: 1.9rem; font-weight: bold;}
