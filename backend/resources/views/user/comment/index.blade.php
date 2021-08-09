@@ -12,7 +12,7 @@
   @foreach($comments as $comment)
   <div class="prof_page_base inner_item">
     <div class="comment_page">
-      <div class="prof_edit_row" style="{{ isset($test) ? '' : 'border-bottom: none;' }}">
+      <div class="prof_edit_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
           <img src="{{ Storage::url(optional($comment->project->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
           <div class="comment_content">{{ $comment->content }}<br>
             <div>
@@ -31,7 +31,7 @@
       </div>
       
       @if($comment->reply)
-      <div class="prof_edit_row">
+      <div class="prof_edit_row" style="{{ isset($comment->reply) ? '' : 'border-bottom: none;' }}">
         {{-- こちらはCRUD処理作成時にコメントアウトを解除します。
         <img src="{{ Storage::url(optional($comment->reply->user)->profile->image_url) }}" alt="プロフィール画像" class="user_image reply_user"> --}}
         <img src="/storage/sampleImage/my-page.svg" class="user_image reply_user">
@@ -122,7 +122,7 @@
   .reply_user{ margin-left: 0px; }
   .comment_icons{ 
     position: relative;
-    left: calc(100% - 240px);
+    left: calc(100% - 220px);
     bottom: 29px;
     font-size: 80%;
   }
