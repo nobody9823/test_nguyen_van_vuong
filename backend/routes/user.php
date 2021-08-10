@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::post('project/{project}/apply', [MyProjectController::class, 'apply'])->name('project.apply');
         Route::get('project/{project}/create_plan', [MyProjectController::class, 'createPlan'])->name('project.create_plan');
         Route::prefix('project/{project}')->group(function () {
+            Route::get('createReturn', [MyPlanController::class, 'createReturn']);
+            Route::post('updatePlan/{plan}', [MyPlanController::class, 'updateReturn']);
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
         });
         Route::name('my_project.')->group(function () {
