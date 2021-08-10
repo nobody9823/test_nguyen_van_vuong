@@ -86,6 +86,10 @@
 <script src="{{ asset('js/upload-project-image.js') }}"></script>
 <script src={{ asset('/js/update-myProject.js') }}></script>
 <script src="{{ asset('js/preview-uploaded-image.js') }}"></script>
+<script src="{{ asset('js/select-edit-tag.js') }}"></script>
+<script src="{{ asset('js/display-plan-form.js') }}"></script>
+<script src="{{ asset('js/display-edit-plan.js') }}"></script>
+<script src="{{ asset('js/get-decoded-uri.js') }}"></script>
 
 
 <script>
@@ -95,39 +99,6 @@
 </script>
 
 <script>
-const selectEditTag = el => {
-    let myProjectSections = document.querySelectorAll('.my_project_section');
-    for(let $i = 0; $i < myProjectSections.length; $i ++){
-        myProjectSections[$i].style.display = 'none';
-    };
-    document.getElementById(el.value + '_section').style.display = 'block';
-};
-const DisplayPlanForm = () => {
-    let el = document.getElementById('plan_form_section');
-    if(el.style.display === 'none'){
-        el.style.display = 'block';
-    } else {
-        el.style.display = 'none';
-    };
-}
-const DisplayEditPlan = (planId) => {
-    let PlanFormSections = document.querySelectorAll('.edit_plan_form_sections');
-    for(let $i = 0; $i < PlanFormSections.length; $i ++){
-        PlanFormSections[$i].style.display = 'none';
-    }
-    document.getElementById('edit_plan_form_section_' + planId).style.display = 'block';
-}
-// パラメーターから値を取得する関数
-function getParam(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-
 if (getParam('status') == 422) {
     getParam('plan') != null
         ? DisplayEditPlan(getParam('plan'))
