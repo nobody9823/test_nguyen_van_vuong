@@ -96,14 +96,11 @@
     window.addEventListener('load',()=>{
         removeProjectImage('.js-image_delete');
     });
-</script>
-
-<script>
-if (getParam('status') == 422) {
-    getParam('plan') != null
-        ? DisplayEditPlan(getParam('plan'))
-        : DisplayPlanForm();
-}
+    if (getParam('status') == 422) {
+        getParam('plan') != null
+            ? DisplayEditPlan(getParam('plan'))
+            : DisplayPlanForm();
+    }
 </script>
 {{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
 <script>
