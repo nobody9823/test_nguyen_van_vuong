@@ -13,10 +13,10 @@
   <div class="prof_page_base inner_item">
     <div class="comment_page">
       <div class="prof_edit_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
-          <img src="{{ Storage::url(optional($comment->project->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
+          <img src="{{ Storage::url(optional($comment->payment->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
           <div class="comment_content">{{ $comment->content }}<br>
             <div>
-              <span>{{ $comment->project->user->name }}&emsp;</span>
+              <span>{{ $comment->payment->user->name }}&emsp;</span>
               <span>{{ $comment->created_at->format('Y年m月d日 h:m') }}</span>
             </div>
 
@@ -35,14 +35,10 @@
       
       @if($comment->reply)
       <div class="prof_edit_row" style="{{ isset($comment->reply) ? '' : 'border-bottom: none;' }}">
-        {{-- こちらはCRUD処理作成時にコメントアウトを解除します。
-        <img src="{{ Storage::url(optional($comment->reply->user)->profile->image_url) }}" alt="プロフィール画像" class="user_image reply_user"> --}}
-        <img src="/storage/sampleImage/my-page.svg" class="user_image reply_user">
-        <div class="comment_content reply_content">応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。応援しています。頑張ってください。<br>
+        <img src="{{ Storage::url(optional($comment->project->user)->profile->image_url) }}" alt="プロフィール画像" class="user_image reply_user">
+        <div class="comment_content reply_content">{{ $comment->reply->content }}<br>
           <div>
-            {{-- こちらはCRUD処理作成時にコメントアウトを解除します。
-            <span>{{ $comment->reply->user->name }}&emsp;</span><span>{{ $comment->reply->created_at->format('Y年m月d日 h:m') }}</span> --}}
-            <span>山田 太郎&emsp;</span><span>2021年08月09日 11:08</span>
+            <span>{{ $comment->project->user->name }}&emsp;</span><span>{{ $comment->reply->created_at->format('Y年m月d日 h:m') }}</span>
           </div>
         </div>
         <div class="comment_icons">
