@@ -64,9 +64,18 @@ class MyPlanRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->toArray()])
-        );
+        if($this->expectsJson()){
+            throw new HttpResponseException(
+                response()->json(['message' => $validator->errors()->toArray()])
+            );
+        } else {
+            throw new HttpResponseException(
+                redirect()
+                ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'return', 'status' => 422, 'plan' => $this->route('plan')])
+                ->withErrors($validator)
+                ->withInput()
+            );
+        };
     }
 
     protected function passedValidation()
