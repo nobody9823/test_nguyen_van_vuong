@@ -128,21 +128,6 @@ const selectEditTag = el => {
     };
     document.getElementById(el.value + '_section').style.display = 'block';
 };
-// const DisplayPlanForm = (projectId) => {
-//     axios.get(`/my_project/${projectId}/createReturn`).then(res => {
-//         if (res.status === 200){
-//             document.getElementById('plan_id').value = res.data.id;
-//             let el = document.getElementById('plan_form_section');
-//             if(el.style.display === 'none'){
-//                 el.style.display = 'block';
-//             } else {
-//                 el.style.display = 'none';
-//             };
-//         }
-//     }).catch(res => {
-//         console.log(res);
-//     });
-// }
 const DisplayEditPlan = (planId) => {
     let PlanFormSections = document.querySelectorAll('.edit_plan_form_sections');
     for(let $i = 0; $i < PlanFormSections.length; $i ++){
