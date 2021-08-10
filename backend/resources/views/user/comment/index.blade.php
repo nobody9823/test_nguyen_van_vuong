@@ -78,6 +78,10 @@
   @endforeach
 </section>
 
+<div>
+{{ $comments->links() }}
+</div>
+
 @endsection
 
 @section('script')
@@ -86,6 +90,12 @@
 @endsection
 
 <style>
+.pagination{
+display: flex;
+justify-content: center;
+font-size: 140%;
+}
+
 /* コメント関連 */
 .comment_page { 
   width: 100%;

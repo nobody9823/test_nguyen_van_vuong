@@ -12,7 +12,7 @@ class CommentController extends Controller
 {
     public function index(Project $project){
         $comments = $project->comments()->with('project.user.profile', 'reply.user.profile')
-                            ->orderBy('created_at', 'DESC')->get();
+                            ->orderBy('created_at', 'DESC')->paginate(10);
         
         return view('user.comment.index',[
             'comments' => $comments
