@@ -56,10 +56,14 @@
                         @endphp
                         @if ($project_supporter->email === Auth::user()->email)
                             <div class="ps_rank_myrank_large_L m_b_4030">
-                                <div class="ps_rank_myrank_large_01">{{ $total_amount_rank }}位</div>
-                                <div class="ps_rank_myrank_large_02">{{ $project_supporter->name }}</div>
-                                <div class="ps_rank_myrank_large_03">
-                                    {{ number_format($project_supporter->invited_payments_sum_price) }}円</div>
+                                <div class="ps_rank_02_tit">あなたの支援総額ランキング</div>
+                                <div class="ps_rank_myrank_large_L_items">
+                                    <div class="ps_rank_myrank_large_01">{{ $total_amount_rank }}位</div>
+                                    <div class="ps_rank_myrank_large_02">{{ $project_supporter->name }}</div>
+                                    <div class="ps_rank_myrank_large_03">
+                                        {{ number_format($project_supporter->invited_payments_sum_price) }}円
+                                    </div>
+                                </div>
                             </div>
                         @endif
                         @php
@@ -78,12 +82,16 @@
                             }
                         @endphp
                         @if ($project_supporter->email === Auth::user()->email)
-                            <div class="ps_rank_myrank_large_R m_b_4030">
+                        <div class="ps_rank_myrank_large_R m_b_4030">
+                            <div class="ps_rank_02_tit">あなたの紹介件数ランキング</div>
+                            <div class="ps_rank_myrank_large_L_items">
                                 <div class="ps_rank_myrank_large_01">{{ $total_quantity_rank }}位</div>
                                 <div class="ps_rank_myrank_large_02">{{ $project_supporter->name }}</div>
                                 <div class="ps_rank_myrank_large_03">
-                                    {{ $project_supporter->invited_plan_payment_included_sum_quantity }}件</div>
+                                    {{ $project_supporter->invited_plan_payment_included_sum_quantity }}件
+                                </div>
                             </div>
+                        </div>
                         @endif
                         @php
                             $before_total_quantity = $project_supporter->invited_plan_payment_included_sum_quantity;
@@ -246,25 +254,39 @@
                         </div>
                     </div><!--/ps_rank_01-->
 
+                    <div class="m_b_1510" style="margin: 0 auto;">
+                        <div class="def_btn">
+                            <a style="color: white">
+                                プロジェクトサポーター(PS)になる
+                            </a>
+                        </div>
+                    </div>
+
                     <div class="ps_rank_02 m_b_4030">
 
                         <div class="ps_rank_myrank_large_L m_b_4030">
-                            <div class="ps_rank_myrank_large_01">18位</div>
-                            <div class="ps_rank_myrank_large_02">ヤマダタロウ</div>
-                            <div class="ps_rank_myrank_large_03">35,000円</div>
+                            <div class="ps_rank_02_tit">あなたの支援総額ランキング</div>
+                            <div class="ps_rank_myrank_large_L_items">
+                                <div class="ps_rank_myrank_large_01">18位</div>
+                                <div class="ps_rank_myrank_large_02">ヤマダタロウ</div>
+                                <div class="ps_rank_myrank_large_03">35,000円</div>
+                            </div>
                         </div>
 
                         <div class="ps_rank_myrank_large_R m_b_4030">
-                            <div class="ps_rank_myrank_large_01">9位</div>
-                            <div class="ps_rank_myrank_large_02">ヤマダタロウ</div>
-                            <div class="ps_rank_myrank_large_03">540件</div>
+                            <div class="ps_rank_02_tit">あなたの紹介件数ランキング</div>
+                            <div class="ps_rank_myrank_large_L_items">
+                                <div class="ps_rank_myrank_large_01">9位</div>
+                                <div class="ps_rank_myrank_large_02">ヤマダタロウ</div>
+                                <div class="ps_rank_myrank_large_03">540件</div>
+                            </div>
                         </div>
 
 
 
                         <div class="ps_rank_02_L">
 
-                            <div class="ps_rank_02_tit">金額</div>
+                            <div class="ps_rank_02_tit">支援総額</div>
 
                             <div class="ps_rank_02_rank_item_row">
                                 <div class="ps_rank_item_01">
