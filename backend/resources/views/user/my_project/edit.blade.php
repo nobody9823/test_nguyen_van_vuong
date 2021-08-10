@@ -82,48 +82,16 @@
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src={{ asset('/js/blade-functions.js') }}></script>
+<script src="{{ asset('js/remove-project-image.js') }}"></script>
+<script src="{{ asset('js/upload-project-image.js') }}"></script>
 <script src={{ asset('/js/update-myProject.js') }}></script>
+<script src="{{ asset('js/preview-uploaded-image.js') }}"></script>
 
 
 <script>
-    $(function() {
-        $(".js-image_delete").click(function() {
-            var deleteConfirm = confirm('削除してもよろしいですか？');
-
-            if (deleteConfirm === true) {
-
-                var el = $(this);
-                var ImageId = el.attr('id');
-
-                el.append('<meta name="csrf-token" content="{{ csrf_token() }}">');
-
-                $.ajax({
-                        url: '/my_project/project/file/' + ImageId,
-                        type: 'POST',
-                        data: {
-                            'project_image': ImageId,
-                            '_method': 'DELETE'
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-
-                        success: function(msg) {
-                            if (msg === 'success') {
-                                alert("削除が成功しました。");
-                                el.parents('div.js-image__card').remove();
-                            } else {
-                                alert("エラーが起こりました。");
-                            }
-                        }
-                    })
-
-                    .fail(function() {
-                        alert('エラーが起こりました。');
-                    });
-            }
-        })
-    })
+    window.addEventListener('load',()=>{
+        removeProjectImage('.js-image_delete');
+    });
 </script>
 
 <script>
@@ -167,63 +135,6 @@ if (getParam('status') == 422) {
 }
 </script>
 {{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
-<script>
-function uploadProjectImage (input, projectId, projectFileId) {
-    const formData = new FormData();
-    formData.append('file',input.files[0]);
-
-    if (projectFileId) {
-        axios.post(`/my_project/project/${projectId}/uploadProjectImage/${projectFileId}?current_tab=visual`, formData)
-        .then((res) => {
-            console.log(res);
-            location.replace(res.data.redirect_url);
-        })
-        .catch((err) => {
-            console.log(err.response);
-            alert(err.response.data.errors.file);
-        });
-    } else {
-        axios.post(`/my_project/project/${projectId}/uploadProjectImage?current_tab=visual`, formData)
-        .then((res) => {
-            console.log(res);
-            location.replace(res.data.redirect_url);
-        })
-        .catch((err) => {
-            console.log(err.response);
-            alert(err.response.data.errors.file);
-        });
-    }
-}
-function previewUploadedImage (input, columnName) {
-    const file = input.files[0];
-    if (file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'image/png' && file.type != 'application/pdf') {
-      alert('.jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています')
-      return
-    }
-    const preview = document.getElementById(columnName);
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        const imageUrl = e.target.result; // URLはevent.target.resultで呼び出せる
-        const img = document.createElement("img"); // img要素を作成
-        img.src = imageUrl; // URLをimg要素にセット
-        preview.removeChild(preview.firstElementChild);
-        preview.appendChild(img); // #previewの中に追加
-    }
-    reader.readAsDataURL(file);
-}
-function uploadedImageHandler (input, columnName, projectId) {
-    previewUploadedImage(input, columnName);
-    const el = new FormData();
-    el.append(columnName, input.files[0]);
-    updateMyProject.imageInput(
-        {
-            name: columnName,
-            value: el,
-        },
-        projectId
-    );
-}
-</script>
 <script>
 tinymce.init({
     selector: '.tiny_editor',
