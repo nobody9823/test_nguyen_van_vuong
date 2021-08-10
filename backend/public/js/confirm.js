@@ -55,6 +55,16 @@ $(function () {
     });
 });
 $(function () {
+    $(".btn-dell-comment").click(function () {
+        if (confirm("本当に削除しますか？")) {
+            //そのままsubmit（削除）
+        } else {
+            //cancel
+            return false;
+        }
+    });
+});
+$(function () {
     $("#btn-send-cheering-users").click(function () {
     var check_count = $('.checkbox-judge :checked').length;
         if (check_count == 0 ){

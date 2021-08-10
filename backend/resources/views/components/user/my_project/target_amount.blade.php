@@ -2,6 +2,7 @@
     @csrf
     @method('PUT')
     <div class="form_item_row">
+
         <div class="form_item_tit">
         <div class="spinner-wrapper">
             <div class="spinner" id="spinner_target_amount"></div>

@@ -68,6 +68,9 @@ class ProjectController extends Controller
         // 最新のプロジェクト
         $new_projects = Project::mainProjects()->orderBy('start_date', 'DESC')->get();
 
+        // 掲載終了プロジェクト
+        $complete_projects = Project::CompletedProjects()->orderBy('end_date', 'ASC')->get();
+
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
         //     ->inRandomOrder()->get();
@@ -97,7 +100,8 @@ class ProjectController extends Controller
             'user_liked',
             'projects',
             'ranking_projects',
-            'new_projects'
+            'new_projects',
+            'complete_projects'
         ));
     }
 
