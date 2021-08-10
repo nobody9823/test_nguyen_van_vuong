@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::get('createReturn', [MyPlanController::class, 'createReturn']);
             Route::post('updatePlan/{plan}', [MyPlanController::class, 'updateReturn']);
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
+            Route::resource('comment', CommentController::class)->only(['index']);
         });
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);

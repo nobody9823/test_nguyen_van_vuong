@@ -43,7 +43,7 @@ class ProjectFactory extends Factory
             ),
             'start_date' => $this->faker->dateTimeBetween($startDate = '2 week', $endDate = '1 month'),
             'end_date' => $this->faker->dateTimeBetween($startDate = '1 month', $endDate = '2 month'),
-            'target_amount' => $this->faker->randomDigit * 100000,
+            'target_amount' => $this->faker->numberBetween(10000, 99999999),
         ];
     }
 
