@@ -297,13 +297,13 @@
     @endif
     </div>
     @section('script')
-    <script src="{{ asset('/js/check_checked.js') }}"></script>
-    <script src="{{ asset('/js/all_check_toggle.js') }}"></script>
+    <script src="{{ asset('/js/check-checked.js') }}"></script>
+    <script src="{{ asset('/js/all-checkbox-toggle.js') }}"></script>
 
     <script type="text/javascript">
         window.addEventListener('DOMContentLoaded', () => {
-            check_checked('#operate_projects_button',".checkbox");
-            all_checkbox_toggle('#checkbox_parent',".checkbox");
+            checkChecked('#operate_projects_button',".checkbox");
+            allCheckboxToggle('#checkbox_parent',".checkbox");
         });
     </script>
     
