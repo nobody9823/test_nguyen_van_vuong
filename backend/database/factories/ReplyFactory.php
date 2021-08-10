@@ -23,7 +23,7 @@ class ReplyFactory extends Factory
     public function definition()
     {
         return [
-            'comment_id' => $this->faker->numberBetween(1, 30),
+            'comment_id' => $this->faker->numberBetween(1, 40),
             'content' => Arr::random([
                 '頑張ってください！',
                 'みんなで乗り越えましょう',
