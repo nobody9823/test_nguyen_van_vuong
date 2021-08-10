@@ -954,10 +954,10 @@ input[type=radio]:checked + .radio-fan::after {
 .pds_sec01_R_nokori02 span{ font-size: 3rem; font-weight: bold;}
 .pds_sec01_R_btn_base{ width: 100%; display: flex; flex-direction: column;}
 .pds_sec01_R_btn01_wrapper {display: flex; justify-content: space-between; align-items: center;}
-.pds_sec01_R_btn01{ font-size: 3rem; font-weight: bold; background: #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; padding: 11px; border-radius: 32px; width: 100%; position: relative;margin-top: 5px;}
+.pds_sec01_R_btn01{ font-size: 3rem; font-weight: bold; background: #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; padding: 11px; border-radius: 32px; width: 100%; position: relative;margin-top: 5px; flex: 5;}
 .pds_sec01_R_btn02{ width: 100%;}
-.project_sns_icon{width: 100%; display: flex; justify-content: flex-end;}
-.project_sns_icon img{ width: 32px; margin-right: 10px;}
+.project_sns_icon{width: 100%; flex: 1; text-align: right;}
+.project_sns_icon img{ width: 32px; margin-left: 10px;}
 
 
 @media screen and (max-width: 768px){
@@ -974,7 +974,7 @@ input[type=radio]:checked + .radio-fan::after {
 	.pds_sec01_R_nokori02{ font-size: 3.6rem;}
 	.pds_sec01_R_nokori02 span{ font-size: 2.2rem;}
     .slider-img-wrapper{ height: 298px; }
-    .project_sns_icon img{ width: 26px; margin-right: 4px;}
+    .project_sns_icon img{ width: 26px; margin-left: 4px;}
 
 }
 
