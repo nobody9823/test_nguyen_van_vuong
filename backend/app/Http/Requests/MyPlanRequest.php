@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Carbon\Carbon;
 
 class MyPlanRequest extends FormRequest
 {
@@ -30,64 +31,51 @@ class MyPlanRequest extends FormRequest
         return [
             'title' => ['nullable', 'string', 'max:45'],
             'content' => ['nullable', 'string', 'max:2000'],
-            'price' => ['required', 'integer', 'max:10000000'],
-            'address_is_required' => ['required', 'boolean'],
-            'limit_of_supporters' => ['required', 'integer', 'min:1'],
-            'delivery_date' => ['required', 'date_format:Y-m-d', "after:{$project_end_date}"],
+            'price' => ['nullable', 'integer', 'max:10000000'],
+            'address_is_required' => ['nullable', 'boolean'],
+            'limit_of_supporters' => ['nullable', 'integer', 'min:1'],
+            'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$project_end_date}"],
             'image_url' => ['nullable', 'image']
         ];
     }
 
     protected function prepareForValidation()
     {
-        if ($this->title === null) {
-            $this->merge([
-                'title' => ''
-            ]);
-        };
+        if ($this->has('delivery_month') && $this->has('delivery_day')){
+            if ($this->delivery_month === "00") {
+                $this->merge([
+                    'delivery_month' => date('m')
+                ]);
+            };
 
-        if ($this->input('content') === null) {
-            $this->merge([
-                'content' => ''
-            ]);
-        };
-        if ($this->limit_of_supporters === null) {
-            $this->merge([
-                'limit_of_supporters' => 1
-            ]);
-        }
+            if ($this->delivery_day === "00") {
+                $this->merge([
+                    'delivery_day' => date('y')
+                ]);
+            }
 
-        if ($this->delivery_month === "00") {
-            $this->merge([
-                'delivery_month' => date('m')
-            ]);
-        };
+            $date = new Carbon($this->delivery_year . '-' . $this->delivery_month . '-' . $this->delivery_day);
 
-        if ($this->delivery_day === "00") {
             $this->merge([
-                'delivery_day' => date('y')
-            ]);
-        }
-
-        $this->merge([
-            'delivery_date' => $this->delivery_year . '-' . $this->delivery_month . '-' . $this->delivery_day
-        ]);
-
-        if ($this->price === null) {
-            $this->merge([
-                'price' => 0
+                'delivery_date' => $date->format('Y-m-d')
             ]);
         }
     }
 
     public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(
-            redirect()
+        if($this->expectsJson()){
+            throw new HttpResponseException(
+                response()->json(['message' => $validator->errors()->toArray()])
+            );
+        } else {
+            throw new HttpResponseException(
+                redirect()
                 ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'return', 'status' => 422, 'plan' => $this->route('plan')])
                 ->withErrors($validator)
                 ->withInput()
-        );
+            );
+        };
     }
 
     protected function passedValidation()

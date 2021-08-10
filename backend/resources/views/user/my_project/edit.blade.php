@@ -83,8 +83,7 @@
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src={{ asset('/js/blade-functions.js') }}></script>
 <script src={{ asset('/js/update-myProject.js') }}></script>
-
-
+<script src={{ asset('/js/update-myPlan.js') }}></script>
 <script>
     $(function() {
         $(".js-image_delete").click(function() {
@@ -134,14 +133,6 @@ const selectEditTag = el => {
     };
     document.getElementById(el.value + '_section').style.display = 'block';
 };
-const DisplayPlanForm = () => {
-    let el = document.getElementById('plan_form_section');
-    if(el.style.display === 'none'){
-        el.style.display = 'block';
-    } else {
-        el.style.display = 'none';
-    };
-}
 const DisplayEditPlan = (planId) => {
     let PlanFormSections = document.querySelectorAll('.edit_plan_form_sections');
     for(let $i = 0; $i < PlanFormSections.length; $i ++){
