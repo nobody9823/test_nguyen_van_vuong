@@ -1763,9 +1763,10 @@ width: 100%;
 .plan_image_wrapper {text-align: center;}
 .identify_image_wrapper {display: flex; flex-direction: row; align-items: center;}
 .identify_image_description {font-size: 1.2rem; margin-left: 20px;}
-.identify_image_description h4 {font-size: 14px;}
-.identify_image_description ul {display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; padding-inline-start: 20px;}
-.identify_image_description ul li {list-style-type: disc;}
+.ps_description {font-size: 1.2rem; margin-bottom: 20px;}
+.identify_image_description h4, .ps_description h4 {font-size: 14px;}
+.identify_image_description ul, .ps_description ul {display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; padding-inline-start: 20px;}
+.identify_image_description ul li, .ps_description ul li {list-style-type: disc;}
 .identify_img img {height: 110px; width: 100%; object-fit: contain;}
 .ps_plan_form_wrapper {flex-direction: row; display: flex; align-items: center; justify-content: space-evenly; width: 100%;}
 .ps_plan_form_item {width:48%; margin-bottom: 40px;}

@@ -216,4 +216,9 @@ class MyProjectController extends Controller
             return response()->json(['result' => false]);
         }
     }
+
+    public function rewardSample()
+    {
+        return view('user.my_project.reward_sample');
+    }
 }
