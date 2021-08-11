@@ -13,10 +13,10 @@
   <div class="prof_page_base inner_item">
     <div class="comment_page">
       <div class="prof_edit_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
-          <img src="{{ Storage::url(optional($comment->payment->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
+          <img src="{{ Storage::url(optional($comment->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
           <div class="comment_content">{{ $comment->content }}<br>
             <div>
-              <span>{{ $comment->payment->user->name }}&emsp;</span>
+              <span>{{ $comment->user->name }}&emsp;</span>
               <span>{{ $comment->created_at->format('Y年m月d日 h:m') }}</span>
             </div>
 
