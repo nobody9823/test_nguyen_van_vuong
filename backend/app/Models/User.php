@@ -107,6 +107,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Payment');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
     public function invitedPayments()
     {
         return $this->hasMany('App\Models\Payment', 'inviter_id', 'id');

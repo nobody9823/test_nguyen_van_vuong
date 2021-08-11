@@ -10,12 +10,10 @@ use App\Models\UserProjectLiked;
 use App\Models\Plan;
 use App\Models\Payment;
 use App\Models\PaymentToken;
-use App\Models\Comment;
 use App\Models\Curator;
 use App\Models\User;
 use App\Models\UserPlanBilling;
 use App\Models\MessageContent;
-use App\Models\Reply;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -52,8 +50,6 @@ class ProjectSeeder extends Seeder
                 $project->projectFiles()->saveMany(ProjectFile::factory(10)->make());
                 $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
                 $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
-                $project->comments()->saveMany(Comment::factory(rand(1,10))->make())
-                ->each(function ($comment){ $comment->reply()->saveMany(Reply::factory())->make(); });
                 // $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())->each(function (Plan $plan) {
                 //     $plan->includedPayments()
                 //         ->attach(
