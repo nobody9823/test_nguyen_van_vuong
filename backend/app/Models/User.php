@@ -77,7 +77,7 @@ class User extends Authenticatable
             Payment::where('inviter_id', $user->id)
                 ->update(['inviter_id' => null]);
             $payment_ids = $user->payments()->pluck('id');
-            $comment_ids = Comment::whereIn('payment_id', $payment_ids)->pluck('id')->toArray();
+            $comment_ids = Comment::where('user_id', $user->id)->pluck('id')->toArray();
             Reply::whereIn('comment_id', $comment_ids)->delete();
             Comment::destroy($comment_ids);
             MessageContent::whereIn('payment_id', $payment_ids)->delete();
