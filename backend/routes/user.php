@@ -5,6 +5,7 @@ use App\Http\Controllers\User\MessageController;
 use App\Http\Controllers\User\PlanController;
 use App\Http\Controllers\User\ProjectController;
 use App\Http\Controllers\User\CommentController;
+use App\Http\Controllers\User\ReplyController;
 use App\Http\Controllers\User\TopPageController;
 use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\InquiryController;
@@ -46,6 +47,8 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::post('updatePlan/{plan}', [MyPlanController::class, 'updateReturn']);
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
             Route::resource('comment', CommentController::class)->only(['index']);
+            Route::post('reply/{comment}', [ReplyController::class, 'store'])->name('reply.store');
+            // Route::resource('reply', ReplyController::class)->only(['store']);
         });
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);

@@ -53,19 +53,22 @@
   <div id="{{ 'modal_area_'.$key }}" class="modal_area">
     <div class="modal_back_ground"></div>
     <div class="modal_wrapper">
-      <div>
+      <form action="{{ route('user.reply.store', ['project' => $comment->project, 'comment' => $comment]) }}" method="POST">
+        @csrf
         <div>
-            <div class="av_tit">
-              <p style="text-align: center;">返信コメント</p>
-            </div>
-            <textarea name="" class="input_reply"></textarea>
+          <div class="av_tit">
+            <p style="text-align: center;">返信コメント</p>
+          </div>
+          <textarea name="content" class="input_reply"></textarea>
         </div>
+
         <div class="def_btn">
-          <a href="" class="disable-btn">
+          <button class="disable-btn" type="submit">
             <p style="font-size: 1.8rem; font-weight: bold; color: #fff;">送信</p>
-          </a>
+          </button>
         </div>
-      </div>
+      </form>
+
       <div id="{{ 'close_modal_'.$key }}" class="close_modal" onclick="toggleModal(this.id)">
         <i class="fas fa-times fa-lg"></i>
       </div>
