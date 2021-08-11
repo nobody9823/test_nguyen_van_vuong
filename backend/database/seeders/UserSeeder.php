@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\Address;
 use App\Models\Identification;
 use App\Models\Comment;
-use App\Models\Reply;
 use App\Models\Profile;
 use App\Models\SnsLink;
 use Illuminate\Database\Seeder;

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Comment;
 use App\Models\Payment;
 use App\Models\PaymentToken;
 use App\Models\Plan;
