@@ -17,7 +17,7 @@
           <div class="comment_content">{{ $comment->content }}<br>
             <div>
               <span>{{ $comment->user->name }}&emsp;</span>
-              <span>{{ $comment->created_at->format('Y年m月d日 h:m') }}</span>
+              <span>{{ $comment->created_at->format('Y年m月d日 H:m') }}</span>
             </div>
 
           </div>
@@ -38,7 +38,7 @@
         <img src="{{ Storage::url(optional($comment->project->user)->profile->image_url) }}" alt="プロフィール画像" class="user_image reply_user">
         <div class="comment_content reply_content">{{ $comment->reply->content }}<br>
           <div>
-            <span>{{ $comment->project->user->name }}&emsp;</span><span>{{ $comment->reply->created_at->format('Y年m月d日 h:m') }}</span>
+            <span>{{ $comment->project->user->name }}&emsp;</span><span>{{ $comment->reply->created_at->format('Y年m月d日 H:m') }}</span>
           </div>
         </div>
         <div class="comment_icons">
