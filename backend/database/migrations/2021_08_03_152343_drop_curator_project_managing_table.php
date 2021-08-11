@@ -25,12 +25,12 @@ class DropCuratorProjectManagingTable extends Migration
      */
     public function down()
     {
-        // Schema::table('curator_project_managings', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->foreignId('project_id')->constrained('projects');
-        //     $table->foreignId('curator_id')->constrained('curators');
-        //     $table->timestamps();
-        //     $table->softDeletes();
-        // });
+        Schema::create('curator_project_managings', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('project_id')->constrained('projects');
+            $table->foreignId('curator_id')->constrained('curators');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 }
