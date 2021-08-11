@@ -27,7 +27,7 @@ class DropColumnPaymentIdColumn extends Migration
     public function down()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->foreignId('payment_id')->constrained('payments');
+            $table->foreignId('payment_id')->nullable()->constrained('payments');
         });
     }
 }
