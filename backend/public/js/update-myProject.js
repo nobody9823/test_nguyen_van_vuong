@@ -50,6 +50,15 @@ const updateMyProject = (() => {
         clearTimeout(savedTimer);
     }
 
+    const displayError = (e, message) => {
+        document.getElementById('errors_' + Object.keys(e)[0]).innerHTML = message;
+        setTimeout(() => { disappearError(e); }, 5000 );
+    }
+
+    const disappearError = (e) => {
+        document.getElementById('errors_' + Object.keys(e)[0]).innerHTML = '';
+    }
+
     const setTimer = (data, projectId, inputType) => {
         if (Timer) {clearTimeout(Timer);}
         if (inputType == 'text') {
@@ -66,8 +75,14 @@ const updateMyProject = (() => {
             if(res.data.result === true){
                 document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
                 displayIcon(document.getElementById('saved_' + Object.keys(data)[0]));
+            } else if (res.data.message !== undefined) {
+                document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
+                displayError(data, res.data.message[Object.keys(data)[0]][0]);
+            } else {
+                document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
             }
         }).catch(res => {
+            document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
             console.log(res);
         });
     }
