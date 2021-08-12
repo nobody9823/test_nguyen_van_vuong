@@ -89,4 +89,14 @@ class MyPlanController extends Controller
     // {
     //
     // }
+
+    public function createReturn(Project $project)
+    {
+        return response()->json($project->plans()->save(Plan::initialize())->toArray());
+    }
+
+    public function updateReturn(Project $project, Plan $plan, MyPlanRequest $request)
+    {
+        return response()->json(['result' => $plan->fill($request->all())->save()]);
+    }
 }

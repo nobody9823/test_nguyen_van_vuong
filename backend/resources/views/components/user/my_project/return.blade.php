@@ -30,13 +30,13 @@
         <form method="post" action="{{ route('user.plan.update', ['project' => $project, 'plan' => $plan , 'current_tab' => 'return']) }}" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
-            <x-user.my_plan.plan-form :plan="$plan" />
+            <x-user.my_plan.plan-form :plan="$plan" :project="$project" />
         </form>
     </section>
     @endforeach
 
     {{--NOTICE: MyProjectController, create action --}}
-    <a href="javascript:DisplayPlanForm()" class="footer-over_L my_new_project">
+    <a href="javascript:updateMyPlan.DisplayPlanForm({{ $project->id }})" class="footer-over_L my_new_project">
         <div class="footer-over_L_02">
         <div class="footer-over_L_02_01">New Project</div>
         <div class="footer-over_L_02_02">新規リターン作成はこちら</div>
@@ -48,7 +48,8 @@
 <section id="plan_form_section" style="display: none;">
     <form method="post" action="{{ route('user.plan.store', ['project' => $project, 'current_tab' => 'return']) }}" enctype="multipart/form-data">
         @csrf
-        <x-user.my_plan.plan-form :plan=null />
+        <input type="hidden" id="plan_id">
+        <x-user.my_plan.plan-form :plan=null :project=$project />
     </form>
 </section>
 

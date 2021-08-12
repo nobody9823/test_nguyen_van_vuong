@@ -10,12 +10,10 @@ use App\Models\UserProjectLiked;
 use App\Models\Plan;
 use App\Models\Payment;
 use App\Models\PaymentToken;
-use App\Models\Comment;
 use App\Models\Curator;
 use App\Models\User;
 use App\Models\UserPlanBilling;
 use App\Models\MessageContent;
-use App\Models\Reply;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 

@@ -36,7 +36,6 @@ use Carbon\CarbonImmutable;
 <x-manage.work_shift.translate_month guard='talent' model='work_shift' :targetMonth=$target_month />
 
 
-@section('script')
 <script>
     function form_submit(form_name){
         document.forms[form_name].submit();
@@ -47,10 +46,4 @@ use Carbon\CarbonImmutable;
         document.forms[form_name].submit();
     }
 
-    function all_checkbox_toggle(prop){
-        this.checked = prop.checked;
-        Array.from(document.getElementsByClassName('checkbox')).forEach(element => element.checked = this.checked);
-    }
 </script>
-@endsection
-@endsection

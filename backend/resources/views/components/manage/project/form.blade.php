@@ -42,9 +42,12 @@
 
 <div class="form-group">
     <label>キュレーター</label>
-    <div class="dropdown">
-        {{ Form::select('curator_id', $curators, old('curator_id', optional($project ?? null)->curator), ['class' => 'form-control', 'placeholder' => '選択してください。']) }}
-    </div>
+    <select name="curator_id" class="form-control">
+        <option value="">未定</option>
+        @foreach ($curators as $id => $name)
+            <option value="{{ $id }}" {{ old('curator_id', optional(optional($project)->curator)->id) === $id ? 'selected' : '' }}>{{ $name }}</option>
+        @endforeach
+    </select>
 </div>
 
 <div>

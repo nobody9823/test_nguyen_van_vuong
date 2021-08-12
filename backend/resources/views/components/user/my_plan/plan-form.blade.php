@@ -1,64 +1,105 @@
 <div class="form_item_row">
-    <div class="form_item_tit">タイトル<span class="hissu_txt">必須</span></div>
-    <input type="text" name="title" class="def_input_100p" value="{{ old('title', optional($plan)->title) }}">
+    <div class="form_item_tit">
+        <div class="spinner-wrapper">
+            <div class="spinner" id="spinner_return_title{{ $plan === null ? '' : '_'.$plan->id }}"></div>
+            <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_title{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+        </div>
+        タイトル
+        <span class="hissu_txt">必須</span>
+    </div>
+    <input type="text" name="title" class="def_input_100p" value="{{ old('title', optional($plan)->title) }}" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">本文<span class="hissu_txt">必須</span><span class="disclaimer">※300文字以内で入力してください</span></div>
-    <textarea name="content" class="def_textarea" rows="6">{{ old('content', optional($plan)->content) }}</textarea>
+    <div class="form_item_tit">
+        <div class="spinner-wrapper">
+            <div class="spinner" id="spinner_return_content{{ $plan === null ? '' : '_'.$plan->id }}"></div>
+            <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_content{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+        </div>
+        本文
+        <span class="hissu_txt">必須</span>
+        <span class="disclaimer">※300文字以内で入力してください</span>
+    </div>
+    <textarea name="content" class="def_textarea" rows="6" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">{{ old('content', optional($plan)->content) }}</textarea>
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">限定数</div>
-    <input type="number" name="limit_of_supporters" class="p-postal-code def_input_100p" value="{{ old('limit_of_supporters', optional($plan)->limit_of_supporters) }}" placeholder="（例）100000">
+    <div class="form_item_tit">
+        <div class="spinner-wrapper">
+            <div class="spinner" id="spinner_return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}"></div>
+            <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+        </div>
+        限定数
+    </div>
+    <input type="number" name="limit_of_supporters" class="p-postal-code def_input_100p" value="{{ old('limit_of_supporters', optional($plan)->limit_of_supporters) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
 </div>
 
 <div class="form_item_row">
     <div class="form_item_tit">お届け予定日<span class="hissu_txt">必須</span></div>
     <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="delivery_year" class="form-control" name="delivery_year" readonly>
+        <select id="delivery_year" class="form-control" name="delivery_year" onChange="updateMyPlan.checkDateIsFilled(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})" readonly>
         @for($i = (int) date('Y'); $i <= (int) date('Y') + 2; $i ++)
             <option value="{{ $i }}" {{ $i == old('delivery_year', optional(optional($plan)->delivery_date)->year) ? 'selected' : '' }}>{{ $i }}</option>
         @endfor
         </select>
     </div>
     <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="delivery_month" class="form-control" name="delivery_month">
+        <select id="delivery_month" class="form-control" name="delivery_month" onChange="updateMyPlan.checkDateIsFilled(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
             @for ($i = 0; $i <= 12; $i++)
-            <option value="{{ sprintf('%02d', $i) }}" {{ optional(optional($plan)->delivery_date)->month == sprintf('%02d', $i) ? 'selected' : '' }}>{{ $i }}</option>
+                <option value="{{ sprintf('%02d', $i) }}" {{ optional(optional($plan)->delivery_date)->month == sprintf('%02d', $i) ? 'selected' : '' }}>{{ $i }}</option>
             @endfor
         </select>
     </div>
     <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="delivery_day" class="form-control" name="delivery_day">
+        <select id="delivery_day" class="form-control" name="delivery_day" onChange="updateMyPlan.checkDateIsFilled(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
             @for ($i = 0; $i <= 31; $i++)
             <option value="{{ sprintf('%02d', $i) }}" {{ optional(optional($plan)->delivery_date)->day == sprintf('%02d', $i) ? 'selected' : '' }}>{{ $i }}</option>
             @endfor
         </select>
     </div>
+    <div class="spinner-wrapper">
+        <div class="spinner" id="spinner_return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}"></div>
+        <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+    </div>
+    <span id="errors_delivery_date" style="color: red;"></span>
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">金額<span class="hissu_txt">必須</span></div>
-    <input type="number" name="price" class="p-postal-code def_input_100p" value="{{ old('price', optional($plan)->price) }}" placeholder="（例）100000">
+    <div class="form_item_tit">
+        <div class="spinner-wrapper">
+            <div class="spinner" id="spinner_return_price{{ $plan === null ? '' : '_'.$plan->id }}"></div>
+            <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_price{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+        </div>
+        金額
+        <span class="hissu_txt">必須</span>
+    </div>
+    <input type="number" name="price" class="p-postal-code def_input_100p" value="{{ old('price', optional($plan)->price) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
 </div>
 
 <div class="form_item_row" style="display: flex; flex-direction: column">
     <div class="form_item_tit">リターン画像<span class="hissu_txt">必須</span></div>
     <div class="plan_image_wrapper">
-        @if (optional($plan)->image_url !== null)
-            <div id="image_url" class="ib02_01 E-font my_project_img_wrapper">
-                <img src="{{ Storage::url($plan->image_url) }}">
+        <div class="form_item_tit">
+            <div class="spinner-wrapper">
+                <div class="spinner" id="spinner_return_image_url{{ $plan === null ? '' : '_'.$plan->id }}"></div>
+                <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_image_url{{ $plan === null ? '' : '_'.$plan->id }}"></i>
             </div>
+        </div>
+        @if ($plan !== null)
+            <div id="image_url_{{ $plan->id }}" class="ib02_01 E-font my_project_img_wrapper">
         @else
             <div id="image_url" class="ib02_01 E-font my_project_img_wrapper">
-                <img src="{{ Storage::url('public/sampleImage/now_printing.png') }}">
-            </div>
         @endif
-        <div class="form_item_tit"></div>
+
+        @if (optional($plan)->image_url !== null)
+            <img src="{{ Storage::url($plan->image_url) }}">
+        @else
+            <img src="{{ Storage::url('public/sampleImage/now_printing.png') }}">
+        @endif
+        </div>
         <div class="input_file_button_wrapper">
             <label>
-                <input type="file" name="image_url" hidden onChange="previewUploadedImage(this, 'image_url')">
+                <input type="file" name="image_url" hidden onChange="updateMyPlan.uploadImage(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
                 <a class="input_file_button">
                     ファイルを選択する
                 </a>
@@ -68,9 +109,17 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">住所情報の取得<small>(※リターンを配送する場合等に利用)</small><span class="hissu_txt">必須</span></div>
+    <div class="form_item_tit">
+        <div class="spinner-wrapper">
+            <div class="spinner" id="spinner_return_address_is_required{{ $plan === null ? '' : '_'.$plan->id }}"></div>
+            <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_address_is_required{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+        </div>
+        住所情報の取得
+        <small>(※リターンを配送する場合等に利用)</small>
+        <span class="hissu_txt">必須</span>
+    </div>
     <div class="cp_ipselect cp_normal">
-        <select name="address_is_required" class="p-region">
+        <select name="address_is_required" class="p-region" onChange="updateMyPlan.selectorInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
             <option value=0 {{ optional($plan)->address_is_required === 0 ? 'selected' : '' }}>要</option>
             <option value=1 {{ optional($plan)->address_is_required === 1 ? 'selected' : '' }}>不要</option>
         </select>

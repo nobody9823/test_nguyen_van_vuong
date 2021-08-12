@@ -80,10 +80,6 @@ use \Illuminate\Support\Str;
         });
     });
 
-        function all_checkbox_toggle(prop){
-            this.checked = prop.checked;
-            Array.from(document.getElementsByClassName('checkbox')).forEach(element => element.checked = this.checked);
-        }
     </script>
 
 </body>

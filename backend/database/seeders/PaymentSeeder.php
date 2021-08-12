@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Comment;
 use App\Models\Payment;
 use App\Models\PaymentToken;
 use App\Models\Plan;
@@ -26,7 +25,6 @@ class PaymentSeeder extends Seeder
             $payment->includedPlans()->attach(
                 [Plan::whereIn('project_id', Project::where('id', $payment->project_id)->select('id'))->inRandomOrder()->first()->id => ['quantity' => random_int(1, 3)]]
             );
-            $payment->comment()->save(Comment::factory()->hasReply()->create());
         });
     }
 }

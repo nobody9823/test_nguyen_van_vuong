@@ -26,6 +26,7 @@ class AddCuratorIdColumnToProjectsTable extends Migration
     public function down()
     {
         Schema::table('projects', function (Blueprint $table) {
+            $table->dropForeign('projects_curator_id_foreign');
             $table->dropColumn('curator_id');
         });
     }
