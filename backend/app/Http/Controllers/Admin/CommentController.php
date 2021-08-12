@@ -19,14 +19,14 @@ class CommentController extends Controller
     {
         $comments = Comment::search()->narrowDownWithProject()
                                      ->searchWithPostDates($request->from_date, $request->to_date)
-                                     ->with(['project', 'payment.user','reply'])
+                                     ->with(['project', 'user','reply'])
                                      ->sortBySelected($request->sort_type);
 
         //リレーション先OrderBy
         if ($request->sort_type === 'payment_user_name_asc') {
-            $comments = $comments->get()->sortBy('payment.user.name')->paginate(10);
+            $comments = $comments->get()->sortBy('user.name')->paginate(10);
         } elseif ($request->sort_type === 'payment_user_name_desc') {
-            $comments = $comments->get()->sortByDesc('payment.user.name')->paginate(10);
+            $comments = $comments->get()->sortByDesc('user.name')->paginate(10);
         } elseif ($request->sort_type === 'project_id_asc') {
             $comments = $comments->get()->sortBy('project.id')->paginate(10);
         } elseif ($request->sort_type === 'project_id_desc') {

@@ -83,140 +83,28 @@
 <script src="https://unpkg.com/flatpickr"></script>
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script src={{ asset('/js/update-myProject.js') }}></script>
 <script src={{ asset('/js/dateFormat.js') }}></script>
+<script src="{{ asset('js/remove-project-image.js') }}"></script>
+<script src="{{ asset('js/upload-project-image.js') }}"></script>
+<script src={{ asset('/js/update-myProject.js') }}></script>
+<script src="{{ asset('js/preview-uploaded-image.js') }}"></script>
+<script src="{{ asset('js/select-edit-tag.js') }}"></script>
+<script src="{{ asset('js/display-plan-form.js') }}"></script>
+<script src="{{ asset('js/display-edit-plan.js') }}"></script>
+<script src="{{ asset('js/get-decoded-uri.js') }}"></script>
 <script src={{ asset('/js/update-myPlan.js') }}></script>
+<script src={{ asset('/js/uploaded-image-handler.js') }}></script>
 <script>
-    $(function() {
-        $(".js-image_delete").click(function() {
-            var deleteConfirm = confirm('削除してもよろしいですか？');
-
-            if (deleteConfirm === true) {
-
-                var el = $(this);
-                var ImageId = el.attr('id');
-
-                el.append('<meta name="csrf-token" content="{{ csrf_token() }}">');
-
-                $.ajax({
-                        url: '/my_project/project/file/' + ImageId,
-                        type: 'POST',
-                        data: {
-                            'project_image': ImageId,
-                            '_method': 'DELETE'
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-
-                        success: function(msg) {
-                            if (msg === 'success') {
-                                alert("削除が成功しました。");
-                                el.parents('div.js-image__card').remove();
-                            } else {
-                                alert("エラーが起こりました。");
-                            }
-                        }
-                    })
-
-                    .fail(function() {
-                        alert('エラーが起こりました。');
-                    });
-            }
-        })
-    })
-</script>
-
-<script>
-const selectEditTag = el => {
-    let myProjectSections = document.querySelectorAll('.my_project_section');
-    for(let $i = 0; $i < myProjectSections.length; $i ++){
-        myProjectSections[$i].style.display = 'none';
-    };
-    document.getElementById(el.value + '_section').style.display = 'block';
-};
-const DisplayEditPlan = (planId) => {
-    let PlanFormSections = document.querySelectorAll('.edit_plan_form_sections');
-    for(let $i = 0; $i < PlanFormSections.length; $i ++){
-        PlanFormSections[$i].style.display = 'none';
+    window.addEventListener('load',()=>{
+        removeProjectImage('.js-image_delete');
+    });
+    if (getParam('status') == 422) {
+        getParam('plan') != null
+            ? DisplayEditPlan(getParam('plan'))
+            : DisplayPlanForm();
     }
-    document.getElementById('edit_plan_form_section_' + planId).style.display = 'block';
-}
-// パラメーターから値を取得する関数
-function getParam(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-
-if (getParam('status') == 422) {
-    getParam('plan') != null
-        ? DisplayEditPlan(getParam('plan'))
-        : DisplayPlanForm();
-}
 </script>
 {{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
-<script>
-function uploadProjectImage (input, projectId, projectFileId) {
-    const formData = new FormData();
-    formData.append('file',input.files[0]);
-
-    if (projectFileId) {
-        axios.post(`/my_project/project/${projectId}/uploadProjectImage/${projectFileId}?current_tab=visual`, formData)
-        .then((res) => {
-            console.log(res);
-            location.replace(res.data.redirect_url);
-        })
-        .catch((err) => {
-            console.log(err.response);
-            alert(err.response.data.errors.file);
-        });
-    } else {
-        axios.post(`/my_project/project/${projectId}/uploadProjectImage?current_tab=visual`, formData)
-        .then((res) => {
-            console.log(res);
-            location.replace(res.data.redirect_url);
-        })
-        .catch((err) => {
-            console.log(err.response);
-            alert(err.response.data.errors.file);
-        });
-    }
-}
-function previewUploadedImage (input, columnName) {
-    const file = input.files[0];
-    if (file.type != 'image/jpeg' && file.type != 'image/gif' && file.type != 'image/png' && file.type != 'application/pdf') {
-      alert('.jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています')
-      return
-    }
-    const preview = document.getElementById(columnName);
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        const imageUrl = e.target.result; // URLはevent.target.resultで呼び出せる
-        const img = document.createElement("img"); // img要素を作成
-        img.src = imageUrl; // URLをimg要素にセット
-        preview.removeChild(preview.firstElementChild);
-        preview.appendChild(img); // #previewの中に追加
-    }
-    reader.readAsDataURL(file);
-}
-function uploadedImageHandler (input, columnName, projectId) {
-    previewUploadedImage(input, columnName);
-    const el = new FormData();
-    el.append(columnName, input.files[0]);
-    updateMyProject.imageInput(
-        {
-            name: columnName,
-            value: el,
-        },
-        projectId
-    );
-}
-</script>
 <script>
 tinymce.init({
     selector: '.tiny_editor',

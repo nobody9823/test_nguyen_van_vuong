@@ -22,19 +22,19 @@
     <div class="text-right">
         @if ($role === 'admin')
         @if ($project->release_status === "承認待ち")
-        <a href="{{ route($role.'.project.send_back', ['project' => $project]) }}"
+        <a href="{{ route($role.'.project.send_back', ['project' => $project]) }}" onclick="return confirm('差し戻ししますか？')"
             class="btn btn-warning btn-send-back">差し戻しする</a>
-        <a href="{{ route($role.'.project.approved', ['project' => $project]) }}"
+        <a href="{{ route($role.'.project.approved', ['project' => $project]) }}" onclick="return confirm('掲載しますか？')"
             class="btn btn-success btn-approved">掲載する</a>
         @elseif ($project->release_status === "掲載中")
-        <a href="{{ route($role.'.project.under_suspension', ['project' => $project]) }}"
+        <a href="{{ route($role.'.project.under_suspension', ['project' => $project]) }}" onclick="return confirm('掲載停止しますか？')"
             class="btn btn-secondary btn-under-suspension">掲載停止する</a>
         @endif
         @elseif ($role !== 'admin')
         @if ($project->release_status === '---' || $project->release_status === "差し戻し" || $project->release_status ===
         "掲載停止中")
         <a href="{{ route($role.'.project.approval_request', ['project' => $project]) }}"
-            class="btn btn-primary btn-approval-request">承認申請を行う</a>
+            class="btn btn-primary btn-approval-request" onclick="return confirm('認証申請を行うと編集、削除が一切できなくなります。よろしいですか？')">承認申請を行う</a>
         @endif
         @endif
         <a href="{{ route($role.'.project.index') }}" class="btn btn-outline-info">プロジェクト一覧へ戻る</a>
@@ -70,7 +70,7 @@
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-dell-project" type="submit">削除</button>
+                                        <button class="btn btn-danger btn-dell-project" type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
                                     </form>
                                 </div>
                                 @endif
@@ -275,7 +275,7 @@
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button class="btn btn-danger btn-dell-activity-report"
+                                                        <button class="btn btn-danger btn-dell-activity-report" onclick="return confirm('本当に削除しますか？')"
                                                             type="submit">削除
                                                         </button>
                                                     </form>
@@ -362,8 +362,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
-<script src="{{ asset('/js/confirm.js') }}"></script>
 @endsection

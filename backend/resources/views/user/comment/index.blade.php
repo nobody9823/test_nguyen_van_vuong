@@ -13,11 +13,11 @@
   <div class="prof_page_base inner_item">
     <div class="comment_page">
       <div class="prof_edit_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
-          <img src="{{ Storage::url(optional($comment->payment->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
+          <img src="{{ Storage::url(optional($comment->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
           <div class="comment_content">{{ $comment->content }}<br>
             <div>
-              <span>{{ $comment->payment->user->name }}&emsp;</span>
-              <span>{{ $comment->created_at->format('Y年m月d日 h:m') }}</span>
+              <span>{{ $comment->user->name }}&emsp;</span>
+              <span>{{ $comment->created_at->format('Y年m月d日 H:m') }}</span>
             </div>
 
           </div>
@@ -28,7 +28,7 @@
               <form action="" method="POST">
                 @csrf
                 @method('DELETE')
-                <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment"></i>
+                <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment" onclick="return confirm("本当に削除しますか？")"></i>
               </form>
           </div>
       </div>
@@ -38,11 +38,11 @@
         <img src="{{ Storage::url(optional($comment->project->user)->profile->image_url) }}" alt="プロフィール画像" class="user_image reply_user">
         <div class="comment_content reply_content">{{ $comment->reply->content }}<br>
           <div>
-            <span>{{ $comment->project->user->name }}&emsp;</span><span>{{ $comment->reply->created_at->format('Y年m月d日 h:m') }}</span>
+            <span>{{ $comment->project->user->name }}&emsp;</span><span>{{ $comment->reply->created_at->format('Y年m月d日 H:m') }}</span>
           </div>
         </div>
         <div class="comment_icons">
-            <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment"></i>
+            <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment" onclick="return confirm("本当に削除しますか？")"></i>
         </div>
       </div>
       @endif

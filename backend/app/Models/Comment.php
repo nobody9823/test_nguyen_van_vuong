@@ -32,9 +32,9 @@ class Comment extends Model
         return $this->hasOne('App\Models\Reply');
     }
 
-    public function payment()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Payment');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function project()
