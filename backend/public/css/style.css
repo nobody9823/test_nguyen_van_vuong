@@ -52,7 +52,6 @@ main .section_base:first-of-type{ margin: 0px auto 100px auto;}
 .cover_link:hover{ background: rgba(255,255,255,0.2);}
 
 .disable-btn {
-    height: 100%;
     width: 100%;
     background-color: transparent;
     border: none;

@@ -23,12 +23,12 @@
           </div>
           <div class="comment_icons">
               @if(!$comment->reply)
-              <i class="fas fa-reply fa-2x fa-fw" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
+              <i class="fas fa-reply fa-2x fa-fw" style="cursor: pointer" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
               @endif
-              <form action="" method="POST">
+              <form action="{{ route('user.comment.destroy', ['project' => $comment->project, 'comment' => $comment]) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment" onclick="return confirm("本当に削除しますか？")"></i>
+                <button type="submit" class="far fa-trash-alt fa-2x fa-fw delete-btn" onclick="return confirm('本当に削除しますか？')"></button>
               </form>
           </div>
       </div>
@@ -42,7 +42,11 @@
           </div>
         </div>
         <div class="comment_icons">
-            <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment" onclick="return confirm("本当に削除しますか？")"></i>
+          <form action="{{ route('user.reply.destroy', ['project' => $comment->project, 'reply' => $comment->reply]) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="far fa-trash-alt fa-2x fa-fw delete-btn" onclick="return confirm('本当に削除しますか？')"></button>
+          </form>        
         </div>
       </div>
       @endif
@@ -53,19 +57,22 @@
   <div id="{{ 'modal_area_'.$key }}" class="modal_area">
     <div class="modal_back_ground"></div>
     <div class="modal_wrapper">
-      <div>
+      <form action="{{ route('user.reply.store', ['project' => $comment->project, 'comment' => $comment]) }}" method="POST">
+        @csrf
         <div>
-            <div class="av_tit">
-              <p style="text-align: center;">返信コメント</p>
-            </div>
-            <textarea name="" class="input_reply"></textarea>
+          <div class="av_tit">
+            <p style="text-align: center;">返信コメント</p>
+          </div>
+          <textarea name="content" class="input_reply"></textarea>
         </div>
+
         <div class="def_btn">
-          <a href="" class="disable-btn">
+          <button class="disable-btn" type="submit">
             <p style="font-size: 1.8rem; font-weight: bold; color: #fff;">送信</p>
-          </a>
+          </button>
         </div>
-      </div>
+      </form>
+
       <div id="{{ 'close_modal_'.$key }}" class="close_modal" onclick="toggleModal(this.id)">
         <i class="fas fa-times fa-lg"></i>
       </div>
@@ -81,7 +88,6 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('/js/confirm.js') }}"></script>
 <script src="{{ asset('/js/modal-window.js') }}"></script>
 @endsection
 
@@ -91,12 +97,22 @@ display: flex;
 justify-content: center;
 font-size: 140%;
 }
-
+.delete-btn{
+  cursor: pointer;
+  color: #00AEBD;
+}
 /* コメント関連 */
 .comment_page { 
   width: 100%;
 }
-
+button{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        appearance: none;
+}
 .user_image {
   border-radius: 50%;
 }
