@@ -17,7 +17,7 @@
     </div><!--/as_header-->
 
     <div class="as_header_02 inner_item">リターンを選択し、必要情報を入力してください</div>
-    <form action="{{ route('user.plan.confirmPayment', ['project' => $project, 'inviter_code' => $inviter_code ?? '']) }}" class="h-adr" method="post">
+    <form action="{{ route('user.plan.confirmPayment', ['project' => $project, 'inviter_code' => $inviter_code ?? '']) }}" class="h-adr" onsubmit="return onSubmit(this)" method="post">
         @csrf
         <input type="hidden" class="p-country-name" value="Japan">
         <!--★選択時 ↓as_select_return　に　asr_currentを追加-->
@@ -417,20 +417,22 @@ window.onload = function(){
 
     var errors = document.getElementById('errors');
 
-    let numEl = document.getElementById('number-form')
+    var numEl = document.getElementById('number-form')
 
-    let exEl = document.getElementById('expiry-form')
+    var exEl = document.getElementById('expiry-form')
 
-    let cvcEl = document.getElementById('cvc-form')
+    var cvcEl = document.getElementById('cvc-form')
 
-    const checkCardNumber = (result) => {
-        if (result === undefined){
-            errors.innerHTML = 'カード情報が不正です。';
+    const checkCardNumber = (response) => {
+        if (response.id === undefined){
+            errors.innerHTML = response.message;
             document.querySelector('#payjp_token').value = '';
+            return false;
         } else {
             errors.innerHTML = '';
-            document.querySelector('#payjp_token').value = result;
-            console.log(document.querySelector('#payjp_token'))
+            document.querySelector('#payjp_token').value = response.id;
+            document.querySelector('#payjp_token');
+            return true;
         }
     };
 
@@ -442,26 +444,37 @@ window.onload = function(){
     expiryElement.mount('#expiry-form')
     cvcElement.mount('#cvc-form')
 
-    let config = { attribute: true, attributeOldValue: true}
-
-    const observer = new MutationObserver(mutationRecords => {
-            for (let MutationRecord of mutationRecords){
-                if(MutationRecord.target.classList.contains('PayjpElement--complete')){
-                    if (
-                            (exEl.classList.contains('PayjpElement--complete')) &&
-                            (cvcEl.classList.contains('PayjpElement--complete')) &&
-                            (numEl.classList.contains('PayjpElement--complete'))
-                        ){
-                            payjp.createToken(numberElement).then(function(r) {
-                                checkCardNumber(r.id);
-                            })
-                    }
-                }
-            }
+    const paypayIsChecked = () => {
+        let result = false;
+        document.getElementsByName('payment_way').forEach(function (e) {
+            if(e.value === 'paypay' && e.checked){
+                return result = true;
+            };
         });
-    observer.disconnect();
-    observer.observe(numEl, config);
-    observer.observe(exEl, config);
-    observer.observe(cvcEl, config);
+        return result;
+    }
+
+    const onSubmit = (el) => {
+        if(
+            (exEl.classList.contains('PayjpElement--complete')) &&
+            (cvcEl.classList.contains('PayjpElement--complete')) &&
+            (numEl.classList.contains('PayjpElement--complete'))
+        ) {
+            payjp.createToken(numberElement).then(function(r) {
+                if (checkCardNumber(r)){
+                    el.submit();
+                } else {
+                    document.querySelector('.tab_container').scrollIntoView({behavior: "smooth", block: "end"});
+                    return false;
+                };
+            })
+        } else if(paypayIsChecked()){
+            el.submit();
+        } else {
+            errors.innerHTML = '入力してください。';
+            document.querySelector('.tab_container').scrollIntoView({behavior: "smooth", block: "end"});
+            return false;
+        }
+    }
 </script>
 @endsection
