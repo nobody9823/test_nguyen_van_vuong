@@ -165,7 +165,7 @@
                                     </div>
 
                                     <div class="tab1_05">
-                                    有効期限が残り100日以上のクレジットカード（Visa/Mastercard JCB/Diners Club/American Express）でご利用いただけます。<br>
+                                    有効期限が残り100日以上のクレジットカード（Visa/Mastercard{{--  JCB/Diners Club/American Express --}}）でご利用いただけます。<br>
                                     デビットカード・プリペイドカードの利用は推奨しておりません。<br>
                                     利用される場合は注意事項を必ずご確認ください。<br>
                                     このクレジットカード情報は当社では保持いたしません。<br>
