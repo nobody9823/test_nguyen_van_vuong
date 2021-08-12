@@ -14,6 +14,7 @@ class CommentController extends Controller
 {
     public function index(Project $project)
     {
+        $this->authorize('checkOwnProject', $project);
         $comments = $project->comments()->with('reply', 'user.profile')
                             ->orderBy('created_at', 'DESC')->paginate(10);
         
@@ -33,6 +34,7 @@ class CommentController extends Controller
 
     public function destroy(Request $request, Project $project, Comment $comment)
     {
+        $this->authorize('checkOwnProject', $project);
         DB::beginTransaction();
         try {
             $comment->delete();

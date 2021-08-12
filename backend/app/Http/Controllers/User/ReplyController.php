@@ -14,6 +14,7 @@ class ReplyController extends Controller
 {
     public function store(Request $request, Project $project, Comment $comment)
     {
+        $this->authorize('checkOwnProject', $project);
         DB::beginTransaction();
         try {
             $comment->reply()->save(new Reply([
@@ -27,8 +28,10 @@ class ReplyController extends Controller
         }
         return redirect()->action([CommentController::class, 'index'], ['project' => $project])->with('flash_message', '返信内容を送信しました。');
     }
+    
     public function destroy(Request $request, Project $project, Reply $reply)
     {
+        $this->authorize('checkOwnProject', $project);
         DB::beginTransaction();
         try {
             $reply->delete();
