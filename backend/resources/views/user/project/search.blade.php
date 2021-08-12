@@ -1,37 +1,38 @@
 @extends('user.layouts.base')
 
 @section('content')
-<div class="content sub_content">
-    <div class="fixedcontainer">
-        <div class="breadcrumb">
-            <p>
-                <a href="/">TOP</a>　＞　<a href="/search">応援プロジェクト</a>
-                {{ $tags != null ? '　＞　' : ''}}
-                {{ $tags != null ? $tags[$_GET['tag_id']] : ''}}
-            </p>
-        </div>
-        <div class="project-search">
-            <div class="search-sidebar">
-                <x-user.search />
-            </div>
-            <div class="section search-result">
-                <h2 class="sec-ttl">
-                    検索結果:{{$projects->total().'件中'.$projects->firstItem().'~'.$projects->lastItem()}}件を表示
-                </h2>
-                <div class="project-list">
-                    @foreach($projects as $project)
-                    <div class="img_box_01_R">
-                        <div class="img_box_01_R_item">
-                            <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" ranking="" />
-                        </div>
-                    </div>
-                    @endforeach
+<main>
+    <x-user.search />
+    <div class="main_inner">
+        <section id="pc-top_04" class="section_base">
+            <div class="tit_L_01"></div>
+
+            <div class="img_box_02">
+                @foreach($projects as $project)
+                <div class="img_box_02_item">
+                    <x-user.project.project-card :project="$project" :userLiked="$user_liked" cardSize="" ranking="" />
                 </div>
-                {{ $projects->appends(request()->input())->links() }}
+                @endforeach
             </div>
+        </section>
+
+        @if ($projects->first() !== null)
+        <div class="pager E-font">
+            <ul class="pagination">
+                @if ($projects->previousPageUrl() !== null)
+                    <li class="pager_pre"><a href="{{ $projects->appends(request()->input())->previousPageUrl() }}"><span>«</span></a></li>
+                @endif
+                @foreach ($projects->appends(request()->input())->links()->elements[0] as $key => $link)
+                    <li><a href="{{ $link }}" class="{{ $projects->currentPage() == $key ? 'pager_active' : ''}}"><span>{{ $key }}</span></a></li>
+                @endforeach
+                @if ($projects->nextPageUrl() !== null)
+                    <li class="pager_next"><a href="{{ $projects->appends(request()->input())->nextPageUrl() }}"><span>»</span></a></li>
+                @endif
+            </ul>
         </div>
+        @endif
     </div>
-</div>
+</main>
 @endsection
 
 @section('css')
@@ -157,6 +158,11 @@
 <script src="{{ asset('/js/clear-search-entry.js') }}"></script>
 
 <script>
+    const selectedRadioButtonHandler = () => {
+        let tagId = document.querySelector("input[name='tag_id']:checked")?.value;
+        let sortType = document.querySelector("input[name='sort_type']:checked")?.value;
+        window.location.replace(`?tag_id=${tagId}&sort_type=${sortType}`);
+    };
     // プロジェクトのお気に入り登録・解除処理
     $('.project-like').on('click', function() {
         var el = $(this);

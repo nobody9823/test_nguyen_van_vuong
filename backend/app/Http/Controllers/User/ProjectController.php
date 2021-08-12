@@ -66,7 +66,7 @@ class ProjectController extends Controller
         $ranking_projects = Project::mainProjects()->orderBy('payments_sum_price', 'DESC')->take(5)->get();
 
         // 最新のプロジェクト
-        $new_projects = Project::mainProjects()->orderBy('start_date', 'DESC')->get();
+        $new_projects = Project::mainProjects()->orderBy('start_date', 'DESC')->take(6)->get();
 
         // 掲載終了プロジェクト
         $complete_projects = Project::CompletedProjects()->orderBy('end_date', 'ASC')->get();
@@ -204,7 +204,7 @@ class ProjectController extends Controller
             throw $e;
         }
         Auth::user()->load(['profile', 'address']);
-        return view('user.project.confirm_plan', ['project' => $project, 'plans' => $plans->loadCount('includedPayments'),'validated_request' => $request->all()]);
+        return view('user.project.confirm_plan', ['project' => $project, 'plans' => $plans->loadCount('includedPayments'), 'validated_request' => $request->all()]);
     }
 
     /**
@@ -321,20 +321,20 @@ class ProjectController extends Controller
         $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
 
         //カテゴリ絞り込み
-        if ($request->tag_id) {
+        if ($request->tag_id && $request->tag_id !== 'undefined') {
             $projectsQuery->whereIn(
                 'id',
                 ProjectTagTagging::query()->select('project_id')
-                ->whereIn(
-                    'tag_id',
-                    Tag::query()->select('id')
-                    ->find($request->tag_id)
-                )
+                    ->whereIn(
+                        'tag_id',
+                        Tag::query()->select('id')
+                            ->find($request->tag_id)
+                    )
             );
         }
 
         // ワード検索
-        $projectsQuery->search($role="user");
+        $projectsQuery->search($role = "user");
         // sort_typeによって順序変更
         // 0 => 人気順(募集中のお気に入り数順),   1 => 新着順,   2 => 終了日が近い順,   3 => 支援総額順,   4 => 支援者数順
         switch ($request->sort_type) {
@@ -343,31 +343,31 @@ class ProjectController extends Controller
                 break;
 
             case '1':
-                $projectsQuery->seeking()->orderBy('created_at', 'DESC');
+                $projectsQuery->seekingWithAfterSeeking()->orderBy('created_at', 'DESC');
                 break;
 
             case '2':
-                if (strstr($request->fullUrl(), '/search?sort_type=2')) {
-                    // ヘッダーメニューの「募集終了が近いプロジェクトの場合」(現在掲載中且つ、残り1週間で終了)
-                    $projectsQuery->daysLeftSeeking('end_date')->orderByNearlyDeadline();
-                } else {
-                    // 検索画面の「並び替え」にある「終了日が近い順」(現在掲載中のもの)
-                    $projectsQuery->seeking()->orderByNearlyDeadline();
-                }
+                // if (strstr($request->fullUrl(), '/search?sort_type=2')) {
+                //     // ヘッダーメニューの「募集終了が近いプロジェクトの場合」(現在掲載中且つ、残り1週間で終了)
+                //     $projectsQuery->daysLeftSeeking('end_date')->orderByNearlyDeadline();
+                // } else {
+                // 検索画面の「並び替え」にある「終了日が近い順」(現在掲載中のもの)
+                $projectsQuery->seeking()->orderByNearlyDeadline();
+                // }
                 break;
 
             case '3':
-                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price', 'DESC');
+                $projectsQuery->seekingWithAfterSeeking()->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price', 'DESC');
                 break;
 
             case '4':
-                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_count', 'DESC');
+                $projectsQuery->seekingWithAfterSeeking()->getWithPaymentsCountAndSumPrice()->orderBy('payments_count', 'DESC');
                 break;
         }
 
         //募集中かどうか確認
         switch ($request->holding_check) {
-            // 公開前
+                // 公開前
             case '0':
                 if (strstr($request->fullUrl(), '/search?holding_check=0')) {
                     // ユーザーヘッダーメニューの「もうすぐ公開されます」(1週間以内に公開)
@@ -377,11 +377,11 @@ class ProjectController extends Controller
                     $projectsQuery->beforeSeeking();
                 }
                 break;
-            // 支援募集中
+                // 支援募集中
             case '1':
                 $projectsQuery->seeking();
                 break;
-            // 募集終了
+                // 募集終了
             case '2':
                 $projectsQuery->afterSeeking();
                 break;
@@ -393,7 +393,7 @@ class ProjectController extends Controller
         //     $projectsQuery->OnlyCheeringDisplay();
         // }
 
-        $projects = $projectsQuery->GetReleasedProject()->with('tags')->paginate(9);
+        $projects = $projectsQuery->GetReleasedProject()->with('tags')->paginate(12);
 
         return view('user.project.search', compact('projects', 'tags', 'user_liked'));
     }
