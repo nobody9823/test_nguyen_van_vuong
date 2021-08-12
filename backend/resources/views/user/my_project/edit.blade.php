@@ -90,6 +90,8 @@
 <script src="{{ asset('js/display-plan-form.js') }}"></script>
 <script src="{{ asset('js/display-edit-plan.js') }}"></script>
 <script src="{{ asset('js/get-decoded-uri.js') }}"></script>
+<script src={{ asset('/js/update-myPlan.js') }}></script>
+<script src={{ asset('/js/uploaded-image-handler.js') }}></script>
 <script>
     window.addEventListener('load',()=>{
         removeProjectImage('.js-image_delete');
