@@ -79,10 +79,12 @@
 @endsection
 
 @section('script')
+<link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
+<script src="https://unpkg.com/flatpickr"></script>
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script src={{ asset('/js/blade-functions.js') }}></script>
 <script src={{ asset('/js/update-myProject.js') }}></script>
+<script src={{ asset('/js/dateFormat.js') }}></script>
 <script src={{ asset('/js/update-myPlan.js') }}></script>
 <script>
     $(function() {
