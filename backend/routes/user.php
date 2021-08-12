@@ -28,7 +28,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{payment}/paymentForPayJp', [ProjectController::class, 'paymentForPayJp'])->name('plan.paymentForPayJp');
     Route::get('plan/{payment}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
-    Route::post('comment/post', [CommentController::class, 'postComment'])->name('comment.post');
+    Route::post('comment', [CommentController::class, 'store'])->name('comment.store')->middleware('project.released');
     Route::get('support', [ProjectController::class, 'support'])->name('project.support');
     Route::get('supporter_ranking', [ProjectController::class, 'supporterRanking'])->name('project.supporter_ranking');
 });
@@ -48,7 +48,6 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
             Route::resource('comment', CommentController::class)->only(['index','destroy']);
             Route::post('reply/{comment}', [ReplyController::class, 'store'])->name('reply.store');
-            // Route::delete('reply/{reply}', [ReplyController::class, 'store'])->name('reply.store');
             Route::resource('reply', ReplyController::class)->only(['destroy']);
         });
         Route::name('my_project.')->group(function () {

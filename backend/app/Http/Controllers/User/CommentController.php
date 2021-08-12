@@ -23,13 +23,20 @@ class CommentController extends Controller
         ]);
     }
 
-    public function postComment(CommentRequest $request, Project $project, Comment $comment)
+    public function store(CommentRequest $request, Project $project, Comment $comment)
     {
-        $comment->content = $request->content;
-        $comment->project_id = $project->id;
-        return $request->user()->comments()->save($comment)
-            ? redirect()->action([ProjectController::class, 'show'], ['project' => $project])->with('flash_message', "投稿が完了しました。")
-            : redirect()->back()->withErrors("投稿に失敗しました。管理者にお問い合わせください。");
+        DB::beginTransaction();
+        try {
+            $comment->content = $request->content;
+            $comment->project_id = $project->id;
+            $request->user()->comments()->save($comment);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::alert($e);
+            return redirect()->back()->withErrors("投稿に失敗しました。管理者にお問い合わせください。");
+        }
+        redirect()->action([ProjectController::class, 'show'], ['project' => $project])->with('flash_message', "投稿が完了しました。");
     }
 
     public function destroy(Request $request, Project $project, Comment $comment)
