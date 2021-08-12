@@ -21,6 +21,7 @@
             <div class="spinner-wrapper">
                 <div class="spinner" id="spinner_start_date"></div>
                 <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_start_date"></i>
+                <span id="errors_start_date" style="color: red;"></span>
             </div>
             掲載開始日(日付、時刻)
             <span class="hissu_txt">必須</span>
@@ -42,6 +43,7 @@
             <div class="spinner-wrapper">
                 <div class="spinner" id="spinner_end_date"></div>
                 <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_end_date"></i>
+                <span id="errors_end_date" style="color: red;"></span>
             </div>
             掲載終了日(日付、時刻)
             <span class="hissu_txt">必須</span>
