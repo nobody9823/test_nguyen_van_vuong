@@ -54,14 +54,14 @@ use Carbon\Carbon;
 
 
 
-    {{-- <section id="pc-top_02" class="section_base">
+    <section id="pc-top_02" class="section_base">
         <div class="tit_L_01 E-font"><h2>CATEGORY</h2><div class="sub_tit_L">カテゴリー</div></div>
         <div class="cate_tag_01">
             @foreach($tags as $tag)
-            <a href="★" class="cate_tag_link">{{$tag->name}}</a>
+                <a href="{{ route('user.search', ['tag_id' => $tag->id]) }}" class="cate_tag_link">{{$tag->name}}</a>
             @endforeach
         </div>
-    </section> --}}
+    </section>
 
 
 
@@ -102,11 +102,11 @@ use Carbon\Carbon;
         </div>
     </div>
 
-    {{-- <div class="more_btn_01">
+    <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
         <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-        <a href="#" class="cover_link"></a>
-    </div> --}}
+        <a href="{{ route('user.search', ['sort_type' => '3']) }}" class="cover_link"></a>
+    </div>
 
     </section>
 
@@ -123,11 +123,11 @@ use Carbon\Carbon;
             @endforeach
         </div>
 
-    {{-- <div class="more_btn_01">
+    <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
         <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-        <a href="★" class="cover_link"></a>
-    </div> --}}
+        <a href="{{ route('user.search', ['sort_type' => '1']) }}" class="cover_link"></a>
+    </div>
 
     </section>
 
