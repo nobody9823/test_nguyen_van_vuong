@@ -395,6 +395,8 @@ class Project extends Model
 
     public static function initialize()
     {
+        $date = new Carbon();
+
         return self::make([
             'title' => '',
             'content' => '',
@@ -402,8 +404,8 @@ class Project extends Model
             'reward_by_total_quantity' => '',
             'target_amount' => 0,
             'curator' => '',
-            'start_date' => Carbon::minValue(),
-            'end_date' => Carbon::maxValue(),
+            'start_date' => Carbon::now(),
+            'end_date' => $date->addYear(2),
             'release_status' => '---',
         ]);
     }
