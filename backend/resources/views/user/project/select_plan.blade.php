@@ -115,7 +115,7 @@
                     <div class="as_i_03_01">
 
                         <div class="tab_container">
-                            <input class="radio-fan" type="radio" id="tab1" name="payment_way" value="credit" onChange="Plans.checkPaymentWay(this)">
+                            <input class="radio-fan" type="radio" id="tab1" name="payment_way" value="credit" checked>
                             {{-- <input id="tab1" type="radio" name="tab_item" checked> --}}
                             <label class="tab_item" for="tab1">クレジットカード</label>
                             {{-- <input id="tab2" type="radio" name="tab_item">
@@ -124,7 +124,7 @@
                             <label class="tab_item" for="tab3">銀行振込</label>
                             <input id="tab4" type="radio" name="tab_item">
                             <label class="tab_item" for="tab4">キャリア決済</label> --}}
-                            <input class="radio-fan" type="radio" id="tab5" name="payment_way" value="paypay" onChange="Plans.checkPaymentWay(this)">
+                            <input class="radio-fan" type="radio" id="tab5" name="payment_way" value="paypay">
                             {{-- <input id="tab5" type="radio" name="tab_item"> --}}
                             <label class="tab_item" for="tab5">PayPay</label>
                             {{-- <input id="tab6" type="radio" name="tab_item">
@@ -157,7 +157,11 @@
                                     {{-- <div class="tab1_04"><input type="checkbox" id="aaa" class="ac_list_checks"><label for="aaa" class="checkbox-fan">このクレジットカード情報を保存する</label></div> --}}
 
                                     <div class="creca_icon">
-                                    <img src="{{ asset('image/credit-card_2.png') }}"><img src="{{ asset('image/credit-card_1.png') }}"><img src="{{ asset('image/credit-card_0.png') }}"><img src="{{ asset('image/credit-card_5.png') }}"><img src="{{ asset('image/credit-card_6.png') }}">
+                                    <img src="{{ asset('image/credit-card_2.png') }}">
+                                    <img src="{{ asset('image/credit-card_1.png') }}">
+                                    {{-- <img src="{{ asset('image/credit-card_0.png') }}">
+                                    <img src="{{ asset('image/credit-card_5.png') }}">
+                                    <img src="{{ asset('image/credit-card_6.png') }}"> --}}
                                     </div>
 
                                     <div class="tab1_05">
