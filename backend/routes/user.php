@@ -48,7 +48,8 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
             Route::resource('comment', CommentController::class)->only(['index']);
             Route::post('reply/{comment}', [ReplyController::class, 'store'])->name('reply.store');
-            // Route::resource('reply', ReplyController::class)->only(['store']);
+            // Route::delete('reply/{reply}', [ReplyController::class, 'store'])->name('reply.store');
+            Route::resource('reply', ReplyController::class)->only(['destroy']);
         });
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);

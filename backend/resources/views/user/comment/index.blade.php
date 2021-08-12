@@ -25,10 +25,10 @@
               @if(!$comment->reply)
               <i class="fas fa-reply fa-2x fa-fw" style="cursor: pointer" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
               @endif
-              <form action="" method="POST">
+              <form action='' method="POST">
                 @csrf
                 @method('DELETE')
-                <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment" style="cursor: pointer" onclick="return confirm('本当に削除しますか？')"></i>
+                {{-- <button type="submit" class="far fa-trash-alt fa-2x fa-fw delete-btn" onclick="return confirm('本当に削除しますか？')"></button> --}}
               </form>
           </div>
       </div>
@@ -42,7 +42,11 @@
           </div>
         </div>
         <div class="comment_icons">
-            <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment" style="cursor: pointer" onclick="return confirm('本当に削除しますか？')"></i>
+          <form action="{{ route('user.reply.destroy', ['project' => $comment->project, 'reply' => $comment->reply]) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="far fa-trash-alt fa-2x fa-fw delete-btn" onclick="return confirm('本当に削除しますか？')"></button>
+          </form>        
         </div>
       </div>
       @endif
@@ -93,12 +97,22 @@ display: flex;
 justify-content: center;
 font-size: 140%;
 }
-
+.delete-btn{
+  cursor: pointer;
+  color: #00AEBD;
+}
 /* コメント関連 */
 .comment_page { 
   width: 100%;
 }
-
+button{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        appearance: none;
+}
 .user_image {
   border-radius: 50%;
 }
