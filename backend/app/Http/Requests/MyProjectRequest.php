@@ -216,53 +216,60 @@ class MyProjectRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        switch ($this->current_tab) {
-            case 'target_amount':
-                $redirect_route = redirect()
-                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'target_amount'])
-                    ->withErrors($validator)
-                    ->withInput();
-                break;
+        if ($this->expectsJson()){
+            throw new HttpResponseException(
+                response()->json(['message' => $validator->errors()->toArray()])
+            );
+        } else {
+            switch ($this->current_tab) {
+                case 'target_amount':
+                    $redirect_route = redirect()
+                        ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'target_amount'])
+                        ->withErrors($validator)
+                        ->withInput();
+                    break;
 
-            case 'overview':
-                $redirect_route = redirect()
-                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'overview'])
-                    ->withErrors($validator)
-                    ->withInput();
-                break;
+                case 'overview':
+                    $redirect_route = redirect()
+                        ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'overview'])
+                        ->withErrors($validator)
+                        ->withInput();
+                    break;
 
-            case 'visual':
-                $redirect_route = redirect()
-                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'visual'])
-                    ->withErrors($validator)
-                    ->withInput();
-                break;
+                case 'visual':
+                    $redirect_route = redirect()
+                        ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'visual'])
+                        ->withErrors($validator)
+                        ->withInput();
+                    break;
 
-            case 'ps_return':
-                $redirect_route = redirect()
-                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'ps_return'])
-                    ->withErrors($validator)
-                    ->withInput();
-                break;
+                case 'ps_return':
+                    $redirect_route = redirect()
+                        ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'ps_return'])
+                        ->withErrors($validator)
+                        ->withInput();
+                    break;
 
-            case 'identification':
-                $redirect_route = redirect()
-                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'identification'])
-                    ->withErrors($validator)
-                    ->withInput();
-                break;
+                case 'identification':
+                    $redirect_route = redirect()
+                        ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'identification'])
+                        ->withErrors($validator)
+                        ->withInput();
+                    break;
 
-            default:
-                $redirect_route = redirect()
-                    ->route('user.my_project.project.edit', ['project' => $this->route('project')])
-                    ->withErrors($validator)
-                    ->withInput();
-                break;
+                default:
+                    $redirect_route = redirect()
+                        ->route('user.my_project.project.edit', ['project' => $this->route('project')])
+                        ->withErrors($validator)
+                        ->withInput();
+                    break;
+            }
+
+            throw new HttpResponseException(
+                $redirect_route
+            );
         }
 
-        throw new HttpResponseException(
-            $redirect_route
-        );
     }
 
     public function passedValidation()
