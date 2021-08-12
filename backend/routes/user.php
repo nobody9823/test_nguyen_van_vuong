@@ -5,6 +5,7 @@ use App\Http\Controllers\User\MessageController;
 use App\Http\Controllers\User\PlanController;
 use App\Http\Controllers\User\ProjectController;
 use App\Http\Controllers\User\CommentController;
+use App\Http\Controllers\User\ReplyController;
 use App\Http\Controllers\User\TopPageController;
 use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\InquiryController;
@@ -27,7 +28,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{payment}/paymentForPayJp', [ProjectController::class, 'paymentForPayJp'])->name('plan.paymentForPayJp');
     Route::get('plan/{payment}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
-    Route::post('comment/post', [CommentController::class, 'postComment'])->name('comment.post');
+    Route::post('comment', [CommentController::class, 'store'])->name('comment.store')->middleware('project.released');
     Route::get('support', [ProjectController::class, 'support'])->name('project.support');
     Route::get('supporter_ranking', [ProjectController::class, 'supporterRanking'])->name('project.supporter_ranking');
 });
@@ -42,10 +43,16 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::post('project/{project}/apply', [MyProjectController::class, 'apply'])->name('project.apply');
         Route::get('project/{project}/create_plan', [MyProjectController::class, 'createPlan'])->name('project.create_plan');
         Route::prefix('project/{project}')->group(function () {
+            Route::get('createReturn', [MyPlanController::class, 'createReturn']);
+            Route::post('updatePlan/{plan}', [MyPlanController::class, 'updateReturn']);
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
+            Route::resource('comment', CommentController::class)->only(['index','destroy']);
+            Route::post('reply/{comment}', [ReplyController::class, 'store'])->name('reply.store');
+            Route::resource('reply', ReplyController::class)->only(['destroy']);
         });
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+            Route::get('reward_sample', [MyProjectController::class, 'rewardSample'])->name('reward_sample');
         });
         Route::delete('project/file/{project_file}', [MyProjectController::class, 'deleteFile'])->name('project_image.destroy');
         // Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');

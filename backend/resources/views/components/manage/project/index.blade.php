@@ -69,19 +69,19 @@
             </option>
             @endforeach
         </select>
-        <input class="btn btn-primary my-2 my-sm-0" form='operate_projects' type="submit" value="実行"></input>
+        <input class="btn btn-primary my-2 my-sm-0" id="operate_projects_button" form='operate_projects' type="submit" value="実行"></input>
     </form>
 </div>
 @if($projects->count() <= 0) <p>表示する投稿はありません。</p>
     @else
     <table class="table">
         <tr>
-            <th style="width:5%"><input name='checkbox' class="checkbox" type="checkbox"
-                    {{ old('checkbox')?'checked':'' }} onchange="all_checkbox_toggle(this)">選択</th>
+            <th style="width:5%"><input name='checkbox' type="checkbox" id='checkbox_parent'
+                    {{ old('checkbox')?'checked':'' }}>選択</th>
             <th style="width:5%">ID</th>
             <th style="width:20%">タイトル</th>
             <th style="width:10%">ユーザー名</th>
-            <th style="width:10%">キュレーター</th>
+            <th style="width:15%">キュレーター</th>
             <th style="width:10%">詳細</th>
             <th style="width:10%">関連一覧画面</th>
             <th style="width:10%">編集/削除</th>
@@ -193,7 +193,19 @@
                         </div>
                     </div>
             </td>
-            <td>{{ $project->curator ? $project->curator->name : '未定' }}</td>
+            <td>
+                <form action="{{ route('admin.project.associate_curator', ['project' => $project]) }}" method="POST" class="form-inline">
+                    @method('PUT')
+                    @csrf
+                    <select name="curator_id" class="form-control col-sm-8">
+                        <option value="">未定</option>
+                        @foreach ($curators() as $curator)
+                            <option value="{{ $curator->id }}" {{ old('curator_id', optional($project->curator)->id) === $curator->id ? 'selected' : '' }}>{{ $curator->name }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-primary col-sm-4">更新</button>
+                </form>
+            </td>
             <td>
                 <button class="btn btn-secondary" type="button" data-toggle="collapse"
                     data-target="#collapse_detail{{ $project->id }}" aria-expanded="false"
@@ -246,7 +258,7 @@
                         <form action="{{ route($role.'.project.destroy', ['project' => $project]) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-sm btn-danger mt-1 w-100 btn-dell" type="submit">削除</button>
+                            <button class="btn btn-sm btn-danger mt-1 w-100 btn-dell" onclick="return confirm('本当に削除しますか？')" type="submit">削除</button>
                         </form>
                         @endif
                     </div>
@@ -297,18 +309,16 @@
     @endif
     </div>
     @section('script')
-    <script>
-        $(function(){
-    $(".btn-dell").click(function(){
-    if(confirm("本当に削除しますか？")){
-    //そのままsubmit（削除）
-    }else{
-    //cancel
-    return false;
-    }
-    });
-    });
+    <script src="{{ asset('/js/check-checked.js') }}"></script>
+    <script src="{{ asset('/js/all-checkbox-toggle.js') }}"></script>
+
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', () => {
+            checkChecked('#operate_projects_button',".checkbox");
+            allCheckboxToggle('#checkbox_parent',".checkbox");
+        });
     </script>
+    
     <script>
         function incrementLikes(projectId, incrementPoints){
         $.ajax({
