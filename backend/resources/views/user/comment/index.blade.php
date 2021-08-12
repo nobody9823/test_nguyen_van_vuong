@@ -28,7 +28,7 @@
               <form action="" method="POST">
                 @csrf
                 @method('DELETE')
-                <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment"></i>
+                <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment" onclick="return confirm("本当に削除しますか？")"></i>
               </form>
           </div>
       </div>
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="comment_icons">
-            <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment"></i>
+            <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment" onclick="return confirm("本当に削除しますか？")"></i>
         </div>
       </div>
       @endif
