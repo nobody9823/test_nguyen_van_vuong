@@ -23,12 +23,12 @@
           </div>
           <div class="comment_icons">
               @if(!$comment->reply)
-              <i class="fas fa-reply fa-2x fa-fw" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
+              <i class="fas fa-reply fa-2x fa-fw" style="cursor: pointer" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
               @endif
               <form action="" method="POST">
                 @csrf
                 @method('DELETE')
-                <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment"></i>
+                <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment" style="cursor: pointer"></i>
               </form>
           </div>
       </div>
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="comment_icons">
-            <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment"></i>
+            <i class="far fa-trash-alt fa-2x fa-fw btn-dell-comment" style="cursor: pointer"></i>
         </div>
       </div>
       @endif
