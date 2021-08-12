@@ -343,7 +343,7 @@ class ProjectController extends Controller
                 break;
 
             case '1':
-                $projectsQuery->seeking()->orderBy('created_at', 'DESC');
+                $projectsQuery->seekingWithAfterSeeking()->orderBy('created_at', 'DESC');
                 break;
 
             case '2':
@@ -357,11 +357,11 @@ class ProjectController extends Controller
                 break;
 
             case '3':
-                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price', 'DESC');
+                $projectsQuery->seekingWithAfterSeeking()->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price', 'DESC');
                 break;
 
             case '4':
-                $projectsQuery->getWithPaymentsCountAndSumPrice()->orderBy('payments_count', 'DESC');
+                $projectsQuery->seekingWithAfterSeeking()->getWithPaymentsCountAndSumPrice()->orderBy('payments_count', 'DESC');
                 break;
         }
 

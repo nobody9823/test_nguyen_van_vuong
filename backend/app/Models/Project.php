@@ -201,6 +201,11 @@ class Project extends Model
         return $query->where('end_date', '<', Carbon::now());
     }
 
+    public function scopeSeekingWithAfterSeeking($query)
+    {
+        return $query->where('start_date', '<', Carbon::now());
+    }
+
     public function scopeDaysLeftSeeking($query, $start_or_end_date)
     {
         return $query->whereBetween($start_or_end_date, [Carbon::now(), Carbon::now()->addWeek(1)]);
