@@ -416,37 +416,24 @@ window.onload = function(){
 <script src="https://js.pay.jp/v2/pay.js"></script>
 <script>
     var payjp = Payjp('{{ config("app.pay_jp_key") }}')
-
     var elements = payjp.elements()
-
     var errors = document.getElementById('errors');
-
     var numEl = document.getElementById('number-form')
-
     var exEl = document.getElementById('expiry-form')
-
     var cvcEl = document.getElementById('cvc-form')
-
-    const checkCardNumber = (response) => {
-        if (response.id === undefined){
-            errors.innerHTML = response.message;
-            document.querySelector('#payjp_token').value = '';
-            return false;
-        } else {
-            errors.innerHTML = '';
-            document.querySelector('#payjp_token').value = response.id;
-            document.querySelector('#payjp_token');
-            return true;
-        }
-    };
 
     // 入力フォームを分解して管理・配置できます
     var numberElement = elements.create('cardNumber')
     var expiryElement = elements.create('cardExpiry')
     var cvcElement = elements.create('cardCvc')
+
     numberElement.mount('#number-form')
     expiryElement.mount('#expiry-form')
     cvcElement.mount('#cvc-form')
+
+    let numberElIsCompleted = false;
+    let expiryElIsCompleted = false;
+    let cvcElIsCompleted = false;
 
     const paypayIsChecked = () => {
         let result = false;
@@ -458,27 +445,53 @@ window.onload = function(){
         return result;
     }
 
-    const onSubmit = (el) => {
-        if(
-            (exEl.classList.contains('PayjpElement--complete')) &&
-            (cvcEl.classList.contains('PayjpElement--complete')) &&
-            (numEl.classList.contains('PayjpElement--complete'))
-        ) {
-            payjp.createToken(numberElement).then(function(r) {
-                if (checkCardNumber(r)){
-                    el.submit();
-                } else {
-                    document.querySelector('.tab_container').scrollIntoView({behavior: "smooth", block: "end"});
+    numberElement.on('change', (event) => {
+        numberElIsCompleted = event.complete
+    });
+    expiryElement.on('change', (event) => {
+        expiryElIsCompleted = event.complete
+    });
+    cvcElement.on('change', (event) => {
+        cvcElIsCompleted = event.complete
+    });
+    numberElement.on('blur', (event) => {
+        if (numberElIsCompleted && expiryElIsCompleted && cvcElIsCompleted) {
+            payjp.createToken(numberElement).then((response) => {
+                if (response.error) {
+                    errors.innerHTML = response.error.message;
                     return false;
+                } else {
+                    document.querySelector('#payjp_token').value = response.id;
+                    console.log(response);
                 };
             })
-        } else if(paypayIsChecked()){
-            el.submit();
-        } else {
-            errors.innerHTML = '入力してください。';
-            document.querySelector('.tab_container').scrollIntoView({behavior: "smooth", block: "end"});
-            return false;
         }
-    }
+    });
+    expiryElement.on('blur', (event) => {
+        if (numberElIsCompleted && expiryElIsCompleted && cvcElIsCompleted) {
+            payjp.createToken(numberElement).then((response) => {
+                if (response.error) {
+                    errors.innerHTML = response.error.message;
+                    return false;
+                } else {
+                    document.querySelector('#payjp_token').value = response.id;
+                    console.log(response);
+                };
+            })
+        }
+    });
+    cvcElement.on('blur', (event) => {
+        if (numberElIsCompleted && expiryElIsCompleted && cvcElIsCompleted) {
+            payjp.createToken(numberElement).then((response) => {
+                if (response.error) {
+                    errors.innerHTML = response.error.message;
+                    return false;
+                } else {
+                    document.querySelector('#payjp_token').value = response.id;
+                    console.log(response);
+                };
+            })
+        }
+    });
 </script>
 @endsection
