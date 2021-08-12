@@ -81,7 +81,7 @@
             <th style="width:5%">ID</th>
             <th style="width:20%">タイトル</th>
             <th style="width:10%">ユーザー名</th>
-            <th style="width:10%">キュレーター</th>
+            <th style="width:15%">キュレーター</th>
             <th style="width:10%">詳細</th>
             <th style="width:10%">関連一覧画面</th>
             <th style="width:10%">編集/削除</th>
@@ -193,7 +193,19 @@
                         </div>
                     </div>
             </td>
-            <td>{{ $project->curator ? $project->curator->name : '未定' }}</td>
+            <td>
+                <form action="{{ route('admin.project.associate_curator', ['project' => $project]) }}" method="POST" class="form-inline">
+                    @method('PUT')
+                    @csrf
+                    <select name="curator_id" class="form-control col-sm-8">
+                        <option value="">未定</option>
+                        @foreach ($curators() as $curator)
+                            <option value="{{ $curator->id }}" {{ old('curator_id', optional($project->curator)->id) === $curator->id ? 'selected' : '' }}>{{ $curator->name }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-primary col-sm-4">更新</button>
+                </form>
+            </td>
             <td>
                 <button class="btn btn-secondary" type="button" data-toggle="collapse"
                     data-target="#collapse_detail{{ $project->id }}" aria-expanded="false"

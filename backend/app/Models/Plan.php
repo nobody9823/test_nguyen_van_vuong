@@ -147,4 +147,17 @@ class Plan extends Model
     //         $this->options()->saveMany($request->optionsToArray());
     //     }
     // }
+
+    public static function initialize()
+    {
+        return self::make([
+            'title' => '',
+            'content' => '',
+            'price' => 0,
+            'address_is_required' => false,
+            'limit_of_supporters' => 0,
+            'delivery_date' => Carbon::maxValue(),
+            'image_url' => 'public/sampleImage/now_printing.png'
+        ]);
+    }
 }

@@ -79,7 +79,7 @@
                     <p>{{ Str::limit($comment->content, 200) }}</p>
                 </td>
                 <td>
-                    {{ $comment->payment->user->name }}
+                    {{ $comment->user->name }}
                 </td>
                 <td>
                     {{ $comment->project->display_id }}
@@ -115,7 +115,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="reply_create_modal">
-                                                {{ $comment->payment->user->name }}様への返信編集
+                                                {{ $comment->user->name }}様への返信編集
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -154,7 +154,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="comment_edit_modal">
-                                                {{ $comment->payment->user->name }}様への返信編集
+                                                {{ $comment->user->name }}様への返信編集
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>

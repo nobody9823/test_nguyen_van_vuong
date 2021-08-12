@@ -109,23 +109,31 @@
                             </div>
                         @endif
                         @isset($project->user->snsLink)
+                            @if ($project->user->snsLink->twitter_url)
                             <div class="project_sns_icon">
-                                @if ($project->user->snsLink->twitter_url)
                                 <a href="{{ $project->user->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
-                                @endif
-                                @if ($project->user->snsLink->instagram_url)
-                                <a href="{{ $project->user->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
-                                @endif
-                                @if ($project->user->snsLink->youtube_url)
-                                <a href="{{ $project->user->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
-                                @endif
-                                @if ($project->user->snsLink->tiktok_url)
-                                <a href="{{ $project->user->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
-                                @endif
-                                @if ($project->user->snsLink->other_url)
-                                <a href="{{ $project->user->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
-                                @endif
                             </div>
+                            @endif
+                            @if ($project->user->snsLink->instagram_url)
+                            <div class="project_sns_icon">
+                                <a href="{{ $project->user->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
+                            </div>
+                            @endif
+                            @if ($project->user->snsLink->youtube_url)
+                            <div class="project_sns_icon">
+                                <a href="{{ $project->user->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
+                            </div>
+                            @endif
+                            @if ($project->user->snsLink->tiktok_url)
+                            <div class="project_sns_icon">
+                                <a href="{{ $project->user->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
+                            </div>
+                            @endif
+                            @if ($project->user->snsLink->other_url)
+                            <div class="project_sns_icon">
+                                <a href="{{ $project->user->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
+                            </div>
+                            @endif
                         @endisset
                     </div>
                     @if($project->isIncluded() === true)
@@ -163,11 +171,11 @@
                     <div class="pds_sec02_tit inner_item">
                         リターンを選ぶ
                     </div>
+                    @foreach($project->plans as $plan)
                     <div class="pds_sec02_box_base">
-                        @foreach($project->plans as $plan)
                         <x-user.plan-card :plan="$plan" :project="$project" :inviterCode="$inviterCode" />
-                        @endforeach
                     </div><!--/pds_sec02_box_base-->
+                    @endforeach
                 </div><!--/wlr_64_R-->
 
             </div><!--/wlr_64-->

@@ -23,8 +23,8 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'project_id' => $this->faker->numberBetween(1, 30),
-            'payment_id' => $this->faker->numberBetween(1, 100),
+            'project_id' => $this->faker->numberBetween(1, 40),
+            'user_id' => $this->faker->numberBetween(1, 100),
             'content' => Arr::random([
                 '頑張ってください！',
                 'みんなで乗り越えましょう',

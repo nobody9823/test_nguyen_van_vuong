@@ -42,10 +42,14 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::post('project/{project}/apply', [MyProjectController::class, 'apply'])->name('project.apply');
         Route::get('project/{project}/create_plan', [MyProjectController::class, 'createPlan'])->name('project.create_plan');
         Route::prefix('project/{project}')->group(function () {
+            Route::get('createReturn', [MyPlanController::class, 'createReturn']);
+            Route::post('updatePlan/{plan}', [MyPlanController::class, 'updateReturn']);
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
+            Route::resource('comment', CommentController::class)->only(['index']);
         });
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+            Route::get('reward_sample', [MyProjectController::class, 'rewardSample'])->name('reward_sample');
         });
         Route::delete('project/file/{project_file}', [MyProjectController::class, 'deleteFile'])->name('project_image.destroy');
         // Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');

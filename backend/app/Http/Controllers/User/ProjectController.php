@@ -236,7 +236,7 @@ class ProjectController extends Controller
             $payment->includedPlans()->attach($validated_request['plans']);
             if (!empty($validated_request['comments'])) {
                 $comment = $this->comment->fill(['project_id' =>  $project->id, 'content' => $validated_request['comments']]);
-                $payment->comment()->save($comment);
+                $this->user->comments()->save($comment);
             }
             $this->plan->updatePlansByIds($plans, $validated_request['plans']);
             $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
