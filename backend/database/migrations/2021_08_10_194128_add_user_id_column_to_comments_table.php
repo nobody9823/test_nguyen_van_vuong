@@ -14,7 +14,7 @@ class AddUserIdColumnToCommentsTable extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->foreignId('user_id')->after('project_id')->constrained('users');
+            $table->foreignId('user_id')->nullable()->after('project_id')->constrained('users');
         });
     }
 
