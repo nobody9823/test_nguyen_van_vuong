@@ -25,10 +25,10 @@
               @if(!$comment->reply)
               <i class="fas fa-reply fa-2x fa-fw" style="cursor: pointer" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
               @endif
-              <form action='' method="POST">
+              <form action="{{ route('user.comment.destroy', ['project' => $comment->project, 'comment' => $comment]) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                {{-- <button type="submit" class="far fa-trash-alt fa-2x fa-fw delete-btn" onclick="return confirm('本当に削除しますか？')"></button> --}}
+                <button type="submit" class="far fa-trash-alt fa-2x fa-fw delete-btn" onclick="return confirm('本当に削除しますか？')"></button>
               </form>
           </div>
       </div>
