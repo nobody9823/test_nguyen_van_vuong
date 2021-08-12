@@ -124,9 +124,9 @@
                             <label class="tab_item" for="tab3">銀行振込</label>
                             <input id="tab4" type="radio" name="tab_item">
                             <label class="tab_item" for="tab4">キャリア決済</label> --}}
-                            <input class="radio-fan" type="radio" id="tab5" name="payment_way" value="paypay">
+                            {{-- <input class="radio-fan" type="radio" id="tab5" name="payment_way" value="paypay"> --}}
                             {{-- <input id="tab5" type="radio" name="tab_item"> --}}
-                            <label class="tab_item" for="tab5">PayPay</label>
+                            {{-- <label class="tab_item" for="tab5">PayPay</label> --}}
                             {{-- <input id="tab6" type="radio" name="tab_item">
                             <label class="tab_item" for="tab6">楽天ペイ</label> --}}
 
@@ -463,6 +463,7 @@ window.onload = function(){
                 } else {
                     document.querySelector('#payjp_token').value = response.id;
                     console.log(response);
+                    errors.innerHTML = ''
                 };
             })
         }
@@ -476,6 +477,7 @@ window.onload = function(){
                 } else {
                     document.querySelector('#payjp_token').value = response.id;
                     console.log(response);
+                    errors.innerHTML = ''
                 };
             })
         }
@@ -489,6 +491,7 @@ window.onload = function(){
                 } else {
                     document.querySelector('#payjp_token').value = response.id;
                     console.log(response);
+                    errors.innerHTML = ''
                 };
             })
         }
