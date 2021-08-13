@@ -36,33 +36,14 @@
 
 <div class="form_item_row">
     <div class="form_item_tit">お届け予定日<span class="hissu_txt">必須</span></div>
-    <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="delivery_year" class="form-control" name="delivery_year" onChange="updateMyPlan.checkDateIsFilled(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})" readonly>
-        @for($i = (int) date('Y'); $i <= (int) date('Y') + 2; $i ++)
-            <option value="{{ $i }}" {{ $i == old('delivery_year', optional(optional($plan)->delivery_date)->year) ? 'selected' : '' }}>{{ $i }}</option>
-        @endfor
-        </select>
+        <div class="spinner-wrapper">
+            <div class="spinner" id="spinner_return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}"></div>
+            <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+        </div>
+        <span id="errors_delivery_date" style="color: red;"></span>
+        <input type="text" id="delivery_date" name="delivery_date" class="p-postal-code def_input_100p delivery_date"
+            value="{{ old('delivery_date', optional($plan)->delivery_date) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
     </div>
-    <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="delivery_month" class="form-control" name="delivery_month" onChange="updateMyPlan.checkDateIsFilled(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
-            @for ($i = 0; $i <= 12; $i++)
-                <option value="{{ sprintf('%02d', $i) }}" {{ optional(optional($plan)->delivery_date)->month == sprintf('%02d', $i) ? 'selected' : '' }}>{{ $i }}</option>
-            @endfor
-        </select>
-    </div>
-    <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="delivery_day" class="form-control" name="delivery_day" onChange="updateMyPlan.checkDateIsFilled(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
-            @for ($i = 0; $i <= 31; $i++)
-            <option value="{{ sprintf('%02d', $i) }}" {{ optional(optional($plan)->delivery_date)->day == sprintf('%02d', $i) ? 'selected' : '' }}>{{ $i }}</option>
-            @endfor
-        </select>
-    </div>
-    <div class="spinner-wrapper">
-        <div class="spinner" id="spinner_return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}"></div>
-        <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}"></i>
-    </div>
-    <span id="errors_delivery_date" style="color: red;"></span>
-</div>
 
 <div class="form_item_row">
     <div class="form_item_tit">

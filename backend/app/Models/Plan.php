@@ -161,7 +161,7 @@ class Plan extends Model
             'price' => 0,
             'address_is_required' => false,
             'limit_of_supporters' => 0,
-            'delivery_date' => Carbon::maxValue(),
+            'delivery_date' => Carbon::now(),
             'image_url' => 'public/sampleImage/now_printing.png'
         ]);
     }
