@@ -3,7 +3,7 @@
 @section('title', 'マイページ | マイプロジェクト')
 
 @section('content')
-<section class="section_base">
+<section id="supported-projects" class="section_base">
     <div class="tit_L_01 E-font">
         <h2>MY PROJECTS</h2>
         <div class="sub_tit_L">マイプロジェクト</div>
