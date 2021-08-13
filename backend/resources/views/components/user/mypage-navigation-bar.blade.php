@@ -12,7 +12,7 @@
     </div>
     <div class="prof_btn_box_base">
         <div class="prof_btn_box_01">
-            <div class="pbb_01_01"><i class="fas fa-volume-up"></i> 応援購入<a href="#" class="cover_link"></a></div>
+            <div class="pbb_01_01"><i class="fas fa-volume-up"></i> 応援購入<a class="cover_link"></a></div>
             <div class="pbb_01_link">応援購入したプロジェクト<i class="fas fa-chevron-right"></i>
                 <a href="{{ route('user.purchased_projects') }}" class="cover_link"></a>
             </div>
@@ -29,7 +29,7 @@
             {{-- <p><a href="{{ route('user.message.index') }}">メッセージ一覧</a></p> --}}
         </div>
         <div class="prof_btn_box_02">
-            <div class="pbb_01_01"><i class="fas fa-user"></i> アカウント情報<a href="#" class="cover_link"></a></div>
+            <div class="pbb_01_01"><i class="fas fa-user"></i> アカウント情報<a class="cover_link"></a></div>
             <div class="pbb_01_link">プロフィール編集<i class="fas fa-chevron-right"></i>
                 <a href="{{ route('user.profile') }}" class="cover_link"></a>
             </div>
@@ -45,7 +45,7 @@
                     c1.6-0.2,3-0.9,4.2-2c1.3-1.1,2.4-2.2,3-1.9C30.5,6.4,25.6,21,25.6,21H11.3z"></path>
                 </svg>
                 プロジェクト
-                <a href="#" class="cover_link"></a>
+                <a class="cover_link"></a>
             </div>
             <div class="pbb_01_link">
                 マイプロジェクト管理
