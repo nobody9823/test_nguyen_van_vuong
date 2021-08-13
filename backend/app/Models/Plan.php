@@ -56,6 +56,11 @@ class Plan extends Model
         return $this->belongsToMany('App\Models\Payment', 'App\Models\PlanPaymentIncluded');
     }
 
+    public function getFormattedDeliveryDateAttribute()
+    {
+        return $this->delivery_date->format('Y-m-d');
+    }
+
     //--------------local scope----------------//
     public function scopeNarrowDownWithProject($query)
     {
@@ -130,9 +135,9 @@ class Plan extends Model
 
     public function scopeUpdatePlansByIds($query, Collection $plans, array $plan_ids)
     {
-        foreach ($plans as $plan){
-            foreach($plan_ids as $key => $value){
-                if ($plan->id === $key){
+        foreach ($plans as $plan) {
+            foreach ($plan_ids as $key => $value) {
+                if ($plan->id === $key) {
                     $plan->limit_of_supporters -= $value['quantity'];
                     $plan->save();
                 }
