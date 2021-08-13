@@ -7,6 +7,7 @@
         <div class="spinner-wrapper">
             <div class="spinner" id="spinner_target_amount"></div>
             <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_target_amount"></i>
+            <span id="errors_target_amount" style="color: red;"></span>
         </div>
         目標金額<span class="hissu_txt">必須</span></div>
         <span class="disclaimer">
