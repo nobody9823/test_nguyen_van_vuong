@@ -34,7 +34,7 @@
 
     <div class="pds_sec02_01">
         <div class="pds_sec02_01_shien_nin">支援者：{{ $plan->included_payments_count }}人</div>
-        <div class="pds_sec02_01_day">お届け日：{{ $plan->delivery_date }}</div>
+        <div class="pds_sec02_01_day">お届け予定日：{{ $plan->formatted_delivery_date }}</div>
     </div>
 </div>
 {{-- <div class="plan">

@@ -38,7 +38,7 @@
 
                 <div class="as_03">
                     <div class="as_shien_nin">支援者 <span>{{ $plan->includedPayments->count() }}人</span></div>
-                    <div class="as_day">お届け予定 <span>{{ $plan->delivery_date }}</span></div>
+                    <div class="as_day">お届け予定日 <span>{{ $plan->formatted_delivery_date }}</span></div>
                 </div>
             </div><!--/wlr_64_R-->
         </div><!--/wlr_64-->
