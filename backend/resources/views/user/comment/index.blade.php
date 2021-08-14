@@ -70,7 +70,7 @@
                     <div class="av_tit">
                         <p style="text-align: center;">返信コメント</p>
                     </div>
-                    <textarea name="content" class="input_reply"></textarea>
+                    <textarea name="content" class="input_reply">{{old('content')}}</textarea>
                     </div>
 
                     <div class="def_btn">
@@ -90,10 +90,21 @@
     </div>
 </section>
 
-<div>
-{{ $comments->links() }}
-</div>
-
+@if ($comments->first() !== null)
+  <div class="pager E-font">
+    <ul class="pagination">
+      @if ($comments->previousPageUrl() !== null)
+        <li class="pager_pre"><a href="{{ $comments->previousPageUrl() }}"><span>«</span></a></li>
+      @endif
+      @foreach ($comments->appends(request()->input())->links()->elements[0] as $key => $link)
+        <li><a href="{{ $link }}" class="{{ $comments->currentPage() == $key ? 'pager_active' : ''}}"><span>{{ $key }}</span></a></li>
+      @endforeach
+      @if ($comments->nextPageUrl() !== null)
+        <li class="pager_next"><a href="{{ $comments->nextPageUrl() }}"><span>»</span></a></li>
+      @endif
+    </ul>
+  </div>
+@endif
 @endsection
 
 @section('script')
@@ -101,11 +112,6 @@
 @endsection
 
 <style>
-.pagination{
-display: flex;
-justify-content: center;
-font-size: 140%;
-}
 .delete-btn{
   cursor: pointer;
   color: #00AEBD;
@@ -127,12 +133,16 @@ button{
 }
 
 .comment_content {
-  width: 80%;
-  line-height: 35px;
+  width: 75%;
+  line-height: 20px;
+  margin-top: 15px;
+  white-space: pre-line;
 }
 
 .comment_content div {
   font-size: 85%;
+  display: flex;
+  flex-direction: column;
 }
 
 .comment_icons {
@@ -145,7 +155,9 @@ button{
 }
 
 .reply_content {
-  width: 790px;
+  width: 70%;
+  margin-top: 25px;
+  white-space: pre-line;
 }
 
 .reply_user {
@@ -154,16 +166,17 @@ button{
 
 @media (max-width: 767px) {
   .user_image{ margin: 30px 0 10px 0; }
-	.reply_content{ width: calc(100% - 75px);}
+	.reply_content{ width: calc(100% - 35%);}
   .reply_user{ margin-left: 0px; }
+  .comment_content { width: calc(100% - 20%);)}
   .comment_content div {
     font-size: 77%;
   }
   .comment_icons{
     position: relative;
-    left: calc(100% - 210px);
-    bottom: 28px;
+    left: calc(100% - 60px);
     font-size: 60%;
+    bottom: 60px;
   }
 }
 
@@ -218,6 +231,7 @@ button{
   margin: 0 0 10px 0;
   border: solid 1px #DBDBDB;
   border-radius: 4px;
+  resize:none;
 }
 /* ここまでモーダルウィンドウ */
 </style>
