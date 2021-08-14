@@ -82,6 +82,7 @@ class MyProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $this->authorize('checkOwnProject', $project);
         $project->getWithPaymentsCountAndSumPrice();
         return view('user.my_project.show', ['project' => $project]);
     }
