@@ -127,7 +127,7 @@ button{
 }
 
 .comment_content {
-  width: 80%;
+  width: 75%;
   line-height: 35px;
 }
 
@@ -145,7 +145,7 @@ button{
 }
 
 .reply_content {
-  width: 790px;
+  width: 70%;
 }
 
 .reply_user {
@@ -154,15 +154,15 @@ button{
 
 @media (max-width: 767px) {
   .user_image{ margin: 30px 0 10px 0; }
-	.reply_content{ width: calc(100% - 75px);}
+	.reply_content{ width: calc(100% - 35%);}
   .reply_user{ margin-left: 0px; }
+  .comment_content { width: calc(100% - 20%);)}
   .comment_content div {
     font-size: 77%;
   }
   .comment_icons{
     position: relative;
-    left: calc(100% - 210px);
-    bottom: 28px;
+    left: calc(100% - 65px);
     font-size: 60%;
   }
 }
@@ -218,6 +218,7 @@ button{
   margin: 0 0 10px 0;
   border: solid 1px #DBDBDB;
   border-radius: 4px;
+  resize:none;
 }
 /* ここまでモーダルウィンドウ */
 </style>
