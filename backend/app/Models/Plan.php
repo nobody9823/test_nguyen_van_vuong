@@ -23,6 +23,7 @@ class Plan extends Model
         'price',
         'address_is_required',
         'limit_of_supporters',
+        'limit_of_supporters_is_required',
         'delivery_date',
         'image_url'
     ];
@@ -161,6 +162,7 @@ class Plan extends Model
             'price' => 0,
             'address_is_required' => false,
             'limit_of_supporters' => 0,
+            'limit_of_supporters_is_required' => false,
             'delivery_date' => Carbon::now(),
             'image_url' => 'public/sampleImage/now_printing.png'
         ]);
