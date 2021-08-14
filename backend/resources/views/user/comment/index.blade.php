@@ -134,7 +134,9 @@ button{
 
 .comment_content {
   width: 75%;
-  line-height: 35px;
+  line-height: 20px;
+  margin-top: 15px;
+  white-space: pre-line;
 }
 
 .comment_content div {
@@ -152,6 +154,8 @@ button{
 
 .reply_content {
   width: 70%;
+  margin-top: 25px;
+  white-space: pre-line;
 }
 
 .reply_user {
