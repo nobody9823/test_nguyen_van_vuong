@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\LimitOfSupporters;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -33,7 +34,8 @@ class MyPlanRequest extends FormRequest
             'content' => ['nullable', 'string', 'max:2000'],
             'price' => ['nullable', 'integer', 'max:10000000'],
             'address_is_required' => ['nullable', 'boolean'],
-            'limit_of_supporters' => ['nullable', 'integer', 'min:1'],
+            'limit_of_supporters_is_required' => ['nullable', 'boolean'],
+            'limit_of_supporters' => ['integer', 'min:1'],
             'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$project_end_date}"],
             'image_url' => ['nullable', 'image']
         ];
@@ -41,7 +43,7 @@ class MyPlanRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if ($this->has('delivery_month') && $this->has('delivery_day')){
+        if ($this->has('delivery_month') && $this->has('delivery_day')) {
             if ($this->delivery_month === "00") {
                 $this->merge([
                     'delivery_month' => date('m')
@@ -64,16 +66,16 @@ class MyPlanRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        if($this->expectsJson()){
+        if ($this->expectsJson()) {
             throw new HttpResponseException(
                 response()->json(['message' => $validator->errors()->toArray()])
             );
         } else {
             throw new HttpResponseException(
                 redirect()
-                ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'return', 'status' => 422, 'plan' => $this->route('plan')])
-                ->withErrors($validator)
-                ->withInput()
+                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'return', 'status' => 422, 'plan' => $this->route('plan')])
+                    ->withErrors($validator)
+                    ->withInput()
             );
         };
     }

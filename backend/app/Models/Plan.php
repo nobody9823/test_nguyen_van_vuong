@@ -161,7 +161,7 @@ class Plan extends Model
             'content' => '',
             'price' => 0,
             'address_is_required' => false,
-            'limit_of_supporters' => 0,
+            'limit_of_supporters' => 1,
             'limit_of_supporters_is_required' => false,
             'delivery_date' => Carbon::now(),
             'image_url' => 'public/sampleImage/now_printing.png'

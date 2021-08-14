@@ -26,12 +26,36 @@
 <div class="form_item_row">
     <div class="form_item_tit">
         <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}"></div>
-            <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+            <div class="spinner" id="spinner_return_limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}"></div>
+            <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}"></i>
         </div>
         限定数
     </div>
-    <input type="number" name="limit_of_supporters" class="p-postal-code def_input_100p" value="{{ old('limit_of_supporters', optional($plan)->limit_of_supporters) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
+    <input type="checkbox" id="limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}" class="ac_list_checks" name="limit_of_supporters_is_required" value="1"
+    onchange="updateMyPlan.limitOfSupportersIsChecked(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})"
+        @if(old('limit_of_supporters_is_required'))
+        {{ old('limit_of_supporters_is_required') ? 'checked' : '' }}>
+        @elseif(!is_null($plan))
+        {{  $plan->limit_of_supporters_is_required ? 'checked' : '' }}>
+        @else
+        >
+        @endif
+    <label for="limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}" class="checkbox-fan">限定数を設定する</label>
+
+    <div class="spinner-wrapper">
+        <div class="spinner" id="spinner_return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}"></div>
+        <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+    </div>
+    <input type="number" id="limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}" name="limit_of_supporters" class="p-postal-code def_input_100p"
+        style="display:
+            @if(old('limit_of_supporters_is_required'))
+            {{ old('limit_of_supporters_is_required') ? 'block' : 'none' }}"
+            @elseif(!is_null($plan))
+            {{  $plan->limit_of_supporters_is_required ? 'block' : 'none' }}"
+            @else
+            {{ 'none' }}"
+            @endif
+        value="{{ old('limit_of_supporters', optional($plan)->limit_of_supporters) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
 </div>
 
 <div class="form_item_row">
