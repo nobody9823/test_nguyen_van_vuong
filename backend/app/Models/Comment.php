@@ -66,7 +66,7 @@ class Comment extends Model
                     // 内容が一致するか
                     $query->where('content', 'like', "%$word%")
                     // コメント投稿者名が一致するか
-                    ->orWhereIn('payment_id', Payment::select('id')->whereIn('user_id', User::select('id')->where('name', 'like', "%$word%")))
+                    ->orWhereIn('user_id', User::select('id')->where('name', 'like', "%$word%"))
                     // プロジェクトIDが一致するか
                     ->orWhereIn('project_id', Project::select('id')->where('id', 'like', "%$word%"))
                     // プロジェクト投稿したインフルエンサー名が一致するか
