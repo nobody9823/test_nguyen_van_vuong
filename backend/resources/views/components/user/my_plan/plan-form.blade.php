@@ -33,9 +33,7 @@
     </div>
     <input type="checkbox" id="limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}" class="ac_list_checks" name="limit_of_supporters_is_required" value="1"
     onchange="updateMyPlan.limitOfSupportersIsChecked(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})"
-        @if(old('limit_of_supporters_is_required'))
-        {{ old('limit_of_supporters_is_required') ? 'checked' : '' }}>
-        @elseif(!is_null($plan))
+        @if(!is_null($plan))
         {{  $plan->limit_of_supporters_is_required ? 'checked' : '' }}>
         @else
         >
@@ -48,14 +46,12 @@
     </div>
     <input type="number" id="limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}" name="limit_of_supporters" class="p-postal-code def_input_100p"
         style="display:
-            @if(old('limit_of_supporters_is_required'))
-            {{ old('limit_of_supporters_is_required') ? 'block' : 'none' }}"
-            @elseif(!is_null($plan))
+            @if(!is_null($plan))
             {{  $plan->limit_of_supporters_is_required ? 'block' : 'none' }}"
             @else
             {{ 'none' }}"
             @endif
-        value="{{ old('limit_of_supporters', optional($plan)->limit_of_supporters) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
+        value="{{ optional($plan)->limit_of_supporters }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
 </div>
 
 <div class="form_item_row">

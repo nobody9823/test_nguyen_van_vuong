@@ -62,6 +62,12 @@ class MyPlanRequest extends FormRequest
                 'delivery_date' => $date->format('Y-m-d')
             ]);
         }
+
+        if ($this->has('limit_of_supporters_is_required') && $this->limit_of_supporters_is_required === 0) {
+            $this->merge([
+                'limit_of_supporters' => 1,
+            ]);
+        }
     }
 
     public function failedValidation(Validator $validator)
