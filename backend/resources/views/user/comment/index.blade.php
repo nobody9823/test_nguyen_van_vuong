@@ -70,7 +70,7 @@
                     <div class="av_tit">
                         <p style="text-align: center;">返信コメント</p>
                     </div>
-                    <textarea name="content" class="input_reply"></textarea>
+                    <textarea name="content" class="input_reply">{{old('content')}}</textarea>
                     </div>
 
                     <div class="def_btn">
