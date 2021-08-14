@@ -141,6 +141,8 @@ button{
 
 .comment_content div {
   font-size: 85%;
+  display: flex;
+  flex-direction: column;
 }
 
 .comment_icons {
@@ -172,8 +174,9 @@ button{
   }
   .comment_icons{
     position: relative;
-    left: calc(100% - 65px);
+    left: calc(100% - 60px);
     font-size: 60%;
+    bottom: 60px;
   }
 }
 
