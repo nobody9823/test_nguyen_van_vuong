@@ -16,21 +16,7 @@
             </div>
         </section>
 
-        @if ($projects->first() !== null)
-        <div class="pager E-font">
-            <ul class="pagination">
-                @if ($projects->previousPageUrl() !== null)
-                    <li class="pager_pre"><a href="{{ $projects->appends(request()->input())->previousPageUrl() }}"><span>«</span></a></li>
-                @endif
-                @foreach ($projects->appends(request()->input())->links()->elements[0] as $key => $link)
-                    <li><a href="{{ $link }}" class="{{ $projects->currentPage() == $key ? 'pager_active' : ''}}"><span>{{ $key }}</span></a></li>
-                @endforeach
-                @if ($projects->nextPageUrl() !== null)
-                    <li class="pager_next"><a href="{{ $projects->appends(request()->input())->nextPageUrl() }}"><span>»</span></a></li>
-                @endif
-            </ul>
-        </div>
-        @endif
+        <x-common.pagination :props="$projects"/>
     </div>
 </main>
 @endsection
