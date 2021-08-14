@@ -164,7 +164,7 @@
         window.location.replace(`?tag_id=${tagId}&sort_type=${sortType}`);
     };
     // プロジェクトのお気に入り登録・解除処理
-    $('.project-like').on('click', function() {
+    $('.liked_project').on('click', function() {
         var el = $(this);
         var projectId = el.attr('id');
 
