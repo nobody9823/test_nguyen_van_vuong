@@ -61,7 +61,7 @@
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}"></i>
         </div>
         <span id="errors_delivery_date" style="color: red;"></span>
-        <input type="text" id="delivery_date" name="delivery_date" class="p-postal-code def_input_100p delivery_date"
+        <input type="text" name="delivery_date" class="p-postal-code def_input_100p delivery_date"
             value="{{ old('delivery_date', optional($plan)->delivery_date) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
     </div>
 
