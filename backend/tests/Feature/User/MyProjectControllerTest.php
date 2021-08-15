@@ -148,11 +148,11 @@ class MyProjectControllerTest extends TestCase
     /**
     * @dataProvider dataProvider_for_testUpdateActionForEachTab
     */
-    public function testUpdateActionForEachTab(string $current_tab, string $next_tab, string $test)
+    public function testUpdateActionForEachTab(string $current_tab, string $next_tab, string $tab_paramsparams)
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => $current_tab], $this->$test));
+        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => $current_tab], $this->$tab_paramsparams));
 
         if($next_tab === 'my_project_index'){
             $response->assertRedirect(route('user.my_project.project.index'));
