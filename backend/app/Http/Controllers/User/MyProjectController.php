@@ -95,7 +95,7 @@ class MyProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        // $this->authorize('checkOwnProjectWithPublishedStatus', $project);
+        $this->authorize('checkOwnProjectWithPublishedStatus', $project);
         $tags = Tag::pluck('name', 'id');
 
         return view('user.my_project.edit', ['project' => $project, 'tags' => $tags]);

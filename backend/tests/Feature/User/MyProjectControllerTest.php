@@ -128,7 +128,7 @@ class MyProjectControllerTest extends TestCase
 
     public function testEditAction()
     {
-        $response = $this->get(route('user.my_project.project.edit', ['project' => $this->project]));
+        $response = $this->get(route('user.my_project.project.edit', ['project' => $this->my_project]));
 
         $response->assertOk();
     }
@@ -148,11 +148,11 @@ class MyProjectControllerTest extends TestCase
     /**
     * @dataProvider dataProvider_for_testUpdateActionForEachTab
     */
-    public function testUpdateActionForEachTab(string $current_tab, string $next_tab, string $tab_paramsparams)
+    public function testUpdateActionForEachTab(string $current_tab, string $next_tab, string $tab_params)
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => $current_tab], $this->$tab_paramsparams));
+        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => $current_tab], $this->$tab_params));
 
         if($next_tab === 'my_project_index'){
             $response->assertRedirect(route('user.my_project.project.index'));
