@@ -133,57 +133,31 @@ class MyProjectControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testUpdateActionWhenEditTargetAmount()
+    Public function dataProvider_for_testUpdateActionForEachTab(): array
     {
-        $this->withoutExceptionHandling();
-
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => 'target_tab'], $this->target_amount_params));
-
-        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->my_project, 'next_tab' => 'overview']));
+        return [
+            '「目標金額」更新処理' => ['target_tab', 'overview', 'target_amount_params'],
+            '「概要」更新処理' => ['overview', 'visual', 'overview_params'],
+            '「TOP画像」更新処理' => ['visual','return', 'visual_params'],
+            '「PSリターン(支援総額)」更新処理' => ['ps_return','identification', 'reward_by_total_amount_params'],
+            '「PSリターン(支援者件数)」更新処理' => ['ps_return','identification','reward_by_total_quantity_params'],
+            '「本人確認」更新処理' => ['identification','my_project_index', 'identification_params'],
+        ];
     }
 
-    public function testUpdateActionWhenEditOverView()
+    /**
+    * @dataProvider dataProvider_for_testUpdateActionForEachTab
+    */
+    public function testUpdateActionForEachTab(string $current_tab, string $next_tab, string $test)
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => 'overview'], $this->overview_params));
+        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => $current_tab], $this->$test));
 
-        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->my_project, 'next_tab' => 'visual']));
-    }
-
-    public function testUpdateActionWhenEditVisual()
-    {
-        $this->withoutExceptionHandling();
-
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => 'visual'], $this->visual_params));
-
-        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->my_project, 'next_tab' => 'return']));
-    }
-
-    public function testUpdateActionWhenEditRewardTotalQuantity()
-    {
-        $this->withoutExceptionHandling();
-
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => 'ps_return'], $this->reward_by_total_amount_params));
-
-        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->my_project, 'next_tab' => 'identification']));
-    }
-
-    public function testUpdateActionWhenEditRewardTotalAmount()
-    {
-        $this->withoutExceptionHandling();
-
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => 'ps_return'], $this->reward_by_total_quantity_params));
-
-        $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->my_project, 'next_tab' => 'identification']));
-    }
-
-    public function testUpdateActionWhenEditIdentification()
-    {
-        $this->withoutExceptionHandling();
-
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => 'identification'], $this->identification_params));
-
-        $response->assertRedirect(route('user.my_project.project.index'));
+        if($next_tab === 'my_project_index'){
+            $response->assertRedirect(route('user.my_project.project.index'));
+        } else {
+            $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->my_project, 'next_tab' => $next_tab]));
+        }
     }
 }
