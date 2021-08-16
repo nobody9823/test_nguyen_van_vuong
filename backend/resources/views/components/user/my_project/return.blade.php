@@ -6,14 +6,12 @@
             <div class="img_box_02_item">
                 <div class="ib02_01 E-font my_project_img_wrapper">
                     <img src="{{ Storage::url($plan->image_url) }}">
-                    {{-- NOTICE: MyProjectController, show action --}}
-                    <a href="#show" class="cover_link"></a>
+                    <a class="cover_link" onclick="DisplayEditPlan({{ $plan->id }});" id="{{ $plan->id }}"></a>
                 </div>
 
                 <div class="ib02_03">
                     <h3>{{ Str::limit($plan->title, 46) }}</h3>
-                    {{-- NOTICE: MyProjectController, show action--}}
-                    <a href="#show" class="cover_link"></a>
+                    <a class="cover_link" onclick="DisplayEditPlan({{ $plan->id }});" id="{{ $plan->id }}"></a>
                 </div>
 
                 <div class="pds_sec02_01_btn">

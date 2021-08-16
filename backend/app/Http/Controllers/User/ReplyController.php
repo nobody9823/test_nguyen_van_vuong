@@ -7,12 +7,13 @@ use App\Models\Project;
 use App\Models\Comment;
 use App\Models\Reply;
 use Illuminate\Http\Request;
+use App\Http\Requests\ReplyRequest;
 use Illuminate\Support\Facades\DB;
 use Log;
 
 class ReplyController extends Controller
 {
-    public function store(Request $request, Project $project, Comment $comment)
+    public function store(ReplyRequest $request, Project $project, Comment $comment)
     {
         $this->authorize('checkOwnProject', $project);
         DB::beginTransaction();

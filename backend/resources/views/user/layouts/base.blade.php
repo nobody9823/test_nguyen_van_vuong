@@ -25,6 +25,7 @@ if(isiOS) {
 
 <link href="{{ asset('css/reset.css') }}" type="text/css" rel="stylesheet">
 <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
+@yield('css')
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 
