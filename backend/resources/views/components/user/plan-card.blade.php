@@ -4,7 +4,9 @@
     </div>
     <div class="pds_sec02_01">
         <div class="pds_sec02_01_en">{{ $plan->price }}円</div>
-        <div class="pds_sec02_01_nokori_nin">残り：{{ $plan->limit_of_supporters }}人まで</div>
+        @if($plan->limit_of_supporters_is_required === 1)
+            <div class="pds_sec02_01_nokori_nin">残り：{{ $plan->limit_of_supporters }}人まで</div>
+        @endif
     </div>
 
     <div class="pds_sec02_txt">
