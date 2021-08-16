@@ -51,7 +51,13 @@ const updateMyProject = (() => {
     }
 
     const displayError = (e, message) => {
-        document.getElementById('errors_' + Object.keys(e)[0]).innerHTML = message;
+        const ul = document.createElement('ul');
+        message.forEach(e => {
+            var childElement = document.createElement('li');
+            childElement.innerHTML = e;
+            ul.appendChild(childElement);
+        });
+        document.getElementById('errors_' + Object.keys(e)[0]).appendChild(ul);
         setTimeout(() => { disappearError(e); }, 5000 );
     }
 
@@ -77,7 +83,7 @@ const updateMyProject = (() => {
                 displayIcon(document.getElementById('saved_' + Object.keys(data)[0]));
             } else if (res.data.message !== undefined) {
                 document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
-                displayError(data, res.data.message[Object.keys(data)[0]][0]);
+                displayError(data, res.data.message[Object.keys(data)[0]]);
             } else {
                 document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
             }
