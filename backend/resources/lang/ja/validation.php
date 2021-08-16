@@ -225,5 +225,7 @@ return [
         'limit_of_supporters' => '限定数',
         'delivery_date' => 'お届け予定日',
         'image_url' => '画像',
+        'identify_image_1' => '本人確認書類1',
+        'identify_image_2' => '本人確認書類2'
     ],
 ];
