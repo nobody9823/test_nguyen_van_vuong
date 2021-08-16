@@ -103,6 +103,7 @@ class MyPlanController extends Controller
 
     public function deletePlan(Project $project, Plan $plan)
     {
+        $this->authorize('checkOwnPlan', $plan);
         if(Auth::user()->projects()->find($project->id)->plans()->find($plan) !== null){
             return response()->json([ 'result' => $plan->delete()]);
         };
