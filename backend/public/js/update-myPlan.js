@@ -162,6 +162,21 @@ const updateMyPlan = (() => {
                 document.getElementById(`limit_of_supporters${planId === undefined ? '' : '_' + planId}`).style.display = 'none';
             }
             setTimer(data, projectId, planId);
+        },
+
+        deletePlan: (el, projectId, planId) => {
+            var spinner = document.getElementById('spinner_return_' + (planId));
+            spinner.style.display = 'block';
+
+            axios.delete(`/my_project/project/${projectId}/delete_plan/${planId}`)
+                .then(res => {
+                    spinner.style.display = 'none';
+                    if(res.data.result){
+                        el.parentNode.parentNode.remove();
+                    };
+                }).catch(res =>{
+                    console.log(res);
+                });
         }
     }
 })();
