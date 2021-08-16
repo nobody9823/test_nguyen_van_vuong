@@ -2,7 +2,7 @@
 /* CSS Document */
 *{-webkit-appearance: none; -webkit-text-size-adjust: 100%;}
 
-body { font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif;}
+body { font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif; color: #707070;}
 b, strong, .bold{	font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI semibold", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic", "Segoe UI", Verdana, Meiryo, sans-serif;}
 /* IEだけに適応 */
 _:lang(x)::-ms-backdrop, .selector {	font-family: "Segoe UI", Meiryo, sans-serif;}
@@ -31,6 +31,46 @@ input, select {
   -webkit-appearance: none;
   appearance: none;
 }
+
+/** common ********************************************************************/
+
+.inner {
+	width: 100%;
+	max-width: 1028px;
+	margin: 0 auto;
+	padding: 0 14px;
+}
+.content {
+	margin: 50px auto;
+}
+@media screen and (min-width: 768px){
+	.inner {
+		width: 100%;
+		max-width: 1060px;
+		margin: 0 auto;
+		padding: 0 30px;
+	}
+	.content {
+		margin: 50px auto;
+		display: flex;
+		justify-content: space-between;
+	}
+	.is-sp {
+		display: none;
+	}
+}
+@media screen and (max-width: 767px){
+	.is-pc {
+		display: none;
+	}
+}
+
+
+
+
+/**  ********************************************************************/
+
+
 
 .f_c_pri{ color: #00AEBD;}
 .f_b_pri{ background: #00AEBD;}
@@ -323,6 +363,35 @@ footer a{ color: #707070;}
 	.footer-over_L{ padding: 10px 10px;}
 	.footer-over_R{ padding: 10px 10px;}
 }
+
+/**パンくず********************************************************************/
+.breadcrumb {
+    padding-top: 30px;
+}
+
+
+
+.breadcrumb__list {
+    display: inline;
+}
+
+.breadcrumb__list:after {/* >を表示*/
+    content: '>';
+    padding: 0 0.2em;
+}
+
+.breadcrumb__list:first-child a {
+    color: #52b5ee;/*色*/
+}
+
+.breadcrumb__list:last-child:after {
+content: '';
+}
+
+.breadcrumb__text {
+	color: #555353;
+}
+
 
 /**ページトップボタン********************************************************************/
 #page-top_btn {
@@ -1745,6 +1814,395 @@ width: 100%;
     background-color: #d1ecf1;
     border-color: #bee5eb;
 }
+
+/* ====================================================================
+  FanReturnとは
+==================================================================== */
+
+/*非表示をコメントアウトしています*/
+/*
+.acd-check{
+    display: none;
+}
+*/
+/* .ac-label {
+    display: block;
+    margin-bottom: 1px;
+    padding: 10px;
+}
+.ac-content{
+    height: 0;
+    opacity: 0;
+    transition: .5s;
+    visibility: hidden;
+}
+.ac-check:checked + .ac-label + .ac-content{
+    height: 50px;
+    opacity: 1;
+    padding: 5px 10px;
+    visibility: visible;
+} */
+
+/* ここまで */
+
+@media screen and (min-width: 768px){
+	.question-sidebar {
+		width: 20%;
+	}
+	.question-main {
+		width: 75%;
+	}
+}
+
+.question-sidebar__title {
+	position: relative;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+	text-align: left;
+	background: #00aebd;
+	padding: 12px 10px;
+}
+.js-question-sidebar__title {
+	cursor: pointer;
+}
+.question-sidebar__title-angle {
+	position: absolute;
+	right: 17px;
+
+}
+
+@media screen and (min-width: 768px){
+	.question-sidebar__title {
+		font-size: 16px;
+		border-radius: 5px;
+		text-align: center;
+		padding: 12px 0;
+	}	
+}
+
+.question-sidebar__list__item {
+	display: block;
+	border-bottom: solid 1px #00aebd;
+	color: #00aebd;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 20px 24px 20px 8px;
+	position: relative;
+}
+
+.question-sidebar__list__item a {
+	color: #00aebd;
+}
+
+.question-sidebar__list__item span {
+	position: absolute;
+	top: 50%;
+	right: 8px;
+	transform: translateY(-50%);
+}
+
+/*  ABOUT  */
+.about {
+	margin-top: 30px;
+}
+@media screen and (min-width: 768px){
+	.about {
+		margin-top: 0;
+	}
+}
+.about__title {
+	font-size: 18px;
+	font-weight: bold;
+	color: #00aebd;
+}
+
+.about__date {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.57;
+	display: block;
+	margin: 10px 0 30px;
+}
+
+@media screen and (min-width: 768px){
+	.about__date {
+		margin: 20px 0 50px;
+	}
+}
+
+.about__img-wrapper {
+	width: 185px;
+	margin: 0 auto;
+}
+@media screen and (min-width: 768px){
+	.about__img-wrapper {
+		width: 270px;
+	}
+}
+
+.about__text {
+	font-size: 12px;
+	line-height: 1.5;
+	margin: 30px 0;
+}
+@media screen and (min-width: 768px){
+	.about__text {
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 1.57;
+		margin: 20px 0;
+	}
+}
+
+.sp-text-center {
+	text-align: center;
+}
+
+@media screen and (min-width: 768px){
+	.sp-text-center {
+		text-align: left;
+	}
+}
+
+.about__text--url,
+.about__text--url a {
+	color: #1c81d8;
+}
+
+.about-fanreturn__list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+
+.about-fanreturn__item {
+	/* background: #00aebd; */
+	border: solid 2px #00aebd;
+	border-radius: 4px;
+	/* color: #fff; */
+	font-size: 13px;
+	width: calc(50% - 10px);
+	text-align: center;
+	padding: 20px;
+}
+
+@media screen and (min-width: 768px){
+	.about-fanreturn__item {
+		width: calc(25% - 10px);
+	}
+}
+
+.about-fanreturn__item:nth-child(2),
+.about-fanreturn__item:nth-child(3),
+.about-fanreturn__item:nth-child(6),
+.about-fanreturn__item:nth-child(7) {
+	background: #fff;
+	color: #00aebd;
+}
+
+.about-fanreturn__item:nth-child(1),
+.about-fanreturn__item:nth-child(4),
+.about-fanreturn__item:nth-child(5),
+.about-fanreturn__item:nth-child(8) {
+	background: #00aebd;
+	color: #fff;
+}
+
+@media screen and (min-width: 768px){
+	.about-fanreturn__item:nth-child(2),
+	.about-fanreturn__item:nth-child(4),
+	.about-fanreturn__item:nth-child(5),
+	.about-fanreturn__item:nth-child(7) {
+		background: #fff;
+		color: #00aebd;
+	}
+
+	.about-fanreturn__item:nth-child(1),
+	.about-fanreturn__item:nth-child(3),
+	.about-fanreturn__item:nth-child(6),
+	.about-fanreturn__item:nth-child(8) {
+		background: #00aebd;
+		color: #fff;
+	}
+}
+
+
+.about-fanreturn__item:nth-child(n+5) {
+	margin-top: 10px;
+}
+
+@media screen and (max-width: 768px){
+	.about-fanreturn__item:nth-child(n+3) {
+		margin-top: 10px;
+	}
+}
+
+.about-fanreturn__item__text {	
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 1.46;
+}
+
+.about-fanreturn__img {
+	height: 88px;
+	margin: 20px 0 0;
+}
+
+.about__sub-title {
+	color: #00aebd;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 1.5;
+	text-align: center;
+	margin: 30px 0 20px;
+}
+
+@media screen and (min-width: 768px){
+	.about__sub-title {
+		line-height: 1.2;
+		text-align-last: left;
+		margin: 30px 0 50px;
+	}
+}
+
+/* FanReturnを使えば... */
+.about-with-fanreturn__title {
+	margin: 20px 0 10px;
+}
+
+@media screen and (min-width: 768px){
+	.about-with-fanreturn__title {
+		margin: 50px 0 10px;
+	}
+}
+
+.about-with-fanreturn__list {
+	display: block;
+}
+
+@media screen and (min-width: 768px){
+	.about-with-fanreturn__list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+}
+
+.about-with-fanreturn__item {
+	display: block;
+	background: #00aebd;
+	border: solid 2px #00aebd;
+	border-radius: 4px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	padding: 14px 0;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+@media screen and (min-width: 768px){
+	.about-with-fanreturn__item {
+		width: calc(50% - 10px);
+	}
+}
+
+@media screen and (min-width: 768px){
+	.about-with-fanreturn__item:nth-child(2n) {
+		margin-left: 10px;
+	}
+}
+
+/* ====================================================================
+  ABOUT - PROJECT
+  ==================================================================== */
+.about-project {
+	margin-top: 50px;
+}
+
+@media screen and (min-width: 768px){
+	.about-project {
+		margin-top: 100px;
+	}
+}
+
+.about-project__title {
+	color: #00aebd;
+	font-size: 22px;
+	letter-spacing: 1.76px;
+	text-align: center;
+}
+
+@media screen and (min-width: 768px){
+	.about-project__title {
+		font-size: 48px;
+		letter-spacing: 1.76px;
+	}
+}
+
+@media screen and (min-width: 768px){
+	.about-project__title {
+		color: #00aebd;
+		font-size: 48px;
+		letter-spacing: 3.2px;
+	}
+}
+
+.about-project__sub-title {
+	color: #00aebd;
+	font-size: 14px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+@media screen and (min-width: 768px){
+	.about-project__sub-title {
+		font-size: 18px;
+		margin-bottom: 50px;
+	}
+}
+
+.about-project__txt {
+	border: solid 1px #00aebd;
+	border-radius: 5px;
+	color: #00aebd;
+	font-weight: bold;
+	font-size: 14px;
+	padding: 14px 10px 14px 46px;
+	position: relative;
+}
+
+.about-project__txt span {
+	position: absolute;
+	left: 10px;
+}
+
+@media screen and (min-width: 768px){
+	.about-project__txt {
+		font-size: 18px;
+		padding: 17px 17px 17px 95px;
+		position: relative;
+	}
+	.about-project__txt span {
+		position: absolute;
+		left: 30px;
+	}
+}
+
+.about-project__down-arrow {
+	display: block;
+	color: #00aebd;
+	font-size: 54px;
+	text-align: center;
+}
+
+.about-project__down-arrow i {
+	display: block;
+}
+
 
 /**slick画像設定**********/
 
