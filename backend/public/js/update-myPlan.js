@@ -163,7 +163,7 @@ const updateMyPlan = (() => {
             var spinner = document.getElementById('spinner_return_' + (planId));
             spinner.style.display = 'block';
 
-            axios.get(`/my_project/project/${projectId}/delete_plan/${planId}`)
+            axios.delete(`/my_project/project/${projectId}/delete_plan/${planId}`)
                 .then(res => {
                     spinner.style.display = 'none';
                     if(res.data.result){
