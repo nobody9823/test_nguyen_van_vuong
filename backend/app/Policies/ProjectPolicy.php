@@ -27,6 +27,15 @@ class ProjectPolicy
         return $user->id === $project->user_id;
     }
 
+    public function checkOwnProjectWithPublishedStatus(User $user, Project $project)
+    {
+        if(($project->release_status === "---" || $project->release_status === "差し戻し") &&  ($user->id === $project->user_id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function checkIsFinishedPayment(User $user, Project $project)
     {
         $check_purchased = $project->payments->where('user_id',$user->id);        
