@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::prefix('project/{project}')->group(function () {
             Route::get('createReturn', [MyPlanController::class, 'createReturn']);
             Route::post('updatePlan/{plan}', [MyPlanController::class, 'updateReturn']);
-            Route::get('delete_plan/{plan}', [MyPlanController::class, 'deletePlan']);
+            Route::delete('delete_plan/{plan}', [MyPlanController::class, 'deletePlan']);
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
             Route::resource('comment', CommentController::class)->only(['index','destroy']);
             Route::post('reply/{comment}', [ReplyController::class, 'store'])->name('reply.store');
