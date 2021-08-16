@@ -1,5 +1,4 @@
 function previewUploadedImage(input, columnName) {
-    console.log(columnName);
     const file = input.files[0];
     if (
         file.type != "image/jpeg" &&
@@ -8,7 +7,7 @@ function previewUploadedImage(input, columnName) {
         file.type != "application/pdf"
     ) {
         alert(".jpg、.gif、.png、.pdfのいずれかのファイルのみ許可されています");
-        return;
+        return false;
     }
     const preview = document.getElementById(columnName);
     const reader = new FileReader();
