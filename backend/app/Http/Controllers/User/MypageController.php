@@ -137,8 +137,8 @@ class MypageController extends Controller
         return view('user.footer.trade_law');
     }
 
-    // public function question()
-    // {
-    //     return view('user.footer.question');
-    // }
+    public function question()
+    {
+        return view('user.footer.question');
+    }
 }
