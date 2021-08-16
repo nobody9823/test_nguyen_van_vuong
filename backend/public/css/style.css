@@ -2377,9 +2377,7 @@ div.spinner-wrapper {
 .ps_ranking_example_wrapper .ps_rank_02_rank_item_row {font-size: 9px; font-weight: normal; display: flex}
 .ps_ranking_example_wrapper .ps_ranking_example_01 {width: 12px;}
 .ps_ranking_example_right_border { width: 1px; margin: 10px 20px; background-color: #00aebd; }
-/* .ps_ranking_example_wrapper .ps_ranking_example_02 */
-/* .ps_ranking_example_wrapper .ps_ranking_example_03 */
-/* .ps_ranking_example_wrapper .ps_ranking_example_04 */
+
 @media screen and (max-width: 1000px){
     .ps_description_items_wrapper {flex-direction: column}
     .ps_description_item {width: 80%; padding: 20px; display: flex; align-items: center; flex-direction: column;}
