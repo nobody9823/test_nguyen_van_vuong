@@ -97,6 +97,7 @@ const updateMyProject = (() => {
             }
         }).catch(res => {
             console.log(res);
+            document.getElementById('spinner_' + data.name).style.display = 'none';
         });
     }
 
