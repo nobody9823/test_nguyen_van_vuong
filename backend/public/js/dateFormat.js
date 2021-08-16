@@ -7,6 +7,11 @@ flatpickr("#start_date", config);
 
 flatpickr("#end_date", config);
 
+flatpickr("#birthday", {
+    dateFormat: "Y-m-d",
+    "locale": "ja",
+});
+
 flatpickr(".delivery_date", {
     dateFormat: "Y-m-d",
     "locale": "ja",

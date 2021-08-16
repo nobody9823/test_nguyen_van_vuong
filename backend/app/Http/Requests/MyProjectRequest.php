@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Rules\MyProjectEndDate;
 
 class MyProjectRequest extends FormRequest
 {
@@ -41,7 +42,7 @@ class MyProjectRequest extends FormRequest
             'video_url' => ['nullable', 'url', 'regex:#(https?\:\/\/)(www\.youtube\.com\/watch\?v=|youtu\.be\/)+[\S]{11}#'],
             'target_amount' => ['nullable', 'integer', 'min:10000','max:99999999'],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', /*'after_or_equal:+14 day'*/],
-            'end_date' => ['nullable', 'date_format:Y-m-d H:i', 'after:start_date'],
+            'end_date' => ['nullable', 'date_format:Y-m-d H:i', new MyProjectEndDate($this->route('project'))],
             'reward_by_total_amount' => ['nullable', 'string', 'max:100000'],
             'reward_by_total_quantity' => ['nullable', 'string', 'max:100000'],
             'first_name_kana' => ['nullable', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
@@ -54,11 +55,10 @@ class MyProjectRequest extends FormRequest
             'city' => ['nullable', 'string', 'max:100'],
             'block' => ['nullable', 'string', 'max:100'],
             'building' => ['nullable', 'string'],
-            'birthday'  => ['required_with:birth_year,birth_month,birth_day', 'string', 'date_format:Y-m-d'],
-            'birth_year'  => ['required_with:birth_month,birth_day', 'string'],
-            'birth_month' => ['required_with:birth_year,birth_day', 'string'],
-            'birth_day'   => ['required_with:birth_year,birth_month', 'string'],
+            'birthday'  => ['nullable', 'string', 'date_format:Y-m-d'],
             'bank_code' => ['nullable', 'string', 'size:4'],
+            'identify_image_1' => ['nullable', 'image'],
+            'identify_image_2' => ['nullable', 'image'],
             'branch_code' => ['nullable', 'string', 'size:3'],
             'account_type' => ['nullable', new EnumValue(BankAccountType::class)],
             'account_number' => ['nullable', 'string', 'min:4', 'max:7'],
@@ -161,16 +161,7 @@ class MyProjectRequest extends FormRequest
                     'last_name' => ''
                 ]);
             }
-            if (!$this->filled('identify_image_1')) {
-                $this->merge([
-                    'identify_image_1' => Auth::user()->identification->identify_image_1 !== null ? Auth::user()->identification->identify_image_1 : 'public/sampleImage/now_printing.png'
-                ]);
-            }
-            if (!$this->filled('identify_image_2')) {
-                $this->merge([
-                    'identify_image_2' => Auth::user()->identification->identify_image_2 !== null ? Auth::user()->identification->identify_image_2 : 'public/sampleImage/now_printing.png'
-                ]);
-            }
+
             if (!$this->filled('phone_number')) {
                 $this->merge([
                     'phone_number' => ''

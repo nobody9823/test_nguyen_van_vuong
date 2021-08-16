@@ -3,6 +3,7 @@
         <div class="spinner-wrapper">
             <div class="spinner" id="spinner_return_title{{ $plan === null ? '' : '_'.$plan->id }}"></div>
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_title{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+            <span id="errors_return_title{{ $plan === null ? '' : '_'.$plan->id }}" style="color: red;"></span>
         </div>
         タイトル
         <span class="hissu_txt">必須</span>
@@ -15,10 +16,11 @@
         <div class="spinner-wrapper">
             <div class="spinner" id="spinner_return_content{{ $plan === null ? '' : '_'.$plan->id }}"></div>
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_content{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+            <span id="errors_return_content{{ $plan === null ? '' : '_'.$plan->id }}" style="color: red;"></span>
         </div>
         本文
         <span class="hissu_txt">必須</span>
-        <span class="disclaimer">※300文字以内で入力してください</span>
+        <span class="disclaimer">※2000文字以内で入力してください</span>
     </div>
     <textarea name="content" class="def_textarea" rows="6" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">{{ old('content', optional($plan)->content) }}</textarea>
 </div>
@@ -28,6 +30,7 @@
         <div class="spinner-wrapper">
             <div class="spinner" id="spinner_return_limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}"></div>
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+            <span id="errors_return_limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}" style="color: red;"></span>
         </div>
         限定数
     </div>
@@ -43,6 +46,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+        <span id="errors_return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}" style="color: red;"></span>
     </div>
     <input type="number" id="limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}" name="limit_of_supporters" class="p-postal-code def_input_100p"
         style="display:
@@ -59,8 +63,8 @@
         <div class="spinner-wrapper">
             <div class="spinner" id="spinner_return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}"></div>
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+            <span id="errors_return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}" style="color: red;"></span>
         </div>
-        <span id="errors_delivery_date" style="color: red;"></span>
         <input type="text" name="delivery_date" class="p-postal-code def_input_100p delivery_date"
             value="{{ old('delivery_date', optional($plan)->delivery_date) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
     </div>
@@ -70,6 +74,7 @@
         <div class="spinner-wrapper">
             <div class="spinner" id="spinner_return_price{{ $plan === null ? '' : '_'.$plan->id }}"></div>
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_price{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+            <span id="errors_return_price{{ $plan === null ? '' : '_'.$plan->id }}" style="color: red;"></span>
         </div>
         金額
         <span class="hissu_txt">必須</span>
@@ -114,6 +119,7 @@
         <div class="spinner-wrapper">
             <div class="spinner" id="spinner_return_address_is_required{{ $plan === null ? '' : '_'.$plan->id }}"></div>
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return_address_is_required{{ $plan === null ? '' : '_'.$plan->id }}"></i>
+            <span id="errors_return_address_is_required{{ $plan === null ? '' : '_'.$plan->id }}" style="color: red;"></span>
         </div>
         住所情報の取得
         <small>(※リターンを配送する場合等に利用)</small>
