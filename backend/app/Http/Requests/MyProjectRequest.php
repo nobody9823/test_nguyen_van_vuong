@@ -54,7 +54,7 @@ class MyProjectRequest extends FormRequest
             'city' => ['nullable', 'string', 'max:100'],
             'block' => ['nullable', 'string', 'max:100'],
             'building' => ['nullable', 'string'],
-            'birthday'  => ['required_with:birth_year,birth_month,birth_day', 'string', 'date_format:Y-m-d'],
+            'birthday'  => ['nullable', 'string', 'date_format:Y-m-d'],
             'bank_code' => ['nullable', 'string', 'size:4'],
             'identify_image_1' => ['nullable', 'image'],
             'identify_image_2' => ['nullable', 'image'],
@@ -160,16 +160,7 @@ class MyProjectRequest extends FormRequest
                     'last_name' => ''
                 ]);
             }
-            if (!$this->filled('identify_image_1')) {
-                $this->merge([
-                    'identify_image_1' => Auth::user()->identification->identify_image_1 !== null ? Auth::user()->identification->identify_image_1 : 'public/sampleImage/now_printing.png'
-                ]);
-            }
-            if (!$this->filled('identify_image_2')) {
-                $this->merge([
-                    'identify_image_2' => Auth::user()->identification->identify_image_2 !== null ? Auth::user()->identification->identify_image_2 : 'public/sampleImage/now_printing.png'
-                ]);
-            }
+
             if (!$this->filled('phone_number')) {
                 $this->merge([
                     'phone_number' => ''
