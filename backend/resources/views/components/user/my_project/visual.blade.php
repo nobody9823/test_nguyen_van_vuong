@@ -39,6 +39,7 @@
             <div class="spinner-wrapper">
                 <div class="spinner" id="spinner_video_url"></div>
                 <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_video_url"></i>
+                <span id="errors_video_url" style="color: red;"></span>
             </div>
             スライドYouTube動画URL設定
         </div>

@@ -21,6 +21,7 @@
                     </div>
                     @endforeach
                 </div>
+                <x-common.pagination :props="$projects"/>
             </div><!-- /.prof_page_R -->
 
         {{-- <div class="more_btn_01">

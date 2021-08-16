@@ -4,6 +4,11 @@
         <div class="img_box_02">
             @foreach($project->plans as $plan)
             <div class="img_box_02_item">
+                <div class="spinner-wrapper">
+                    <div class="spinner" id="spinner_return{{ '_'.$plan->id }}"></div>
+                    <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return{{ '_'.$plan->id }}"></i>
+                    <span id="errors_return{{ '_'.$plan->id }}" style="color: red;"></span>
+                </div>
                 <div class="ib02_01 E-font my_project_img_wrapper">
                     <img src="{{ Storage::url($plan->image_url) }}">
                     <a class="cover_link" onclick="DisplayEditPlan({{ $plan->id }});" id="{{ $plan->id }}"></a>
@@ -17,6 +22,10 @@
                 <div class="pds_sec02_01_btn">
                     編集
                     <a class="cover_link" onclick="DisplayEditPlan({{ $plan->id }});" id="{{ $plan->id }}"></a>
+                </div>
+                <div class="pds_sec02_01_btn">
+                    削除
+                    <a class="cover_link" onclick="updateMyPlan.deletePlan(this, {{ $project->id }}, {{ $plan->id }});" id="{{ $plan->id }}"></a>
                 </div>
             </div>
             @endforeach

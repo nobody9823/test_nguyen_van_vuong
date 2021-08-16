@@ -8,6 +8,7 @@ use App\Http\Requests\MyPlanRequest;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Plan;
+use Illuminate\Support\Facades\Auth;
 
 class MyPlanController extends Controller
 {
@@ -98,5 +99,14 @@ class MyPlanController extends Controller
     public function updateReturn(Project $project, Plan $plan, MyPlanRequest $request)
     {
         return response()->json(['result' => $plan->fill($request->all())->save()]);
+    }
+
+    public function deletePlan(Project $project, Plan $plan)
+    {
+        $this->authorize('checkOwnPlan', $plan);
+        if(Auth::user()->projects()->find($project->id)->plans()->find($plan) !== null){
+            return response()->json([ 'result' => $plan->delete()]);
+        };
+        return response()->json(['result' => false]);
     }
 }
