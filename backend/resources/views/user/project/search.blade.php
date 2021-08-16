@@ -16,21 +16,7 @@
             </div>
         </section>
 
-        @if ($projects->first() !== null)
-        <div class="pager E-font">
-            <ul class="pagination">
-                @if ($projects->previousPageUrl() !== null)
-                    <li class="pager_pre"><a href="{{ $projects->appends(request()->input())->previousPageUrl() }}"><span>«</span></a></li>
-                @endif
-                @foreach ($projects->appends(request()->input())->links()->elements[0] as $key => $link)
-                    <li><a href="{{ $link }}" class="{{ $projects->currentPage() == $key ? 'pager_active' : ''}}"><span>{{ $key }}</span></a></li>
-                @endforeach
-                @if ($projects->nextPageUrl() !== null)
-                    <li class="pager_next"><a href="{{ $projects->appends(request()->input())->nextPageUrl() }}"><span>»</span></a></li>
-                @endif
-            </ul>
-        </div>
-        @endif
+        <x-common.pagination :props="$projects"/>
     </div>
 </main>
 @endsection
@@ -158,40 +144,10 @@
 <script src="{{ asset('/js/clear-search-entry.js') }}"></script>
 
 <script>
-    const selectedRadioButtonHandler = () => {
-        let tagId = document.querySelector("input[name='tag_id']:checked")?.value;
-        let sortType = document.querySelector("input[name='sort_type']:checked")?.value;
-        window.location.replace(`?tag_id=${tagId}&sort_type=${sortType}`);
-    };
-    // プロジェクトのお気に入り登録・解除処理
-    $('.project-like').on('click', function() {
-        var el = $(this);
-        var projectId = el.attr('id');
-
-        el.append('<meta name="csrf-token" content="{{ csrf_token() }}">');
-
-        $.ajax({
-            url: '/project/'+ projectId + '/liked',
-            type: 'POST',
-            data: {'project_id': projectId },
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        })
-        .then((res) => {
-            console.log(res);
-            if(res == "登録"){
-                el.children('i').attr('class', 'fas fa-heart project-like-icon');
-            } else if(res == "削除"){
-                el.children('i').attr('class', 'far fa-heart project-like-icon');
-            } else if (res == "未ログイン") {
-                alert("ログインしてください");
-            } else {
-                alert("エラーが起こりました。");
-            }
-        })
-        .fail((error)=>{
-            console.log("エラーが起こりました。")
-        })
-    });
+    // csrfトークンを下記のproject-liked.jsファイルに送信
+    window.Laravel = {};
+    window.Laravel.csrfToken = @json( csrf_token() );
 </script>
+<script src="{{ asset('/js/project-liked.js') }}"></script>
 
 @endsection

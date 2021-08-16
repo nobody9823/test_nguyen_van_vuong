@@ -144,6 +144,19 @@ const updateMyPlan = (() => {
             formData.append('image_url', el.files[0]);
 
             setTimer(formData, projectId, planId);
+        },
+
+        limitOfSupportersIsChecked: (el, projectId, planId) => {
+            data = {};
+            data['limit_of_supporters_is_required'] = {};
+            if (el.type === 'checkbox' && el.checked){
+                data['limit_of_supporters_is_required'] = 1;
+                document.getElementById(`limit_of_supporters${planId === undefined ? '' : '_' + planId}`).style.display = 'block';
+            } else {
+                data['limit_of_supporters_is_required'] = 0;
+                document.getElementById(`limit_of_supporters${planId === undefined ? '' : '_' + planId}`).style.display = 'none';
+            }
+            setTimer(data, projectId, planId);
         }
     }
 })();

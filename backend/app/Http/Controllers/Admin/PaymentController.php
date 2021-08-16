@@ -24,7 +24,7 @@ class PaymentController extends Controller
                         'user' => function ($query) {
                             $query->with(['profile', 'address']);
                         },
-                        'inviter', 'comment'
+                        'inviter'
                     ])
                     ->sortBySelected($request->sort_type);
 

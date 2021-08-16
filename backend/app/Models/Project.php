@@ -241,7 +241,7 @@ class Project extends Model
                 ->orWhereIn('user_id', User::select('id')->where('name', 'like', "%$word%"));
         } else if ($role === 'admin') {
             return $query->where('title', 'like', "%$word%")
-                ->orWhere('curator', 'like', "%$word%")
+                ->orWhereIn('curator_id', Curator::select('id')->where('name', 'like', "%$word%"))
                 ->orWhere('id', 'like', "%$word%")
                 ->orWhereIn('user_id', User::select('id')->where('name', 'like', "%$word%"));
         }

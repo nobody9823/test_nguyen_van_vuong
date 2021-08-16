@@ -23,6 +23,7 @@ class PlanFactory extends Factory
      */
     public function definition()
     {
+        $limit_of_supporters_is_required = $this->faker->boolean(50);
         return [
             'project_id' => random_int(1, 100),
             'title' => Arr::random([
@@ -31,11 +32,12 @@ class PlanFactory extends Factory
                 'インフルエンサーの「やりたい」が叶う”それがファンリターン',
             ]),
             'content' => 'インフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターン',
-            'limit_of_supporters' => $this->faker->numberBetween(50, 100),
+            'limit_of_supporters' => $limit_of_supporters_is_required ? $this->faker->numberBetween(50, 100) : 1,
             'delivery_date' => $this->faker->dateTimeBetween('+30days', '+90days'),
             'price' => random_int(1, 30) * 1000,
             'image_url' => 'public/sampleImage/now_printing.png',
             'address_is_required' => $this->faker->boolean(50),
+            'limit_of_supporters_is_required' => $limit_of_supporters_is_required,
         ];
     }
 }
