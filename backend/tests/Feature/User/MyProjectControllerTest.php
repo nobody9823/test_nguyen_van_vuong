@@ -133,7 +133,7 @@ class MyProjectControllerTest extends TestCase
         $response->assertOk();
     }
 
-    Public function dataProvider_for_testUpdateActionForEachTab(): array
+    Public function dataProviderForTestUpdateActionForEachTab(): array
     {
         return [
             '「目標金額」更新処理' => ['target_tab', 'overview', 'target_amount_params'],
@@ -146,7 +146,7 @@ class MyProjectControllerTest extends TestCase
     }
 
     /**
-    * @dataProvider dataProvider_for_testUpdateActionForEachTab
+    * @dataProvider dataProviderForTestUpdateActionForEachTab
     */
     public function testUpdateActionForEachTab(string $current_tab, string $next_tab, string $tab_params)
     {
