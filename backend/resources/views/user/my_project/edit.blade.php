@@ -100,14 +100,17 @@
 <script src="{{ asset('js/get-decoded-uri.js') }}"></script>
 <script src={{ asset('/js/update-myPlan.js') }}></script>
 <script src={{ asset('/js/uploaded-image-handler.js') }}></script>
+<script src={{ asset('/js/plan-form-modal.js') }}></script>
+<script src={{ asset('/js/fade-element.js') }}></script>
+
 <script>
     window.addEventListener('load',()=>{
         removeProjectImage('.js-image_delete');
     });
     if (getParam('status') == 422) {
         getParam('plan') != null
-            ? DisplayEditPlan(getParam('plan'))
-            : DisplayPlanForm();
+            ? openPlanFormModal(getParam('plan'))
+            : openNewPlanFormModal();
     }
 </script>
 {{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}

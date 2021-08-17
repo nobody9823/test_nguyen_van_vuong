@@ -2237,7 +2237,7 @@ width: 100%;
 .my_project_img_wrapper {overflow: hidden; position: relative; display: flex; justify-content: center; align-items: center;}
 .my_project_img_wrapper_show {overflow: visible;}
 .my_new_project_wrapper {margin: 15px 0 15px 0;}
-.my_new_project {width: 100%;}
+.my_new_project {width: 100%; cursor: pointer;}
 .publish_date_wrapper {display: flex; flex-direction: row;}
 .publish_date_after_month {display: flex;flex-wrap: wrap;}
 .project_image_row {justify-content: space-around;}
@@ -2413,3 +2413,40 @@ div.spinner-wrapper {
     .posts_example_btn p {padding: 8px 9px;}
 }
 /* PSサポーターとは */
+
+/* リターン作成のフォームのモーダル表示 */
+.plan_form_modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 2;
+}
+
+.plan_form_modal_bg{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.plan_form_modal_content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: scroll; /* はみ出た部分はスクロールさせる */
+    height: 60%;/* これが無いと「overflow:scroll」が利かない */
+    width: 60%;/* これが無いと「overflow:scroll」が利かない */
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px){
+    .plan_form_modal_content{
+        width: 90%;
+    }
+}
+/* リターン作成のフォームのモーダル表示 */

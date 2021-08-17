@@ -103,22 +103,6 @@ const updateMyPlan = (() => {
     }
 
     return {
-        DisplayPlanForm: projectId => {
-            axios.get(`/my_project/project/${projectId}/createReturn`).then(res => {
-                if (res.status === 200){
-                    document.getElementById('plan_id').value = res.data.id;
-                    let el = document.getElementById('plan_form_section');
-                    if(el.style.display === 'none'){
-                        el.style.display = 'block';
-                    } else {
-                        el.style.display = 'none';
-                    };
-                }
-            }).catch(res => {
-                console.log(res);
-            });
-        },
-
         textInput: (el, projectId, planId) => {
             data = {};
             data[el.name] = el.value;
