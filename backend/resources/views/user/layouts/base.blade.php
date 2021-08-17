@@ -311,25 +311,21 @@ if(isiOS) {
     <footer>
         <div class="footer_main">
             <div class="footer_main_inner">
-                {{-- <div class="footer_main_01">
-                    <div class="footer_tit">プロジェクトをさがす</div>
-                    <div class="footer_item"><a href="★">カテゴリ</a></div>
-                    <div class="footer_item"><a href="★">テキストテキスト</a></div>
-                    <div class="footer_item"><a href="★">テキストテキストテキストテキスト</a></div>
-                    <div class="footer_item"><a href="★">テキストテキスト</a></div>
-                    <div class="footer_item"><a href="★">テキストテキストテキストテキストテキストテキスト</a></div>
-                    <div class="footer_item"><a href="★">テキストテキスト</a></div>
-                    <div class="footer_item"><a href="★">テキストテキストテキストテキスト</a></div>
-                </div> --}}
+                <div class="footer_main_01">
+                    <h4 class="footer_tit">プロジェクトをさがす</h4>
+                    @foreach($tags as $tag)
+                        <p class="footer_item"><a href="{{ route('user.search', ['tag_id' => $tag->id]) }}">{{$tag->name}}</a></p>
+                    @endforeach
+                </div>
 
                 <div class="footer_main_02">
-                    <div class="footer_tit">プロジェクトをはじめる</div>
+                    <h4 class="footer_tit">プロジェクトをはじめる</h4>
                     {{-- <div class="footer_item"><a href="★">プロジェクト掲載</a></div> --}}
                     <div class="footer_item"><a href="{{ route('user.my_project.project.index') }}">プロジェクトを作る</a></div>
                 </div>
 
                 <div class="footer_main_03">
-                    <div class="footer_tit">fanreturnについて</div>
+                    <h4 class="footer_tit">fanreturnについて</h4>
                     {{-- <div class="footer_item"><a href="★">fanreturnとは</a></div>
                     <div class="footer_item"><a href="★">クラウドファンティングとは</a></div>
                     <div class="footer_item"><a href="★">ヘルプ</a></div>
