@@ -55,7 +55,7 @@
 <section id="plan_form_section" style="display: none;">
     <form method="post" action="{{ route('user.plan.store', ['project' => $project, 'current_tab' => 'return']) }}" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" id="plan_id" name="plan_id">
+        <input type="hidden" id="plan_id" name="plan_id" value={{ $plan->id ?? '' }}>
         <x-user.my_plan.plan-form :plan=null :project=$project />
     </form>
 </section>
