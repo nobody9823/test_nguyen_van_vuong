@@ -1627,6 +1627,7 @@ input[name="tab_item"] {
 
 
 .nm_doui{text-align: center; margin: 0 auto 50px auto;  font-size: 1.4rem;}
+.nm_doui input[type=checkbox] {display: inline-block; position: absolute; opacity: 0; z-index: -1; width: 20px; height: 20px;}
 .nm_s_txt{ font-size: 1.2rem; color: #555353; width: 100%; max-width: 600px; margin: 0 auto 30px auto;}
 .nm_other{ width: 100%; max-width: 320px; text-align: center; position: relative; margin: 30px auto; font-size: 1.2rem; color: #555353;}
 .nm_other span{ background: #fff; padding: 5px 15px;}
