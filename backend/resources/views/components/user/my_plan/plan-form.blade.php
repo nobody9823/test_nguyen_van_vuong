@@ -79,7 +79,7 @@
         金額
         <span class="hissu_txt">必須</span>
     </div>
-    <input type="number" name="price" class="p-postal-code def_input_100p" value="{{ old('price', optional($plan)->price) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})">
+    <input type="number" name="price" class="p-postal-code def_input_100p" value="{{ old('price', optional($plan)->price) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? $plan : $plan->id }})" min="0">
 </div>
 
 <div class="form_item_row" style="display: flex; flex-direction: column">
