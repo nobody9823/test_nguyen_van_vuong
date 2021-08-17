@@ -51,7 +51,3 @@
     </div><!--/.inner_item-->
 </section><!--/.section_base-->
 @endsection
-
-@section('script')
-
-@endsection
