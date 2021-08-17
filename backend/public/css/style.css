@@ -957,6 +957,8 @@ input[type=radio]:checked + .radio-fan::after {
 .prof_edit_editbox input[type=file]{ margin: 0 0 10px 0;}
 .prof_edit_editbox textarea { width: 100%; min-height: 300px; border: solid 1px #DBDBDB; border-radius: 4px; }
 .prof_edit_editbox_desc{ font-size: 1.2rem; color: #EC111A;}
+.prof_edit_sns_links {display: flex; flex-direction: column;}
+.prof_edit_sns_links div {display: flex;}
 
 .pee_tit{ width: 100%; color: #848484; margin: 15px 0 10px 0;}
 .pee_tit_first{ margin: 5px 0 10px 0;}
@@ -969,7 +971,8 @@ input[type=radio]:checked + .radio-fan::after {
 @media screen and (max-width: 768px){
 	.prof_edit_01 br{ display: none;}
 	.prof_edit_01 span{ padding: 0 0 0 10px;}
-	.prof_edit_editbox { width: calc(100% - 4rem);}
+	.prof_edit_editbox {width: 100%;}
+    .prof_edit_editbox input[type=text] {width: 100%;}
 }
 
 
