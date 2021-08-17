@@ -119,7 +119,7 @@ if(isiOS) {
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-                <a href="#" class="top_menu-1 nav_btn_link" onClick="window.alert('Coming Soon!'); return false;">
+                <a href="{{ route('user.question') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">ファンリターンとは</p>
 				</a>
 			</li>
@@ -357,7 +357,7 @@ if(isiOS) {
                 <ul class="footer_list">
                     <li><a href="{{ route('user.my_project.project.index') }}">はじめる</a></li>
                     <li><a href="{{ route('user.search') }}">さがす</a></li>
-                    <li><a href="#" onClick="window.alert('Coming Soon!'); return false;">ファンリターンとは</a></li>
+                    <li><a href="{{ route('user.question') }}">ファンリターンとは</a></li>
 
                     @guest('web')
                     <li>
