@@ -14,7 +14,13 @@ if(isiOS) {
   }
 }
 </script>
-<title></title>
+
+<title>FanReturn (ファンリターン) 〜インフルエンサーの「やりたい」が叶う〜 | @yield('title')</title>
+<meta name="description" content="グッズを作りたい！ファンイベントを開きたい！そんなインフルエンサーに特化したクラウドファンディングサービスです。更にファンの満足度をUPさせる仕組みが多数！">
+<link rel="shortcut icon" href="{{ asset('image/fanreturn.ico') }}">
+<link rel="apple-touch-icon" href="{{ asset('image/fanreturn_apple_touch_icon.png') }}">
+<link rel="icon" type="image/png" href="{{ asset('image/fanreturn_android_chrome_192x192.png') }}">
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
