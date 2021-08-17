@@ -12,17 +12,17 @@
             @csrf
             <div class="form_item_row">
                 <div class="form_item_tit">ユーザー名<span class="form_item_tit_desc">※英数字、漢字、平仮名、カタカナも可</span></div>
-                <input name="name" type="text" value="" class="def_input_100p" placeholder="ユーザー名">
+                <input name="name" type="text" value="" class="def_input_100p" placeholder="ユーザー名" required>
             </div><!--/form_item_row-->
 
             <div class="form_item_row">
                 <div class="form_item_tit">パスワード<span class="form_item_tit_desc">※半角英数字8文字以上</span></div>
-                <input name="password" type="password" value="" class="def_input_100p" placeholder="パスワード">
+                <input name="password" type="password" value="" class="def_input_100p" placeholder="パスワード" required>
             </div><!--/form_item_row-->
 
             <div class="form_item_row">
                 <div class="form_item_tit">パスワード確認用</div>
-                <input name="password_confirmation" type="password" value="" class="def_input_100p" placeholder="パスワード確認用">
+                <input name="password_confirmation" type="password" value="" class="def_input_100p" placeholder="パスワード確認用" required>
             </div><!--/form_item_row-->
 
             <div class="nm_doui">
@@ -50,4 +50,8 @@
         </form>
     </div><!--/.inner_item-->
 </section><!--/.section_base-->
+@endsection
+
+@section('script')
+
 @endsection
