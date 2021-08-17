@@ -34,23 +34,24 @@
 
             <x-user.invitation-url :project="$project" :rankingButton='true'/>
 
-            <x-user.project.ps-description-left />            
+            {{-- <x-user.project.ps-description-left />             --}}
             <!--/ps_desc_L-->
-            
-            <x-user.project.ps-description-right />            
+
+            {{-- <x-user.project.ps-description-right />             --}}
             <!--/ps_desc_R-->
-    
+
         </div>
+        <x-user.project.ps-description />
 
         <!--/ps_desc_base-->
-    
+
         {{-- <div class="other_kiji_box m_b_3020">
             <div class="other_kiji_tit_L">最近表示した記事</div>
             <div class="other_kiji_tit"><a href="">支援したプロジェクトが成立した後の流れ</a></div>
             <div class="other_kiji_tit"><a href="">領収書を発行してほしい</a></div>
             <div class="other_kiji_tit"><a href="">支援後に退会（アカウント削除）した場合どうなりますか？</a></div>
         </div><!--/other_kiji_box-->
-    
+
         <div class="other_kiji_box m_b_3020">
             <div class="other_kiji_tit_L">関連記事</div>
             <div class="other_kiji_tit"><a href="">システム利用料について</a></div>
@@ -60,7 +61,7 @@
         </div><!--/other_kiji_box--> --}}
     </div>
     <!--/.inner_item-->
-    
+
     {{-- <x-user.invitation-url :project="$project" :rankingButton='true'/> --}}
 </section><!--/.section_base-->
 @endsection
