@@ -59,7 +59,7 @@ class ProjectFactory extends Factory
         });
     }
 
-    public function init(int $count = 1, bool $is_released)
+    public function init(int $count = 1)
     {
         for ($i = 0; $i < $count; $i ++){
             $this->values[] = [
@@ -79,7 +79,7 @@ class ProjectFactory extends Factory
                 'インフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターン',
                 'start_date' => Carbon::yesterday(),
                 'end_date' => Carbon::now()->addMonth(),
-                'release_status' => $is_released ? '掲載中' : Arr::random(
+                'release_status' => rand(0, 1) ? '掲載中' : Arr::random(
                     ProjectReleaseStatus::getValues()
                 ),
                 'target_amount' => $this->faker->numberBetween(10000, 99999999),
