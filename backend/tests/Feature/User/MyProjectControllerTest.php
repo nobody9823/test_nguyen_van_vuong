@@ -14,7 +14,6 @@ use App\Models\Address;
 use Carbon\Carbon;
 use App\Models\ProjectFile;
 use App\Models\Plan;
-use App\Models\Curator;
 use Tests\TestCase;
 
 class MyProjectControllerTest extends TestCase
@@ -28,13 +27,21 @@ class MyProjectControllerTest extends TestCase
         $this->users = User::factory()
             ->has(Identification::factory())
             ->has(Address::factory())
-            ->has(Profile::factory())->create();
-
-        Project::insert(Project::factory()->init(10, $this->users->first()->id, Curator::factory()->create()->id));
-        Project::get()->each(function (Project $project){
-            ProjectFile::insert(ProjectFile::factory()->init(1, $project->id));
-            Plan::insert(Plan::factory()->init(1, $project->id));
-        });
+            ->has(Profile::factory())
+            ->has(
+                Project::factory()->released()
+                    ->has(
+                        ProjectFile::factory()->state([
+                            'file_url' => 'public/sampleImage/now_printing.png',
+                            'file_content_type' => 'image_url',
+                        ])
+                    )
+                    ->has(
+                        Plan::factory()->state([
+                            'price' => 1000
+                        ])
+                    )
+            )->count(10)->create();
 
         $this->user = $this->users->first();
 
