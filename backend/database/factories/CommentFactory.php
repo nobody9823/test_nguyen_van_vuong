@@ -36,7 +36,7 @@ class CommentFactory extends Factory
         ];
     }
 
-    public function init(int $count = 1, int $user_id)
+    public function init(int $count, int $user_id)
     {
         for($i = 0; $i < $count; $i++){
             $this->values[] = [

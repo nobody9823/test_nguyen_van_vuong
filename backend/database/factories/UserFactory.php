@@ -46,7 +46,7 @@ class UserFactory extends Factory
         });
     }
 
-    public function init(int $count = 1)
+    public function init(int $count)
     {
         for ($i = 0; $i < $count; $i ++){
             $this->values[] = [
