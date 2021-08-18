@@ -49,35 +49,33 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        @if (session('attention_message'))
-        <p class="attention_message">
-            {{ session('attention_message') }}
-        </p>
-        @endif
-        <div class="def_outer_gray">
-            <div class=" def_inner inner_item">
-                <section style="{{ Request::get('next_tab') === 'target_amount' || Request::get('next_tab') === null ? '' : 'display: none;' }}" id="target_amount_section" class="my_project_section">
-                    <x-user.my_project.target_amount :project="$project" />
-                </section>
-                <section style="{{ Request::get('next_tab') === 'overview' ? '' : 'display: none;' }}" id="overview_section" class="my_project_section">
-                    <x-user.my_project.overview :project="$project" :tags="$tags" />
-                </section>
-                <section style="{{ Request::get('next_tab') === 'visual' ? '' : 'display: none;' }}" id="visual_section" class="my_project_section">
-                    <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
-                </section>
-                <section style="{{ Request::get('next_tab') === 'return' ? '' : 'display: none;' }}" id="return_section" class="my_project_section">
-                    <x-user.my_project.return :project="$project" />
-                </section>
-                <section style="{{ Request::get('next_tab') === 'ps_return' ? '' : 'display: none;' }}" id="ps_return_section" class="my_project_section">
-                    <x-user.my_project.ps_return :project="$project" />
-                </section>
-                <section style="{{ Request::get('next_tab') === 'identification' ? '' : 'display: none;' }}" id="identification_section" class="my_project_section">
-                    <x-user.my_project.identification :project="$project" :user="Auth::user()" />
-                </section>
-            </div>
-        </div>
 
+    @if (session('attention_message'))
+    <p class="attention_message">
+        {{ session('attention_message') }}
+    </p>
+    @endif
+    <div class="def_outer_gray">
+        <section style="{{ Request::get('next_tab') === 'target_amount' || Request::get('next_tab') === null ? '' : 'display: none;' }}" id="target_amount_section" class="my_project_section def_inner inner_item">
+            <x-user.my_project.target_amount :project="$project" />
+        </section>
+        <section style="{{ Request::get('next_tab') === 'overview' ? '' : 'display: none;' }}" id="overview_section" class="my_project_section def_inner inner_item">
+            <x-user.my_project.overview :project="$project" :tags="$tags" />
+        </section>
+        <section style="{{ Request::get('next_tab') === 'visual' ? '' : 'display: none;' }}" id="visual_section" class="my_project_section def_inner inner_item">
+            <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
+        </section>
+        <section style="{{ Request::get('next_tab') === 'return' ? '' : 'display: none;' }}" id="return_section" class="my_project_section">
+            <x-user.my_project.return :project="$project" />
+        </section>
+        <section style="{{ Request::get('next_tab') === 'ps_return' ? '' : 'display: none;' }}" id="ps_return_section" class="my_project_section def_inner inner_item">
+            <x-user.my_project.ps_return :project="$project" />
+        </section>
+        <section style="{{ Request::get('next_tab') === 'identification' ? '' : 'display: none;' }}" id="identification_section" class="my_project_section def_inner inner_item">
+            <x-user.my_project.identification :project="$project" :user="Auth::user()" />
+        </section>
     </div>
 
 </div>
@@ -100,14 +98,17 @@
 <script src="{{ asset('js/get-decoded-uri.js') }}"></script>
 <script src={{ asset('/js/update-myPlan.js') }}></script>
 <script src={{ asset('/js/uploaded-image-handler.js') }}></script>
+<script src={{ asset('/js/plan-form-modal.js') }}></script>
+<script src={{ asset('/js/fade-element.js') }}></script>
+
 <script>
     window.addEventListener('load',()=>{
         removeProjectImage('.js-image_delete');
     });
     if (getParam('status') == 422) {
         getParam('plan') != null
-            ? DisplayEditPlan(getParam('plan'))
-            : DisplayPlanForm();
+            ? openPlanFormModal(getParam('plan'))
+            : openNewPlanFormModal();
     }
 </script>
 {{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
