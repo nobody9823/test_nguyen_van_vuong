@@ -51,6 +51,7 @@
     <x-common.save_back_button saveButton="unnecessary" />
 </div>
 
+{{-- 「編集」ボタンを押したときに表示されるモーダル部 --}}
 @foreach($project->plans as $plan)
     <section class="plan_form_modal" id="plan_form_modal_{{ $plan->id }}">
         <div class="plan_form_modal_bg" onclick="closePlanFormModal({{ $plan->id }})"></div>
@@ -65,6 +66,7 @@
     </section>
 @endforeach
 
+{{-- 「新規リターン作成」ボタンを押したときに表示されるモーダル部 --}}
 <section class="plan_form_modal" id="new_plan_form_modal">
     <div class="plan_form_modal_bg" onclick="closeNewPlanFormModal()"></div>
     <div class="plan_form_modal_content">
