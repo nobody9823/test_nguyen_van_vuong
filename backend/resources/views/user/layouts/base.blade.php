@@ -520,6 +520,23 @@ jQuery(document).ready(function($) {
             $(h_mega_nav).removeClass("is-active");
         });
     });
+    $("#page-top_btn").hide();
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#page-top_btn').fadeIn();
+            } else {
+                $('#page-top_btn').fadeOut();
+            }
+        });
+
+        $('#page-top_btn a').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
 });
 
 
