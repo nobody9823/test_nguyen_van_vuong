@@ -69,7 +69,30 @@
 </div>
 --}}
 <div class="form-group">
-    <label>個数</label>
+    <div>限定数設定の有無</div>
+    <div class="form-check ">
+        <input class="form-check-input" type="radio" name="limit_of_supporters_is_required" id="limit_of_supporters_is_required1" value="1"
+            @if(!is_null(old('limit_of_supporters_is_required')))
+                {{ old('limit_of_supporters_is_required') ? 'checked' : '' }}
+            @else
+                {{ optional($plan)->limit_of_supporters_is_required ? 'checked' : '' }}
+            @endif
+        />
+        <label class="form-check-label" for="limit_of_supporters_is_required1">あり</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="limit_of_supporters_is_required" id="limit_of_supporters_is_required1" value="0"
+            @if(!is_null(old('limit_of_supporters_is_required')))
+                {{ old('limit_of_supporters_is_required') ? '' : 'checked' }}
+            @else
+                {{ optional($plan)->limit_of_supporters_is_required ? '' : 'checked' }}
+            @endif
+        />
+        <label class="form-check-label" for="limit_of_supporters_is_required2">なし</label>
+    </div>
+</div>
+<div class="form-group">
+    <label>限定数</label>
     <input type="number" name="limit_of_supporters" class="form-control" min="1" value="{{ old('limit_of_supporters', optional($plan)->limit_of_supporters) }}">
 </div>
 
