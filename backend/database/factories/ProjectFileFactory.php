@@ -43,7 +43,7 @@ class ProjectFileFactory extends Factory
         ];
     }
 
-    public function init(int $count = 1, int $project_id)
+    public function init(int $count, int $project_id)
     {
 
         $image_file = [
