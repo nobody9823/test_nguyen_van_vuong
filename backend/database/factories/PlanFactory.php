@@ -16,6 +16,8 @@ class PlanFactory extends Factory
      */
     protected $model = Plan::class;
 
+    protected $values = [];
+
     /**
      * Define the model's default state.
      *
@@ -39,5 +41,29 @@ class PlanFactory extends Factory
             'address_is_required' => $this->faker->boolean(50),
             'limit_of_supporters_is_required' => $limit_of_supporters_is_required,
         ];
+    }
+
+    public function init(int $count = 0, int $project_id)
+    {
+        $limit_of_supporters_is_required = $this->faker->boolean(50);
+
+        for($i = 0; $i < $count; $i ++){
+            $this->values[] = [
+                'project_id' => $project_id,
+                'title' => Arr::random([
+                    'インフルエンサーの「やりたい」が叶う”それがファンリターン',
+                    'インフルエンサーの「やりたい」が叶う”それがファンリターン',
+                    'インフルエンサーの「やりたい」が叶う”それがファンリターン',
+                ]),
+                'content' => 'インフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターンインフルエンサーの「やりたい」が叶う”それがファンリターン',
+                'limit_of_supporters' => $limit_of_supporters_is_required ? $this->faker->numberBetween(50, 100) : 1,
+                'delivery_date' => $this->faker->dateTimeBetween('+30days', '+90days'),
+                'price' => random_int(1, 30) * 1000,
+                'image_url' => 'public/sampleImage/now_printing.png',
+                'address_is_required' => $this->faker->boolean(50),
+                'limit_of_supporters_is_required' => $limit_of_supporters_is_required,
+            ];
+        }
+        return $this->values;
     }
 }
