@@ -15,6 +15,8 @@ class ProjectFileFactory extends Factory
      */
     protected $model = ProjectFile::class;
 
+    protected $values = [];
+
     /**
      * Define the model's default state.
      *
@@ -39,5 +41,33 @@ class ProjectFileFactory extends Factory
             'file_url' => $file_faker['file_url'],
             'file_content_type' => $file_faker['file_content_type'],
         ];
+    }
+
+    public function init(int $count, int $project_id)
+    {
+
+        $image_file = [
+            'file_url' => 'public/sampleImage/now_printing.png',
+            'file_content_type' => 'image_url',
+        ];
+
+        $video_file = [
+            'file_url' => 'https://www.youtube.com/watch?v=HB4QrJyWqEw',
+            'file_content_type' => 'video_url',
+        ];
+
+        $file_faker = Arr::random([
+            $image_file,
+            $video_file
+        ]);
+
+        for ($i = 0; $i < $count; $i ++){
+            $this->values[] = [
+                'project_id' => $project_id,
+                'file_url' => $file_faker['file_url'],
+                'file_content_type' => $file_faker['file_content_type'],
+            ];
+        }
+        return $this->values;
     }
 }
