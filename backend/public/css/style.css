@@ -40,9 +40,7 @@ input, select {
 	margin: 0 auto;
 	padding: 0 14px;
 }
-.content {
-	margin: 50px auto;
-}
+
 @media screen and (min-width: 768px){
 	.inner {
 		width: 100%;
@@ -50,7 +48,7 @@ input, select {
 		margin: 0 auto;
 		padding: 0 30px;
 	}
-	.content {
+	.about-content {
 		margin: 50px auto;
 		display: flex;
 		justify-content: space-between;
@@ -1848,32 +1846,16 @@ width: 100%;
 /* ====================================================================
   FanReturnとは
 ==================================================================== */
-
-/*非表示をコメントアウトしています*/
-/*
-.acd-check{
-    display: none;
+.question-content {
+	margin: 50px auto;
 }
-*/
-/* .ac-label {
-    display: block;
-    margin-bottom: 1px;
-    padding: 10px;
+@media screen and (min-width: 768px){
+	.question-content {
+		margin: 50px auto;
+		display: flex;
+		justify-content: space-between;
+	}
 }
-.ac-content{
-    height: 0;
-    opacity: 0;
-    transition: .5s;
-    visibility: hidden;
-}
-.ac-check:checked + .ac-label + .ac-content{
-    height: 50px;
-    opacity: 1;
-    padding: 5px 10px;
-    visibility: visible;
-} */
-
-/* ここまで */
 
 @media screen and (min-width: 768px){
 	.question-sidebar {
