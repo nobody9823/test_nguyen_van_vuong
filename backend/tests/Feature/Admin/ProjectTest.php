@@ -165,7 +165,7 @@ class ProjectTest extends TestCase
     public function test_preview()
     {
         $this->project->save();
-        Plan::insert(Plan::factory()->init(5, $this->project->id));
+        $this->project->plans()->saveMany(Plan::factory(5));
         $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.index'))->get(route('admin.project.preview', ['project' => $this->project]));
         $response->assertOk();
         $response->assertViewIs('admin.project.preview');
