@@ -4,7 +4,11 @@
     </div>
     <div class="pds_sec02_01">
         <div class="pds_sec02_01_en">{{ $plan->price }}円</div>
-        <div class="pds_sec02_01_nokori_nin">残り：{{ $plan->limit_of_supporters }}人まで</div>
+        @if($plan->limit_of_supporters_is_required === 1 && $plan->limit_of_supporters > 0)
+            <div class="pds_sec02_01_nokori_nin">残り：{{ $plan->limit_of_supporters }}人まで</div>
+        @elseif($plan->limit_of_supporters_is_required === 1 && $plan->limit_of_supporters < 1)
+            <div class="pds_sec02_01_nokori_nin" style="color: #e65d65">OUT OF STOCK</div>
+        @endif
     </div>
 
     <div class="pds_sec02_txt">
@@ -24,17 +28,12 @@
             このリターンを選択する
             <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'plan' => $plan, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
         </div>
-    @elseif ($plan->limit_of_supporters <= 0)
-        <div class="pds_sec02_01_btn">
-            OUT OF STOCK
-            <a class="cover_link"></a>
-        </div>
     @endif
 
 
     <div class="pds_sec02_01">
         <div class="pds_sec02_01_shien_nin">支援者：{{ $plan->included_payments_count }}人</div>
-        <div class="pds_sec02_01_day">お届け日：{{ $plan->delivery_date }}</div>
+        <div class="pds_sec02_01_day">お届け予定日：{{ $plan->formatted_delivery_date }}</div>
     </div>
 </div>
 {{-- <div class="plan">

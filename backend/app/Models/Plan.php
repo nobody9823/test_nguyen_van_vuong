@@ -23,6 +23,7 @@ class Plan extends Model
         'price',
         'address_is_required',
         'limit_of_supporters',
+        'limit_of_supporters_is_required',
         'delivery_date',
         'image_url'
     ];
@@ -54,6 +55,11 @@ class Plan extends Model
     public function includedPayments()
     {
         return $this->belongsToMany('App\Models\Payment', 'App\Models\PlanPaymentIncluded');
+    }
+
+    public function getFormattedDeliveryDateAttribute()
+    {
+        return $this->delivery_date->format('Y-m-d');
     }
 
     //--------------local scope----------------//
@@ -130,11 +136,13 @@ class Plan extends Model
 
     public function scopeUpdatePlansByIds($query, Collection $plans, array $plan_ids)
     {
-        foreach ($plans as $plan){
-            foreach($plan_ids as $key => $value){
-                if ($plan->id === $key){
-                    $plan->limit_of_supporters -= $value['quantity'];
-                    $plan->save();
+        foreach ($plans as $plan) {
+            if ($plan->limit_of_supporters_is_required === 1) {
+                foreach ($plan_ids as $key => $value) {
+                    if ($plan->id === $key) {
+                        $plan->limit_of_supporters -= $value['quantity'];
+                        $plan->save();
+                    }
                 }
             }
         }
@@ -155,8 +163,9 @@ class Plan extends Model
             'content' => '',
             'price' => 0,
             'address_is_required' => false,
-            'limit_of_supporters' => 0,
-            'delivery_date' => Carbon::maxValue(),
+            'limit_of_supporters' => 1,
+            'limit_of_supporters_is_required' => false,
+            'delivery_date' => Carbon::now(),
             'image_url' => 'public/sampleImage/now_printing.png'
         ]);
     }

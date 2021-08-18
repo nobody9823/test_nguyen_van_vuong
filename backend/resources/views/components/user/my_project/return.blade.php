@@ -4,21 +4,28 @@
         <div class="img_box_02">
             @foreach($project->plans as $plan)
             <div class="img_box_02_item">
+                <div class="spinner-wrapper">
+                    <div class="spinner" id="spinner_return{{ '_'.$plan->id }}"></div>
+                    <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return{{ '_'.$plan->id }}"></i>
+                    <span id="errors_return{{ '_'.$plan->id }}" style="color: red;"></span>
+                </div>
                 <div class="ib02_01 E-font my_project_img_wrapper">
                     <img src="{{ Storage::url($plan->image_url) }}">
-                    {{-- NOTICE: MyProjectController, show action --}}
-                    <a href="#show" class="cover_link"></a>
+                    <a class="cover_link" onclick="DisplayEditPlan({{ $plan->id }});" id="{{ $plan->id }}"></a>
                 </div>
 
                 <div class="ib02_03">
                     <h3>{{ Str::limit($plan->title, 46) }}</h3>
-                    {{-- NOTICE: MyProjectController, show action--}}
-                    <a href="#show" class="cover_link"></a>
+                    <a class="cover_link" onclick="DisplayEditPlan({{ $plan->id }});" id="{{ $plan->id }}"></a>
                 </div>
 
                 <div class="pds_sec02_01_btn">
                     編集
                     <a class="cover_link" onclick="DisplayEditPlan({{ $plan->id }});" id="{{ $plan->id }}"></a>
+                </div>
+                <div class="pds_sec02_01_btn">
+                    削除
+                    <a class="cover_link" onclick="updateMyPlan.deletePlan(this, {{ $project->id }}, {{ $plan->id }});" id="{{ $plan->id }}"></a>
                 </div>
             </div>
             @endforeach
@@ -48,7 +55,7 @@
 <section id="plan_form_section" style="display: none;">
     <form method="post" action="{{ route('user.plan.store', ['project' => $project, 'current_tab' => 'return']) }}" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" id="plan_id">
+        <input type="hidden" id="plan_id" name="plan_id" value={{ $plan->id ?? '' }}>
         <x-user.my_plan.plan-form :plan=null :project=$project />
     </form>
 </section>

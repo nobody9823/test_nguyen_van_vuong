@@ -82,6 +82,7 @@ class MyProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $this->authorize('checkOwnProject', $project);
         $project->getWithPaymentsCountAndSumPrice();
         return view('user.my_project.show', ['project' => $project]);
     }
@@ -94,7 +95,7 @@ class MyProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnProjectWithPublishedStatus', $project);
         $tags = Tag::pluck('name', 'id');
 
         return view('user.my_project.edit', ['project' => $project, 'tags' => $tags]);
@@ -109,7 +110,7 @@ class MyProjectController extends Controller
      */
     public function update(MyProjectRequest $request, Project $project)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnProjectWithPublishedStatus', $project);
         DB::beginTransaction();
         try {
             $project->fill($request->all())->save();
@@ -174,7 +175,7 @@ class MyProjectController extends Controller
         if (!is_null($project_file)) {
             $this->authorize('checkOwnProjectFiles', $project_file);
         } else {
-            $this->authorize('checkOwnProject', $project);
+            $this->authorize('checkOwnProjectWithPublishedStatus', $project);
         }
         $this->project_service->saveProjectImage($project, $project_file, $request);
 

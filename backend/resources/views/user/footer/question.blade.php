@@ -3,148 +3,156 @@
 @section('title', 'FAQ')
 
 @section('css')
-<style type="text/css">
-    .question_sections{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .question_section{
-        width: 45%;
-    }
-    .question{
-        width: 100%;
-        margin-bottom: 30px;
-    }
-    .question label{
-        padding: 5px;
-        font-weight: bold;
-        cursor :pointer;
-    }
-    .question input {
-        display: none;
-    }
-    .question .hidden_show {
-        height: 0;
-        padding: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: 0.8s;
-    }
-    .question input:checked ~ .hidden_show {
-        padding: 10px 0;
-        height: auto;
-        opacity: 1;
-    }
-    .sec-sub-ttl{
-        font-size: 20px;
-        margin-bottom: 10px;
-        border-left: 5px solid #ff1493;
-        padding: 0 0 0 10px;
-        margin-top: 20px;
-    }
+<style>
+
 </style>
 @endsection
 
 @section('content')
-<div class="content">
-    <div class="section">
-        <div class="fixedcontainer">
-            <h2 class="sec-ttl">よくある質問</h2>
-            <p>質問をクリックしていただくと回答を見ることができます。</p>
-            <div class="question_sections">
-                <div class="question_section">
-                    <h4 class="sec-sub-ttl">初めての方</h4>
-                        <div class="question_lists">
-                        <div class="question">
-                            <label for="label1">ガーディアンとは ▼</label>
-                            <input type="checkbox" id="label1"/>
-                            <div class="hidden_show">
-                                <p>
-                                    ガーディアンとは、みんなの力でアイドルを救うためのクラウドファンディングサイトです。
-                                </p>
-                            </div>
-                        </div>
-                        <div class="question">
-                            <label for="label2">応援プロジェクトとは ▼</label>
-                            <input type="checkbox" id="label2"/>
-                            <div class="hidden_show">
-                                <p>
-                                    応援プロジェクトを支援してクラウドファンディングを行うことで、<br>
-                                    誹謗中傷などにより活動が困難になってしまったアイドルを救うことができます。
-                                </p>
-                            </div>
-                        </div>
-                        <div class="question">
-                            <label for="label3">他のサイトとどこが違いますか ▼</label>
-                            <input type="checkbox" id="label3"/>
-                            <div class="hidden_show">
-                                <p>
-                                    アイドルを救う事に特化したサービスを扱っています。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="question_section">
-                    <h4 class="sec-sub-ttl">アカウントについて</h4>
-                    <div class="question_lists">
-                    <div class="question">
-                            <label for="label4">どこから新規会員登録できますか ▼</label>
-                            <input type="checkbox" id="label4"/>
-                            <div class="hidden_show">
-                                <p>
-                                    ページの右上にある「会員登録」をクリックしていただけると登録画面に進みます。
-                                </p>
-                            </div>
-                        </div>
-                        <div class="question">
-                            <label for="label5">会員登録すると何ができますか ▼</label>
-                            <input type="checkbox" id="label5"/>
-                            <div class="hidden_show">
-                                <p>
-                                    応援プロジェクトを支援してクラウドファンディングができるようになります。
-                                </p>
-                            </div>
-                        </div>
-                        <div class="question">
-                            <label for="label6">マイページとはなんですか ▼</label>
-                            <input type="checkbox" id="label6"/>
-                            <div class="hidden_show">
-                                <p>
-                                    ユーザー情報の管理、支援した応援プロジェクト、投稿したプロジェクトの確認などができます。<br>
-                                    ページの右上にある「ログイン」を押していただくとログイン画面に進みます。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="question_section">
-                    <h4 class="sec-sub-ttl">決済方法について</h4>
-                    <div class="question_lists">
-                        <div class="question">
-                            <label for="label10">クレジットカードの引き落とし日はいつですか ▼</label>
-                            <input type="checkbox" id="label10"/>
-                            <div class="hidden_show">
-                                <p>
-                                    クレジットカードで支援して頂いた場合、基本的に即時決済完了となります。
-                                    引き落とし日は、それぞれのカード会社によって異なるため、お持ちのカードの引き落とし条件をご確認いただくか、カード会社へ直接ご確認をお願い致します。
-                                </p>
-                            </div>
-                        </div>
-                        <div class="question">
-                            <label for="label11">分割で支払いはできますか ▼</label>
-                            <input type="checkbox" id="label11"/>
-                            <div class="hidden_show">
-                                <p>
-                                    クレジットカードの分割払いのご指定ができかねます。ご了承ください。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+
+<ol class="breadcrumb inner" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumb__list" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a class="breadcrumb__text" itemprop="item" href="ホームのURL">
+            <span itemprop="name">FanReturn ヘルプ</span>
+        </a>
+        <meta itemprop="position" content="1" />
+    </li><!-- /.breadcrumb__list -->
+
+    <li class="breadcrumb__list" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a class="breadcrumb__text" itemprop="item" href="カテゴリー1のURL">
+            <span itemprop="name">FanReturnとは</span>
+        </a>
+        <meta itemprop="position" content="2" />
+    </li><!-- /.breadcrumb__list -->
+</ol><!-- /.breadcrumb -->
+
+<div class="content inner">
+
+    <aside class="question-sidebar">
+        {{-- SPのとき --}}
+        <div class="question-sidebar__inner is-sp">
+            <h3 class="question-sidebar__title js-question-sidebar__title">このセクションの記事<span class="question-sidebar__title-angle is-sp"><i class="fas fa-chevron-down"></i></span></h3>
+            <ul class="question-sidebar__list js-question-sidebar__list">
+                <li class="question-sidebar__list__item"><a href="#">システム利用料について</a><span>＞</span></li>
+                <li class="question-sidebar__list__item"><a href="#">対応している決済方法について</a><span>＞</span></li>
+                <li class="question-sidebar__list__item"><a href="#">海外からの支援について</a><span>＞</span></li>
+                <li class="question-sidebar__list__item"><a href="#">寄付型クラウドファンディングについて</a><span>＞</span></li>
+            </ul><!-- /.question-sidebar__list -->
+        </div><!-- /.question-sidebar__inner -->
+        {{-- PCのとき --}}
+        <div class="question-sidebar__inner is-pc">
+            <h3 class="question-sidebar__title">このセクションの記事<span class="question-sidebar__title-angle is-sp"><i class="fas fa-chevron-down"></i></span></h3>
+            <ul class="question-sidebar__list">
+                <li class="question-sidebar__list__item"><a href="#">システム利用料について</a><span>＞</span></li>
+                <li class="question-sidebar__list__item"><a href="#">対応している決済方法について</a><span>＞</span></li>
+                <li class="question-sidebar__list__item"><a href="#">海外からの支援について</a><span>＞</span></li>
+                <li class="question-sidebar__list__item"><a href="#">寄付型クラウドファンディングについて</a><span>＞</span></li>
+            </ul><!-- /.question-sidebar__list -->
+
+        </div><!-- /.question-sidebar__inner -->
+
+    </aside><!-- /.question-sidebar -->
+
+    <main class="question-main">
+
+        <section class="about">
+            <h2 class="about__title">FanReturnとは</h2>
+            <time class="about__date" datetime="2021-06-08">2021.6.8</time>
+            <p class="about__img-wrapper"><img src="{{ asset('image/logo-color.svg') }}" alt="FanReturn"></p>
+            <p class="about__text sp-text-center">イベントを開きたい…<br class="is-sp">オリジナルグッズを作りたい…<br>そんなインフルエンサーの“やりたい”を叶える<br class="is-sp">クラウドファンディングサービスです。</p>
+            <ul class="about-fanreturn__list">
+                <li class="about-fanreturn__item">
+                    <p class="about-fanreturn__item__text">オリジナルTシャツを<br>作りたい！</p>
+                    <img class="about-fanreturn__img" src="{{ asset('image/about-shirt.svg') }}" alt="オリジナルTシャツを作りたい！">
+                </li><!-- /.about-fanreturn__item -->
+                <li class="about-fanreturn__item">
+                    <p class="about-fanreturn__item__text">ファンイベントを<br>開きたい！</p>
+                    <img class="about-fanreturn__img" src="{{ asset('image/about-event.svg') }}" alt="ファンイベントを開きたい！">
+                </li><!-- /.about-fanreturn__item -->
+                <li class="about-fanreturn__item">
+                    <p class="about-fanreturn__item__text">写真集を<br>だしたい！</p>
+                    <img class="about-fanreturn__img is-pc" src="{{ asset('image/about-book.svg') }}" alt="写真集をだしたい！">
+                    <img class="about-fanreturn__img is-sp" src="{{ asset('image/about-book-sp.svg') }}" alt="写真集をだしたい！">
+                </li><!-- /.about-fanreturn__item -->
+                <li class="about-fanreturn__item">
+                    <p class="about-fanreturn__item__text">コンサートを<br>開きたい！</p>
+                    <img class="about-fanreturn__img is-pc" src="{{ asset('image/about-mike.svg') }}" alt="コンサートを開きたい！">
+                    <img class="about-fanreturn__img is-sp" src="{{ asset('image/about-mike-sp.svg') }}" alt="コンサートを開きたい！">
+                </li><!-- /.about-fanreturn__item -->
+                <li class="about-fanreturn__item">
+                    <p class="about-fanreturn__item__text">楽曲やMVの<br>制作をしたい！</p>
+                    <img class="about-fanreturn__img is-pc" src="{{ asset('image/about-music.svg') }}" alt="楽曲やMVの制作をしたい！">
+                    <img class="about-fanreturn__img is-sp" src="{{ asset('image/about-music-sp.svg') }}" alt="楽曲やMVの制作をしたい！">
+                </li><!-- /.about-fanreturn__item -->
+                <li class="about-fanreturn__item">
+                    <p class="about-fanreturn__item__text">マグカップを<br>作りたい！</p>
+                    <img class="about-fanreturn__img is-pc" src="{{ asset('image/about-teacup.svg') }}" alt="マグカップを作りたい！">
+                    <img class="about-fanreturn__img is-sp" src="{{ asset('image/about-teacup-sp.svg') }}" alt="マグカップを作りたい！">
+                </li><!-- /.about-fanreturn__item -->
+                <li class="about-fanreturn__item">
+                    <p class="about-fanreturn__item__text">オンライン教室<br>を開きたい！</p>
+                    <img class="about-fanreturn__img" src="{{ asset('image/about-smartPhone.svg') }}" alt="オンライン教室を開きたい！">
+                </li><!-- /.about-fanreturn__item -->
+                <li class="about-fanreturn__item">
+                    <p class="about-fanreturn__item__text">オリジナルブランド<br>を作りたい！</p>
+                    <img class="about-fanreturn__img" src="{{ asset('image/about-highHeels.svg') }}" alt="オリジナルブランドを作りたい！">
+                </li><!-- /.about-fanreturn__item -->
+            </ul><!-- /.about-fanreturn__list -->
+            <h3 class="about__sub-title">事前予約制のため、<br class="is-sp">リスクなく実施することが可能です。</h3>
+            <p class="about__text">また、FanReturnという名の通り、インフルエンサーがもっとも大事にするファンへの特別なリターンの仕組みを用意しています。それが「プロジェクトサポーター（PS）」です。</p>
+            <p class="about__text">インフルエンサーのプロジェクトをファンが拡散すればするほど、ファンはインフルエンサーから特別なリターンがもらえるというサービスです。</p>
+            <p class="about__text">インフルエンサーにとってもファンにとってもメリットのあるPSの仕組みは、より強固なWIN-WINの関係を築くことができます。PSは他のクラウドファンディングにはありません。<br>インフルエンサーに特化したFanReturnだからこそできるサービスです。</p>
+            <p class="about__text about__text--url">詳しくは「プロジェクトサポーター（PS）とは」をご覧ください。<br><a href="#">URL：</a></p>
+            <p class="about__text">「イベントを開きたい」「オリジナルグッズを作りたい」、でもどのくらい人が集まるか不安、金銭面が不安と悩んでいるインフルエンサーの皆さま、ぜひFanReturnをご活用ください。</p>
+            <p class="about__text about-with-fanreturn__title">FanReturnを使えば…</p>
+            <ul class="about-with-fanreturn__list">
+                <li class="about-with-fanreturn__item">
+                    <p class="about-with-fanreturn__text">夢への加速度UP！</p>
+                </li><!--/.about-with-fanreturn__item -->
+                <li class="about-with-fanreturn__item">
+                    <p class="about-with-fanreturn__text">ファンの満足度UP！</p>
+                </li><!--/.about-with-fanreturn__item -->
+                <li class="about-with-fanreturn__item">
+                    <p class="about-with-fanreturn__text">新規ファン獲得！</p>
+                </li><!--/.about-with-fanreturn__item -->
+                <li class="about-with-fanreturn__item">
+                    <p class="about-with-fanreturn__text">ファンと共にやりたいことを形にできる！</p>
+                </li><!--/.about-with-fanreturn__item -->
+                <li class="about-with-fanreturn__item">
+                    <p class="about-with-fanreturn__text">安定したインフルエンサー活動ができる！</p>
+                </li><!--/.about-with-fanreturn__item -->
+            </ul><!-- /.about-with-fanreturn__list -->
+        </section>
+
+        <section class="about-project">
+            <h2 class="about-project__title">PROJECT</h2><!-- /.about-project__title -->
+            <h3 class="about-project__sub-title">プロジェクト実施の流れ</h3>
+            <p class="about-project__txt"><span>01</span>プロジェクト内容の打ち合わせ</p>
+            <span class="about-project__down-arrow"><i class="fas fa-caret-down"></i></span>
+            <p class="about-project__txt"><span>02</span>プロジェクト内容&リターン内容の入力</p>
+            <span class="about-project__down-arrow"><i class="fas fa-caret-down"></i></span>
+            <p class="about-project__txt"><span>03</span>目標金額を設定</p>
+            <span class="about-project__down-arrow"><i class="fas fa-caret-down"></i></span>
+            <p class="about-project__txt"><span>04</span>プロジェクトをスタート</p>
+            <span class="about-project__down-arrow"><i class="fas fa-caret-down"></i></span>
+            <p class="about-project__txt"><span>05</span>プロジェクトリターンの実施</p>
+        </section><!-- /.about-project -->
+
+
+    </main>
+</div><!-- /.content -->
+
+
+@endsection
+
+
+@section('script')
+<script>
+$(function(){
+    $(".js-question-sidebar__title").on("click", function() {
+        $(".js-question-sidebar__list").slideToggle();
+    });
+});
+</script>
 @endsection

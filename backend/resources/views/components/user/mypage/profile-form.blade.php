@@ -9,7 +9,11 @@
                 <input name="name" type="text" placeholder="UserId" value="{{ old('name', $authUser->name) }}"/>
             </div>
             <div class="prof_edit_03">
-                <a href="javascript:document.nameForm.submit()">更新</a>
+            </div>
+            <div class="def_btn">
+                <button type="submit" class="disable-btn">
+                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
+                </button>
             </div>
         </div>
     </form>
@@ -23,7 +27,11 @@
                 <input type="file" id="files_input" name="image_url" accept=".png, .jpg, .jpeg, .gif"><br><span class="prof_edit_editbox_desc">ファイルサイズは1MB以下<br>ファイル形式は jpeg、gif、png 形式のみ可</span>
             </div>
             <div class="prof_edit_03">
-                <a href="javascript:document.imageForm.submit()">更新</a>
+            </div>
+            <div class="def_btn">
+                <button type="submit" class="disable-btn">
+                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
+                </button>
             </div>
         </div>
     </form>
@@ -46,7 +54,11 @@
                 <input name="email_confirmation" type="email" required/>
             </div>
             <div class="prof_edit_03">
-                <a href="javascript:document.mailForm.submit()">更新</a>
+            </div>
+            <div class="def_btn">
+                <button type="submit" class="disable-btn">
+                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
+                </button>
             </div>
         </div>
     </form>
@@ -74,7 +86,11 @@
 
             </div>
             <div class="prof_edit_03">
-                <a href="javascript:document.passwordForm.submit()">更新</a>
+            </div>
+            <div class="def_btn">
+                <button type="submit" class="disable-btn">
+                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
+                </button>
             </div>
         </div>
     </form>
@@ -84,16 +100,34 @@
         @csrf
         <div class="prof_edit_row">
             <div class="prof_edit_01">URL<br><span>編集中</span></div>
-            <div class="prof_edit_editbox">
-                <img src="{{ asset('image/twitter.png') }}" alt=""><input name="twitter_url" type="text" placeholder="twitter" value="{{ old('twitter_url', $authUser->snsLink->twitter_url) }}">
-                <img src="{{ asset('image/instagram.png') }}" alt=""><input name="instagram_url" type="text" placeholder="instagram" value="{{ old('instagram_url', $authUser->snsLink->instagram_url) }}">
-                <img src="{{ asset('image/youtube.png') }}" alt=""><input name="youtube_url" type="text" placeholder="youtube" value="{{ old('youtube_url', $authUser->snsLink->youtube_url) }}">
-                <img src="{{ asset('image/tiktok.png') }}" alt=""><input name="tiktok_url" type="text" placeholder="tiktok" value="{{ old('tiktok_url', $authUser->snsLink->tiktok_url) }}">
-                <img src="{{ asset('image/other_sns.png') }}" alt=""><input name="other_url" type="text" placeholder="other" value="{{ old('other_url', $authUser->snsLink->other_url) }}">
-
+            <div class="prof_edit_editbox prof_edit_sns_links">
+                <div>
+                    <img src="{{ asset('image/twitter.png') }}" alt="">
+                    <input name="twitter_url" type="text" placeholder="twitter" value="{{ old('twitter_url', $authUser->snsLink->twitter_url) }}">
+                </div>
+                <div>
+                    <img src="{{ asset('image/instagram.png') }}" alt="">
+                    <input name="instagram_url" type="text" placeholder="instagram" value="{{ old('instagram_url', $authUser->snsLink->instagram_url) }}">
+                </div>
+                <div>
+                    <img src="{{ asset('image/youtube.png') }}" alt="">
+                    <input name="youtube_url" type="text" placeholder="youtube" value="{{ old('youtube_url', $authUser->snsLink->youtube_url) }}">
+                </div>
+                <div>
+                    <img src="{{ asset('image/tiktok.png') }}" alt="">
+                    <input name="tiktok_url" type="text" placeholder="tiktok" value="{{ old('tiktok_url', $authUser->snsLink->tiktok_url) }}">
+                </div>
+                <div>
+                    <img src="{{ asset('image/other_sns.png') }}" alt="">
+                    <input name="other_url" type="text" placeholder="other" value="{{ old('other_url', $authUser->snsLink->other_url) }}">
+                </div>
             </div>
             <div class="prof_edit_03">
-                <a href="javascript:document.urlForm.submit()">更新</a>
+            </div>
+            <div class="def_btn">
+                <button type="submit" class="disable-btn">
+                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
+                </button>
             </div>
         </div>
     </form>
@@ -114,7 +148,11 @@
 
             </div><!-- prof_edit_editbox -->
             <div class="prof_edit_03">
-                <a href="javascript:document.prefectureForm.submit()">更新</a>
+            </div>
+            <div class="def_btn">
+                <button type="submit" class="disable-btn">
+                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
+                </button>
             </div>
         </div>
     </form>
@@ -158,7 +196,11 @@
             </div>
         </div>
         <div class="prof_edit_03">
-            <a href="javascript:document.birthdayForm.submit()">更新</a>
+        </div>
+        <div class="def_btn">
+            <button type="submit" class="disable-btn">
+                <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
+            </button>
         </div>
     </div>
 </form>
@@ -185,7 +227,11 @@
 				</div>
 			</div>
 			<div class="prof_edit_03">
-                <a href="javascript:document.genderForm.submit()">更新</a>
+            </div>
+            <div class="def_btn">
+                <button type="submit" class="disable-btn">
+                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
+                </button>
             </div>
 		</div>
     </form>
@@ -199,7 +245,11 @@
 				<textarea rows="8" name="introduction">{{ old('introduction', $authUser->profile->introduction) }}</textarea>
 			</div>
 			<div class="prof_edit_03">
-                <a href="javascript:document.introductionForm.submit()">更新</a>
+            </div>
+            <div class="def_btn">
+                <button type="submit" class="disable-btn">
+                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
+                </button>
             </div>
         </div>
     </form>

@@ -1,6 +1,12 @@
-function moreLooking(propsClassName,defaultNum,addNum,moreButtonName = 'more_looking_button',CloseButtonName = 'closed_btn'){
+function moreLooking(
+    propsClassName,
+    defaultNum,
+    addNum,
+    moreButtonName = "more_looking_button",
+    CloseButtonName = "closed_btn"
+) {
     // メッセージグループの数を取得
-    var $propsLength = $('.' + propsClassName).length;
+    var $propsLength = $("." + propsClassName).length;
 
     // 現在のメッセージグループの表示数
     var $currentNum = 0;
@@ -11,11 +17,11 @@ function moreLooking(propsClassName,defaultNum,addNum,moreButtonName = 'more_loo
     // 取得したメッセージグループ数が$currentNumより多い時
     if ($currentNum < $propsLength) {
         // メッセージグループを8コまで表示してそれ以外はhideしておく
-        $('.' + propsClassName).each(function(index) {
+        $("." + propsClassName).each(function (index) {
             if (index >= defaultNum) {
                 $(this).hide();
             }
-        })
+        });
 
         // もっと見るボタンは表示して、閉じるボタンはhideする
         $("#" + moreButtonName).show();
@@ -28,12 +34,13 @@ function moreLooking(propsClassName,defaultNum,addNum,moreButtonName = 'more_loo
     }
 
     // もっと見るボタンを押した時
-    $("#" + moreButtonName).click(function() {
-        console.log('hello');
+    $("#" + moreButtonName).click(function () {
         // $currentNum変数を更新
         $currentNum += addNum;
         // 現在表示しているメッセージグループに12コ追加で表示
-        $("." + propsClassName + '_list').find("." + propsClassName + ":lt("+ $currentNum +")").slideDown();
+        $("." + propsClassName + "_list")
+            .find("." + propsClassName + ":lt(" + $currentNum + ")")
+            .slideDown();
 
         // $currentNumより取得したメッセージグループが少ない場合
         if ($currentNum >= $propsLength) {
@@ -46,13 +53,15 @@ function moreLooking(propsClassName,defaultNum,addNum,moreButtonName = 'more_loo
             $("#" + CloseButtonName).show();
 
             // 閉じるボタンを押した時
-            $("#" + CloseButtonName).click(function() {
+            $("#" + CloseButtonName).click(function () {
                 // インデックスが$indexNumより大きい要素は非表示
-                $("." + propsClassName + '_list').find("." + propsClassName + ":gt("+ $indexNum +")").slideUp();
+                $("." + propsClassName + "_list")
+                    .find("." + propsClassName + ":gt(" + $indexNum + ")")
+                    .slideUp();
                 // 閉じるボタンはhide、もっと見るボタンは表示
                 $("#" + CloseButtonName).hide();
                 $("#" + moreButtonName).show();
-            })
+            });
         }
-    })
+    });
 }

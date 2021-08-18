@@ -128,7 +128,7 @@ class ProjectController extends Controller
 
         return view('user.project.show', [
             'inviter_code' => $this->inviter_code,
-            'project' => $project->getLoadPaymentsCountAndSumPrice()
+            'project' => $project->getLoadPaymentsCountAndSumPrice()->loadComments(),
         ]);
     }
 
@@ -357,11 +357,11 @@ class ProjectController extends Controller
                 break;
 
             case '3':
-                $projectsQuery->seekingWithAfterSeeking()->getWithPaymentsCountAndSumPrice()->orderBy('payments_sum_price', 'DESC');
+                $projectsQuery->seekingWithAfterSeeking()->orderBy('payments_sum_price', 'DESC');
                 break;
 
             case '4':
-                $projectsQuery->seekingWithAfterSeeking()->getWithPaymentsCountAndSumPrice()->orderBy('payments_count', 'DESC');
+                $projectsQuery->seekingWithAfterSeeking()->orderBy('payments_count', 'DESC');
                 break;
         }
 
@@ -393,7 +393,7 @@ class ProjectController extends Controller
         //     $projectsQuery->OnlyCheeringDisplay();
         // }
 
-        $projects = $projectsQuery->GetReleasedProject()->with('tags')->paginate(12);
+        $projects = $projectsQuery->GetReleasedProject()->with('tags')->getWithPaymentsCountAndSumPrice()->paginate(12);
 
         return view('user.project.search', compact('projects', 'tags', 'user_liked'));
     }

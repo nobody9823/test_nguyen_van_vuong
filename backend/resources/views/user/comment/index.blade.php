@@ -3,88 +3,108 @@
 @section('title', 'コメント一覧')
 
 @section('content')
-<section class="section_base">
-  <div class="tit_L_01 E-font">
-      <h2>COMMENTS</h2>
-      <div class="sub_tit_L">コメント一覧</div>
-  </div>
+<section id="supported-projects" class="section_base">
 
-  @foreach($comments as $key => $comment)
-  <div class="prof_page_base inner_item">
-    <div class="comment_page">
-      <div class="prof_edit_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
-          <img src="{{ Storage::url(optional($comment->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
-          <div class="comment_content">{{ $comment->content }}<br>
-            <div>
-              <span>{{ $comment->user->name }}&emsp;</span>
-              <span>{{ $comment->created_at->format('Y年m月d日 H:m') }}</span>
+    <div class="tit_L_01 E-font">
+        <h2>COMMENTS</h2>
+        <div class="sub_tit_L">コメント一覧</div>
+    </div>
+
+    <div class="prof_page_base inner_item">
+        <div class="prof_page_L">
+            <x-user.mypage-navigation-bar/>
+        </div><!--/prof_page_L-->
+
+        <div class="prof_page_R">
+            @foreach($comments as $key => $comment)
+            <div class="prof_page_base inner_item">
+                <div class="comment_page">
+                <div class="prof_edit_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
+                    <img src="{{ Storage::url(optional($comment->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
+                    <div class="comment_content">{{ $comment->content }}<br>
+                        <div>
+                        <span>{{ $comment->user->name }}&emsp;</span>
+                        <span>{{ $comment->created_at->format('Y年m月d日 H:m') }}</span>
+                        </div>
+
+                    </div>
+                    <div class="comment_icons">
+                        @if(!$comment->reply)
+                        <i class="fas fa-reply fa-2x fa-fw" style="cursor: pointer" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
+                        @endif
+                        <form action="{{ route('user.comment.destroy', ['project' => $comment->project, 'comment' => $comment]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="far fa-trash-alt fa-2x fa-fw delete-btn" onclick="return confirm('本当に削除しますか？')"></button>
+                        </form>
+                    </div>
+                </div>
+
+                @if($comment->reply)
+                <div class="prof_edit_row" style="{{ isset($comment->reply) ? '' : 'border-bottom: none;' }}">
+                    <img src="{{ Storage::url(optional($comment->project->user)->profile->image_url) }}" alt="プロフィール画像" class="user_image reply_user">
+                    <div class="comment_content reply_content">{{ $comment->reply->content }}<br>
+                    <div>
+                        <span>{{ $comment->project->user->name }}&emsp;</span><span>{{ $comment->reply->created_at->format('Y年m月d日 H:m') }}</span>
+                    </div>
+                    </div>
+                    <div class="comment_icons">
+                    <form action="{{ route('user.reply.destroy', ['project' => $comment->project, 'reply' => $comment->reply]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="far fa-trash-alt fa-2x fa-fw delete-btn" onclick="return confirm('本当に削除しますか？')"></button>
+                    </form>
+                    </div>
+                </div>
+                @endif
+                </div>
             </div>
 
-          </div>
-          <div class="comment_icons">
-              @if(!$comment->reply)
-              <i class="fas fa-reply fa-2x fa-fw" style="cursor: pointer" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
-              @endif
-              <form action="{{ route('user.comment.destroy', ['project' => $comment->project, 'comment' => $comment]) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="far fa-trash-alt fa-2x fa-fw delete-btn" onclick="return confirm('本当に削除しますか？')"></button>
-              </form>
-          </div>
-      </div>
-      
-      @if($comment->reply)
-      <div class="prof_edit_row" style="{{ isset($comment->reply) ? '' : 'border-bottom: none;' }}">
-        <img src="{{ Storage::url(optional($comment->project->user)->profile->image_url) }}" alt="プロフィール画像" class="user_image reply_user">
-        <div class="comment_content reply_content">{{ $comment->reply->content }}<br>
-          <div>
-            <span>{{ $comment->project->user->name }}&emsp;</span><span>{{ $comment->reply->created_at->format('Y年m月d日 H:m') }}</span>
-          </div>
+            <!-- モーダルウィンドウ -->
+            <div id="{{ 'modal_area_'.$key }}" class="modal_area">
+                <div class="modal_back_ground"></div>
+                <div class="modal_wrapper">
+                <form action="{{ route('user.reply.store', ['project' => $comment->project, 'comment' => $comment]) }}" method="POST">
+                    @csrf
+                    <div>
+                    <div class="av_tit">
+                        <p style="text-align: center;">返信コメント</p>
+                    </div>
+                    <textarea name="content" class="input_reply">{{old('content')}}</textarea>
+                    </div>
+
+                    <div class="def_btn">
+                    <button class="disable-btn" type="submit">
+                        <p style="font-size: 1.8rem; font-weight: bold; color: #fff;">送信</p>
+                    </button>
+                    </div>
+                </form>
+
+                <div id="{{ 'close_modal_'.$key }}" class="close_modal" onclick="toggleModal(this.id)">
+                    <i class="fas fa-times fa-lg"></i>
+                </div>
+                </div>
+            </div>
+            @endforeach
         </div>
-        <div class="comment_icons">
-          <form action="{{ route('user.reply.destroy', ['project' => $comment->project, 'reply' => $comment->reply]) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="far fa-trash-alt fa-2x fa-fw delete-btn" onclick="return confirm('本当に削除しますか？')"></button>
-          </form>        
-        </div>
-      </div>
-      @endif
     </div>
-  </div>
-
-  <!-- モーダルウィンドウ -->
-  <div id="{{ 'modal_area_'.$key }}" class="modal_area">
-    <div class="modal_back_ground"></div>
-    <div class="modal_wrapper">
-      <form action="{{ route('user.reply.store', ['project' => $comment->project, 'comment' => $comment]) }}" method="POST">
-        @csrf
-        <div>
-          <div class="av_tit">
-            <p style="text-align: center;">返信コメント</p>
-          </div>
-          <textarea name="content" class="input_reply"></textarea>
-        </div>
-
-        <div class="def_btn">
-          <button class="disable-btn" type="submit">
-            <p style="font-size: 1.8rem; font-weight: bold; color: #fff;">送信</p>
-          </button>
-        </div>
-      </form>
-
-      <div id="{{ 'close_modal_'.$key }}" class="close_modal" onclick="toggleModal(this.id)">
-        <i class="fas fa-times fa-lg"></i>
-      </div>
-    </div>
-  </div>
-  @endforeach
 </section>
 
-<div>
-{{ $comments->links() }}
-</div>
-
+@if ($comments->first() !== null)
+  <div class="pager E-font">
+    <ul class="pagination">
+      @if ($comments->previousPageUrl() !== null)
+        <li class="pager_pre"><a href="{{ $comments->previousPageUrl() }}"><span>«</span></a></li>
+      @endif
+      @foreach ($comments->appends(request()->input())->links()->elements[0] as $key => $link)
+        <li><a href="{{ $link }}" class="{{ $comments->currentPage() == $key ? 'pager_active' : ''}}"><span>{{ $key }}</span></a></li>
+      @endforeach
+      @if ($comments->nextPageUrl() !== null)
+        <li class="pager_next"><a href="{{ $comments->nextPageUrl() }}"><span>»</span></a></li>
+      @endif
+    </ul>
+  </div>
+@endif
 @endsection
 
 @section('script')
@@ -92,17 +112,12 @@
 @endsection
 
 <style>
-.pagination{
-display: flex;
-justify-content: center;
-font-size: 140%;
-}
 .delete-btn{
   cursor: pointer;
   color: #00AEBD;
 }
 /* コメント関連 */
-.comment_page { 
+.comment_page {
   width: 100%;
 }
 button{
@@ -118,12 +133,16 @@ button{
 }
 
 .comment_content {
-  width: 80%;
-  line-height: 35px;
+  width: 75%;
+  line-height: 20px;
+  margin-top: 15px;
+  white-space: pre-line;
 }
 
 .comment_content div {
   font-size: 85%;
+  display: flex;
+  flex-direction: column;
 }
 
 .comment_icons {
@@ -136,7 +155,9 @@ button{
 }
 
 .reply_content {
-  width: 790px;
+  width: 70%;
+  margin-top: 25px;
+  white-space: pre-line;
 }
 
 .reply_user {
@@ -145,22 +166,23 @@ button{
 
 @media (max-width: 767px) {
   .user_image{ margin: 30px 0 10px 0; }
-	.reply_content{ width: calc(100% - 75px);} 
+	.reply_content{ width: calc(100% - 35%);}
   .reply_user{ margin-left: 0px; }
+  .comment_content { width: calc(100% - 20%);)}
   .comment_content div {
     font-size: 77%;
   }
-  .comment_icons{ 
+  .comment_icons{
     position: relative;
-    left: calc(100% - 210px);
-    bottom: 28px;
+    left: calc(100% - 60px);
     font-size: 60%;
+    bottom: 60px;
   }
 }
 
 /* モーダルウィンドウ */
 .modal_area {
-  visibility: hidden; 
+  visibility: hidden;
   opacity : 0;
   position: fixed;
   z-index: 1;
@@ -209,6 +231,7 @@ button{
   margin: 0 0 10px 0;
   border: solid 1px #DBDBDB;
   border-radius: 4px;
+  resize:none;
 }
 /* ここまでモーダルウィンドウ */
 </style>

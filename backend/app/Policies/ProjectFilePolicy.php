@@ -12,6 +12,11 @@ class ProjectFilePolicy
 
     public function checkOwnProjectFiles(User $user, ProjectFile $project_file)
     {
-        return $user->id === $project_file->project->user_id;
+        if(($project_file->project->release_status === "---" || $project_file->project->release_status === "差し戻し") &&  
+          ($user->id === $project_file->project->user_id)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

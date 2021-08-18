@@ -1,5 +1,10 @@
 @extends('user.layouts.base')
 
+@section('css')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_green.css">
+@endsection
+
 @section('content')
 
 <div class="Assist-input_base">
@@ -79,9 +84,12 @@
 @endsection
 
 @section('script')
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script src={{ asset('/js/blade-functions.js') }}></script>
+<script src={{ asset('/js/dateFormat.js') }}></script>
 <script src="{{ asset('js/remove-project-image.js') }}"></script>
 <script src="{{ asset('js/upload-project-image.js') }}"></script>
 <script src={{ asset('/js/update-myProject.js') }}></script>

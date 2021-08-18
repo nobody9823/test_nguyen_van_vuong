@@ -159,6 +159,13 @@ class Project extends Model
             }]);
     }
 
+    public function loadComments()
+    {
+        return $this->load(['comments' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }]);
+    }
+
     public function scopeMainProjects($query)
     {
         return $query->getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice();
@@ -239,9 +246,9 @@ class Project extends Model
         if ($role === 'user') {
             return $query->where('title', 'like', "%$word%")
                 ->orWhereIn('user_id', User::select('id')->where('name', 'like', "%$word%"));
-        } else if ($role === 'admin') {
+        } elseif ($role === 'admin') {
             return $query->where('title', 'like', "%$word%")
-                ->orWhere('curator', 'like', "%$word%")
+                ->orWhereIn('curator_id', Curator::select('id')->where('name', 'like', "%$word%"))
                 ->orWhere('id', 'like', "%$word%")
                 ->orWhereIn('user_id', User::select('id')->where('name', 'like', "%$word%"));
         }
@@ -378,10 +385,10 @@ class Project extends Model
         // ユーザーがURLを入力していないor更新する際にURLが変更されていない場合
         if (optional($projectVideo)->file_url === null || optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === optional($projectVideo)->file_url) {
             return false;
-            // 新規作成の時or更新する際に動画のURLが存在しない場合
+        // 新規作成の時or更新する際に動画のURLが存在しない場合
         } elseif (optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === null && optional($projectVideo)->file_url !== null) {
             $this->projectFiles()->save($projectVideo);
-            // プロジェクト更新時に既に埋め込んでいるURLから別のURLに変更した場合
+        // プロジェクト更新時に既に埋め込んでいるURLから別のURLに変更した場合
         } elseif (optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url !== optional($projectVideo)->file_url) {
             $this->projectFiles()->where('file_content_type', 'video_url')->first()->delete();
             $this->projectFiles()->save($projectVideo);
@@ -400,6 +407,8 @@ class Project extends Model
 
     public static function initialize()
     {
+        $date = new Carbon();
+
         return self::make([
             'title' => '',
             'content' => '',
@@ -407,8 +416,8 @@ class Project extends Model
             'reward_by_total_quantity' => '',
             'target_amount' => 0,
             'curator' => '',
-            'start_date' => Carbon::minValue(),
-            'end_date' => Carbon::maxValue(),
+            'start_date' => Carbon::now(),
+            'end_date' => $date->addYear(2),
             'release_status' => '---',
         ]);
     }
