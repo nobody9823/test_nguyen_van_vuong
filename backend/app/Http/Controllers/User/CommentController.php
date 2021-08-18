@@ -36,7 +36,7 @@ class CommentController extends Controller
             Log::alert($e);
             return redirect()->back()->withErrors("投稿に失敗しました。管理者にお問い合わせください。");
         }
-        redirect()->action([ProjectController::class, 'show'], ['project' => $project])->with('flash_message', "投稿が完了しました。");
+        return redirect()->action([ProjectController::class, 'show'], ['project' => $project])->with('flash_message', "投稿が完了しました。");
     }
 
     public function destroy(Request $request, Project $project, Comment $comment)
