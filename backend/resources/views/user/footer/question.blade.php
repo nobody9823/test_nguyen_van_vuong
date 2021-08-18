@@ -27,7 +27,7 @@
     </li><!-- /.breadcrumb__list -->
 </ol><!-- /.breadcrumb -->
 
-<div class="content inner">
+<div class="question-content inner">
 
     <aside class="question-sidebar">
         {{-- SPのとき --}}
@@ -141,7 +141,7 @@
 
 
     </main>
-</div><!-- /.content -->
+</div><!-- /.question-content -->
 
 
 @endsection
