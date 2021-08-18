@@ -43,7 +43,7 @@ class PlanFactory extends Factory
         ];
     }
 
-    public function init(int $count = 0, int $project_id)
+    public function init(int $count, int $project_id)
     {
         $limit_of_supporters_is_required = $this->faker->boolean(50);
 
