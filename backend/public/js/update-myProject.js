@@ -50,6 +50,21 @@ const updateMyProject = (() => {
         clearTimeout(savedTimer);
     }
 
+    const displayError = (e, message) => {
+        const ul = document.createElement('ul');
+        message.forEach(e => {
+            var childElement = document.createElement('li');
+            childElement.innerHTML = e;
+            ul.appendChild(childElement);
+        });
+        document.getElementById('errors_' + Object.keys(e)[0]).appendChild(ul);
+        setTimeout(() => { disappearError(e); }, 5000 );
+    }
+
+    const disappearError = (e) => {
+        document.getElementById('errors_' + Object.keys(e)[0]).innerHTML = '';
+    }
+
     const setTimer = (data, projectId, inputType) => {
         if (Timer) {clearTimeout(Timer);}
         if (inputType == 'text') {
@@ -66,8 +81,14 @@ const updateMyProject = (() => {
             if(res.data.result === true){
                 document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
                 displayIcon(document.getElementById('saved_' + Object.keys(data)[0]));
+            } else if (res.data.message !== undefined) {
+                document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
+                displayError(data, res.data.message[Object.keys(data)[0]]);
+            } else {
+                document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
             }
         }).catch(res => {
+            document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
             console.log(res);
         });
     }
@@ -82,6 +103,7 @@ const updateMyProject = (() => {
             }
         }).catch(res => {
             console.log(res);
+            document.getElementById('spinner_' + data.name).style.display = 'none';
         });
     }
 

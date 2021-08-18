@@ -31,9 +31,10 @@ class MyPlanRequest extends FormRequest
         return [
             'title' => ['nullable', 'string', 'max:45'],
             'content' => ['nullable', 'string', 'max:2000'],
-            'price' => ['nullable', 'integer', 'max:10000000'],
+            'price' => ['integer', 'min:0', 'max:10000000'],
             'address_is_required' => ['nullable', 'boolean'],
-            'limit_of_supporters' => ['nullable', 'integer', 'min:1'],
+            'limit_of_supporters_is_required' => ['nullable', 'boolean'],
+            'limit_of_supporters' => ['integer', 'min:1'],
             'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$project_end_date}"],
             'image_url' => ['nullable', 'image']
         ];
@@ -41,39 +42,41 @@ class MyPlanRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if ($this->has('delivery_month') && $this->has('delivery_day')){
-            if ($this->delivery_month === "00") {
-                $this->merge([
-                    'delivery_month' => date('m')
-                ]);
-            };
-
-            if ($this->delivery_day === "00") {
-                $this->merge([
-                    'delivery_day' => date('y')
-                ]);
-            }
-
-            $date = new Carbon($this->delivery_year . '-' . $this->delivery_month . '-' . $this->delivery_day);
-
+        if (!$this->filled('title')){
             $this->merge([
-                'delivery_date' => $date->format('Y-m-d')
+                'title' => ''
             ]);
+        }
+
+        if (!$this->filled('content')){
+            $this->merge([
+                'content' => ''
+            ]);
+        }
+
+        if ($this->has('limit_of_supporters_is_required') && $this->limit_of_supporters_is_required === 0) {
+            $this->merge([
+                'limit_of_supporters' => 1,
+            ]);
+        }
+
+        if (!$this->filled('delivery_date')){
+            $this->offsetUnset('delivery_date');
         }
     }
 
     public function failedValidation(Validator $validator)
     {
-        if($this->expectsJson()){
+        if ($this->expectsJson()) {
             throw new HttpResponseException(
                 response()->json(['message' => $validator->errors()->toArray()])
             );
         } else {
             throw new HttpResponseException(
                 redirect()
-                ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'return', 'status' => 422, 'plan' => $this->route('plan')])
-                ->withErrors($validator)
-                ->withInput()
+                    ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'return', 'status' => 422, 'plan' => $this->route('plan')])
+                    ->withErrors($validator)
+                    ->withInput()
             );
         };
     }

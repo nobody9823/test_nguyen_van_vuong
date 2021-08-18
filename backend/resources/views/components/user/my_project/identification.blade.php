@@ -6,6 +6,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_last_name"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_last_name"></i>
+        <span id="errors_last_name" style="color: red;"></span>
     </div>
     <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>
     <input type="text" name="last_name" class="def_input_100p"
@@ -16,6 +17,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_first_name"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_first_name"></i>
+        <span id="errors_first_name" style="color: red;"></span>
     </div>
     <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
     <input type="text" name="first_name" class="def_input_100p"
@@ -26,6 +28,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_last_name_kana"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_last_name_kana"></i>
+        <span id="errors_last_name_kana" style="color: red;"></span>
     </div>
     <div class="form_item_tit">セイ（全角）<span class="hissu_txt">必須</span></div>
     <input type="text" name="last_name_kana" class="def_input_100p"
@@ -36,6 +39,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_first_name_kana"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_first_name_kana"></i>
+        <span id="errors_first_name_kana" style="color: red;"></span>
     </div>
     <div class="form_item_tit">メイ（全角）<span class="hissu_txt">必須</span></div>
     <input type="text" name="first_name_kana" class="def_input_100p"
@@ -46,6 +50,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_phone_number"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_phone_number"></i>
+        <span id="errors_phone_number" style="color: red;"></span>
     </div>
     <div class="form_item_tit">電話番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
     <input type="number" name="phone_number" class="def_input_100p"
@@ -56,6 +61,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_postal_code"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_postal_code"></i>
+        <span id="errors_postal_code" style="color: red;"></span>
     </div>
     <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
     <input type="number" id="postal_code" name="postal_code" class="p-postal-code def_input_100p"
@@ -111,33 +117,14 @@
 <div class="form_item_row">
     <div class="form_item_tit">
         <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_birth_date"></div>
-            <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_birth_date"></i>
+            <div class="spinner" id="spinner_birthday"></div>
+            <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_birthday"></i>
+            <span id="errors_birthday" style="color: red;"></span>
         </div>
         生年月日<span class="hissu_txt">必須</span>
     </div>
-    <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="birth_year" name="birth_year" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
-            <option value="">年</option>
-            @foreach(array_reverse(range(today()->year - 100, today()->year)) as $birth_year)
-                <option value="{{ $birth_year }}" {{ old('birth_year', $user->profile->getYearOfBirth()) == $birth_year ? 'selected' : '' }}>{{ $birth_year }}</option>
-            @endforeach
-        </select>
-    </div>
-
-    <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
-        <select id="birth_month" name="birth_month" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
-            <option value="">月</option>
-            @foreach(range(1, 12) as $birth_month)
-                <option value="{{ $birth_month }}" {{ old('birth_month', $user->profile->getMonthOfBirth()) == $birth_month ? 'selected' : '' }}>{{ $birth_month }}</option>
-            @endforeach
-        </select>
-    </div>
-
-    <div class="cp_ipselect cp_normal">
-        <select id="birth_day" name="birth_day"
-            data-old-value="{{ old('birth_day', $user->profile->getDayOfBirth()) }}" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})"></select>
-    </div>
+    <input type="text" id="birthday" name="birthday" class="p-postal-code def_input_100p"
+        value="{{ old('start_date', $user->profile->birthday) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
 </div>
 
 <div class="form_item_row">
@@ -151,6 +138,7 @@
                 <div class="spinner-wrapper">
                     <div class="spinner" id="spinner_identify_image_1"></div>
                     <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_identify_image_1"></i>
+                    <span id="errors_identify_image_1" style="color: red;"></span>
                 </div>
                 <div id="identify_image_1" class="ib02_01 E-font my_project_img_wrapper identify_img">
                     <img src="{{ Storage::url($user->identification->identify_image_1) }}">
@@ -169,6 +157,7 @@
                 <div class="spinner-wrapper">
                     <div class="spinner" id="spinner_identify_image_2"></div>
                     <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_identify_image_2"></i>
+                    <span id="errors_identify_image_2" style="color: red;"></span>
                 </div>
                 <div id="identify_image_2" class="ib02_01 E-font my_project_img_wrapper identify_img">
                     <img src="{{ Storage::url($user->identification->identify_image_2) }}">
@@ -211,11 +200,12 @@
 </div>
 
 <div class="form_item_row">
-    <div class="spinner-wrapper">
-        <div class="spinner" id="spinner_bank_code"></div>
-        <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_bank_code"></i>
-    </div>
     <div class="form_item_tit">
+        <div class="spinner-wrapper">
+            <div class="spinner" id="spinner_bank_code"></div>
+            <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_bank_code"></i>
+            <span id="errors_bank_code" style="color: red;"></span>
+        </div>
         金融機関コード・銀行コード
         <span class="hissu_txt">必須</span>
     <br/>
@@ -234,6 +224,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_branch_code"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_branch_code"></i>
+        <span id="errors_branch_code" style="color: red;"></span>
     </div>
     <div class="form_item_tit">支店番号<span class="hissu_txt">必須</span></div>
     <input type="number" name="branch_code" class="def_input_100p"
@@ -244,6 +235,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_account_type"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_account_type"></i>
+        <span id="errors_account_type" style="color: red;"></span>
     </div>
     <div class="form_item_tit">口座種別<span class="hissu_txt">必須</span></div>
     <div class="cp_ipselect cp_normal">
@@ -259,6 +251,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_account_number"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_account_number"></i>
+        <span id="errors_account_number" style="color: red;"></span>
     </div>
     <div class="form_item_tit">口座番号<span class="hissu_txt">必須</span></div>
     <input type="number" name="account_number" class="def_input_100p"
@@ -269,6 +262,7 @@
     <div class="spinner-wrapper">
         <div class="spinner" id="spinner_account_name"></div>
         <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_account_name"></i>
+        <span id="errors_account_name" style="color: red;"></span>
     </div>
     <div class="form_item_tit">口座名義<span class="hissu_txt">必須</span></div>
     <input type="text" name="account_name" class="def_input_100p"

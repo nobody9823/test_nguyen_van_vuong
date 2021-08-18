@@ -177,10 +177,10 @@ return [
         'payment_way' => '決済方法',
         'total_amount' => 'リターン合計金額',
         'display_added_price' => '上乗せ支援額',
-        'first_name_kana' => 'セイ(全角)',
-        'last_name_kana' => 'メイ(全角)',
-        'first_name' => '姓(全角)',
-        'last_name' => '名(全角)',
+        'first_name_kana' => 'メイ(全角)',
+        'last_name_kana' => 'セイ(全角)',
+        'first_name' => '名(全角)',
+        'last_name' => '姓(全角)',
         'gender' => '性別',
         'phone_number' => '電話番号',
         'postal_code' => '郵便番号',
@@ -225,5 +225,7 @@ return [
         'limit_of_supporters' => '限定数',
         'delivery_date' => 'お届け予定日',
         'image_url' => '画像',
+        'identify_image_1' => '本人確認書類1',
+        'identify_image_2' => '本人確認書類2'
     ],
 ];

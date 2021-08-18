@@ -14,7 +14,13 @@ if(isiOS) {
   }
 }
 </script>
-<title></title>
+
+<title>FanReturn (ファンリターン) 〜インフルエンサーの「やりたい」が叶う〜 | @yield('title')</title>
+<meta name="description" content="グッズを作りたい！ファンイベントを開きたい！そんなインフルエンサーに特化したクラウドファンディングサービスです。更にファンの満足度をUPさせる仕組みが多数！">
+<link rel="shortcut icon" href="{{ asset('image/fanreturn.ico') }}">
+<link rel="apple-touch-icon" href="{{ asset('image/fanreturn_apple_touch_icon.png') }}">
+<link rel="icon" type="image/png" href="{{ asset('image/fanreturn_android_chrome_192x192.png') }}">
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -25,6 +31,7 @@ if(isiOS) {
 
 <link href="{{ asset('css/reset.css') }}" type="text/css" rel="stylesheet">
 <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
+@yield('css')
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 
@@ -118,7 +125,7 @@ if(isiOS) {
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-                <a href="#" class="top_menu-1 nav_btn_link" onClick="window.alert('Coming Soon!'); return false;">
+                <a href="{{ route('user.question') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">ファンリターンとは</p>
 				</a>
 			</li>
@@ -356,7 +363,7 @@ if(isiOS) {
                 <ul class="footer_list">
                     <li><a href="{{ route('user.my_project.project.index') }}">はじめる</a></li>
                     <li><a href="{{ route('user.search') }}">さがす</a></li>
-                    <li><a href="#" onClick="window.alert('Coming Soon!'); return false;">ファンリターンとは</a></li>
+                    <li><a href="{{ route('user.question') }}">ファンリターンとは</a></li>
 
                     @guest('web')
                     <li>

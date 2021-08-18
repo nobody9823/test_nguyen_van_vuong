@@ -72,7 +72,7 @@ class MypageController extends Controller
     {
         $user_liked = UserProjectLiked::where('user_id', Auth::id())->get();
         return view('user.mypage.liked_project', [
-            'projects' => Auth::user()->likedProjects->load(['projectFiles', 'tags', 'likedUsers']),
+            'projects' => Auth::user()->likedProjects()->with(['projectFiles', 'tags', 'likedUsers'])->getWithPaymentsCountAndSumPrice()->paginate(12),
             'user_liked' => $user_liked,
         ]);
     }
@@ -137,8 +137,8 @@ class MypageController extends Controller
         return view('user.footer.trade_law');
     }
 
-    // public function question()
-    // {
-    //     return view('user.footer.question');
-    // }
+    public function question()
+    {
+        return view('user.footer.question');
+    }
 }

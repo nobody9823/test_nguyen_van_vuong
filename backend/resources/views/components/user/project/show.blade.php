@@ -86,7 +86,7 @@
                 <div class="pds_sec01_R_nin_base">
                     <div class="pds_sec01_R_nin01">支援者数</div>
                     <div class="pds_sec01_R_nin02 E-font">{{ $project->payments_count }}<span>人</span></div>
-                    <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div>
+                    {{-- <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div> --}}
                 </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_nokori_base">
@@ -155,17 +155,60 @@
 
             </div><!--/pds_sec01-->
         </div><!--/pds_inner-->
+        <div class="project_switch_tabs">
+            <div class="project_show_select_tab selected_tab" onClick="switchTabs(this,'#project_content_section')">プロジェクト</div>
+            {{-- <div class="project_show_select_tab" onClick="switchTabs(this)">活動レポート</div> --}}
+            <div class="project_show_select_tab" onClick="switchTabs(this,'#comment_section')">応援コメント</div>
+        </div>
+
     </div><!--/pc-Details-screen_base_top-->
 
     <div class="pc-Details-screen_base">
         <div class="def_inner">
             <div class="wlr_64">
 
-                <div class="wlr_64_L inner_item">
+                <div class="wlr_64_L inner_item tab_contents" id='project_content_section'>
                     <div class="pds_sec02_tit">{{ $project->title }}</div>
                     <div class="pds_sec02_txt">{!! $project->content !!}</div>
                     {{-- <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div> --}}
                 </div><!--/wlr_64_L-->
+
+                {{-- 必要になったらコメントアウト外す
+                <div class="wlr_64_L inner_item tab_contents" id='report_section' style="display:none">
+                    <div class="tit_L_01 E-font">
+                        <div class="sub_tit_L">活動レポート</div>
+                    </div>
+                    
+                    <div>
+                        @foreach($project->report as $report)
+                        <x-user.project.report :report="$report" />
+                        @endforeach
+                    </div>
+                </div>
+                必要になったらコメントアウト外す --}}
+
+                <div class="wlr_64_L inner_item tab_contents a_comment_list " id='comment_section' style="display:none">
+                    <div class="tit_L_01 E-font">
+                        {{-- <h2>COMMENTS</h2> --}}
+                        <div class="sub_tit_L">コメント一覧</div>
+                    </div>
+                
+                    <div>
+                        @foreach($project->comments as $comment)
+                        <x-user.project.comment :comment="$comment" />
+                        @endforeach
+                    </div>
+                    <div class="row justify-content-center mb-5" style="margin-top: 5px;">
+                        <div class="ps_rank_more_btn" id="comments_more_looking_button">
+                            続きを表示 <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="ps_rank_more_btn" id="comments_close_button">
+                            表示を少なくする <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                </div><!--/wlr_64_L-->
+                
 
                 <div class="wlr_64_R">
                     <div class="pds_sec02_tit inner_item">
@@ -185,6 +228,20 @@
     </div><!--/pc-Details-screen_base-->
 
 </section>
+
+<script src="{{ asset('js/switch-display-style.js') }}"></script>
+<script src="{{ asset('js/toggle-class-name.js') }}"></script>
+<script src="{{ asset('js/more-looking.js') }}"></script>
+<script type="text/javascript">
+//タブを押した際にスイッチする用のJS
+    window.addEventListener('DOMContentLoaded', () => {
+        moreLooking('a_comment', 3, 30, 'comments_more_looking_button','comments_close_button');
+    });
+    const switchTabs = (el,displaySectionSelector) => {
+        switchDisplayStyle('.tab_contents',displaySectionSelector);
+        toggleClassName('selected_tab','.project_show_select_tab',el);
+    };
+</script>
 {{-- <div class="content sub_content detail_content">
     <div class="fixedcontainer">
         <div class="breadcrumb">

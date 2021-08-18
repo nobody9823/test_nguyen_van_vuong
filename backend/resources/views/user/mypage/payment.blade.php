@@ -3,13 +3,15 @@
 @section('title', 'マイページ | マイプロジェクト')
 
 @section('content')
-<section class="section_base">
+<section id="supported-projects" class="section_base">
     <div class="tit_L_01 E-font">
         <h2>PURCHASE HISTORY</h2>
         <div class="sub_tit_L">購入履歴</div>
     </div>
     <div class="prof_page_base inner_item">
-        <x-user.mypage-navigation-bar/>
+        <div class="prof_page_L">
+            <x-user.mypage-navigation-bar/>
+        </div>
         @foreach($payments as $payment)
             <div class="prof_page_R">
                 <div class="su_pr_base">
@@ -72,21 +74,8 @@
         @endforeach
     </div>
 
-    @if ($payments->first() !== null)
-        <div class="pager E-font">
-            <ul class="pagination">
-                @if ($payments->previousPageUrl() !== null)
-                    <li class="pager_pre"><a href="{{ $payments->previousPageUrl() }}"><span>«</span></a></li>
-                @endif
-                @foreach ($payments->links()->elements[0] as $key => $link)
-                    <li><a href="{{ $link }}" class="{{ $payments->currentPage() == $key ? 'pager_active' : ''}}"><span>{{ $key }}</span></a></li>
-                @endforeach
-                @if ($payments->nextPageUrl() !== null)
-                    <li class="pager_next"><a href="{{ $payments->nextPageUrl() }}"><span>»</span></a></li>
-                @endif
-            </ul>
-        </div>
-    @endif
+    <x-common.pagination :props="$payments"/>
+    
 </section>
 @endsection
 

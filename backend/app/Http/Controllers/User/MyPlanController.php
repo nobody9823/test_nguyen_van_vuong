@@ -8,6 +8,8 @@ use App\Http\Requests\MyPlanRequest;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Plan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class MyPlanController extends Controller
 {
@@ -39,8 +41,16 @@ class MyPlanController extends Controller
      */
     public function store(MyPlanRequest $request, Project $project)
     {
-        $project->plans()->save(Plan::make($request->all()));
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => 'return'])->with(['flash_message' => 'リターンが作成されました。']);
+        DB::beginTransaction();
+        try {
+            Plan::find($request->plan_id)->fill($request->all())->save();
+            DB::commit();
+            return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => 'return'])->with(['flash_message' => 'リターン編集に成功しました。']);
+        } catch(\Exception $e) {
+            DB::rollback();
+            throw $e;
+            return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => 'return'])->withErrors(['リターン編集に失敗しました。']);
+        }
     }
 
     /**
@@ -98,5 +108,14 @@ class MyPlanController extends Controller
     public function updateReturn(Project $project, Plan $plan, MyPlanRequest $request)
     {
         return response()->json(['result' => $plan->fill($request->all())->save()]);
+    }
+
+    public function deletePlan(Project $project, Plan $plan)
+    {
+        $this->authorize('checkOwnPlan', $plan);
+        if(Auth::user()->projects()->find($project->id)->plans()->find($plan) !== null){
+            return response()->json([ 'result' => $plan->delete()]);
+        };
+        return response()->json(['result' => false]);
     }
 }
