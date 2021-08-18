@@ -15,6 +15,8 @@ class CommentFactory extends Factory
      */
     protected $model = Comment::class;
 
+    protected $values = [];
+
     /**
      * Define the model's default state.
      *
@@ -32,5 +34,22 @@ class CommentFactory extends Factory
                 'たくさんの人の希望の詰まったプロジェクトになる事を願っています。',
             ]),
         ];
+    }
+
+    public function init(int $count = 1, int $user_id)
+    {
+        for($i = 0; $i < $count; $i++){
+            $this->values[] = [
+                'project_id' => $this->faker->numberBetween(1, 40),
+                'user_id' => $user_id,
+                'content' => Arr::random([
+                    '頑張ってください！',
+                    'みんなで乗り越えましょう',
+                    'お手伝いできることがあればなんでもやります！',
+                    'たくさんの人の希望の詰まったプロジェクトになる事を願っています。',
+                ]),
+            ];
+        }
+        return $this->values;
     }
 }
