@@ -59,12 +59,12 @@ class ProjectFactory extends Factory
         });
     }
 
-    public function init(int $count = 1)
+    public function init(int $count = 1, int $user_id = 1, int $curator_id = 1)
     {
         for ($i = 0; $i < $count; $i ++){
             $this->values[] = [
-                'user_id' => $this->faker->numberBetween(1, 50),
-                'curator_id' => $this->faker->numberBetween(1, 10),
+                'user_id' => $user_id,
+                'curator_id' => $curator_id,
                 'title' => Arr::random([
                     'インフルエンサーの「やりたい」が叶う”それがファンリターン',
                     'インフルエンサーの「やりたい」が叶う”それがファンリターン',
