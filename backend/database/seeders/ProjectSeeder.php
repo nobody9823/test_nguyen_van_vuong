@@ -27,17 +27,7 @@ class ProjectSeeder extends Seeder
     public function run()
     {
         Project::truncate();
-        Project::insert(Project::factory()->init(30, false));
-        Project::all()->each(function(Project $project){
-            ProjectFile::insert(ProjectFile::factory()->init(rand(1, 10), $project->id));
-            Report::insert(Report::factory()->init(rand(1, 10), $project->id));
-            Plan::insert(Plan::factory()->init(rand(1, 10), $project->id));
-            $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
-            $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
-        });
-
-        // 公開中
-        Project::insert(Project::factory()->init(10, true));
+        Project::insert(Project::factory()->init(40));
         Project::where('release_status', '掲載中')->get()->each(function(Project $project){
             ProjectFile::insert(ProjectFile::factory()->init(rand(1, 10), $project->id));
             Report::insert(Report::factory()->init(rand(1, 10), $project->id));
@@ -45,6 +35,14 @@ class ProjectSeeder extends Seeder
             $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
             $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
             $project->supportedUsers()->attach(User::inRandomOrder()->take(random_int(1, 10))->get()->pluck('id'));
+        });
+
+        Project::where('release_status', '!=', '掲載中')->get()->each(function(Project $project){
+            ProjectFile::insert(ProjectFile::factory()->init(rand(1, 10), $project->id));
+            Report::insert(Report::factory()->init(rand(1, 10), $project->id));
+            Plan::insert(Plan::factory()->init(rand(1, 10), $project->id));
+            $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
+            $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
         });
     }
 }
