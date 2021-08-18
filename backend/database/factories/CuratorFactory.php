@@ -15,6 +15,8 @@ class CuratorFactory extends Factory
      */
     protected $model = Curator::class;
 
+    protected $values = [];
+
     /**
      * Define the model's default state.
      *
@@ -41,5 +43,19 @@ class CuratorFactory extends Factory
                 'password' => 'valleyin'
             ];
         });
+    }
+
+    public function init(int $count = 1)
+    {
+        for($i = 0; $i < $count; $i++){
+            $this->values[] = [
+                'name' => $this->faker->name,
+                'email' => $this->faker->unique()->safeEmail,
+                'email_verified_at' => now(),
+                'password' => 'password',
+                'remember_token' => Str::random(10)
+            ];
+        }
+        return $this->values;
     }
 }
