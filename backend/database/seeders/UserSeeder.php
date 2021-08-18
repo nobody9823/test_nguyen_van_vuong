@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             $user->comments()->saveMany(Comment::factory(rand(1,10))->hasReply(rand(0,1))->create());
         });
 
-        User::insert(User::factory()->init());
+        User::insert(User::factory()->init(50));
         User::all()->each(function(User $user){
             $user->address()->save(Address::factory()->make());
             $user->identification()->save(Identification::factory()->make());
