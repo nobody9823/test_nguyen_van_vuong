@@ -16,6 +16,6 @@ class CuratorSeeder extends Seeder
     {
         Curator::factory()->valleyin()->create();
 
-        Curator::factory(10)->create();
+        Curator::insert(Curator::factory()->init(10));
     }
 }
