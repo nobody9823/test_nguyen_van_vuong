@@ -27,10 +27,11 @@ class ProjectSeeder extends Seeder
     public function run()
     {
         Project::truncate();
-        Project::insert(Project::factory()->init(40), rand(1, 50), rand(1, 10));
+        Project::insert(Project::factory()->init(40, rand(1, 50), rand(1, 10)));
         Project::where('release_status', '掲載中')->get()->each(function(Project $project){
             ProjectFile::insert(ProjectFile::factory()->init(rand(1, 10), $project->id));
             Report::insert(Report::factory()->init(rand(1, 10), $project->id));
+            Plan::insert(Plan::factory()->init(rand(1, 10), $project->id));
             Plan::insert(Plan::factory()->init(rand(1, 10), $project->id));
             $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
             $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
