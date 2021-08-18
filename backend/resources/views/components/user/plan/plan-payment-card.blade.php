@@ -11,13 +11,18 @@
             <div class="wlr_64_R">
                 <div class="as_01">
                     <div class="as_check">
+                        @if($plan->limit_of_supporters > 0)
                         <input type="checkbox" name="plan_ids[]" class="plan_ids ac_list_checks checkbox-fan" onChange="Plans.planIsChecked(this)" id="{{ $plan->id }}" value="{{ $plan->price }}"
-                            @if ( ($plan->limit_of_supporters > 0) === true && !empty(old('plans')) && in_array($plan->id, array_keys(old('plans'))) )
+                            @if (old('plans') && in_array($plan->id, array_keys(old('plans'))))
                                 checked
-                            @elseif (($plan->limit_of_supporters > 0) === false)
-                                'disabled'
-                            @endif>
+                            @elseif($isSelected)
+                                checked
+                            @endif
+                        />
                         <label for="{{ $plan->id }}" class="checkbox-fan_02">{{ $plan->price }}円</label>
+                        @elseif($plan->limit_of_supporters < 1)
+                        <div class="pds_sec02_01_nokori_nin" style="color: #e65d65">OUT OF STOCK</div>
+                        @endif
                     </div>
                 </div>
                 @if ($plan->limit_of_supporters > 0)

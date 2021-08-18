@@ -27,11 +27,12 @@ class UserSeeder extends Seeder
             $user->comments()->saveMany(Comment::factory(rand(1,10))->hasReply(rand(0,1))->create());
         });
 
-        User::factory(100)->create()->each(function ($user) {
+        User::insert(User::factory()->init());
+        User::all()->each(function(User $user){
             $user->address()->save(Address::factory()->make());
             $user->identification()->save(Identification::factory()->make());
             $user->profile()->save(Profile::factory()->make());
-            $user->comments()->saveMany(Comment::factory(rand(1,10))->hasReply(rand(0,1))->create());         
+            Comment::insert(Comment::factory()->init(rand(1, 10), $user->id));
         });
     }
 }

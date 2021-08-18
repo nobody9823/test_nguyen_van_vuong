@@ -167,6 +167,7 @@
         <div class="def_inner">
             <div class="wlr_64">
 
+
                 <div class="wlr_64_L inner_item tab_contents" id='project_content_section'>
                     <div class="pds_sec02_tit">{{ $project->title }}</div>
                     <div class="pds_sec02_txt">{!! $project->content !!}</div>
@@ -192,7 +193,16 @@
                         {{-- <h2>COMMENTS</h2> --}}
                         <div class="sub_tit_L">コメント一覧</div>
                     </div>
-                
+                    <form action="{{ route('user.comment.store',['project' => $project]) }}" method="POST">
+                        @csrf
+                        <label for="comment_content" id="l_comment_content"></label>
+                        <input id="comment_content" name="content" type="text" placeholder="コメントを入力">
+                        <div class="text_underline"></div>
+                        <div style="text-align: center">
+                            <input class="comment_submit_button" type="submit" value="コメントを送信">
+                        </div>
+                    </form>
+
                     <div>
                         @foreach($project->comments as $comment)
                         <x-user.project.comment :comment="$comment" />

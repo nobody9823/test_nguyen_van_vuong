@@ -22,10 +22,10 @@
         <input type="hidden" class="p-country-name" value="Japan">
         <!--★選択時 ↓as_select_return　に　asr_currentを追加-->
         @if ($plans instanceof \App\Models\Plan)
-            <x-user.plan.plan-payment-card :plan="$plans" />
+            <x-user.plan.plan-payment-card :plan="$plans" isSelected="1" />
         @else
             @foreach($project->plans as $plan)
-                <x-user.plan.plan-payment-card :plan="$plan" />
+                <x-user.plan.plan-payment-card :plan="$plan" isSelected="0" />
             @endforeach
         @endif
         {{-- <!--★通常時-->

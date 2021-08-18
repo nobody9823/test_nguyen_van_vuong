@@ -32,9 +32,10 @@ class PlanRequest extends FormRequest
             'content' => ['required', 'string', 'max:2000'],
             'price' =>  ['integer', 'min:500', 'max:10000000', Rule::requiredIf($request->isMethod('post'))],
             'address_is_required' => ['required'],
-            'limit_of_supporters' => ['required','integer', 'min:1'],
+            'limit_of_supporters_is_required' => ['required', 'boolean'],
+            'limit_of_supporters' => ['required', 'integer', 'min:1'],
             'delivery_date' => ['required', 'date_format:Y-m-d', 'after:now'],
-            'image_url' => ['image',Rule::requiredIf($request->isMethod('post'))],
+            'image_url' => ['image', Rule::requiredIf($request->isMethod('post'))],
             // NOTE:現状オプションは使用しない為、コメントアウト
             // 'options' => ['array'],
             // 'options.*.name' => ['nullable', 'string'],
