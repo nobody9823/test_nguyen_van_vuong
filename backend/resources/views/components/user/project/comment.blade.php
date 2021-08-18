@@ -1,10 +1,6 @@
 <div class="a_comment">
     <div class="comment_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
-        @if(isset($comment->user->profile))
         <img src="{{ Storage::url(optional($comment->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
-        @else
-        <img src="{{ asset('sampleImage/my-page.svg') }} alt="プロフィール画像" class="user_image">
-        @endif
         <div class="comment_content">
             <div class="comment_content_user">
                 <span>{{ $comment->user->name }}&emsp;</span>
