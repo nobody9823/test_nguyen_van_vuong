@@ -59,7 +59,7 @@ class ProjectFactory extends Factory
         });
     }
 
-    public function init(int $count = 1, int $user_id = 1, int $curator_id = 1)
+    public function init(int $count, int $user_id, int $curator_id)
     {
         for ($i = 0; $i < $count; $i ++){
             $this->values[] = [
