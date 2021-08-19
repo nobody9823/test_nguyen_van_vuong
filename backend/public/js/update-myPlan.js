@@ -46,7 +46,7 @@ const updateMyPlan = (() => {
         } else {
             el = document.getElementById('saved_return_' + Object.keys(data)[0] + (planId === undefined ? '' : '_' + planId));
         }
-        el.style.display = 'block';
+        el.style.display = 'inline-block';
         setTimeout(() => { dissaperIcon(el); }, 3000);
     }
 
