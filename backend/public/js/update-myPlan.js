@@ -46,7 +46,7 @@ const updateMyPlan = (() => {
         } else {
             el = document.getElementById('saved_return_' + Object.keys(data)[0] + (planId === undefined ? '' : '_' + planId));
         }
-        el.style.display = 'contents';
+        el.style.display = 'block';
         setTimeout(() => { dissaperIcon(el); }, 3000);
     }
 
@@ -93,7 +93,9 @@ const updateMyPlan = (() => {
                 }
                 displayIcon(data, planId);
             } else if (res.data.message !== undefined){
-                console.log(data);
+                if (data instanceof FormData){
+                    displayError({image_url: data}, res.data.message['image_url'], planId);
+                }
                 displayError(data, res.data.message[Object.keys(data)[0]], planId);
             }
         }).catch(res => {

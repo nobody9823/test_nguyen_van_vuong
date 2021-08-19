@@ -2442,3 +2442,10 @@ div.spinner-wrapper {
     }
 }
 /* リターン作成のフォームのモーダル表示 */
+
+.saved_icon {
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #00c368;
+}
