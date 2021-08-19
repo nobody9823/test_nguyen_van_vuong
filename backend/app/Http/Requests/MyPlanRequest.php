@@ -42,13 +42,13 @@ class MyPlanRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if (!$this->filled('title')){
+        if ($this->has('title') && is_null($this->title)) {
             $this->merge([
                 'title' => ''
             ]);
         }
 
-        if (!$this->filled('content')){
+        if ($this->has('content') && is_null($this->content)) {
             $this->merge([
                 'content' => ''
             ]);
@@ -60,7 +60,7 @@ class MyPlanRequest extends FormRequest
             ]);
         }
 
-        if (!$this->filled('delivery_date')){
+        if (!$this->filled('delivery_date')) {
             $this->offsetUnset('delivery_date');
         }
     }
