@@ -19,6 +19,7 @@
                 <img id="project_file_{{ $project_image->id }}" src="{{ Storage::url($project_image->file_url) }}">
                 <button id="{{ $project_image->id }}" class="js-image_delete project_image-delete"><i class="fas fa-times-circle"></i></button>
             </div>
+            <div class="form_item_tit" style="margin-bottom: 10px"></div>
             <div class="input_file_button_wrapper">
                 <label>
                     <input hidden type="file" onChange="uploadProjectImage(this, {{ $project->id }}, {{ $project_image->id }})">
