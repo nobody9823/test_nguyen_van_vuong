@@ -36,14 +36,14 @@
     @method('PUT')
     <div class="form_item_row">
         <div class="form_item_tit">
-            <div class="spinner-wrapper">
-                <div class="spinner" id="spinner_video_url"></div>
-                <i class="fa fa-check-circle green" aria-hidden="true" style="display: none;" id="saved_video_url"></i>
-                <span id="errors_video_url" style="color: red;"></span>
-            </div>
             スライドYouTube動画URL設定
         </div>
         <input type="text" name="video_url" class="def_input_100p" value="{{ old('video_url', optional($projectVideo)->file_url) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
+        <div class="spinner-wrapper">
+            <div class="spinner" id="spinner_video_url"></div>
+            <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_video_url">保存しました</p>
+            <span id="errors_video_url" style="color: red;"></span>
+        </div>
     </div>
 
     <div class="def_btn">
