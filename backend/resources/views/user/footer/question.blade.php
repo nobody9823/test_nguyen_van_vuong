@@ -139,7 +139,11 @@
             <p class="about-project__txt"><span>05</span>プロジェクトリターンの実施</p>
         </section><!-- /.about-project -->
 
-
+        <section class="about-project-supporter">
+            <h2 class="about-project-supporter__title">PROJECT SUPPORTER</h2><!-- /.about-project-supporter__title -->
+            <h3 class="about-project-supporter__sub-title">プロジェクトサポーター(PS)とは</h3>
+            <x-user.project.ps-description />
+        </section>
     </main>
 </div><!-- /.question-content -->
 
