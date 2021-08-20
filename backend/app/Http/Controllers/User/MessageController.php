@@ -50,8 +50,8 @@ class MessageController extends Controller
     public function store(MessageContentRequest $request, Payment $payment)
     {
         // FIXME ポリシーは修正は別タスクで修正いたします。
-        $this->authorize('checkOwnedByUser', $payment);
-        if ($this->message_store($request, $payment, 'web')) {
+        $this->authorize('checkOwnedBySupporter', $payment);
+        if ($this->message_store($request, $payment, 'supporter')) {
             return redirect()->back()->with('flash_message', 'メッセージ送信が完了しました。');
         } else {
             return redirect()->back()->with('error', 'メッセージ送信に失敗しました。時間をおいてお試しください。');
@@ -64,18 +64,18 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment)
+    public function show(Payment $message)
     {
-        $this->authorize('checkOwnedByUser', $payment);
-        $payment->messageContents()->readByUser();
-        $selected_message = $payment;
+        $this->authorize('checkOwnedBySupporter', $message);
+        $message->messageContents()->readBySupporter();
+        $selected_message = $message;
         $chating_messages = Payment::where('user_id', Auth::id())->messaging()->seeking()->orderBy('updated_at', 'desc')->get();
         $not_chating_messages = Payment::where('user_id', Auth::id())->notMessaging()->seeking()->orderBy('updated_at', 'desc')->get();
         return view('user.mypage.message.index', [
             'chating_messages' => $chating_messages,
             'not_chating_messages' => $not_chating_messages,
             'selected_message' => $selected_message,
-            ]);
+        ]);
     }
 
     /**
@@ -114,7 +114,7 @@ class MessageController extends Controller
 
     public function file_download(MessageContent $message_content)
     {
-        $this->authorize('checkOwnedByUser', $message_content);
+        $this->authorize('checkOwnedBySupporter', $message_content);
         if ($message_content->payment->user->id = Auth::guard()->id()) {
             return Storage::download($message_content->file_path, $message_content->file_original_name);
         } else {

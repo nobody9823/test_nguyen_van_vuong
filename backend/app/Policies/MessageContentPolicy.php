@@ -2,11 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Company;
 use App\Models\MessageContent;
-use App\Models\Talent;
 use App\Models\User;
-use App\Models\UserPlanCheering;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MessageContentPolicy
@@ -96,32 +93,22 @@ class MessageContentPolicy
     }
 
     /**
-     * check owned by company
+     * check owned by executor
      *
      *@return void
      */
-    public function checkOwnedByCompany(Company $company, MessageContent $message_content)
+    public function checkOwnedByExecutor(User $user, MessageContent $message_content)
     {
-        return $message_content->userPlanCheering->plan->project->talent->company->id === $company->id;
+        return $message_content->payment->project->user->id === $user->id;
     }
 
     /**
-     * check owned by talent
+     * check owned by supporter
      *
      *@return void
      */
-    public function checkOwnedByTalent(Talent $talent, MessageContent $message_content)
+    public function checkOwnedBySupporter(User $user, MessageContent $message_content)
     {
-        return $message_content->userPlanCheering->plan->project->talent->id === $talent->id;
-    }
-
-    /**
-     * check owned by user
-     *
-     *@return void
-     */
-    public function checkOwnedByUser(User $user, MessageContent $message_content)
-    {
-        return $message_content->userPlanCheering->user->id === $user->id;
+        return $message_content->payment->user->id === $user->id;
     }
 }
