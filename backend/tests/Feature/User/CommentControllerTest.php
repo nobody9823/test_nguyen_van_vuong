@@ -63,9 +63,8 @@ class CommentControllerTest extends TestCase
 
         $this->comment->save();
         $response = $this->actingAs($this->user)
-        ->from(route('user.comment.index', ['project' => $this->project]))
-        ->delete(route('user.comment.destroy', ['project' => $this->project, 'comment' => $this->comment]));
-
+                         ->from(route('user.comment.index', ['project' => $this->project]))
+                         ->delete(route('user.comment.destroy', ['project' => $this->project, 'comment' => $this->comment]));
         $response->assertRedirect(route('user.comment.index', ['project' => $this->project]));
         $this->assertSoftDeleted($this->comment);
         $this->assertEquals(0, Comment::count());

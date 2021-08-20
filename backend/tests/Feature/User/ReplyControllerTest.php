@@ -54,4 +54,17 @@ class ReplyControllerTest extends TestCase
         ]);
         $response->assertRedirect(route('user.comment.index', ['project' => $this->project]));
     }
+
+    public function testDestroyAction()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->reply->save();
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.comment.index', ['project' => $this->project]))
+                         ->delete(route('user.reply.destroy', ['project' => $this->project, 'reply' => $this->reply]));
+        $response->assertRedirect(route('user.comment.index', ['project' => $this->project]));
+        $this->assertSoftDeleted($this->reply);
+        $this->assertEquals(0, Reply::count());
+    }
 }
