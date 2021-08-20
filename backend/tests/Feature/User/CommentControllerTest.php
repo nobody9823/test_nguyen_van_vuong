@@ -40,6 +40,7 @@ class CommentControllerTest extends TestCase
     public function testIndexAction()
     {
         $this->withoutExceptionHandling();
+
         $response = $this->actingAs($this->user)
                          ->from(route('user.my_project.project.show', ['project' => $this->project]))
                          ->get(route('user.comment.index', ['project' => $this->project]));
@@ -52,12 +53,27 @@ class CommentControllerTest extends TestCase
         $this->withoutExceptionHandling();
 
         $response = $this->actingAs($this->user)
-        ->from(route('user.project.show', ['project' => $this->project]))
-        ->post(route('user.comment.store', ['project' => $this->project, 'comment' => $this->comment]),[
+                         ->from(route('user.project.show', ['project' => $this->project]))
+                         ->post(route('user.comment.store', ['project' => $this->project, 'comment' => $this->comment]),
+        [
             'user_id' => $this->user->id,
             'project_id' => $this->project->id,
             'content' => $this->comment->content,
         ]);
         $response->assertRedirect(route('user.project.show', ['project' => $this->project]));
+    }
+
+    public function testDestroyAction()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->comment->save();
+        $response = $this->actingAs($this->user)
+        ->from(route('user.comment.index', ['project' => $this->project]))
+        ->delete(route('user.comment.destroy', ['project' => $this->project, 'comment' => $this->comment]));
+
+        $response->assertRedirect(route('user.comment.index', ['project' => $this->project]));
+        $this->assertSoftDeleted($this->comment);
+        $this->assertEquals(0, Comment::count());
     }
 }
