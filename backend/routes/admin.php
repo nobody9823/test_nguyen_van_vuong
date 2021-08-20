@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\ReportController;
-use App\Http\Controllers\Admin\ActivityReportController;
 use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\TagController;
-use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Admin\LoginController;
@@ -17,9 +15,7 @@ use App\Http\Controllers\Admin\ReplyController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\CuratorController;
-use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\UserController;
-use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
 //ログイン
