@@ -13,7 +13,6 @@ use App\Actions\PayPay\PayPayInterface;
 use App\Actions\PayJp\PayJpInterface;
 use Illuminate\Foundation\Exceptions\Handler;
 use App\Traits\UniqueToken;
-use App\Rules\UserAddressLimit;
 use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
