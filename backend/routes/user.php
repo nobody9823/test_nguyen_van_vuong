@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\LoginController;
+use App\Http\Controllers\User\MessageController;
 use App\Http\Controllers\User\PlanController;
 use App\Http\Controllers\User\ProjectController;
 use App\Http\Controllers\User\CommentController;
