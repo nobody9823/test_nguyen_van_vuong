@@ -40,9 +40,7 @@ input, select {
 	margin: 0 auto;
 	padding: 0 14px;
 }
-.content {
-	margin: 50px auto;
-}
+
 @media screen and (min-width: 768px){
 	.inner {
 		width: 100%;
@@ -50,7 +48,7 @@ input, select {
 		margin: 0 auto;
 		padding: 0 30px;
 	}
-	.content {
+	.about-content {
 		margin: 50px auto;
 		display: flex;
 		justify-content: space-between;
@@ -920,10 +918,20 @@ input[type=radio]:checked + .radio-fan::after {
 .prof_edit_row img{ height: 48px; width: 48px;}
 
 .comment_row{padding: 10px 0; min-height: 75px; border-bottom: solid 1px #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
-.comment_row img{ height: 48px; width: 48px;}
+.comment_row img{ width: 48px;height: 48px;object-fit: cover;}
 .comment_content{width: 80%;}
 .comment_content_user{font-size: 0.5vw;text-align: right;}
 .comment_content_text{font-size: 1.0vw;text-align: right;}
+#comment_content{font-size: 1.4rem;width: 100%;border: none;outline: none;padding-bottom: 8px;box-sizing: border-box;}
+.text_underline{position: relative;border-top: 1px solid #c2c2c2;}
+.text_underline::before,
+.text_underline::after{position: absolute; bottom: 0px;width: 0px;height: 1px;content: '';background-color: #00AEBD;transition: all 0.5s;-webkit-transition: all 0.5s;}
+.text_underline::before{left: 50%;}
+.text_underline::after{ right: 50%;}
+#comment_content:focus + .text_underline::before,
+#comment_content:focus + .text_underline::after{width: 50%;}
+.comment_submit_button {display:inline-block;border-radius:3%;font-size:1.2rem;text-align:center;cursor:pointer;padding:10px 10%;margin:5px 0 0 0;background: #00AEBD;color: #ffffff;line-height: 1em;transition: .2s;box-shadow:0 2px #666666;border: 1px solid #00AEBD;}
+.comment_submit_button:hover {box-shadow: none;color: #00AEBD;background: #ffffff;}
 
 .prof_edit_01{ width:20%;  color: #00AEBD; font-weight: bold; position: relative;}
 .prof_edit_01 span{ font-size: 1.4rem; font-weight: normal; color: #EC111A;}
@@ -1070,7 +1078,7 @@ input[type=radio]:checked + .radio-fan::after {
 	.pds_sec01_R_nokori02 span{ font-size: 2.2rem;}
     .slider-img-wrapper{ height: 298px; }
     .project_sns_icon img{ width: 26px; margin-left: 4px;}
-	.project_show_select_tab{width:20%;}
+	.project_show_select_tab{width:50%;}
 }
 
 
@@ -1838,32 +1846,16 @@ width: 100%;
 /* ====================================================================
   FanReturnとは
 ==================================================================== */
-
-/*非表示をコメントアウトしています*/
-/*
-.acd-check{
-    display: none;
+.question-content {
+	margin: 50px auto;
 }
-*/
-/* .ac-label {
-    display: block;
-    margin-bottom: 1px;
-    padding: 10px;
+@media screen and (min-width: 768px){
+	.question-content {
+		margin: 50px auto;
+		display: flex;
+		justify-content: space-between;
+	}
 }
-.ac-content{
-    height: 0;
-    opacity: 0;
-    transition: .5s;
-    visibility: hidden;
-}
-.ac-check:checked + .ac-label + .ac-content{
-    height: 50px;
-    opacity: 1;
-    padding: 5px 10px;
-    visibility: visible;
-} */
-
-/* ここまで */
 
 @media screen and (min-width: 768px){
 	.question-sidebar {
@@ -2237,7 +2229,7 @@ width: 100%;
 .my_project_img_wrapper {overflow: hidden; position: relative; display: flex; justify-content: center; align-items: center;}
 .my_project_img_wrapper_show {overflow: visible;}
 .my_new_project_wrapper {margin: 15px 0 15px 0;}
-.my_new_project {width: 100%;}
+.my_new_project {width: 100%; cursor: pointer;}
 .publish_date_wrapper {display: flex; flex-direction: row;}
 .publish_date_after_month {display: flex;flex-wrap: wrap;}
 .project_image_row {justify-content: space-around;}
@@ -2413,3 +2405,40 @@ div.spinner-wrapper {
     .posts_example_btn p {padding: 8px 9px;}
 }
 /* PSサポーターとは */
+
+/* リターン作成のフォームのモーダル表示 */
+.plan_form_modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 2;
+}
+
+.plan_form_modal_bg{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.plan_form_modal_content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: scroll; /* はみ出た部分はスクロールさせる */
+    height: 60%;/* これが無いと「overflow:scroll」が利かない */
+    width: 60%;/* これが無いと「overflow:scroll」が利かない */
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px){
+    .plan_form_modal_content{
+        width: 90%;
+    }
+}
+/* リターン作成のフォームのモーダル表示 */

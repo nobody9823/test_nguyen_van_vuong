@@ -16,6 +16,8 @@ class UserFactory extends Factory
      */
     protected $model = User::class;
 
+    public $values = [];
+
     /**
      * Define the model's default state.
      *
@@ -42,5 +44,19 @@ class UserFactory extends Factory
                 'password' => 'valleyin',
             ];
         });
+    }
+
+    public function init(int $count)
+    {
+        for ($i = 0; $i < $count; $i ++){
+            $this->values[] = [
+                'name' => $this->faker->name,
+                'email' => $this->faker->unique()->safeEmail,
+                'email_verified_at' => now(),
+                'password' => 'password',
+                'remember_token' => Str::random(10),
+            ];
+        }
+        return $this->values;
     }
 }
