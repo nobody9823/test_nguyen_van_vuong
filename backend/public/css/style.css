@@ -2450,3 +2450,94 @@ div.spinner-wrapper {
     }
 }
 /* リターン作成のフォームのモーダル表示 */
+
+
+/* お問い合わせ */
+.inquiry_attention{
+	font-size: 18px;
+    color: #00aebd;
+    font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.inquiry_text{
+	font-size: 14px;
+	margin-bottom: 30px;
+}
+
+.inquiry_border{
+	height: 0;
+	border: solid 1px #bdbdbd;
+	margin-bottom: 30px;
+}
+
+.inquiry_attention_border{
+	height: 0;
+	width: 564px;
+	margin: 30px auto;
+	border: solid 1px #00aebd;
+}
+
+.inquiry_anchor_wrapper{
+	margin:0 0 20px 0;
+}
+
+.inquiry_anchor{
+	font-size: 14px;
+	font-weight: bold;
+	color: #1c81d8;
+}
+
+.inquiry_section_inner {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.inquiry_form_section {
+	width: 100%;
+	margin-top: 30px;
+	background-color: #f8f8f8;
+	font-size: 14px;
+	padding: 0 0 50px 0;
+}
+
+.inquiry_form_section_inner {
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.inquiry_form_text{
+	text-align: center;
+	padding: 50px 0 50px 0;
+}
+
+.inquiry_form_group{
+	width: 564px;
+	margin: 0 auto;
+}
+
+.inquiry_button{
+	width: 401px;
+	height: 52px;
+	font-size: 18px;
+	margin: 50px auto 0 auto;
+	padding: 10px 140px 10px 140px;
+	border-radius: 4px;
+	background-color: #00aebd;
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+}
+
+.inquiry_button[disabled] {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+/* .akk{
+	display: inline;
+} */
+/* お問い合わせ */
