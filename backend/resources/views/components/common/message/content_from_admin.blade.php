@@ -11,7 +11,7 @@
         <div>
             <img class="contributor-icon" src={{Storage::url('public/sampleImage/person_sample.jpg')}}
                 style="margin-right: 0.5rem;width: 25px;height: 25px;">
-            ガーディアン運営:
+            FanReturn運営:
             <span style="font-weight: normal;color: gray;font-size: 80%;">
                 {{$messageContent->updated_at}}
             </span>

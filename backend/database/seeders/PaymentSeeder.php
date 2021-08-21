@@ -21,9 +21,9 @@ class PaymentSeeder extends Seeder
     {
         User::inRandomOrder()->take(rand(50, 80))->each(function (User $user) {
             $user->payments()->saveMany(
-                Payment::factory(rand(0, 5))
+                Payment::factory()->count(10)
                     ->has(PaymentToken::factory())
-                    ->has(MessageContent::factory()->count(3))
+                    ->has(MessageContent::factory()->count(20))
                     ->create()
             );
         });
