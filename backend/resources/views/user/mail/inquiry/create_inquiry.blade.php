@@ -47,7 +47,8 @@
                     <div class="form_item_row">
                         <div class="form_item_tit">お問い合わせ種類<span class="nini_txt">任意</span></div>
                         <div class="cp_ipselect cp_normal" style="width: 100%">
-                            <select name="device" class="p-region">
+                            <select name="inquiry_category" class="p-region">
+                                <option selected>選択してください</option>
                                 @foreach($inquiry_categories as $inquiry_category)
                                 <option value="{{$inquiry_category}}" {{ old('inquiry_category')== $inquiry_category ? 'selected' : '' }}>
                                     {{$inquiry_category}}
@@ -62,12 +63,12 @@
                     <div class="form_item_row">
                         <div class="form_item_tit">デバイス種類<span class="nini_txt">任意</span></div>
                         <div class="cp_ipselect cp_normal" style="width: 100%">
-                            <select name="device" class="p-region">
-                                @foreach($inquiry_categories as $inquiry_category)
-                                <option value="{{$inquiry_category}}" {{ old('inquiry_category')== $inquiry_category ? 'selected' : '' }}>
-                                    {{$inquiry_category}}
-                                </option>
-                                @endforeach                        
+                            <select name="device_type" class="p-region">
+                                <option selected>選択してください</option>
+                                <option value='pc' {{ old('device_type')== 'pc' ? 'selected' : '' }}>PC</option>
+                                <option value='smartphone' {{ old('device_type')== 'smartphone' ? 'selected' : '' }}>スマートフォン(WEB)</option>
+                                <option value='tablet' {{ old('device_type')== 'tablet' ? 'selected' : '' }}>タブレット</option>
+                                <option value='others' {{ old('device_type')== 'others' ? 'selected' : '' }}>その他</option>
                             </select>
                         </div>
                     </div>

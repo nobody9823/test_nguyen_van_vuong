@@ -9,6 +9,7 @@ use App\Http\Requests\InquiryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+
 // use URL;
 
 class InquiryController extends Controller
@@ -27,7 +28,7 @@ class InquiryController extends Controller
             "その他"
         );
 
-        return view('user.mail.inquiry.create_inquiry',[
+        return view('user.mail.inquiry.create_inquiry', [
         'inquiry_categories' => $inquiry_categories,
         ]);
     }
@@ -35,26 +36,26 @@ class InquiryController extends Controller
     public function sendInquiry(InquiryRequest $inquiry)
     {
         // 画像をStoragesに保存し、そのファイル名を$file_namesの配列に挿入。
-        $file_names = array();
-        if ($inquiry->images) {
-            foreach ($inquiry->images as $image) {
-                $file_name = $image->getClientOriginalName();
-                $image->storeAS('public/image', $file_name);
-                $inputs['path'] = $file_name;
-                array_push($file_names, $file_name);
-            }
-        } else {
-            $file_names = null;
-        }
+        // $file_names = array();
+        // if ($inquiry->images) {
+        //     foreach ($inquiry->images as $image) {
+        //         $file_name = $image->getClientOriginalName();
+        //         $image->storeAS('public/image', $file_name);
+        //         $inputs['path'] = $file_name;
+        //         array_push($file_names, $file_name);
+        //     }
+        // } else {
+        //     $file_names = null;
+        // }
 
-        Mail::to(config('mail.customer_support.address'))->send(new MailFromInquiry($inquiry, $file_names));
+        Mail::to(config('mail.customer_support.address'))->send(new MailFromInquiry($inquiry, null));
 
         // メールを送信した後、アップロードしたStorage内の画像を削除する。
-        if (isset($file_names)) {
-            foreach ($file_names as $file_name) {
-                Storage::delete('public/image/' . $file_name);
-            }
-        }
+        // if (isset($file_names)) {
+        //     foreach ($file_names as $file_name) {
+        //         Storage::delete('public/image/' . $file_name);
+        //     }
+        // }
 
         return redirect()->route('user.inquiry.create')->with('flash_message', 'メール送信が成功しました。');
     }
