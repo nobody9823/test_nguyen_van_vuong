@@ -75,30 +75,16 @@ class Payment extends Model
     public function scopeSeeking($query)
     {
         return $query->whereIn(
-            'id',
-            PlanPaymentIncluded::query()->select('payment_id')->whereIn(
-                'plan_id',
-                Plan::query()->select('id')->whereIn(
-                    'project_id',
-                    Project::query()->select('id')
-                        ->seeking()
-                )
-            )
+            'project_id',
+            Project::query()->select('id')->seeking()
         );
     }
 
     public function scopeNotSeeking($query)
     {
         return $query->whereNotIn(
-            'id',
-            PlanPaymentIncluded::query()->select('payment_id')->whereIn(
-                'plan_id',
-                Plan::query()->select('id')->whereIn(
-                    'project_id',
-                    Project::query()->select('id')
-                        ->seeking()
-                )
-            )
+            'project_id',
+            Project::query()->select('id')->seeking()
         );
     }
 
@@ -108,9 +94,9 @@ class Payment extends Model
             foreach ($this->getSearchWordInArray() as $word) {
                 $query->where(function ($query) use ($word) {
                     $query->whereIn('user_id', User::select('id')->where('name', 'like', "%$word%"))
-                    ->orWhereIn('inviter_id', User::select('id')->where('name', 'like', "%$word%"))
-                    ->orWhereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->whereIn('project_id', Project::select('id')->where('title', 'like', "%$word%"))))
-                    ->orWhereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->where('title', 'like', "%$word%")));
+                        ->orWhereIn('inviter_id', User::select('id')->where('name', 'like', "%$word%"))
+                        ->orWhereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->whereIn('project_id', Project::select('id')->where('title', 'like', "%$word%"))))
+                        ->orWhereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->where('title', 'like', "%$word%")));
                 });
             }
         }
@@ -157,7 +143,7 @@ class Payment extends Model
     public function getAddedPaymentAmountAttribute()
     {
         $total_amount = 0;
-        foreach($this->includedPlans as $plan){
+        foreach ($this->includedPlans as $plan) {
             $total_amount += ($plan->price * $plan->pivot->quantity);
         }
         return $this->price - $total_amount;
