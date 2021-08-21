@@ -6,6 +6,7 @@ use App\Http\Controllers\User\PlanController;
 use App\Http\Controllers\User\ProjectController;
 use App\Http\Controllers\User\CommentController;
 use App\Http\Controllers\User\ReplyController;
+use App\Http\Controllers\User\ReportController;
 use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\InquiryController;
 use App\Http\Controllers\User\MypageController;
@@ -47,6 +48,7 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::delete('delete_plan/{plan}', [MyPlanController::class, 'deletePlan']);
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
             Route::resource('comment', CommentController::class)->only(['index', 'destroy']);
+            Route::resource('report', ReportController::class)->only(['index']);
             Route::post('reply/{comment}', [ReplyController::class, 'store'])->name('reply.store');
             Route::resource('reply', ReplyController::class)->only(['destroy']);
         });
