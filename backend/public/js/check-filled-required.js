@@ -1,4 +1,4 @@
-function required_check(selector) {
+function checkFilledRequired(selector) {
     $(function () {
         //始めにjQueryで送信ボタンを無効化する
         $(selector).prop("disabled", true);

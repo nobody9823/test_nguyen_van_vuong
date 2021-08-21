@@ -17,9 +17,9 @@
             </div>
             <div class="inquiry_transition_box">
                 <p class="inquiry_attention inquiry_attention_2">ご不明な点がありましたら、ヘルプページをご覧ください</p>
-                <p class="inquiry_anchor_wrapper"><a class='inquiry_anchor' href="">サポーター向けよくある質問</a></p>
-                <p class="inquiry_anchor_wrapper"><a class='inquiry_anchor' href="">プロジェクト実行者向けよくある質問</a></p>
-                <p class="inquiry_anchor_wrapper"><a class='inquiry_anchor' href="">ヘルプページ</a></p>
+                <p class="inquiry_anchor_wrapper"><a class='inquiry_anchor' href="#">サポーター向けよくある質問</a></p>
+                <p class="inquiry_anchor_wrapper"><a class='inquiry_anchor' href="#">プロジェクト実行者向けよくある質問</a></p>
+                <p class="inquiry_anchor_wrapper"><a class='inquiry_anchor' href="#">ヘルプページ</a></p>
             </div>
         </div>
     </section>
@@ -32,14 +32,14 @@
                 <div class="inquiry_form">
                     <div class="form_item_row">
                         <div class="form_item_tit">氏名<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="name" class="p-postal-code def_input_100p" value="{{ old('name') }}" placeholder="インフルエンサー 花子" required>
+                        <input type="text" name="name" class="p-postal-code def_input_100p" value="{{ old('name',optional(Auth::user())->name) }}" placeholder="インフルエンサー 花子" required>
                     </div>
                 </div>
                 
                 <div class="inquiry_form">
                     <div class="form_item_row">
                         <div class="form_item_tit">メールアドレス<span class="hissu_txt">必須</span></div>
-                        <input type="email" name="email" class="p-postal-code def_input_100p" id="email" value="{{ old('email') }}" placeholder="○○○○○○○○○○○○@○○○○○○.com" required>
+                        <input type="email" name="email" class="p-postal-code def_input_100p" id="email" value="{{ old('email',optional(Auth::user())->email) }}" placeholder="○○○○○○○○○○○○@○○○○○○.com" required>
                     </div>
                 </div>
     
@@ -138,12 +138,11 @@
 @endsection
 
 <script type="text/javascript" src="{{ asset('js/uploaded-images-preview.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/required_check.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/check-filled-required.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/adapt_textarea_height.js') }}"></script>
 <script>
-    function hello(el){
-        // console.log(el.checked);
-    }
     window.addEventListener('DOMContentLoaded', () => {
-        required_check('.inquiry_button');
+        checkFilledRequired('.inquiry_button');
+        adapt_textarea_height('.def_textarea');
     });
 </script>
