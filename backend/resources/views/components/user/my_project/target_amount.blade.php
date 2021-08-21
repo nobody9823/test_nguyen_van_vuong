@@ -11,7 +11,7 @@
         </div>
         <input type="number" name="target_amount" class="p-postal-code def_input_100p"
             value="{{ old('target_amount', optional($project)->target_amount) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-icon columnName="target_amount" />
+        <x-common.async-submit-message propName="target_amount" />
     </div>
 
     <div class="form_item_row">
@@ -29,7 +29,7 @@
         </div>
         <input type="text" id="start_date" name="start_date" class="p-postal-code def_input_100p"
             value="{{ old('start_date', optional($project)->start_date) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-icon columnName="start_date" />
+        <x-common.async-submit-message propName="start_date" />
     </div>
 
     <div class="form_item_row">
@@ -47,7 +47,7 @@
         </div>
         <input type="text" id="end_date" name="end_date" class="p-postal-code def_input_100p"
             value="{{ old('end_date', optional($project)->end_date) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-icon columnName="end_date" />
+        <x-common.async-submit-message propName="end_date" />
     </div>
     <x-common.save_back_button />
 </form>

@@ -7,13 +7,13 @@
         <span class="hissu_txt">必須</span>
     </div>
     <input type="text" name="title" class="def_input_100p" value="{{ old('title', optional($project)->title) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-    <x-common.async-submit-icon columnName="title" />
+    <x-common.async-submit-message propName="title" />
 </div>
 
 <div class="form_item_row">
     <div class="form_item_tit">概要文<span class="nini_txt">任意</span>　<span class="disclaimer">※300文字以内で入力してください</span></div>
     <textarea name="content" id="content" class="def_textarea tiny_editor" rows="6">{{ old('content', optional($project)->content) }}</textarea>
-    <x-common.async-submit-icon columnName="content" />
+    <x-common.async-submit-message propName="content" />
 </div>
 
 <div class="form_item_row">
@@ -29,7 +29,7 @@
         <label for="{{ $value }}" class="checkbox-fan">{{ $value }}</label>
     @endforeach
     </div>
-    <x-common.async-submit-icon columnName="tags" />
+    <x-common.async-submit-message propName="tags" />
 </div>
 
 <x-common.save_back_button />

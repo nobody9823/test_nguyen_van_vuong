@@ -27,9 +27,6 @@ class Plan extends Model
         'delivery_date',
         'image_url'
     ];
-    protected $guarded = [
-        'price',
-    ];
 
     protected $casts = [
         'image_url' => ImageCast::class,

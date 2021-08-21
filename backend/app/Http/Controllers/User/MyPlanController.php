@@ -46,7 +46,7 @@ class MyPlanController extends Controller
             Plan::find($request->plan_id)->fill($request->all())->save();
             DB::commit();
             return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => 'return'])->with(['flash_message' => 'リターン編集に成功しました。']);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             throw $e;
             return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'next_tab' => 'return'])->withErrors(['リターン編集に失敗しました。']);
@@ -113,8 +113,8 @@ class MyPlanController extends Controller
     public function deletePlan(Project $project, Plan $plan)
     {
         $this->authorize('checkOwnPlan', $plan);
-        if(Auth::user()->projects()->find($project->id)->plans()->find($plan) !== null){
-            return response()->json([ 'result' => $plan->delete()]);
+        if (Auth::user()->projects()->find($project->id)->plans()->find($plan) !== null) {
+            return response()->json(['result' => $plan->delete()]);
         };
         return response()->json(['result' => false]);
     }

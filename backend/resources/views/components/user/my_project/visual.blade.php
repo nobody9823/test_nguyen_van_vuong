@@ -40,7 +40,7 @@
             スライドYouTube動画URL設定
         </div>
         <input type="text" name="video_url" class="def_input_100p" value="{{ old('video_url', optional($projectVideo)->file_url) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-icon columnName="video_url" />
+        <x-common.async-submit-message propName="video_url" />
     </div>
 
     <div class="def_btn">

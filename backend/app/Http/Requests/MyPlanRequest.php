@@ -26,8 +26,6 @@ class MyPlanRequest extends FormRequest
      */
     public function rules()
     {
-        $project_end_date = $this->route('project')->end_date->format('Y-m-d H:i:s');
-
         return [
             'title' => ['nullable', 'string', 'max:45'],
             'content' => ['nullable', 'string', 'max:2000'],
@@ -35,22 +33,29 @@ class MyPlanRequest extends FormRequest
             'address_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters' => ['integer', 'min:1'],
-            'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$project_end_date}"],
+            'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$this->route('project')->end_date->format('Y-m-d H:i:s')}"],
             'image_url' => ['nullable', 'image']
         ];
     }
 
     protected function prepareForValidation()
     {
-        if ($this->has('title') && is_null($this->title)) {
+
+        if ($this->has('title') && is_null($this->input('title'))) {
             $this->merge([
                 'title' => ''
             ]);
         }
 
-        if ($this->has('content') && is_null($this->content)) {
+        if ($this->has('content') && is_null($this->input('content'))) {
             $this->merge([
                 'content' => ''
+            ]);
+        }
+
+        if ($this->has('price') && is_null($this->input('price'))) {
+            $this->merge([
+                'price' => 0
             ]);
         }
 
