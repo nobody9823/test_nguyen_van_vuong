@@ -6,66 +6,42 @@
         <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>
         <input type="text" name="last_name" class="def_input_100p"
             value="{{ old('last_name', optional($user->profile)->last_name) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_last_name"></div>
-            <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_last_name">保存しました</p>
-            <span id="errors_last_name" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="last_name" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
         <input type="text" name="first_name" class="def_input_100p"
             value="{{ old('first_name', optional($user->profile)->first_name) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_first_name"></div>
-            <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_first_name">保存しました</p>
-            <span id="errors_first_name" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="first_name" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">セイ（全角）<span class="hissu_txt">必須</span></div>
         <input type="text" name="last_name_kana" class="def_input_100p"
             value="{{ old('last_name_kana', optional($user->profile)->last_name_kana) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_last_name_kana"></div>
-            <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_last_name_kana">保存しました</p>
-            <span id="errors_last_name_kana" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="last_name_kana" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">メイ（全角）<span class="hissu_txt">必須</span></div>
         <input type="text" name="first_name_kana" class="def_input_100p"
             value="{{ old('first_name_kana', optional($user->profile)->first_name_kana) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_first_name_kana"></div>
-            <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_first_name_kana">保存しました</p>
-            <span id="errors_first_name_kana" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="first_name_kana" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">電話番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
         <input type="number" name="phone_number" class="def_input_100p"
             value="{{ old('phone_number', optional($user->profile)->phone_number) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_phone_number"></div>
-            <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_phone_number">保存しました</p>
-            <span id="errors_phone_number" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="phone_number" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
         <input type="number" id="postal_code" name="postal_code" class="p-postal-code def_input_100p"
             value="{{ old('postal_code', optional($user->address)->postal_code) }}" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_postal_code"></div>
-            <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_postal_code">保存しました</p>
-            <span id="errors_postal_code" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="postal_code" />
     </div>
 
     <div class="form_item_row">
@@ -79,10 +55,7 @@
             </select>
         </div>
         <div class="form_item_tit">
-            <div class="spinner-wrapper">
-                <div class="spinner" id="spinner_prefecture"></div>
-                <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_prefecture">保存しました</p>
-            </div>
+            <x-common.async-submit-icon columnName="prefecture" />
         </div>
     </div>
 
@@ -90,30 +63,21 @@
         <div class="form_item_tit">市区町村<span class="hissu_txt">必須</span></div>
         <input type="text" id="city" name="city" class="p-locality def_input_100p"
             value="{{ old('city', optional($user->address)->city) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_city"></div>
-            <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_city">保存しました</p>
-        </div>
+        <x-common.async-submit-icon columnName="city" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">町域•番地<span class="hissu_txt">必須</span></div>
         <input type="text" id="block" name="block" class="p-street-address def_input_100p"
             value="{{ old('block', optional($user->address)->block) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_block"></div>
-            <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_block">保存しました</p>
-        </div>
+        <x-common.async-submit-icon columnName="block" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">建物名<span class="nini_txt">任意</span></div>
         <input type="text" name="building" class="p-extended-address def_input_100p"
             value="{{ old('building', optional($user->address)->building) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_building"></div>
-            <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_building">保存しました</p>
-        </div>
+        <x-common.async-submit-icon columnName="building" />
     </div>
 
     <div class="form_item_row">
@@ -122,11 +86,7 @@
         </div>
         <input type="text" id="birthday" name="birthday" class="def_input_100p"
             value="{{ old('start_date', $user->profile->birthday) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_birthday"></div>
-            <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_birthday">保存しました</p>
-            <span id="errors_birthday" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="birthday" />
     </div>
 
     <div class="form_item_row">
@@ -147,11 +107,7 @@
                             <a class="input_file_button">
                                 ファイルを選択する
                             </a>
-                            <div class="spinner-wrapper">
-                                <div class="spinner" id="spinner_identify_image_1"></div>
-                                <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_identify_image_1">保存しました</p>
-                                <span id="errors_identify_image_1" style="color: red;"></span>
-                            </div>
+                            <x-common.async-submit-icon columnName="identify_image_1" />
                         </label>
                     </div>
                 </div>
@@ -166,11 +122,7 @@
                             <a class="input_file_button">
                                 ファイルを選択する
                             </a>
-                            <div class="spinner-wrapper">
-                                <div class="spinner" id="spinner_identify_image_2"></div>
-                                <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_identify_image_2">保存しました</p>
-                                <span id="errors_identify_image_2" style="color: red;"></span>
-                            </div>
+                            <x-common.async-submit-icon columnName="identify_image_2" />
                         </label>
                     </div>
                 </div>
@@ -215,22 +167,14 @@
         </div>
         <input type="number" name="bank_code" class="def_input_100p"
             value="{{ old('bank_code', optional($user->identification)->bank_code) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_bank_code"></div>
-            <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_bank_code">保存しました</p>
-            <span id="errors_bank_code" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="bank_code" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">支店番号<span class="hissu_txt">必須</span></div>
         <input type="number" name="branch_code" class="def_input_100p"
             value="{{ old('branch_code', optional($user->identification)->branch_code) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_branch_code"></div>
-            <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_branch_code">保存しました</p>
-            <span id="errors_branch_code" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="branch_code" />
     </div>
 
     <div class="form_item_row">
@@ -243,11 +187,7 @@
             </select>
         </div>
         <div class="form_item_tit">
-            <div class="spinner-wrapper">
-                <div class="spinner" id="spinner_account_type"></div>
-                <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_account_type">保存しました</p>
-                <span id="errors_account_type" style="color: red;"></span>
-            </div>
+            <x-common.async-submit-icon columnName="account_type" />
         </div>
     </div>
 
@@ -255,22 +195,14 @@
         <div class="form_item_tit">口座番号<span class="hissu_txt">必須</span></div>
         <input type="number" name="account_number" class="def_input_100p"
             value="{{ old('account_number', optional($user->identification)->account_number) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_account_number"></div>
-            <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_account_number">保存しました</p>
-            <span id="errors_account_number" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="account_number" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">口座名義<span class="hissu_txt">必須</span></div>
         <input type="text" name="account_name" class="def_input_100p"
             value="{{ old('account_name', optional($user->identification)->account_number) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_account_name"></div>
-            <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_account_name">保存しました</p>
-            <span id="errors_account_name" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="account_name" />
     </div>
 
     <x-common.save_back_button />

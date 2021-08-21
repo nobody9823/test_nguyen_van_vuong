@@ -11,11 +11,7 @@
         </div>
         <input type="number" name="target_amount" class="p-postal-code def_input_100p"
             value="{{ old('target_amount', optional($project)->target_amount) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_target_amount"></div>
-            <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_target_amount">保存しました</p>
-            <span id="errors_target_amount" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="target_amount" />
     </div>
 
     <div class="form_item_row">
@@ -33,11 +29,7 @@
         </div>
         <input type="text" id="start_date" name="start_date" class="p-postal-code def_input_100p"
             value="{{ old('start_date', optional($project)->start_date) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_start_date"></div>
-            <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_start_date">保存しました</p>
-            <span id="errors_start_date" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="start_date" />
     </div>
 
     <div class="form_item_row">
@@ -55,11 +47,7 @@
         </div>
         <input type="text" id="end_date" name="end_date" class="p-postal-code def_input_100p"
             value="{{ old('end_date', optional($project)->end_date) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <div class="spinner-wrapper">
-            <div class="spinner" id="spinner_end_date"></div>
-            <p class="saved_icon" aria-hidden="true" style="display: none;" id="saved_end_date">保存しました</p>
-            <span id="errors_end_date" style="color: red;"></span>
-        </div>
+        <x-common.async-submit-icon columnName="end_date" />
     </div>
     <x-common.save_back_button />
 </form>
