@@ -13,7 +13,7 @@
     <div class="prof_page_base inner_item">
         <div class="prof_page_L">
             <x-user.mypage-navigation-bar/>
-        </div><!--/prof_page_L-->
+        </div>
 
         <div class="prof_page_R">
             <table class="report_table">
@@ -22,7 +22,7 @@
                     <!-- TODO:こちらは将来必要になった際に追加する -->
                     <!-- <th>公開設定</th> -->
                     <th>タイトル</th>
-                    <th>操作</th>
+                    <th>編集</th>
                 </tr>
                 @if($reports)
                     @foreach($reports as $report)
@@ -34,20 +34,24 @@
                         <td>
                           {{ $report->title }}
                         </td>
-                        <td>
-                            <i class="fas fa-ellipsis-h fa-lg"></i>
-                            <!-- <i class="far fa-edit"></i>
+                        <td class="report_icons">
+                            <!-- <i class="fas fa-ellipsis-h fa-lg"></i>
                             <i class="far fa-trash-alt"></i> -->
+                            <i class="far fa-edit fa-lg"></i>
                         </td>
                     </tr>
                     @endforeach
                 @endif
             </table>
             
-            <div class="def_btn">
+            <div class="def_btn" style="margin: 100px 170px;">
               <button type="submit" class="disable-btn">
                 <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">投稿する</p>
               </button>
+            </div>
+
+            <div style="margin: 100px 0;">
+              <x-common.pagination :props="$reports"/>
             </div>
         </div>
     </div>
@@ -73,8 +77,14 @@
   .prof_edit_row td:nth-child(2) {
     width: 400px;
   }
+  
+  .prof_edit_row td {
+    height: 100px;
+    display: flex;
+    align-items: center;
+  }
 
-  .fa-ellipsis-h, .prof_edit_row td:nth-child(2) {
+  .report_icons .fa-edit, .prof_edit_row td:nth-child(2) {
     position: relative;
     right: 25px;
   }
