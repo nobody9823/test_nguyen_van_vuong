@@ -19,24 +19,29 @@
             <table class="report_table">
                 <tr>
                     <th>作成日</th>
-                    <!-- こちらは将来必要になった際に追加する -->
+                    <!-- TODO:こちらは将来必要になった際に追加する -->
                     <!-- <th>公開設定</th> -->
                     <th>タイトル</th>
                     <th>操作</th>
                 </tr>
-                <tr class="prof_edit_row">
-                    <td>
-                        <div>2021年10月10日<br><span>10:10</span></div>  
-                    </td>
-                    <td>
-                      １２３４５６７８９０１２３４５６７８９０１２３４５１２３４５６７８９０１２３４５６７８９０１２３４５
-                    </td>
-                    <td>
-                        <i class="fas fa-ellipsis-h fa-lg"></i>
-                        <!-- <i class="far fa-edit"></i>
-                        <i class="far fa-trash-alt"></i> -->
-                    </td>
-                </tr>
+                @if($reports)
+                    @foreach($reports as $report)
+                    <tr class="prof_edit_row">
+                        <td>
+                            <div>{{ $report->created_at->format('Y年m月d日') }}<br>
+                            <span>{{ $report->created_at->format('H:m') }}</span></div>  
+                        </td>
+                        <td>
+                          {{ $report->title }}
+                        </td>
+                        <td>
+                            <i class="fas fa-ellipsis-h fa-lg"></i>
+                            <!-- <i class="far fa-edit"></i>
+                            <i class="far fa-trash-alt"></i> -->
+                        </td>
+                    </tr>
+                    @endforeach
+                @endif
             </table>
             
             <div class="def_btn">
@@ -69,7 +74,7 @@
     width: 400px;
   }
 
-  .fa-ellipsis-h {
+  .fa-ellipsis-h, .prof_edit_row td:nth-child(2) {
     position: relative;
     right: 25px;
   }
