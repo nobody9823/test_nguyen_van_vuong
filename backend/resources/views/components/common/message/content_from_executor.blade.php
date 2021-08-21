@@ -9,16 +9,24 @@
     style="border-bottom: 2px solid #EEE;padding: 0.5rem 0.5rem;margin-left: 0rem;margin-bottom: 3px;">
     <div style="font-weight: bold;display:flex;justify-content:space-between;">
         <div>
-            <img class="contributor-icon" src="{{Storage::url($messageContent->userPlanCheering->user->image_url)}}"
+            @if (isset($messageContent->payment->project->user->profile->image_url))
+            <img class="contributor-icon"
+                src="{{Storage::url($messageContent->payment->project->user->profile->image_url)}}"
                 style="float:left;margin-right: 0.5rem;width: 25px;height: 25px;">
-            {{-- ガードがuserなら'あなた'表記 ちょっと冗長--}}
-            @if ($guard === 'user')
+            @else
+            {{-- DB構造変えられないため、ない場合はサンプル出すよう応急処置 --}}
+            <img class="contributor-icon" src="{{Storage::url('public/sampleImage/my-page.svg')}}"
+                style="float:left;margin-right: 0.5rem;width: 25px;height: 25px;">
+            @endif
+            {{-- ガードがexecutorなら'あなた'表記 ちょっと冗長--}}
+            @if ($guard === 'executor')
             あなた:
             @else
-            {{$messageContent->userPlanCheering->user->name}}:
+            {{$messageContent->payment->project->user->name}}:
             @endif
             {{-- ガードがuserなら'あなた'表記 --}}
-            <span style="font-weight: normal;color: gray;font-size: 80%;">{{$messageContent->updated_at}}</span>
+            <span
+                style="font-weight: normal;color: gray;font-size: 80%;">{{$messageContent->payment->updated_at}}</span>
         </div>
         @if ($guard === 'admin')
         <div class="icons">
@@ -34,10 +42,11 @@
     @if (isset($messageContent->file_path))
     <x-common.message.file_download_button :guard="$guard" :messageContent="$messageContent" />
     @endif
+
 </div>
 
-@once
 
+@once
 <style>
     .chat_content:hover div.icons img {
         opacity: 0.5;

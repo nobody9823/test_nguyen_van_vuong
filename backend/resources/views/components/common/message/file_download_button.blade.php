@@ -5,7 +5,12 @@
 --}}
 
 <a id="btn-square"
-    href={{ route("$guard.message_content.file_download",['message_content' => $messageContent]) }}>{{ $messageContent->file_original_name }}</a>
+    @if($guard === 'supporter')
+        href={{ route('user.message_content.file_download', ['message_content' => $messageContent]) }}
+    @endif
+>
+    {{ $messageContent->file_original_name }}
+</a>
 <style>
     #btn-square {
         display: inline-block;

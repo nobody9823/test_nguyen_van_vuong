@@ -9,24 +9,16 @@
     style="border-bottom: 2px solid #EEE;padding: 0.5rem 0.5rem;margin-left: 0rem;margin-bottom: 3px;">
     <div style="font-weight: bold;display:flex;justify-content:space-between;">
         <div>
-            @if (isset($messageContent->userPlanCheering->plan->project->talent->image_url))
-            <img class="contributor-icon"
-                src="{{Storage::url($messageContent->userPlanCheering->plan->project->talent->image_url)}}"
+            <img class="contributor-icon" src="{{Storage::url($messageContent->payment->user->profile->image_url)}}"
                 style="float:left;margin-right: 0.5rem;width: 25px;height: 25px;">
-            @else
-            {{-- DB構造変えられないため、ない場合はサンプル出すよう応急処置 --}}
-            <img class="contributor-icon" src="{{Storage::url('public/sampleImage/now_printing.jpg')}}"
-                style="float:left;margin-right: 0.5rem;width: 25px;height: 25px;">
-            @endif
-            {{-- ガードがuserなら'あなた'表記 ちょっと冗長--}}
-            @if ($guard === 'talent')
+            {{-- ガードがsupporterなら'あなた'表記 ちょっと冗長--}}
+            @if ($guard === 'supporter')
             あなた:
             @else
-            {{$messageContent->userPlanCheering->plan->project->talent->name}}:
+            {{$messageContent->payment->user->name}}:
             @endif
-            {{-- ガードがuserなら'あなた'表記 --}}
-            <span
-                style="font-weight: normal;color: gray;font-size: 80%;">{{$messageContent->userPlanCheering->updated_at}}</span>
+            {{-- ガードがsupporterなら'あなた'表記 --}}
+            <span style="font-weight: normal;color: gray;font-size: 80%;">{{$messageContent->updated_at}}</span>
         </div>
         @if ($guard === 'admin')
         <div class="icons">
@@ -42,11 +34,10 @@
     @if (isset($messageContent->file_path))
     <x-common.message.file_download_button :guard="$guard" :messageContent="$messageContent" />
     @endif
-
 </div>
 
-
 @once
+
 <style>
     .chat_content:hover div.icons img {
         opacity: 0.5;

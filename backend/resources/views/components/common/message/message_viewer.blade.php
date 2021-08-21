@@ -1,19 +1,19 @@
 <div style='min-height:85px; background: #ddd;border: black; margin-bottom: 0; padding: 0.5rem'>
     <div style="font-weight: bold;">
         <p>
-            @if ($guard === 'user')
-            【{{$selectedMessage->plan->project->talent->name}}】
+            @if ($guard === 'supporter')
+            【{{$selectedMessage->project->user->name}}】
             @else
             【{{$selectedMessage->user->name}} 】様
             @endif
         </p>
     </div>
     <div>
-        @if ($guard === 'user')
-        {{$selectedMessage->plan->title}}
+        @if ($guard === 'supporter')
+        {{$selectedMessage->project->title}}
         @else
-        <a href="{{ route("$guard.plan.show",['plan' => $selectedMessage->plan]) }}">
-            {{$selectedMessage->plan->title}}</a>
+        <a href="{{ route('user.project.show', ['project' => $selectedMessage->project]) }}">
+            {{$selectedMessage->project->title}}</a>
         @endif
     </div>
 
@@ -25,9 +25,9 @@
 
         @foreach ($selectedMessage->messageContents as $messageContent)
         @if($messageContent->message_contributor === '支援者')
-        <x-common.message.content_from_user :guard="$guard" :messageContent="$messageContent" />
-        @elseif($messageContent->message_contributor === 'タレント')
-        <x-common.message.content_from_talent :guard="$guard" :messageContent="$messageContent" />
+        <x-common.message.content_from_supporter :guard="$guard" :messageContent="$messageContent" />
+        @elseif($messageContent->message_contributor === '実行者')
+        <x-common.message.content_from_executor :guard="$guard" :messageContent="$messageContent" />
         @elseif($messageContent->message_contributor === '管理者')
         <x-common.message.content_from_admin :guard="$guard" :messageContent="$messageContent" />
         @endif
@@ -41,8 +41,9 @@
     </table>
 </div>
 
-
-<form action={{route("$guard.message_content.store",['user_plan_cheering' => $selectedMessage])}} method='post'
+@if($guard === 'supporter')
+<form action={{route('user.message_content.store', ['payment' => $selectedMessage])}} method='post'
+@endif
     enctype="multipart/form-data">
     @csrf
     <x-common.add_hidden_query />

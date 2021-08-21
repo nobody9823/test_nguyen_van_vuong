@@ -22,11 +22,12 @@
             <div class="pbb_01_link">購入履歴<i class="fas fa-chevron-right"></i>
                 <a href="{{ route('user.payment_history') }}" class="cover_link"></a>
             </div>
-            <div class="pbb_01_link">投稿コメント一覧<i class="fas fa-chevron-right"></i>
+            {{-- <div class="pbb_01_link">投稿コメント一覧<i class="fas fa-chevron-right"></i>
                 <a href="{{ route('user.contribution_comments') }}" class="cover_link"></a>
+            </div> --}}
+            <div class="pbb_01_link">メッセージ一覧<i class="fas fa-chevron-right"></i>
+                <a href="{{ route('user.message.index') }}" class="cover_link"></a>
             </div>
-            {{-- NOTICE 現状メッセージ機能の実装間に合わなそうなので一旦コメントアウトいたします --}}
-            {{-- <p><a href="{{ route('user.message.index') }}">メッセージ一覧</a></p> --}}
         </div>
         <div class="prof_btn_box_02">
             <div class="pbb_01_01"><i class="fas fa-user"></i> アカウント情報<a class="cover_link"></a></div>

@@ -12,14 +12,14 @@
             <h2><i class="fas fa-lock"></i>メッセージ一覧</h2>
 
             <div class="message_container">
-                {{-- <div class="message_container__body">
+                <div class="message_container__body">
                     <div class="message_container__body-menu">
                         <p class="message_container_menu is-pc">
                             メッセージ一覧
                             @if (Request::get('message_word'))
                             検索ワード:{{ Request::get("message_word") }}
-                @endif
-                </p>
+                            @endif
+                        </p>
 
                 <button class="message_container_menu is-sp">
                     メッセージ一覧を見る
@@ -35,7 +35,7 @@
                     style="line-height: 2.0;" value={{Request::get('message_word')}}>
                 <button type="submit" class="btn btn-info">検索</button>
             </form>
-        </div> --}}
+        </div>
 
         <div class="message_body">
             <div class="chat_group_list">
@@ -54,7 +54,7 @@
                 <p style='background-color:#ddd;margin:10px 0px 0 0;'>やりとり中支援リターン</p>
                 @endif
                 @foreach ($chating_messages as $message)
-                <x-common.message.a_message_of_index :message="$message" guard='user'
+                <x-common.message.a_message_of_index :message="$message" guard='supporter'
                     :selectedMessage="isset($selected_message)?$selected_message:null" />
                 @endforeach
                 {{-- チャット中リターン --}}
@@ -64,7 +64,7 @@
                 <p style='background-color:#ddd;margin:10px 0px 0 0;'>やりとりしていない支援リターン</p>
                 @endif
                 @foreach ($not_chating_messages as $message)
-                <x-common.message.a_message_of_index :message="$message" guard='user'
+                <x-common.message.a_message_of_index :message="$message" guard='supporter'
                     :selectedMessage="isset($selected_message)?$selected_message:null" />
                 @endforeach
                 {{-- 未チャットリターン --}}
@@ -80,7 +80,7 @@
                 </button>
 
                 @if(isset($selected_message))
-                <x-common.message.message_viewer :selectedMessage="$selected_message" guard="user" />
+                <x-common.message.message_viewer :selectedMessage="$selected_message" guard="supporter" />
                 @else
                 <div class="" style='min-height:800px; padding: 1rem; background: #FFF;'>
                     メッセージを選択してください。

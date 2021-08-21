@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MessageContent extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'message_contents';
     protected $dates = ['deleted_at'];
@@ -28,27 +28,22 @@ class MessageContent extends Model
         return $this->belongsTo(Payment::class, 'payment_id');
     }
 
-    public function scopeReadByUser($query)
+    public function scopeReadBySupporter($query)
     {
-        return $query->whereIn('message_contributor', ['タレント','管理者'])->where('is_read', false)->update(['is_read' => true]);
+        return $query->whereIn('message_contributor', ['実行者', '管理者'])->where('is_read', false)->update(['is_read' => true]);
     }
 
-    public function scopeReadByTalent($query)
+    public function scopeReadByExecutor($query)
     {
         return $query->where('message_contributor', '支援者')->where('is_read', false)->update(['is_read' => true]);
     }
 
-    public function scopeCheckReadByUser($query)
+    public function scopeCheckReadBySupporter($query)
     {
-        return $query->whereIn('message_contributor', ['タレント','管理者'])->where('is_read', false)->exists();
+        return $query->whereIn('message_contributor', ['実行者', '管理者'])->where('is_read', false)->exists();
     }
 
-    public function scopeCheckReadByCompany($query)
-    {
-        return $query->where('message_contributor', '支援者')->where('is_read', false)->exists();
-    }
-
-    public function scopeCheckReadByTalent($query)
+    public function scopeCheckReadByExecutor($query)
     {
         return $query->where('message_contributor', '支援者')->where('is_read', false)->exists();
     }
