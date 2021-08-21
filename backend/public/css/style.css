@@ -2139,17 +2139,20 @@ width: 100%;
 /* ====================================================================
   ABOUT - PROJECT
   ==================================================================== */
-.about-project {
+.about-project, .about-project-supporter {
 	margin-top: 50px;
 }
+.about-project-supporter .ps_description_items_wrapper {flex-direction: column}
+.about-project-supporter .ps_description_item {width: 100%; display: flex; align-items: center; flex-direction: column;}
+.about-project-supporter .ps_description_border {width: 120px; height: 3px;}
 
 @media screen and (min-width: 768px){
-	.about-project {
+	.about-project, .about-project-supporter {
 		margin-top: 100px;
 	}
 }
 
-.about-project__title {
+.about-project__title, .about-project-supporter__title {
 	color: #00aebd;
 	font-size: 22px;
 	letter-spacing: 1.76px;
@@ -2157,21 +2160,21 @@ width: 100%;
 }
 
 @media screen and (min-width: 768px){
-	.about-project__title {
+	.about-project__title, .about-project-supporter__title {
 		font-size: 48px;
 		letter-spacing: 1.76px;
 	}
 }
 
 @media screen and (min-width: 768px){
-	.about-project__title {
+	.about-project__title, .about-project-supporter__title {
 		color: #00aebd;
 		font-size: 48px;
 		letter-spacing: 3.2px;
 	}
 }
 
-.about-project__sub-title {
+.about-project__sub-title, .about-project-supporter__sub-title {
 	color: #00aebd;
 	font-size: 14px;
 	text-align: center;
@@ -2179,7 +2182,7 @@ width: 100%;
 }
 
 @media screen and (min-width: 768px){
-	.about-project__sub-title {
+	.about-project__sub-title, .about-project-supporter__sub-title {
 		font-size: 18px;
 		margin-bottom: 50px;
 	}
