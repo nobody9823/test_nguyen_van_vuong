@@ -26,10 +26,12 @@ class InquiryRequest extends FormRequest
         return [
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email'],
-            'tel' => ['required', 'regex:/^0\d{2,3}-\d{1,4}-\d{4}$/'],
-            'inquiry_category' => ['required', 'string', 'max:255'],
-            'inquiry_content' => ['required', 'string', 'max:10000'],
-            'images[]' => ['nullable', 'image'],
+            // 'tel' => ['required', 'regex:/^0\d{2,3}-\d{1,4}-\d{4}$/'],
+            'inquiry_category' => ['nullable', 'string', 'max:255'],
+            'device_type' => ['nullable', 'string'],
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:10000'],
+            // 'images[]' => ['nullable', 'image'],
         ];
     }
 
@@ -45,9 +47,13 @@ class InquiryRequest extends FormRequest
             'inquiry_category.required' => "お問い合わせ種別は必ず選択して下さい。",
             'inquiry_category.string' => "お問い合わせ種別に文字以外のものが含まれています",
             'inquiry_category.max' => "お問い合わせ種別は255文字以下で入力下さい。",
-            'inquiry_content.required' => "お問い合わせ内容は必ず入力して下さい。",
-            'inquiry_content.string' => "お問い合わせ内容に文字以外のものが含まれています。",
-            'inquiry_content.max' => "お問い合わせ内容は10000文字以下で入力下さい。",
+            'device_type.string' => "デバイス種類が不正です。",
+            'title.required' => "お問い合わせ件名は必ず入力して下さい。",
+            'title.string' => "お問い合わせ件名に文字以外のものが含まれています。",
+            'title.max' => "お問い合わせ件名は100文字以下で入力下さい。",
+            'content.required' => "お問い合わせ内容は必ず入力して下さい。",
+            'content.string' => "お問い合わせ内容に文字以外のものが含まれています。",
+            'content.max' => "お問い合わせ内容は10000文字以下で入力下さい。",
             'images[].image' => "画像の形式が不正です。ご確認下さい。(jpg、jpeg、png、bmp、gif、svg、webp)",
         ];
     }
