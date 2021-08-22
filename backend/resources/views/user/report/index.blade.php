@@ -63,8 +63,12 @@
 
 <style>
   /* テーブル */
+  .reports table {
+    width: 63%;
+  }
+
   .reports tr:first-child {
-    width: 100%;
+    width: 110%;
     display: flex;
     background: #F7FDFF;
     color: #00AEBD;
@@ -81,9 +85,19 @@
   .reports .prof_edit_row td:nth-child(2) {
     width: 400px;
   }
+  
+  .prof_edit_row {
+    width: 110%;
+  }
 
   /* アイコン */
-  .reports .mobile_display { display: none; }
+  .reports .mobile_display { 
+    display: none; 
+  }
+
+  .reports a { 
+    color: #00AEBD; 
+  }
 
   /* 新規投稿ボタン */
   .reports .def_btn { margin: 70px 170px 100px; }
@@ -92,15 +106,17 @@
   @media (max-width: 767px) {
     /* テーブルの各スタイル */
     .reports tr:first-child { width: calc(100% - 20%); display: none;)}
-    .reports .prof_edit_row td { height: 60px; }
+    /* .reports th:nth-child(3) { width: 100%;} */
+    .reports .prof_edit_row { width: calc(200% - 40%); }
     .reports .prof_edit_row td:first-child { display: none; }
-    .reports .prof_edit_row td:nth-child(2) { width:100%; margin-top: 25px;}
+    .reports .prof_edit_row td:nth-child(2) { width:100%; margin-top: 25px; margin-bottom: 15px;}
+    .reports .prof_edit_row td:nth-child(3) { width:100%;}
     .reports .prof_edit_row td:nth-child(3) div { color: #00AEBD; font-size: 85%; }
     /* アイコン */
     .reports .fa-edit {
     position: relative;
-    bottom: 20px;
-    left: 305px;
+    bottom: 17px;
+    left: calc(100% - 15%);
     }
     .reports .mobile_display { display: block; }
     /* 新規投稿ボタン */
@@ -116,7 +132,7 @@
     }
     .reports .fa-edit, .reports .prof_edit_row td:nth-child(2) {
       position: relative;
-      right: 25px;
+      right: 40px;
     }
   }
 </style>

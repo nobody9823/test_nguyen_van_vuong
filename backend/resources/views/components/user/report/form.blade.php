@@ -35,7 +35,7 @@
 
 <style>
   .report_form{
-    margin: 40px 5px 40px 5px;
+    margin: 40px 10px 40px 10px;
   }
 
     /* PCサイズ */
