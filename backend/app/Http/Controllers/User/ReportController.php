@@ -24,4 +24,9 @@ class ReportController extends Controller
     {
         return view('user.report.create', ['project' => $project]);
     }
+
+    public function store(Project $project)
+    {
+        return redirect()->action([ReportController::class, 'index'], ['project' => $project])->with('flash_message', '新規作成が完了しました。');
+    }
 }
