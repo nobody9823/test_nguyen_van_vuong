@@ -1,6 +1,6 @@
 @extends('user.layouts.base')
 
-@section('title', '活動報告一覧')
+@section('title', '活動報告作成')
 
 @section('content')
 <section id="supported-projects" class="section_base report_form">

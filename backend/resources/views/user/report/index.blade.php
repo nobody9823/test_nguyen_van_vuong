@@ -37,7 +37,9 @@
                         <td>
                             <div>
                                 <p class="mobile_display">{{ $report->created_at->format('Y年m月d日 H:i') }}</p>
-                                <i class="far fa-edit fa-lg"></i>
+                                <a href="{{ route('user.report.edit' ,['project' => $project, 'report' => $report]) }}">
+                                  <i class="far fa-edit fa-lg"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>
