@@ -47,7 +47,7 @@
             
             <div class="def_btn">
               <button type="submit" class="disable-btn">
-                <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">新規投稿を作成</p>
+                <a href="{{ route('user.report.create' ,['project' => $project ]) }}" style="font-size: 1.8rem;font-weight: bold;color: #fff;">新規投稿を作成</a>
               </button>
             </div>
 

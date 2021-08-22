@@ -15,7 +15,13 @@ class ReportController extends Controller
         $reports = $project->reports()->orderBy('created_at', 'DESC')->paginate(5);
         
         return view('user.report.index', [
-            'reports' => $reports
+            'reports' => $reports,
+            'project' => $project
         ]);
+    }
+
+    public function create(Project $project)
+    {
+        return view('user.report.create', ['project' => $project]);
     }
 }
