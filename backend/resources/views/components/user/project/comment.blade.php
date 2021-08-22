@@ -4,7 +4,7 @@
         <div class="comment_content">
             <div class="comment_content_user">
                 <span>{{ $comment->user->name }}&emsp;</span>
-                <span>{{ $comment->created_at->format('Y年m月d日 H:m') }}</span>
+                <span>{{ $comment->created_at->format('Y年m月d日 H:i') }}</span>
             </div>
             <div class="comment_content_text">
                 {{ $comment->content }}
@@ -19,7 +19,7 @@
             <div class="comment_content reply_content">
                 <div class="comment_content_user">
                     <span>{{ $comment->project->user->name }}&emsp;</span>
-                    <span>{{ $comment->reply->created_at->format('Y年m月d日 H:m') }}</span>
+                    <span>{{ $comment->reply->created_at->format('Y年m月d日 H:i') }}</span>
                 </div>
                 <div class="comment_content_text">
                 {{ $comment->reply->content }}

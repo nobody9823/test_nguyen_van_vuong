@@ -29,14 +29,14 @@
                     <tr class="prof_edit_row">
                         <td>
                             <div>{{ $report->created_at->format('Y年m月d日') }}<br>
-                            <span>{{ $report->created_at->format('H:m') }}</span></div>
+                            <span>{{ $report->created_at->format('H:i') }}</span></div>
                         </td>
                         <td>
                           {{ $report->title }}
                         </td>
                         <td>
                             <div>
-                                <p class="mobile_display">{{ $report->created_at->format('Y年m月d日 H:m') }}</p>
+                                <p class="mobile_display">{{ $report->created_at->format('Y年m月d日 H:i') }}</p>
                                 <i class="far fa-edit fa-lg"></i>
                             </div>
                         </td>

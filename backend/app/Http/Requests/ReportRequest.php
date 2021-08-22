@@ -26,7 +26,7 @@ class ReportRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
-            'title' => ['required', 'string', 'max:55'],
+            'title' => ['required', 'string', 'max:50'],
             'content' => ['required', 'string', 'max:2000'],
             'image_url' => [Rule::requiredIf($request->isMethod('post')),'image'],
         ];
@@ -36,10 +36,10 @@ class ReportRequest extends FormRequest
         return [
             'title.required' => "タイトルを入力してください。",
             'title.string' => "タイトルは文字で入力してください。",
-            'title.max' => "タイトルは255文字以内にしてください。",
+            'title.max' => "タイトルは50文字以内にしてください。",
             'content.required' => '内容を入力してください。',
             'content.string' => '内容は文字で入力してください。',
-            'content.max' => '内容は20000文字以内にしてください。',
+            'content.max' => '内容は2000文字以内にしてください。',
             'image_url.required' => "画像は必須項目です。",
             'image_url.image' => "画像の形式が不正です。ご確認下さい。(jpg、jpeg、png、bmp、gif、svg、webp)",
         ];

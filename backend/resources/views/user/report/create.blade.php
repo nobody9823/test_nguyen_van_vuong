@@ -9,9 +9,8 @@
         <div class="sub_tit_L">活動報告作成</div>
     </div>
 
-    <form action="{{ route('user.report.store', ['project' => $project]) }}" method="post" class="report_form">
+    <form action="{{ route('user.report.store', ['project' => $project]) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
 
         <x-user.report.form :report="null" />
     </form>
