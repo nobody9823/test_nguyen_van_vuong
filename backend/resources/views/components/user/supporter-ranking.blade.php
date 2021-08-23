@@ -30,7 +30,7 @@
                         </div>
                         <!--/ps_rank_01_03-->
                         <div class="ps_rank_01_02 m_b_1510">
-                            {{ $project->title }}
+                            {{ Str::limit($project->title, 46) }}
                         </div>
                     </div>
                 </div>
