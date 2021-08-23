@@ -44,24 +44,6 @@
 </div>
 @endif
 
-
-<style>
-  .report_form {
-    margin: 40px 10px 40px 10px;
-  }
-
-    /* PCサイズ */
-  @media (min-width: 767px) {
-  .report_form .prof_edit_01 { width: 35%;}
-  .report_form .prof_edit_editbox { width: 65%; }
-}
-
-.report_form .prof_edit_editbox img {
-  width: auto;
-  margin: 20px 0;
-}
-</style>
-
 @section('script')
 <script>
   $(function() {
