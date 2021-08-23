@@ -14,7 +14,7 @@ class ReportController extends Controller
 {
     public function index(Project $project)
     {
-        // $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnProject', $project);
         $reports = $project->reports()->orderBy('created_at', 'DESC')->paginate(5);
         
         return view('user.report.index', [
@@ -25,11 +25,13 @@ class ReportController extends Controller
 
     public function create(Project $project)
     {
+        $this->authorize('checkOwnProject', $project);
         return view('user.report.create', ['project' => $project]);
     }
 
     public function store(ReportRequest $request, Report $report, Project $project)
     {
+        $this->authorize('checkOwnProject', $project);
         DB::beginTransaction();
         try {
             $report->fill($request->fillWithProjectId($project->id))->save();
@@ -44,11 +46,13 @@ class ReportController extends Controller
 
     public function edit(Project $project, Report $report)
     {
+        $this->authorize('checkOwnProject', $project);
         return view('user.report.edit', ['project' => $project, 'report' => $report]);
     }
 
     public function update(ReportRequest $request, Project $project, Report $report)
     {
+        $this->authorize('checkOwnProject', $project);
         // 活動報告削除処理
         if($request->delete){
             DB::beginTransaction();
