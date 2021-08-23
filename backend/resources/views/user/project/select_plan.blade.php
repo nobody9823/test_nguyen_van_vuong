@@ -334,6 +334,7 @@
 
                     <div class="form_item_row">
                         <div class="form_item_tit">応援コメント<span class="nini_txt">任意</span>　<span class="disclaimer">※300文字以内で入力してください</span></div>
+                        <span class="message-warning">※応援コメントはプロジェクト詳細画面の応援コメント一覧に表示されます</span>
                         <textarea name="comments" class="def_textarea" rows="6">{{ old('comments') }}</textarea>
                     </div><!--/form_item_row-->
                     <div class="def_btn">
