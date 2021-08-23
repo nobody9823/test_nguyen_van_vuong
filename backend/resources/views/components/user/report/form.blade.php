@@ -26,15 +26,22 @@
     </div>
 </div>
 
+<br>
 <div class="def_btn">
   <button type="submit" class="disable-btn">
     <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存</p>
   </button>
 </div>
 
+<div class="def_btn">
+  <button type="submit" class="disable-btn" onclick="return confirm('本当に削除しますか？')" name="delete" value="delete">
+    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">削除</p>
+  </button>
+</div>
+
 
 <style>
-  .report_form{
+  .report_form {
     margin: 40px 10px 40px 10px;
   }
 

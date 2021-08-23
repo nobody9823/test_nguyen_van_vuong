@@ -49,6 +49,20 @@ class ReportController extends Controller
 
     public function update(ReportRequest $request, Project $project, Report $report)
     {
+        if($request->delete){
+            DB::beginTransaction();
+            try {
+                Storage::delete($report->image_url);
+                $report->delete();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollback();
+            }
+            
+            return redirect()->action([ReportController::class, 'index'], ['project' => $project])
+            ->with('flash_message', '削除が完了しました。');
+        }
+
         DB::beginTransaction();
         try {
             $report->fill($request->fillWithProjectId($project->id))->save();
@@ -58,6 +72,7 @@ class ReportController extends Controller
             return redirect()->back()->withErrors('活動報告の作成に失敗しました。管理会社に連絡をお願いします。');
         }
 
-        return redirect()->action([ReportController::class, 'index'], ['project' => $project])->with('flash_message', '更新が完了しました。');
-    }
+        return redirect()->action([ReportController::class, 'index'], ['project' => $project])
+        ->with('flash_message', '更新が完了しました。');
+    }    
 }
