@@ -32,7 +32,7 @@ class ProfileRequest extends FormRequest
             'last_name_kana' =>['required', 'string'],
             'first_name' =>['required', 'string'],
             'last_name' =>['required', 'string'],
-            'birthday' => ['required', 'date_format:Y-m-d',"after:{$expire_date}"],
+            'birthday' => ['required', 'date_format:Y-m-d',"before:{$expire_date}"],
             'birthday_is_published' =>['nullable', 'integer'],
             'gender' =>['required', 'string'],
             'gender_is_published' =>['nullable', 'integer'],
