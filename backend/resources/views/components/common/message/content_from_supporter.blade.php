@@ -4,17 +4,21 @@
     $guard
     を注入
 --}}
+
 <div class="chat_content"
     style="border-bottom: 2px solid #EEE;padding: 0.5rem 0.5rem;margin-left: 0rem;margin-bottom: 3px;">
-
     <div style="font-weight: bold;display:flex;justify-content:space-between;">
         <div>
-            <img class="contributor-icon" src={{Storage::url('public/sampleImage/person_sample.jpg')}}
-                style="margin-right: 0.5rem;width: 25px;height: 25px;">
-            FanReturn運営:
-            <span style="font-weight: normal;color: gray;font-size: 80%;">
-                {{$messageContent->updated_at}}
-            </span>
+            <img class="contributor-icon" src="{{Storage::url($messageContent->payment->user->profile->image_url)}}"
+                style="float:left;margin-right: 0.5rem;width: 25px;height: 25px;">
+            {{-- ガードがsupporterなら'あなた'表記 ちょっと冗長--}}
+            @if ($guard === 'supporter')
+            あなた:
+            @else
+            {{$messageContent->payment->user->name}}:
+            @endif
+            {{-- ガードがsupporterなら'あなた'表記 --}}
+            <span style="font-weight: normal;color: gray;font-size: 80%;">{{$messageContent->updated_at}}</span>
         </div>
         @if ($guard === 'admin')
         <div class="icons">
@@ -35,8 +39,8 @@
 @once
 
 <style>
-    .chat_content:hover .icons img {
-        opacity: 0.5 !important;
+    .chat_content:hover div.icons img {
+        opacity: 0.5;
     }
 
     .contributor-icon {

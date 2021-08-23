@@ -41,7 +41,7 @@ const updateMyProject = (() => {
     var block = document.getElementById('block');
 
     const displayIcon = (el) => {
-        el.style.display = 'contents';
+        el.style.display = 'inline-block';
         setTimeout(() => { dissaperIcon(el); }, 3000);
     }
 

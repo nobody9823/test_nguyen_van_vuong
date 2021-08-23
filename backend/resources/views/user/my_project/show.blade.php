@@ -48,7 +48,7 @@
                     <div class="su_pr_02">
                         <div class="su_pr_02_04 m_b_1510">
                             <div>
-                                <span>支援総額 : </span>{{ number_format($project->price) }}円
+                                <span>支援総額 : </span>{{ $project->payments_sum_price }}円
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                     </div><!--/su_pr_02-->
 
                     <div class="tit_L_01 E-font">
-                        <div class="sub_tit_L">活動報告 : {{ $project->reports()->count() }}件</div>
+                        <div class="sub_tit_L"><a href="{{ route('user.report.index', ['project' => $project]) }}">活動報告 : {{ $project->reports()->count() }}件</a></div>
                             {{-- <div class="su_pr_02">
                                 <div class="su_pr_02_01 m_b_1510">リターン名</div>
                                 <div class="su_pr_02_02 m_b_1510"></div>
@@ -125,7 +125,7 @@
                                 </div><!--/su_pr_02--> --}}
                             </div>
                             <div class="tit_L_01 E-font">
-                                <div class="sub_tit_L">支援者一覧 : {{ $project->supportedUsers()->count() }}人</div>
+                                <div class="sub_tit_L"><a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">支援者とのやりとり : {{ $project->payments_count }}人</a></div>
                                     {{-- <div class="su_pr_02">
                                         <div class="su_pr_02_01 m_b_1510">リターン名</div>
                                         <div class="su_pr_02_02 m_b_1510"></div>

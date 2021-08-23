@@ -190,6 +190,11 @@ if(isiOS) {
 					<p class="nav_btn_tit_L">購入履歴一覧</p>
 				</a>
 			</li>
+			<li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.message.index') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">メッセージ一覧</p>
+				</a>
+			</li>
 
 			<li id="menu-item-2" class="menu-item menu-item-2 nav_btn menu-item-has-children taso_li menuset_06">
 					<a href="#" id="top_menu-3" data-megamenu="js-megamenu3" class=" nav_btn_link taso_li_a">
@@ -344,6 +349,7 @@ if(isiOS) {
                     <div class="footer_item"><a href="{{ route('user.ps_terms_of_service') }}">プロジェクトサポーター利用規約</a></div>
                     <div class="footer_item"><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></div>
                     <div class="footer_item"><a href="{{ route('user.trade_law') }}">特定商取引法に基づく表記</a></div>
+                    <div class="footer_item"><a href="{{ route('user.inquiry.create') }}">お問い合わせ</a></div>
                     {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div>
                     <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
                     {{-- <div class="footer_sns_icon">
@@ -520,6 +526,54 @@ jQuery(document).ready(function($) {
             $(h_mega_nav).removeClass("is-active");
         });
     });
+    $("#page-top_btn").hide();
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#page-top_btn').fadeIn();
+            } else {
+                $('#page-top_btn').fadeOut();
+            }
+        });
+
+        $('#page-top_btn a').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+    //URLのハッシュ値を取得
+    var urlHash = location.hash;
+    //ハッシュ値があればページ内スクロール
+    if(urlHash) {
+        //スクロールを0に戻す
+        $('body,html').stop().scrollTop(0);
+        setTimeout(function () {
+        //ロード時の処理を待ち、時間差でスクロール実行
+        scrollToAnker(urlHash) ;
+        }, 100);
+    }
+
+    //通常のクリック時
+    $('a[href^="#"]').click(function() {
+        //ページ内リンク先を取得
+        var href= $(this).attr("href");
+        //リンク先が#か空だったらhtmlに
+        var hash = href == "#" || href == "" ? 'html' : href;
+        //スクロール実行
+        scrollToAnker(hash);
+        //リンク無効化
+        return false;
+    });
+
+    // 関数：スムーススクロール
+    // 指定したアンカー(#ID)へアニメーションでスクロール
+    function scrollToAnker(hash) {
+        var target = $(hash);
+        var position = target.offset().top;
+        $('body,html').stop().animate({scrollTop:position}, 500);
+    }
 });
 
 

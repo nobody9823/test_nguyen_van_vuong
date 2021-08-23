@@ -8,12 +8,12 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use App\Models\Plan;
 use App\Models\Project;
-use App\Models\UserPlanCheering;
+use App\Models\Payment;
 use App\Policies\MessageContentPolicy;
 use App\Policies\OptionPolicy;
+use App\Policies\PaymentPolicy;
 use App\Policies\PlanPolicy;
 use App\Policies\ProjectPolicy;
-use App\Policies\UserPlanCheeringPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Project::class => ProjectPolicy::class,
         Plan::class => PlanPolicy::class,
-        UserPlanCheering::class => UserPlanCheeringPolicy::class,
+        Payment::class => PaymentPolicy::class,
         MessageContent::class => MessageContentPolicy::class,
         Option::class => OptionPolicy::class,
     ];

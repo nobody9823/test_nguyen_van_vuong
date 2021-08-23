@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Option;
-use App\Rules\Options;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;

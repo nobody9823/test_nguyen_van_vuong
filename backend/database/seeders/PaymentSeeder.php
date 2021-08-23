@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MessageContent;
 use App\Models\Payment;
 use App\Models\PaymentToken;
 use App\Models\Plan;
@@ -19,7 +20,12 @@ class PaymentSeeder extends Seeder
     public function run()
     {
         User::inRandomOrder()->take(rand(50, 80))->each(function (User $user) {
-            $user->payments()->saveMany(Payment::factory(rand(0, 5))->has(PaymentToken::factory())->create());
+            $user->payments()->saveMany(
+                Payment::factory()->count(10)
+                    ->has(PaymentToken::factory())
+                    ->has(MessageContent::factory()->count(20))
+                    ->create()
+            );
         });
         Payment::all()->each(function (Payment $payment) {
             $payment->includedPlans()->attach(
