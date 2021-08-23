@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth:web']], function () {
         });
         Route::delete('project/file/{project_file}', [MyProjectController::class, 'deleteFile'])->name('project_image.destroy');
         // Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');
-        Route::get('message/{selected_message?}', [MessageController::class, 'indexByExecutor'])->name('my_project.message.index');
+        Route::get('{project}/message/{selected_message?}', [MessageController::class, 'indexByExecutor'])->name('my_project.message.index');
         Route::get('message/{payment}', [MessageController::class, 'showByExecutor'])->name('my_project.message.show');
         Route::post('message/{payment}', [MessageController::class, 'storeByExecutor'])->name('my_project.message_content.store');
         Route::get('message/{message_content}/file_download', [MessageController::class, 'fileDownloadByExecutor'])->name('my_project.message_content.file_download');

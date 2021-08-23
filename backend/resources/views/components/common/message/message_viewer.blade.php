@@ -10,8 +10,6 @@
     </div>
     <div>
         @if ($guard === 'supporter')
-        {{$selectedMessage->project->title}}
-        @else
         <a href="{{ route('user.project.show', ['project' => $selectedMessage->project]) }}">
             {{$selectedMessage->project->title}}</a>
         @endif

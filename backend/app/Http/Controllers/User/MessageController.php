@@ -62,7 +62,7 @@ class MessageController extends Controller
         $this->authorize('checkOwnProject', $project);
         $chating_messages = Payment::where('project_id', $project->id)->messaging()->seeking()->orderBy('updated_at', 'desc')->get();
         $not_chating_messages = Payment::where('project_id', $project->id)->notMessaging()->seeking()->orderBy('updated_at', 'desc')->get();
-        return view('user.mypage.message.index', [
+        return view('user.my_project.message.index', [
             'chating_messages' => $chating_messages,
             'not_chating_messages' => $not_chating_messages,
             'selected_message' => $selected_message,

@@ -9,10 +9,14 @@
     <div class="unread_mark_parent">
         <x-common.message.unread_mark :guard="$guard" :message="$message" />
         {{$message->updated_at->format('Y/m/d H:i:s')}}<br>
-        【{{Str::limit($message->project->title,40)}}】
+        @if($guard === 'supporter')
+            【{{Str::limit($message->project->title,40)}}】
+        @endif
     </div>
     <div>
-        【{{$message->project->user->name}}】
+        @if($guard === 'supporter')
+            【{{$message->project->user->name}}】
+        @endif
         【{{$message->user->name}}】
     </div>
 </div>
