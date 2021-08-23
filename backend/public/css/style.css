@@ -1400,7 +1400,7 @@ input[name="tab_item"] {
 
 .hissu_txt{ font-size: 1.2rem; padding: 2px 5px; background: #EC111A; color: #fff; display: inline-block; margin: 0 0 0 5px;}
 .nini_txt{ font-size: 1.2rem; padding: 2px 5px; background: #848484; color: #fff; display: inline-block; margin: 0 0 0 5px;}
-
+.message-warning{ font-size: 1.2rem; color: #EC111A; }
 
 @media screen and (max-width: 1000px){
 	.as_i_01_L{ width: 100%; border-right: none; border-bottom: solid 1px #00AEBD;}
