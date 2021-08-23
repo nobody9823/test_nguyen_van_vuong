@@ -7,6 +7,8 @@
 <a id="btn-square"
     @if($guard === 'supporter')
         href={{ route('user.message_content.file_download', ['message_content' => $messageContent]) }}
+    @elseif($guard === 'executor')
+        href={{ route('user.my_project.message_content.file_download', ['message_content' => $messageContent]) }}
     @endif
 >
     {{ $messageContent->file_original_name }}
@@ -22,7 +24,7 @@
         /* カーソル   */
         padding: 8px 8px;
         /* 余白       */
-        background: #000066;
+        background: #00AEBD;
         /* 背景色     */
         color: #ffffff;
         /* 文字色     */

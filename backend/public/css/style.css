@@ -928,8 +928,8 @@ input[type=radio]:checked + .radio-fan::after {
 .comment_row{padding: 10px 0; min-height: 75px; border-bottom: solid 1px #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
 .comment_row img{ width: 48px;height: 48px;object-fit: cover;}
 .comment_content{width: 80%;}
-.comment_content_user{font-size: 0.5vw;text-align: right;}
-.comment_content_text{font-size: 1.0vw;text-align: right;}
+.comment_content_user{font-size: 0.5rem;text-align: right;}
+.comment_content_text{font-size: 1.0rem;text-align: right;}
 #comment_content{font-size: 1.4rem;width: 100%;border: none;outline: none;padding-bottom: 8px;box-sizing: border-box;}
 .text_underline{position: relative;border-top: 1px solid #c2c2c2;}
 .text_underline::before,
@@ -1400,7 +1400,7 @@ input[name="tab_item"] {
 
 .hissu_txt{ font-size: 1.2rem; padding: 2px 5px; background: #EC111A; color: #fff; display: inline-block; margin: 0 0 0 5px;}
 .nini_txt{ font-size: 1.2rem; padding: 2px 5px; background: #848484; color: #fff; display: inline-block; margin: 0 0 0 5px;}
-
+.message-warning{ font-size: 1.2rem; color: #EC111A; }
 
 @media screen and (max-width: 1000px){
 	.as_i_01_L{ width: 100%; border-right: none; border-bottom: solid 1px #00AEBD;}
@@ -2454,6 +2454,12 @@ div.spinner-wrapper {
 }
 /* リターン作成のフォームのモーダル表示 */
 
+.saved_icon {
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #00c368;
+}
 
 /* お問い合わせ */
 .inquiry_attention{
@@ -2681,3 +2687,73 @@ div.spinner-wrapper {
 width: auto;
 margin: 20px 0;
 }
+/* アコーディオンメニュー */
+.accordion__title {
+    position: relative;
+    cursor: pointer;
+}
+.accordion__content {
+    display: none;
+    cursor: pointer;
+}
+.accordion__content.is-open {
+    display: block;
+}
+
+/* アコーディオンの(+)アイコン */
+.accordion__plus_minus::before, .accordion__plus_minus::after {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    background-color: #3abec1;
+    width: 20px;
+    height: 4px;
+    transition: all 0.3s;
+}
+.accordion__plus_minus::after {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+/* アコーディオン展開時の(-)アイコン */
+.accordion__item.is-active .accordion__plus_minus::before {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.accordion__item.is-active .accordion__plus_minus::after {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    opacity: 0;
+}
+
+/* アコーディオンの矢印（下）アイコン */
+.accordion__arrow:after {
+    content: "";
+    position: absolute;
+    right: 25px;
+    top: 38%;
+    transition: all 0.5s ease-in-out;
+    /*   要素の動きを指定 */
+
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-top: solid 4px #00AEBD;
+    border-right: solid 4px #00AEBD;
+
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    /* transform: rotateで要素の角度を指定 */
+}
+
+/* アコーディオンの矢印（上）アイコン */
+.accordion__item.is-active .accordion__arrow:after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: 45%;
+    /*   .openクラスがついた時の要素の角度を指定 */
+}
+/* アコーディオンメニュー */

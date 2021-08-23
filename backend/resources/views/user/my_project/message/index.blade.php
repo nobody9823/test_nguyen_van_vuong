@@ -1,6 +1,6 @@
 @extends('user.layouts.base')
 
-@section('title', 'メッセージ一覧')
+@section('title', '支援者とのやりとり')
 
 @section('css')
 <style type="text/css">
@@ -13,14 +13,21 @@
 @section('content')
 <section id="supported-projects" class="section_base">
     <div class="tit_L_01 E-font">
-        <h2>MESSAGE</h2>
-        <div class="sub_tit_L">メッセージ一覧</div>
+        <h2>MESSAGE TO SUPPORTERS</h2>
+        <div class="sub_tit_L">支援者とのやりとり</div>
     </div>
     <div class="prof_page_base inner_item">
         <div class="prof_page_L">
             <x-user.mypage-navigation-bar/>
         </div>
         <div class="prof_page_R">
+            <div class="su_pr_02">
+                <div class="su_pr_02_04 m_b_1510">
+                    <div>
+                        <span>プロジェクト名 : </span>{{ Str::limit($project->title, 46) }}
+                    </div>
+                </div>
+            </div>
             {{-- <div class="fixedcontainer mypage_contents">
 
                 <div class="message_container">
@@ -62,32 +69,32 @@
                     {{-- 検索結果踏まえて送信する用フォーム --}}
 
                     <div class="accordion js-accordion">
-                        {{-- チャット中プロジェクト --}}
+                        {{-- チャット中の支援者 --}}
                         <div class="accordion__item js-accordion-trigger">
                             @if ($chating_messages->isNotEmpty())
-                            <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>やりとりしている支援プロジェクト</p>
+                            <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>やりとりしている支援者</p>
                             @endif
                             <div class="accordion__content">
                                 @foreach ($chating_messages as $message)
-                                <x-common.message.a_message_of_index :message="$message" guard='supporter'
+                                <x-common.message.a_message_of_index :message="$message" guard='executor'
                                     :selectedMessage="isset($selected_message)?$selected_message:null" />
                                 @endforeach
                             </div>
                         </div>
-                        {{-- チャット中プロジェクト --}}
+                        {{-- チャット中の支援者 --}}
 
-                        {{-- 未チャットプロジェクト --}}
+                        {{-- 未チャットの支援者 --}}
                         <div class="accordion__item js-accordion-trigger">
                             @if ($not_chating_messages->isNotEmpty())
-                            <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>やりとりしていない支援プロジェクト</p>
+                            <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>やりとりしていない支援者</p>
                             @endif
                             <div class="accordion__content">
                                 @foreach ($not_chating_messages as $message)
-                                <x-common.message.a_message_of_index :message="$message" guard='supporter'
+                                <x-common.message.a_message_of_index :message="$message" guard='executor'
                                     :selectedMessage="isset($selected_message)?$selected_message:null" />
                                 @endforeach
                             </div>
-                            {{-- 未チャットプロジェクト --}}
+                            {{-- 未チャットの支援者 --}}
                         </div>
                     </div>
 
@@ -102,7 +109,7 @@
                 </button> --}}
 
                 @if(isset($selected_message))
-                <x-common.message.message_viewer :selectedMessage="$selected_message" guard="supporter" />
+                <x-common.message.message_viewer :selectedMessage="$selected_message" guard="executor" />
                 @else
                 <div class="" style='min-height:800px; padding: 1rem; background: #FFF;'>
                     メッセージを選択してください。

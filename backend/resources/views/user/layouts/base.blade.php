@@ -190,6 +190,11 @@ if(isiOS) {
 					<p class="nav_btn_tit_L">購入履歴一覧</p>
 				</a>
 			</li>
+			<li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.message.index') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">メッセージ一覧</p>
+				</a>
+			</li>
 
 			<li id="menu-item-2" class="menu-item menu-item-2 nav_btn menu-item-has-children taso_li menuset_06">
 					<a href="#" id="top_menu-3" data-megamenu="js-megamenu3" class=" nav_btn_link taso_li_a">
