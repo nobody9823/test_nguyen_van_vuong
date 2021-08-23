@@ -10,10 +10,9 @@
     </div>
     <div>
         @if ($guard === 'supporter')
-        {{$selectedMessage->project->title}}
-        @else
         <a href="{{ route('user.project.show', ['project' => $selectedMessage->project]) }}">
-            {{$selectedMessage->project->title}}</a>
+            {{ Str::limit($selectedMessage->project->title, 46) }}
+        </a>
         @endif
     </div>
 
@@ -42,7 +41,9 @@
 </div>
 
 @if($guard === 'supporter')
-<form action={{route('user.message_content.store', ['payment' => $selectedMessage])}} method='post'
+    <form action={{route('user.message_content.store', ['payment' => $selectedMessage])}} method='post'
+@elseif($guard === 'executor')
+    <form action={{route('user.my_project.message_content.store', ['payment' => $selectedMessage])}} method='post'
 @endif
     enctype="multipart/form-data">
     @csrf

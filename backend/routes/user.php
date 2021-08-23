@@ -56,6 +56,10 @@ Route::group(['middleware' => ['auth:web']], function () {
         });
         Route::delete('project/file/{project_file}', [MyProjectController::class, 'deleteFile'])->name('project_image.destroy');
         // Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');
+        Route::get('{project}/message/{selected_message?}', [MessageController::class, 'indexByExecutor'])->name('my_project.message.index');
+        Route::get('message/{payment}', [MessageController::class, 'showByExecutor'])->name('my_project.message.show');
+        Route::post('message/{payment}', [MessageController::class, 'storeByExecutor'])->name('my_project.message_content.store');
+        Route::get('message/{message_content}/file_download', [MessageController::class, 'fileDownloadByExecutor'])->name('my_project.message_content.file_download');
     });
     Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_amount');
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
@@ -70,9 +74,12 @@ Route::group(['middleware' => ['auth:web']], function () {
     //---------------------Project掲載依頼-----------------------------------------------
     Route::get('/consult_project', [ProjectController::class, 'consultProject'])->name('consult_project');
     Route::post('/consult_project', [ProjectController::class, 'consultProjectSend'])->name('consult_project.send');
-    Route::resource('message', MessageController::class)->only(['index', 'show']);
+
+    //---------------------メッセージ一覧-----------------------------------------------
+    Route::get('message/{selected_message?}', [MessageController::class, 'index'])->name('message.index');
+    Route::get('message/{payment}', [MessageController::class, 'show'])->name('message.show');
     Route::post('message/{payment}', [MessageController::class, 'store'])->name('message_content.store');
-    Route::get('message/{message_content}/file_download', [MessageController::class, 'file_download'])->name('message_content.file_download');
+    Route::get('message/{message_content}/file_download', [MessageController::class, 'fileDownload'])->name('message_content.file_download');
 });
 
 Route::middleware(['guest:web', 'throttle:10'])->group(function () {
