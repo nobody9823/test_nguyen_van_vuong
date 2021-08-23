@@ -1,5 +1,5 @@
 <div id='hovering-grey' class="chat_group" onclick="form_submit(this)"
-    style='cursor: pointer;min-height:90px;border: 0;border-bottom: 1px solid #aaa;padding: 0.5rem;background-color:{{ $message->id === optional($selectedMessage)->id ? "rgb(230, 230, 230)":'#f8f9fa' }};'
+    style='font-size: 1.4rem;font-weight: bold;cursor: pointer;min-height:90px;border: 0;border-bottom: 1px solid #00aebd;color:#707070;padding: 0.5rem;background-color:{{ $message->id === optional($selectedMessage)->id ? "#F7FDFF":'#fff' }};'
     @if($guard === 'supporter')
         data-href={{route('user.message.show', ['message' => $message])}}
     @endif
@@ -25,7 +25,7 @@
 
 <style type="text/css">
     #hovering-grey:hover {
-        background-color: rgb(201, 201, 201) !important;
+        background-color: #F7FDFF !important;
     }
 </style>
 @endonce

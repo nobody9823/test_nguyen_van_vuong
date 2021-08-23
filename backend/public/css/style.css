@@ -2596,3 +2596,74 @@ div.spinner-wrapper {
 	}
 }
 /* お問い合わせ */
+
+/* アコーディオンメニュー */
+.accordion__title {
+    position: relative;
+    cursor: pointer;
+}
+.accordion__content {
+    display: none;
+    cursor: pointer;
+}
+.accordion__content.is-open {
+    display: block;
+}
+
+/* アコーディオンの(+)アイコン */
+.accordion__plus_minus::before, .accordion__plus_minus::after {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    background-color: #3abec1;
+    width: 20px;
+    height: 4px;
+    transition: all 0.3s;
+}
+.accordion__plus_minus::after {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+/* アコーディオン展開時の(-)アイコン */
+.accordion__item.is-active .accordion__plus_minus::before {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.accordion__item.is-active .accordion__plus_minus::after {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    opacity: 0;
+}
+
+/* アコーディオンの矢印（下）アイコン */
+.accordion__arrow:after {
+    content: "";
+    position: absolute;
+    right: 25px;
+    top: 38%;
+    transition: all 0.5s ease-in-out;
+    /*   要素の動きを指定 */
+
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-top: solid 4px #00AEBD;
+    border-right: solid 4px #00AEBD;
+
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    /* transform: rotateで要素の角度を指定 */
+}
+
+/* アコーディオンの矢印（上）アイコン */
+.accordion__item.is-active .accordion__arrow:after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: 45%;
+    /*   .openクラスがついた時の要素の角度を指定 */
+}
+/* アコーディオンメニュー */

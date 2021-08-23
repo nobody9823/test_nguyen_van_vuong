@@ -22,7 +22,7 @@
         /* カーソル   */
         padding: 8px 8px;
         /* 余白       */
-        background: #000066;
+        background: #00AEBD;
         /* 背景色     */
         color: #ffffff;
         /* 文字色     */
