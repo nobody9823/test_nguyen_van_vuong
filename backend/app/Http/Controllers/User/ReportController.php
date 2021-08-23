@@ -49,6 +49,7 @@ class ReportController extends Controller
 
     public function update(ReportRequest $request, Project $project, Report $report)
     {
+        // 活動報告削除処理
         if($request->delete){
             DB::beginTransaction();
             try {
@@ -58,11 +59,12 @@ class ReportController extends Controller
             } catch (\Exception $e) {
                 DB::rollback();
             }
-            
+
             return redirect()->action([ReportController::class, 'index'], ['project' => $project])
             ->with('flash_message', '削除が完了しました。');
         }
 
+        // 活動報告更新処理
         DB::beginTransaction();
         try {
             $report->fill($request->fillWithProjectId($project->id))->save();
