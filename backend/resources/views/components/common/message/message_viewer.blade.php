@@ -42,7 +42,9 @@
 </div>
 
 @if($guard === 'supporter')
-<form action={{route('user.message_content.store', ['payment' => $selectedMessage])}} method='post'
+    <form action={{route('user.message_content.store', ['payment' => $selectedMessage])}} method='post'
+@elseif($guard === 'executor')
+    <form action={{route('user.my_project.message_content.store', ['payment' => $selectedMessage])}} method='post'
 @endif
     enctype="multipart/form-data">
     @csrf

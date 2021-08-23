@@ -7,6 +7,8 @@
 <a id="btn-square"
     @if($guard === 'supporter')
         href={{ route('user.message_content.file_download', ['message_content' => $messageContent]) }}
+    @elseif($guard === 'executor')
+        href={{ route('user.my_project.message_content.file_download', ['message_content' => $messageContent]) }}
     @endif
 >
     {{ $messageContent->file_original_name }}

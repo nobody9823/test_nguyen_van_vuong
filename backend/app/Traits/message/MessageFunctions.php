@@ -67,6 +67,8 @@ trait MessageFunctions
     {
         if ($guard === 'supporter') {
             return '未対応';
+        } else if ($guard === 'executor') {
+            return '対応済';
         }
     }
 }
