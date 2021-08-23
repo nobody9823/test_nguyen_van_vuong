@@ -11,7 +11,8 @@
     <div>
         @if ($guard === 'supporter')
         <a href="{{ route('user.project.show', ['project' => $selectedMessage->project]) }}">
-            {{$selectedMessage->project->title}}</a>
+            {{ Str::limit($selectedMessage->project->title, 46) }}
+        </a>
         @endif
     </div>
 

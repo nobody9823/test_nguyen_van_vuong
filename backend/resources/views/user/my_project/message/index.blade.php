@@ -21,6 +21,13 @@
             <x-user.mypage-navigation-bar/>
         </div>
         <div class="prof_page_R">
+            <div class="su_pr_02">
+                <div class="su_pr_02_04 m_b_1510">
+                    <div>
+                        <span>プロジェクト名 : </span>{{ Str::limit($project->title, 46) }}
+                    </div>
+                </div>
+            </div>
             {{-- <div class="fixedcontainer mypage_contents">
 
                 <div class="message_container">
