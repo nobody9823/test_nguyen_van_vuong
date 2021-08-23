@@ -76,7 +76,7 @@
                     </div><!--/su_pr_02-->
 
                     <div class="tit_L_01 E-font">
-                        <div class="sub_tit_L">活動報告 : {{ $project->reports()->count() }}件</div>
+                        <div class="sub_tit_L"><a href="{{ route('user.report.index', ['project' => $project]) }}">活動報告 : {{ $project->reports()->count() }}件</a></div>
                             {{-- <div class="su_pr_02">
                                 <div class="su_pr_02_01 m_b_1510">リターン名</div>
                                 <div class="su_pr_02_02 m_b_1510"></div>

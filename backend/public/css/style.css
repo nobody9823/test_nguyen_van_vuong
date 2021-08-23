@@ -2597,6 +2597,96 @@ div.spinner-wrapper {
 }
 /* お問い合わせ */
 
+/* 活動報告一覧(インフルエンサー側) */
+/* テーブル */
+.reports table {
+	width: 63%;
+}
+
+.reports tr:first-child {
+	width: 110%;
+	display: flex;
+	background: #F7FDFF;
+	color: #00AEBD;
+}
+
+.reports tr:first-child th {
+	margin: 20px;
+}
+
+.reports th:nth-child(2) {
+	width: 535px;
+}
+
+.reports .prof_edit_row td:nth-child(2) {
+	width: 400px;
+}
+
+.prof_edit_row {
+	width: 110%;
+}
+
+/* アイコン */
+.reports .mobile_display { 
+	display: none; 
+}
+
+.reports a { 
+	color: #00AEBD; 
+}
+
+/* 新規投稿ボタン */
+.reports .def_btn { margin: 70px 170px 100px; }
+
+/* スマホサイズ */
+@media (max-width: 767px) {
+	/* テーブルの各スタイル */
+	.reports tr:first-child { width: calc(100% - 20%); display: none;)}
+	/* .reports th:nth-child(3) { width: 100%;} */
+	.reports .prof_edit_row { width: calc(200% - 40%); }
+	.reports .prof_edit_row td:first-child { display: none; }
+	.reports .prof_edit_row td:nth-child(2) { width:100%; margin-top: 25px; margin-bottom: 15px;}
+	.reports .prof_edit_row td:nth-child(3) { width:100%;}
+	.reports .prof_edit_row td:nth-child(3) div { color: #00AEBD; font-size: 85%; }
+	/* アイコン */
+	.reports .fa-edit {
+	position: relative;
+	bottom: 17px;
+	left: calc(100% - 15%);
+	}
+	.reports .mobile_display { display: block; }
+	/* 新規投稿ボタン */
+	.reports .def_btn { margin: 50px 0px 100px; }
+}
+
+/* PCサイズ */
+@media (min-width: 767px) {
+	.reports .prof_edit_row td {
+		height: 100px;
+		display: flex;
+		align-items: center;
+	}
+	.reports .fa-edit, .reports .prof_edit_row td:nth-child(2) {
+		position: relative;
+		right: 40px;
+	}
+}
+
+/* 活動報告新規作成・更新画面(インフルエンサー側) */
+.report_form {
+	margin: 40px 10px 40px 10px;
+}
+
+	/* PCサイズ */
+@media (min-width: 767px) {
+.report_form .prof_edit_01 { width: 35%;}
+.report_form .prof_edit_editbox { width: 65%; }
+}
+
+.report_form .prof_edit_editbox img {
+width: auto;
+margin: 20px 0;
+}
 /* アコーディオンメニュー */
 .accordion__title {
     position: relative;
