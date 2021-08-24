@@ -53,13 +53,14 @@
                     <div class="su_pr_02">
                         <div class="su_pr_02_04 m_b_1510">
                             <div>
+                                {{-- FIXME: ここのステータスの部分はユーザーに分かりやすいような文言へと修正が必要そうです --}}
                                 <span>あなたのプロジェクトは</span>
                                 @if($project->release_status === '---')
                                     <span style="border-bottom: 2px solid #555353">申請前</span>
                                 @elseif($project->release_status === '承認待ち')
                                     <span style="border-bottom: 2px solid #555353">審査中</span>
                                 @elseif($project->release_status === '掲載中')
-                                    <span style="border-bottom: 2px solid #555353">{{ $project->release_status }}</span>
+                                    <span style="border-bottom: 2px solid #555353">公開中</span>
                                 @elseif($project->release_status === '掲載停止中')
                                     <span style="border-bottom: 2px solid #555353">{{ $project->release_status }}</span>
                                 @elseif($project->release_status === '差し戻し')
