@@ -128,7 +128,7 @@ class ProjectController extends Controller
 
         return view('user.project.show', [
             'inviter_code' => $this->inviter_code,
-            'project' => $project->getLoadPaymentsCountAndSumPrice()->loadComments(),
+            'project' => $project->getLoadPaymentsCountAndSumPrice()->loadOtherRelations(),
         ]);
     }
 

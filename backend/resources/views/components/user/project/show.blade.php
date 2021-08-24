@@ -178,12 +178,17 @@
                     <div class="tit_L_01 E-font">
                         <div class="sub_tit_L">活動レポート</div>
                     </div>
+
                     
+                    @if($project->payments->contains('user_id', optional(Auth::user())->id)) 
                     <div>
                         @foreach($project->reports as $report)
                         <x-user.project.report :project="$project" :report="$report" />
                         @endforeach
                     </div>
+                    @else
+                    <p>プロジェクトを支援した方のみ閲覧可能です。</p>
+                    @endif
                 </div>
 
                 <div class="wlr_64_L inner_item tab_contents a_comment_list " id='comment_section' style="display:none">

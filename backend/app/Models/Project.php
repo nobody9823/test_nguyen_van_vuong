@@ -159,11 +159,20 @@ class Project extends Model
             }]);
     }
 
-    public function loadComments()
+    public function loadOtherRelations()
     {
-        return $this->load(['comments' => function ($query) {
-            $query->orderBy('created_at', 'desc');
-        }]);
+        $relationTables = ['comments','reports','payments'];
+        foreach($relationTables as $relationTable){
+            $this->load([$relationTable => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }]);
+        }
+        
+        return $this;
+        
+        // return $this->load(['comments','reports','payments' => function($queryes) {
+        //     dd($queryes->take(5)->get());
+        // }]);
     }
 
     public function scopeMainProjects($query)
