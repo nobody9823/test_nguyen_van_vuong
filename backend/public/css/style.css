@@ -928,8 +928,9 @@ input[type=radio]:checked + .radio-fan::after {
 .comment_row{padding: 10px 0; min-height: 75px; border-bottom: solid 1px #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
 .comment_row img{ width: 48px;height: 48px;object-fit: cover;}
 .comment_content{width: 80%;}
-.comment_content_user{font-size: 0.5rem;text-align: right;}
-.comment_content_text{font-size: 1.0rem;text-align: right;}
+.comment_content_user{text-align: right;}
+.comment_content_user span{font-size: 0.8rem;}
+.comment_content_text{font-size: 1.2rem;text-align: right;}
 #comment_content{font-size: 1.4rem;width: 100%;border: none;outline: none;padding-bottom: 8px;box-sizing: border-box;}
 .text_underline{position: relative;border-top: 1px solid #c2c2c2;}
 .text_underline::before,
@@ -2623,12 +2624,12 @@ div.spinner-wrapper {
 }
 
 /* アイコン */
-.reports .mobile_display { 
-	display: none; 
+.reports .mobile_display {
+	display: none;
 }
 
-.reports a { 
-	color: #00AEBD; 
+.reports a {
+	color: #00AEBD;
 }
 
 /* 新規投稿ボタン */
