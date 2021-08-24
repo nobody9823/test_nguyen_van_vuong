@@ -2687,6 +2687,56 @@ div.spinner-wrapper {
 width: auto;
 margin: 20px 0;
 }
+
+/* 活動報告(プロジェクト詳細画面内のタブ) */
+.a_report {
+	border-bottom: solid 1px #00AEBD;
+	margin-bottom: 70px;
+}
+
+:is(.a_report, .report_detail) .disclaimer {
+	opacity: 0.7; 
+}
+
+:is(.a_report, .report_detail) .pds_sec02_img img {
+	max-width: 100%;
+	max-height: none;
+	width: 100%;
+	height: auto;
+}
+
+/* 活動報告詳細画面 */
+.report_detail {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+
+.report_detail .content {
+	display: flex;
+	flex-direction: column;
+	width: 60%;
+}
+
+.report_detail .content strong {
+	font-size: 125%;
+}
+
+.report_detail .content div {
+	margin: 15px 0;
+}
+
+.report_detail .content div:nth-child(5) {
+	margin: 60px 0;
+}
+
+@media (max-width: 767px) {
+	.report_detail .content { width: 90%; font-size: 85%; }
+}
+	/* ここまで活動報告 */
+
 /* アコーディオンメニュー */
 .accordion__title {
     position: relative;
