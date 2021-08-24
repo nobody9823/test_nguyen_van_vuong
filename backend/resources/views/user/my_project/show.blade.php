@@ -39,7 +39,7 @@
                                 @else --}}
                                     <div>募集開始まで残り: {{ DateFormat::getDiffCompareWithToday($project->start_date) }}日</div>
                                 {{-- @endif --}}
-                            @elseif (DateFormat::checkDateIsPast($project->start_date))
+                            @elseif (DateFormat::checkDateIsPast($project->start_date) && DateFormat::checkDateIsFuture($project->end_date))
                                 {{-- @if (DateFormat::checkDateIsWithInADay($project->end_date))
                                     <div style="color: #e65d65;">募集終了まで残り：{{ DateFormat::getDiffCompareWithToday($project->end_date) }}時間</div>
                                 @else --}}
