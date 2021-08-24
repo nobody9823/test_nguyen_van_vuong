@@ -19,7 +19,7 @@
         </div>
         <div style="white-space: pre-line;">{{ Str::limit($report->content, 200) }}</div>
         <div>
-           <a href="{{ route('user.project.show', ['project' => $project]) }}"><i class="fas fa-chevron-left"></i> 活動報告一覧へ戻る</a>
+           <a href="javascript: history.back()"><i class="fas fa-chevron-left"></i> 活動報告一覧へ戻る</a>
         </div>
     </div>
 </div>
