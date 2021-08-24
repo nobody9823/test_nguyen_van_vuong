@@ -44,6 +44,11 @@ class ReportController extends Controller
         return redirect()->action([ReportController::class, 'index'], ['project' => $project])->with('flash_message', '新規作成が完了しました。');
     }
 
+    public function show(Project $project, Report $report)
+    {
+        return view('user.report.show', ['report' => $report]);
+    }
+
     public function edit(Project $project, Report $report)
     {
         $this->authorize('checkOwnProject', $project);

@@ -181,7 +181,7 @@
                     
                     <div>
                         @foreach($project->reports as $report)
-                        <x-user.project.report :report="$report" />
+                        <x-user.project.report :project="$project" :report="$report" />
                         @endforeach
                     </div>
                 </div>
