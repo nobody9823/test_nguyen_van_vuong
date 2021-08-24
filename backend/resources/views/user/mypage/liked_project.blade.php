@@ -21,7 +21,7 @@
                     </div>
                     @endforeach
                 </div>
-                <x-common.pagination :props="$projects"/>
+                {{ $projects->appends(request()->input())->onEachSide(4)->links() }}
             </div><!-- /.prof_page_R -->
 
         {{-- <div class="more_btn_01">

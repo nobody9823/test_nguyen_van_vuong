@@ -32,7 +32,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::useBootstrap();
+        Paginator::defaultView('components.common.pagination');
+        Paginator::defaultSimpleView('components.common.pagination');
         /**
          * Collectionに対して paginate できるようにするマクロ
          *
