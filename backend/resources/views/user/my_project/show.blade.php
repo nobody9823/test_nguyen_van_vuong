@@ -53,11 +53,24 @@
                     <div class="su_pr_02">
                         <div class="su_pr_02_04 m_b_1510">
                             <div>
-                                <span>支援総額 : </span>{{ $project->payments_sum_price }}円
+                                <span>あなたのプロジェクトは</span>
+                                @if($project->release_status === '---')
+                                    <span style="border-bottom: 2px solid #555353">申請前</span>
+                                @elseif($project->release_status === '承認待ち')
+                                    <span style="border-bottom: 2px solid #555353">審査中</span>
+                                @elseif($project->release_status === '掲載中')
+                                    <span style="border-bottom: 2px solid #555353">{{ $project->release_status }}</span>
+                                @elseif($project->release_status === '掲載停止中')
+                                    <span style="border-bottom: 2px solid #555353">{{ $project->release_status }}</span>
+                                @elseif($project->release_status === '差し戻し')
+                                    <span style="border-bottom: 2px solid #555353">要修正</span>
+                                @endif
+                                です。
                             </div>
                         </div>
                     </div>
 
+                    {{-- NOTICE: キャンプファイアの方ではリターンの一覧が特になかったので一旦コメントアウトにしています。 --}}
                     {{-- <div class="tit_L_01 E-font accordion js-accordion">
                         @if ($project->plans_count > 0)
                         <div class="accordion__item js-accordion-trigger">
