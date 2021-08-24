@@ -21,7 +21,7 @@
                     </div>
                     @endforeach
                 </div>
-                {{ $projects->appends(request()->input())->onEachSide(4)->links() }}
+                {{ $projects->appends(request()->input())->onEachSide(1)->links() }}
             </div><!-- /.prof_page_R -->
 
         {{-- <div class="more_btn_01">
