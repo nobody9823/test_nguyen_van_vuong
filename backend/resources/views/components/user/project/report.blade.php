@@ -5,9 +5,9 @@
             <img src="{{ Storage::url($report->image_url) }}">
         </div>
 
-        <span class="disclaimer">
+        <div class="disclaimer">
             {{ $report->created_at }}
-        </span>
+        </div>
         <div>
             <strong>{{ $report->title }}</strong>
         </div>
@@ -15,7 +15,7 @@
             {{ Str::limit($report->content, 200) }}
         </div>
         <div class="ps_rank_more_btn">
-          <a href="{{ route('user.report.show',['project' => $project, 'report' => $report]) }}">もっと見る<i class="fas fa-chevron-down"></i></a>
+          <a href="{{ route('user.report.show',['project' => $project, 'report' => $report]) }}">もっと見る <i class="fas fa-chevron-right"></i></a>
         </div>
     </div>
   <!-- </div> -->

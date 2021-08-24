@@ -46,7 +46,7 @@ class ReportController extends Controller
 
     public function show(Project $project, Report $report)
     {
-        return view('user.report.show', ['report' => $report]);
+        return view('user.report.show', ['project' => $project, 'report' => $report]);
     }
 
     public function edit(Project $project, Report $report)
