@@ -26,7 +26,22 @@
                         <div class="ps_rank_01_01 m_b_1510">
                             <div>現在：{{ number_format($project->payments_sum_price) }}円</div>
                             <div>支援者数：{{ $project->payments_count }}人</div>
-                            <div>募集終了まで残り：{{ $project->number_of_days_left }}日</div>
+                            @if (DateFormat::checkDateIsFuture($project->start_date))
+                                {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
+                                {{-- @if (DateFormat::checkDateIsWithInADay($project->start_date))
+                                    <div style="color: #e65d65;">募集開始まで残り：{{ DateFormat::getDiffCompareWithToday($project->start_date) }}時間</div>
+                                @else --}}
+                                    <div>募集開始まで残り：{{ DateFormat::getDiffCompareWithToday($project->start_date) }}日</div>
+                                {{-- @endif --}}
+                            @elseif (DateFormat::checkDateIsPast($project->start_date) && DateFormat::checkDateIsFuture($project->end_date))
+                                {{-- @if (DateFormat::checkDateIsWithInADay($project->end_date))
+                                    <div style="color: #e65d65;">募集終了まで残り：{{ DateFormat::getDiffCompareWithToday($project->end_date) }}時間</div>
+                                @else --}}
+                                    <div>募集終了まで残り：{{ DateFormat::getDiffCompareWithToday($project->end_date) }}日</div>
+                                {{-- @endif --}}
+                            @elseif (DateFormat::checkDateIsPast($project->end_date))
+                                <div>募集終了</div>
+                            @endif
                         </div>
                         <!--/ps_rank_01_03-->
                         <div class="ps_rank_01_02 m_b_1510">
