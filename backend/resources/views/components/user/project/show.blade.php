@@ -157,7 +157,7 @@
         </div><!--/pds_inner-->
         <div class="project_switch_tabs">
             <div class="project_show_select_tab selected_tab" onClick="switchTabs(this,'#project_content_section')">プロジェクト</div>
-            {{-- <div class="project_show_select_tab" onClick="switchTabs(this)">活動レポート</div> --}}
+            <div class="project_show_select_tab" onClick="switchTabs(this,'#report_section')">活動レポート</div>
             <div class="project_show_select_tab" onClick="switchTabs(this,'#comment_section')">応援コメント</div>
         </div>
 
@@ -174,19 +174,17 @@
                     {{-- <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div> --}}
                 </div><!--/wlr_64_L-->
 
-                {{-- 必要になったらコメントアウト外す
                 <div class="wlr_64_L inner_item tab_contents" id='report_section' style="display:none">
                     <div class="tit_L_01 E-font">
                         <div class="sub_tit_L">活動レポート</div>
                     </div>
                     
                     <div>
-                        @foreach($project->report as $report)
+                        @foreach($project->reports as $report)
                         <x-user.project.report :report="$report" />
                         @endforeach
                     </div>
                 </div>
-                必要になったらコメントアウト外す --}}
 
                 <div class="wlr_64_L inner_item tab_contents a_comment_list " id='comment_section' style="display:none">
                     <div class="tit_L_01 E-font">
