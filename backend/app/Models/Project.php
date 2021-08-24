@@ -169,10 +169,6 @@ class Project extends Model
         }
         
         return $this;
-        
-        // return $this->load(['comments','reports','payments' => function($queryes) {
-        //     dd($queryes->take(5)->get());
-        // }]);
     }
 
     public function scopeMainProjects($query)

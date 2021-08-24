@@ -179,7 +179,6 @@
                         <div class="sub_tit_L">活動レポート</div>
                     </div>
 
-                    
                     @if($project->payments->contains('user_id', optional(Auth::user())->id)) 
                     <div>
                         @foreach($project->reports as $report)
