@@ -28,14 +28,14 @@
                         <div class="su_pr_01_03 m_b_1510">
                             <div>目標金額は¥{{ number_format($project->target_amount) }}</div>
                             <div>支援者数：{{ $project->payments_count }}</div>
-                            @if (DateFormat::checkDateIsPast($project->start_date))
-                                {{-- NOTICE: 追加開発が決まったらこちらのコメントアウトを外してください --}}
+                            @if (DateFormat::checkDateIsPast($project->start_date) && DateFormat::checkDateIsFuture($project->end_date))
+                                {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
                                 {{-- @if (DateFormat::checkDateIsWithInADay($project->end_date))
                                     <div style="color: #e65d65;">募集終了まで残り：{{ DateFormat::getDiffCompareWithToday($project->end_date) }}時間</div>
                                 @else --}}
                                     <div>募集終了まで残り：{{ DateFormat::getDiffCompareWithToday($project->end_date) }}日</div>
                                 {{-- @endif --}}
-                            @else
+                            @elseif (DateFormat::checkDateIsPast($project->end_date))
                                 <div>募集終了</div>
                             @endif
                         </div><!--/su_pr_01_03-->

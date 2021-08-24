@@ -90,8 +90,28 @@
                 </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_nokori_base">
-                    <div class="pds_sec01_R_nokori01">募集終了まで残り</div>
-                    <div class="pds_sec01_R_nokori02 E-font">{{ $project->number_of_days_left }}<span>日</span></div>
+                    @if (DateFormat::checkDateIsFuture($project->start_date))
+                        <div class="pds_sec01_R_nokori01">募集開始まで残り</div>
+                        <div class="pds_sec01_R_nokori02 E-font">
+                            {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
+                            {{-- @if (DateFormat::checkDateIsWithInADay($project->start_date))
+                                {{ DateFormat::getDiffCompareWithToday($project->start_date) }}<span>時間</span>
+                            @else --}}
+                                {{ DateFormat::getDiffCompareWithToday($project->start_date) }}<span>日</span>
+                            {{-- @endif --}}
+                        </div>
+                    @elseif (DateFormat::checkDateIsPast($project->start_date) && DateFormat::checkDateIsFuture($project->end_date))
+                        <div class="pds_sec01_R_nokori01">募集終了まで残り</div>
+                        <div class="pds_sec01_R_nokori02 E-font">
+                            {{-- @if (DateFormat::checkDateIsWithInADay($project->end_date))
+                                {{ DateFormat::getDiffCompareWithToday($project->end_date) }}<span>時間</span>
+                            @else --}}
+                                {{ DateFormat::getDiffCompareWithToday($project->end_date) }}<span>日</span>
+                            {{-- @endif --}}
+                        </div>
+                    @elseif (DateFormat::checkDateIsPast($project->end_date))
+                        <div class="pds_sec01_R_nokori02"><span>FINISHED</span></div>
+                    @endif
                 </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_btn_base">
@@ -179,7 +199,7 @@
                     <div class="tit_L_01 E-font">
                         <div class="sub_tit_L">活動レポート</div>
                     </div>
-                    
+
                     <div>
                         @foreach($project->report as $report)
                         <x-user.project.report :report="$report" />
@@ -218,7 +238,7 @@
                     </div>
 
                 </div><!--/wlr_64_L-->
-                
+
 
                 <div class="wlr_64_R">
                     <div class="pds_sec02_tit inner_item">
