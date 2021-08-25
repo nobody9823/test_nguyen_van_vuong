@@ -2757,3 +2757,10 @@ margin: 20px 0;
     /*   .openクラスがついた時の要素の角度を指定 */
 }
 /* アコーディオンメニュー */
+
+.my_project_dashboard {justify-content: center;}
+.my_project_dashboard .def_btn {width: 40%; margin-bottom: 10px;}
+.my_project_dashboard_status {text-align: center; width: 100%; margin: 0; padding-bottom: 20px;}
+@media screen and (max-width: 768px){
+    .my_project_dashboard .def_btn {width: 100%;}
+}
