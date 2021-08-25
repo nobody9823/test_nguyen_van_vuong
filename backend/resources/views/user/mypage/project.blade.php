@@ -41,8 +41,7 @@
                 </div><!--/su_pr_02-->
             </div><!--/su_pr_base-->
             @endforeach
-
-            <x-common.pagination :props="$projects"/>
+            {{ $projects->appends(request()->input())->onEachSide(1)->links() }}
 
         </div><!--/prof_page_R-->
     </div><!--/.prof_page_base-->
