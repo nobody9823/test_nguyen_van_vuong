@@ -247,6 +247,8 @@ return [
     'pay_jp_key' => env('PAY_JP_KEY'),
     'pay_pay_key_for_test' => env('PAY_PAY_KEY_FOR_TEST'),
     'pay_pay_secret_for_test' => env('PAY_APY_SECRET_FOR_TEST'),
+    'stripe_key' => env('STRIPE_KEY'),
+    'stripe_secret' => env('STRIPE_SECRET'),
     'merchant_id' => env('MERCHANT_ID'),
     'production_env' => env('PRODUCTION_ENV'),
     'sandbox' => env('SANDBOX'),
