@@ -12,8 +12,8 @@
         <div class="prof_page_L">
             <x-user.mypage-navigation-bar/>
         </div>
-        @foreach($payments as $payment)
-            <div class="prof_page_R">
+        <div class="prof_page_R">
+            @foreach($payments as $payment)
                 <div class="su_pr_base">
                     <div class="su_pr_img m_b_1510"><img class="" src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}"></div>
                     <div class="su_pr_01 m_b_1510">
@@ -75,11 +75,11 @@
                         </div><!--/su_pr_02-->
                     @endforeach
                 </div><!--/su_pr_base-->
-            </div>
-        @endforeach
+            @endforeach
+            {{ $payments->appends(request()->input())->onEachSide(1)->links() }}
+        </div>
     </div>
 
-    <x-common.pagination :props="$payments"/>
 
 </section>
 @endsection

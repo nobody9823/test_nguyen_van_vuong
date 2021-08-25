@@ -32,7 +32,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::useBootstrap();
+        Paginator::defaultView('components.common.pagination');
+        // FIXME: スマホの時に以下のsimpleViewを表示されるようにするなど対応が必要
+        // Paginator::defaultSimpleView('');
         /**
          * Collectionに対して paginate できるようにするマクロ
          *

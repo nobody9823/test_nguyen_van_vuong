@@ -25,7 +25,7 @@
             @foreach($projects as $project)
             <div class="su_pr_base">
                 <div class="su_pr_img m_b_1510">
-                    <img class="" src="{{ Storage::url($project->projectFiles->first()->file_url) }}">
+                    {{-- <img class="" src="{{ Storage::url($project->projectFiles->first()->file_url) }}"> --}}
                 </div>
                 <div class="su_pr_01 m_b_1510">
                     <div class="su_pr_01_01 m_b_1510">{{ $project->title }}</div>
@@ -68,8 +68,7 @@
                 </div><!--/su_pr_02-->
             </div><!--/su_pr_base-->
             @endforeach
-
-            <x-common.pagination :props="$projects"/>
+            {{ $projects->appends(request()->input())->onEachSide(1)->links() }}
 
         </div><!--/prof_page_R-->
     </div><!--/.prof_page_base-->
