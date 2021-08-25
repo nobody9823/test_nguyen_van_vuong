@@ -46,7 +46,7 @@
                     @endforeach
                 @endif
             </table>
-            
+
             <div class="def_btn">
               <button type="submit" class="disable-btn">
                 <a href="{{ route('user.report.create' ,['project' => $project ]) }}" style="font-size: 1.8rem;font-weight: bold;color: #fff;">新規投稿を作成</a>
@@ -54,7 +54,7 @@
             </div>
 
             <div style="margin: 100px 0;">
-              <x-common.pagination :props="$reports"/>
+                {{ $reports->appends(request()->input())->onEachSide(1)->links() }}
             </div>
         </div>
     </div>

@@ -89,8 +89,7 @@
         </div>
     </div>
 </section>
-
-<x-common.pagination :props="$comments"/>
+{{ $comments->appends(request()->input())->onEachSide(1)->links() }}
 
 @endsection
 

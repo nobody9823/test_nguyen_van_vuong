@@ -14,10 +14,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes, SearchFunctions, SortBySelected;
+    use HasFactory, Notifiable, SoftDeletes, SearchFunctions, SortBySelected, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -206,11 +207,11 @@ class User extends Authenticatable
         return $query->withSum(['invitedPlanPaymentIncluded' => function ($query) use ($project_id) {
             $query->where('payments.project_id', $project_id);
         }], 'quantity')
-        ->whereIn('id', Payment::select('inviter_id')->whereIn(
-            'project_id',
-            Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
-        ))
-        ->orderBy('invited_plan_payment_included_sum_quantity', 'DESC');
+            ->whereIn('id', Payment::select('inviter_id')->whereIn(
+                'project_id',
+                Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
+            ))
+            ->orderBy('invited_plan_payment_included_sum_quantity', 'DESC');
     }
 
     // inviter_idが一致するpaymentsの支援総額から降順に並び替え
@@ -219,11 +220,11 @@ class User extends Authenticatable
         return $query->withSum(['invitedPayments' => function ($query) use ($project_id) {
             $query->where('project_id', $project_id);
         }], 'price')
-        ->whereIn('id', Payment::select('inviter_id')->whereIn(
-            'project_id',
-            Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
-        ))
-        ->orderBy('invited_payments_sum_price', 'DESC');
+            ->whereIn('id', Payment::select('inviter_id')->whereIn(
+                'project_id',
+                Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
+            ))
+            ->orderBy('invited_payments_sum_price', 'DESC');
     }
 
     public function scopeGetInviterFromInviterCode($query, $inviter_code)
@@ -248,7 +249,7 @@ class User extends Authenticatable
         };
     }
 
-    public function saveProfile(array $value) :void
+    public function saveProfile(array $value): void
     {
         if (isset($this->profile)) {
             $this->profile()->save($this->profile->fill($value));
@@ -258,7 +259,7 @@ class User extends Authenticatable
         }
     }
 
-    public function saveAddress(array $value) :void
+    public function saveAddress(array $value): void
     {
         if (isset($this->address)) {
             $this->address()->save($this->address->fill($value));
@@ -268,7 +269,7 @@ class User extends Authenticatable
         }
     }
 
-    public function saveSnsLink(array $value) :void
+    public function saveSnsLink(array $value): void
     {
         if (isset($this->snsLink)) {
             $this->snsLink()->save($this->snsLink->fill($value));

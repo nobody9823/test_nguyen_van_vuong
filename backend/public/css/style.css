@@ -1565,11 +1565,19 @@ input[name="tab_item"] {
 
 .pager_naka{border: none !important;}
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 540px){
 	.pager .pagination li {
-	  width: 27px;
-	  height: 27px;
-	  font-size: 1.3rem;
+	  width: 23px;
+	  height: 23px;
+	  font-size: 1.1rem;
+	}
+}
+
+@media screen and (max-width: 320px){
+	.pager .pagination li {
+	  width: 18px;
+	  height: 18px;
+	  font-size: 1rem;
 	}
 }
 

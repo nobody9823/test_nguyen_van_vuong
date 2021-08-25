@@ -15,8 +15,7 @@
                 @endforeach
             </div>
         </section>
-
-        <x-common.pagination :props="$projects"/>
+        {{ $projects->appends(request()->input())->onEachSide(1)->links() }}
     </div>
 </main>
 @endsection
