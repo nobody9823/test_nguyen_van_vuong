@@ -116,6 +116,7 @@ class ProjectControllerForPayJpTest extends TestCase
                         ->from($this->url)
                         ->get(
                             route('user.plan.paymentForPayJp', [
+                            'tag' => $this->tag,
                             'project' => $this->project,
                             'payment' => $this->success_payment
                         ])
