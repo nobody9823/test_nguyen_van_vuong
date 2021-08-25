@@ -27,7 +27,7 @@
     </li><!-- /.breadcrumb__list -->
 </ol><!-- /.breadcrumb -->
 
-<div class="content inner">
+<div class="question-content inner">
 
     <aside class="question-sidebar">
         {{-- SPのとき --}}
@@ -103,7 +103,7 @@
             <p class="about__text">また、FanReturnという名の通り、インフルエンサーがもっとも大事にするファンへの特別なリターンの仕組みを用意しています。それが「プロジェクトサポーター（PS）」です。</p>
             <p class="about__text">インフルエンサーのプロジェクトをファンが拡散すればするほど、ファンはインフルエンサーから特別なリターンがもらえるというサービスです。</p>
             <p class="about__text">インフルエンサーにとってもファンにとってもメリットのあるPSの仕組みは、より強固なWIN-WINの関係を築くことができます。PSは他のクラウドファンディングにはありません。<br>インフルエンサーに特化したFanReturnだからこそできるサービスです。</p>
-            <p class="about__text about__text--url">詳しくは「プロジェクトサポーター（PS）とは」をご覧ください。<br><a href="#">URL：</a></p>
+            <p class="about__text about__text--url"><a href="#ps_supporter_description"><i class="fas fa-link"></i> 詳しくは「プロジェクトサポーター（PS）とは」をご覧ください。</a></p>
             <p class="about__text">「イベントを開きたい」「オリジナルグッズを作りたい」、でもどのくらい人が集まるか不安、金銭面が不安と悩んでいるインフルエンサーの皆さま、ぜひFanReturnをご活用ください。</p>
             <p class="about__text about-with-fanreturn__title">FanReturnを使えば…</p>
             <ul class="about-with-fanreturn__list">
@@ -139,9 +139,13 @@
             <p class="about-project__txt"><span>05</span>プロジェクトリターンの実施</p>
         </section><!-- /.about-project -->
 
-
+        <section id="ps_supporter_description" class="about-project-supporter">
+            <h2 class="about-project-supporter__title">PROJECT SUPPORTER</h2><!-- /.about-project-supporter__title -->
+            <h3 class="about-project-supporter__sub-title">プロジェクトサポーター(PS)とは</h3>
+            <x-user.project.ps-description />
+        </section>
     </main>
-</div><!-- /.content -->
+</div><!-- /.question-content -->
 
 
 @endsection

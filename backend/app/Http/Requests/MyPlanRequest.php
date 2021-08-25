@@ -26,46 +26,59 @@ class MyPlanRequest extends FormRequest
      */
     public function rules()
     {
-        $project_end_date = $this->route('project')->end_date->format('Y-m-d H:i:s');
-
         return [
             'title' => ['nullable', 'string', 'max:45'],
             'content' => ['nullable', 'string', 'max:2000'],
-            'price' => ['nullable', 'integer', 'max:10000000'],
+            'price' => ['integer', 'min:0', 'max:10000000'],
             'address_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters' => ['integer', 'min:1'],
-            'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$project_end_date}"],
+            'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$this->route('project')->end_date->format('Y-m-d H:i:s')}"],
             'image_url' => ['nullable', 'image']
         ];
     }
 
     protected function prepareForValidation()
     {
-        if ($this->has('delivery_month') && $this->has('delivery_day')) {
-            if ($this->delivery_month === "00") {
-                $this->merge([
-                    'delivery_month' => date('m')
-                ]);
-            };
 
-            if ($this->delivery_day === "00") {
-                $this->merge([
-                    'delivery_day' => date('y')
-                ]);
-            }
-
-            $date = new Carbon($this->delivery_year . '-' . $this->delivery_month . '-' . $this->delivery_day);
-
+        if ($this->has('title') && is_null($this->input('title'))) {
             $this->merge([
-                'delivery_date' => $date->format('Y-m-d')
+                'title' => ''
             ]);
         }
 
-        if ($this->has('limit_of_supporters_is_required') && $this->limit_of_supporters_is_required === 0) {
+        if ($this->has('content') && is_null($this->input('content'))) {
+            $this->merge([
+                'content' => ''
+            ]);
+        }
+
+        if ($this->has('price') && is_null($this->input('price'))) {
+            $this->merge([
+                'price' => 0
+            ]);
+        }
+
+        if ($this->input('limit_of_supporters_is_required') === 0) {
             $this->merge([
                 'limit_of_supporters' => 1,
             ]);
+        }
+
+        if ($this->isMethod('patch') && $this->missing('limit_of_supporters_is_required') && $this->route('plan')->limit_of_supporters_is_required === 0) {
+            $this->merge([
+                'limit_of_supporters' => 1,
+            ]);
+        }
+
+        if ($this->isMethod('post') && $this->missing('limit_of_supporters_is_required')) {
+            $this->merge([
+                'limit_of_supporters' => 1,
+            ]);
+        }
+
+        if (!$this->filled('delivery_date')) {
+            $this->offsetUnset('delivery_date');
         }
     }
 

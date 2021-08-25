@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <script>
 var ua = navigator.userAgent.toLowerCase();
 var isiOS = (ua.indexOf('iphone') > -1) || (ua.indexOf('ipad') > -1);
@@ -14,7 +14,13 @@ if(isiOS) {
   }
 }
 </script>
-<title></title>
+
+<title>FanReturn (ファンリターン) 〜インフルエンサーの「やりたい」が叶う〜 | @yield('title')</title>
+<meta name="description" content="グッズを作りたい！ファンイベントを開きたい！そんなインフルエンサーに特化したクラウドファンディングサービスです。更にファンの満足度をUPさせる仕組みが多数！">
+<link rel="shortcut icon" href="{{ asset('image/fanreturn.ico') }}">
+<link rel="apple-touch-icon" href="{{ asset('image/fanreturn_apple_touch_icon.png') }}">
+<link rel="icon" type="image/png" href="{{ asset('image/fanreturn_android_chrome_192x192.png') }}">
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -182,6 +188,11 @@ if(isiOS) {
 			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.payment_history') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">購入履歴一覧</p>
+				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.message.index') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">メッセージ一覧</p>
 				</a>
 			</li>
 
@@ -443,6 +454,54 @@ jQuery(document).ready(function($) {
             $(h_mega_nav).removeClass("is-active");
         });
     });
+    $("#page-top_btn").hide();
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#page-top_btn').fadeIn();
+            } else {
+                $('#page-top_btn').fadeOut();
+            }
+        });
+
+        $('#page-top_btn a').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+    //URLのハッシュ値を取得
+    var urlHash = location.hash;
+    //ハッシュ値があればページ内スクロール
+    if(urlHash) {
+        //スクロールを0に戻す
+        $('body,html').stop().scrollTop(0);
+        setTimeout(function () {
+        //ロード時の処理を待ち、時間差でスクロール実行
+        scrollToAnker(urlHash) ;
+        }, 100);
+    }
+
+    //通常のクリック時
+    $('a[href^="#"]').click(function() {
+        //ページ内リンク先を取得
+        var href= $(this).attr("href");
+        //リンク先が#か空だったらhtmlに
+        var hash = href == "#" || href == "" ? 'html' : href;
+        //スクロール実行
+        scrollToAnker(hash);
+        //リンク無効化
+        return false;
+    });
+
+    // 関数：スムーススクロール
+    // 指定したアンカー(#ID)へアニメーションでスクロール
+    function scrollToAnker(hash) {
+        var target = $(hash);
+        var position = target.offset().top;
+        $('body,html').stop().animate({scrollTop:position}, 500);
+    }
 });
 
 

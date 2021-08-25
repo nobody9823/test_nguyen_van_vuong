@@ -1,12 +1,12 @@
 <?php
+
 namespace App\Services\Date;
 
 use Carbon\Carbon;
 
-class DateFormatService {
-
+class DateFormatService
+{
     protected $today;
-
     protected $diff_date = null;
 
     public function __construct()
@@ -15,27 +15,43 @@ class DateFormatService {
     }
 
     /**
-     * check argument date is before today
+     * check argument date is past
      *
      * @param $date
      *
      * @return boolean
      */
-    protected function checkDateBeforeToday($date)
+    public function checkDateIsPast($date)
     {
-        return $this->today->gt($date);
+        $date = new Carbon($date);
+        return $date->isPast();
     }
 
     /**
-     * check argument date is after today
+     * check argument date is feature
      *
      * @param $date
      *
      * @return boolean
      */
-    protected function checkDateAfterToday($date)
+    public function checkDateIsFuture($date)
     {
-        return $this->today->lt($date);
+        $date = new Carbon($date);
+        return $date->isFuture();
+    }
+
+    /**
+     * check argument date is within a day
+     *
+     * @param $date
+     *
+     * @return boolean
+     */
+    public function checkDateIsWithInADay($date)
+    {
+        $date = new Carbon($date);
+        $diff = $this->today->diffInHours($date);
+        return $diff <= 24;
     }
 
     /**
@@ -45,14 +61,18 @@ class DateFormatService {
      *
      * @return number
      */
-    public function getDiffCompareWithToday($date = null)
+    public function getDiffCompareWithToday($date)
     {
-        if ($date !== null && $this->checkDateBeforeToday($date)){
-            $this->diff_date = $this->today->diffInDays($date);
-        } else if ($date !== null && $this->checkDateAfterToday($date)){
-            $this->diff_date = - $this->today->diffInDays($date);
-        }
-        return $this->diff_date;
+        new Carbon($date);
+        $diff = $this->today->diffInDays($date);
+
+        return $diff;
+
+        // NOTICE: 追加開発が決まったらこちらを適用させてください
+        // NOTICE: 差分が24時間以内になると時間が出力されます。
+        // return $diff === 0
+        //     ? $this->today->diffInHours($date)
+        //     : $diff;
     }
 
     /**
@@ -64,7 +84,7 @@ class DateFormatService {
      */
     public function forJapanese($date)
     {
-        if ($date != null){
+        if ($date != null) {
             $date = Carbon::parse($date);
             return $date->format('Y年m月d日');
         }

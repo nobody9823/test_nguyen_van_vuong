@@ -27,42 +27,23 @@ class ProjectSeeder extends Seeder
     public function run()
     {
         Project::truncate();
+        Project::insert(Project::factory()->init(40, rand(1, 50), rand(1, 10)));
+        Project::where('release_status', '掲載中')->get()->each(function(Project $project){
+            ProjectFile::insert(ProjectFile::factory()->init(rand(1, 10), $project->id));
+            Report::insert(Report::factory()->init(rand(1, 10), $project->id));
+            Plan::insert(Plan::factory()->init(rand(1, 10), $project->id));
+            Plan::insert(Plan::factory()->init(rand(1, 10), $project->id));
+            $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
+            $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
+            $project->supportedUsers()->attach(User::inRandomOrder()->take(random_int(1, 10))->get()->pluck('id'));
+        });
 
-        Project::factory(30)
-            ->state([
-                'curator_id' => rand(1, 10)
-            ])->create()
-            ->each(function (Project $project) {
-                $project->projectFiles()->saveMany(ProjectFile::factory(rand(1, 10))->make());
-                $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
-                $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
-                $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
-                $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
-            });
-
-        // 公開中
-        Project::factory(10)->released()
-            ->state([
-                'curator_id' => rand(1, 10)
-            ])
-            ->create()
-            ->each(function (Project $project) {
-                $project->projectFiles()->saveMany(ProjectFile::factory(10)->make());
-                $project->reports()->saveMany(Report::factory(rand(1, 10))->make());
-                $project->plans()->saveMany(Plan::factory(rand(1, 10))->make());
-                // $project->plans()->saveMany(Plan::factory(rand(1, 10))->make())->each(function (Plan $plan) {
-                //     $plan->includedPayments()
-                //         ->attach(
-                //             [
-                //                 Payment::factory()
-                //                     ->for(User::inRandomOrder()->first())
-                //                     ->has(PaymentToken::factory())->create()->id => ['quantity' => random_int(1, 3)]
-                //             ]
-                //         );
-                // });
-                $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
-                $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
-                $project->supportedUsers()->attach(User::inRandomOrder()->take(random_int(1, 10))->get()->pluck('id'));
-            });
+        Project::where('release_status', '!=', '掲載中')->get()->each(function(Project $project){
+            ProjectFile::insert(ProjectFile::factory()->init(rand(1, 10), $project->id));
+            Report::insert(Report::factory()->init(rand(1, 10), $project->id));
+            Plan::insert(Plan::factory()->init(rand(1, 10), $project->id));
+            $project->tags()->attach(Tag::inRandomOrder()->take(rand(1, 3))->get()->pluck('id'));
+            $project->likedUsers()->attach(User::inRandomOrder()->take(rand(1, 10))->get()->pluck('id'));
+        });
     }
 }

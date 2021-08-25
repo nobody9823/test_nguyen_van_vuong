@@ -1,13 +1,12 @@
 <footer>
     <div class="footer_main">
         <div class="footer_main_inner">
+
             <div class="footer_main_01">
                 <h4 class="footer_tit">プロジェクトをさがす</h4>
-
                 @foreach($tags as $tag)
                     <p class="footer_item"><a href="{{ route('user.search', ['tag_id' => $tag->id]) }}">{{$tag->name}}</a></p>
                 @endforeach
-
             </div>
 
             <div class="footer_main_02">
@@ -26,6 +25,7 @@
                 <div class="footer_item"><a href="{{ route('user.ps_terms_of_service') }}">プロジェクトサポーター利用規約</a></div>
                 <div class="footer_item"><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></div>
                 <div class="footer_item"><a href="{{ route('user.trade_law') }}">特定商取引法に基づく表記</a></div>
+                <div class="footer_item"><a href="{{ route('user.inquiry.create') }}">お問い合わせ</a></div>
                 {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div>
                 <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
                 {{-- <div class="footer_sns_icon">
@@ -67,5 +67,4 @@
             </ul>
         </div><!--/.footer_inner-->
     </div><!--/.footer_under-->
-
 </footer>

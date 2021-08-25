@@ -27,9 +27,6 @@ class Plan extends Model
         'delivery_date',
         'image_url'
     ];
-    protected $guarded = [
-        'price',
-    ];
 
     protected $casts = [
         'image_url' => ImageCast::class,
@@ -137,10 +134,12 @@ class Plan extends Model
     public function scopeUpdatePlansByIds($query, Collection $plans, array $plan_ids)
     {
         foreach ($plans as $plan) {
-            foreach ($plan_ids as $key => $value) {
-                if ($plan->id === $key) {
-                    $plan->limit_of_supporters -= $value['quantity'];
-                    $plan->save();
+            if ($plan->limit_of_supporters_is_required === 1) {
+                foreach ($plan_ids as $key => $value) {
+                    if ($plan->id === $key) {
+                        $plan->limit_of_supporters -= $value['quantity'];
+                        $plan->save();
+                    }
                 }
             }
         }

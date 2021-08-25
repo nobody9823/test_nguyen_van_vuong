@@ -22,10 +22,10 @@
         <input type="hidden" class="p-country-name" value="Japan">
         <!--★選択時 ↓as_select_return　に　asr_currentを追加-->
         @if ($plans instanceof \App\Models\Plan)
-            <x-user.plan.plan-payment-card :plan="$plans" />
+            <x-user.plan.plan-payment-card :plan="$plans" isSelected="1" />
         @else
             @foreach($project->plans as $plan)
-                <x-user.plan.plan-payment-card :plan="$plan" />
+                <x-user.plan.plan-payment-card :plan="$plan" isSelected="0" />
             @endforeach
         @endif
         {{-- <!--★通常時-->
@@ -334,6 +334,7 @@
 
                     <div class="form_item_row">
                         <div class="form_item_tit">応援コメント<span class="nini_txt">任意</span>　<span class="disclaimer">※300文字以内で入力してください</span></div>
+                        <span class="message-warning">※応援コメントはプロジェクト詳細画面の応援コメント一覧に表示されます</span>
                         <textarea name="comments" class="def_textarea" rows="6">{{ old('comments') }}</textarea>
                     </div><!--/form_item_row-->
                     <div class="def_btn">

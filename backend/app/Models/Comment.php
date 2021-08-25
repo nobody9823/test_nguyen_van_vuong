@@ -15,7 +15,7 @@ class Comment extends Model
 
     protected $fillable = [
         'project_id',
-        'payment_id',
+        'user_id',
         'content'
     ];
 
@@ -45,8 +45,8 @@ class Comment extends Model
     public function scopeGetOwnComments($query)
     {
         return $query->whereIn(
-            'payment_id',
-            Payment::query()->select('id')
+            'user_id',
+            User::query()->select('id')
                 ->where('user_id', \Auth::id())
         );
     }
