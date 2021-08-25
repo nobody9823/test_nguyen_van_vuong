@@ -15,31 +15,7 @@
         <div class="prof_page_R">
             @foreach($payments as $payment)
                 <div class="su_pr_base">
-                    <div class="su_pr_img m_b_1510"><img class="" src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}"></div>
-                    <div class="su_pr_01 m_b_1510">
-                        <div class="su_pr_01_01 m_b_1510">{{ $project->title }}</div>
-                        <div class="su_pr_01_02 m_b_1510">現在の支援総額：{{ number_format($project->payments_sum_price) }}円</div>
-                        <div class="pds_sec01_progress-bar m_b_1510">
-                            <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
-                            <div class="progress-bar">
-                                <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
-                            </div>
-                        </div>
-                        <div class="su_pr_01_03 m_b_1510">
-                            <div>目標金額は¥{{ number_format($project->target_amount) }}</div>
-                            <div>支援者数：{{ $project->payments_count }}</div>
-                            @if (DateFormat::checkDateIsPast($project->start_date) && DateFormat::checkDateIsFuture($project->end_date))
-                                {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
-                                {{-- @if (DateFormat::checkDateIsWithInADay($project->end_date))
-                                    <div style="color: #e65d65;">募集終了まで残り：{{ DateFormat::getDiffCompareWithToday($project->end_date) }}時間</div>
-                                @else --}}
-                                    <div>募集終了まで残り：{{ DateFormat::getDiffCompareWithToday($project->end_date) }}日</div>
-                                {{-- @endif --}}
-                            @elseif (DateFormat::checkDateIsPast($project->end_date))
-                                <div>募集終了</div>
-                            @endif
-                        </div><!--/su_pr_01_03-->
-                    </div><!--/su_pr_01-->
+                    <x-common.mypage.project-information :project="$project" />
                     <div class="su_pr_02">
                         <div class="su_pr_02_04 m_b_1510">
                             <div>
