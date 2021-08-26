@@ -134,46 +134,47 @@
                                 <div class="tab_content_description tab1_desc">
                                     <div class="tab1_01">
                                         <div class="tab1_01_01">クレジットカード番号</div>
-                                        <div name="number_form" id="number-form" class="payjs-outer"></div>
-                                        <span id="errors" style="color: red;"></span>
+                                        <div name="number_form" id="number-form"></div>
+                                        <span id="number_errors" style="color: red;"></span>
                                     </div>
 
                                     <div class="tab1_01">
-                                        <div class="tab1_02_01">セキュリティコード</div>
+                                        <div class="tab1_01_01">セキュリティコード</div>
                                         <div class="cvc-wrapper">
-                                            <div name="cvc-form" id="cvc-form" class="payjs-outer"></div>
+                                            <div name="cvc-form" id="cvc-form" class="cvc_form"></div>
                                             <div class="tooltip1">
                                                 <p>？</p>
                                                 <div class="description1">カードの裏面にある末尾3桁の数字</div>
                                             </div>
                                         </div>
+                                        <span id="cvc_errors" style="color: red;"></span>
                                     </div>
 
                                     <div class="tab1_01">
                                         <div class="tab1_01_01">有効期限</div>
-                                        <div name="expiry-form" id="expiry-form" class="payjs-outer"></div>
+                                        <div name="expiry-form" id="expiry-form"></div>
+                                        <span id="expiry_errors" style="color: red;"></span>
                                     </div>
-
-                                    {{-- <div class="tab1_04"><input type="checkbox" id="aaa" class="ac_list_checks"><label for="aaa" class="checkbox-fan">このクレジットカード情報を保存する</label></div> --}}
-
-                                    <div class="creca_icon">
-                                    <img src="{{ asset('image/credit-card_2.png') }}">
-                                    <img src="{{ asset('image/credit-card_1.png') }}">
-                                    {{-- <img src="{{ asset('image/credit-card_0.png') }}">
-                                    <img src="{{ asset('image/credit-card_5.png') }}">
-                                    <img src="{{ asset('image/credit-card_6.png') }}"> --}}
-                                    </div>
-
-                                    <div class="tab1_05">
-                                    有効期限が残り100日以上のクレジットカード（Visa/Mastercard{{--  JCB/Diners Club/American Express --}}）でご利用いただけます。<br>
-                                    デビットカード・プリペイドカードの利用は推奨しておりません。<br>
-                                    利用される場合は注意事項を必ずご確認ください。<br>
-                                    このクレジットカード情報は当社では保持いたしません。<br>
-                                    <span style="color: red;">各決済ごとの領収書発行機能は提供しておりません。利用元のクレジットカード明細のご確認をお願いいたします。</span>
-                                    </div>
-
-
                                 </div>
+
+                                {{-- <div class="tab1_04"><input type="checkbox" id="aaa" class="ac_list_checks"><label for="aaa" class="checkbox-fan">このクレジットカード情報を保存する</label></div> --}}
+
+                                <div class="creca_icon">
+                                <img src="{{ asset('image/credit-card_2.png') }}">
+                                <img src="{{ asset('image/credit-card_1.png') }}">
+                                {{-- <img src="{{ asset('image/credit-card_0.png') }}">
+                                <img src="{{ asset('image/credit-card_5.png') }}">
+                                <img src="{{ asset('image/credit-card_6.png') }}"> --}}
+                                </div>
+
+                                <div class="tab1_05">
+                                有効期限が残り100日以上のクレジットカード（Visa/Mastercard{{--  JCB/Diners Club/American Express --}}）でご利用いただけます。<br>
+                                デビットカード・プリペイドカードの利用は推奨しておりません。<br>
+                                利用される場合は注意事項を必ずご確認ください。<br>
+                                このクレジットカード情報は当社では保持いたしません。<br>
+                                <span style="color: red;">各決済ごとの領収書発行機能は提供しておりません。利用元のクレジットカード明細のご確認をお願いいたします。</span>
+                                </div>
+
                             </div><!--/tab_content-->
                             {{-- <div class="tab_content" id="tab2_content">
                                 <div class="tab_content_description">
@@ -231,7 +232,7 @@
 
             <div class="def_outer_gray">
                 <div class=" def_inner inner_item">
-                    <input type="hidden" name="payjp_token" id="payjp_token" value="">
+                    <input type="hidden" name="payment_method_id" id="payment_method_id" value="">
 
                     <div class="form_item_row">
                         <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>
@@ -414,88 +415,25 @@ window.onload = function(){
 }
 </script>
 <script src="{{ asset('/js/Plans.js') }}"></script>
-<script src="https://js.pay.jp/v2/pay.js"></script>
+{{-- <script src="https://js.pay.jp/v2/pay.js"></script>
 <script>
     var payjp = Payjp('{{ config("app.pay_jp_key") }}')
-    var elements = payjp.elements()
-    var errors = document.getElementById('errors');
-    var numEl = document.getElementById('number-form')
-    var exEl = document.getElementById('expiry-form')
-    var cvcEl = document.getElementById('cvc-form')
-
-    // 入力フォームを分解して管理・配置できます
-    var numberElement = elements.create('cardNumber')
-    var expiryElement = elements.create('cardExpiry')
-    var cvcElement = elements.create('cardCvc')
-
-    numberElement.mount('#number-form')
-    expiryElement.mount('#expiry-form')
-    cvcElement.mount('#cvc-form')
-
-    let numberElIsCompleted = false;
-    let expiryElIsCompleted = false;
-    let cvcElIsCompleted = false;
-
+</script>
+<script src="{{ asset('/js/payjp-create-card-token.js') }}"></script> --}}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe('{{ config("app.stripe_key") }}');
+</script>
+<script src="{{ asset('/js/stripe-create-card-token.js') }}"></script>
+<script>
     const paypayIsChecked = () => {
-        let result = false;
-        document.getElementsByName('payment_way').forEach(function (e) {
-            if(e.value === 'paypay' && e.checked){
-                return result = true;
-            };
-        });
-        return result;
-    }
-
-    numberElement.on('change', (event) => {
-        numberElIsCompleted = event.complete
+    let result = false;
+    document.getElementsByName('payment_way').forEach(function (e) {
+        if(e.value === 'paypay' && e.checked){
+            return result = true;
+        };
     });
-    expiryElement.on('change', (event) => {
-        expiryElIsCompleted = event.complete
-    });
-    cvcElement.on('change', (event) => {
-        cvcElIsCompleted = event.complete
-    });
-    numberElement.on('blur', (event) => {
-        if (numberElIsCompleted && expiryElIsCompleted && cvcElIsCompleted) {
-            payjp.createToken(numberElement).then((response) => {
-                if (response.error) {
-                    errors.innerHTML = response.error.message;
-                    return false;
-                } else {
-                    document.querySelector('#payjp_token').value = response.id;
-                    console.log(response);
-                    errors.innerHTML = ''
-                };
-            })
-        }
-    });
-    expiryElement.on('blur', (event) => {
-        if (numberElIsCompleted && expiryElIsCompleted && cvcElIsCompleted) {
-            payjp.createToken(numberElement).then((response) => {
-                if (response.error) {
-                    errors.innerHTML = response.error.message;
-                    return false;
-                } else {
-                    document.querySelector('#payjp_token').value = response.id;
-                    console.log(response);
-                    errors.innerHTML = ''
-                };
-            })
-        }
-    });
-    cvcElement.on('blur', (event) => {
-        if (numberElIsCompleted && expiryElIsCompleted && cvcElIsCompleted) {
-            payjp.createToken(numberElement).then((response) => {
-                if (response.error) {
-                    errors.innerHTML = response.error.message;
-                    return false;
-                } else {
-                    document.querySelector('#payjp_token').value = response.id;
-                    console.log(response);
-                    errors.innerHTML = ''
-                };
-            })
-        }
-    });
+    return result;
+}
 </script>
 @endsection
