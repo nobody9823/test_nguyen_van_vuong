@@ -15,7 +15,7 @@ use App\Models\Comment;
 use App\Models\Profile;
 use App\Models\Address;
 use Carbon\Carbon;
-use App\Actions\PayJp\PayJpInterface;
+use App\Actions\CardPayment\CardPaymentInterface;
 use App\Actions\PayPay\PayPayInterface;
 use App\Http\Requests\ConfirmPaymentRequest;
 use App\Http\Requests\ConsultProjectSendRequest;
@@ -36,13 +36,13 @@ use Mail;
 
 class ProjectController extends Controller
 {
-    public function __construct(PayJpInterface $pay_jp_interface, PayPayInterface $pay_pay_interface, Payment $payment, Comment $comment, Plan $plan)
+    public function __construct(CardPaymentInterface $card_payment_interface, PayPayInterface $pay_pay_interface, Payment $payment, Comment $comment, Plan $plan)
     {
         $this->middleware(function ($request, $next) {
             $this->user = \Auth::user();
             return $next($request);
         });
-        $this->pay_jp = $pay_jp_interface;
+        $this->card_payment = $card_payment_interface;
 
         $this->pay_pay = $pay_pay_interface;
 
@@ -227,7 +227,7 @@ class ProjectController extends Controller
                     'inviter_id' => !empty($validated_request['inviter_code']) && !empty($inviter) ? $inviter->id : null,
                     'price' => $validated_request['total_amount'],
                     'message_status' => "ステータスなし",
-                    'payment_way' => !empty($validated_request['payjp_token']) ? 'PayJp' : 'PayPay',
+                    'payment_way' => !empty($validated_request['payjp_token']) ? $this->card_payment->getPaymentApiName() : 'PayPay',
                     'payment_is_finished' => false
                 ],
                 $request->all()
@@ -250,7 +250,7 @@ class ProjectController extends Controller
         }
 
         if ($validated_request['payment_way'] === 'credit') {
-            return redirect()->action([ProjectController::class, 'paymentForPayJp'], ['project' => $project, 'payment' => $payment]);
+            return redirect()->action([ProjectController::class, 'paymentForCredit'], ['project' => $project, 'payment' => $payment]);
         } elseif ($validated_request['payment_way'] === 'paypay') {
             return redirect()->away($qr_code['data']['url']);
         }
@@ -264,9 +264,9 @@ class ProjectController extends Controller
      *
      *@return \Illuminate\Http\Response
      */
-    public function paymentForPayJp(Project $project, Payment $payment)
+    public function paymentForCredit(Project $project, Payment $payment)
     {
-        $response = $this->pay_jp->Payment($payment->price, $payment->paymentToken->token);
+        $response = $this->card_payment->charge($payment->price, $payment->paymentToken->token);
         DB::beginTransaction();
         try {
             $payment->payment_is_finished = true;
@@ -274,7 +274,7 @@ class ProjectController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            $this->pay_jp->Refund($response->id);
+            $this->card_payment->refund($response->id);
             throw $e;
         }
         $this->user->notify(new PaymentNotification($project, $payment));
