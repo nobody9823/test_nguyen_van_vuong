@@ -17,7 +17,7 @@
         <div>
             <strong>{{ $report->title }}</strong>
         </div>
-        <div style="white-space: pre-line;">{{ Str::limit($report->content, 200) }}</div>
+        <div style="white-space: pre-line;">{{ $report->content }}</div>
         <div>
            <a href="javascript: history.back()"><i class="fas fa-chevron-left"></i> 活動報告一覧へ戻る</a>
         </div>
