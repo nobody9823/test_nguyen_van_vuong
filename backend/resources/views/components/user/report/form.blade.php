@@ -24,7 +24,7 @@
       <span class="prof_edit_editbox_desc">ファイルサイズは1MB以下<br>ファイル形式は jpeg、gif、png 形式のみ可</span>
       <input id="imageUploader" type="file" name="image_url" accept=".png, .jpg, .jpeg, .gif"><br>
       @if($report)
-      <img src="{{asset(Storage::url($report->image_url))}}" style='height:200px; object-fit: cover;' alt="image">
+      <img src="{{asset(Storage::url($report->image_url))}}" style='height:300px; width:300px; object-fit: contain;' alt="image">
       @endif
     </div>
 </div>
@@ -64,7 +64,7 @@
       // 画像表示
       var reader = new FileReader();
       reader.onload = function() {
-        var img_src = $('<img>').attr('src', reader.result).attr('style','height:200px;');
+        var img_src = $('<img>').attr('src', reader.result).attr('style','height:300px; width:300px; object-fit: contain;');
         $('#uploadedImage').html(img_src);
       }
       reader.readAsDataURL(file);

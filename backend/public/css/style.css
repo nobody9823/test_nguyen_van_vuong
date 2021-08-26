@@ -927,7 +927,7 @@ input[type=radio]:checked + .radio-fan::after {
 
 .comment_row{padding: 10px 0; min-height: 75px; border-bottom: solid 1px #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
 .comment_row img{ width: 48px;height: 48px;object-fit: cover;}
-.comment_content{width: 80%;}
+.comment_content{width: 80%; word-wrap: break-word;}
 .comment_content_user{text-align: right;}
 .comment_content_user span{font-size: 0.8rem;}
 .comment_content_text{font-size: 1.2rem;text-align: right;}
@@ -2616,10 +2616,12 @@ div.spinner-wrapper {
 }
 
 .reports tr:first-child {
-	width: 110%;
+	width: 100%;
 	display: flex;
 	background: #F7FDFF;
 	color: #00AEBD;
+	justify-content: space-between;
+	white-space: nowrap;
 }
 
 .reports tr:first-child th {
