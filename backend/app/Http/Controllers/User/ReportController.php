@@ -25,13 +25,13 @@ class ReportController extends Controller
 
     public function create(Project $project)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnProjectWithPublishedStatusForRepoert', $project);
         return view('user.report.create', ['project' => $project]);
     }
 
     public function store(ReportRequest $request, Report $report, Project $project)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnProjectWithPublishedStatusForRepoert', $project);
         DB::beginTransaction();
         try {
             $report->fill($request->fillWithProjectId($project->id))->save();
@@ -49,15 +49,15 @@ class ReportController extends Controller
         return view('user.report.show', ['project' => $project, 'report' => $report]);
     }
 
-    public function edit(Project $project, Report $report)
+    public function edit(Request $request, Project $project, Report $report)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnReportWithPublishedStatus', $report);
         return view('user.report.edit', ['project' => $project, 'report' => $report]);
     }
 
     public function update(ReportRequest $request, Project $project, Report $report)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnReportWithPublishedStatus', $report);
         // 活動報告削除処理
         if($request->delete){
             DB::beginTransaction();
