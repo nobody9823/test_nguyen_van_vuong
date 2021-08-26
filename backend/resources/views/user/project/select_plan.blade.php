@@ -232,7 +232,7 @@
 
             <div class="def_outer_gray">
                 <div class=" def_inner inner_item">
-                    <input type="hidden" name="payjp_token" id="payjp_token" value="">
+                    <input type="hidden" name="payment_method_id" id="payment_method_id" value="">
 
                     <div class="form_item_row">
                         <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>

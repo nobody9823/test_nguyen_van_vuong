@@ -69,7 +69,7 @@ numberElement.on('blur', (event) => {
                 number_errors.innerHTML = response.error.message;
                 return false;
             } else {
-                document.querySelector('#payjp_token').value = response.id;
+                document.querySelector('#payment_method_id').value = response.id;
                 console.log(response);
                 number_errors.innerHTML = ''
             };
@@ -83,7 +83,7 @@ expiryElement.on('blur', (event) => {
                 expiry_errors.innerHTML = response.error.message;
                 return false;
             } else {
-                document.querySelector('#payjp_token').value = response.id;
+                document.querySelector('#payment_method_id').value = response.id;
                 console.log(response);
                 expiry_errors.innerHTML = ''
             };
@@ -97,7 +97,7 @@ cvcElement.on('blur', (event) => {
                 cvc_errors.innerHTML = response.error.message;
                 return false;
             } else {
-                document.querySelector('#payjp_token').value = response.id;
+                document.querySelector('#payment_method_id').value = response.id;
                 console.log(response);
                 cvc_errors.innerHTML = ''
             };

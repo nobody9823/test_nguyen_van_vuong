@@ -111,7 +111,7 @@ numberElement.on('blur', async (e) => {
             // カードは正常に検証された…
             console.log(paymentMethod);
             console.log(paymentMethod.id);
-            document.querySelector('#payjp_token').value = paymentMethod.id;
+            document.querySelector('#payment_method_id').value = paymentMethod.id;
             number_errors.innerHTML = ''
         }
     }
@@ -134,7 +134,7 @@ cvcElement.on('blur', async (e) => {
             // カードは正常に検証された…
             console.log(paymentMethod);
             console.log(paymentMethod.id);
-            document.querySelector('#payjp_token').value = paymentMethod.id;
+            document.querySelector('#payment_method_id').value = paymentMethod.id;
             cvc_errors.innerHTML = ''
         }
     }
@@ -157,7 +157,7 @@ expiryElement.on('blur', async (e) => {
             // カードは正常に検証された…
             console.log(paymentMethod);
             console.log(paymentMethod.id);
-            document.querySelector('#payjp_token').value = paymentMethod.id;
+            document.querySelector('#payment_method_id').value = paymentMethod.id;
             expiry_errors.innerHTML = ''
         }
     }
