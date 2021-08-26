@@ -26,8 +26,6 @@ class MyPlanRequest extends FormRequest
      */
     public function rules()
     {
-        $project_end_date = $this->route('project')->end_date->format('Y-m-d H:i:s');
-
         return [
             'title' => ['nullable', 'string', 'max:45'],
             'content' => ['nullable', 'string', 'max:2000'],
@@ -35,32 +33,51 @@ class MyPlanRequest extends FormRequest
             'address_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters' => ['integer', 'min:1'],
-            'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$project_end_date}"],
+            'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$this->route('project')->end_date->format('Y-m-d H:i:s')}"],
             'image_url' => ['nullable', 'image']
         ];
     }
 
     protected function prepareForValidation()
     {
-        if (!$this->filled('title')){
+
+        if ($this->has('title') && is_null($this->input('title'))) {
             $this->merge([
                 'title' => ''
             ]);
         }
 
-        if (!$this->filled('content')){
+        if ($this->has('content') && is_null($this->input('content'))) {
             $this->merge([
                 'content' => ''
             ]);
         }
 
-        if ($this->has('limit_of_supporters_is_required') && $this->limit_of_supporters_is_required === 0) {
+        if ($this->has('price') && is_null($this->input('price'))) {
+            $this->merge([
+                'price' => 0
+            ]);
+        }
+
+        if ($this->input('limit_of_supporters_is_required') === 0) {
             $this->merge([
                 'limit_of_supporters' => 1,
             ]);
         }
 
-        if (!$this->filled('delivery_date')){
+        if ($this->isMethod('patch') && $this->missing('limit_of_supporters_is_required') && $this->route('plan')->limit_of_supporters_is_required === 0) {
+            $this->merge([
+                'limit_of_supporters' => 1,
+            ]);
+        }
+
+        if ($this->isMethod('post') && $this->missing('limit_of_supporters_is_required')) {
+            $this->merge([
+                'limit_of_supporters' => 1,
+            ]);
+        }
+
+        if (!$this->filled('delivery_date')) {
             $this->offsetUnset('delivery_date');
         }
     }

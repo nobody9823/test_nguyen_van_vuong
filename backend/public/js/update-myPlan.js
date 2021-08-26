@@ -46,7 +46,7 @@ const updateMyPlan = (() => {
         } else {
             el = document.getElementById('saved_return_' + Object.keys(data)[0] + (planId === undefined ? '' : '_' + planId));
         }
-        el.style.display = 'contents';
+        el.style.display = 'inline-block';
         setTimeout(() => { dissaperIcon(el); }, 3000);
     }
 
@@ -85,7 +85,7 @@ const updateMyPlan = (() => {
         var spinner = getSpinner(data, planId);
         spinner.style.display = 'block';
 
-        axios.post(`/my_project/project/${projectId}/updatePlan/${planId === undefined ? document.getElementById('plan_id').value : planId}`, data).then(res => {
+        axios.patch(`/my_project/project/${projectId}/updatePlan/${planId === undefined ? document.getElementById('new_plan_id').value : planId}`, data).then(res => {
             spinner.style.display = 'none';
             if(res.data.result === true){
                 if (data instanceof FormData){
@@ -93,7 +93,9 @@ const updateMyPlan = (() => {
                 }
                 displayIcon(data, planId);
             } else if (res.data.message !== undefined){
-                console.log(data);
+                if (data instanceof FormData){
+                    displayError({image_url: data}, res.data.message['image_url'], planId);
+                }
                 displayError(data, res.data.message[Object.keys(data)[0]], planId);
             }
         }).catch(res => {
@@ -103,22 +105,6 @@ const updateMyPlan = (() => {
     }
 
     return {
-        DisplayPlanForm: projectId => {
-            axios.get(`/my_project/project/${projectId}/createReturn`).then(res => {
-                if (res.status === 200){
-                    document.getElementById('plan_id').value = res.data.id;
-                    let el = document.getElementById('plan_form_section');
-                    if(el.style.display === 'none'){
-                        el.style.display = 'block';
-                    } else {
-                        el.style.display = 'none';
-                    };
-                }
-            }).catch(res => {
-                console.log(res);
-            });
-        },
-
         textInput: (el, projectId, planId) => {
             data = {};
             data[el.name] = el.value;

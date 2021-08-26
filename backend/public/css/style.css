@@ -40,9 +40,7 @@ input, select {
 	margin: 0 auto;
 	padding: 0 14px;
 }
-.content {
-	margin: 50px auto;
-}
+
 @media screen and (min-width: 768px){
 	.inner {
 		width: 100%;
@@ -50,7 +48,7 @@ input, select {
 		margin: 0 auto;
 		padding: 0 30px;
 	}
-	.content {
+	.about-content {
 		margin: 50px auto;
 		display: flex;
 		justify-content: space-between;
@@ -404,6 +402,14 @@ content: '';
 #page-top_btn a {
 	color: #00AEBD;
 }
+
+#page-top_btn .fa-chevron-circle-up{
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
 #page-top_btn a:hover {
 	opacity: 0.7;
 }
@@ -922,8 +928,9 @@ input[type=radio]:checked + .radio-fan::after {
 .comment_row{padding: 10px 0; min-height: 75px; border-bottom: solid 1px #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
 .comment_row img{ width: 48px;height: 48px;object-fit: cover;}
 .comment_content{width: 80%;}
-.comment_content_user{font-size: 0.5vw;text-align: right;}
-.comment_content_text{font-size: 1.0vw;text-align: right;}
+.comment_content_user{text-align: right;}
+.comment_content_user span{font-size: 0.8rem;}
+.comment_content_text{font-size: 1.2rem;text-align: right;}
 #comment_content{font-size: 1.4rem;width: 100%;border: none;outline: none;padding-bottom: 8px;box-sizing: border-box;}
 .text_underline{position: relative;border-top: 1px solid #c2c2c2;}
 .text_underline::before,
@@ -1394,7 +1401,7 @@ input[name="tab_item"] {
 
 .hissu_txt{ font-size: 1.2rem; padding: 2px 5px; background: #EC111A; color: #fff; display: inline-block; margin: 0 0 0 5px;}
 .nini_txt{ font-size: 1.2rem; padding: 2px 5px; background: #848484; color: #fff; display: inline-block; margin: 0 0 0 5px;}
-
+.message-warning{ font-size: 1.2rem; color: #EC111A; }
 
 @media screen and (max-width: 1000px){
 	.as_i_01_L{ width: 100%; border-right: none; border-bottom: solid 1px #00AEBD;}
@@ -1470,7 +1477,6 @@ input[name="tab_item"] {
     margin: 0 20px 0 0;
 }
 
-
 @media screen and (max-width: 768px){
 	.av_box{ width: 100%; margin: 0 0 15px 0; padding: 0 0 15px 0; border-bottom: solid 1px #DBDBDB;}
 	.av_tit{ font-size: 1.4rem; font-weight: bold; color: #00AEBD; margin: 0 0 10px 0;}
@@ -1478,14 +1484,18 @@ input[name="tab_item"] {
 	.av_txt{ font-size: 1.2rem;}
 	.av_txt div{ font-weight: bold;}
 	.av_caution{ font-size: 1.0rem; }
+	.line_link-sp { display: inline; }
+	.line_link-pc { display: none; }
 }
 
+@media screen and (min-width: 768px) {
+	.line_link-sp { display: none; }
+	.line_link-pc { display: inline; }
+}
 
-
-
-
-.su_pr_base{display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; color: #555353; padding: 0 0 30px 0; border-bottom: solid 1px #DBDBDB; margin: 0 0 30px 0;}
+.su_pr_base{display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-around; color: #555353; padding: 0 0 30px 0; border-bottom: solid 1px #DBDBDB; margin: 0 0 30px 0;}
 .su_pr_img{ width: 240px; border-radius: 4px;}
+.su_pr_img img { height: 160px; object-fit: contain;}
 .su_pr_01{ width: calc(100% - 260px);}
 .su_pr_01 .pds_sec01_progress-bar{}
 .su_pr_01_01{ font-size:1.4rem; font-weight: bold;}
@@ -1555,11 +1565,19 @@ input[name="tab_item"] {
 
 .pager_naka{border: none !important;}
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 540px){
 	.pager .pagination li {
-	  width: 27px;
-	  height: 27px;
-	  font-size: 1.3rem;
+	  width: 23px;
+	  height: 23px;
+	  font-size: 1.1rem;
+	}
+}
+
+@media screen and (max-width: 320px){
+	.pager .pagination li {
+	  width: 18px;
+	  height: 18px;
+	  font-size: 1rem;
 	}
 }
 
@@ -1677,7 +1695,7 @@ input[name="tab_item"] {
 
 .ps_rank_base{display: flex; flex-wrap: wrap; justify-content:space-between;}
 .ps_rank_img{ width: 40%; border-radius: 4px; display: flex; justify-content: center; align-items: center;}
-.ps_rank_img img{ width: calc(80% - 15px); height: auto; border-radius: 4px; object-fit: contain;}
+.ps_rank_img img{ width: calc(80% - 15px); height: 160px; border-radius: 4px; object-fit: contain;}
 .ps_rank_01{width: 60%;}
 .ps_rank_01_01{ width: 100%; font-size: 1.2rem; font-weight: bold; color: #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; }
 .ps_rank_01_01 div{ margin-right: 2rem;}
@@ -1848,32 +1866,16 @@ width: 100%;
 /* ====================================================================
   FanReturnとは
 ==================================================================== */
-
-/*非表示をコメントアウトしています*/
-/*
-.acd-check{
-    display: none;
+.question-content {
+	margin: 50px auto;
 }
-*/
-/* .ac-label {
-    display: block;
-    margin-bottom: 1px;
-    padding: 10px;
+@media screen and (min-width: 768px){
+	.question-content {
+		margin: 50px auto;
+		display: flex;
+		justify-content: space-between;
+	}
 }
-.ac-content{
-    height: 0;
-    opacity: 0;
-    transition: .5s;
-    visibility: hidden;
-}
-.ac-check:checked + .ac-label + .ac-content{
-    height: 50px;
-    opacity: 1;
-    padding: 5px 10px;
-    visibility: visible;
-} */
-
-/* ここまで */
 
 @media screen and (min-width: 768px){
 	.question-sidebar {
@@ -2149,17 +2151,20 @@ width: 100%;
 /* ====================================================================
   ABOUT - PROJECT
   ==================================================================== */
-.about-project {
+.about-project, .about-project-supporter {
 	margin-top: 50px;
 }
+.about-project-supporter .ps_description_items_wrapper {flex-direction: column}
+.about-project-supporter .ps_description_item {width: 100%; display: flex; align-items: center; flex-direction: column;}
+.about-project-supporter .ps_description_border {width: 120px; height: 3px;}
 
 @media screen and (min-width: 768px){
-	.about-project {
+	.about-project, .about-project-supporter {
 		margin-top: 100px;
 	}
 }
 
-.about-project__title {
+.about-project__title, .about-project-supporter__title {
 	color: #00aebd;
 	font-size: 22px;
 	letter-spacing: 1.76px;
@@ -2167,21 +2172,21 @@ width: 100%;
 }
 
 @media screen and (min-width: 768px){
-	.about-project__title {
+	.about-project__title, .about-project-supporter__title {
 		font-size: 48px;
 		letter-spacing: 1.76px;
 	}
 }
 
 @media screen and (min-width: 768px){
-	.about-project__title {
+	.about-project__title, .about-project-supporter__title {
 		color: #00aebd;
 		font-size: 48px;
 		letter-spacing: 3.2px;
 	}
 }
 
-.about-project__sub-title {
+.about-project__sub-title, .about-project-supporter__sub-title {
 	color: #00aebd;
 	font-size: 14px;
 	text-align: center;
@@ -2189,7 +2194,7 @@ width: 100%;
 }
 
 @media screen and (min-width: 768px){
-	.about-project__sub-title {
+	.about-project__sub-title, .about-project-supporter__sub-title {
 		font-size: 18px;
 		margin-bottom: 50px;
 	}
@@ -2247,7 +2252,7 @@ width: 100%;
 .my_project_img_wrapper {overflow: hidden; position: relative; display: flex; justify-content: center; align-items: center;}
 .my_project_img_wrapper_show {overflow: visible;}
 .my_new_project_wrapper {margin: 15px 0 15px 0;}
-.my_new_project {width: 100%;}
+.my_new_project {width: 100%; cursor: pointer;}
 .publish_date_wrapper {display: flex; flex-direction: row;}
 .publish_date_after_month {display: flex;flex-wrap: wrap;}
 .project_image_row {justify-content: space-around;}
@@ -2423,3 +2428,347 @@ div.spinner-wrapper {
     .posts_example_btn p {padding: 8px 9px;}
 }
 /* PSサポーターとは */
+
+/* リターン作成のフォームのモーダル表示 */
+.plan_form_modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 2;
+}
+
+.plan_form_modal_bg{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.plan_form_modal_content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: scroll; /* はみ出た部分はスクロールさせる */
+    height: 60%;/* これが無いと「overflow:scroll」が利かない */
+    width: 60%;/* これが無いと「overflow:scroll」が利かない */
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px){
+    .plan_form_modal_content{
+        width: 90%;
+    }
+}
+/* リターン作成のフォームのモーダル表示 */
+
+.saved_icon {
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #00c368;
+}
+
+/* お問い合わせ */
+.inquiry_attention{
+	font-size: 18px;
+    color: #00aebd;
+    font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.inquiry_text{
+	font-size: 14px;
+}
+
+.inquiry_attention_box{
+	padding-bottom: 30px;
+	border-bottom: 1px solid #dbdbdb;
+}
+
+.inquiry_transition_box{
+	padding: 30px 0 10px 0;
+}
+
+.inquiry_notice_box{
+	margin: 30px auto;
+	padding: 30px 0;
+	border-top: solid 1px #00aebd;
+	border-bottom: solid 1px #00aebd;
+}
+
+.inquiry_anchor_wrapper{
+	margin:0 0 15px 0;
+	font-size: 14px;
+}
+
+.inquiry_anchor{
+	font-weight: bold;
+	color: #1c81d8;
+}
+
+.inquiry_section_inner {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.inquiry_form_section {
+	width: 100%;
+	margin-top: 30px;
+	background-color: #f8f8f8;
+	font-size: 14px;
+	padding: 0 0 50px 0;
+}
+
+.inquiry_form_section_inner {
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.inquiry_form_text{
+	text-align: center;
+	padding: 50px 0 50px 0;
+}
+
+.inquiry_form_group{
+	width: 564px;
+	margin: 0 auto;
+}
+
+.inquiry_button{
+	width: 401px;
+	height: 52px;
+	font-size: 18px;
+	margin: 50px auto 0 auto;
+	padding: 10px 0;
+	border-radius: 4px;
+	background-color: #00aebd;
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+}
+
+.inquiry_button[disabled] {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+.inquiry_confirm_text{
+	font-weight: bold;
+}
+@media screen and (max-width: 700px){
+	.inquiry_form_group{
+		width: 100%;
+		margin: 0 auto;
+	}
+	.inquiry_attention_2{
+		font-size: 14px;
+	}
+	.inquiry_form_section {
+		background-color: #ffffff;
+		padding: 0;
+	}
+	.inquiry_attention_border{
+		width: 100%;
+	}
+	.inquiry_form_text{
+		padding: 0 0 10px 0;
+		text-align: left;
+	}
+	.inquiry_transition_box{
+		padding: 30px 0 10px 0;
+		border-bottom: 1px solid #dbdbdb;
+	}
+	.inquiry_anchor_wrapper{
+		font-size: 12px;
+		margin:0 0 5px 0;
+	}
+	.inquiry_notice_box{
+		padding: 30px 30px;
+		border:none;
+		width: 100vw;
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: #f8f8f8;
+	}
+	.inquiry_form_section {
+		font-size: 12px;
+	}
+	.inquiry_button{
+		font-size: 16px;
+		width: 100%;
+		padding: 10px 0;
+	}
+}
+/* お問い合わせ */
+
+/* 活動報告一覧(インフルエンサー側) */
+/* テーブル */
+.reports table {
+	width: 63%;
+}
+
+.reports tr:first-child {
+	width: 110%;
+	display: flex;
+	background: #F7FDFF;
+	color: #00AEBD;
+}
+
+.reports tr:first-child th {
+	margin: 20px;
+}
+
+.reports th:nth-child(2) {
+	width: 535px;
+}
+
+.reports .prof_edit_row td:nth-child(2) {
+	width: 400px;
+}
+
+/* アイコン */
+.reports .mobile_display {
+	display: none;
+}
+
+.reports a {
+	color: #00AEBD;
+}
+
+/* 新規投稿ボタン */
+.reports .def_btn { margin: 70px 170px 100px; }
+
+/* スマホサイズ */
+@media (max-width: 767px) {
+	/* テーブルの各スタイル */
+	.reports tr:first-child { width: calc(100% - 20%); display: none;)}
+	/* .reports th:nth-child(3) { width: 100%;} */
+	.reports .prof_edit_row { width: calc(200% - 40%); }
+	.reports .prof_edit_row td:first-child { display: none; }
+	.reports .prof_edit_row td:nth-child(2) { width:100%; margin-top: 25px; margin-bottom: 15px;}
+	.reports .prof_edit_row td:nth-child(3) { width:100%;}
+	.reports .prof_edit_row td:nth-child(3) div { color: #00AEBD; font-size: 85%; }
+	/* アイコン */
+	.reports .fa-edit {
+	position: relative;
+	bottom: 17px;
+	left: calc(100% - 15%);
+	}
+	.reports .mobile_display { display: block; }
+	/* 新規投稿ボタン */
+	.reports .def_btn { margin: 50px 0px 100px; }
+}
+
+/* PCサイズ */
+@media (min-width: 767px) {
+	.reports .prof_edit_row td {
+		height: 100px;
+		display: flex;
+		align-items: center;
+	}
+	.reports .fa-edit, .reports .prof_edit_row td:nth-child(2) {
+		position: relative;
+		right: 40px;
+	}
+}
+
+/* 活動報告新規作成・更新画面(インフルエンサー側) */
+.report_form {
+	margin: 40px 10px 40px 10px;
+}
+
+	/* PCサイズ */
+@media (min-width: 767px) {
+.report_form .prof_edit_01 { width: 35%;}
+.report_form .prof_edit_editbox { width: 65%; }
+}
+
+.report_form .prof_edit_editbox img {
+width: auto;
+margin: 20px 0;
+}
+/* アコーディオンメニュー */
+.accordion__title {
+    position: relative;
+    cursor: pointer;
+}
+.accordion__content {
+    display: none;
+    cursor: pointer;
+}
+.accordion__content.is-open {
+    display: block;
+}
+
+/* アコーディオンの(+)アイコン */
+.accordion__plus_minus::before, .accordion__plus_minus::after {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    background-color: #3abec1;
+    width: 20px;
+    height: 4px;
+    transition: all 0.3s;
+}
+.accordion__plus_minus::after {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+/* アコーディオン展開時の(-)アイコン */
+.accordion__item.is-active .accordion__plus_minus::before {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.accordion__item.is-active .accordion__plus_minus::after {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    opacity: 0;
+}
+
+/* アコーディオンの矢印（下）アイコン */
+.accordion__arrow:after {
+    content: "";
+    position: absolute;
+    right: 25px;
+    top: 38%;
+    transition: all 0.5s ease-in-out;
+    /*   要素の動きを指定 */
+
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-top: solid 4px #00AEBD;
+    border-right: solid 4px #00AEBD;
+
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    /* transform: rotateで要素の角度を指定 */
+}
+
+/* アコーディオンの矢印（上）アイコン */
+.accordion__item.is-active .accordion__arrow:after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: 45%;
+    /*   .openクラスがついた時の要素の角度を指定 */
+}
+/* アコーディオンメニュー */
+
+.my_project_dashboard {justify-content: center;}
+.my_project_dashboard .def_btn {width: 40%; margin-bottom: 10px;}
+.my_project_dashboard_status {text-align: center; width: 100%; margin: 0; padding-bottom: 20px;}
+@media screen and (max-width: 768px){
+    .my_project_dashboard .def_btn {width: 100%;}
+}

@@ -4,7 +4,11 @@
             <img class="" src="{{ asset('image/sns_01.svg') }}">
         </a>
 
-        <a href="https://social-plugins.line.me/lineit/share?url={{ $invitationUrl() }}&text=私が応援しているプロジェクトです！応援お願いします！" target="_blank"><img src="{{ asset('image/sns_02.svg') }}"></a>
+        {{-- PC --}}
+        <a class="line_link-pc" href="https://social-plugins.line.me/lineit/share?url={{ $invitationUrl() }}&text=私が応援しているプロジェクトです！応援お願いします！" target="_blank"><img src="{{ asset('image/sns_02.svg') }}"></a>
+
+        {{-- SP --}}
+        <a class="line_link-sp" href="https://line.me/R/share?text=%E7%A7%81%E3%81%8C%E5%BF%9C%E6%8F%B4%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E3%81%99%EF%BC%81%E5%BF%9C%E6%8F%B4%E3%81%8A%E9%A1%98%E3%81%84%E3%81%97%E3%81%BE%E3%81%99%EF%BC%81%0d%0a{{ urlencode($invitationUrl()) }}"><img src="{{ asset('image/sns_02.svg') }}"></a>
 
         <div data-href="{{ $invitationUrl() }}">
             <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?quote=私が応援しているプロジェクトです！応援お願いします！&u={{ $invitationUrl() }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">

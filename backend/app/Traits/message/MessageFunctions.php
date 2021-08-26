@@ -56,11 +56,7 @@ trait MessageFunctions
 
     public function setMessageContributor(String $guard)
     {
-        if ($guard !== 'company') {
-            return MessageContributor::getValue($guard);
-        } else {
-            return MessageContributor::getValue('talent');
-        }
+        return MessageContributor::getValue($guard);
     }
 
     /**
@@ -69,10 +65,10 @@ trait MessageFunctions
 
     public function setMessageStatus(String $guard)
     {
-        if ($guard !== 'web') {
-            return '対応済';
-        } else {
+        if ($guard === 'supporter') {
             return '未対応';
+        } else if ($guard === 'executor') {
+            return '対応済';
         }
     }
 }
