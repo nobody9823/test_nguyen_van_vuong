@@ -64,7 +64,7 @@
       // 画像表示
       var reader = new FileReader();
       reader.onload = function() {
-        var img_src = $('<img>').attr('src', reader.result).attr('style','height:200px;');
+        var img_src = $('<img>').attr('src', reader.result).attr('style','height:300px; width:300px; object-fit: contain;');
         $('#uploadedImage').html(img_src);
       }
       reader.readAsDataURL(file);
