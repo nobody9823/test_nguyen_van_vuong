@@ -1,7 +1,7 @@
 @extends('user.layouts.base')
 
 @section('content')
-<div class="report_detail">
+<section class="section_base report_detail">
     <div class="tit_L_01 E-font">
         <h2>DETAIL REPORTS</h2>
         <div class="sub_tit_L">活動報告詳細</div>
@@ -22,5 +22,5 @@
            <a href="javascript: history.back()"><i class="fas fa-chevron-left"></i> 活動報告一覧へ戻る</a>
         </div>
     </div>
-</div>
+</section>
 @endsection
