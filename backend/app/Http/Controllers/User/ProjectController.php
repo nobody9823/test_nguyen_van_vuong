@@ -343,7 +343,7 @@ class ProjectController extends Controller
                 break;
 
             case '1':
-                $projectsQuery->seekingWithAfterSeeking()->orderBy('created_at', 'DESC');
+                $projectsQuery->seekingWithAfterSeeking()->orderBy('start_date', 'DESC');
                 break;
 
             case '2':

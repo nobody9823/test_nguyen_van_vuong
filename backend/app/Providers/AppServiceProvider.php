@@ -10,6 +10,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PayPayInterface::class, PayPay::class);
 
         $this->app->bind(PayJpInterface::class, PayJp::class);
+
+        Cashier::ignoreMigrations();
     }
 
     /**
@@ -32,7 +35,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::useBootstrap();
+        Paginator::defaultView('components.common.pagination');
+        // FIXME: スマホの時に以下のsimpleViewを表示されるようにするなど対応が必要
+        // Paginator::defaultSimpleView('');
         /**
          * Collectionに対して paginate できるようにするマクロ
          *

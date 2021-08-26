@@ -59,7 +59,19 @@ class MyPlanRequest extends FormRequest
             ]);
         }
 
-        if ($this->has('limit_of_supporters_is_required') && $this->limit_of_supporters_is_required === 0) {
+        if ($this->input('limit_of_supporters_is_required') === 0) {
+            $this->merge([
+                'limit_of_supporters' => 1,
+            ]);
+        }
+
+        if ($this->isMethod('patch') && $this->missing('limit_of_supporters_is_required') && $this->route('plan')->limit_of_supporters_is_required === 0) {
+            $this->merge([
+                'limit_of_supporters' => 1,
+            ]);
+        }
+
+        if ($this->isMethod('post') && $this->missing('limit_of_supporters_is_required')) {
             $this->merge([
                 'limit_of_supporters' => 1,
             ]);

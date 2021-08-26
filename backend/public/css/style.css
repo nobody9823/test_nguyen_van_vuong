@@ -928,8 +928,9 @@ input[type=radio]:checked + .radio-fan::after {
 .comment_row{padding: 10px 0; min-height: 75px; border-bottom: solid 1px #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
 .comment_row img{ width: 48px;height: 48px;object-fit: cover;}
 .comment_content{width: 80%;}
-.comment_content_user{font-size: 0.5rem;text-align: right;}
-.comment_content_text{font-size: 1.0rem;text-align: right;}
+.comment_content_user{text-align: right;}
+.comment_content_user span{font-size: 0.8rem;}
+.comment_content_text{font-size: 1.2rem;text-align: right;}
 #comment_content{font-size: 1.4rem;width: 100%;border: none;outline: none;padding-bottom: 8px;box-sizing: border-box;}
 .text_underline{position: relative;border-top: 1px solid #c2c2c2;}
 .text_underline::before,
@@ -1476,7 +1477,6 @@ input[name="tab_item"] {
     margin: 0 20px 0 0;
 }
 
-
 @media screen and (max-width: 768px){
 	.av_box{ width: 100%; margin: 0 0 15px 0; padding: 0 0 15px 0; border-bottom: solid 1px #DBDBDB;}
 	.av_tit{ font-size: 1.4rem; font-weight: bold; color: #00AEBD; margin: 0 0 10px 0;}
@@ -1484,14 +1484,18 @@ input[name="tab_item"] {
 	.av_txt{ font-size: 1.2rem;}
 	.av_txt div{ font-weight: bold;}
 	.av_caution{ font-size: 1.0rem; }
+	.line_link-sp { display: inline; }
+	.line_link-pc { display: none; }
 }
 
+@media screen and (min-width: 768px) {
+	.line_link-sp { display: none; }
+	.line_link-pc { display: inline; }
+}
 
-
-
-
-.su_pr_base{display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; color: #555353; padding: 0 0 30px 0; border-bottom: solid 1px #DBDBDB; margin: 0 0 30px 0;}
+.su_pr_base{display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-around; color: #555353; padding: 0 0 30px 0; border-bottom: solid 1px #DBDBDB; margin: 0 0 30px 0;}
 .su_pr_img{ width: 240px; border-radius: 4px;}
+.su_pr_img img { height: 160px; object-fit: contain;}
 .su_pr_01{ width: calc(100% - 260px);}
 .su_pr_01 .pds_sec01_progress-bar{}
 .su_pr_01_01{ font-size:1.4rem; font-weight: bold;}
@@ -1561,11 +1565,19 @@ input[name="tab_item"] {
 
 .pager_naka{border: none !important;}
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 540px){
 	.pager .pagination li {
-	  width: 27px;
-	  height: 27px;
-	  font-size: 1.3rem;
+	  width: 23px;
+	  height: 23px;
+	  font-size: 1.1rem;
+	}
+}
+
+@media screen and (max-width: 320px){
+	.pager .pagination li {
+	  width: 18px;
+	  height: 18px;
+	  font-size: 1rem;
 	}
 }
 
@@ -1683,7 +1695,7 @@ input[name="tab_item"] {
 
 .ps_rank_base{display: flex; flex-wrap: wrap; justify-content:space-between;}
 .ps_rank_img{ width: 40%; border-radius: 4px; display: flex; justify-content: center; align-items: center;}
-.ps_rank_img img{ width: calc(80% - 15px); height: auto; border-radius: 4px; object-fit: contain;}
+.ps_rank_img img{ width: calc(80% - 15px); height: 160px; border-radius: 4px; object-fit: contain;}
 .ps_rank_01{width: 60%;}
 .ps_rank_01_01{ width: 100%; font-size: 1.2rem; font-weight: bold; color: #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; }
 .ps_rank_01_01 div{ margin-right: 2rem;}
@@ -2622,17 +2634,13 @@ div.spinner-wrapper {
 	width: 400px;
 }
 
-.prof_edit_row {
-	width: 110%;
-}
-
 /* アイコン */
-.reports .mobile_display { 
-	display: none; 
+.reports .mobile_display {
+	display: none;
 }
 
-.reports a { 
-	color: #00AEBD; 
+.reports a {
+	color: #00AEBD;
 }
 
 /* 新規投稿ボタン */
@@ -2807,3 +2815,10 @@ margin: 20px 0;
     /*   .openクラスがついた時の要素の角度を指定 */
 }
 /* アコーディオンメニュー */
+
+.my_project_dashboard {justify-content: center;}
+.my_project_dashboard .def_btn {width: 40%; margin-bottom: 10px;}
+.my_project_dashboard_status {text-align: center; width: 100%; margin: 0; padding-bottom: 20px;}
+@media screen and (max-width: 768px){
+    .my_project_dashboard .def_btn {width: 100%;}
+}
