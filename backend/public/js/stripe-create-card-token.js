@@ -14,33 +14,35 @@ var number_errors = document.getElementById('number_errors');
 var cvc_errors = document.getElementById('cvc_errors');
 var expiry_errors = document.getElementById('expiry_errors');
 
+// フォームのスタイル
+var formStyle = {
+    base: {
+        color: '#707070',
+        fontFamily: 'YuGothic',
+        fontSize: '14px',
+        fontWeight: 'bold',
+        fontStyle: 'normal',
+        letterSpacing: 'normal',
+        textAlign: 'left',
+        fontSmoothing: 'antialiased',
+        ':-webkit-autofill': {
+            color: '#fce883',
+        },
+        '::placeholder': {
+            color: '#dbdbdb',
+        },
+    },
+    invalid: {
+        iconColor: '#FFC7EE',
+        color: 'red',
+    },
+}
+
 // カード番号フォームの生成
 var numberElement = elements.create(
     'cardNumber',
     {
-        // フォームのスタイル
-        style: {
-            base: {
-                color: '#707070',
-                fontFamily: 'YuGothic',
-                fontSize: '14px',
-                fontWeight: 'bold',
-                fontStyle: 'normal',
-                letterSpacing: 'normal',
-                textAlign: 'left',
-                fontSmoothing: 'antialiased',
-                ':-webkit-autofill': {
-                    color: '#fce883',
-                },
-                '::placeholder': {
-                    color: '#dbdbdb',
-                },
-            },
-            invalid: {
-                iconColor: '#FFC7EE',
-                color: 'red',
-            },
-        },
+        style: formStyle,
     }
 );
 numberElement.mount('#number-form');
@@ -49,29 +51,7 @@ numberElement.mount('#number-form');
 var expiryElement = elements.create(
     'cardExpiry',
     {
-        // フォームのスタイル
-        style: {
-            base: {
-                color: '#707070',
-                fontFamily: 'YuGothic',
-                fontSize: '14px',
-                fontWeight: 'bold',
-                fontStyle: 'normal',
-                letterSpacing: 'normal',
-                textAlign: 'left',
-                fontSmoothing: 'antialiased',
-                ':-webkit-autofill': {
-                    color: '#fce883',
-                },
-                '::placeholder': {
-                    color: '#dbdbdb',
-                },
-            },
-            invalid: {
-                iconColor: '#FFC7EE',
-                color: 'red',
-            },
-        },
+        style: formStyle,
     }
 );
 expiryElement.mount('#expiry-form');
@@ -80,29 +60,7 @@ expiryElement.mount('#expiry-form');
 var cvcElement = elements.create(
     'cardCvc',
     {
-        // フォームのスタイル
-        style: {
-            base: {
-                color: '#707070',
-                fontFamily: 'YuGothic',
-                fontSize: '14px',
-                fontWeight: 'bold',
-                fontStyle: 'normal',
-                letterSpacing: 'normal',
-                textAlign: 'left',
-                fontSmoothing: 'antialiased',
-                ':-webkit-autofill': {
-                    color: '#fce883',
-                },
-                '::placeholder': {
-                    color: '#dbdbdb',
-                },
-            },
-            invalid: {
-                iconColor: '#FFC7EE',
-                color: 'red',
-            },
-        },
+        style: formStyle,
     }
 );
 cvcElement.mount('#cvc-form');

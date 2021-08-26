@@ -425,4 +425,15 @@ window.onload = function(){
     var stripe = Stripe('{{ config("app.stripe_key") }}');
 </script>
 <script src="{{ asset('/js/stripe-create-card-token.js') }}"></script>
+<script>
+    const paypayIsChecked = () => {
+    let result = false;
+    document.getElementsByName('payment_way').forEach(function (e) {
+        if(e.value === 'paypay' && e.checked){
+            return result = true;
+        };
+    });
+    return result;
+}
+</script>
 @endsection

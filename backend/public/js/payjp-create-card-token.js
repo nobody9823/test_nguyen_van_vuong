@@ -3,10 +3,34 @@ var number_errors = document.getElementById('number_errors');
 var expiry_errors = document.getElementById('expiry_errors');
 var cvc_errors = document.getElementById('cvc_errors');
 
+// フォームのスタイル
+var formStyle = {
+    base: {
+        color: '#707070',
+        fontFamily: 'YuGothic',
+        fontSize: '14px',
+        fontWeight: 'bold',
+        fontStyle: 'normal',
+        letterSpacing: 'normal',
+        textAlign: 'left',
+        fontSmoothing: 'antialiased',
+        ':-webkit-autofill': {
+            color: '#fce883',
+        },
+        '::placeholder': {
+            color: '#dbdbdb',
+        },
+    },
+    invalid: {
+        iconColor: '#FFC7EE',
+        color: 'red',
+    },
+}
+
 // 入力フォームを分解して管理・配置できます
-var numberElement = elements.create('cardNumber')
-var expiryElement = elements.create('cardExpiry')
-var cvcElement = elements.create('cardCvc')
+var numberElement = elements.create('cardNumber', {style: formStyle})
+var expiryElement = elements.create('cardExpiry', {style: formStyle})
+var cvcElement = elements.create('cardCvc', {style: formStyle})
 
 numberElement.mount('#number-form')
 expiryElement.mount('#expiry-form')
@@ -16,15 +40,6 @@ let numberElIsCompleted = false;
 let expiryElIsCompleted = false;
 let cvcElIsCompleted = false;
 
-const paypayIsChecked = () => {
-    let result = false;
-    document.getElementsByName('payment_way').forEach(function (e) {
-        if(e.value === 'paypay' && e.checked){
-            return result = true;
-        };
-    });
-    return result;
-}
 
 numberElement.on('change', (event) => {
     number_errors.innerHTML = '';
