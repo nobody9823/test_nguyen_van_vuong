@@ -227,7 +227,7 @@ class ProjectController extends Controller
                     'inviter_id' => !empty($validated_request['inviter_code']) && !empty($inviter) ? $inviter->id : null,
                     'price' => $validated_request['total_amount'],
                     'message_status' => "ステータスなし",
-                    'payment_way' => !empty($validated_request['payjp_token']) ? $this->card_payment->getPaymentApiName() : 'PayPay',
+                    'payment_way' => !empty($validated_request['payment_method_id']) ? $this->card_payment->getPaymentApiName() : 'PayPay',
                     'payment_is_finished' => false
                 ],
                 $request->all()
@@ -241,7 +241,7 @@ class ProjectController extends Controller
             $this->plan->updatePlansByIds($plans, $validated_request['plans']);
             $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
             $payment->paymentToken()->save(PaymentToken::make([
-                'token' => !empty($validated_request['payjp_token']) ? $validated_request['payjp_token'] : $unique_token,
+                'token' => !empty($validated_request['payment_method_id']) ? $validated_request['payment_method_id'] : $unique_token,
             ]));
             DB::commit();
         } catch (\Exception $e) {

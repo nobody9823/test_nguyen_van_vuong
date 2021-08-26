@@ -69,14 +69,14 @@ class ProjectControllerForPayJpTest extends TestCase
         $this->fail_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
 
         $this->success_payment = Payment::factory()->state([
-                    'project_id' => $this->project->id,
-                    'user_id' => $this->supporter->id,
-                    'price' => $this->plan->price,
-                    'message_status' => 'ステータスなし',
-                    'payment_way' => 'PayJp',
-                    'payment_is_finished' => false,
-                    'remarks' => 'test remarks'
-                ])->create();
+            'project_id' => $this->project->id,
+            'user_id' => $this->supporter->id,
+            'price' => $this->plan->price,
+            'message_status' => 'ステータスなし',
+            'payment_way' => 'PayJp',
+            'payment_is_finished' => false,
+            'remarks' => 'test remarks'
+        ])->create();
 
         $this->success_payment->paymentToken()->save(PaymentToken::factory()->state([
             'token' => $this->success_token->id,
@@ -93,18 +93,18 @@ class ProjectControllerForPayJpTest extends TestCase
         $this->fail_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
 
         $this->fail_payment = Payment::factory()->state([
-                'project_id' => $this->project->id,
-                'user_id' => $this->supporter->id,
-                'price' => $this->plan->price,
-                'message_status' => 'ステータスなし',
-                'payment_way' => 'PayJp',
-                'payment_is_finished' => false,
-                'remarks' => 'test remarks'
-            ])->create();
+            'project_id' => $this->project->id,
+            'user_id' => $this->supporter->id,
+            'price' => $this->plan->price,
+            'message_status' => 'ステータスなし',
+            'payment_way' => 'PayJp',
+            'payment_is_finished' => false,
+            'remarks' => 'test remarks'
+        ])->create();
 
         $this->fail_payment->paymentToken()->save(PaymentToken::factory()->state([
-                'token' => $this->fail_token->id
-            ])->make());
+            'token' => $this->fail_token->id
+        ])->make());
 
         $this->url = "project/{$this->project->id}/plan/confirmPayment";
     }
@@ -113,15 +113,15 @@ class ProjectControllerForPayJpTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $response = $this->actingAs($this->supporter)
-                        ->from($this->url)
-                        ->get(
-                            route('user.plan.paymentForPayJp', [
-                            'project' => $this->project,
-                            'payment' => $this->success_payment
-                        ])
-                        );
+            ->from($this->url)
+            ->get(
+                route('user.plan.payment_for_credit', [
+                    'project' => $this->project,
+                    'payment' => $this->success_payment
+                ])
+            );
         $response->assertOk();
-        $payment =Payment::find($this->success_payment->id);
+        $payment = Payment::find($this->success_payment->id);
         $this->assertSame(1, $payment->payment_is_finished);
     }
 
@@ -132,10 +132,10 @@ class ProjectControllerForPayJpTest extends TestCase
         ($this->actingAs($this->supporter)
             ->from($this->url)
             ->get(
-                route('user.plan.paymentForPayJp', [
-                'project' => $this->project,
-                'payment' => $this->fail_payment
-            ])
+                route('user.plan.payment_for_credit', [
+                    'project' => $this->project,
+                    'payment' => $this->fail_payment
+                ])
             ))->execute(1);
     }
 }
