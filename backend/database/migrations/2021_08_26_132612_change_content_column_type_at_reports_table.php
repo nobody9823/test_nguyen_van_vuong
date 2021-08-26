@@ -14,7 +14,7 @@ class ChangeContentColumnTypeAtReportsTable extends Migration
     public function up()
     {
         Schema::table('reports', function (Blueprint $table) {
-            $table->text('content')->change();
+            $table->mediumText('content')->change();
         });
     }
 
