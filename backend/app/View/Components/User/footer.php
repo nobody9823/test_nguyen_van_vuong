@@ -5,7 +5,7 @@ namespace App\View\Components\User;
 use Illuminate\View\Component;
 use App\Models\Tag;
 
-class footer extends Component
+class Footer extends Component
 {
     /**
      * Create a new component instance.
