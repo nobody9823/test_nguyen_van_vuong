@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReportRequest;
-use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Report;
 use Illuminate\Support\Facades\Storage;
@@ -50,7 +49,7 @@ class ReportController extends Controller
         return view('user.report.show', ['project' => $project, 'report' => $report]);
     }
 
-    public function edit(Request $request, Project $project, Report $report)
+    public function edit(Project $project, Report $report)
     {
         $this->authorize('checkOwnReportWithPublishedStatus', $report);
         return view('user.report.edit', ['project' => $project, 'report' => $report]);
