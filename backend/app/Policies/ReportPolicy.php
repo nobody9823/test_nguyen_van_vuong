@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Report;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Auth;
 
 class ReportPolicy
 {
@@ -27,5 +28,10 @@ class ReportPolicy
         } else {
             return false;
         }
+    }
+
+    public function CheckProjectSupported(User $user, Report $report)
+    {
+        return isset($report->project->payments->where('user_id', Auth::user()->id)->first()->user->id); 
     }
 }

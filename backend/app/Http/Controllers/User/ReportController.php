@@ -46,6 +46,7 @@ class ReportController extends Controller
 
     public function show(Project $project, Report $report)
     {
+        $this->authorize('CheckProjectSupported', $report);
         return view('user.report.show', ['project' => $project, 'report' => $report]);
     }
 
