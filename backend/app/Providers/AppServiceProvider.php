@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use App\Actions\PayPay\PayPay;
-use App\Actions\PayJp\PayJp;
+use App\Actions\CardPayment\PayJp;
 use App\Actions\PayPay\PayPayInterface;
-use App\Actions\PayJp\PayJpInterface;
+use App\Actions\CardPayment\CardPaymentInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(PayPayInterface::class, PayPay::class);
 
-        $this->app->bind(PayJpInterface::class, PayJp::class);
+        $this->app->bind(CardPaymentInterface::class, PayJp::class);
 
         Cashier::ignoreMigrations();
     }
