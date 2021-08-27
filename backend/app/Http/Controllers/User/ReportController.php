@@ -16,7 +16,7 @@ class ReportController extends Controller
     {
         $this->authorize('checkOwnProject', $project);
         $reports = $project->reports()->orderBy('created_at', 'DESC')->paginate(5);
-        
+    
         return view('user.report.index', [
             'reports' => $reports,
             'project' => $project

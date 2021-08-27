@@ -47,11 +47,19 @@
                 @endif
             </table>
 
+            @if($project->release_status === "---" || $project->release_status === "承認待ち" 
+            || $project->release_status === "差し戻し")
+            <p style="text-align: center; margin-top: 100px;">プロジェクトを公開後に投稿が可能です。</p>
+            @else
+                @if($reports->isEmpty())
+                <p style="text-align: center; margin-top: 100px;">投稿した活動報告はありません。</p> 
+                @endif
             <div class="def_btn">
               <button type="submit" class="disable-btn">
                 <a href="{{ route('user.report.create' ,['project' => $project ]) }}" style="font-size: 1.8rem;font-weight: bold;color: #fff;">新規投稿を作成</a>
               </button>
             </div>
+            @endif
 
             <div style="margin: 100px 0;">
                 {{ $reports->appends(request()->input())->onEachSide(1)->links() }}
