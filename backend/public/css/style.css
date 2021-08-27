@@ -2628,6 +2628,48 @@ div.spinner-wrapper {
 	width: 535px;
 }
 
+/* 支援者一覧 */
+.supporters table {
+	width: 63%;
+}
+
+.supporters tr:first-child {
+	width: 100%;
+	display: flex;
+	background: #F7FDFF;
+	color: #00AEBD;
+	justify-content: space-between;
+	white-space: nowrap;
+}
+
+.supporters tr:first-child th {
+	margin: 20px;
+}
+
+.supporters th:nth-child(2) {
+	width: 16vw;
+}
+
+.supporters th:nth-child(3) {
+	width: 24vw;
+}
+
+.supporters .edit_row {
+    font-size: 1.6rem;
+    padding: 10px 0;
+    min-height: 75px;
+    border-bottom: solid 1px #00AEBD;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.supporters .edit_row td:nth-child(4) {
+	width: 16vw;
+}
+
 .reports .prof_edit_row td:nth-child(2) {
 	width: 400px;
 }
