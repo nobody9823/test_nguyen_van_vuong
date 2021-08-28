@@ -270,7 +270,9 @@ class ProjectController extends Controller
         DB::beginTransaction();
         try {
             $payment->payment_is_finished = true;
+            $payment->paymentToken->token = $response->id;
             $payment->save();
+            $payment->paymentToken->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

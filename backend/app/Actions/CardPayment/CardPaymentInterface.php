@@ -21,7 +21,7 @@ interface CardPaymentInterface
      *
      * @return object
      */
-    public function refund(string $payment_method_id): object;
+    public function refund(string $payment_id): object;
 
     /**
      * Get payment api name
