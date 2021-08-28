@@ -105,7 +105,7 @@ Route::post('/send_reset_password_mail', [PasswordResetController::class, 'sendR
 Route::get('/password_reset/{token}', [PasswordResetController::class, 'reset'])->name('password.reset');
 Route::post('/password_reset', [PasswordResetController::class, 'update'])->name('password.update');
 
-// --------------------inqury-------------------
+// --------------------inquiry-------------------
 Route::get('/inquiry/create', [InquiryController::class, 'createInquiry'])->name('inquiry.create');
 Route::post('/inquiry/send', [InquiryController::class, 'sendInquiry'])->name('inquiry.send');
 
