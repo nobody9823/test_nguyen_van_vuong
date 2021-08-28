@@ -18,6 +18,7 @@ class Stripe implements CardPaymentInterface
     public function charge(int $price, string $payment_method_id): object
     {
         try {
+            // NOTICE: chargeメソッドの第三引数のオプションで['receipt_email' => Auth::user()->email]などとすると領収書が送れます。
             $result = (new User)->charge($price, $payment_method_id);
         } catch (\Stripe\Exception\CardException $e) {
             // Since it's a decline, \Stripe\Exception\CardException will be caught
