@@ -18,7 +18,7 @@ class Stripe implements CardPaymentInterface
     public function charge(int $price, string $payment_method_id): object
     {
         try {
-            $result = (new User)->charge(100, $payment_method_id);
+            $result = (new User)->charge($price, $payment_method_id);
         } catch (\Stripe\Exception\CardException $e) {
             // Since it's a decline, \Stripe\Exception\CardException will be caught
             // echo 'Status is:' . $e->getHttpStatus() . '\n';
