@@ -195,22 +195,10 @@ if(isiOS) {
 					<p class="nav_btn_tit_L">メッセージ一覧</p>
 				</a>
 			</li>
-
-			<li id="menu-item-2" class="menu-item menu-item-2 nav_btn menu-item-has-children taso_li menuset_06">
-					<a href="#" id="top_menu-3" data-megamenu="js-megamenu3" class=" nav_btn_link taso_li_a">
-						<label for="item_c_3" class="item_c">
-							<div>
-							<p class="nav_btn_tit_L">プロジェクト</p>
-							</div>
-						</label>
-					</a>
-				<input type="checkbox" id="item_c_3" style="display:none;">
-				<input type="checkbox" id="ta_menu-3"><label for="ta_menu-3" class="taso_li_a_label"><span class="pd"><i class="fas fa-chevron-down"></i></span></label>
-					<ul class="taso_ul pri_W_b taso_ul_ko" style="background: #fff; padding: 10px 10px 0 10px;">
-						<li class="taso_li taso_li_ko ninki_tag_li">
-							<div class="pbb_01_link" style="border-bottom: none;">マイプロジェクト管理<i class="fas fa-chevron-right"></i><a href="{{ route('user.my_project.project.index') }}" class="cover_link"></a></div>
-						</li>
-					</ul>
+			<li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.my_project.project.index') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">マイプロジェクト管理</p>
+				</a>
 			</li>
 
 			<li class="menu-item nav_btn taso_li menuset_06">
