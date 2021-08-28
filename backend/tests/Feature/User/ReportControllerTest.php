@@ -26,7 +26,7 @@ class ReportControllerTest extends TestCase
 
         $this->report = Report::factory()->state([
             'project_id' => $this->project->id
-        ])->count(3)->create();
+        ])->create();
     }
 
 
@@ -40,5 +40,17 @@ class ReportControllerTest extends TestCase
         $response->assertOk()
                  ->assertViewIs('user.report.index')
                  ->assertViewHas(['reports','project']);
+    }
+
+    public function testCreateAction()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.report.index', ['project' => $this->project]))
+                         ->get(route('user.report.create', ['project' => $this->project]));
+        $response->assertOk()
+                 ->assertViewIs('user.report.create')
+                 ->assertViewHas('project');
     }
 }
