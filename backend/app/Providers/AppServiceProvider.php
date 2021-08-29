@@ -6,6 +6,7 @@ use App\Actions\PayPay\PayPay;
 use App\Actions\CardPayment\PayJp;
 use App\Actions\PayPay\PayPayInterface;
 use App\Actions\CardPayment\CardPaymentInterface;
+use App\Actions\CardPayment\Stripe;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -35,6 +36,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // 'extend' -> すでに依存解決済みのサービスを変更するメソッドで、こちらの場合は.envのcard_payment_apiによってサービスを変更しています。
+        $this->app->extend(CardPaymentInterface::class, function ($service, $app) {
+            if (config('app.card_payment_api') === 'stripe') {
+                return new Stripe();
+            } else if (config('app.card_payment_api') === 'payjp') {
+                return new PayJp();
+            }
+        });
+
         Paginator::defaultView('components.common.pagination');
         // FIXME: スマホの時に以下のsimpleViewを表示されるようにするなど対応が必要
         // Paginator::defaultSimpleView('');

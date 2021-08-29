@@ -53,10 +53,10 @@ class PayJp implements CardPaymentInterface
      *
      * @return object
      */
-    public function refund(string $payment_method_id): object
+    public function refund(string $payment_id): object
     {
         \Payjp\Payjp::setApiKey(config('app.pay_jp_secret'));
-        $charge = \Payjp\Charge::retrieve($payment_method_id);
+        $charge = \Payjp\Charge::retrieve($payment_id);
         return $charge->refund();
     }
 

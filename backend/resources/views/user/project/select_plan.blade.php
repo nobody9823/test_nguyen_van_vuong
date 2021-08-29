@@ -415,16 +415,21 @@ window.onload = function(){
 }
 </script>
 <script src="{{ asset('/js/Plans.js') }}"></script>
-{{-- <script src="https://js.pay.jp/v2/pay.js"></script>
-<script>
-    var payjp = Payjp('{{ config("app.pay_jp_key") }}')
-</script>
-<script src="{{ asset('/js/payjp-create-card-token.js') }}"></script> --}}
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-    var stripe = Stripe('{{ config("app.stripe_key") }}');
-</script>
-<script src="{{ asset('/js/stripe-create-card-token.js') }}"></script>
+
+@if(config('app.card_payment_api') === 'payjp')
+    <script src="https://js.pay.jp/v2/pay.js"></script>
+    <script>
+        var payjp = Payjp('{{ config("app.pay_jp_key") }}')
+    </script>
+    <script src="{{ asset('/js/payjp-create-card-token.js') }}"></script>
+@elseif(config('app.card_payment_api') === 'stripe')
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('{{ config("app.stripe_key") }}');
+    </script>
+    <script src="{{ asset('/js/stripe-create-card-token.js') }}"></script>
+@endif
+
 <script>
     const paypayIsChecked = () => {
     let result = false;
