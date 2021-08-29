@@ -20,11 +20,11 @@
                         <a class="cover_link" onclick="openPlanFormModal({{ $plan->id }})"></a>
                     </div>
 
-                    <div class="pds_sec02_01_btn">
+                    <div class="def_btn">
                         編集
                         <a class="cover_link" onclick="openPlanFormModal({{ $plan->id }})"></a>
                     </div>
-                    <div class="pds_sec02_01_btn">
+                    <div class="def_btn">
                         削除
                         <a class="cover_link" onclick="updateMyPlan.deletePlan(this, {{ $project->id }}, {{ $plan->id }});" id="{{ $plan->id }}"></a>
                     </div>
