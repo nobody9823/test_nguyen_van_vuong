@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 <main>
 
-    <div class="main_inner">
+    <div class="main_inner main_inner-pt">
     <section id="pc-top_01" class="section_base">
 
     <div class="img_box_01">

@@ -76,6 +76,7 @@ input, select {
 img{ width: 100%;}
 
 .main_inner{ width: 100%; max-width: 1000px; margin: 0 auto;}
+.main_inner-pt {padding-top: 16px;}
 .section_base{ padding: 0 0; margin: 50px auto 100px auto;}
 main .section_base:first-of-type{ margin: 0px auto 100px auto;}
 
