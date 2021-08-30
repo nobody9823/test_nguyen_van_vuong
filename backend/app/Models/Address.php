@@ -30,6 +30,16 @@ class Address extends Model
         return config('prefecture.'.$this->prefecture_id);
     }
 
+    public function getFormattedPostalCodeAttribute()
+    {
+        return substr($this->postal_code ,0,3) . "-" . substr($this->postal_code ,3);
+    }
+
+    public function getFullAddressAttribute()
+    {
+        return $this->prefecture . $this->city . $this->block . $this->building;
+    }
+
     public static function initialize()
     {
         return self::make([
