@@ -24,7 +24,7 @@
                 </a>
             </div>
             <section id="pc-top_04" class="section_base">
-                <div class="img_box_02">
+                <div class="my_project_container">
                     @foreach($projects as $project)
                     <div class="my_project_img_box_wrapper">
                         <div class="ib02_01 E-font my_project_img_wrapper">
