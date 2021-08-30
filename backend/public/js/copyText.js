@@ -1,7 +1,9 @@
 const copyText = (() => {
 
     return {
-        copy:  el => {
+        copy:  (el, elementId) => {
+
+            document.getElementById(elementId).style.display = 'block';
 
             const copyFrom = document.createElement("textarea");
 
