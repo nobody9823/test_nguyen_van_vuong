@@ -15,7 +15,7 @@
             <x-user.mypage-navigation-bar/>
         </div>
 
-        <div class="prof_page_R">
+        <div class="prof_page_R scrollable">
             <table>
                 <tr>
                     <th>支援者名</th>
@@ -26,7 +26,7 @@
                 @if($project->payments)
                     @foreach($project->payments as $payment)
                     <tr class="edit_row">
-                        <td>
+                        <td class="supporter_name">
                             <a onClick="copyText.copy(this)">
                                 {{ $payment->user->name }}
                             </a>
@@ -42,9 +42,11 @@
                             </a>
                         </td>
                         <td>
-                            <a onClick="display.planDetail({{ $payment->id }})"><p class="accordion__title accordion__arrow" style="font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;">やりとりしている支援者</p></a>
+                            <a onClick="display.planDetail({{ $payment->id }})"><p class="accordion__title" style="font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px; white-space: nowrap;">一覧</p></a>
                         </td>
-                        <td id="display_plan_detail_{{ $payment->id }}" style="display:none;">
+                    </tr>
+                    <tr class="plan_detail">
+                        <td id="display_plan_detail_{{ $payment->id }}" style="display:none;" colspan="4">
                             <ul>
                                 @foreach($payment->includedPlans as $plan)
                                     <a onClick="copyText.copy(this)">
