@@ -2658,9 +2658,7 @@ div.spinner-wrapper {
     font-size: 1.6rem;
     padding: 10px 0;
     min-height: 75px;
-    border-bottom: solid 1px #00AEBD;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     align-content: center;
     justify-content: space-between;
@@ -2672,6 +2670,22 @@ div.spinner-wrapper {
 
 .reports .prof_edit_row td:nth-child(2) {
 	width: 400px;
+}
+
+.supporters td {
+	margin: 20px;
+}
+
+.supporters td.supporter_name {
+	white-space: nowrap;
+}
+
+.plan_detail {
+	border-bottom: solid 1px #00AEBD;
+}
+
+.scrollable {
+	overflow: scroll;
 }
 
 /* アイコン */
