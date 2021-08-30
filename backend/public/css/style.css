@@ -2680,6 +2680,10 @@ div.spinner-wrapper {
 	white-space: nowrap;
 }
 
+.supporters td span.formatted_postal_code {
+	white-space: nowrap;
+}
+
 .plan_detail {
 	border-bottom: solid 1px #00AEBD;
 }
