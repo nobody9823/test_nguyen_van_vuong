@@ -2655,7 +2655,7 @@ div.spinner-wrapper {
 }
 
 .supporters .edit_row {
-    font-size: 1.6rem;
+    font-size: 0.8vw;
     padding: 10px 0;
     min-height: 75px;
     display: flex;
@@ -2684,7 +2684,8 @@ div.spinner-wrapper {
 	white-space: nowrap;
 }
 
-.plan_detail {
+.supporters .plan_detail {
+	font-size: 0.8vw;
 	border-bottom: solid 1px #00AEBD;
 }
 
