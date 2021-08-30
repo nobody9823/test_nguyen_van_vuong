@@ -18,22 +18,25 @@ class ProjectTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp() :void
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->users = User::factory()
             ->has(Profile::factory())
-            ->has(Project::factory()->released()
-                ->has(
+            ->has(
+                Project::factory()->released()
+                    ->has(
                         ProjectFile::factory()->state([
                             'file_url' => 'public/sampleImage/now_printing.png',
                             'file_content_type' => 'image_url',
-                    ]))
-                ->has(
-                    Plan::factory()->state([
-                        'price' => 1000
-                    ]))
+                        ])
+                    )
+                    ->has(
+                        Plan::factory()->state([
+                            'price' => 1000
+                        ])
+                    )
             )->count(10)->create();
 
         $this->user = User::first();
@@ -52,7 +55,7 @@ class ProjectTest extends TestCase
                 ],
                 "total_amount" => $this->plan->price,
                 "payment_way" => "credit",
-                "payjp_token" => "tok_0cf9542f036d4b0c3b05cc78c406",
+                "payment_method_id" => "tok_0cf9542f036d4b0c3b05cc78c406",
                 "first_name" => "山田",
                 "last_name" => "太郎",
                 "first_name_kana" => "ヤマダ",
@@ -146,10 +149,10 @@ class ProjectTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $response = $this->actingAs($this->user)
-                        ->get(route('user.plan.prepare_for_payment', array_merge(['project' => $this->project], $this->data_for_credit)));
+            ->get(route('user.plan.prepare_for_payment', array_merge(['project' => $this->project], $this->data_for_credit)));
 
         $this->payment = $this->user->payments()->first();
-        $response->assertRedirect(route('user.plan.paymentForPayJp', ['project' => $this->project, 'payment' => $this->payment]));
+        $response->assertRedirect(route('user.plan.payment_for_credit', ['project' => $this->project, 'payment' => $this->payment]));
     }
 
     public function testPrepareForPaymentForPayPay()
@@ -160,11 +163,11 @@ class ProjectTest extends TestCase
             ->once()
             ->andReturn($this->response_create_qr_code);
 
-        $this->app->bind(PayPayInterface::class, function () use ($mock){
+        $this->app->bind(PayPayInterface::class, function () use ($mock) {
             return $mock;
         });
         $response = $this->actingAs($this->user)
-                        ->get(route('user.plan.prepare_for_payment', array_merge(['project' => $this->project], $this->data_for_paypay)));
+            ->get(route('user.plan.prepare_for_payment', array_merge(['project' => $this->project], $this->data_for_paypay)));
 
         $response->assertRedirect('https://qr-stg.sandbox.paypay.ne.jp/28180104c6BFhmBN9MGwhLaz');
         $payments = $this->user->payments()->get();

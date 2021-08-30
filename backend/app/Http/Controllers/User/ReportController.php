@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReportRequest;
-use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Report;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +15,7 @@ class ReportController extends Controller
     {
         $this->authorize('checkOwnProject', $project);
         $reports = $project->reports()->orderBy('created_at', 'DESC')->paginate(5);
-        
+    
         return view('user.report.index', [
             'reports' => $reports,
             'project' => $project
@@ -25,13 +24,13 @@ class ReportController extends Controller
 
     public function create(Project $project)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnProjectWithPublishedStatusForRepoert', $project);
         return view('user.report.create', ['project' => $project]);
     }
 
     public function store(ReportRequest $request, Report $report, Project $project)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnProjectWithPublishedStatusForRepoert', $project);
         DB::beginTransaction();
         try {
             $report->fill($request->fillWithProjectId($project->id))->save();
@@ -46,18 +45,19 @@ class ReportController extends Controller
 
     public function show(Project $project, Report $report)
     {
+        $this->authorize('CheckProjectSupported', $report);
         return view('user.report.show', ['project' => $project, 'report' => $report]);
     }
 
     public function edit(Project $project, Report $report)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnReportWithPublishedStatus', $report);
         return view('user.report.edit', ['project' => $project, 'report' => $report]);
     }
 
     public function update(ReportRequest $request, Project $project, Report $report)
     {
-        $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnReportWithPublishedStatus', $report);
         // 活動報告削除処理
         if($request->delete){
             DB::beginTransaction();

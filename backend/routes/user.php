@@ -26,7 +26,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/selectPlans/{plan?}', [ProjectController::class, 'selectPlans'])->name('plan.selectPlans')->middleware('CheckProjectIsPublished');
     Route::post('plan/confirmPayment', [ProjectController::class, 'confirmPayment'])->name('plan.confirmPayment');
     Route::get('plan/prepare_for_payment', [ProjectController::class, 'prepareForPayment'])->name('plan.prepare_for_payment');
-    Route::get('plan/{payment}/paymentForPayJp', [ProjectController::class, 'paymentForPayJp'])->name('plan.paymentForPayJp');
+    Route::get('plan/{payment}/payment_for_credit', [ProjectController::class, 'paymentForCredit'])->name('plan.payment_for_credit');
     Route::get('plan/{payment}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
     Route::post('comment', [CommentController::class, 'store'])->name('comment.store')->middleware('project.released');
@@ -107,7 +107,7 @@ Route::post('/send_reset_password_mail', [PasswordResetController::class, 'sendR
 Route::get('/password_reset/{token}', [PasswordResetController::class, 'reset'])->name('password.reset');
 Route::post('/password_reset', [PasswordResetController::class, 'update'])->name('password.update');
 
-// --------------------inqury-------------------
+// --------------------inquiry-------------------
 Route::get('/inquiry/create', [InquiryController::class, 'createInquiry'])->name('inquiry.create');
 Route::post('/inquiry/send', [InquiryController::class, 'sendInquiry'])->name('inquiry.send');
 

@@ -81,9 +81,9 @@ class ProjectControllerForPayPayTest extends TestCase
 
         $this->response_payment_detail = [
             "resultInfo" => [
-            "code" => "SUCCESS",
-            "message" => "Success",
-            "codeId" => "08100001",
+                "code" => "SUCCESS",
+                "message" => "Success",
+                "codeId" => "08100001",
             ],
             "data" => [
                 "paymentId" => "03659954981238005760",
@@ -100,35 +100,35 @@ class ProjectControllerForPayPayTest extends TestCase
         ];
 
         $this->params = [
-        "_token" => "p2a6jKCe7pfX6VeZ7VL6UKWp4u1pMRHvMO6ZinIZ",
-        "plan_ids" => [
-            0 => "1000"
-        ],
-        "plans" => [
-            $this->plan->id => "1"
-        ],
-        "total_amount" => "1000",
-        "display_added_price" => null,
-        "payment_way" => "paypay",
-        "payjp_token" => null,
-        "first_name" => "山田",
-        "last_name" => "太郎",
-        "first_name_kana" => "ヤマダ",
-        "last_name_kana" => "タロウ",
-        "email" => $this->supporter->email,
-        "gender" => "男性",
-        "phone_number" => "00000000000",
-        "postal_code" => "0000000",
-        "prefecture" => "東京都",
-        "city" => "test city",
-        "block" => "test block",
-        "building" => "test building",
-        "birth_year" => "2020",
-        "birth_month" => "1",
-        "birth_day" => "1",
-        "remarks" => "test remarks",
-        "comments" => "test comments",
-        "birthday" => "1996-01-01",
+            "_token" => "p2a6jKCe7pfX6VeZ7VL6UKWp4u1pMRHvMO6ZinIZ",
+            "plan_ids" => [
+                0 => "1000"
+            ],
+            "plans" => [
+                $this->plan->id => "1"
+            ],
+            "total_amount" => "1000",
+            "display_added_price" => null,
+            "payment_way" => "paypay",
+            "payment_method_id" => null,
+            "first_name" => "山田",
+            "last_name" => "太郎",
+            "first_name_kana" => "ヤマダ",
+            "last_name_kana" => "タロウ",
+            "email" => $this->supporter->email,
+            "gender" => "男性",
+            "phone_number" => "00000000000",
+            "postal_code" => "0000000",
+            "prefecture" => "東京都",
+            "city" => "test city",
+            "block" => "test block",
+            "building" => "test building",
+            "birth_year" => "2020",
+            "birth_month" => "1",
+            "birth_day" => "1",
+            "remarks" => "test remarks",
+            "comments" => "test comments",
+            "birthday" => "1996-01-01",
         ];
     }
 
