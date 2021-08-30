@@ -47,7 +47,7 @@ class PlanFactory extends Factory
     {
         $limit_of_supporters_is_required = $this->faker->boolean(50);
 
-        for($i = 0; $i < $count; $i ++){
+        for ($i = 0; $i < $count; $i ++) {
             $this->values[] = [
                 'project_id' => $project_id,
                 'title' => Arr::random([
@@ -62,6 +62,8 @@ class PlanFactory extends Factory
                 'image_url' => 'public/sampleImage/now_printing.png',
                 'address_is_required' => $this->faker->boolean(50),
                 'limit_of_supporters_is_required' => $limit_of_supporters_is_required,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
         return $this->values;
