@@ -35,7 +35,12 @@
                         <td>
                             <div id="supporter_address_{{ $payment->id }}" style="display: none;">コピーしました。</div>
                             <a onClick="copyText.copy(this, 'supporter_address_{{ $payment->id }}')">
-                                {{ $payment->user->address->postal_code .' '. $payment->user->address->prefecture . $payment->user->address->city . $payment->user->address->block . $payment->user->address->building }}
+                                <p>
+                                    <span class="formatted_postal_code">
+                                        {{ $payment->user->address->formatted_postal_code }}
+                                    </span><br>
+                                    {{ $payment->user->address->full_address }}
+                                </p>
                             </a>
                         </td>
                         <td>
