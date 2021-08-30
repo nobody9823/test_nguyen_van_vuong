@@ -27,17 +27,20 @@
                     @foreach($project->payments as $payment)
                     <tr class="edit_row">
                         <td class="supporter_name">
-                            <a onClick="copyText.copy(this)">
+                            <div id="supporter_name_{{ $payment->id }}" style="display: none;">コピーしました。</div>
+                            <a onClick="copyText.copy(this, 'supporter_name_{{ $payment->id }}')">
                                 {{ $payment->user->name }}
                             </a>
                         </td>
                         <td>
-                            <a onClick="copyText.copy(this)">
+                            <div id="supporter_address_{{ $payment->id }}" style="display: none;">コピーしました。</div>
+                            <a onClick="copyText.copy(this, 'supporter_address_{{ $payment->id }}')">
                                 {{ $payment->user->address->postal_code .' '. $payment->user->address->prefecture . $payment->user->address->city . $payment->user->address->block . $payment->user->address->building }}
                             </a>
                         </td>
                         <td>
-                            <a onClick="copyText.copy(this)">
+                            <div id="supporter_email_{{ $payment->id }}" style="display: none;">コピーしました。</div>
+                            <a onClick="copyText.copy(this, 'supporter_email_{{ $payment->id }}')">
                                 {{ $payment->user->email }}
                             </a>
                         </td>
@@ -47,9 +50,10 @@
                     </tr>
                     <tr class="plan_detail">
                         <td id="display_plan_detail_{{ $payment->id }}" style="display:none;" colspan="4">
+                            <div id="supporter_plan_detail_{{ $payment->id }}" style="display: none;">コピーしました。</div>
                             <ul>
                                 @foreach($payment->includedPlans as $plan)
-                                    <a onClick="copyText.copy(this)">
+                                    <a onClick="copyText.copy(this, 'supporter_plan_detail_{{ $payment->id }}')">
                                         <li>
                                             タイトル : {{ $plan->title }}
                                         </li>
