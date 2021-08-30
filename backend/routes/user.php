@@ -14,6 +14,7 @@ use App\Http\Controllers\User\MyProjectController;
 use App\Http\Controllers\User\MyPlanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\RegisterController;
+use App\Http\Controllers\User\SupporterController;
 
 //---------------------projects-----------------------------------------------
 Route::get('/', [ProjectController::class, 'index'])->name('index');
@@ -62,6 +63,7 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::get('message/{payment}', [MessageController::class, 'showByExecutor'])->name('my_project.message.show');
         Route::post('message/{payment}', [MessageController::class, 'storeByExecutor'])->name('my_project.message_content.store');
         Route::get('message/{message_content}/file_download', [MessageController::class, 'fileDownloadByExecutor'])->name('my_project.message_content.file_download');
+        Route::resource('{project}/supporter', SupporterController::class)->only(['index']);
     });
     Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_amount');
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
