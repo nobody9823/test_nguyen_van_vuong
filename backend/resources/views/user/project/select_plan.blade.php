@@ -162,13 +162,14 @@
                                 <div class="creca_icon">
                                 <img src="{{ asset('image/credit-card_2.png') }}">
                                 <img src="{{ asset('image/credit-card_1.png') }}">
-                                {{-- <img src="{{ asset('image/credit-card_0.png') }}">
+                                <img src="{{ asset('image/credit-card_0.png') }}">
                                 <img src="{{ asset('image/credit-card_5.png') }}">
-                                <img src="{{ asset('image/credit-card_6.png') }}"> --}}
+                                <img src="{{ asset('image/credit-card_6.png') }}">
+                                <img src="{{ asset('image/credit-card_14.png') }}">
                                 </div>
 
                                 <div class="tab1_05">
-                                有効期限が残り100日以上のクレジットカード（Visa/Mastercard{{--  JCB/Diners Club/American Express --}}）でご利用いただけます。<br>
+                                有効期限が残り100日以上のクレジットカード（Visa/Mastercard/JCB/American Express/Diners Club/Discover）でご利用いただけます。<br>
                                 デビットカード・プリペイドカードの利用は推奨しておりません。<br>
                                 利用される場合は注意事項を必ずご確認ください。<br>
                                 このクレジットカード情報は当社では保持いたしません。<br>
