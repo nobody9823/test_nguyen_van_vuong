@@ -14,6 +14,7 @@ use App\Http\Controllers\User\MyProjectController;
 use App\Http\Controllers\User\MyPlanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\RegisterController;
+use App\Http\Controllers\User\SupporterController;
 
 //---------------------projects-----------------------------------------------
 Route::get('/', [ProjectController::class, 'index'])->name('index');
@@ -25,7 +26,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/selectPlans/{plan?}', [ProjectController::class, 'selectPlans'])->name('plan.selectPlans')->middleware('CheckProjectIsPublished');
     Route::post('plan/confirmPayment', [ProjectController::class, 'confirmPayment'])->name('plan.confirmPayment');
     Route::get('plan/prepare_for_payment', [ProjectController::class, 'prepareForPayment'])->name('plan.prepare_for_payment');
-    Route::get('plan/{payment}/paymentForPayJp', [ProjectController::class, 'paymentForPayJp'])->name('plan.paymentForPayJp');
+    Route::get('plan/{payment}/payment_for_credit', [ProjectController::class, 'paymentForCredit'])->name('plan.payment_for_credit');
     Route::get('plan/{payment}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
     Route::post('comment', [CommentController::class, 'store'])->name('comment.store')->middleware('project.released');
@@ -48,7 +49,7 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::delete('delete_plan/{plan}', [MyPlanController::class, 'deletePlan']);
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
             Route::resource('comment', CommentController::class)->only(['index', 'destroy']);
-            Route::resource('report', ReportController::class)->only(['index', 'create', 'store', 'edit', 'update']);
+            Route::resource('report', ReportController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update']);
             Route::post('reply/{comment}', [ReplyController::class, 'store'])->name('reply.store');
             Route::resource('reply', ReplyController::class)->only(['destroy']);
         });
@@ -62,6 +63,7 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::get('message/{payment}', [MessageController::class, 'showByExecutor'])->name('my_project.message.show');
         Route::post('message/{payment}', [MessageController::class, 'storeByExecutor'])->name('my_project.message_content.store');
         Route::get('message/{message_content}/file_download', [MessageController::class, 'fileDownloadByExecutor'])->name('my_project.message_content.file_download');
+        Route::resource('{project}/supporter', SupporterController::class)->only(['index']);
     });
     Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_amount');
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
@@ -105,7 +107,7 @@ Route::post('/send_reset_password_mail', [PasswordResetController::class, 'sendR
 Route::get('/password_reset/{token}', [PasswordResetController::class, 'reset'])->name('password.reset');
 Route::post('/password_reset', [PasswordResetController::class, 'update'])->name('password.update');
 
-// --------------------inqury-------------------
+// --------------------inquiry-------------------
 Route::get('/inquiry/create', [InquiryController::class, 'createInquiry'])->name('inquiry.create');
 Route::post('/inquiry/send', [InquiryController::class, 'sendInquiry'])->name('inquiry.send');
 

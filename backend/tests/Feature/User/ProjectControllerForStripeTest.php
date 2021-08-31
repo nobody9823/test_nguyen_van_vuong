@@ -15,7 +15,7 @@ use App\Traits\UniqueToken;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Config;
 
-class ProjectControllerForPayJpTest extends TestCase
+class ProjectControllerForStripeTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -23,7 +23,7 @@ class ProjectControllerForPayJpTest extends TestCase
     {
         parent::setUp();
 
-        Config::set('app.card_payment_api', 'payjp');
+        Config::set('app.card_payment_api', 'stripe');
 
         $this->creator = User::factory()->hasProfile()->create();
 
@@ -49,70 +49,64 @@ class ProjectControllerForPayJpTest extends TestCase
             'limit_of_supporters' => 50
         ])->create();
 
-        \Payjp\Payjp::setApiKey(config('app.pay_jp_secret'));
+        $this->stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
 
         $params = [
+            'type' => 'card',
             'card' => [
-                "number" => "4242424242424242",
-                "exp_month" => "12",
-                "exp_year" => "2024",
+                'number' => '4242424242424242',
+                'exp_month' => '12',
+                'exp_year' => '2024',
+                'cvc' => '314',
             ]
         ];
 
-        $this->success_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
+        $this->success_payment_methods = $this->stripe->paymentMethods->create($params);
 
         $params = [
+            'type' => 'card',
             'card' => [
-                "number" => "4000000000080319",
-                "exp_month" => "12",
-                "exp_year" => "2024",
+                'number' => '4000000000000341',
+                'exp_month' => '12',
+                'exp_year' => '2024',
+                'cvc' => '314',
             ]
         ];
 
-        $this->fail_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
+        $this->fail_payment_methods = $this->stripe->paymentMethods->create($params);
 
         $this->success_payment = Payment::factory()->state([
             'project_id' => $this->project->id,
             'user_id' => $this->supporter->id,
             'price' => $this->plan->price,
             'message_status' => 'ステータスなし',
-            'payment_way' => 'PayJp',
+            'payment_way' => 'Stripe',
             'payment_is_finished' => false,
             'remarks' => 'test remarks'
         ])->create();
 
         $this->success_payment->paymentToken()->save(PaymentToken::factory()->state([
-            'token' => $this->success_token->id,
+            'token' => $this->success_payment_methods->id,
         ])->make());
-
-        $params = [
-            'card' => [
-                "number" => "4000000000080319",
-                "exp_month" => "12",
-                "exp_year" => "2024",
-            ]
-        ];
-
-        $this->fail_token = \Payjp\Token::create($params, $options = ['payjp_direct_token_generate' => 'true']);
 
         $this->fail_payment = Payment::factory()->state([
             'project_id' => $this->project->id,
             'user_id' => $this->supporter->id,
             'price' => $this->plan->price,
             'message_status' => 'ステータスなし',
-            'payment_way' => 'PayJp',
+            'payment_way' => 'Stripe',
             'payment_is_finished' => false,
             'remarks' => 'test remarks'
         ])->create();
 
         $this->fail_payment->paymentToken()->save(PaymentToken::factory()->state([
-            'token' => $this->fail_token->id
+            'token' => $this->fail_payment_methods->id,
         ])->make());
 
         $this->url = "project/{$this->project->id}/plan/confirmPayment";
     }
 
-    public function testPaymentForPayJpActionIsSuccess()
+    public function testPaymentForStripeActionIsSuccess()
     {
         $this->withoutExceptionHandling();
         $response = $this->actingAs($this->supporter)
@@ -128,7 +122,7 @@ class ProjectControllerForPayJpTest extends TestCase
         $this->assertSame(1, $payment->payment_is_finished);
     }
 
-    public function testPaymentForPayJpActionIsFail()
+    public function testPaymentForStripeActionIsFail()
     {
         $this->withoutExceptionHandling();
         $this->expectException(Exception::class);

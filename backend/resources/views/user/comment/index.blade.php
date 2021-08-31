@@ -19,15 +19,17 @@
             @foreach($comments as $key => $comment)
             <div class="prof_page_base inner_item">
                 <div class="comment_page">
-                <div class="prof_edit_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
+                {{-- <div class="prof_edit_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}"> --}}
+                <div class="comment_wrapper" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
+                  <div style="display: flex; min-width: 80%;">
                     <img src="{{ Storage::url(optional($comment->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
                     <div class="comment_content">{{ $comment->content }}<br>
                         <div>
                         <span>{{ $comment->user->name }}&emsp;</span>
                         <span>{{ $comment->created_at->format('Y年m月d日 H:i') }}</span>
                         </div>
-
                     </div>
+                  </div>
                     <div class="comment_icons">
                         @if(!$comment->reply)
                         <i class="fas fa-reply fa-2x fa-fw" style="cursor: pointer" id="{{ 'open_modal_'.$key }}" onclick="toggleModal(this.id)"></i>&emsp;
@@ -119,7 +121,7 @@ button{
 }
 
 .comment_content {
-  width: 75%;
+  width: 100%;
   line-height: 20px;
   margin-top: 15px;
   white-space: pre-line;
@@ -134,6 +136,7 @@ button{
 .comment_icons {
   color: #00AEBD;
   display: flex;
+  font-size: 12px;
 }
 
 .comment_content span:first-child {
@@ -158,13 +161,20 @@ button{
   .comment_content div {
     font-size: 77%;
   }
-  .comment_icons{
-    position: relative;
-    left: calc(100% - 60px);
-    font-size: 60%;
-    bottom: 60px;
-  }
 }
+
+.comment_wrapper {
+  font-size: 1.6rem;
+  padding: 10px 0;
+  min-height: 75px;
+  border-bottom: solid 1px #00AEBD;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.comment_wrapper img{ height: 48px; width: 48px;}
 
 /* モーダルウィンドウ */
 .modal_area {

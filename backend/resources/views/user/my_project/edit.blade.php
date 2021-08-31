@@ -67,7 +67,7 @@
         <section style="{{ Request::get('next_tab') === 'visual' ? '' : 'display: none;' }}" id="visual_section" class="my_project_section def_inner inner_item">
             <x-user.my_project.visual :project="$project" :projectImages="$project->projectFiles()->where('file_content_type', 'image_url')->get()" :projectVideo="$project->projectFiles()->where('file_content_type', 'video_url')->first()" />
         </section>
-        <section style="{{ Request::get('next_tab') === 'return' ? '' : 'display: none;' }}" id="return_section" class="my_project_section">
+        <section style="{{ Request::get('next_tab') === 'return' ? '' : 'display: none;' }}" id="return_section" class="my_project_section def_inner inner_item">
             <x-user.my_project.return :project="$project" />
         </section>
         <section style="{{ Request::get('next_tab') === 'ps_return' ? '' : 'display: none;' }}" id="ps_return_section" class="my_project_section def_inner inner_item">

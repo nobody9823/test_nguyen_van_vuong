@@ -24,9 +24,9 @@
                 </a>
             </div>
             <section id="pc-top_04" class="section_base">
-                <div class="img_box_02">
+                <div class="my_project_container">
                     @foreach($projects as $project)
-                    <div class="img_box_02_item my_project_img_box_wrapper">
+                    <div class="my_project_img_box_wrapper">
                         <div class="ib02_01 E-font my_project_img_wrapper">
                             <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}">
                                 @if ($project->projectFiles()->where('file_content_type', 'image_url')->count() > 0)
@@ -43,24 +43,30 @@
                                 <div>
                                 ({{ $project->release_status === ProjectReleaseStatus::getValue('Default') ? '申請前' : $project->release_status }})
                                 </div>
-                                @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
-                                    <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
-                                        @csrf
-                                        <button type="submit" class="my_project_apply disable-btn">
-                                            <p style="font-weight: bold;color: #fff;">申請する</p>
-                                        </button>
-                                    </form>
-                                @endif
+                                <div class="my_project_apply_wrapper">
+                                    @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
+                                    <div class="def_btn my_project_apply">
+                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
+                                            @csrf
+                                            申請する
+                                            <button type="submit" class="cover_link disable-btn">
+                                            </button>
+                                        </form>
+                                    </div>
+                                    @endif
 
-                                @if ($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack'))
-                                    <form action="{{ route('user.my_project.project.destroy', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="my_project_apply disable-btn">
-                                            <p style="font-weight: bold;color: #fff;">削除する</p>
-                                        </button>
-                                    </form>
-                                @endif
+                                    @if ($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack'))
+                                    <div class="def_btn my_project_apply">
+                                        <form action="{{ route('user.my_project.project.destroy', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
+                                            @csrf
+                                            @method('DELETE')
+                                            削除する
+                                            <button type="submit" class="cover_link disable-btn">
+                                            </button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                </div>
                             </div>
 
                             <div class="ib02_03">
@@ -71,7 +77,7 @@
                             </div>
                         </div>
 
-                        <div class="pds_sec02_01_btn">
+                        <div class="def_btn">
                             @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
                             編集
                             {{-- NOTICE: MyProjectController, edit action --}}
