@@ -400,29 +400,6 @@ class ProjectController extends Controller
         return view('user.project.search', compact('projects', 'tags', 'user_liked'));
     }
 
-    public function consultProject()
-    {
-        return view('user.consult_project');
-    }
-
-    public function consultProjectSend(ConsultProjectSendRequest $request)
-    {
-        DB::beginTransaction();
-        try {
-            Auth::user()->saveProfile($request->all());
-            Auth::user()->saveAddress($request->all());
-            // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
-            Mail::to(config('mail.customer_support.address'))->send(new ConsultProject($request->all()));
-            DB::commit();
-            return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
-        } catch (Exception $e) {
-            DB::rollBack();
-            // NOTICE Slackにログを送信できるみたいなので今後時間があったら実装してみても良いかもしれないです。
-            Log::error($e->getMessage(), $e->getTrace());
-            return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");
-        }
-    }
-
     public function ProjectLiked(Request $request)
     {
         $project = Project::where('id', $request->project_id)->first();
