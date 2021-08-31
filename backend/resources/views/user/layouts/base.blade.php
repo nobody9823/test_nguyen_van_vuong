@@ -195,22 +195,10 @@ if(isiOS) {
 					<p class="nav_btn_tit_L">メッセージ一覧</p>
 				</a>
 			</li>
-
-			<li id="menu-item-2" class="menu-item menu-item-2 nav_btn menu-item-has-children taso_li menuset_06">
-					<a href="#" id="top_menu-3" data-megamenu="js-megamenu3" class=" nav_btn_link taso_li_a">
-						<label for="item_c_3" class="item_c">
-							<div>
-							<p class="nav_btn_tit_L">プロジェクト</p>
-							</div>
-						</label>
-					</a>
-				<input type="checkbox" id="item_c_3" style="display:none;">
-				<input type="checkbox" id="ta_menu-3"><label for="ta_menu-3" class="taso_li_a_label"><span class="pd"><i class="fas fa-chevron-down"></i></span></label>
-					<ul class="taso_ul pri_W_b taso_ul_ko" style="background: #fff; padding: 10px 10px 0 10px;">
-						<li class="taso_li taso_li_ko ninki_tag_li">
-							<div class="pbb_01_link" style="border-bottom: none;">マイプロジェクト管理<i class="fas fa-chevron-right"></i><a href="{{ route('user.my_project.project.index') }}" class="cover_link"></a></div>
-						</li>
-					</ul>
+			<li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.my_project.project.index') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">マイプロジェクト管理</p>
+				</a>
 			</li>
 
 			<li class="menu-item nav_btn taso_li menuset_06">
@@ -319,80 +307,8 @@ if(isiOS) {
 
     @yield('content')
 
-    <footer>
-        <div class="footer_main">
-            <div class="footer_main_inner">
-                {{-- <div class="footer_main_01">
-                    <div class="footer_tit">プロジェクトをさがす</div>
-                    <div class="footer_item"><a href="★">カテゴリ</a></div>
-                    <div class="footer_item"><a href="★">テキストテキスト</a></div>
-                    <div class="footer_item"><a href="★">テキストテキストテキストテキスト</a></div>
-                    <div class="footer_item"><a href="★">テキストテキスト</a></div>
-                    <div class="footer_item"><a href="★">テキストテキストテキストテキストテキストテキスト</a></div>
-                    <div class="footer_item"><a href="★">テキストテキスト</a></div>
-                    <div class="footer_item"><a href="★">テキストテキストテキストテキスト</a></div>
-                </div> --}}
+    <x-user.footer />
 
-                <div class="footer_main_02">
-                    <div class="footer_tit">プロジェクトをはじめる</div>
-                    {{-- <div class="footer_item"><a href="★">プロジェクト掲載</a></div> --}}
-                    <div class="footer_item"><a href="{{ route('user.my_project.project.index') }}">プロジェクトを作る</a></div>
-                </div>
-
-                <div class="footer_main_03">
-                    <div class="footer_tit">fanreturnについて</div>
-                    {{-- <div class="footer_item"><a href="★">fanreturnとは</a></div>
-                    <div class="footer_item"><a href="★">クラウドファンティングとは</a></div>
-                    <div class="footer_item"><a href="★">ヘルプ</a></div>
-                    <div class="footer_item"><a href="★">お問い合わせ</a></div> --}}
-                    <div class="footer_item"><a href="{{ route('user.terms_of_service') }}">利用規約</a></div>
-                    <div class="footer_item"><a href="{{ route('user.ps_terms_of_service') }}">プロジェクトサポーター利用規約</a></div>
-                    <div class="footer_item"><a href="{{ route('user.privacy_policy') }}">プライバシーポリシー</a></div>
-                    <div class="footer_item"><a href="{{ route('user.trade_law') }}">特定商取引法に基づく表記</a></div>
-                    <div class="footer_item"><a href="{{ route('user.inquiry.create') }}">お問い合わせ</a></div>
-                    {{-- <div class="footer_item"><a href="★">情報セキュリティ方針</a></div>
-                    <div class="footer_item"><a href="★">反社基本方針</a></div> --}}
-                    {{-- <div class="footer_sns_icon">
-                        <a href="★"><img class="" src="{{ asset('image/sns_01.svg') }}"></a>
-                        <a href="★"><img class="" src="{{ asset('image/sns_02.svg') }}"></a>
-                        <a href="★"><img class="" src="{{ asset('image/sns_03.svg') }}"></a>
-                    </div> --}}
-                </div>
-            </div><!--/.footer_inner-->
-        </div><!--/.footer_main-->
-
-        <div class="footer_under">
-            <div class="footer_under_inner">
-                <div class="footer_logo">
-                    <img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
-                </div>
-                <ul class="footer_list">
-                    <li><a href="{{ route('user.my_project.project.index') }}">はじめる</a></li>
-                    <li><a href="{{ route('user.search') }}">さがす</a></li>
-                    <li><a href="{{ route('user.question') }}">ファンリターンとは</a></li>
-
-                    @guest('web')
-                    <li>
-                        <div class="menuset_03 wm_login_btn">
-                            <a href="{{ route('login') }}">
-                                ログイン
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="menuset_03 wm_signup_btn">
-                            <a href="{{ route('user.pre_create') }}">
-                                新規登録
-                            </a>
-                        </div>
-                    </li>
-                    @endguest
-
-                </ul>
-            </div><!--/.footer_inner-->
-        </div><!--/.footer_under-->
-
-    </footer>
     <p id="page-top_btn">
         <a href="#wrapper"><i class="fas fa-chevron-circle-up"></i></a>
     </p>

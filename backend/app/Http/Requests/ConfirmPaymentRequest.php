@@ -34,7 +34,7 @@ class ConfirmPaymentRequest extends FormRequest
     {
         return [
             'payment_way' => ['required', 'string'],
-            'payjp_token' => [Rule::requiredIf($request->payment_way === "credit")],
+            'payment_method_id' => [Rule::requiredIf($request->payment_way === "credit")],
             'plans' => ['required', new CheckPlanAmount($this)],
             'plans.*.quantity' => ['required', 'integer'],
             'total_amount' => ['required', 'integer'],
@@ -61,14 +61,13 @@ class ConfirmPaymentRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if ($this->has('phone_number')){
+        if ($this->has('phone_number')) {
             $this->phone_number = (string) $this->phone_number;
         }
-        if ($this->has('postal_code')){
+        if ($this->has('postal_code')) {
             $this->postal_code = (string) $this->postal_code;
         }
-        if ($this->input('birth_day') && $this->input('birth_month') && $this->input('birth_year'))
-        {
+        if ($this->input('birth_day') && $this->input('birth_month') && $this->input('birth_year')) {
             $birthDate = implode('-', $this->only(['birth_year', 'birth_month', 'birth_day']));
             $this->merge([
                 $birth_day =  new Carbon($birthDate),
@@ -84,9 +83,9 @@ class ConfirmPaymentRequest extends FormRequest
     {
         throw new HttpResponseException(
             redirect()
-            ->route('user.plan.selectPlans', ['project' => $this->route('project'), 'inviter_code' => $this->inviter_code ?? ''])
-            ->withErrors($validator)
-            ->withInput()
+                ->route('user.plan.selectPlans', ['project' => $this->route('project'), 'inviter_code' => $this->inviter_code ?? ''])
+                ->withErrors($validator)
+                ->withInput()
         );
     }
 

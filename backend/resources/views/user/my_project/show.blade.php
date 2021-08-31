@@ -148,6 +148,11 @@
                                         </div>
                                     </div><!--/su_pr_02--> --}}
                                 </div>
+                            <div class="tit_L01 E-font">
+                                <div class="sub_tit_L">
+                                    <a href="{{ route('user.supporter.index', ['project' => $project]) }}">支援者一覧</a>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>

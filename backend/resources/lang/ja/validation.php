@@ -195,7 +195,7 @@ return [
         'introduction' => '自己紹介',
         'remarks' => '備考欄',
         'comments' => '任意コメント',
-        'payjp_token' => 'クレジットカード情報',
+        'payment_method_id' => 'クレジットカード情報',
         'title' => 'タイトル',
         'content' => '本文',
         'tags' => 'タグ',

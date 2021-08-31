@@ -27,8 +27,8 @@ class ProjectSeeder extends Seeder
     public function run()
     {
         Project::truncate();
-        Project::insert(Project::factory()->init(40, rand(1, 50), rand(1, 10)));
-        Project::where('release_status', '掲載中')->get()->each(function(Project $project){
+        Project::insert(Project::factory()->init(40, 50, 10));
+        Project::where('release_status', '掲載中')->get()->each(function (Project $project) {
             ProjectFile::insert(ProjectFile::factory()->init(rand(1, 10), $project->id));
             Report::insert(Report::factory()->init(rand(1, 10), $project->id));
             Plan::insert(Plan::factory()->init(rand(1, 10), $project->id));
@@ -38,7 +38,7 @@ class ProjectSeeder extends Seeder
             $project->supportedUsers()->attach(User::inRandomOrder()->take(random_int(1, 10))->get()->pluck('id'));
         });
 
-        Project::where('release_status', '!=', '掲載中')->get()->each(function(Project $project){
+        Project::where('release_status', '!=', '掲載中')->get()->each(function (Project $project) {
             ProjectFile::insert(ProjectFile::factory()->init(rand(1, 10), $project->id));
             Report::insert(Report::factory()->init(rand(1, 10), $project->id));
             Plan::insert(Plan::factory()->init(rand(1, 10), $project->id));

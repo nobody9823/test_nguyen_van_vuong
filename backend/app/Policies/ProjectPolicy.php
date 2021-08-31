@@ -35,6 +35,15 @@ class ProjectPolicy
             return false;
         }
     }
+    
+    public function checkOwnProjectWithPublishedStatusForRepoert(User $user, Project $project)
+    {
+        if(($project->release_status === "掲載中" || $project->release_status === "掲載停止中") && ($user->id === $project->user_id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function checkIsFinishedPayment(User $user, Project $project)
     {

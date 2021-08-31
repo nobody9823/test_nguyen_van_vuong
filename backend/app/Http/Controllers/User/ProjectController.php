@@ -15,7 +15,7 @@ use App\Models\Comment;
 use App\Models\Profile;
 use App\Models\Address;
 use Carbon\Carbon;
-use App\Actions\PayJp\PayJpInterface;
+use App\Actions\CardPayment\CardPaymentInterface;
 use App\Actions\PayPay\PayPayInterface;
 use App\Http\Requests\ConfirmPaymentRequest;
 use App\Http\Requests\ConsultProjectSendRequest;
@@ -36,13 +36,13 @@ use Mail;
 
 class ProjectController extends Controller
 {
-    public function __construct(PayJpInterface $pay_jp_interface, PayPayInterface $pay_pay_interface, Payment $payment, Comment $comment, Plan $plan)
+    public function __construct(CardPaymentInterface $card_payment_interface, PayPayInterface $pay_pay_interface, Payment $payment, Comment $comment, Plan $plan)
     {
         $this->middleware(function ($request, $next) {
             $this->user = \Auth::user();
             return $next($request);
         });
-        $this->pay_jp = $pay_jp_interface;
+        $this->card_payment = $card_payment_interface;
 
         $this->pay_pay = $pay_pay_interface;
 
@@ -128,7 +128,7 @@ class ProjectController extends Controller
 
         return view('user.project.show', [
             'inviter_code' => $this->inviter_code,
-            'project' => $project->getLoadPaymentsCountAndSumPrice()->loadComments(),
+            'project' => $project->getLoadPaymentsCountAndSumPrice()->loadOtherRelations(),
         ]);
     }
 
@@ -227,7 +227,7 @@ class ProjectController extends Controller
                     'inviter_id' => !empty($validated_request['inviter_code']) && !empty($inviter) ? $inviter->id : null,
                     'price' => $validated_request['total_amount'],
                     'message_status' => "ステータスなし",
-                    'payment_way' => !empty($validated_request['payjp_token']) ? 'PayJp' : 'PayPay',
+                    'payment_way' => !empty($validated_request['payment_method_id']) ? $this->card_payment->getPaymentApiName() : 'PayPay',
                     'payment_is_finished' => false
                 ],
                 $request->all()
@@ -241,7 +241,7 @@ class ProjectController extends Controller
             $this->plan->updatePlansByIds($plans, $validated_request['plans']);
             $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
             $payment->paymentToken()->save(PaymentToken::make([
-                'token' => !empty($validated_request['payjp_token']) ? $validated_request['payjp_token'] : $unique_token,
+                'token' => !empty($validated_request['payment_method_id']) ? $validated_request['payment_method_id'] : $unique_token,
             ]));
             DB::commit();
         } catch (\Exception $e) {
@@ -250,7 +250,7 @@ class ProjectController extends Controller
         }
 
         if ($validated_request['payment_way'] === 'credit') {
-            return redirect()->action([ProjectController::class, 'paymentForPayJp'], ['project' => $project, 'payment' => $payment]);
+            return redirect()->action([ProjectController::class, 'paymentForCredit'], ['project' => $project, 'payment' => $payment]);
         } elseif ($validated_request['payment_way'] === 'paypay') {
             return redirect()->away($qr_code['data']['url']);
         }
@@ -264,17 +264,19 @@ class ProjectController extends Controller
      *
      *@return \Illuminate\Http\Response
      */
-    public function paymentForPayJp(Project $project, Payment $payment)
+    public function paymentForCredit(Project $project, Payment $payment)
     {
-        $response = $this->pay_jp->Payment($payment->price, $payment->paymentToken->token);
+        $response = $this->card_payment->charge($payment->price, $payment->paymentToken->token);
         DB::beginTransaction();
         try {
             $payment->payment_is_finished = true;
+            $payment->paymentToken->token = $response->id;
             $payment->save();
+            $payment->paymentToken->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            $this->pay_jp->Refund($response->id);
+            $this->card_payment->refund($response->id);
             throw $e;
         }
         $this->user->notify(new PaymentNotification($project, $payment));
@@ -396,29 +398,6 @@ class ProjectController extends Controller
         $projects = $projectsQuery->GetReleasedProject()->with('tags')->getWithPaymentsCountAndSumPrice()->paginate(12);
 
         return view('user.project.search', compact('projects', 'tags', 'user_liked'));
-    }
-
-    public function consultProject()
-    {
-        return view('user.consult_project');
-    }
-
-    public function consultProjectSend(ConsultProjectSendRequest $request)
-    {
-        DB::beginTransaction();
-        try {
-            Auth::user()->saveProfile($request->all());
-            Auth::user()->saveAddress($request->all());
-            // NOTICE ここは通知用は送信専用のメールアドレスにして受信用と分けるかどうか要確認
-            Mail::to(config('mail.customer_support.address'))->send(new ConsultProject($request->all()));
-            DB::commit();
-            return redirect()->route('user.profile')->with('flash_message', 'プロジェクトの掲載申請が完了いたしました。');
-        } catch (Exception $e) {
-            DB::rollBack();
-            // NOTICE Slackにログを送信できるみたいなので今後時間があったら実装してみても良いかもしれないです。
-            Log::error($e->getMessage(), $e->getTrace());
-            return redirect()->route('user.consult_project')->withErrors("プロジェクト掲載申請に失敗しました。管理者にお問い合わせください。");
-        }
     }
 
     public function ProjectLiked(Request $request)

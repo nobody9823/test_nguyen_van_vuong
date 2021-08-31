@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
@@ -48,13 +49,15 @@ class UserFactory extends Factory
 
     public function init(int $count)
     {
-        for ($i = 0; $i < $count; $i ++){
+        for ($i = 0; $i < $count; $i ++) {
             $this->values[] = [
                 'name' => $this->faker->name,
                 'email' => $this->faker->unique()->safeEmail,
                 'email_verified_at' => now(),
                 'password' => 'password',
                 'remember_token' => Str::random(10),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
         return $this->values;
