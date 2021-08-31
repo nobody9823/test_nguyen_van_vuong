@@ -16,8 +16,17 @@
         </div>
 
         <div class="prof_page_R scrollable">
+            <div>
+                <div class="send_btn my_project_apply">
+                    <form action="{{ route('user.supporter', ['project' => $project]) }}" method="POST" onsubmit="">
+                        @csrf
+                        発送済みにする
+                        <button type="submit" class="cover_link disable-btn"></button>
+                </div>
+            </div>
             <table>
                 <tr>
+                    <th>発送状況</th>
                     <th>支援者名</th>
                     <th>住所</th>
                     <th>メールアドレス</th>
@@ -26,6 +35,16 @@
                 @if($project->payments)
                     @foreach($project->payments as $payment)
                     <tr class="edit_row">
+                        <td>
+                            @if ($payment->is_sent)
+                                発送済み
+                            @else
+                                <input type="checkbox" id="payment_{{ $payment->id }}" class="ac_list_checks" name="payment_ids[]" value="{{ $payment->id }}">
+                                <label for="payment_{{ $payment->id }}" class="checkbox-fan">
+                                    発送待ち
+                                </label>
+                            @endif
+                        </td>
                         <td class="supporter_name">
                             <div id="supporter_name_{{ $payment->id }}" style="display: none;">コピーしました。</div>
                             <a onClick="copyText.copy(this, 'supporter_name_{{ $payment->id }}')">
@@ -82,6 +101,7 @@
                     @endforeach
                 @endif
             </table>
+            </form>
         </div>
     </div>
 </section>
