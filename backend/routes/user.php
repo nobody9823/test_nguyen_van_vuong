@@ -75,10 +75,6 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/withdraw', [MypageController::class, 'withdraw'])->name('withdraw');
     Route::delete('/withdraw/{user}', [MypageController::class, 'delete_user'])->name('delete_user');
 
-    //---------------------Project掲載依頼-----------------------------------------------
-    Route::get('/consult_project', [ProjectController::class, 'consultProject'])->name('consult_project');
-    Route::post('/consult_project', [ProjectController::class, 'consultProjectSend'])->name('consult_project.send');
-
     //---------------------メッセージ一覧-----------------------------------------------
     Route::get('message/{selected_message?}', [MessageController::class, 'index'])->name('message.index');
     Route::get('message/{payment}', [MessageController::class, 'show'])->name('message.show');

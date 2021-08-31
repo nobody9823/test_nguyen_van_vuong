@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\ProjectFile;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -45,7 +46,6 @@ class ProjectFileFactory extends Factory
 
     public function init(int $count, int $project_id)
     {
-
         $image_file = [
             'file_url' => 'public/sampleImage/now_printing.png',
             'file_content_type' => 'image_url',
@@ -61,11 +61,13 @@ class ProjectFileFactory extends Factory
             $video_file
         ]);
 
-        for ($i = 0; $i < $count; $i ++){
+        for ($i = 0; $i < $count; $i ++) {
             $this->values[] = [
                 'project_id' => $project_id,
                 'file_url' => $file_faker['file_url'],
                 'file_content_type' => $file_faker['file_content_type'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
         return $this->values;
