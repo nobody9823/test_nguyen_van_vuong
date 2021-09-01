@@ -15,6 +15,7 @@ use App\Http\Controllers\User\MyPlanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\SupporterController;
+use App\Http\Controllers\User\SendToSupporterController;
 
 //---------------------projects-----------------------------------------------
 Route::get('/', [ProjectController::class, 'index'])->name('index');
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::resource('report', ReportController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update']);
             Route::post('reply/{comment}', [ReplyController::class, 'store'])->name('reply.store');
             Route::resource('reply', ReplyController::class)->only(['destroy']);
+            Route::post('send_to_supporter', SendToSupporterController::class)->name('send_to_supporter');
         });
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
