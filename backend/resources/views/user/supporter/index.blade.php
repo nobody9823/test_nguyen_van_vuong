@@ -18,7 +18,7 @@
         <div class="prof_page_R scrollable">
             <div>
                 <div class="send_btn my_project_apply">
-                    <form action="{{ route('user.supporter', ['project' => $project]) }}" method="POST" onsubmit="">
+                    <form action="{{ route('user.send_to_supporter', ['project' => $project]) }}" method="POST">
                         @csrf
                         発送済みにする
                         <button type="submit" class="cover_link disable-btn"></button>
