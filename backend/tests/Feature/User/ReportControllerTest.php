@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\Report;
+use App\Models\Payment;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,6 +28,11 @@ class ReportControllerTest extends TestCase
         ])->create();
 
         $this->report = Report::factory()->state([
+            'project_id' => $this->project->id
+        ])->create();
+
+        $this->payment = Payment::factory()->state([
+            'user_id' => $this->user,
             'project_id' => $this->project->id
         ])->create();
 
@@ -73,5 +79,17 @@ class ReportControllerTest extends TestCase
                          ->from(route('user.report.create', ['project' => $this->project]))
                          ->post(route('user.report.store', ['project' => $this->project]), $this->data);
         $response->assertRedirect(route('user.report.index', ['project' => $this->project]));
+    }
+
+    public function testShowAction()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.project.show', ['project' => $this->project]))
+                         ->get(route('user.report.show', ['project' => $this->project, 'report' => $this->report]));
+        $response->assertOk()
+                 ->assertViewIs('user.report.show')
+                 ->assertViewHas(['project','report']);
     }
 }
