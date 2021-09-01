@@ -29,7 +29,7 @@ class ReportControllerTest extends TestCase
 
         $this->report = Report::factory()->state([
             'project_id' => $this->project->id
-        ])->create();
+        ])->create(); 
 
         $this->payment = Payment::factory()->state([
             'user_id' => $this->user,
@@ -43,6 +43,8 @@ class ReportControllerTest extends TestCase
             'content' => $this->report->content,
             'image_url' => UploadedFile::fake()->image('avatar.jpeg'),
         ];
+
+        $this->data_for_delete = array_merge($this->data, array('delete'=>'delete'));
     }
 
 
@@ -84,7 +86,7 @@ class ReportControllerTest extends TestCase
     public function testShowAction()
     {
         $this->withoutExceptionHandling();
-
+ 
         $response = $this->actingAs($this->user)
                          ->from(route('user.project.show', ['project' => $this->project]))
                          ->get(route('user.report.show', ['project' => $this->project, 'report' => $this->report]));
@@ -109,10 +111,24 @@ class ReportControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
         Storage::fake('avatars');
-        
+
         $response = $this->actingAs($this->user)
                          ->from(route('user.report.edit', ['project' => $this->project, 'report' => $this->report]))
-                         ->put(route('user.report.update', ['project' => $this->project, 'report' => $this->report]), $this->data);
+                         ->put(route('user.report.update', ['project' => $this->project, 'report' => $this->report]),$this->data);
         $response->assertRedirect(route('user.report.index', ['project' => $this->project]));
+    }
+    
+    public function testDeleteAction()
+    {
+        $this->withoutExceptionHandling();
+        Storage::fake('avatars');
+
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.report.edit', ['project' => $this->project, 'report' => $this->report]))
+                         ->put(route('user.report.update', ['project' => $this->project, 'report' => $this->report]),
+                         $this->data_for_delete);
+        $response->assertRedirect(route('user.report.index', ['project' => $this->project]));
+        $this->assertSoftDeleted($this->report)
+             ->assertEquals(0, Report::count());
     }
 }
