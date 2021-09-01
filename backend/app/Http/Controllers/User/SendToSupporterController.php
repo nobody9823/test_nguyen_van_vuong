@@ -14,7 +14,7 @@ class SendToSupporterController extends Controller
     {
         DB::beginTransaction();
         try {
-            Payment::whereIn('id', $request->payment_ids)->update(['is_sent' => true]);
+            $project->payments()->whereIn('id', $request->payment_ids)->update(['is_sent' => true]);
             DB::commit();
             return redirect()->action([SupporterController::class, 'index'], ['project' => $project])->with(['flash_message' => '発送済みに変更しました。']);
         } catch (\Exception $e) {
