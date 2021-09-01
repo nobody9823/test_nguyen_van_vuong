@@ -27,7 +27,7 @@ class SendToSupporterRequest extends FormRequest
     {
         return [
             'payment_ids' => ['nullable', 'array', new PaymentHasSameProjectId($request)],
-            'payment_ids.*' => ['nullable', 'int'],
+            'payment_ids.*' => ['nullable', 'integer'],
         ];
     }
 
