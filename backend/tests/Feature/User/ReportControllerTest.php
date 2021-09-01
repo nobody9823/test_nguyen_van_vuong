@@ -92,4 +92,16 @@ class ReportControllerTest extends TestCase
                  ->assertViewIs('user.report.show')
                  ->assertViewHas(['project','report']);
     }
+
+    public function testEditAction()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.report.index', ['project' => $this->project]))
+                         ->get(route('user.report.edit', ['project' => $this->project, 'report' => $this->report]));
+        $response->assertOk()
+                 ->assertViewIs('user.report.edit')
+                 ->assertViewHas(['project','report']);
+    }
 }
