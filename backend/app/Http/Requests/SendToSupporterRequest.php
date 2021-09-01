@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PaymentHasSameProjectId;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class SendToSupporterRequest extends FormRequest
 {
@@ -21,11 +23,18 @@ class SendToSupporterRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
-            'payment_ids' => ['nullable', 'array'],
+            'payment_ids' => ['nullable', 'array', new PaymentHasSameProjectId($request)],
             'payment_ids.*' => ['nullable', 'int'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'payment_ids' => '決済情報'
         ];
     }
 }
