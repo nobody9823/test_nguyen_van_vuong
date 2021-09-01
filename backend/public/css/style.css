@@ -1089,6 +1089,7 @@ input[type=radio]:checked + .radio-fan::after {
 .def_inner{ width: 100%; max-width: 1000px; margin: 0 auto; padding-top: 50px; padding-bottom: 50px;}
 .def_textarea{width: 100%; border: solid 1px #DBDBDB; border-radius: 4px;}
 .def_btn{width: 100%; max-width: 400px; font-size: 1.8rem; font-weight: bold; text-align: center; padding: 15px; background: #00AEBD; margin: 15px auto 15px auto; position: relative; color: #fff; border-radius: 6px;}
+.send_btn{width: 100%; max-width: 160px; font-size: 1.8rem; font-weight: bold; text-align: center; padding: 15px; background: #00AEBD; margin: 15px auto 15px auto; position: relative; color: #fff; border-radius: 6px;}
 .def_btn_02{width: 100%; max-width: 400px; font-size: 1.8rem; font-weight: bold; text-align: center; padding: 15px; background: #fff; margin: 0 auto 15px auto; position: relative; color: #00AEBD; border-radius: 6px; border: solid 1px #00AEBD;}
 .def_input_50p{ width: 50%; height: 47px; padding: 10px; border: solid 1px #DBDBDB; border-radius: 4px;font-size: 1.6rem;}
 .def_input_50p::placeholder{ color: #ddd;font-size: 1.4rem;}
