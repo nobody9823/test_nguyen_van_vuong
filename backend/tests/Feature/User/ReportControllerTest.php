@@ -104,4 +104,15 @@ class ReportControllerTest extends TestCase
                  ->assertViewIs('user.report.edit')
                  ->assertViewHas(['project','report']);
     }
+
+    public function testUpdateAction()
+    {
+        $this->withoutExceptionHandling();
+        Storage::fake('avatars');
+        
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.report.edit', ['project' => $this->project, 'report' => $this->report]))
+                         ->put(route('user.report.update', ['project' => $this->project, 'report' => $this->report]), $this->data);
+        $response->assertRedirect(route('user.report.index', ['project' => $this->project]));
+    }
 }
