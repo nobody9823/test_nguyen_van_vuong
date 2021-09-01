@@ -28,7 +28,8 @@ class ReportControllerTest extends TestCase
         ])->create();
 
         $this->report = Report::factory()->state([
-            'project_id' => $this->project->id
+            'project_id' => $this->project->id,
+            'image_url' => 'public/sampleImage/test.jpg'
         ])->create(); 
 
         $this->payment = Payment::factory()->state([
@@ -107,7 +108,7 @@ class ReportControllerTest extends TestCase
                  ->assertViewHas(['project','report']);
     }
 
-    public function testUpdateAction()
+    public function testUpdateActionForUpdate()
     {
         $this->withoutExceptionHandling();
         Storage::fake('avatars');
@@ -118,7 +119,7 @@ class ReportControllerTest extends TestCase
         $response->assertRedirect(route('user.report.index', ['project' => $this->project]));
     }
     
-    public function testDeleteAction()
+    public function testUpdateActionForDelete()
     {
         $this->withoutExceptionHandling();
         Storage::fake('avatars');
