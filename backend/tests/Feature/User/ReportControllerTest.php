@@ -4,10 +4,12 @@ namespace Tests\Feature\User;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\Report;
-use Tests\TestCase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class ReportControllerTest extends TestCase
 {
@@ -27,6 +29,14 @@ class ReportControllerTest extends TestCase
         $this->report = Report::factory()->state([
             'project_id' => $this->project->id
         ])->create();
+
+        $this->data = 
+        [
+            'project_id' => $this->report->project_id,
+            'title' => $this->report->title,
+            'content' => $this->report->content,
+            'image_url' => UploadedFile::fake()->image('avatar.jpeg'),
+        ];
     }
 
 
@@ -52,5 +62,16 @@ class ReportControllerTest extends TestCase
         $response->assertOk()
                  ->assertViewIs('user.report.create')
                  ->assertViewHas('project');
+    }
+
+    public function testStoreAction()
+    {
+        $this->withoutExceptionHandling();
+        Storage::fake('avatars');
+        
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.report.create', ['project' => $this->project]))
+                         ->post(route('user.report.store', ['project' => $this->project]), $this->data);
+        $response->assertRedirect(route('user.report.index', ['project' => $this->project]));
     }
 }
