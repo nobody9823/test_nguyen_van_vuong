@@ -176,8 +176,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\AdminLoginServiceProvider::class,
-        App\Providers\TalentLoginServiceProvider::class,
-        App\Providers\CompanyLoginServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
         App\Providers\SlackServiceProvider::class,
         App\Providers\DateFormatServiceProvider::class,

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Curator;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -35,7 +36,7 @@ class CuratorFactory extends Factory
 
     public function valleyin()
     {
-        return $this->state(function (array $attribute){
+        return $this->state(function (array $attribute) {
             return [
                 'name' => 'valleyin',
                 'email' => 'test@valleyin.co.jp',
@@ -47,13 +48,15 @@ class CuratorFactory extends Factory
 
     public function init(int $count)
     {
-        for($i = 0; $i < $count; $i++){
+        for ($i = 0; $i < $count; $i++) {
             $this->values[] = [
                 'name' => $this->faker->name,
                 'email' => $this->faker->unique()->safeEmail,
                 'email_verified_at' => now(),
                 'password' => 'password',
-                'remember_token' => Str::random(10)
+                'remember_token' => Str::random(10),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
         return $this->values;

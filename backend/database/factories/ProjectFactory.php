@@ -59,12 +59,12 @@ class ProjectFactory extends Factory
         });
     }
 
-    public function init(int $count, int $user_id, int $curator_id)
+    public function init(int $count, int $user_id_to, int $curator_id_to)
     {
-        for ($i = 0; $i < $count; $i ++){
+        for ($i = 0; $i < $count; $i ++) {
             $this->values[] = [
-                'user_id' => $user_id,
-                'curator_id' => $curator_id,
+                'user_id' => rand(1, $user_id_to),
+                'curator_id' => rand(1, $curator_id_to),
                 'title' => Arr::random([
                     'インフルエンサーの「やりたい」が叶う”それがファンリターン',
                     'インフルエンサーの「やりたい」が叶う”それがファンリターン',
@@ -83,6 +83,8 @@ class ProjectFactory extends Factory
                     ProjectReleaseStatus::getValues()
                 ),
                 'target_amount' => $this->faker->numberBetween(10000, 99999999),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
         return $this->values;

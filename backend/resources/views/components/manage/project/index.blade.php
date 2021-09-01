@@ -76,8 +76,7 @@
     @else
     <table class="table">
         <tr>
-            <th style="width:5%"><input name='checkbox' type="checkbox" id='checkbox_parent'
-                    {{ old('checkbox')?'checked':'' }}>選択</th>
+            <th style="width:5%"><input name='checkbox' type="checkbox" id='checkbox_parent' {{ old('checkbox')?'checked':'' }}>選択</th>
             <th style="width:5%">ID</th>
             <th style="width:20%">タイトル</th>
             <th style="width:10%">ユーザー名</th>
@@ -315,7 +314,7 @@
     <script type="text/javascript">
         window.addEventListener('DOMContentLoaded', () => {
             checkChecked('#operate_projects_button',".checkbox");
-            allCheckboxToggle('#checkbox_parent',".checkbox");
+            allCheckBoxToggle('#checkbox_parent',".checkbox");
         });
     </script>
     

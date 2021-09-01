@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Report;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -37,7 +38,7 @@ class ReportFactory extends Factory
 
     public function init(int $count, int $project_id)
     {
-        for($i = 1; $i < $count; $i++){
+        for ($i = 1; $i < $count; $i++) {
             $this->values[] = [
                 'project_id' => $project_id,
                 'title' => Arr::random([
@@ -46,6 +47,8 @@ class ReportFactory extends Factory
                 ]),
                 'content' => 'ご覧頂き有難うございます。このプロジェクトが良いなと思ったらぜひお近くの人にも紹介してください。次回をお楽しみに',
                 'image_url' => 'public/sampleImage/reportImageSample.jpg',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
         return $this->values;
