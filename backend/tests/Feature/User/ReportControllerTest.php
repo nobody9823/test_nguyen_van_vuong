@@ -29,7 +29,7 @@ class ReportControllerTest extends TestCase
 
         $this->report = Report::factory()->state([
             'project_id' => $this->project->id,
-            'image_url' => 'public/sampleImage/test.jpg'
+            'image_url' => UploadedFile::fake()->image('avatar.jpeg')
         ])->create(); 
 
         $this->payment = Payment::factory()->state([
@@ -42,7 +42,7 @@ class ReportControllerTest extends TestCase
             'project_id' => $this->report->project_id,
             'title' => $this->report->title,
             'content' => $this->report->content,
-            'image_url' => UploadedFile::fake()->image('avatar.jpeg'),
+            'image_url' => UploadedFile::fake()->image('avatar.jpeg')
         ];
 
         $this->data_for_delete = array_merge($this->data, array('delete'=>'delete'));
