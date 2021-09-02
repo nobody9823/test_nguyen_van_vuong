@@ -14,6 +14,7 @@ use App\Models\Address;
 use App\Models\Profile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Exception;
 
 class SupporterControllerTest extends TestCase
 {
@@ -61,6 +62,7 @@ class SupporterControllerTest extends TestCase
 
         $this->project = $this->user->projects()->first();
     }
+
     /**
      * A basic feature test example.
      *
@@ -73,5 +75,14 @@ class SupporterControllerTest extends TestCase
         $response = $this->actingAs($this->user)->get(route('user.supporter.index', ['project' => $this->project]));
 
         $response->assertStatus(200);
+    }
+
+    public function testUserSupporterIndexPageIsFailBecauseOfNotOwnProject()
+    {
+        $this->withoutExceptionHandling();
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('This action is unauthorized.');
+
+        ($this->actingAs($this->user)->get(route('user.supporter.index', ['project' => Project::inRandomOrder()->first()])))->execute(1);
     }
 }

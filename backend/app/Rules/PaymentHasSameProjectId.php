@@ -14,9 +14,7 @@ class PaymentHasSameProjectId implements Rule
      */
     public function __construct($request)
     {
-        $this->payments = Payment::whereIn('id', $request->payment_ids)->get();
-
-        $this->project = $request->route('project');
+        $this->request = $request;
     }
 
     /**
@@ -28,15 +26,7 @@ class PaymentHasSameProjectId implements Rule
      */
     public function passes($attribute, $value)
     {
-        foreach ($this->payments as $payment){
-            if($payment->project_id !== $this->project->id)
-            {
-                return false;
-            } else {
-                break;
-            }
-        }
-        return true;
+        return Payment::find($value)->project_id === $this->request->route('project')->id;
     }
 
     /**
