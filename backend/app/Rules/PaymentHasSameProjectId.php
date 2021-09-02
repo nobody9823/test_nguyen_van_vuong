@@ -26,7 +26,7 @@ class PaymentHasSameProjectId implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Payment::find($value)->id !== $this->request->route('project')->id;
+        return Payment::find($value)->project_id === $this->request->route('project')->id;
     }
 
     /**
