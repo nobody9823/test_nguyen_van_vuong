@@ -44,12 +44,24 @@ class MypageControllerTest extends TestCase
     public function testPaymentHistory()
     {
         $this->withoutExceptionHandling();
-        
+
         $response = $this->actingAs($this->user)
                          ->from(route('user.profile'))
                          ->get(route('user.payment_history'));
         $response->assertOk()
                  ->assertViewIs('user.mypage.payment')
                  ->assertViewHas(['payments' ,'project']);
+    }
+
+    public function testContributionComments()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.profile'))
+                         ->get(route('user.contribution_comments'));
+        $response->assertOk()
+                 ->assertViewIs('user.mypage.comment')
+                 ->assertViewHas('comments');
     }
 }
