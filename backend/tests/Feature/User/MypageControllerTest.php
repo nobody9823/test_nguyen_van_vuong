@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\SnsLink;
+use App\Models\Profile;
+use App\Models\Address;
 use App\Models\Project;
 use App\Models\Payment;
 use App\Models\PaymentToken;
@@ -19,7 +22,20 @@ class MypageControllerTest extends TestCase
     {
         parent::setUp();
 
+        // ダミーデータの記述方法を後で変更する（楠本の個人的なメモです）
         $this->user = User::factory()->create();
+
+        $this->sns_link = SnsLink::factory()->state([
+            'user_id' => $this->user->id,            
+        ])->create();
+
+        $this->profile = Profile::factory()->state([
+            'user_id' => $this->user->id,
+        ])->create();
+
+        $this->address = Address::factory()->state([
+            'user_id' => $this->user->id,
+        ])->create();
 
         $this->project = Project::factory()->state([
             'user_id' => $this->user->id,
@@ -43,7 +59,7 @@ class MypageControllerTest extends TestCase
 
     public function testPaymentHistory()
     {
-        $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling(); 
 
         $response = $this->actingAs($this->user)
                          ->from(route('user.profile'))
@@ -87,5 +103,17 @@ class MypageControllerTest extends TestCase
         $response->assertOk()
                  ->assertViewIs('user.mypage.liked_project')
                  ->assertViewHas(['projects', 'user_liked']);
+    }
+
+    public function testProfile()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.index'))
+                         ->get(route('user.profile'));
+        $response->assertOk()
+                 ->assertViewIs('user.mypage.profile')
+                 ->assertViewHas('user');
     }
 }
