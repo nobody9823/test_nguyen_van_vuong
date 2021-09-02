@@ -76,4 +76,16 @@ class MypageControllerTest extends TestCase
                  ->assertViewIs('user.mypage.project')
                  ->assertViewHas('projects');
     }
+
+    public function testLikedProjects()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.profile'))
+                         ->get(route('user.liked_projects'));
+        $response->assertOk()
+                 ->assertViewIs('user.mypage.liked_project')
+                 ->assertViewHas(['projects', 'user_liked']);
+    }
 }
