@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Actions\CardPayment\CardPaymentInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserProfileRequest;
 use App\Models\User;
@@ -13,7 +14,6 @@ use App\Models\Plan;
 use App\Models\PlanPaymentIncluded;
 use App\Models\Project;
 use App\Models\UserProjectLiked;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +24,10 @@ use Log;
 
 class MypageController extends Controller
 {
+    public function __construct(CardPaymentInterface $card_payment_interface)
+    {
+        $this->card_payment = $card_payment_interface;
+    }
     /**
      * Handle the incoming request.
      *
@@ -112,6 +116,22 @@ class MypageController extends Controller
         return $user->delete()
             ? redirect('/')->with('flash_message', '退会が完了しました。またのご利用をお待ちしております。')
             : redirect()->back()->with('flash_message', '退会手続きに失敗しました。');
+    }
+
+    public function setConnectedAccount(Request $request)
+    {
+        if (isset(Auth::user()->identification->connected_account_id)) {
+            $account = $this->card_payment->updateExternalAccount(Auth::id(), $request['bankToken']);
+        } else {
+            $this->card_payment->createConnectedAccount(Auth::id(), $request->ip());
+            $this->card_payment->updateExternalAccount(Auth::id(), $request['bankToken']);
+            $file = $this->card_payment->createIdentityDocument(Auth::id());
+            $account = $this->card_payment->attachIdentityDocument(Auth::id(), $file['id']);
+            Auth::user()->identification->connected_account_id = $account['id'];
+            Auth::user()->identification->save();
+        }
+
+        return $account;
     }
 
     public function commission()

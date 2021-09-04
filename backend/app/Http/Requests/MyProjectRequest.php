@@ -40,7 +40,7 @@ class MyProjectRequest extends FormRequest
             'image_url.*' => ['nullable', 'array'],
             'image_url.*.*' => ['nullable', 'image'],
             'video_url' => ['nullable', 'url', 'regex:#(https?\:\/\/)(www\.youtube\.com\/watch\?v=|youtu\.be\/)+[\S]{11}#'],
-            'target_amount' => ['nullable', 'integer', 'min:10000','max:99999999'],
+            'target_amount' => ['nullable', 'integer', 'min:10000', 'max:99999999'],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', /*'after_or_equal:+14 day'*/],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', new MyProjectEndDate($this->route('project'))],
             'reward_by_total_amount' => ['nullable', 'string', 'max:100000'],
@@ -54,6 +54,7 @@ class MyProjectRequest extends FormRequest
             'prefecture' => ['nullable', 'string'],
             'city' => ['nullable', 'string', 'max:100'],
             'block' => ['nullable', 'string', 'max:100'],
+            'block_number' => ['nullable', 'string', 'max:100'],
             'building' => ['nullable', 'string'],
             'birthday'  => ['nullable', 'string', 'date_format:Y-m-d'],
             'bank_code' => ['nullable', 'string', 'size:4'],
@@ -140,6 +141,10 @@ class MyProjectRequest extends FormRequest
             $this->merge(['building' => ""]);
         }
 
+        if ($this->has('block_number') && is_null($this->input('block_number'))) {
+            $this->merge(['block_number' => ""]);
+        }
+
         if ($this->current_tab === 'identification') {
             if (!$this->filled('first_name_kana')) {
                 $this->merge([
@@ -207,7 +212,7 @@ class MyProjectRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        if ($this->expectsJson()){
+        if ($this->expectsJson()) {
             throw new HttpResponseException(
                 response()->json(['message' => $validator->errors()->toArray()])
             );
@@ -260,7 +265,6 @@ class MyProjectRequest extends FormRequest
                 $redirect_route
             );
         }
-
     }
 
     public function passedValidation()

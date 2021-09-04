@@ -21,6 +21,7 @@ class Identification extends Model
         'account_name',
         'identify_image_1',
         'identify_image_2',
+        'connected_account_id',
     ];
 
     protected $dates = ['deleted_at'];

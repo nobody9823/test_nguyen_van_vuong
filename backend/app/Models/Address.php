@@ -17,22 +17,25 @@ class Address extends Model
         "prefecture",
         "city",
         "block",
+        "block_number",
         "building",
     ];
 
     protected $dates = ['deleted_at'];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 
-    public function getPrefNameAttribute() {
-        return config('prefecture.'.$this->prefecture_id);
+    public function getPrefNameAttribute()
+    {
+        return config('prefecture.' . $this->prefecture_id);
     }
 
     public function getFormattedPostalCodeAttribute()
     {
-        return substr($this->postal_code ,0,3) . "-" . substr($this->postal_code ,3);
+        return substr($this->postal_code, 0, 3) . "-" . substr($this->postal_code, 3);
     }
 
     public function getFullAddressAttribute()
@@ -47,6 +50,7 @@ class Address extends Model
             'prefecture' => '東京都',
             'city' => '',
             'block' => '',
+            'block_number' => '',
             'building' => ''
         ]);
     }

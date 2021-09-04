@@ -110,6 +110,49 @@
     }
 </script>
 {{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    accountNumber = document.getElementById('accountNumber');
+    holderName = document.getElementById('holderName');
+    bankCode = document.getElementById('bankCode');
+    branchCode = document.getElementById('branchCode');
+    const createBankAccountToken = () => {
+        console.log(bankCode.value + branchCode.value);
+        var stripe = Stripe('{{ config("app.stripe_key") }}');
+        stripe.createToken('bank_account', {
+                country: 'JP',
+                currency: 'jpy',
+                routing_number: bankCode.value + branchCode.value,
+                account_number: accountNumber.value,
+                account_holder_name: holderName.value,
+                account_holder_type: 'individual',
+            })
+            .then(function(result) {
+                console.log(result);
+                console.log(result.token.id);
+                axios.post('/set_connected_account', {bankToken: result.token.id})
+                    .then((res) => {
+                        console.log(res);
+                    })
+                    .catch((res) => {
+                        console.log(res);
+                    });
+                // Handle result.error or result.token
+            });
+    }
+    accountNumber.addEventListener('change', () => {
+        createBankAccountToken();
+    });
+    holderName.addEventListener('change', () => {
+        createBankAccountToken();
+    });
+    bankCode.addEventListener('change', () => {
+        createBankAccountToken();
+    });
+    branchCode.addEventListener('change', () => {
+        createBankAccountToken();
+    });
+</script>
 <script>
 tinymce.init({
     selector: '.tiny_editor',

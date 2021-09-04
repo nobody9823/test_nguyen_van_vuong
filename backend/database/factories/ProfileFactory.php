@@ -36,7 +36,7 @@ class ProfileFactory extends Factory
                 'その他'
             ]),
             'introduction' => $this->faker->realText(50),
-            'phone_number' => $this->faker->numberBetween(10000000000, 99999999999),
+            'phone_number' => '080' . $this->faker->numberBetween(00000000, 99999999),
             'birthday_is_published' => $this->faker->boolean(50),
             'gender_is_published' => $this->faker->boolean(50),
             'image_url' => 'public/sampleImage/my-page.svg',

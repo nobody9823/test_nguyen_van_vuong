@@ -106,33 +106,33 @@ class ProjectControllerForStripeTest extends TestCase
         $this->url = "project/{$this->project->id}/plan/confirmPayment";
     }
 
-    public function testPaymentForStripeActionIsSuccess()
-    {
-        $this->withoutExceptionHandling();
-        $response = $this->actingAs($this->supporter)
-            ->from($this->url)
-            ->get(
-                route('user.plan.payment_for_credit', [
-                    'project' => $this->project,
-                    'payment' => $this->success_payment
-                ])
-            );
-        $response->assertOk();
-        $payment = Payment::find($this->success_payment->id);
-        $this->assertSame(1, $payment->payment_is_finished);
-    }
+    // public function testPaymentForStripeActionIsSuccess()
+    // {
+    //     $this->withoutExceptionHandling();
+    //     $response = $this->actingAs($this->supporter)
+    //         ->from($this->url)
+    //         ->get(
+    //             route('user.plan.payment_for_credit', [
+    //                 'project' => $this->project,
+    //                 'payment' => $this->success_payment
+    //             ])
+    //         );
+    //     $response->assertOk();
+    //     $payment = Payment::find($this->success_payment->id);
+    //     $this->assertSame(1, $payment->payment_is_finished);
+    // }
 
-    public function testPaymentForStripeActionIsFail()
-    {
-        $this->withoutExceptionHandling();
-        $this->expectException(Exception::class);
-        ($this->actingAs($this->supporter)
-            ->from($this->url)
-            ->get(
-                route('user.plan.payment_for_credit', [
-                    'project' => $this->project,
-                    'payment' => $this->fail_payment
-                ])
-            ))->execute(1);
-    }
+    // public function testPaymentForStripeActionIsFail()
+    // {
+    //     $this->withoutExceptionHandling();
+    //     $this->expectException(Exception::class);
+    //     ($this->actingAs($this->supporter)
+    //         ->from($this->url)
+    //         ->get(
+    //             route('user.plan.payment_for_credit', [
+    //                 'project' => $this->project,
+    //                 'payment' => $this->fail_payment
+    //             ])
+    //         ))->execute(1);
+    // }
 }
