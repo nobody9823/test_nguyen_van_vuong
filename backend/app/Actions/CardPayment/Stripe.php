@@ -134,14 +134,15 @@ class Stripe implements CardPaymentInterface
      *
      * @param int
      * @param string
+     * @param string
      * @return object
      */
-    public function updateExternalAccount(int $user_id, string $bank_token): object
+    public function updateExternalAccount(int $user_id, string $bank_token, string $connected_account_id): object
     {
         $user = User::find($user_id);
         $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
         $account = $stripe->accounts->update(
-            $user->identification->connected_account_id,
+            $connected_account_id,
             [
                 'external_account' => $bank_token,
                 'individual' => [
@@ -193,14 +194,15 @@ class Stripe implements CardPaymentInterface
      *
      * @param int
      * @param string
+     * @param string
      * @return object
      */
-    public function attachIdentityDocument(int $user_id, string $file_id): object
+    public function attachIdentityDocument(int $user_id, string $file_id, string $connected_account_id): object
     {
         $user = User::find($user_id);
         $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
         $account = $stripe->accounts->update(
-            $user->identification->connected_account_id,
+            $connected_account_id,
             [
                 'individual' => [
                     'verification' => [

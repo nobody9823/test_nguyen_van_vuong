@@ -38,9 +38,10 @@ interface CardPaymentInterface
      *
      * @param int
      * @param string
+     * @param string
      * @return object
      */
-    public function updateExternalAccount(int $user_id, string $bank_token): object;
+    public function updateExternalAccount(int $user_id, string $bank_token, string $connected_account_id): object;
 
     /**
      * Create identity document file
@@ -55,9 +56,10 @@ interface CardPaymentInterface
      *
      * @param int
      * @param string
+     * @param string
      * @return object
      */
-    public function attachIdentityDocument(int $user_id, string $file_id): object;
+    public function attachIdentityDocument(int $user_id, string $file_id, string $connected_account_id): object;
 
     /**
      * Get payment api name

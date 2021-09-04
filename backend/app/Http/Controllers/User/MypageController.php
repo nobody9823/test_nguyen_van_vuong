@@ -121,12 +121,12 @@ class MypageController extends Controller
     public function setConnectedAccount(Request $request)
     {
         if (isset(Auth::user()->identification->connected_account_id)) {
-            $account = $this->card_payment->updateExternalAccount(Auth::id(), $request['bankToken']);
+            $account = $this->card_payment->updateExternalAccount(Auth::id(), $request['bankToken'], Auth::user()->identification->connected_account_id);
         } else {
-            $this->card_payment->createConnectedAccount(Auth::id(), $request->ip());
-            $this->card_payment->updateExternalAccount(Auth::id(), $request['bankToken']);
+            $account = $this->card_payment->createConnectedAccount(Auth::id(), $request->ip());
+            $account = $this->card_payment->updateExternalAccount(Auth::id(), $request['bankToken'], $account['id']);
             $file = $this->card_payment->createIdentityDocument(Auth::id());
-            $account = $this->card_payment->attachIdentityDocument(Auth::id(), $file['id']);
+            $account = $this->card_payment->attachIdentityDocument(Auth::id(), $file['id'], $account['id']);
             Auth::user()->identification->connected_account_id = $account['id'];
             Auth::user()->identification->save();
         }
