@@ -141,8 +141,37 @@ class Project extends Model
     // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        return $query->withCount('payments')->withSum('payments', 'price');
+        // return $query->withCount('payments')->withSum('payments', 'price');
+
+        // こちらは動きそうで動かないコード
+        // $query->withCount(['payments' => function ($query) {
+        //     $query->select('user_id')->groupBy('user_id');
+        // }]);
+        
+        // 正式な支援者数は取得できるが、WithCountの様にカラムとして追加はできない。
+        // $query
+        // ->join('payments', 'payments.project_id', '=', 'projects.id')
+        // ->select('payments.user_id')
+        // ->groupBy('payments.user_id')
+        // ->get();
+
+        // こちらを使用すれば、正確な支援者数を算出できる。ViewとControllerで処理を分ける方法。
+        // 下記のpaymentsUserCount()メソッドを使ってView側で呼び出す。
+        //Controller
+        // $projects = $query->with('payments')->get();
+
+        // //View
+        // foreach($projects as $project) {
+        //     $test = $project->payments->groupBy('user_id')->count();
+        //     dd($test);
+        // }
     }
+
+    
+    // Public function paymentsUserCount()
+    // {
+    //     return $this->payments->groupBy('user_id')->count();
+    // }
 
     public function getLoadPaymentsCountAndSumPrice()
     {
