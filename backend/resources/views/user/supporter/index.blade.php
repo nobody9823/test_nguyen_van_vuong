@@ -4,7 +4,6 @@
 
 @section('content')
 <section id="supported-projects" class="section_base">
-
     <div class="tit_L_01 E-font">
         <h2>SUPPORTERS</h2>
         <div class="sub_tit_L">支援者一覧</div>
@@ -46,27 +45,21 @@
                             @endif
                         </td>
                         <td class="supporter_name">
-                            <div id="supporter_name_{{ $payment->id }}" style="display: none;">コピーしました。</div>
-                            <a onClick="copyText.copy(this, 'supporter_name_{{ $payment->id }}')">
-                                {{ $payment->user->name }}
-                            </a>
+                            <span>{{ $payment->user->name }}</span>
+                            <i class="fas fa-copy" style="cursor: pointer" onclick="copyInnerText(this.previousElementSibling);displayToast('success','','コピーが完了しました。')"></i>
                         </td>
                         <td>
-                            <div id="supporter_address_{{ $payment->id }}" style="display: none;">コピーしました。</div>
-                            <a onClick="copyText.copy(this, 'supporter_address_{{ $payment->id }}')">
-                                <p>
-                                    <span class="formatted_postal_code">
-                                        {{ $payment->user->address->formatted_postal_code }}
-                                    </span><br>
-                                    {{ $payment->user->address->full_address }}
-                                </p>
-                            </a>
+                            <span class="formatted_postal_code">
+                                {{ $payment->user->address->formatted_postal_code }}<br>
+                                {{ $payment->user->address->full_address }}
+                            </span>
+                            <i class="fas fa-copy" style="cursor: pointer" onclick="copyInnerText(this.previousElementSibling);displayToast('success','','コピーが完了しました。')"></i>
                         </td>
                         <td>
-                            <div id="supporter_email_{{ $payment->id }}" style="display: none;">コピーしました。</div>
-                            <a onClick="copyText.copy(this, 'supporter_email_{{ $payment->id }}')">
+                            <span>
                                 {{ $payment->user->email }}
-                            </a>
+                            </span>
+                            <i class="fas fa-copy" style="cursor: pointer" onclick="copyInnerText(this.previousElementSibling);displayToast('success','','コピーが完了しました。')"></i>
                         </td>
                         <td>
                             <a onClick="display.planDetail({{ $payment->id }})"><p class="accordion__title" style="font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px; white-space: nowrap;">一覧</p></a>
@@ -108,5 +101,7 @@
 @endsection
 @section('script')
 <script src={{ asset('/js/copyText.js') }}></script>
-<script src={{ asset('/js/display.js') }}></scrip>
+<script src={{ asset('/js/copy-inner-text.js') }}></script>
+<script src={{ asset('/js/display.js') }}></script>
+<script src={{ asset('/js/display-toast.js') }}></script>
 @endsection
