@@ -125,8 +125,8 @@ class MypageController extends Controller
         } else {
             $account = $this->card_payment->createConnectedAccount(Auth::id(), $request->ip());
             $account = $this->card_payment->updateExternalAccount(Auth::id(), $request['bankToken'], $account['id']);
-            $file = $this->card_payment->createIdentityDocument(Auth::id());
-            $account = $this->card_payment->attachIdentityDocument(Auth::id(), $file['id'], $account['id']);
+            // $file = $this->card_payment->createIdentityDocument(Auth::id());
+            // $account = $this->card_payment->attachIdentityDocument(Auth::id(), $file['id'], $account['id']);
             Auth::user()->identification->connected_account_id = $account['id'];
             Auth::user()->identification->save();
         }
