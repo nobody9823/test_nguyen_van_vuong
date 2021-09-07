@@ -13,6 +13,8 @@ use App\Models\Project;
 use App\Models\Payment;
 use App\Models\PaymentToken;
 use App\Models\Plan;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class MypageControllerTest extends TestCase
 {
@@ -55,6 +57,25 @@ class MypageControllerTest extends TestCase
         ])->create();
 
         $this->payment->includedPlans()->attach($this->plan->id ,['quantity' => 1]);
+
+        // $this->data =
+        // [
+        // "name" => "山田 太郎",
+        // "email" => "test@valleyin.co.jp",
+        // "email_confirmation" => "test@valleyin.co.jp",
+        // "password" => "test1234",
+        // "image_url" => UploadedFile::fake()->image('avatar.jpeg'),
+        // "gender" => "男性",
+        // "gender_is_published" => "1",
+        // "introduction" => "自己紹介文",
+        // "birthday" => [
+        //     "year" => "2021",
+        //     "month" => "1",
+        //     "day" => "1",
+        // ],
+        // "birthday_is_published" => "1",
+        // "birthday" => "2021-01-01"
+        // ];
     }
 
     public function testPaymentHistory()
@@ -115,5 +136,16 @@ class MypageControllerTest extends TestCase
         $response->assertOk()
                  ->assertViewIs('user.mypage.profile')
                  ->assertViewHas('user');
+    }
+
+    public function testUpdateProfile()
+    {
+        $this->withoutExceptionHandling();
+        Storage::fake('avatars');
+
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.profile'))
+                         ->patch(route('user.update_profile',['user' => $this->user]), $this->data);
+        $response->assertRedirect(route('user.profile'));
     }
 }
