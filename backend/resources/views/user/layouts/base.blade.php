@@ -25,10 +25,14 @@ if(isiOS) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+{{-- toastr読み込み --}}
+<script src={{ asset("js/toastr.min.js") }}></script>
+{{-- toastr読み込み --}}
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" rel="stylesheet">
-
+<link rel='stylesheet' href={{ asset('css/toastr.min.css') }} />
 <link href="{{ asset('css/reset.css') }}" type="text/css" rel="stylesheet">
 <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
 @yield('css')
@@ -259,7 +263,6 @@ if(isiOS) {
 			</li>
             @endauth
 			<!--▲ ★★★ログイン時-->
-
 		</ul>
 	</nav>
 
@@ -330,6 +333,28 @@ $(window).on('load', function(){
     } else {
     //768pxより大きい時の処理
     }
+    // toastr読み込み
+    $(function() {
+        //ドキュメントロード時に、toastr のオプションを設定する
+        toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+        }
+    });
+    // toastr読み込み
 });
 
 /**nav**/
