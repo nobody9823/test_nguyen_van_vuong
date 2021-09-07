@@ -58,6 +58,19 @@ class MyProjectController extends Controller
     public function create()
     {
         $project = $this->user->projects()->save(Project::initialize());
+        if (!isset(Auth::user()->identification->connected_account_id)) {
+            DB::beginTransaction();
+            try {
+                $account = $this->card_payment->createConnectedAccount(\Request::ip());
+                Auth::user()->identification->connected_account_id = $account['id'];
+                Auth::user()->identification->save();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                Log::alert($e->getMessage());
+                return redirect()->back()->withErrors('サーバーエラーが発生しました。管理者にお問い合わせください。');
+            }
+        }
 
         return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with('attention_message', '※申請には本人確認が必須となります。早めにご記入ください。');
     }

@@ -80,39 +80,15 @@ class Stripe implements CardPaymentInterface
     /**
      * Create connected account
      *
-     * @param int
      * @param string
      * @return object
      */
-    public function createConnectedAccount(int $user_id, string $ip): object
+    public function createConnectedAccount(string $ip): object
     {
-        $user = User::find($user_id);
         $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
         $account = $stripe->accounts->create([
             'type' => 'custom',
             'business_type' => 'individual',
-            'individual' => [
-                'first_name_kana' => $user->profile->first_name_kana,
-                'first_name_kanji' => $user->profile->first_name,
-                'last_name_kana' => $user->profile->last_name_kana,
-                'last_name_kanji' => $user->profile->last_name,
-                'dob' => [
-                    'day' => $user->profile->getDayOfBirth(),
-                    'month' => $user->profile->getMonthOfBirth(),
-                    'year' => $user->profile->getYearOfBirth(),
-                ],
-                'email' => $user->email,
-                'phone' => $user->profile->parse_phone_number,
-                'address_kana' => [
-                    'postal_code' => $user->address->postal_code,
-                    'line1' => $user->address->block_number,
-                ],
-                'address_kanji' => [
-                    'postal_code' => $user->address->postal_code,
-                    'town' => $user->address->block,
-                    'line1' => $user->address->block_number,
-                ],
-            ],
             'business_profile' => [
                 'product_description' => 'SNS等を活用し、商品やプロデュースを行って対価を頂く',
                 'url' => 'https://fanreturn.com',
@@ -137,12 +113,12 @@ class Stripe implements CardPaymentInterface
      * @param string
      * @return object
      */
-    public function updateExternalAccount(int $user_id, string $bank_token, string $connected_account_id): object
+    public function updateExternalAccount(int $user_id, string $bank_token): object
     {
         $user = User::find($user_id);
         $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
         $account = $stripe->accounts->update(
-            $connected_account_id,
+            $user->identification->connected_account_id,
             [
                 'external_account' => $bank_token,
                 'individual' => [
