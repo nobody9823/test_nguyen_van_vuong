@@ -90,9 +90,9 @@ class Stripe implements CardPaymentInterface
             'type' => 'custom',
             'business_type' => 'individual',
             'business_profile' => [
-                'product_description' => 'SNS等を活用し、商品やプロデュースを行って対価を頂く',
+                'product_description' => 'インターネットを介して支援者から資金を調達し、リターンとして商品やサービスなどを対価として提供する',
                 'url' => 'https://fanreturn.com',
-                'mcc' => '1520',
+                'mcc' => '6012',
             ],
             'capabilities' => [
                 'transfers' => ['requested' => true],
