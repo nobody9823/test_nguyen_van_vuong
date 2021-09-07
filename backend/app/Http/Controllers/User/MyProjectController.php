@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Actions\CardPayment\CardPaymentInterface;
 use App\Http\Controllers\Controller;
 use App\Services\Project\ProjectService;
 use App\Http\Requests\MyProjectRequest;
@@ -27,12 +28,14 @@ class MyProjectController extends Controller
 
     protected $my_project_tab_service;
 
-    public function __construct(ProjectService $project_service, EditMyProjectTabService $my_project_tab_service)
+    public function __construct(CardPaymentInterface $card_payment, ProjectService $project_service, EditMyProjectTabService $my_project_tab_service)
     {
         $this->middleware(function ($request, $next) {
             $this->user = \Auth::user();
             return $next($request);
         });
+
+        $this->card_payment = $card_payment;
 
         $this->project_service = $project_service;
 
