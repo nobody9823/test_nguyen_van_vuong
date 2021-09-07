@@ -2650,7 +2650,7 @@ div.spinner-wrapper {
 }
 
 .supporters .edit_row {
-    font-size: 0.8vw;
+    font-size: 12px;
     padding: 10px 0;
     min-height: 75px;
     display: flex;
