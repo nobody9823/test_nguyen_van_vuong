@@ -67,26 +67,23 @@
                     </tr>
                     <tr class="plan_detail">
                         <td id="display_plan_detail_{{ $payment->id }}" style="display:none;" colspan="4">
-                            <div id="supporter_plan_detail_{{ $payment->id }}" style="display: none;">コピーしました。</div>
                             <ul>
                                 @foreach($payment->includedPlans as $plan)
-                                    <a onClick="copyText.copy(this, 'supporter_plan_detail_{{ $payment->id }}')">
-                                        <li>
-                                            タイトル : {{ $plan->title }}
-                                        </li>
-                                        <li>
-                                            {{ $plan->content }}
-                                        </li>
-                                        <li>
-                                            価格 : {{ $plan->price }}
-                                        </li>
-                                        <li>
-                                            お届け予定日：{{ $plan->delivery_date }}
-                                        </li>
-                                        <li>
-                                            個数：{{ $plan->pivot->quantity }}
-                                        </li>
-                                    </a>
+                                    <li>
+                                        タイトル : {{ $plan->title }}
+                                    </li>
+                                    <li>
+                                        {{ $plan->content }}
+                                    </li>
+                                    <li>
+                                        価格 : {{ $plan->price }}
+                                    </li>
+                                    <li>
+                                        お届け予定日：{{ $plan->delivery_date }}
+                                    </li>
+                                    <li>
+                                        個数：{{ $plan->pivot->quantity }}
+                                    </li>
                                 @endforeach
                             </ul>
                         </td>
@@ -100,7 +97,6 @@
 </section>
 @endsection
 @section('script')
-<script src={{ asset('/js/copyText.js') }}></script>
 <script src={{ asset('/js/copy-inner-text.js') }}></script>
 <script src={{ asset('/js/display.js') }}></script>
 <script src={{ asset('/js/display-toast.js') }}></script>
