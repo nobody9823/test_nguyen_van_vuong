@@ -78,8 +78,16 @@ const updateMyProject = (() => {
         document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'block';
 
         axios.post(`/my_project/uploadProject/${projectId}`, data).then(res => {
-            console.log(res);
             if(res.data.result === true){
+                console.log(res);
+                toastr["clear"]();
+                var pastDue = res.data.account.requirements.past_due
+                if (pastDue.length) {
+                    displayIndividualStatus(pastDue);
+                } else {
+                    toastr["success"]('本人確認情報の登録完了');
+                }
+
                 document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
                 displayIcon(document.getElementById('saved_' + Object.keys(data)[0]));
             } else if (res.data.message !== undefined) {

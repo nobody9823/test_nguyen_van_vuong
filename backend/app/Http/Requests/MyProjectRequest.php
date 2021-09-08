@@ -346,11 +346,12 @@ class MyProjectRequest extends FormRequest
         if ($this->filled('postal_code')) {
             $address_array['stripe']['individual']['address_kana']['postal_code'] = $this->input('postal_code');
             $address_array['stripe']['individual']['address_kanji']['postal_code'] = $this->input('postal_code');
-        }
-        if ($this->filled('block')) {
             $address_array['stripe']['individual']['address_kanji']['town'] = $this->input('block');
         }
-        if ($this->filled('block_number')) {
+        if ($this->filled('block') && $this->missing('postal_code')) {
+            $address_array['stripe']['individual']['address_kanji']['town'] = $this->input('block');
+        }
+        if ($this->filled('block_number') && $this->missing('postal_code')) {
             $address_array['stripe']['individual']['address_kana']['line1'] = $this->input('block_number');
             $address_array['stripe']['individual']['address_kanji']['line1'] = $this->input('block_number');
         }

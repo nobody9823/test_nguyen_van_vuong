@@ -111,6 +111,20 @@ class Stripe implements CardPaymentInterface
     }
 
     /**
+     * Retrieve connected account
+     *
+     * @param int
+     * @return object
+     */
+    public function retrieveConnectedAccount(int $user_id): object
+    {
+        $user = User::find($user_id);
+        $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
+        $account = $stripe->accounts->retrieve($user->identification->connected_account_id);
+        return $account;
+    }
+
+    /**
      * Update personal information
      *
      * @param int

@@ -33,6 +33,14 @@ interface CardPaymentInterface
     public function createConnectedAccount(string $ip): object;
 
     /**
+     * Retrieve connected account
+     *
+     * @param int
+     * @return object
+     */
+    public function retrieveConnectedAccount(int $user_id): object;
+
+    /**
      * Update personal information
      *
      * @param int
