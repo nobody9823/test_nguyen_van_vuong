@@ -118,11 +118,11 @@ class MypageController extends Controller
             : redirect()->back()->with('flash_message', '退会手続きに失敗しました。');
     }
 
-    public function setConnectedAccount(Request $request)
+    public function updateExternalAccount(Request $request)
     {
-        $account = $this->card_payment->updateExternalAccount(Auth::id(), $request['bankToken']);
+        $account = $this->card_payment->updateExternalAccount(Auth::user()->identification->connected_account_id, $request['bankToken']);
         // $file = $this->card_payment->createIdentityDocument(Auth::id());
-        // $account = $this->card_payment->attachIdentityDocument(Auth::id(), $file['id'], $account['id']);
+        // $account = $this->card_payment->attachIdentityDocument($file['id'], Auth::user()->identification->connected_account_id);
 
         return $account;
     }

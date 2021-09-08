@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::patch('/profile/{user}', [MypageController::class, 'updateProfile'])->name('update_profile');
     Route::get('/withdraw', [MypageController::class, 'withdraw'])->name('withdraw');
     Route::delete('/withdraw/{user}', [MypageController::class, 'delete_user'])->name('delete_user');
-    Route::post('set_connected_account', [MypageController::class, 'setConnectedAccount'])->name('set_connected_account');
+    Route::post('update_external_account', [MypageController::class, 'updateExternalAccount'])->name('update_external_account');
 
     //---------------------メッセージ一覧-----------------------------------------------
     Route::get('message/{selected_message?}', [MessageController::class, 'index'])->name('message.index');

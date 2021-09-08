@@ -4,6 +4,8 @@ namespace App\Actions\CardPayment;
 
 use App\Actions\CardPayment\CardPaymentInterface;
 use App\Models\User;
+use Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Stripe implements CardPaymentInterface
@@ -101,48 +103,55 @@ class Stripe implements CardPaymentInterface
                 'date' => time(),
                 'ip' => $ip,
             ],
+            'individual' => [
+                'email' => Auth::user()->email,
+            ]
         ]);
+        return $account;
+    }
+
+    /**
+     * Update personal information
+     *
+     * @param int
+     * @param object
+     * @return array
+     */
+    public function updatePersonalInformation(int $user_id, array $request): object
+    {
+        $user = User::find($user_id);
+        $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
+        try {
+            $account = $stripe->accounts->update(
+                $user->identification->connected_account_id,
+                isset($request['stripe']) ? $request['stripe'] : [],
+            );
+        } catch (\Stripe\Exception\InvalidRequestException $e) {
+            // Invalid parameters were supplied to Stripe's API
+            Log::alert($e);
+            $account = $stripe->accounts->retrieve($user->identification->connected_account_id);
+        } catch (\Exception $e) {
+            // Something else happened, completely unrelated to Stripe
+            Log::alert($e);
+            $account = $stripe->accounts->retrieve($user->identification->connected_account_id);
+        }
         return $account;
     }
 
     /**
      * Update external account
      *
-     * @param int
      * @param string
      * @param string
      * @return object
      */
-    public function updateExternalAccount(int $user_id, string $bank_token): object
+    public function updateExternalAccount(string $connected_account_id, string $bank_token): object
     {
-        $user = User::find($user_id);
         $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
         $account = $stripe->accounts->update(
-            $user->identification->connected_account_id,
+            $connected_account_id,
             [
                 'external_account' => $bank_token,
-                'individual' => [
-                    'first_name_kana' => $user->profile->first_name_kana,
-                    'first_name_kanji' => $user->profile->first_name,
-                    'last_name_kana' => $user->profile->last_name_kana,
-                    'last_name_kanji' => $user->profile->last_name,
-                    'dob' => [
-                        'day' => $user->profile->getDayOfBirth(),
-                        'month' => $user->profile->getMonthOfBirth(),
-                        'year' => $user->profile->getYearOfBirth(),
-                    ],
-                    'email' => $user->email,
-                    'phone' => $user->profile->parse_phone_number,
-                    'address_kana' => [
-                        'postal_code' => $user->address->postal_code,
-                        'line1' => $user->address->block_number,
-                    ],
-                    'address_kanji' => [
-                        'postal_code' => $user->address->postal_code,
-                        'town' => $user->address->block,
-                        'line1' => $user->address->block_number,
-                    ],
-                ],
             ]
         );
         return $account;
@@ -168,14 +177,12 @@ class Stripe implements CardPaymentInterface
     /**
      * Attach identity document to connected account
      *
-     * @param int
      * @param string
      * @param string
      * @return object
      */
-    public function attachIdentityDocument(int $user_id, string $file_id, string $connected_account_id): object
+    public function attachIdentityDocument(string $file_id, string $connected_account_id): object
     {
-        $user = User::find($user_id);
         $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
         $account = $stripe->accounts->update(
             $connected_account_id,

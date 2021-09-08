@@ -117,7 +117,6 @@
     bankCode = document.getElementById('bankCode');
     branchCode = document.getElementById('branchCode');
     const createBankAccountToken = () => {
-        console.log(bankCode.value + branchCode.value);
         var stripe = Stripe('{{ config("app.stripe_key") }}');
         stripe.createToken('bank_account', {
                 country: 'JP',
@@ -127,18 +126,20 @@
                 account_holder_name: holderName.value,
                 account_holder_type: 'individual',
             })
-            .then(function(result) {
-                console.log(result);
-                console.log(result.token.id);
-                axios.post('/set_connected_account', {bankToken: result.token.id})
-                    .then((res) => {
-                        console.log(res);
-                    })
-                    .catch((res) => {
-                        console.log(res);
-                    });
+            .then((result) => {
                 // Handle result.error or result.token
-            });
+                if (result.error) {
+                    console.log(result.error)
+                } else {
+                    axios.post('/update_external_account', {bankToken: result.token.id})
+                        .then((res) => {
+                            console.log(res);
+                        })
+                        .catch((res) => {
+                            console.log(res);
+                        });
+                }
+            })
     }
     accountNumber.addEventListener('change', () => {
         createBankAccountToken();

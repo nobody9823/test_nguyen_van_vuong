@@ -137,7 +137,14 @@ class MyProjectRequest extends FormRequest
             ]);
         }
 
-        if (is_null($this->input('building'))) {
+        if ($this->input('phone_number')) {
+            $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+            $phone_number = $phoneUtil->parse($this->input('phone_number'), "JP");
+            $parse_phone_number = $phoneUtil->format($phone_number, \libphonenumber\PhoneNumberFormat::E164);
+            $this->merge(['parse_phone_number' => $parse_phone_number]);
+        }
+
+        if ($this->has('building') && is_null($this->input('building'))) {
             $this->merge(['building' => ""]);
         }
 
@@ -148,19 +155,22 @@ class MyProjectRequest extends FormRequest
         if ($this->current_tab === 'identification') {
             if (!$this->filled('first_name_kana')) {
                 $this->merge([
-                    'first_name_kana' => ''
+                    'first_name_kana' => '',
                 ]);
             }
+
             if (!$this->filled('last_name_kana')) {
                 $this->merge([
                     'last_name_kana' => ''
                 ]);
             }
+
             if (!$this->filled('first_name')) {
                 $this->merge([
                     'first_name' => ''
                 ]);
             }
+
             if (!$this->filled('last_name')) {
                 $this->merge([
                     'last_name' => ''
@@ -172,21 +182,31 @@ class MyProjectRequest extends FormRequest
                     'phone_number' => ''
                 ]);
             }
-            if (!$this->filled('city')) {
-                $this->merge([
-                    'city' => ''
-                ]);
-            }
-            if (!$this->filled('block')) {
-                $this->merge([
-                    'block' => ''
-                ]);
-            }
+
             if (!$this->filled('postal_code')) {
                 $this->merge([
                     'postal_code' => ''
                 ]);
             }
+
+            if (!$this->filled('city')) {
+                $this->merge([
+                    'city' => ''
+                ]);
+            }
+
+            if (!$this->filled('block')) {
+                $this->merge([
+                    'block' => ''
+                ]);
+            }
+
+            if (!$this->filled('block_number')) {
+                $this->merge([
+                    'block_number' => ''
+                ]);
+            }
+
             if (!$this->filled('bank_code')) {
                 $this->merge([
                     'bank_code' => ''
@@ -276,6 +296,124 @@ class MyProjectRequest extends FormRequest
             $original_url = isset($headers['Location']) ? $headers['Location'] : $short_url;
 
             $this->merge(['video_url' => $original_url]);
+        }
+
+        if ($this->filled('first_name_kana')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'first_name_kana'  => $this->input('first_name_kana')
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('last_name_kana')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'last_name_kana'  => $this->input('last_name_kana')
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('first_name')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'first_name_kanji'  => $this->input('first_name')
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('last_name')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'last_name_kanji'  => $this->input('last_name')
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('phone_number')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'phone'  => $this->input('parse_phone_number')
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('postal_code')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'address_kana' => [
+                            'postal_code' => $this->input('postal_code')
+                        ],
+                        'address_kanji' => [
+                            'postal_code' => $this->input('postal_code')
+                        ],
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('block')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'address_kanji' => [
+                            'town' => $this->input('block')
+                        ],
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('block_number')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'address_kana' => [
+                            'line1' => $this->input('block_number')
+                        ],
+                        'address_kanji' => [
+                            'line1' => $this->input('block_number')
+                        ],
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('birth_day')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'dob' => [
+                            'day' => $this->input('birth_day')
+                        ],
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('birth_month')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'dob' => [
+                            'month' => $this->input('birth_month')
+                        ],
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('birth_year')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'dob' => [
+                            'year' => $this->input('birth_year')
+                        ],
+                    ]
+                ]
+            ]);
         }
     }
 
