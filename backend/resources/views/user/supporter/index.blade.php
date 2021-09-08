@@ -62,11 +62,12 @@
                             <i class="fas fa-copy" style="cursor: pointer" onclick="copyInnerText(this.previousElementSibling);displayToast('success','','コピーが完了しました。')"></i>
                         </td>
                         <td>
-                            <a onClick="display.planDetail({{ $payment->id }})"><p class="accordion__title" style="font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px; white-space: nowrap;">一覧</p></a>
+                            <a onClick="display.planDetail({{ $payment->id }})"><span class="accordion__title" style="font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px; white-space: nowrap;">一覧</span></a>
                         </td>
                     </tr>
                     <tr class="plan_detail">
                         <td id="display_plan_detail_{{ $payment->id }}" style="display:none;" colspan="4">
+                            <i class="fas fa-copy" style="cursor: pointer" onclick="copyInnerText(this.nextElementSibling);displayToast('success','','コピーが完了しました。')"></i>
                             <ul>
                                 @foreach($payment->includedPlans as $plan)
                                     <li>
