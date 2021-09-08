@@ -98,6 +98,11 @@
 <script src={{ asset('/js/uploaded-image-handler.js') }}></script>
 <script src={{ asset('/js/plan-form-modal.js') }}></script>
 <script src={{ asset('/js/fade-element.js') }}></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe('{{ config("app.stripe_key") }}');
+</script>
+<script src="{{ asset('/js/stripe-create-bank-account-token.js') }}"></script>
 
 <script>
     window.addEventListener('load',()=>{
@@ -105,54 +110,9 @@
     });
     if (getParam('status') == 422) {
         getParam('plan') != null
-            ? openPlanFormModal(getParam('plan'))
-            : openNewPlanFormModal();
+        ? openPlanFormModal(getParam('plan'))
+        : openNewPlanFormModal();
     }
-</script>
-{{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-    accountNumber = document.getElementById('accountNumber');
-    holderName = document.getElementById('holderName');
-    bankCode = document.getElementById('bankCode');
-    branchCode = document.getElementById('branchCode');
-    const createBankAccountToken = () => {
-        var stripe = Stripe('{{ config("app.stripe_key") }}');
-        stripe.createToken('bank_account', {
-                country: 'JP',
-                currency: 'jpy',
-                routing_number: bankCode.value + branchCode.value,
-                account_number: accountNumber.value,
-                account_holder_name: holderName.value,
-                account_holder_type: 'individual',
-            })
-            .then((result) => {
-                // Handle result.error or result.token
-                if (result.error) {
-                    console.log(result.error)
-                } else {
-                    axios.post('/update_external_account', {bankToken: result.token.id})
-                        .then((res) => {
-                            console.log(res);
-                        })
-                        .catch((res) => {
-                            console.log(res);
-                        });
-                }
-            })
-    }
-    accountNumber.addEventListener('change', () => {
-        createBankAccountToken();
-    });
-    holderName.addEventListener('change', () => {
-        createBankAccountToken();
-    });
-    bankCode.addEventListener('change', () => {
-        createBankAccountToken();
-    });
-    branchCode.addEventListener('change', () => {
-        createBankAccountToken();
-    });
 </script>
 <script>
 tinymce.init({
