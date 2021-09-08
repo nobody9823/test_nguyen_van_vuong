@@ -344,76 +344,28 @@ class MyProjectRequest extends FormRequest
             ]);
         }
         if ($this->filled('postal_code')) {
-            $this->merge([
-                'stripe' => [
-                    'individual' => [
-                        'address_kana' => [
-                            'postal_code' => $this->input('postal_code')
-                        ],
-                        'address_kanji' => [
-                            'postal_code' => $this->input('postal_code')
-                        ],
-                    ]
-                ]
-            ]);
+            $address_array['stripe']['individual']['address_kana']['postal_code'] = $this->input('postal_code');
+            $address_array['stripe']['individual']['address_kanji']['postal_code'] = $this->input('postal_code');
         }
         if ($this->filled('block')) {
-            $this->merge([
-                'stripe' => [
-                    'individual' => [
-                        'address_kanji' => [
-                            'town' => $this->input('block')
-                        ],
-                    ]
-                ]
-            ]);
+            $address_array['stripe']['individual']['address_kanji']['town'] = $this->input('block');
         }
         if ($this->filled('block_number')) {
-            $this->merge([
-                'stripe' => [
-                    'individual' => [
-                        'address_kana' => [
-                            'line1' => $this->input('block_number')
-                        ],
-                        'address_kanji' => [
-                            'line1' => $this->input('block_number')
-                        ],
-                    ]
-                ]
-            ]);
+            $address_array['stripe']['individual']['address_kana']['line1'] = $this->input('block_number');
+            $address_array['stripe']['individual']['address_kanji']['line1'] = $this->input('block_number');
         }
-        if ($this->filled('birth_day')) {
-            $this->merge([
-                'stripe' => [
-                    'individual' => [
-                        'dob' => [
-                            'day' => $this->input('birth_day')
-                        ],
-                    ]
-                ]
-            ]);
+        if (isset($address_array)) {
+            $this->merge($address_array);
         }
-        if ($this->filled('birth_month')) {
-            $this->merge([
-                'stripe' => [
-                    'individual' => [
-                        'dob' => [
-                            'month' => $this->input('birth_month')
-                        ],
-                    ]
-                ]
-            ]);
+
+        if ($this->filled('birthday')) {
+            $formatted_birth_day = new Carbon($this->birthday);
+            $dob_array['stripe']['individual']['dob']['day'] = $formatted_birth_day->day;
+            $dob_array['stripe']['individual']['dob']['month'] = $formatted_birth_day->month;
+            $dob_array['stripe']['individual']['dob']['year'] = $formatted_birth_day->year;
         }
-        if ($this->filled('birth_year')) {
-            $this->merge([
-                'stripe' => [
-                    'individual' => [
-                        'dob' => [
-                            'year' => $this->input('birth_year')
-                        ],
-                    ]
-                ]
-            ]);
+        if (isset($dob_array)) {
+            $this->merge($dob_array);
         }
     }
 

@@ -115,7 +115,7 @@ class Stripe implements CardPaymentInterface
      *
      * @param int
      * @param object
-     * @return array
+     * @return object
      */
     public function updatePersonalInformation(int $user_id, array $request): object
     {
