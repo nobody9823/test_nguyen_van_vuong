@@ -92,6 +92,8 @@ class Project extends Model
         return $this->hasMany('App\Models\Payment');
     }
 
+
+
     public function likedUsers()
     {
         return $this->belongsToMany('App\Models\User', 'user_project_liked')
@@ -138,36 +140,18 @@ class Project extends Model
         return $query->where('release_status', '掲載中');
     }
 
-    // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
+    // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        // return $query->withCount('payments')->withSum('payments', 'price');
+        $sub_query = 
+        Payment::select(DB::raw('count(distinct(`user_id`))'))
+        ->from('payments')
+        ->whereColumn('projects.id','payments.project_id')
+        ->toSql();
 
-        // こちらは動きそうで動かないコード
-        // $query->withCount(['payments' => function ($query) {
-        //     $query->select('user_id')->groupBy('user_id');
-        // }]);
-        
-        // 正式な支援者数は取得できるが、WithCountの様にカラムとして追加はできない。
-        // $query
-        // ->join('payments', 'payments.project_id', '=', 'projects.id')
-        // ->select('payments.user_id')
-        // ->groupBy('payments.user_id')
-        // ->get();
-
-        // こちらを使用すれば、正確な支援者数を算出できる。ViewとControllerで処理を分ける方法。
-        // 下記のpaymentsUserCount()メソッドを使ってView側で呼び出す。
-        //Controller
-        // $projects = $query->with('payments')->get();
-
-        // //View
-        // foreach($projects as $project) {
-        //     $test = $project->payments->groupBy('user_id')->count();
-        //     dd($test);
-        // }
+        return $query->selectRaw("`projects`.*,($sub_query) as `payments_count`")->withSum('payments', 'price');
     }
 
-    
     // Public function paymentsUserCount()
     // {
     //     return $this->payments->groupBy('user_id')->count();
