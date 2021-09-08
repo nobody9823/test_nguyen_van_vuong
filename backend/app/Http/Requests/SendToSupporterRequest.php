@@ -26,8 +26,8 @@ class SendToSupporterRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
-            'payment_ids' => ['nullable', 'array', new PaymentHasSameProjectId($request)],
-            'payment_ids.*' => ['nullable', 'integer'],
+            'payment_ids' => ['nullable', 'array'],
+            'payment_ids.*' => ['nullable', 'integer', new PaymentHasSameProjectId($request)],
         ];
     }
 
