@@ -73,11 +73,9 @@ class MyProjectController extends Controller
                 Log::alert($e->getMessage());
                 return redirect()->back()->withErrors('サーバーエラーが発生しました。管理者にお問い合わせください。');
             }
-        } else {
-            $account = $this->card_payment->retrieveConnectedAccount(Auth::id());
         }
 
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project, 'account' => $account])->with('attention_message', '※申請には本人確認が必須となります。早めにご記入ください。');
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with('attention_message', '※申請には本人確認が必須となります。早めにご記入ください。');
     }
 
     /**
