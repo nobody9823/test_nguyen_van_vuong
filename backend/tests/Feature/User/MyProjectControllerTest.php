@@ -25,7 +25,7 @@ class MyProjectControllerTest extends TestCase
         parent::setUp();
 
         $this->users = User::factory()
-            ->has(Identification::factory())
+            ->has(Identification::factory()->state(['connected_account_id' => 'acct_1JVd3nRneYkDOHDQ']))
             ->has(Address::factory())
             ->has(Profile::factory())
             ->has(
@@ -133,28 +133,28 @@ class MyProjectControllerTest extends TestCase
         $response->assertOk();
     }
 
-    Public function dataProviderForTestUpdateActionForEachTab(): array
+    public function dataProviderForTestUpdateActionForEachTab(): array
     {
         return [
             '「目標金額」更新処理' => ['target_tab', 'overview', 'target_amount_params'],
             '「概要」更新処理' => ['overview', 'visual', 'overview_params'],
-            '「TOP画像」更新処理' => ['visual','return', 'visual_params'],
-            '「PSリターン(支援総額)」更新処理' => ['ps_return','identification', 'reward_by_total_amount_params'],
-            '「PSリターン(支援者件数)」更新処理' => ['ps_return','identification','reward_by_total_quantity_params'],
-            '「本人確認」更新処理' => ['identification','my_project_index', 'identification_params'],
+            '「TOP画像」更新処理' => ['visual', 'return', 'visual_params'],
+            '「PSリターン(支援総額)」更新処理' => ['ps_return', 'identification', 'reward_by_total_amount_params'],
+            '「PSリターン(支援者件数)」更新処理' => ['ps_return', 'identification', 'reward_by_total_quantity_params'],
+            '「本人確認」更新処理' => ['identification', 'my_project_index', 'identification_params'],
         ];
     }
 
     /**
-    * @dataProvider dataProviderForTestUpdateActionForEachTab
-    */
+     * @dataProvider dataProviderForTestUpdateActionForEachTab
+     */
     public function testUpdateActionForEachTab(string $current_tab, string $next_tab, string $tab_params)
     {
         $this->withoutExceptionHandling();
 
         $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => $current_tab], $this->$tab_params));
 
-        if($next_tab === 'my_project_index'){
+        if ($next_tab === 'my_project_index') {
             $response->assertRedirect(route('user.my_project.project.index'));
         } else {
             $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->my_project, 'next_tab' => $next_tab]));

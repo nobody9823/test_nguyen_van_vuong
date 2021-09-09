@@ -266,7 +266,7 @@ class ProjectController extends Controller
      */
     public function paymentForCredit(Project $project, Payment $payment)
     {
-        $response = $this->card_payment->charge($payment->price, $payment->paymentToken->token);
+        $response = $this->card_payment->charge($payment->price, $payment->paymentToken->token, $project->user->identification->connected_account_id);
         DB::beginTransaction();
         try {
             $payment->payment_is_finished = true;
