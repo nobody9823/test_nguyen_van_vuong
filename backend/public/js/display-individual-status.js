@@ -49,7 +49,7 @@ const displayIndividualStatus = (pastDue) => {
         "preventDuplicates": false,
         "onclick": null,
         "showDuration": "300",
-        "hideDuration": "100",
+        "hideDuration": "0",
         "timeOut": 0,
         "extendedTimeOut": 0,
         "showEasing": "swing",
@@ -58,6 +58,5 @@ const displayIndividualStatus = (pastDue) => {
         "hideMethod": "fadeOut",
         "tapToDismiss": false
     }
-    toastr["clear"]();
-    toastr["warning"](ul, "本人確認情報の以下の項目を確認し、もう一度入力してください。");
+    toastr["warning"](ul, "以下の項目を確認し、もう一度入力してください。");
 }

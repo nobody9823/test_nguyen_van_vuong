@@ -80,11 +80,11 @@ const updateMyProject = (() => {
         axios.post(`/my_project/uploadProject/${projectId}`, data).then(res => {
             if(res.data.result === true){
                 console.log(res);
+                toastr["clear"]();
                 var pastDue = res.data.account.requirements.past_due
                 if (pastDue.length) {
                     displayIndividualStatus(pastDue);
                 } else {
-                    toastr["clear"]();
                     toastr["success"]('本人確認情報の登録完了');
                 }
 
