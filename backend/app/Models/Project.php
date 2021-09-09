@@ -138,7 +138,7 @@ class Project extends Model
         return $query->where('release_status', '掲載中');
     }
 
-    // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
+    // 'Payments'テーブルのユーザーカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
         $sub_query = Payment::select(DB::raw('count(distinct(`user_id`))'))
