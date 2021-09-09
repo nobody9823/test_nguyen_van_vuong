@@ -141,7 +141,7 @@ class Project extends Model
     // 'Payments'テーブルのユーザーカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        $sub_query = Payment::select(DB::raw('count(distinct(`user_id`))'))
+        $sub_query = Payment::selectRaw('count(distinct(`user_id`))')
                     ->from('payments')
                     ->whereColumn('projects.id','payments.project_id')
                     ->toSql();
