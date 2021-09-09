@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="su_pr_01_03 m_b_1510">
-        <div>目標金額は¥{{ number_format($project->target_amount) }}</div>
+        <div>目標人数は{{ number_format($project->target_number) }}人</div>
         <div>支援者数：{{ $project->payments_count }}人</div>
         @if (DateFormat::checkDateIsFuture($project->start_date))
             {{-- NOTICE: 追加開発が決まったら以下2箇所とpaymentブレード内のところとDateFormatファサード内のコメントアウトを外してください --}}

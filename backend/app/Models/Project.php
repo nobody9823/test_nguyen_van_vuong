@@ -29,7 +29,7 @@ class Project extends Model
         'content',
         'reward_by_total_amount',
         'reward_by_total_quantity',
-        'target_amount',
+        'target_number',
         'start_date',
         'end_date',
     ];
@@ -280,8 +280,8 @@ class Project extends Model
     public function getAchievementRateAttribute()
     {
         // 金額の達成率の算出
-        if ($this->target_amount > 0) {
-            return round($this->payments_sum_price * 100 / $this->target_amount);
+        if ($this->target_number > 0) {
+            return round($this->payments_sum_price * 100 / $this->target_number);
         } else { // ゼロ除算対策
             return 100;
         }
@@ -427,7 +427,7 @@ class Project extends Model
             'content' => '',
             'reward_by_total_amount' => '',
             'reward_by_total_quantity' => '',
-            'target_amount' => 0,
+            'target_number' => 0,
             'curator' => '',
             'start_date' => Carbon::now(),
             'end_date' => $date->addYear(2),

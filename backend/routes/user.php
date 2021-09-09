@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::get('message/{message_content}/file_download', [MessageController::class, 'fileDownloadByExecutor'])->name('my_project.message_content.file_download');
         Route::resource('{project}/supporter', SupporterController::class)->only(['index']);
     });
-    Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_amount');
+    Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_number');
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
     Route::get('/contribution_comments', [MypageController::class, 'contributionComments'])->name('contribution_comments');
     Route::get('/purchased_projects', [MypageController::class, 'purchasedProjects'])->name('purchased_projects');

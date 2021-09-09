@@ -56,8 +56,8 @@ class MyProjectControllerTest extends TestCase
 
         $date = Carbon::now();
 
-        $this->target_amount_params = [
-            'target_amount' => 10000,
+        $this->target_number_params = [
+            'target_number' => 10000,
             'start_date' => $date->addDays(14),
             'end_date' => $date->addDays(44),
         ];
@@ -136,7 +136,7 @@ class MyProjectControllerTest extends TestCase
     public function dataProviderForTestUpdateActionForEachTab(): array
     {
         return [
-            '「目標金額」更新処理' => ['target_tab', 'overview', 'target_amount_params'],
+            '「目標人数」更新処理' => ['target_tab', 'overview', 'target_number_params'],
             '「概要」更新処理' => ['overview', 'visual', 'overview_params'],
             '「TOP画像」更新処理' => ['visual', 'return', 'visual_params'],
             '「PSリターン(支援総額)」更新処理' => ['ps_return', 'identification', 'reward_by_total_amount_params'],

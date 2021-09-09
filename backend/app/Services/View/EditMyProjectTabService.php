@@ -17,7 +17,7 @@ class EditMyProjectTabService
     }
 
     protected $my_project_tab = [
-        0 => 'target_amount',
+        0 => 'target_number',
         1 => 'overview',
         2 => 'visual',
         3 => 'return',
@@ -43,9 +43,9 @@ class EditMyProjectTabService
         return $this->my_project_tab[$this->next_tag_order];
     }
 
-    public function TargetAmountTabIsFilled(Project $project)
+    public function TargetNumberTabIsFilled(Project $project)
     {
-        if ($project->target_amount > 0 && !Carbon::minValue()->eq($project->start_date) && !Carbon::maxValue()->eq($project->end_date)) {
+        if ($project->target_number > 0 && !Carbon::minValue()->eq($project->start_date) && !Carbon::maxValue()->eq($project->end_date)) {
             return true;
         }
         return false;
