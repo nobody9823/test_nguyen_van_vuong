@@ -156,18 +156,6 @@ class Project extends Model
         return $this;
     }
 
-    public function loadOtherRelations()
-    {
-        $relationTables = ['comments','reports','payments'];
-        foreach($relationTables as $relationTable){
-            $this->load([$relationTable => function ($query) {
-                $query->orderBy('created_at', 'desc');
-            }]);
-        }
-        
-        return $this;
-    }
-
     public function scopeMainProjects($query)
     {
         return $query->getReleasedProject()->seeking()->getWithPaymentsCountAndSumPrice();
@@ -296,6 +284,18 @@ class Project extends Model
         } else { // ゼロ除算対策
             return 100;
         }
+    }
+
+    public function loadOtherRelations()
+    {
+        $relationTables = ['comments','reports','payments'];
+        foreach($relationTables as $relationTable){
+            $this->load([$relationTable => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }]);
+        }
+        
+        return $this;
     }
 
     /**
