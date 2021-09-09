@@ -62,6 +62,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                    <p>StripeのアカウントID: {{ optional($user->identification)->connected_account_id }}</p>
                                     <p>招待者コード:{{ optional($user->profile)->inviter_code }}</p>
                                     <p>姓:{{ optional($user->profile)->last_name }}</p>
                                     <p>名:{{ optional($user->profile)->first_name }}</p>
