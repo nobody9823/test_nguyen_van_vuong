@@ -92,8 +92,6 @@ class Project extends Model
         return $this->hasMany('App\Models\Payment');
     }
 
-
-
     public function likedUsers()
     {
         return $this->belongsToMany('App\Models\User', 'user_project_liked')
@@ -143,33 +141,19 @@ class Project extends Model
     // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        $sub_query = 
-        Payment::select(DB::raw('count(distinct(`user_id`))'))
-        ->from('payments')
-        ->whereColumn('projects.id','payments.project_id')
-        ->toSql();
+        $sub_query = Payment::select(DB::raw('count(distinct(`user_id`))'))
+                    ->from('payments')
+                    ->whereColumn('projects.id','payments.project_id')
+                    ->toSql();
 
         return $query->selectRaw("`projects`.*,($sub_query) as `payments_count`")->withSum('payments', 'price');
     }
 
-    // Public function paymentsUserCount()
-    // {
-    //     return $this->payments->groupBy('user_id')->count();
-    // }
-
-    public function getLoadPaymentsCountAndSumPrice()
+    public function getLoadIncludedPaymentsCountAndSumPrice()
     {
-        return $this
-            ->loadSum('payments', 'price')
-            ->loadCount([
-                'payments',
-                'payments as payments_count_within_a_day' => function ($query) {
-                    $query->where('created_at', '>=', Carbon::now()->subHours(24));
-                },
-            ])
-            ->load(['plans' => function ($query) {
-                $query->withCount('includedPayments');
-            }]);
+        $this->plans->loadCount('includedPayments');
+        $this->loadSum('payments', 'price');
+        return $this;
     }
 
     public function loadOtherRelations()
@@ -290,6 +274,16 @@ class Project extends Model
         $end_date = new Carbon($this->end_date);
         $today = Carbon::now();
         return $end_date->diffInDays($today);
+    }
+
+    public function getPaymentsCountAttribute()
+    {
+        return $this->payments->groupBy('user_id')->count();
+    }
+    
+    public function getPaymentsCountWithinADayAttribute()
+    {
+        return $this->payments->where('created_at', '>=', Carbon::now()->subHours(24))->groupBy('user_id')->count();
     }
 
     // 目標金額に対する支援総額の割合
