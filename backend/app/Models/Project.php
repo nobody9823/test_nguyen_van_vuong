@@ -141,6 +141,7 @@ class Project extends Model
     // 'Payments'テーブルのユーザーカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
+        // 重複するuser_idを削除して、支援者数を算出する。
         $sub_query = Payment::selectRaw('count(distinct(`user_id`))')
                     ->from('payments')
                     ->whereColumn('projects.id','payments.project_id')
