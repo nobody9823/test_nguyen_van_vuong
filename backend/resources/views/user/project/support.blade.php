@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="ps_rank_01_01 m_b_1510">
-                    <div>現在：{{ number_format($project->payments_sum_price) }}円</div>
+                    <!-- <div>現在：{{ number_format($project->payments_sum_price) }}円</div> -->
                     <div>支援者数：{{ $project->payments_count }}人</div>
                     @if (DateFormat::checkDateIsFuture($project->start_date))
                         {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
