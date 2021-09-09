@@ -40,7 +40,7 @@ class MyProjectRequest extends FormRequest
             'image_url.*' => ['nullable', 'array'],
             'image_url.*.*' => ['nullable', 'image'],
             'video_url' => ['nullable', 'url', 'regex:#(https?\:\/\/)(www\.youtube\.com\/watch\?v=|youtu\.be\/)+[\S]{11}#'],
-            'target_amount' => ['nullable', 'integer', 'min:10000','max:99999999'],
+            'target_amount' => ['nullable', 'integer', 'min:10000', 'max:99999999'],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', /*'after_or_equal:+14 day'*/],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', new MyProjectEndDate($this->route('project'))],
             'reward_by_total_amount' => ['nullable', 'string', 'max:100000'],
@@ -54,6 +54,7 @@ class MyProjectRequest extends FormRequest
             'prefecture' => ['nullable', 'string'],
             'city' => ['nullable', 'string', 'max:100'],
             'block' => ['nullable', 'string', 'max:100'],
+            'block_number' => ['nullable', 'string', 'max:100'],
             'building' => ['nullable', 'string'],
             'birthday'  => ['nullable', 'string', 'date_format:Y-m-d'],
             'bank_code' => ['nullable', 'string', 'size:4'],
@@ -136,26 +137,40 @@ class MyProjectRequest extends FormRequest
             ]);
         }
 
-        if (is_null($this->input('building'))) {
+        if ($this->input('phone_number')) {
+            $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+            $phone_number = $phoneUtil->parse($this->input('phone_number'), "JP");
+            $parse_phone_number = $phoneUtil->format($phone_number, \libphonenumber\PhoneNumberFormat::E164);
+            $this->merge(['parse_phone_number' => $parse_phone_number]);
+        }
+
+        if ($this->has('building') && is_null($this->input('building'))) {
             $this->merge(['building' => ""]);
+        }
+
+        if ($this->has('block_number') && is_null($this->input('block_number'))) {
+            $this->merge(['block_number' => ""]);
         }
 
         if ($this->current_tab === 'identification') {
             if (!$this->filled('first_name_kana')) {
                 $this->merge([
-                    'first_name_kana' => ''
+                    'first_name_kana' => '',
                 ]);
             }
+
             if (!$this->filled('last_name_kana')) {
                 $this->merge([
                     'last_name_kana' => ''
                 ]);
             }
+
             if (!$this->filled('first_name')) {
                 $this->merge([
                     'first_name' => ''
                 ]);
             }
+
             if (!$this->filled('last_name')) {
                 $this->merge([
                     'last_name' => ''
@@ -167,21 +182,31 @@ class MyProjectRequest extends FormRequest
                     'phone_number' => ''
                 ]);
             }
-            if (!$this->filled('city')) {
-                $this->merge([
-                    'city' => ''
-                ]);
-            }
-            if (!$this->filled('block')) {
-                $this->merge([
-                    'block' => ''
-                ]);
-            }
+
             if (!$this->filled('postal_code')) {
                 $this->merge([
                     'postal_code' => ''
                 ]);
             }
+
+            if (!$this->filled('city')) {
+                $this->merge([
+                    'city' => ''
+                ]);
+            }
+
+            if (!$this->filled('block')) {
+                $this->merge([
+                    'block' => ''
+                ]);
+            }
+
+            if (!$this->filled('block_number')) {
+                $this->merge([
+                    'block_number' => ''
+                ]);
+            }
+
             if (!$this->filled('bank_code')) {
                 $this->merge([
                     'bank_code' => ''
@@ -207,7 +232,7 @@ class MyProjectRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        if ($this->expectsJson()){
+        if ($this->expectsJson()) {
             throw new HttpResponseException(
                 response()->json(['message' => $validator->errors()->toArray()])
             );
@@ -260,7 +285,6 @@ class MyProjectRequest extends FormRequest
                 $redirect_route
             );
         }
-
     }
 
     public function passedValidation()
@@ -272,6 +296,77 @@ class MyProjectRequest extends FormRequest
             $original_url = isset($headers['Location']) ? $headers['Location'] : $short_url;
 
             $this->merge(['video_url' => $original_url]);
+        }
+
+        if ($this->filled('first_name_kana')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'first_name_kana'  => $this->input('first_name_kana')
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('last_name_kana')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'last_name_kana'  => $this->input('last_name_kana')
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('first_name')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'first_name_kanji'  => $this->input('first_name')
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('last_name')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'last_name_kanji'  => $this->input('last_name')
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('phone_number')) {
+            $this->merge([
+                'stripe' => [
+                    'individual' => [
+                        'phone'  => $this->input('parse_phone_number')
+                    ]
+                ]
+            ]);
+        }
+        if ($this->filled('postal_code')) {
+            $address_array['stripe']['individual']['address_kana']['postal_code'] = $this->input('postal_code');
+            $address_array['stripe']['individual']['address_kanji']['postal_code'] = $this->input('postal_code');
+            $address_array['stripe']['individual']['address_kanji']['town'] = $this->input('block');
+        }
+        if ($this->filled('block') && $this->missing('postal_code')) {
+            $address_array['stripe']['individual']['address_kanji']['town'] = $this->input('block');
+        }
+        if ($this->filled('block_number') && $this->missing('postal_code')) {
+            $address_array['stripe']['individual']['address_kana']['line1'] = $this->input('block_number');
+            $address_array['stripe']['individual']['address_kanji']['line1'] = $this->input('block_number');
+        }
+        if (isset($address_array)) {
+            $this->merge($address_array);
+        }
+
+        if ($this->filled('birthday')) {
+            $formatted_birth_day = new Carbon($this->birthday);
+            $dob_array['stripe']['individual']['dob']['day'] = $formatted_birth_day->day;
+            $dob_array['stripe']['individual']['dob']['month'] = $formatted_birth_day->month;
+            $dob_array['stripe']['individual']['dob']['year'] = $formatted_birth_day->year;
+        }
+        if (isset($dob_array)) {
+            $this->merge($dob_array);
         }
     }
 

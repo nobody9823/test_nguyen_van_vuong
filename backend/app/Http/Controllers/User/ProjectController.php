@@ -128,7 +128,7 @@ class ProjectController extends Controller
 
         return view('user.project.show', [
             'inviter_code' => $this->inviter_code,
-            'project' => $project->getLoadPaymentsCountAndSumPrice()->loadOtherRelations(),
+            'project' => $project->getLoadIncludedPaymentsCountAndSumPrice()->loadOtherRelations(),
         ]);
     }
 
@@ -266,7 +266,7 @@ class ProjectController extends Controller
      */
     public function paymentForCredit(Project $project, Payment $payment)
     {
-        $response = $this->card_payment->charge($payment->price, $payment->paymentToken->token);
+        $response = $this->card_payment->charge($payment->price, $payment->paymentToken->token, $project->user->identification->connected_account_id);
         DB::beginTransaction();
         try {
             $payment->payment_is_finished = true;
@@ -281,7 +281,7 @@ class ProjectController extends Controller
         }
         $this->user->notify(new PaymentNotification($project, $payment));
 
-        return view('user.plan.supported', ['project' => $project->getLoadPaymentsCountAndSumPrice(), 'payment' => $payment]);
+        return view('user.plan.supported', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice(), 'payment' => $payment]);
     }
 
     public function paymentForPayPay(Project $project, Payment $payment)
@@ -304,7 +304,7 @@ class ProjectController extends Controller
         }
         $this->user->notify(new PaymentNotification($project, $payment));
 
-        return view('user.plan.supported', ['project' => $project->getLoadPaymentsCountAndSumPrice(), 'payment' => $payment]);
+        return view('user.plan.supported', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice(), 'payment' => $payment]);
     }
 
     /**
@@ -421,7 +421,7 @@ class ProjectController extends Controller
         $this->authorize('checkIsFinishedPayment', $project);
         Auth::user()->supportedProjects()->attach($project->id);
 
-        return view('user.project.support', ['project' => $project->getLoadPaymentsCountAndSumPrice()]);
+        return view('user.project.support', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice()]);
     }
 
     public function supporterRanking(Project $project)
@@ -434,7 +434,7 @@ class ProjectController extends Controller
             [
                 'users_ranked_by_total_quantity' => $users_ranked_by_total_quantity,
                 'users_ranked_by_total_amount' => $users_ranked_by_total_amount,
-                'project' => $project->getLoadPaymentsCountAndSumPrice(),
+                'project' => $project->getLoadIncludedPaymentsCountAndSumPrice(),
             ],
         );
     }

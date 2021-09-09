@@ -33,6 +33,7 @@ class PaymentFactory extends Factory
             'message_status' => 'ステータスなし',
             'payment_way' => PaymentWay::getValues()[random_int(0, 2)],
             'payment_is_finished' => $this->faker->boolean(50),
+            'is_sent' => false,
             'remarks' => $this->faker->realText(100),
         ];
     }
