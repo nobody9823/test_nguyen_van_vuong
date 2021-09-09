@@ -343,10 +343,9 @@ class MyProjectRequest extends FormRequest
                 ]
             ]);
         }
-        if ($this->filled('postal_code')) {
+        if ($this->filled(['postal_code'])) {
             $address_array['stripe']['individual']['address_kana']['postal_code'] = $this->input('postal_code');
             $address_array['stripe']['individual']['address_kanji']['postal_code'] = $this->input('postal_code');
-            $address_array['stripe']['individual']['address_kanji']['town'] = $this->input('block');
         }
         if ($this->filled('block') && $this->missing('postal_code')) {
             $address_array['stripe']['individual']['address_kanji']['town'] = $this->input('block');

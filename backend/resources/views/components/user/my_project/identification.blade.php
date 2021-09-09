@@ -67,14 +67,14 @@
     </div>
 
     <div class="form_item_row">
-        <div class="form_item_tit">町域<span class="hissu_txt">必須</span></div>
+        <div class="form_item_tit">町域 / 丁目（英数字 + '丁目'）<span class="hissu_txt">必須</span></div>
         <input type="text" id="block" name="block" class="p-street-address def_input_100p"
             value="{{ old('block', optional($user->address)->block) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="block" />
     </div>
 
     <div class="form_item_row">
-        <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
+        <div class="form_item_tit">番地（英数字 + ハイフン）<span class="hissu_txt">必須</span></div>
         <input type="text" name="block_number" class="p-extended-address def_input_100p"
             value="{{ old('block_number', optional($user->address)->block_number) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="block_number" />
