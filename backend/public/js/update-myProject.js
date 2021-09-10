@@ -83,9 +83,6 @@ const updateMyProject = (() => {
                 var pastDue = res.data.account.requirements.past_due
                 if (pastDue.length) {
                     displayIndividualStatus(pastDue);
-                } else {
-                    toastr["clear"]();
-                    toastr["success"]('本人確認情報の登録完了');
                 }
 
                 document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
