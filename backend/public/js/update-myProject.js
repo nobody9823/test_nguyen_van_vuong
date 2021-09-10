@@ -83,6 +83,8 @@ const updateMyProject = (() => {
                 var pastDue = res.data.account.requirements.past_due
                 if (pastDue.length) {
                     displayIndividualStatus(pastDue);
+                } else {
+                    toastr["clear"]();
                 }
 
                 document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
