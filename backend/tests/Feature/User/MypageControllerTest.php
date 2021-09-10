@@ -152,4 +152,15 @@ class MypageControllerTest extends TestCase
                          ->patch(route('user.update_profile',['user' => $this->user]), $this->data);
         $response->assertRedirect(route('user.profile'));
     }
+
+    public function testWithdraw()
+    {
+        $this->withoutExceptionHandling(); 
+
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.profile'))
+                         ->get(route('user.withdraw'));
+        $response->assertOk()
+                 ->assertViewIs('user.mypage.withdraw');
+    }
 }
