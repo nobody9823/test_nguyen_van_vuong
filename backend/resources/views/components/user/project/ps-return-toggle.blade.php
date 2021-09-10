@@ -4,13 +4,13 @@
     の中にある想定なので注意
     --}}
 @isset($project)
-    <div class="ps_rank_02_return_L">
+    {{-- <div class="ps_rank_02_return_L">
         <div class="ps_rank_02_return_tit return_opener">リターン内容(紹介支援総額)</div>
         <!--/ps_rank_01-->
         <div class="ps_rank_return_text return_content">
             {!! $project->reward_by_total_amount !!}
         </div>
-    </div>
+    </div> --}}
 
     <div class="ps_rank_02_return_R">
         <div class="ps_rank_02_return_tit return_opener">リターン内容(紹介件数)</div>
@@ -64,7 +64,7 @@
         }
     </style>
 @else
-    <div class="ps_rank_02_return_L">
+    {{-- <div class="ps_rank_02_return_L">
         <div class="ps_rank_02_return_tit return_opener">リターン内容(紹介支援総額)</div>
         <!--/ps_rank_01-->
         <div class="ps_rank_return_text return_content">
@@ -72,7 +72,7 @@
             <img class="" src="{{Storage::url('public/sampleImage/now_printing.png')}}">
             <br/>
         </div>
-    </div>
+    </div> --}}
 
     <div class="ps_rank_02_return_R">
         <div class="ps_rank_02_return_tit return_opener">リターン内容(紹介件数)</div>

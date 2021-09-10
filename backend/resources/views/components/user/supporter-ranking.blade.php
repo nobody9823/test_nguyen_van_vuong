@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="ps_rank_02 m_b_4030">
-                    @php
+                    {{-- @php
                         $total_amount_rank = 1;
                         $before_total_amount = null;
                     @endphp
@@ -84,7 +84,7 @@
                         @php
                             $before_total_amount = $project_supporter->invited_payments_sum_price;
                         @endphp
-                    @endforeach
+                    @endforeach --}}
 
                     @php
                         $total_quantity_rank = 1;
@@ -114,7 +114,7 @@
                     @endforeach
 
 
-                    <div class="ps_rank_02_L ranked_inviter_by_amount_list">
+                    {{-- <div class="ps_rank_02_L ranked_inviter_by_amount_list">
 
                         <div class="ps_rank_02_tit">紹介支援総額</div>
 
@@ -159,7 +159,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> --}}
 
                     <!--/ps_rank_02_L-->
 
@@ -279,14 +279,14 @@
 
                     <div class="ps_rank_02 m_b_4030">
 
-                        <div class="ps_rank_myrank_large_L m_b_4030">
+                        {{-- <div class="ps_rank_myrank_large_L m_b_4030">
                             <div class="ps_rank_02_tit">あなたの支援総額ランキング</div>
                             <div class="ps_rank_myrank_large_L_items">
                                 <div class="ps_rank_myrank_large_01">18位</div>
                                 <div class="ps_rank_myrank_large_02">ヤマダタロウ</div>
                                 <div class="ps_rank_myrank_large_03">35,000円</div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="ps_rank_myrank_large_R m_b_4030">
                             <div class="ps_rank_02_tit">あなたの紹介件数ランキング</div>
@@ -299,7 +299,7 @@
 
 
 
-                        <div class="ps_rank_02_L">
+                        {{-- <div class="ps_rank_02_L">
 
                             <div class="ps_rank_02_tit">支援総額</div>
 
@@ -365,7 +365,7 @@
 
                             <div class="ps_rank_more_btn"><a>続きの順位を表示　<i class="fas fa-chevron-down"></i></a></div>
 
-                        </div><!--/ps_rank_02_L-->
+                        </div><!--/ps_rank_02_L--> --}}
 
                         <div class="ps_rank_02_R">
 
