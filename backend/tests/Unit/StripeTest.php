@@ -31,7 +31,12 @@ class StripeTest extends TestCase
             ]
         ];
         $payment_method = $stripe_client->paymentMethods->create($params);
-        $response = $this->user->charge(1000, $payment_method->id);
+        $response = $this->user->charge(1000, $payment_method->id, [
+            'transfer_data' => [
+                'destination' => 'acct_1JWzlURY5QcsEZYN',
+                'amount' => ceil(bcmul(1000, 0.8, 1)),
+            ]
+        ]);
         $this->assertSame(true, is_string($response->id));
     }
 
@@ -51,7 +56,12 @@ class StripeTest extends TestCase
             ]
         ];
         $payment_methods = $stripe_client->paymentMethods->create($params);
-        ($this->user->charge(1000, $payment_methods->id))->execute(1);
+        ($this->user->charge(1000, $payment_methods->id, [
+            'transfer_data' => [
+                'destination' => 'acct_1JWzlURY5QcsEZYN',
+                'amount' => ceil(bcmul(1000, 0.8, 1)),
+            ]
+        ]))->execute(1);
     }
 
     public function testFailByExpiredCard()
@@ -69,7 +79,12 @@ class StripeTest extends TestCase
             ]
         ];
         $payment_method = $stripe_client->paymentMethods->create($params);
-        ($this->user->charge(1000, $payment_method->id))->execute(1);
+        ($this->user->charge(1000, $payment_method->id, [
+            'transfer_data' => [
+                'destination' => 'acct_1JWzlURY5QcsEZYN',
+                'amount' => ceil(bcmul(1000, 0.8, 1)),
+            ]
+        ]))->execute(1);
     }
 
     public function testFailByCardDeclinedByInvalidExpirationDate()
@@ -87,6 +102,11 @@ class StripeTest extends TestCase
             ]
         ];
         $payment_method = $stripe_client->paymentMethods->create($params);
-        ($this->user->charge(1000, $payment_method->id))->execute(1);
+        ($this->user->charge(1000, $payment_method->id, [
+            'transfer_data' => [
+                'destination' => 'acct_1JWzlURY5QcsEZYN',
+                'amount' => ceil(bcmul(1000, 0.8, 1)),
+            ]
+        ]))->execute(1);
     }
 }

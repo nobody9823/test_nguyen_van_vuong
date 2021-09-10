@@ -113,41 +113,39 @@ class Stripe implements CardPaymentInterface
     /**
      * Retrieve connected account
      *
-     * @param int
+     * @param string
      * @return object
      */
-    public function retrieveConnectedAccount(int $user_id): object
+    public function retrieveConnectedAccount(string $connected_account_id): object
     {
-        $user = User::find($user_id);
         $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
-        $account = $stripe->accounts->retrieve($user->identification->connected_account_id);
+        $account = $stripe->accounts->retrieve($connected_account_id);
         return $account;
     }
 
     /**
      * Update personal information
      *
-     * @param int
+     * @param string
      * @param object
      * @return object
      */
-    public function updatePersonalInformation(int $user_id, array $request): object
+    public function updatePersonalInformation(string $connected_account_id, array $request): object
     {
-        $user = User::find($user_id);
         $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
         try {
             $account = $stripe->accounts->update(
-                $user->identification->connected_account_id,
+                $connected_account_id,
                 isset($request['stripe']) ? $request['stripe'] : [],
             );
         } catch (\Stripe\Exception\InvalidRequestException $e) {
             // Invalid parameters were supplied to Stripe's API
             Log::alert($e);
-            $account = $stripe->accounts->retrieve($user->identification->connected_account_id);
+            $account = $stripe->accounts->retrieve($connected_account_id);
         } catch (\Exception $e) {
             // Something else happened, completely unrelated to Stripe
             Log::alert($e);
-            $account = $stripe->accounts->retrieve($user->identification->connected_account_id);
+            $account = $stripe->accounts->retrieve($connected_account_id);
         }
         return $account;
     }

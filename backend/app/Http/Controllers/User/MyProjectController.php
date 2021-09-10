@@ -125,7 +125,7 @@ class MyProjectController extends Controller
                 return redirect()->back()->withErrors('サーバーエラーが発生しました。管理者にお問い合わせください。');
             }
         } else {
-            $account = $this->card_payment->retrieveConnectedAccount(Auth::id());
+            $account = $this->card_payment->retrieveConnectedAccount(Auth::user()->identification->connected_account_id);
         }
         $tags = Tag::pluck('name', 'id');
 
@@ -240,7 +240,7 @@ class MyProjectController extends Controller
             $this->user->address->fill($request->all())->save();
             $this->project_service->attachTags($project, $request);
             $this->project_service->saveVideoUrl($project, $request);
-            $account = $this->card_payment->updatePersonalInformation(Auth::id(), $request->all());
+            $account = $this->card_payment->updatePersonalInformation(Auth::user()->identification->connected_account_id, $request->all());
             DB::commit();
             return response()->json(['result' => true, 'account' => $account]);
         } catch (\Exception $e) {
