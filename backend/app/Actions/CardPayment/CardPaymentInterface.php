@@ -35,19 +35,19 @@ interface CardPaymentInterface
     /**
      * Retrieve connected account
      *
-     * @param int
+     * @param string
      * @return object
      */
-    public function retrieveConnectedAccount(int $user_id): object;
+    public function retrieveConnectedAccount(string $connected_account_id): object;
 
     /**
      * Update personal information
      *
-     * @param int
+     * @param string
      * @param object
      * @return object
      */
-    public function updatePersonalInformation(int $user_id, array $request): object;
+    public function updatePersonalInformation(string $connected_account_id, array $request): object;
 
     /**
      * Update external account
