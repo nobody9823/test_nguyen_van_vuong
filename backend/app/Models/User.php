@@ -204,14 +204,12 @@ class User extends Authenticatable
     // inviter_idが一致するpaymentsに紐づくplan_payment_includedのquantityカラムの合計を集計して降順に並び替え
     public function scopeGetInvitersRankedByInvitedUsers($query, $project_id)
     {
-        return $query->withSum(['invitedPlanPaymentIncluded' => function ($query) use ($project_id) {
-            $query->where('payments.project_id', $project_id);
-        }], 'quantity')
-            ->whereIn('id', Payment::select('inviter_id')->whereIn(
-                'project_id',
-                Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
-            ))
-            ->orderBy('invited_plan_payment_included_sum_quantity', 'DESC');
+        return $query->withCount(['invitedPayments' => function ($query) use ($project_id) {
+            $query->select(\DB::raw('count(distinct(`user_id`))'))->where('project_id', $project_id);
+        }])->whereIn('id', Payment::select('inviter_id')->whereIn(
+            'project_id',
+            Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
+        ))->orderBy('invited_payments_count', 'DESC');
     }
 
     // inviter_idが一致するpaymentsの支援総額から降順に並び替え

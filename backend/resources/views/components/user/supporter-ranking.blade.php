@@ -92,7 +92,7 @@
                     @endphp
                     @foreach ($usersRankedByTotalQuantity as $rank => $project_supporter)
                         @php
-                            if ($before_total_quantity > $project_supporter->invited_plan_payment_included_sum_quantity) {
+                            if ($before_total_quantity > $project_supporter->invited_payments_count) {
                                 $total_quantity_rank = $loop->iteration;
                             }
                         @endphp
@@ -103,13 +103,13 @@
                                 <div class="ps_rank_myrank_large_01">{{ $total_quantity_rank }}位</div>
                                 <div class="ps_rank_myrank_large_02">{{ $project_supporter->name }}</div>
                                 <div class="ps_rank_myrank_large_03">
-                                    {{ $project_supporter->invited_plan_payment_included_sum_quantity }}件
+                                    {{ $project_supporter->invited_payments_count }}件
                                 </div>
                             </div>
                         </div>
                         @endif
                         @php
-                            $before_total_quantity = $project_supporter->invited_plan_payment_included_sum_quantity;
+                            $before_total_quantity = $project_supporter->invited_payments_count;
                         @endphp
                     @endforeach
 
@@ -173,7 +173,7 @@
                         @endphp
                         @foreach ($usersRankedByTotalQuantity as $rank => $project_supporter)
                             @php
-                                if ($before_total_quantity > $project_supporter->invited_plan_payment_included_sum_quantity) {
+                                if ($before_total_quantity > $project_supporter->invited_payments_count) {
                                     $total_quantity_rank = $loop->iteration;
                                 }
                             @endphp
@@ -191,11 +191,11 @@
                                     <div class="ps_rank_item_02">{{ $total_quantity_rank }}位</div>
                                     <div class="ps_rank_item_03">{{ $project_supporter->name }}</div>
                                     <div class="ps_rank_item_04">
-                                        {{ $project_supporter->invited_plan_payment_included_sum_quantity }}件</div>
+                                        {{ $project_supporter->invited_payments_count }}件</div>
                                 </div>
                                 <!--/ps_rank_02_rank_item_row-->
                             @php
-                                $before_total_quantity = $project_supporter->invited_plan_payment_included_sum_quantity;
+                                $before_total_quantity = $project_supporter->invited_payments_count;
                             @endphp
                         @endforeach
 
