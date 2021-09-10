@@ -9,7 +9,9 @@
 </div>
 <div class="su_pr_01 m_b_1510">
     <div class="su_pr_01_01 m_b_1510">{{ Str::limit($project->title, 46) }}</div>
+    @if($project->user->id === Auth::user()->id)
     <div class="su_pr_01_02 m_b_1510">現在の支援総額：{{ number_format($project->payments_sum_price) }}円</div>
+    @endif
     <div class="pds_sec01_progress-bar m_b_1510">
         <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
         <div class="progress-bar">
