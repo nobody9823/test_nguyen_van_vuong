@@ -125,6 +125,7 @@
                                         </a>
                                     </p>
                                     <p>Email:<a href="mailto:{{ $project->user->email }}">{{ $project->user->email }}</a></p>
+                                    <p>StripeのアカウントID: {{ optional($project->user->identification)->connected_account_id }}</p>
                                     <p>プロフィール画像:
                                         <div class="text-center">
                                             <img style="max-height:15vw; object-fit: contain;"
@@ -317,7 +318,7 @@
             allCheckBoxToggle('#checkbox_parent',".checkbox");
         });
     </script>
-    
+
     <script>
         function incrementLikes(projectId, incrementPoints){
         $.ajax({
