@@ -98,7 +98,7 @@
                         @endphp
                         @if ($project_supporter->email === Auth::user()->email)
                         <div class="ps_rank_myrank_large_R m_b_4030">
-                            <div class="ps_rank_02_tit">あなたの紹介件数ランキング</div>
+                            <div class="ps_rank_02_tit">あなたの紹介人数ランキング</div>
                             <div class="ps_rank_myrank_large_L_items">
                                 <div class="ps_rank_myrank_large_01">{{ $total_quantity_rank }}位</div>
                                 <div class="ps_rank_myrank_large_02">{{ $project_supporter->name }}</div>
@@ -165,7 +165,7 @@
 
                     <div class="ps_rank_02_R ranked_inviter_of_count_list">
 
-                        <div class="ps_rank_02_tit">紹介件数</div>
+                        <div class="ps_rank_02_tit">紹介人数</div>
 
                         @php
                             $total_quantity_rank = 1;
@@ -289,7 +289,7 @@
                         </div> --}}
 
                         <div class="ps_rank_myrank_large_R m_b_4030">
-                            <div class="ps_rank_02_tit">あなたの紹介件数ランキング</div>
+                            <div class="ps_rank_02_tit">あなたの紹介人数ランキング</div>
                             <div class="ps_rank_myrank_large_L_items">
                                 <div class="ps_rank_myrank_large_01">9位</div>
                                 <div class="ps_rank_myrank_large_02">ヤマダタロウ</div>
@@ -369,7 +369,7 @@
 
                         <div class="ps_rank_02_R">
 
-                            <div class="ps_rank_02_tit">紹介件数</div>
+                            <div class="ps_rank_02_tit">紹介人数</div>
 
                             <div class="ps_rank_02_rank_item_row">
                                 <div class="ps_rank_item_01">

@@ -13,7 +13,7 @@
     </div> --}}
 
     <div class="ps_rank_02_return_R">
-        <div class="ps_rank_02_return_tit return_opener">リターン内容(紹介件数)</div>
+        <div class="ps_rank_02_return_tit return_opener">リターン内容(紹介人数)</div>
         <!--/ps_rank_01-->
         <div class="ps_rank_return_text return_content">
             {!! $project->reward_by_total_quantity !!}
@@ -75,7 +75,7 @@
     </div> --}}
 
     <div class="ps_rank_02_return_R">
-        <div class="ps_rank_02_return_tit return_opener">リターン内容(紹介件数)</div>
+        <div class="ps_rank_02_return_tit return_opener">リターン内容(紹介人数)</div>
         <!--/ps_rank_01-->
         <div class="ps_rank_return_text return_content">
             <p>上位３名の方に特別お礼イベント開催！</p>

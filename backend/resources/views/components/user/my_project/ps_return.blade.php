@@ -5,7 +5,7 @@
         <h4 style="color: #e65d65">以下の注意事項をご確認ください。</h4>
         <ul>
             <li>
-                {{-- PSリターン獲得の条件は、支援者がプロジェクトサポーター(PS)となってプロジェクトページへのリンクをSNSで紹介し、別のユーザーがそのリンクによって集まった支援の総額が「支援総額」購入されたリターンの合計個数が「支援件数」として、それぞれの順位によって獲得ができます。 --}}
+                {{-- PSリターン獲得の条件は、支援者がプロジェクトサポーター(PS)となってプロジェクトページへのリンクをSNSで紹介し、別のユーザーがそのリンクによって集まった支援の総額が「支援総額」購入されたリターンの合計個数が「支援人数」として、それぞれの順位によって獲得ができます。 --}}
                 PSリターン獲得の条件は、支援者がプロジェクトサポーター(PS)となってプロジェクトページへのリンクをSNSで紹介し、別のユーザーがそのリンクによって集まった支援の合計人数が「支援人数」として、その順位によって獲得ができます。
             </li>
             <li>
@@ -36,7 +36,7 @@
             <x-common.async-submit-message propName="reward_by_total_amount" />
         </div> --}}
         <div class="ps_plan_form_item">
-            <div class="form_item_tit">支援件数順リターン内容<span class="hissu_txt">必須</span><span class="disclaimer">※300文字以内で入力してください</span></div>
+            <div class="form_item_tit">支援人数順リターン内容<span class="hissu_txt">必須</span><span class="disclaimer">※300文字以内で入力してください</span></div>
             <textarea name="reward_by_total_quantity" class="def_textarea tiny_editor" rows="6">{{ old('reward_by_total_quantity', optional($project)->reward_by_total_quantity) }}</textarea>
             <x-common.async-submit-message propName="reward_by_total_quantity" />
         </div>

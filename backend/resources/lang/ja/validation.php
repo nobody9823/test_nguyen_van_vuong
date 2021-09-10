@@ -214,7 +214,7 @@ return [
         'end_hour' => '掲載終了日(日付、時刻)',
         'end_minute' => '掲載終了日(日付、時刻)',
         'reward_by_total_amount' => '支援総額順リターン内容',
-        'reward_by_total_quantity' => '支援件数順リターン内容',
+        'reward_by_total_quantity' => '支援人数順リターン内容',
         'bank_code' => '金融機関コード・銀行コード',
         'branch_code' => '支店番号',
         'account_type' => '口座種別',

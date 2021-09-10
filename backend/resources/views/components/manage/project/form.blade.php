@@ -23,7 +23,7 @@
        class="form-control">{{old('reward_by_total_amount', optional($project ?? null)->reward_by_total_amount)}}</textarea>
 </div>
 <div class="form-group">
-    <label>支援件数順リターン内容</label>
+    <label>支援人数順リターン内容</label>
     <textarea type="text" name="reward_by_total_quantity"
        class="form-control">{{old('reward_by_total_quantity', optional($project ?? null)->reward_by_total_quantity)}}</textarea>
 </div>

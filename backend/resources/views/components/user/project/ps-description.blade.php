@@ -90,10 +90,10 @@
 
     <div class="ps_description_title">
         <p>③ランキング</p>
-        <span>あなた専用の招待リンクから購入した支援者の、紹介支援総額と紹介支援件数が表示されます。</span>
+        <span>あなた専用の招待リンクから購入した支援者の、紹介支援総額と紹介支援人数が表示されます。</span>
     </div>
     <p class="ps_description_text">紹介支援総額とは、あなた専用の招待リンクから支援者が購入した総額です。</p>
-    <p class="ps_description_text">紹介支援件数とは、あなた専用の招待リンクから購入したリターンの件数です。</p>
+    <p class="ps_description_text">紹介支援人数とは、あなた専用の招待リンクから購入したリターンの件数です。</p>
     <div class="ps_description_items_wrapper">
 
         <div class="ps_description_item">
@@ -153,7 +153,7 @@
 
                 <div class="ps_ranking_example_wrapper">
 
-                    <div class="ps_rank_02_tit">紹介件数</div>
+                    <div class="ps_rank_02_tit">紹介人数</div>
 
                     <div class="ps_rank_02_rank_item_row">
                         <div class="ps_ranking_example_01">
@@ -210,7 +210,7 @@
             特別なプロジェクトサポーター(PS)リターンを受け取ることができます。
         </p>
     </div>
-    <p class="ps_description_text">（例）紹介支援総額上位３名と、紹介支援件数上位３名限定で、お礼イベント開催。</p>
+    <p class="ps_description_text">（例）紹介支援総額上位３名と、紹介支援人数上位３名限定で、お礼イベント開催。</p>
     <div class="ps_description_items_wrapper">
 
         <div class="" style="width: 70%;">
