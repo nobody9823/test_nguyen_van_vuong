@@ -175,4 +175,16 @@ class MypageControllerTest extends TestCase
         $this->assertSoftDeleted($this->user);
         $this->assertEquals(0, User::count());
     }
+
+    // TODO:将来的にサポートプランを実装する場合に用いる
+    // public function testCommission()
+    // {
+    //     $this->withoutExceptionHandling(); 
+
+    //     $response = $this->actingAs($this->user)
+    //                      ->from(route('/'))
+    //                      ->get(route('user.commission'));
+    //     $response->assertOk()
+    //              ->assertViewIs('user.commission');
+    // }
 }
