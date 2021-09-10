@@ -36,7 +36,7 @@ class ProjectControllerForStripeTest extends TestCase
             'user_id' => $this->creator->id,
             'title' => 'test title',
             'content' => 'test content',
-            'target_amount' => 10000000,
+            'target_number' => 1000,
             'release_status' => '掲載中',
             'start_date' => now(),
             'end_date' => now()
