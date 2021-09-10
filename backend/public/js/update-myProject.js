@@ -85,7 +85,6 @@ const updateMyProject = (() => {
                     displayIndividualStatus(pastDue);
                 } else {
                     toastr["clear"]();
-                    toastr["success"]('本人確認情報の登録完了');
                 }
 
                 document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
