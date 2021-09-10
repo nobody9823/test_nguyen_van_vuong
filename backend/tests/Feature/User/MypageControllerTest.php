@@ -58,24 +58,28 @@ class MypageControllerTest extends TestCase
 
         $this->payment->includedPlans()->attach($this->plan->id ,['quantity' => 1]);
 
-        // $this->data =
-        // [
-        // "name" => "山田 太郎",
-        // "email" => "test@valleyin.co.jp",
-        // "email_confirmation" => "test@valleyin.co.jp",
-        // "password" => "test1234",
-        // "image_url" => UploadedFile::fake()->image('avatar.jpeg'),
-        // "gender" => "男性",
-        // "gender_is_published" => "1",
-        // "introduction" => "自己紹介文",
-        // "birthday" => [
-        //     "year" => "2021",
-        //     "month" => "1",
-        //     "day" => "1",
-        // ],
-        // "birthday_is_published" => "1",
-        // "birthday" => "2021-01-01"
-        // ];
+        $this->data =
+        [
+        "name" => "山田 太郎",
+        "image_url" => UploadedFile::fake()->image('avatar.jpeg'),
+        "email" => "test@valleyin.co.jp",
+        "email_confirmation" => "test@valleyin.co.jp",
+        "password" => "test1234",
+        "password_confirmation" => "test1234",
+        "twitter_url" => "https://twitter.com/",
+        "instagram_url" => "https://www.instagram.com/",
+        "youtube_url" => "https://www.youtube.com/",
+        "tiktok_url" => "https://www.tiktok.com/",
+        "other_url" => "https://readouble.com/",
+        "prefecture" => "東京都", 
+        "year" => "2011",
+        "month" => "1",
+        "day" => "1",
+        "birthday_is_published" => "1",
+        "gender" => "男性",
+        "gender_is_published" => "1",
+        "introduction" => "自己紹介文",
+        ]; 
     }
 
     public function testPaymentHistory()
