@@ -22,7 +22,12 @@ class Payment extends Model
         'message_status',
         'payment_way',
         'payment_is_finished',
+        'is_sent',
         'remarks'
+    ];
+
+    protected $casts = [
+        'is_sent' => 'boolean'
     ];
 
     public function user()

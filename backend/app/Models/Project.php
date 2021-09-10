@@ -138,36 +138,22 @@ class Project extends Model
         return $query->where('release_status', '掲載中');
     }
 
-    // includedPaymentsのカウント数と'price'の合計をカラムに持たせた'plans'をリレーションとして取得しています。
+    // 'Payments'テーブルのユーザーカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        return $query->withCount('payments')->withSum('payments', 'price');
+        // 重複するuser_idを削除して、支援者数を算出する。
+        $sub_query = Payment::selectRaw('count(distinct(`user_id`))')
+                    ->from('payments')
+                    ->whereColumn('projects.id','payments.project_id')
+                    ->toSql();
+
+        return $query->selectRaw("`projects`.*,($sub_query) as `payments_count`")->withSum('payments', 'price');
     }
 
-    public function getLoadPaymentsCountAndSumPrice()
+    public function getLoadIncludedPaymentsCountAndSumPrice()
     {
-        return $this
-            ->loadSum('payments', 'price')
-            ->loadCount([
-                'payments',
-                'payments as payments_count_within_a_day' => function ($query) {
-                    $query->where('created_at', '>=', Carbon::now()->subHours(24));
-                },
-            ])
-            ->load(['plans' => function ($query) {
-                $query->withCount('includedPayments');
-            }]);
-    }
-
-    public function loadOtherRelations()
-    {
-        $relationTables = ['comments','reports','payments'];
-        foreach($relationTables as $relationTable){
-            $this->load([$relationTable => function ($query) {
-                $query->orderBy('created_at', 'desc');
-            }]);
-        }
-        
+        $this->plans->loadCount('includedPayments');
+        $this->loadSum('payments', 'price');
         return $this;
     }
 
@@ -279,6 +265,16 @@ class Project extends Model
         return $end_date->diffInDays($today);
     }
 
+    public function getPaymentsCountAttribute()
+    {
+        return $this->payments->groupBy('user_id')->count();
+    }
+    
+    public function getPaymentsCountWithinADayAttribute()
+    {
+        return $this->payments->where('created_at', '>=', Carbon::now()->subHours(24))->groupBy('user_id')->count();
+    }
+
     // 目標金額に対する支援総額の割合
     // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
     public function getAchievementRateAttribute()
@@ -289,6 +285,18 @@ class Project extends Model
         } else { // ゼロ除算対策
             return 100;
         }
+    }
+
+    public function loadOtherRelations()
+    {
+        $relationTables = ['comments','reports','payments'];
+        foreach($relationTables as $relationTable){
+            $this->load([$relationTable => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }]);
+        }
+        
+        return $this;
     }
 
     /**

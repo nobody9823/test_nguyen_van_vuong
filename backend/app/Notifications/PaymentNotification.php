@@ -20,7 +20,7 @@ class PaymentNotification extends Notification
      */
     public function __construct(Project $project, Payment $payment)
     {
-        $this->project = $project->getLoadPaymentsCountAndSumPrice();
+        $this->project = $project->getLoadIncludedPaymentsCountAndSumPrice();
 
         $this->payment = $payment;
     }

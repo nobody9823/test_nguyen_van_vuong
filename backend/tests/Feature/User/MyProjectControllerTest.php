@@ -25,7 +25,7 @@ class MyProjectControllerTest extends TestCase
         parent::setUp();
 
         $this->users = User::factory()
-            ->has(Identification::factory())
+            ->has(Identification::factory()->state(['connected_account_id' => 'acct_1JVd3nRneYkDOHDQ']))
             ->has(Address::factory())
             ->has(Profile::factory())
             ->has(
@@ -43,12 +43,36 @@ class MyProjectControllerTest extends TestCase
                     )
             )->count(10)->create();
 
+        $this->user_not_having_connected_account = User::factory()
+            ->has(Identification::factory())
+            ->has(Address::factory())
+            ->has(Profile::factory())
+            ->has(
+                Project::factory()->released()
+                    ->has(
+                        ProjectFile::factory()->state([
+                            'file_url' => 'public/sampleImage/now_printing.png',
+                            'file_content_type' => 'image_url',
+                        ])
+                    )
+                    ->has(
+                        Plan::factory()->state([
+                            'price' => 1000
+                        ])
+                    )
+            )->create();
+
         $this->user = $this->users->first();
 
         $this->project = $this->user->projects()->first();
 
         $this->my_project = Project::factory()->state([
             'user_id' => $this->user->id,
+            'release_status' => '---',
+        ])->create();
+
+        $this->my_project_by_user_not_having_connected_account = Project::factory()->state([
+            'user_id' => $this->user_not_having_connected_account->id,
             'release_status' => '---',
         ])->create();
 
@@ -108,53 +132,67 @@ class MyProjectControllerTest extends TestCase
             'account_number' => '0000000',
             'account_name' => 'ヤマダタロウ'
         ];
-
-        $this->actingAs($this->user);
     }
 
     public function testIndexAction()
     {
-        $response = $this->get(route('user.my_project.project.index'));
+        $response = $this->actingAs($this->user)->get(route('user.my_project.project.index'));
 
         $response->assertOk();
     }
 
     public function testCreateAction()
     {
-        $response = $this->get(route('user.my_project.project.create'));
+        $response = $this->actingAs($this->user)->get(route('user.my_project.project.create'));
 
         $response->assertRedirect(route('user.my_project.project.edit', ['project' => Project::orderby('id', 'desc')->first()]));
     }
 
     public function testEditAction()
     {
-        $response = $this->get(route('user.my_project.project.edit', ['project' => $this->my_project]));
+        $response = $this->actingAs($this->user)->get(route('user.my_project.project.edit', ['project' => $this->my_project]));
 
         $response->assertOk();
     }
 
-    Public function dataProviderForTestUpdateActionForEachTab(): array
+    public function testCreateActionByUserNotHavingConnectedAccount()
+    {
+        $response = $this->actingAs($this->user_not_having_connected_account)->get(route('user.my_project.project.create'));
+
+        $response->assertRedirect(route('user.my_project.project.edit', ['project' => Project::orderby('id', 'desc')->first()]));
+        $this->assertNotEmpty($this->user_not_having_connected_account->identification->connected_account_id);
+    }
+
+    public function testEditActionByUserNotHavingConnectedAccount()
+    {
+        $response = $this->actingAs($this->user_not_having_connected_account)->get(route('user.my_project.project.edit', ['project' => $this->my_project_by_user_not_having_connected_account]));
+
+        $response->assertOk();
+        $this->assertNotEmpty($this->user_not_having_connected_account->identification->connected_account_id);
+    }
+
+    public function dataProviderForTestUpdateActionForEachTab(): array
     {
         return [
             '「目標金額」更新処理' => ['target_tab', 'overview', 'target_amount_params'],
             '「概要」更新処理' => ['overview', 'visual', 'overview_params'],
-            '「TOP画像」更新処理' => ['visual','return', 'visual_params'],
-            '「PSリターン(支援総額)」更新処理' => ['ps_return','identification', 'reward_by_total_amount_params'],
-            '「PSリターン(支援者件数)」更新処理' => ['ps_return','identification','reward_by_total_quantity_params'],
-            '「本人確認」更新処理' => ['identification','my_project_index', 'identification_params'],
+            '「TOP画像」更新処理' => ['visual', 'return', 'visual_params'],
+            '「PSリターン(支援総額)」更新処理' => ['ps_return', 'identification', 'reward_by_total_amount_params'],
+            '「PSリターン(支援者件数)」更新処理' => ['ps_return', 'identification', 'reward_by_total_quantity_params'],
+            '「本人確認」更新処理' => ['identification', 'my_project_index', 'identification_params'],
         ];
     }
 
     /**
-    * @dataProvider dataProviderForTestUpdateActionForEachTab
-    */
+     * @dataProvider dataProviderForTestUpdateActionForEachTab
+     */
     public function testUpdateActionForEachTab(string $current_tab, string $next_tab, string $tab_params)
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => $current_tab], $this->$tab_params));
+        $response = $this->actingAs($this->user)->put(route('user.my_project.project.update', ['project' => $this->my_project, 'current_tab' => $current_tab], $this->$tab_params));
 
-        if($next_tab === 'my_project_index'){
+        if ($next_tab === 'my_project_index') {
             $response->assertRedirect(route('user.my_project.project.index'));
         } else {
             $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->my_project, 'next_tab' => $next_tab]));

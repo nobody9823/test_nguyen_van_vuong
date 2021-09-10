@@ -25,7 +25,10 @@ class ProjectControllerForStripeTest extends TestCase
 
         Config::set('app.card_payment_api', 'stripe');
 
-        $this->creator = User::factory()->hasProfile()->create();
+        $this->creator = User::factory()
+            ->hasProfile()
+            ->hasIdentification(['connected_account_id' => 'acct_1JWzlURY5QcsEZYN'])
+            ->create();
 
         $this->supporter = User::factory()->hasProfile()->create();
 

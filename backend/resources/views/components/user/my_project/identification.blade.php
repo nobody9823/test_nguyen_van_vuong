@@ -67,10 +67,17 @@
     </div>
 
     <div class="form_item_row">
-        <div class="form_item_tit">町域•番地<span class="hissu_txt">必須</span></div>
+        <div class="form_item_tit">町域<span class="hissu_txt">必須</span></div>
         <input type="text" id="block" name="block" class="p-street-address def_input_100p"
             value="{{ old('block', optional($user->address)->block) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="block" />
+    </div>
+
+    <div class="form_item_row">
+        <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
+        <input type="text" name="block_number" class="p-extended-address def_input_100p"
+            value="{{ old('block_number', optional($user->address)->block_number) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
+        <x-common.async-submit-message propName="block_number" />
     </div>
 
     <div class="form_item_row">
@@ -165,14 +172,14 @@
                 </a>
             </span>
         </div>
-        <input type="number" name="bank_code" class="def_input_100p"
+        <input id="bankCode" type="number" name="bank_code" class="def_input_100p"
             value="{{ old('bank_code', optional($user->identification)->bank_code) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="bank_code" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">支店番号<span class="hissu_txt">必須</span></div>
-        <input type="number" name="branch_code" class="def_input_100p"
+        <input id="branchCode" type="number" name="branch_code" class="def_input_100p"
             value="{{ old('branch_code', optional($user->identification)->branch_code) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="branch_code" />
     </div>
@@ -193,15 +200,15 @@
 
     <div class="form_item_row">
         <div class="form_item_tit">口座番号<span class="hissu_txt">必須</span></div>
-        <input type="number" name="account_number" class="def_input_100p"
+        <input id="accountNumber" type="number" name="account_number" class="def_input_100p"
             value="{{ old('account_number', optional($user->identification)->account_number) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="account_number" />
     </div>
 
     <div class="form_item_row">
         <div class="form_item_tit">口座名義<span class="hissu_txt">必須</span></div>
-        <input type="text" name="account_name" class="def_input_100p"
-            value="{{ old('account_name', optional($user->identification)->account_number) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
+        <input id="holderName" type="text" name="account_name" class="def_input_100p"
+            value="{{ old('account_name', optional($user->identification)->account_name) }}" onchange="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="account_name" />
     </div>
 
