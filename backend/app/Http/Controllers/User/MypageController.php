@@ -110,7 +110,7 @@ class MypageController extends Controller
         return view('user.mypage.withdraw');
     }
 
-    public function delete_user(User $user)
+    public function deleteUser(User $user)
     {
         $user = User::find($user->id);
         return $user->delete()

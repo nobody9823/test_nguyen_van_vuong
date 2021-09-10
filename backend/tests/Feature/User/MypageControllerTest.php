@@ -163,4 +163,16 @@ class MypageControllerTest extends TestCase
         $response->assertOk()
                  ->assertViewIs('user.mypage.withdraw');
     }
+
+    public function testDeleteUser()
+    {
+        $this->withoutExceptionHandling(); 
+
+        $response = $this->actingAs($this->user)
+                         ->from(route('user.withdraw'))
+                         ->delete(route('user.delete_user', ['user' => $this->user]));
+        $response->assertRedirect(route('user.index'));
+        $this->assertSoftDeleted($this->user);
+        $this->assertEquals(0, User::count());
+    }
 }
