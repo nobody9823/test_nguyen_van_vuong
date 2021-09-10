@@ -87,6 +87,7 @@
 <script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 <script src="https://cdn.tiny.cloud/1/ovqfx7jro709kbmz7dd1ofd9e28r5od7w5p4y268w75z511w/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="{{ asset('/js/display-individual-status.js') }}"></script>
 <script src={{ asset('/js/dateFormat.js') }}></script>
 <script src="{{ asset('js/remove-project-image.js') }}"></script>
 <script src="{{ asset('js/upload-project-image.js') }}"></script>
@@ -98,6 +99,11 @@
 <script src={{ asset('/js/uploaded-image-handler.js') }}></script>
 <script src={{ asset('/js/plan-form-modal.js') }}></script>
 <script src={{ asset('/js/fade-element.js') }}></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe('{{ config("app.stripe_key") }}');
+</script>
+<script src="{{ asset('/js/stripe-create-bank-account-token.js') }}"></script>
 
 <script>
     window.addEventListener('load',()=>{
@@ -105,11 +111,15 @@
     });
     if (getParam('status') == 422) {
         getParam('plan') != null
-            ? openPlanFormModal(getParam('plan'))
-            : openNewPlanFormModal();
+        ? openPlanFormModal(getParam('plan'))
+        : openNewPlanFormModal();
+    }
+    var pastDue = @json($account->requirements->past_due);
+    if (pastDue.length) {
+        displayIndividualStatus(pastDue);
     }
 </script>
-{{-- FIXME: 今後別ファイルにまとめる必要あり、IDなどそのままリクエストを送っているのでPolicyなどで権限チェックなども追加したほうが良いかもしれないです。 --}}
+
 <script>
 tinymce.init({
     selector: '.tiny_editor',

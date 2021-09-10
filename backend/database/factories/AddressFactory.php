@@ -28,6 +28,7 @@ class AddressFactory extends Factory
             'prefecture' => PrefectureHelper::getPrefectures()[random_int(1, 47)],
             'city' => $this->faker->city,
             'block' => $this->faker->streetAddress,
+            'block_number' => '1-1-1',
             'building' => $this->faker->buildingNumber,
         ];
     }

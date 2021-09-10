@@ -59,8 +59,7 @@ class Profile extends Model
 
     public function getYearOfBirth()
     {
-        if ($this->birthday !== null)
-        {
+        if ($this->birthday !== null) {
             return $this->getBirthDay()->year;
         }
         return null;
@@ -68,8 +67,7 @@ class Profile extends Model
 
     public function getMonthOfBirth()
     {
-        if ($this->birthday !== null)
-        {
+        if ($this->birthday !== null) {
             return $this->getBirthDay()->month;
         }
         return null;
@@ -77,11 +75,17 @@ class Profile extends Model
 
     public function getDayOfBirth()
     {
-        if ($this->birthday !== null)
-        {
+        if ($this->birthday !== null) {
             return $this->getBirthDay()->day;
         }
         return null;
+    }
+
+    public function getParsePhoneNumberAttribute()
+    {
+        $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+        $phone_number = $phoneUtil->parse($this->phone_number, "JP");
+        return $phoneUtil->format($phone_number, \libphonenumber\PhoneNumberFormat::E164);
     }
 
     public static function initialize()

@@ -14,6 +14,7 @@ use App\Models\Address;
 use App\Models\Profile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Exception;
 
 class SupporterControllerTest extends TestCase
 {
@@ -42,7 +43,7 @@ class SupporterControllerTest extends TestCase
                     )
             )->count(10)->create();
 
-        $this->users->each(function (User $user){
+        $this->users->each(function (User $user) {
             $user->payments()->saveMany(
                 Payment::factory()->count(10)
                     ->has(PaymentToken::factory())
@@ -51,7 +52,7 @@ class SupporterControllerTest extends TestCase
             );
         });
 
-        Payment::all()->each(function (Payment $payment){
+        Payment::all()->each(function (Payment $payment) {
             $payment->includedPlans()->attach(
                 [Plan::whereIn('project_id', Project::where('id', $payment->project_id)->select('id'))->inRandomOrder()->first()->id => ['quantity' => random_int(1, 3)]]
             );
@@ -60,7 +61,10 @@ class SupporterControllerTest extends TestCase
         $this->user = $this->users->first();
 
         $this->project = $this->user->projects()->first();
+
+        $this->unauthorizedProject = User::latest('id')->first()->projects()->first();
     }
+
     /**
      * A basic feature test example.
      *
@@ -73,5 +77,14 @@ class SupporterControllerTest extends TestCase
         $response = $this->actingAs($this->user)->get(route('user.supporter.index', ['project' => $this->project]));
 
         $response->assertStatus(200);
+    }
+
+    public function testUserSupporterIndexPageIsFailBecauseOfNotOwnProject()
+    {
+        $this->withoutExceptionHandling();
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('This action is unauthorized.');
+
+        ($this->actingAs($this->user)->get(route('user.supporter.index', ['project' => $this->unauthorizedProject])))->execute(1);
     }
 }
