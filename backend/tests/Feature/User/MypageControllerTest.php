@@ -226,4 +226,14 @@ class MypageControllerTest extends TestCase
         $response->assertOk()
                  ->assertViewIs('user.footer.trade_law');
     }
+
+    public function testQuestion()
+    {
+        $this->withoutExceptionHandling(); 
+
+        $response = $this->from(route('user.index'))
+                         ->get(route('user.question'));
+        $response->assertOk()
+                 ->assertViewIs('user.footer.question');
+    }
 }
