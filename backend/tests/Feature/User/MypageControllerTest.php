@@ -196,4 +196,14 @@ class MypageControllerTest extends TestCase
         $response->assertOk()
                  ->assertViewIs('user.footer.ps_terms_of_service');
     }
+
+    public function testTermsOfService()
+    {
+        $this->withoutExceptionHandling(); 
+
+        $response = $this->from(route('user.index'))
+                         ->get(route('user.terms_of_service'));
+        $response->assertOk()
+                 ->assertViewIs('user.footer.terms_of_service');
+    }
 }
