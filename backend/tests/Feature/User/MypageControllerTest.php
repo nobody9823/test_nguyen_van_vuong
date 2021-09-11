@@ -181,10 +181,19 @@ class MypageControllerTest extends TestCase
     // {
     //     $this->withoutExceptionHandling(); 
 
-    //     $response = $this->actingAs($this->user)
-    //                      ->from(route('/'))
+    //     $response = $this->from(route('user.index'))
     //                      ->get(route('user.commission'));
     //     $response->assertOk()
     //              ->assertViewIs('user.commission');
     // }
+
+    public function testPsTermsOfService()
+    {
+        $this->withoutExceptionHandling(); 
+
+        $response = $this->actingAs($this->user)->from(route('user.index'))
+                         ->get(route('user.ps_terms_of_service'));
+        $response->assertOk()
+                 ->assertViewIs('user.footer.ps_terms_of_service');
+    }
 }
