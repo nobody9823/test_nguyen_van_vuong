@@ -216,4 +216,14 @@ class MypageControllerTest extends TestCase
         $response->assertOk()
                  ->assertViewIs('user.footer.privacy_policy');
     }
+
+    public function testTradeLaw()
+    {
+        $this->withoutExceptionHandling(); 
+
+        $response = $this->from(route('user.index'))
+                         ->get(route('user.trade_law'));
+        $response->assertOk()
+                 ->assertViewIs('user.footer.trade_law');
+    }
 }
