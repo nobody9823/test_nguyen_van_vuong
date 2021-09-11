@@ -206,4 +206,14 @@ class MypageControllerTest extends TestCase
         $response->assertOk()
                  ->assertViewIs('user.footer.terms_of_service');
     }
+
+    public function testPrivacyPolicy()
+    {
+        $this->withoutExceptionHandling(); 
+
+        $response = $this->from(route('user.index'))
+                         ->get(route('user.privacy_policy'));
+        $response->assertOk()
+                 ->assertViewIs('user.footer.privacy_policy');
+    }
 }
