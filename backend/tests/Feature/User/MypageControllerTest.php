@@ -24,37 +24,23 @@ class MypageControllerTest extends TestCase
     {
         parent::setUp();
 
-        // ダミーデータの記述方法を後で変更する（楠本の個人的なメモです）
-        $this->user = User::factory()->create();
+        $this->user = User::factory()
+            ->has(SnsLink::factory())
+            ->has(Address::factory())
+            ->has(Profile::factory())
+            ->has(
+                Project::factory()
+                    ->has(Plan::factory())
+                    ->has(Payment::factory()
+                        ->has(PaymentToken::factory())
+                    )
+            )->create();
+        
+        $this->project = $this->user->projects()->first();
 
-        $this->sns_link = SnsLink::factory()->state([
-            'user_id' => $this->user->id,            
-        ])->create();
-
-        $this->profile = Profile::factory()->state([
-            'user_id' => $this->user->id,
-        ])->create();
-
-        $this->address = Address::factory()->state([
-            'user_id' => $this->user->id,
-        ])->create();
-
-        $this->project = Project::factory()->state([
-            'user_id' => $this->user->id,
-        ])->create();
-
-        $this->payment = Payment::factory()->state([
-            'user_id' => $this->user->id,
-            'project_id' => $this->project->id
-        ])->create();
-
-        $this->plan = Plan::factory()->state([
-            'project_id' => $this->project->id,
-        ])->create();
-
-        $this->payment_token = PaymentToken::factory()->state([
-            'payment_id' => $this->payment->id,            
-        ])->create();
+        $this->plan = $this->project->plans()->first();
+        
+        $this->payment = $this->project->payments()->first();
 
         $this->payment->includedPlans()->attach($this->plan->id ,['quantity' => 1]);
 
