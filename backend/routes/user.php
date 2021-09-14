@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/profile', [MypageController::class, 'profile'])->name('profile');
     Route::patch('/profile/{user}', [MypageController::class, 'updateProfile'])->name('update_profile');
     Route::get('/withdraw', [MypageController::class, 'withdraw'])->name('withdraw');
-    Route::delete('/withdraw/{user}', [MypageController::class, 'delete_user'])->name('delete_user');
+    Route::delete('/withdraw/{user}', [MypageController::class, 'deleteUser'])->name('delete_user');
     Route::post('update_external_account', [MypageController::class, 'updateExternalAccount'])->name('update_external_account');
 
     //---------------------メッセージ一覧-----------------------------------------------
@@ -113,7 +113,7 @@ Route::post('/inquiry/send', [InquiryController::class, 'sendInquiry'])->name('i
 // --------------------terms of service-------------------
 Route::get('/terms_of_service', [MypageController::class, 'termsOfService'])->name('terms_of_service');
 // --------------------PS terms of service-------------------
-Route::get('/ps_terms_of_service', [MypageController::class, 'PsTermsOfService'])->name('ps_terms_of_service');
+Route::get('/ps_terms_of_service', [MypageController::class, 'psTermsOfService'])->name('ps_terms_of_service');
 // --------------------privacy policy-------------------
 Route::get('/privacy_policy', [MypageController::class, 'privacyPolicy'])->name('privacy_policy');
 // --------------------trade law-------------------
