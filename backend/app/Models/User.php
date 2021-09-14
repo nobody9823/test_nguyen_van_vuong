@@ -118,18 +118,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Payment', 'inviter_id', 'id');
     }
 
-    public function invitedPlanPaymentIncluded()
-    {
-        return $this->hasManyThrough(
-            'App\Models\PlanPaymentIncluded',
-            'App\Models\Payment',
-            'inviter_id',
-            'payment_id',
-            'id',
-            'id'
-        );
-    }
-
     public function likedProjects()
     {
         return $this->belongsToMany('App\Models\Project', 'user_project_liked')
