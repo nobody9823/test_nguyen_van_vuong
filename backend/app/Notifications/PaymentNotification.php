@@ -49,7 +49,7 @@ class PaymentNotification extends Notification
                 ->view('user.mail.template.payment_finished',
                 [
                     'billing_users_count' => $this->project->payments_count,
-                    'payments_sum_price' => $this->project->payments_sum_price,
+                    // 'payments_sum_price' => $this->project->payments_sum_price,
                     'project_title' => $this->project->title,
                     'payment_id' => $this->payment->paymentToken->token
                 ]);

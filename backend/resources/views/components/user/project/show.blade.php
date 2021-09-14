@@ -70,8 +70,8 @@
 
                 <div class="pds_sec01_R">
 
-                <div class="pds_sec01_R_en01">現在の支援総額</div>
-                <div class="pds_sec01_R_en02 E-font">¥ {{ $project->payments_sum_price }}</div>
+                <div class="pds_sec01_R_en01">現在の支援者数</div>
+                <div class="pds_sec01_R_en02 E-font">{{ $project->payments_count }} 人</div>
 
 
                 <div class="pds_sec01_progress-bar">
@@ -81,13 +81,13 @@
                     </div>
                 </div>
 
-                <div class="pds_sec01_R_en03">目標金額は¥{{ $project->target_amount }}</div>
+                <div class="pds_sec01_R_en03">目標人数は{{ $project->target_number }}人</div>
 
-                <div class="pds_sec01_R_nin_base">
+                {{-- <div class="pds_sec01_R_nin_base">
                     <div class="pds_sec01_R_nin01">支援者数</div>
                     <div class="pds_sec01_R_nin02 E-font">{{ $project->payments_count }}<span>人</span></div>
-                     {{-- <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div> --}}
-                </div><!--/pds_sec01_R_nin01-->
+                      <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div> 
+                </div><!--/pds_sec01_R_nin01-->--}}
 
                 <div class="pds_sec01_R_nokori_base">
                     @if (DateFormat::checkDateIsFuture($project->start_date))
@@ -317,8 +317,8 @@
         <p><i class="far fa-lightbulb pri_color_f i_icon"></i>達成額</p>
         <div><span>{{ $project->payments_sum_price }}</span>円</div>
         <p>
-            <i class="fas fa-yen-sign pri_color_f i_icon"></i>目標金額 {{ number_format($project->target_amount) }}
-            円</p>
+            <i class="fas fa-yen-sign pri_color_f i_icon"></i>目標人数 {{ number_format($project->target_number) }}
+            人</p>
         @if($project->achievement_rate < 100) <div class="complete">
             <div class="bar" style="width: {{ $project->achievement_rate }}%;"></div>
             <div class="complete-text">{{ $project->achievement_rate}}%達成</div>
