@@ -1040,6 +1040,7 @@ input[type=radio]:checked + .radio-fan::after {
 .pds_sec01_R{ width: calc(45% - 15px); display: flex; flex-wrap: wrap; order: 4;}
 .pds_sec01_R_en01{ font-size: 1.6rem; font-weight: bold; color: #00AEBD; width: 100%;}
 .pds_sec01_R_en02{ font-size: 5.4rem; font-weight: bold; color: #00AEBD; width: 100%;}
+.pds_sec01_R_en02 span{ font-size: 3rem; font-weight: bold;}
 
 .pds_sec01_progress-bar{ width: 100%;}
 
