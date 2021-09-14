@@ -42,7 +42,8 @@ class ProjectRequest extends FormRequest
             'content' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
             'reward_by_total_amount' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
             'reward_by_total_amount' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
-            'target_amount' => ['required', 'integer', 'min:10000', 'max:99999999'],
+            // 'target_amount' => ['required', 'integer', 'min:10000', 'max:99999999'],
+            'target_number' => ['required', 'integer', 'min:1', 'max:9999999'],
             'curator_id' => ['nullable', 'exists:curators,id'],
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
             'start_date' => ['required', 'date_format:Y-m-d H:i:s', $this->isMethod('post') ? 'after:1 week' : ''],
@@ -104,10 +105,14 @@ class ProjectRequest extends FormRequest
             'content.required' => "プロジェクト内容を入力してください。",
             'content.string' => "プロジェクト内容は文字で入力してください。",
             'content.max' => "プロジェクト内容は100000文字以内にしてください。",
-            'target_amount.required' => "目標金額を入力してください。",
-            'target_amount.integer' => "目標金額は数字で入力してください。",
-            'target_amount.min' => "目標金額は10,000円以上にしてください。",
-            'target_amount.max' => "目標金額は99,999,999円以内にしてください。",
+            // 'target_amount.required' => "目標金額を入力してください。",
+            // 'target_amount.integer' => "目標金額は数字で入力してください。",
+            // 'target_amount.min' => "目標金額は10,000円以上にしてください。",
+            // 'target_amount.max' => "目標金額は99,999,999円以内にしてください。",
+            'target_number.required' => "目標人数を入力してください。",
+            'target_number.integer' => "目標人数は数字で入力してください。",
+            'target_number.min' => "目標人数は1人以上にしてください。",
+            'target_number.max' => "目標人数は9,999,999人以内にしてください。",
             'curator_id.required' => "キュレーターを入力してください。",
             'curator_id.exists' => '選択されたキュレーターは存在しておりません。',
             'start_date.required' => "掲載開始日時を入力してください。",
