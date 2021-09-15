@@ -118,18 +118,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Payment', 'inviter_id', 'id');
     }
 
-    public function invitedPlanPaymentIncluded()
-    {
-        return $this->hasManyThrough(
-            'App\Models\PlanPaymentIncluded',
-            'App\Models\Payment',
-            'inviter_id',
-            'payment_id',
-            'id',
-            'id'
-        );
-    }
-
     public function likedProjects()
     {
         return $this->belongsToMany('App\Models\Project', 'user_project_liked')
@@ -204,14 +192,17 @@ class User extends Authenticatable
     // inviter_idが一致するpaymentsに紐づくplan_payment_includedのquantityカラムの合計を集計して降順に並び替え
     public function scopeGetInvitersRankedByInvitedUsers($query, $project_id)
     {
-        return $query->withSum(['invitedPlanPaymentIncluded' => function ($query) use ($project_id) {
-            $query->where('payments.project_id', $project_id);
-        }], 'quantity')
-            ->whereIn('id', Payment::select('inviter_id')->whereIn(
-                'project_id',
-                Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
-            ))
-            ->orderBy('invited_plan_payment_included_sum_quantity', 'DESC');
+        return $query
+            ->withCount(['invitedPayments' => function ($query) use ($project_id) {
+                $query->select(\DB::raw('count(distinct(`user_id`))'))->where('project_id', $project_id);
+            }])
+            ->withSum(['invitedPayments' => function ($query) use ($project_id) {
+                $query->where('project_id', $project_id);
+            }], 'price')
+            ->having('invited_payments_count', '>', 0)
+            ->having('invited_payments_sum_price', '>', 0)
+            ->orderBy('invited_payments_count', 'DESC')
+            ->orderBy('invited_payments_sum_price', 'DESC');
     }
 
     // inviter_idが一致するpaymentsの支援総額から降順に並び替え
@@ -220,10 +211,7 @@ class User extends Authenticatable
         return $query->withSum(['invitedPayments' => function ($query) use ($project_id) {
             $query->where('project_id', $project_id);
         }], 'price')
-            ->whereIn('id', Payment::select('inviter_id')->whereIn(
-                'project_id',
-                Project::select('id')->where('id', $project_id)->pluck('id')->toArray()
-            ))
+            ->having('invited_payments_sum_price', '>', 0)
             ->orderBy('invited_payments_sum_price', 'DESC');
     }
 
