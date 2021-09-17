@@ -58,7 +58,7 @@
     </p>
     @endif
     <div class="def_outer_gray">
-        <section style="{{ Request::get('next_tab') === 'target_number' || Request::get('next_tab') === null ? '' : 'display: none;' }}" class="my_project_section def_inner inner_item">
+        <section style="{{ Request::get('next_tab') === 'target_number' || Request::get('next_tab') === null ? '' : 'display: none;' }}" id="target_number_section"  class="my_project_section def_inner inner_item">
             <x-user.my_project.target_number :project="$project" />
         </section>
         <section style="{{ Request::get('next_tab') === 'overview' ? '' : 'display: none;' }}" id="overview_section" class="my_project_section def_inner inner_item">
