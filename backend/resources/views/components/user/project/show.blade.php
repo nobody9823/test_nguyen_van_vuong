@@ -70,10 +70,6 @@
 
                 <div class="pds_sec01_R">
 
-                <div class="pds_sec01_R_en01">現在の支援者数</div>
-                <div class="pds_sec01_R_en02 E-font">{{ $project->payments_count }} 人</div>
-
-
                 <div class="pds_sec01_progress-bar">
                     <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
                     <div class="progress-bar">
@@ -83,11 +79,11 @@
 
                 <div class="pds_sec01_R_en03">目標人数は{{ $project->target_number }}人</div>
 
-                {{-- <div class="pds_sec01_R_nin_base">
-                    <div class="pds_sec01_R_nin01">支援者数</div>
-                    <div class="pds_sec01_R_nin02 E-font">{{ $project->payments_count }}<span>人</span></div>
-                      <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div> 
-                </div><!--/pds_sec01_R_nin01-->--}}
+                <div class="pds_sec01_R_nin_base">
+                    <div class="pds_sec01_R_en01">現在の支援者数</div>
+                    <div class="pds_sec01_R_en02 E-font">{{ $project->payments_count }}<span>人</span></div>
+                      {{-- <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div> --}}
+                </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_nokori_base">
                     @if (DateFormat::checkDateIsFuture($project->start_date))
@@ -199,7 +195,7 @@
                         <div class="sub_tit_L">活動レポート</div>
                     </div>
 
-                    @if($project->payments->contains('user_id', optional(Auth::user())->id)) 
+                    @if($project->payments->contains('user_id', optional(Auth::user())->id))
                     <div>
                         @foreach($project->reports as $report)
                         <x-user.project.report :project="$project" :report="$report" />
