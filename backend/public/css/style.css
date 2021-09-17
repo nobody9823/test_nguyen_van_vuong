@@ -607,9 +607,9 @@ input[type=radio]:checked + .radio-fan::after {
 .ib01L_01 img { width: 100%; height: 100%; max-width: 492px; max-height: 323px; border-radius: 8px 8px 0px 0px; object-fit: contain;}
 .ib01L_02{ padding: 0 15px; margin: 0 0 15px 0;}
 .ib01L_02 .progress-bar{ width: 100%; height: 10px; background: #eee; border-radius: 5px;}
-.ib01L_02 .progress-bar span { display:block; height: 10px; border-radius: 5px; background: #00aebd; background: -moz-linear-gradient(left,  #00aebd 0%, #fff200 100%); background: -webkit-linear-gradient(left,  #00aebd 0%,#fff200 100%); background: linear-gradient(to right,  #00aebd 0%,#fff200 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00aebd', endColorstr='#fff200',GradientType=1 ); }
+.ib01L_02 .progress-bar span { display:block; height: 10px; border-radius: 5px;}
 
-.img_box_01_L .progress-bar_par{ display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; margin-bottom: 3px;}
+.img_box_01_L .progress-bar_par{ display: flex; align-items: center; align-content: center; justify-content:flex-end; margin-bottom: 3px;}
 .img_box_01_L .progress-bar_par div{ font-size: 0.9rem; color:#00aebd; }
 
 .ib01L_03{ padding: 0 15px; margin: 0 0 30px 0; position: relative;}
@@ -627,9 +627,9 @@ input[type=radio]:checked + .radio-fan::after {
 .ib01R_01 img { width: 100%; height: 100%; max-width: 240px; max-height: 150px; border-radius: 8px 8px 0px 0px; object-fit: contain;}
 .ib01R_02{ padding: 0 10px; margin: 0 0 10px 0;}
 .ib01R_02 .progress-bar{ width: 100%; height: 7px; background: #eee; border-radius: 5px;}
-.ib01R_02 .progress-bar span { display:block; height: 7px; border-radius: 5px; background: #00aebd; background: -moz-linear-gradient(left,  #00aebd 0%, #fff200 100%); background: -webkit-linear-gradient(left,  #00aebd 0%,#fff200 100%); background: linear-gradient(to right,  #00aebd 0%,#fff200 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00aebd', endColorstr='#fff200',GradientType=1 ); }
+.ib01R_02 .progress-bar span { display:block; height: 7px; border-radius: 5px;}
 
-.img_box_01_R .progress-bar_par{ display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; margin-bottom: 0px;}
+.img_box_01_R .progress-bar_par{ display: flex; align-content: center; justify-content:flex-end; margin-bottom: 0px;}
 .img_box_01_R .progress-bar_par div{ font-size: 0.8rem; color:#00aebd; }
 
 .ib01R_03{ padding: 0 10px; margin: 0 0 10px 0; position: relative;}
@@ -652,11 +652,7 @@ input[type=radio]:checked + .radio-fan::after {
     .ib01L_01 img {max-width: 100vw;}
     .ib01L_04 {position: static;}
 }
-@media screen and (max-width: 1000px){
-	.supporter_count{
-		display: none;
-	}
-}
+
 .tit_L_01{ width: 100%;  font-size: 2rem; font-weight: bold; text-align: center; color:#00aebd ; margin: 0 auto 40px auto;}
 .tit_L_01 h2{ font-size: 4.0rem; font-weight: bold;}
 .sub_tit_L{ font-size: 1.9rem; font-weight: bold;}
@@ -672,9 +668,9 @@ input[type=radio]:checked + .radio-fan::after {
 .ib02_01 img { height: 150px; max-width: 240px; object-fit: contain;}
 .ib02_02{ padding: 0 10px; margin: 0 0 10px 0;}
 .ib02_02 .progress-bar{ width: 100%; height: 7px; background: #eee; border-radius: 5px;}
-.ib02_02 .progress-bar span { display:block; height: 7px; border-radius: 5px; background: #00aebd; background: -moz-linear-gradient(left,  #00aebd 0%, #fff200 100%); background: -webkit-linear-gradient(left,  #00aebd 0%,#fff200 100%); background: linear-gradient(to right,  #00aebd 0%,#fff200 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00aebd', endColorstr='#fff200',GradientType=1 ); }
+.ib02_02 .progress-bar span { display:block; height: 7px; border-radius: 5px;}
 
-.img_box_02 .progress-bar_par{ display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; margin-bottom: 0px;}
+.img_box_02 .progress-bar_par{ display: flex; align-items: center; align-content: center; justify-content:flex-end; margin-bottom: 0px;}
 .img_box_02 .progress-bar_par div{ font-size: 0.8rem; color:#00aebd; }
 
 .ib02_03{ padding: 0 10px; margin: 0 0 10px 0; position: relative;}
@@ -1045,8 +1041,8 @@ input[type=radio]:checked + .radio-fan::after {
 .pds_sec01_progress-bar{ width: 100%;}
 
 .pds_sec01_progress-bar .progress-bar{ width: 100%; height: 15px; background: #eee; border-radius: 8px;}
-.pds_sec01_progress-bar .progress-bar span { display:block; height: 15px; border-radius: 8px; background: #00aebd; background: -moz-linear-gradient(left,  #00aebd 0%, #fff200 100%); background: -webkit-linear-gradient(left,  #00aebd 0%,#fff200 100%); background: linear-gradient(to right,  #00aebd 0%,#fff200 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00aebd', endColorstr='#fff200',GradientType=1 ); }
-.pds_sec01_progress-bar .progress-bar_par{ display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; margin-bottom: 0px;}
+.pds_sec01_progress-bar .progress-bar span { display:block; height: 15px; border-radius: 8px;}
+.pds_sec01_progress-bar .progress-bar_par{ display: flex; align-items: center; align-content: center; justify-content:flex-end; margin-bottom: 0px;}
 .pds_sec01_progress-bar .progress-bar_par div{ font-size: 0.8rem; color:#00aebd; }
 .pds_sec01_R_en03{ font-size: 1.2rem; font-weight: bold; color: #555353; width: 100%; margin: 10px 0 20px 0;}
 
@@ -2891,4 +2887,20 @@ margin: 20px 0;
 @media screen and (max-width: 768px){
     .my_project_img_box_wrapper {width: 90vw;}
     .my_plan_img_box_wrapper {width: 90vw;}
+}
+
+.progress_bar_color_case_of_less_than_30 {
+    background-color: #00aebd;
+}
+.progress_bar_color_case_of_less_than_50 {
+    background-color: #00bf93;
+}
+.progress_bar_color_case_of_less_than_90 {
+    background-color: #47ef45;
+}
+.progress_bar_color_case_of_less_than_100 {
+    background-color: #baff5c;
+}
+.progress_bar_color_case_of_greater_than_100 {
+    background-color: #edf82d;
 }

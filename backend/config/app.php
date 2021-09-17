@@ -180,6 +180,7 @@ return [
         App\Providers\SlackServiceProvider::class,
         App\Providers\DateFormatServiceProvider::class,
         App\Providers\EditMyProjectTabServiceProvider::class,
+        App\Providers\ProgressBarStateServiceProvider::class,
         // 追加
     ],
 
@@ -238,6 +239,7 @@ return [
         'Slack' => App\Services\Slack\SlackFacade::class,
         'DateFormat' => App\Services\Date\DateFormatFacade::class,
         'EditMyProjectTab' => App\Services\View\EditMyProjectTabFacade::class,
+        'ProgressBarState' => App\Services\View\ProgressBarStateFacade::class,
     ],
 
     'basic_auth' => env('BASIC_AUTH', false),

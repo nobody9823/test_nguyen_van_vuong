@@ -13,9 +13,14 @@
     <div class="su_pr_01_02 m_b_1510">現在の支援総額：{{ number_format($project->payments_sum_price) }}円</div>
     @endif
     <div class="pds_sec01_progress-bar m_b_1510">
-        <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
+        <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
+            <div>{{ $project->achievement_rate }}%</div>
+        </div>
         <div class="progress-bar">
-            <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
+            <span
+                style="width: {{ $project->achievement_rate }}%; max-width:100%"
+                class="{{ ProgressBarState::getClassName($project) }}"
+            ></span>
         </div>
     </div>
     <div class="su_pr_01_03 m_b_1510">

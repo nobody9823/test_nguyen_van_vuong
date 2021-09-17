@@ -71,9 +71,14 @@
                 <div class="pds_sec01_R">
 
                 <div class="pds_sec01_progress-bar">
-                    <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
+                    <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
+                        <div>{{ $project->achievement_rate }}%</div>
+                    </div>
                     <div class="progress-bar">
-                        <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
+                        <span
+                            style="width: {{ $project->achievement_rate }}%; max-width:100%"
+                            class="{{ ProgressBarState::getClassName($project) }}"
+                        ></span>
                     </div>
                 </div>
 
