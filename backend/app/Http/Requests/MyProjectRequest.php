@@ -40,7 +40,8 @@ class MyProjectRequest extends FormRequest
             'image_url.*' => ['nullable', 'array'],
             'image_url.*.*' => ['nullable', 'image'],
             'video_url' => ['nullable', 'url', 'regex:#(https?\:\/\/)(www\.youtube\.com\/watch\?v=|youtu\.be\/)+[\S]{11}#'],
-            'target_amount' => ['nullable', 'integer', 'min:10000', 'max:99999999'],
+            // 'target_amount' => ['nullable', 'integer', 'min:10000', 'max:99999999'],
+            'target_number' => ['nullable', 'integer', 'min:1', 'max:9999999'],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', /*'after_or_equal:+14 day'*/],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', new MyProjectEndDate($this->route('project'))],
             'reward_by_total_amount' => ['nullable', 'string', 'max:100000'],
@@ -82,9 +83,9 @@ class MyProjectRequest extends FormRequest
     // FIXME: ここは落ち着いたらリファクタリングしましょう.....
     protected function prepareForValidation()
     {
-        if ($this->current_tab === 'target_amount' && $this->target_amount === null) {
+        if ($this->current_tab === 'target_number' && $this->target_number === null) {
             $this->merge([
-                'target_amount' => 0
+                'target_number' => 0
             ]);
         }
 
@@ -238,9 +239,9 @@ class MyProjectRequest extends FormRequest
             );
         } else {
             switch ($this->current_tab) {
-                case 'target_amount':
+                case 'target_number':
                     $redirect_route = redirect()
-                        ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'target_amount'])
+                        ->route('user.my_project.project.edit', ['project' => $this->route('project'), 'next_tab' => 'target_number'])
                         ->withErrors($validator)
                         ->withInput();
                     break;

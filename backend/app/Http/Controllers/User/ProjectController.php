@@ -72,11 +72,11 @@ class ProjectController extends Controller
         $complete_projects = Project::CompletedProjects()->orderBy('end_date', 'ASC')->get();
 
         // 応援プロジェクト（目標金額の高い順）
-        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_number', 'DESC')
         //     ->inRandomOrder()->get();
 
         // 応援プロジェクト（目標金額の高い順）
-        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_amount', 'DESC')
+        // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_number', 'DESC')
         //     ->inRandomOrder()->get();
 
         // 人気のプロジェクト

@@ -23,21 +23,21 @@
        class="form-control">{{old('reward_by_total_amount', optional($project ?? null)->reward_by_total_amount)}}</textarea>
 </div>
 <div class="form-group">
-    <label>支援件数順リターン内容</label>
+    <label>支援人数順リターン内容</label>
     <textarea type="text" name="reward_by_total_quantity"
        class="form-control">{{old('reward_by_total_quantity', optional($project ?? null)->reward_by_total_quantity)}}</textarea>
 </div>
 
 <div class="form-row">
     <div class="col-md-11 mb-3">
-        <label>目標金額</label>
+        <label>目標人数</label>
         <ul>
-            <li>目標金額は最低10,000円から設定可能です。</li>
+            <li>目標人数は最低1人以上設定してください。</li>
         </ul>
-        <input type="number" name="target_amount" class="form-control mb-2 mr-sm-2" min="0"
-            value="{{ old('target_amount', optional($project ?? null)->target_amount) }}" step="10000">
+        <input type="number" name="target_number" class="form-control mb-2 mr-sm-2" min="1"
+            value="{{ old('target_number', optional($project ?? null)->target_number) }}" step="1">
     </div>
-    <h5 class="pt-5">円</h5>
+    <h5 class="pt-5">人</h5>
 </div>
 
 <div class="form-group">

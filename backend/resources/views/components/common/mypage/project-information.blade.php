@@ -9,7 +9,9 @@
 </div>
 <div class="su_pr_01 m_b_1510">
     <div class="su_pr_01_01 m_b_1510">{{ Str::limit($project->title, 46) }}</div>
+    @if($project->user->id === Auth::user()->id)
     <div class="su_pr_01_02 m_b_1510">現在の支援総額：{{ number_format($project->payments_sum_price) }}円</div>
+    @endif
     <div class="pds_sec01_progress-bar m_b_1510">
         <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
         <div class="progress-bar">
@@ -17,7 +19,7 @@
         </div>
     </div>
     <div class="su_pr_01_03 m_b_1510">
-        <div>目標金額は¥{{ number_format($project->target_amount) }}</div>
+        <div>目標人数は{{ number_format($project->target_number) }}人</div>
         <div>支援者数：{{ $project->payments_count }}人</div>
         @if (DateFormat::checkDateIsFuture($project->start_date))
             {{-- NOTICE: 追加開発が決まったら以下2箇所とpaymentブレード内のところとDateFormatファサード内のコメントアウトを外してください --}}

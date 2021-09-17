@@ -16,10 +16,10 @@
         <div class="as_i_03">
             <div class="as_i_03_01">
                 <div class="tab_container">
-                    <input class="radio-fan" type="radio" id="target_amount_tag" name="project_edit_tag" value="target_amount" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'target_amount' || Request::get('next_tab') === null ? 'checked' : '' }}>
-                    <label class="tab_item" for="target_amount_tag">
+                    <input class="radio-fan" type="radio" id="target_number_tag" name="project_edit_tag" value="target_number" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'target_number' || Request::get('next_tab') === null ? 'checked' : '' }}>
+                    <label class="tab_item" for="target_number_tag">
                         目標金額
-                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::TargetAmountTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
+                        <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::TargetNumberTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
                     </label>
                     <input class="radio-fan" type="radio" id="overview_tag" name="project_edit_tag" value="overview" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'overview' ? 'checked' : '' }}>
                     <label class="tab_item" for="overview_tag">
@@ -58,8 +58,8 @@
     </p>
     @endif
     <div class="def_outer_gray">
-        <section style="{{ Request::get('next_tab') === 'target_amount' || Request::get('next_tab') === null ? '' : 'display: none;' }}" id="target_amount_section" class="my_project_section def_inner inner_item">
-            <x-user.my_project.target_amount :project="$project" />
+        <section style="{{ Request::get('next_tab') === 'target_number' || Request::get('next_tab') === null ? '' : 'display: none;' }}" class="my_project_section def_inner inner_item">
+            <x-user.my_project.target_number :project="$project" />
         </section>
         <section style="{{ Request::get('next_tab') === 'overview' ? '' : 'display: none;' }}" id="overview_section" class="my_project_section def_inner inner_item">
             <x-user.my_project.overview :project="$project" :tags="$tags" />
