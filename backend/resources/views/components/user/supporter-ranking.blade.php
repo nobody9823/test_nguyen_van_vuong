@@ -16,12 +16,14 @@
                     <div class="ps_rank_01 m_b_3020">
                         <div class="pds_sec01_progress-bar m_b_1510">
                             <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
-                                <div>{{ $project->achievement_rate }}%</div>
+                                <div class="{{ ProgressBarState::getNumberClassName($project) }}">
+                                    {{ $project->achievement_rate }}%
+                                </div>
                             </div>
                             <div class="progress-bar">
                                 <span
                                     style="width: {{ $project->achievement_rate }}%; max-width:100%"
-                                    class="{{ ProgressBarState::getClassName($project) }}"
+                                    class="{{ ProgressBarState::getBarClassName($project) }}"
                                 ></span>
                             </div>
                         </div>
@@ -251,7 +253,7 @@
                     <div class="ps_rank_01 m_b_3020">
                         <div class="pds_sec01_progress-bar m_b_1510">
                             <div class="progress-bar_par" style="width: 60%; max-width:100%">
-                                <div>60%</div>
+                                <div class="progress_number_color_case_of_less_than_90">60%</div>
                             </div>
                             <div class="progress-bar">
                                 <span

@@ -72,12 +72,14 @@
 
                 <div class="pds_sec01_progress-bar">
                     <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
-                        <div>{{ $project->achievement_rate }}%</div>
+                        <div class="{{ ProgressBarState::getNumberClassName($project) }}">
+                            {{ $project->achievement_rate }}%
+                        </div>
                     </div>
                     <div class="progress-bar">
                         <span
                             style="width: {{ $project->achievement_rate }}%; max-width:100%"
-                            class="{{ ProgressBarState::getClassName($project) }}"
+                            class="{{ ProgressBarState::getBarClassName($project) }}"
                         ></span>
                     </div>
                 </div>
@@ -279,7 +281,7 @@
     <div class="fixedcontainer">
         <div class="breadcrumb">
             <p>
-                <a href="/">TOP</a>　＞　<a href="/search">応援プロジェクト</a>　＞　
+                <a href="/">TOP</a>　＞　<a href="/search">応援プロジェクト</a>　＞
                 @if($project->category)
                 <a href="{{ route('user.search', ['category_id' => $project->category_id]) }}">
                     {{ $project->category->name }}
