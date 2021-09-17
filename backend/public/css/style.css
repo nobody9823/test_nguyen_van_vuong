@@ -1040,6 +1040,7 @@ input[type=radio]:checked + .radio-fan::after {
 .pds_sec01_R{ width: calc(45% - 15px); display: flex; flex-wrap: wrap; order: 4;}
 .pds_sec01_R_en01{ font-size: 1.6rem; font-weight: bold; color: #00AEBD; width: 100%;}
 .pds_sec01_R_en02{ font-size: 5.4rem; font-weight: bold; color: #00AEBD; width: 100%;}
+.pds_sec01_R_en02 span{ font-size: 3rem; font-weight: bold;}
 
 .pds_sec01_progress-bar{ width: 100%;}
 
@@ -1700,13 +1701,13 @@ input[name="tab_item"] {
 
 .ps_rank_myrank_large_L{ width: 50%; padding: 20px 20px; border-right: solid 1px #00AEBD; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; font-size: 1.8rem; font-weight: bold; color: #00AEBD; background: #F7FDFF; order: 1;}
 .ps_rank_myrank_large_L_items {display: flex; justify-content:space-between; width: 100%;}
-.ps_rank_myrank_large_R{ width: 50%; padding: 20px 20px; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; font-size: 1.8rem; font-weight: bold; color: #00AEBD; background: #F7FDFF; order: 2;}
+.ps_rank_myrank_large_R{ /* width: 50%; */ width: 100%; padding: 20px 20px; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; font-size: 1.8rem; font-weight: bold; color: #00AEBD; background: #F7FDFF; order: 2;}
 .ps_rank_myrank_large_01{ width: 20%}
 .ps_rank_myrank_large_02{ width: 38%;}
 .ps_rank_myrank_large_03{ width: 38%; text-align: right;}
 
 .ps_rank_02_L{ width: 50%; padding: 3px 20px 3px 0; border-right: solid 1px #00AEBD; display: flex; flex-wrap: wrap; justify-content:space-between; align-content: flex-start; order: 3;}
-.ps_rank_02_R{ width: 50%; padding: 3px 0px 3px 20px; display: flex; flex-wrap: wrap; justify-content:space-between; align-content: flex-start; order: 4;}
+.ps_rank_02_R{ /* width: 50%; */ padding: 3px 0px 3px 20px; display: flex; flex-wrap: wrap; justify-content:space-between; align-content: flex-start; order: 4;}
 .ps_rank_02_tit{ font-size: 1.8rem; font-weight: bold; color: #00AEBD; margin-bottom: 20px;}
 .ps_rank_02_rank_item_row{ width: 100%; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; font-size: 1.6rem; font-weight: bold; margin-bottom: 15px;}
 .ps_rank_item_01{ width: 20px; margin-right: 10px;}
@@ -1719,7 +1720,7 @@ input[name="tab_item"] {
 .ps_rank_more_btn a{color: #1C81D8;}
 
 .ps_rank_02_return_L{margin: 20px 0 0 0 ; width: 50%; padding: 3px 20px 3px 0; border-right: solid 1px #00AEBD; order: 5;}
-.ps_rank_02_return_R{margin: 20px 0 0 0 ; width: 50%; padding: 3px 0px 3px 20px; order: 6;}
+.ps_rank_02_return_R{margin: 20px 0 0 0 ; /* width: 50%; */ width: 100%; padding: 3px 0px 3px 20px; order: 6;}
 .ps_rank_02_return_tit{ font-size: 1.8rem; font-weight: bold; color: #00AEBD; }
 
 @media screen and (max-width: 768px){
@@ -2256,7 +2257,7 @@ width: 100%;
 .identify_image_description ul li, .ps_description ul li {list-style-type: disc;}
 .identify_img img {height: 110px; width: 100%; object-fit: contain;}
 .ps_plan_form_wrapper {flex-direction: row; display: flex; align-items: center; justify-content: space-evenly; width: 100%;}
-.ps_plan_form_item {width:48%; margin-bottom: 40px;}
+.ps_plan_form_item { /* width:48%; */ width:80%; margin-bottom: 40px;}
 .input_file_button_wrapper {text-align: center; margin-bottom: 40px;}
 .input_file_button{ width: 100%; text-align: center; font-size: 1.4rem; padding: 10px; background:  #00AEBD; color: #fff; cursor: pointer;}
 .input_file_button:hover { opacity: 0.7;}
@@ -2425,6 +2426,7 @@ div.spinner-wrapper {
     display: none;
     position: fixed;
     top: 0;
+	left: 0;
     height: 100vh;
     width: 100%;
     z-index: 2;

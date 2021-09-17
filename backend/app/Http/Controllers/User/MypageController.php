@@ -110,7 +110,7 @@ class MypageController extends Controller
         return view('user.mypage.withdraw');
     }
 
-    public function delete_user(User $user)
+    public function deleteUser(User $user)
     {
         $user = User::find($user->id);
         return $user->delete()
@@ -132,7 +132,7 @@ class MypageController extends Controller
         return view('user.commission');
     }
 
-    public function PsTermsOfService()
+    public function psTermsOfService()
     {
         return view('user.footer.ps_terms_of_service');
     }

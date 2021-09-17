@@ -44,7 +44,7 @@ class ProjectFactory extends Factory
             ),
             'start_date' => $this->faker->dateTimeBetween($startDate = '2 week', $endDate = '1 month'),
             'end_date' => $this->faker->dateTimeBetween($startDate = '1 month', $endDate = '2 month'),
-            'target_amount' => $this->faker->numberBetween(10000, 99999999),
+            'target_number' => $this->faker->numberBetween(10, 1000),
         ];
     }
 
@@ -82,7 +82,7 @@ class ProjectFactory extends Factory
                 'release_status' => rand(0, 1) ? '掲載中' : Arr::random(
                     ProjectReleaseStatus::getValues()
                 ),
-                'target_amount' => $this->faker->numberBetween(10000, 99999999),
+                'target_number' => $this->faker->numberBetween(10, 1000),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ];

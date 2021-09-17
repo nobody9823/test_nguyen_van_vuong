@@ -1,17 +1,17 @@
-<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'target_amount']) }}" method="post">
+<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'target_number']) }}" method="post">
     @csrf
     @method('PUT')
     <div class="form_item_row">
         <div class="form_item_tit">
-            目標金額<span class="hissu_txt">必須</span>
+            目標人数<span class="hissu_txt">必須</span>
             <br/>
             <span class="disclaimer">
-                ※目標金額は最低10,000円から設定可能です。
+                ※目標人数は最低1人以上設定してください。
             </span>
         </div>
-        <input type="number" name="target_amount" class="p-postal-code def_input_100p"
-            value="{{ old('target_amount', optional($project)->target_amount) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="target_amount" />
+        <input type="number" name="target_number" class="p-postal-code def_input_100p"
+            value="{{ old('target_number', optional($project)->target_number) }}" placeholder="（例）1000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
+        <x-common.async-submit-message propName="target_number" />
     </div>
 
     <div class="form_item_row">
