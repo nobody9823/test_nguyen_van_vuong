@@ -3012,46 +3012,7 @@ margin: 20px 0;
 .progress_number_color_case_of_less_than_100 {
     color: #baff5c;
 }
-.progress_arrow_box_case_of_achieve_100 {
-    position:relative;
-    width:77px;
-    height:24px;
-    padding:5px;
-    text-align:center;
-    color:#FFFFFF;
-    font-size:8px;
-    border-radius:5px;
-    -webkit-border-radius:5px;
-    -moz-border-radius:5px;
-    text-shadow:0px 0px 0px #FFFFFF ;
-    background-color: #edf82d;
-}
-.progress_arrow_box_case_of_achieve_100:after {
-    border: solid transparent;
-    content:'';
-    height:0;
-    width:0;
-    pointer-events:none;
-    position:absolute;
-    border-color: rgba(0, 174, 189, 0);
-    border-top-width:6px;
-    border-bottom-width:6px;
-    border-left-width:5px;
-    border-right-width:5px;
-    margin-left: -5px;
-    top:100%;
-    left:50%;
-    border-top-color: #edf82d;
-}
-
-
-.progress_bar_color_case_of_achieve_100 {
-    background-color: #edf82d;
-}
-.progress_number_color_case_of_achieve_100 {
-    color: #edf82d;
-}
-.progress_arrow_box_case_of_over_100 {
+.progress_arrow_box_case_of_greater_100 {
     position:relative;
     width:77px;
     height:24px;
@@ -3065,7 +3026,7 @@ margin: 20px 0;
     text-shadow:0px 0px 0px #FFFFFF ;
     background-color: #f8d32d;
 }
-.progress_arrow_box_case_of_over_100:after {
+.progress_arrow_box_case_of_greater_100:after {
     border: solid transparent;
     content:'';
     height:0;
@@ -3082,13 +3043,13 @@ margin: 20px 0;
     left:50%;
     border-top-color: #f8d32d;
 }
-
 .progress_bar_color_case_of_greater_than_100 {
     background-color: #f8d32d;
 }
 .progress_number_color_case_of_greater_than_100 {
     color: #f8d32d;
 }
+
 
 .progress_arrow_box_wrapper {
     display: flex;
