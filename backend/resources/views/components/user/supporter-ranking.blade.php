@@ -15,6 +15,9 @@
                     </div>
                     <div class="ps_rank_01 m_b_3020">
                         <div class="pds_sec01_progress-bar m_b_1510">
+                            <div class="progress_arrow_box_wrapper">
+                                <div class="{{ ProgressBarState::getArrowBoxClassName($project) }}">{{ ProgressBarState::getArrowBoxText($project) }}</div>
+                            </div>
                             <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
                                 <div class="{{ ProgressBarState::getNumberClassName($project) }}">
                                     {{ $project->achievement_rate }}%
@@ -252,6 +255,9 @@
                     </div>
                     <div class="ps_rank_01 m_b_3020">
                         <div class="pds_sec01_progress-bar m_b_1510">
+                            <div class="progress_arrow_box_wrapper">
+                                <div class="progress_arrow_box_case_of_achieve_50">第2段階達成！</div>
+                            </div>
                             <div class="progress-bar_par" style="width: 60%; max-width:100%">
                                 <div class="progress_number_color_case_of_less_than_90">60%</div>
                             </div>

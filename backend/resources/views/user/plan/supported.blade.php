@@ -51,6 +51,9 @@
                 </div>
                 <div class="m_b_3020">
                     <div class="pds_sec01_progress-bar m_b_1510">
+                        <div class="progress_arrow_box_wrapper">
+                            <div class="{{ ProgressBarState::getArrowBoxClassName($project) }}">{{ ProgressBarState::getArrowBoxText($project) }}</div>
+                        </div>
                         <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
                             <div class="{{ ProgressBarState::getNumberClassName($project) }}">
                                 {{ $project->achievement_rate }}%
