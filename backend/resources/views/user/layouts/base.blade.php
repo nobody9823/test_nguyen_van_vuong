@@ -52,7 +52,7 @@ if(isiOS) {
     </div>
     <div class="header_banner_link_wrapper">
         <a class="header_banner_link" href="https://lin.ee/JTL9trf">
-            <img height="36" border="0" src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png">
+            <img border="0" src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png">
         </a>
     </div>
 </div>
