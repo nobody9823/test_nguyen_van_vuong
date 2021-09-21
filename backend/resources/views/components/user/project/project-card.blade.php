@@ -24,9 +24,19 @@
     @endif
 
     <div class="{{ empty($cardSize) ? 'ib01R_02' : 'ib01L_02' }}">
-    <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
+        <div class="progress_arrow_box_wrapper">
+            <div class="{{ ProgressBarState::getArrowBoxClassName($project) }}">{{ ProgressBarState::getArrowBoxText($project) }}</div>
+        </div>
+        <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
+            <div class="{{ ProgressBarState::getNumberClassName($project) }}">
+                {{ $project->achievement_rate }}%
+            </div>
+        </div>
         <div class="progress-bar">
-            <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
+            <span
+                style="width: {{ $project->achievement_rate }}%; max-width:100%"
+                class="{{ ProgressBarState::getBarClassName($project) }}"
+            ></span>
         </div>
     </div>
 
