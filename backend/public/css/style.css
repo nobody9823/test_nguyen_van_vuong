@@ -219,6 +219,8 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 }
 .header_banner_link img {
     border-radius: 4px;
+    width: 102px;
+    height: 36px;
 }
 #wm_btn{ display:none; width: 230px; }
 #wm_btn.login_after_user_btn{ width: 135px; }
