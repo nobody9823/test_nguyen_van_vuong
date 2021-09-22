@@ -40,8 +40,9 @@ class ProjectRequest extends FormRequest
             'user_id' => ['required', 'integer'],
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
-            'reward_by_total_amount' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
-            'reward_by_total_amount' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
+            // WARNING:支援総額順のPSリターンを使用する際はprepareForValidationのoffsetUnsetの処理を削除して下さい。
+            // 'reward_by_total_amount' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
+            'reward_by_total_quantity' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
             // 'target_amount' => ['required', 'integer', 'min:10000', 'max:99999999'],
             'target_number' => ['required', 'integer', 'min:1', 'max:9999999'],
             'curator_id' => ['nullable', 'exists:curators,id'],
@@ -93,6 +94,13 @@ class ProjectRequest extends FormRequest
 
             $this->merge(['video_url' => $original_url]);
         }
+
+        // 現状支援総額順のPSリターンは使用しない為、reward_by_total_amountは空文字で登録する。
+        if ($this->reward_by_total_amount === null) {
+                $this->merge([
+                    'reward_by_total_amount' => ''
+                ]);
+            };
     }
 
     public function messages()

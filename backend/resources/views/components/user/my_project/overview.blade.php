@@ -32,5 +32,5 @@
     <x-common.async-submit-message propName="tags" />
 </div>
 
-<x-common.save_back_button />
+<x-common.navigating_page_buttons />
 </form>
