@@ -43,12 +43,11 @@
         <x-common.async-submit-message propName="video_url" />
     </div>
 
-    <div class="def_btn">
+    {{-- <div class="def_btn">
         <button type="submit" class="disable-btn">
-            {{-- FIXME: 動画URLの方は保存ボタンを押さないと保存できないのでボタン名を変えています。 --}}
             <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">動画URLを保存する</p>
         </button>
-    </div>
+    </div> --}}
 
     <x-common.navigating_page_buttons />
 </form>
