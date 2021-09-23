@@ -18,7 +18,7 @@
                 <div class="tab_container">
                     <input class="radio-fan" type="radio" id="target_number_tag" name="project_edit_tag" value="target_number" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'target_number' || Request::get('next_tab') === null ? 'checked' : '' }}>
                     <label class="tab_item" for="target_number_tag">
-                        目標金額
+                        目標人数
                         <i class="fa fa-check-circle green" aria-hidden="true" style="{{ EditMyProjectTab::TargetNumberTabIsFilled($project) === true ? 'display: contents;' : '' }}"></i>
                     </label>
                     <input class="radio-fan" type="radio" id="overview_tag" name="project_edit_tag" value="overview" onClick="selectEditTag(this)" {{ Request::get('next_tab') === 'overview' ? 'checked' : '' }}>

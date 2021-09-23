@@ -17,11 +17,11 @@
 </div>
 
 <label>プロジェクトサポーターリターン内容</label>
-<div class="form-group">
+<!-- <div class="form-group">
     <label>支援総額順リターン内容</label>
     <textarea type="text" name="reward_by_total_amount"
        class="form-control">{{old('reward_by_total_amount', optional($project ?? null)->reward_by_total_amount)}}</textarea>
-</div>
+</div> -->
 <div class="form-group">
     <label>支援人数順リターン内容</label>
     <textarea type="text" name="reward_by_total_quantity"
