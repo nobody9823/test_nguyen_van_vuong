@@ -2,7 +2,7 @@
 @if(!isset($saveButton))
 <div class="def_btn">
     <button type="submit" class="disable-btn">
-        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存する</p>
+        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">次へ進む</p>
     </button>
 </div>
 @endif

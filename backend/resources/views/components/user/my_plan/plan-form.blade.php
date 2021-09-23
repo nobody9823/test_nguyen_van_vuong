@@ -22,7 +22,10 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">限定数</div>
+    <div class="form_item_tit">
+        限定数
+        <span class="disclaimer">※個数に制限がない場合、チェックを入れる必要はありません</span>
+    </div>
     <input type="checkbox" id="limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}" class="ac_list_checks" name="limit_of_supporters_is_required" value="1"
     onchange="updateMyPlan.limitOfSupportersIsChecked(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})"
         @if(!is_null($plan))
@@ -30,7 +33,7 @@
         @else
         >
         @endif
-    <label for="limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}" class="checkbox-fan">限定数を設定する</label>
+    <label for="limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}" class="checkbox-fan">このリターンの個数を設定する</label>
 
     <input type="number" id="limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}" name="limit_of_supporters" class="p-postal-code def_input_100p"
         style="display:

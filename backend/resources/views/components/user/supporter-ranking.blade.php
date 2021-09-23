@@ -198,7 +198,7 @@
                                     <div class="ps_rank_item_02">{{ $total_quantity_rank }}位</div>
                                     <div class="ps_rank_item_03">{{ $project_supporter->name }}</div>
                                     <div class="ps_rank_item_04">
-                                        {{ $project_supporter->invited_payments_count }}件</div>
+                                        {{ $project_supporter->invited_payments_count }}人</div>
                                 </div>
                                 <!--/ps_rank_02_rank_item_row-->
                             @php

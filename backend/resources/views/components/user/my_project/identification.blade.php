@@ -212,5 +212,5 @@
         <x-common.async-submit-message propName="account_name" />
     </div>
 
-    <x-common.save_back_button />
+    <x-common.navigating_page_buttons saveButton="unnecessary" />
 </form>
