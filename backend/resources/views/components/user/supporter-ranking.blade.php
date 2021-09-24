@@ -15,12 +15,19 @@
                     </div>
                     <div class="ps_rank_01 m_b_3020">
                         <div class="pds_sec01_progress-bar m_b_1510">
-                            <div class="progress-bar_par">
-                                <div>0%</div>
-                                <div>100%</div>
+                            <div class="progress_arrow_box_wrapper">
+                                <div class="{{ ProgressBarState::getArrowBoxClassName($project) }}">{{ ProgressBarState::getArrowBoxText($project) }}</div>
+                            </div>
+                            <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
+                                <div class="{{ ProgressBarState::getNumberClassName($project) }}">
+                                    {{ $project->achievement_rate }}%
+                                </div>
                             </div>
                             <div class="progress-bar">
-                                <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
+                                <span
+                                    style="width: {{ $project->achievement_rate }}%; max-width:100%"
+                                    class="{{ ProgressBarState::getBarClassName($project) }}"
+                                ></span>
                             </div>
                         </div>
                         <div class="ps_rank_01_01 m_b_1510">
@@ -191,7 +198,7 @@
                                     <div class="ps_rank_item_02">{{ $total_quantity_rank }}位</div>
                                     <div class="ps_rank_item_03">{{ $project_supporter->name }}</div>
                                     <div class="ps_rank_item_04">
-                                        {{ $project_supporter->invited_payments_count }}件</div>
+                                        {{ $project_supporter->invited_payments_count }}人</div>
                                 </div>
                                 <!--/ps_rank_02_rank_item_row-->
                             @php
@@ -248,12 +255,17 @@
                     </div>
                     <div class="ps_rank_01 m_b_3020">
                         <div class="pds_sec01_progress-bar m_b_1510">
-                            <div class="progress-bar_par">
-                                <div>0%</div>
-                                <div>100%</div>
+                            <div class="progress_arrow_box_wrapper">
+                                <div class="progress_arrow_box_case_of_achieve_50">第2段階達成！</div>
+                            </div>
+                            <div class="progress-bar_par" style="width: 60%; max-width:100%">
+                                <div class="progress_number_color_case_of_less_than_90">60%</div>
                             </div>
                             <div class="progress-bar">
-                                <span style="width:60%;"></span>
+                                <span
+                                    style="width: 60%; max-width:100%"
+                                    class="progress_bar_color_case_of_less_than_90"
+                                ></span>
                             </div>
                         </div>
                         <div class="ps_rank_01_01 m_b_1510">

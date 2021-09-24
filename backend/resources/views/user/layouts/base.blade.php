@@ -46,6 +46,16 @@ if(isiOS) {
 
 
 <div id="header_wrap" style="">
+<div id="header_banner">
+    <div class="header_banner_text">
+        プロジェクトを始めたい方は、まずご相談！
+    </div>
+    <div class="header_banner_link_wrapper">
+        <a class="header_banner_link" href="https://lin.ee/JTL9trf">
+            <img border="0" src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png">
+        </a>
+    </div>
+</div>
 <header id="header">
 
 <div id="branding">

@@ -24,9 +24,19 @@
     @endif
 
     <div class="{{ empty($cardSize) ? 'ib01R_02' : 'ib01L_02' }}">
-    <div class="progress-bar_par"><div>0%</div><div>100%</div></div>
+        <div class="progress_arrow_box_wrapper">
+            <div class="{{ ProgressBarState::getArrowBoxClassName($project) }}">{{ ProgressBarState::getArrowBoxText($project) }}</div>
+        </div>
+        <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
+            <div class="{{ ProgressBarState::getNumberClassName($project) }}">
+                {{ $project->achievement_rate }}%
+            </div>
+        </div>
         <div class="progress-bar">
-            <span style="width: {{ $project->achievement_rate }}%; max-width:100%"></span>
+            <span
+                style="width: {{ $project->achievement_rate }}%; max-width:100%"
+                class="{{ ProgressBarState::getBarClassName($project) }}"
+            ></span>
         </div>
     </div>
 
@@ -37,7 +47,7 @@
 
     <div class="{{ empty($cardSize) ? 'ib01R_04' : 'ib01L_04' }}">
         <!-- <div>現在 <span>{{ number_format($project->payments_sum_price) }}円</span></div> -->
-        <div class="supporter_count">支援者 <span>{{ $project->payments_count }}人</span></div>
+        <div class="supporter_count">現在の支援者数 <span>{{ $project->payments_count }}人</span></div>
         @if (DateFormat::checkDateIsFuture($project->start_date))
             {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
             {{-- @if (DateFormat::checkDateIsWithInADay($project->start_date))

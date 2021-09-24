@@ -75,7 +75,7 @@ class MyProjectController extends Controller
             }
         }
 
-        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with('attention_message', '※申請には本人確認が必須となります。早めにご記入ください。');
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with('attention_message', '※申請には本人確認が必須となります。お早めにご記入ください。');
     }
 
     /**
