@@ -29,7 +29,7 @@
         </div>
         <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
             <div class="{{ ProgressBarState::getNumberClassName($project) }}">
-                {{ $project->achievement_rate }}%
+                <p>{{ $project->achievement_rate }}%</p>
             </div>
         </div>
         <div class="progress-bar">
