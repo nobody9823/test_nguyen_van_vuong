@@ -11,7 +11,7 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">概要文<span class="nini_txt">任意</span>　<span class="disclaimer">※300文字以内で入力してください<br/>※スマートフォンからは動画の埋め込みは行えません</span></div>
+    <div class="form_item_tit">概要文<span class="nini_txt">任意</span><br/><span class="disclaimer">※300文字以内で入力してください<br/>※スマートフォンからは動画の埋め込みは行えません</span></div>
     <textarea name="content" id="content" class="def_textarea tiny_editor" rows="6">{{ old('content', optional($project)->content) }}</textarea>
     <x-common.async-submit-message propName="content" />
 </div>
