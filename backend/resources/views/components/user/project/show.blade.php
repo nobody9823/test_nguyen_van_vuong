@@ -23,166 +23,168 @@
 
     <div class="pc-Details-screen_base_top inner_item">
 
-        <div class="pds_sec01">
-            <div class="project_author_wrapper">
-                <div class="author_image" style="background-image: url({{ Storage::url($project->user->profile->image_url) }})">
+        <div class="pds_inner">
+            <div class="pds_sec01">
+                <div class="project_author_wrapper">
+                    <div class="author_image" style="background-image: url({{ Storage::url($project->user->profile->image_url) }})">
+                    </div>
+                    <span>{{ $project->user->name }}</span>
                 </div>
-                <span>{{ $project->user->name }}</span>
-            </div>
-            <div class="pds_sec01_tit">{{ $project->title }}</div><!--/pds_sec01_tit-->
-            <div class="pds_sec01_tag">
-                @foreach($project->tags as $tag)
-                <span><a href="{{ route('user.search', ['tag_id' => $tag->id]) }}">#{{ $tag->name }}</a></span>
-                @endforeach
-            </div><!--/pds_sec01_tag-->
+                <div class="pds_sec01_tit">{{ $project->title }}</div><!--/pds_sec01_tit-->
+                <div class="pds_sec01_tag">
+                    @foreach($project->tags as $tag)
+                    <span><a href="{{ route('user.search', ['tag_id' => $tag->id]) }}">#{{ $tag->name }}</a></span>
+                    @endforeach
+                </div><!--/pds_sec01_tag-->
 
-            <div class="pds_sec01_L">
-                <div class="pds_sec01_slider {{ $project->projectFiles->count() === 1 ? 'slider-img-wrapper' : '' }}">
-                    <ul id="slider">
-                        @foreach($project->projectFiles as $project_file)
-                            @if($project_file->file_content_type === 'image_url')
-                            <li class="slide-item">
-                                <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
-                            </li>
-                            @elseif($project_file->file_content_type === 'video_url')
-                            <li class="slide-item">
-                                {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
-                            </li>
-                            @endif
-                        @endforeach
-                    </ul>
-                    @if($project->projectFiles->count() > 1)
-                        <ul id="thumbnail_slider">
+                <div class="pds_sec01_L">
+                    <div class="pds_sec01_slider {{ $project->projectFiles->count() === 1 ? 'slider-img-wrapper' : '' }}">
+                        <ul id="slider">
                             @foreach($project->projectFiles as $project_file)
                                 @if($project_file->file_content_type === 'image_url')
-                                <li class="thumbnail-item">
+                                <li class="slide-item">
                                     <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
                                 </li>
                                 @elseif($project_file->file_content_type === 'video_url')
-                                <li class="thumbnail-item">
+                                <li class="slide-item">
                                     {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
                                 </li>
                                 @endif
                             @endforeach
                         </ul>
+                        @if($project->projectFiles->count() > 1)
+                            <ul id="thumbnail_slider">
+                                @foreach($project->projectFiles as $project_file)
+                                    @if($project_file->file_content_type === 'image_url')
+                                    <li class="thumbnail-item">
+                                        <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                                    </li>
+                                    @elseif($project_file->file_content_type === 'video_url')
+                                    <li class="thumbnail-item">
+                                        {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
+                                    </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+                </div><!--/pds_sec01_L-->
+
+
+
+                <div class="pds_sec01_R">
+
+                <div class="pds_sec01_progress-bar">
+                    <div class="progress_arrow_box_wrapper">
+                        <div class="{{ ProgressBarState::getArrowBoxClassName($project) }}">{{ ProgressBarState::getArrowBoxText($project) }}</div>
+                    </div>
+                    <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
+                        <div class="{{ ProgressBarState::getNumberClassName($project) }}">
+                            {{ $project->achievement_rate }}%
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <span
+                            style="width: {{ $project->achievement_rate }}%; max-width:100%"
+                            class="{{ ProgressBarState::getBarClassName($project) }}"
+                        ></span>
+                    </div>
+                </div>
+
+                <div class="pds_sec01_R_en03">目標人数は{{ $project->target_number }}人</div>
+
+                <div class="pds_sec01_R_nin_base">
+                    <div class="pds_sec01_R_en01">現在の支援者数</div>
+                    <div class="pds_sec01_R_en02 E-font">{{ $project->payments_count }}<span>人</span></div>
+                        {{-- <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div> --}}
+                </div><!--/pds_sec01_R_nin01-->
+
+                <div class="pds_sec01_R_nokori_base">
+                    @if (DateFormat::checkDateIsFuture($project->start_date))
+                        <div class="pds_sec01_R_nokori01">募集開始まで残り</div>
+                        <div class="pds_sec01_R_nokori02 E-font">
+                            {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
+                            {{-- @if (DateFormat::checkDateIsWithInADay($project->start_date))
+                                {{ DateFormat::getDiffCompareWithToday($project->start_date) }}<span>時間</span>
+                            @else --}}
+                                {{ DateFormat::getDiffCompareWithToday($project->start_date) }}<span>日</span>
+                            {{-- @endif --}}
+                        </div>
+                    @elseif (DateFormat::checkDateIsPast($project->start_date) && DateFormat::checkDateIsFuture($project->end_date))
+                        <div class="pds_sec01_R_nokori01">募集終了まで残り</div>
+                        <div class="pds_sec01_R_nokori02 E-font">
+                            {{-- @if (DateFormat::checkDateIsWithInADay($project->end_date))
+                                {{ DateFormat::getDiffCompareWithToday($project->end_date) }}<span>時間</span>
+                            @else --}}
+                                {{ DateFormat::getDiffCompareWithToday($project->end_date) }}<span>日</span>
+                            {{-- @endif --}}
+                        </div>
+                    @elseif (DateFormat::checkDateIsPast($project->end_date))
+                        <div class="pds_sec01_R_nokori02"><span>FINISHED</span></div>
                     @endif
-                </div>
-            </div><!--/pds_sec01_L-->
+                </div><!--/pds_sec01_R_nin01-->
 
-
-
-            <div class="pds_sec01_R">
-
-            <div class="pds_sec01_progress-bar">
-                <div class="progress_arrow_box_wrapper">
-                    <div class="{{ ProgressBarState::getArrowBoxClassName($project) }}">{{ ProgressBarState::getArrowBoxText($project) }}</div>
-                </div>
-                <div class="progress-bar_par" style="width: {{ $project->achievement_rate }}%; max-width:100%">
-                    <div class="{{ ProgressBarState::getNumberClassName($project) }}">
-                        {{ $project->achievement_rate }}%
+                <div class="pds_sec01_R_btn_base">
+                    <div class="pds_sec01_R_btn01_wrapper">
+                        @if ($project->end_date > now())
+                            <div class="pds_sec01_R_btn01">
+                                <div class="more_btn_01_01">支援する</div>
+                                <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                                <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
+                            </div>
+                        @else
+                            <div class="pds_sec01_R_btn01">
+                                <div class="more_btn_01_01">FINISHED</div>
+                                <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                            </div>
+                        @endif
+                        @isset($project->user->snsLink)
+                            @if ($project->user->snsLink->twitter_url)
+                            <div class="project_sns_icon">
+                                <a href="{{ $project->user->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
+                            </div>
+                            @endif
+                            @if ($project->user->snsLink->instagram_url)
+                            <div class="project_sns_icon">
+                                <a href="{{ $project->user->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
+                            </div>
+                            @endif
+                            @if ($project->user->snsLink->youtube_url)
+                            <div class="project_sns_icon">
+                                <a href="{{ $project->user->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
+                            </div>
+                            @endif
+                            @if ($project->user->snsLink->tiktok_url)
+                            <div class="project_sns_icon">
+                                <a href="{{ $project->user->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
+                            </div>
+                            @endif
+                            @if ($project->user->snsLink->other_url)
+                            <div class="project_sns_icon">
+                                <a href="{{ $project->user->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
+                            </div>
+                            @endif
+                        @endisset
                     </div>
-                </div>
-                <div class="progress-bar">
-                    <span
-                        style="width: {{ $project->achievement_rate }}%; max-width:100%"
-                        class="{{ ProgressBarState::getBarClassName($project) }}"
-                    ></span>
-                </div>
-            </div>
-
-            <div class="pds_sec01_R_en03">目標人数は{{ $project->target_number }}人</div>
-
-            <div class="pds_sec01_R_nin_base">
-                <div class="pds_sec01_R_en01">現在の支援者数</div>
-                <div class="pds_sec01_R_en02 E-font">{{ $project->payments_count }}<span>人</span></div>
-                    {{-- <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div> --}}
-            </div><!--/pds_sec01_R_nin01-->
-
-            <div class="pds_sec01_R_nokori_base">
-                @if (DateFormat::checkDateIsFuture($project->start_date))
-                    <div class="pds_sec01_R_nokori01">募集開始まで残り</div>
-                    <div class="pds_sec01_R_nokori02 E-font">
-                        {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
-                        {{-- @if (DateFormat::checkDateIsWithInADay($project->start_date))
-                            {{ DateFormat::getDiffCompareWithToday($project->start_date) }}<span>時間</span>
-                        @else --}}
-                            {{ DateFormat::getDiffCompareWithToday($project->start_date) }}<span>日</span>
-                        {{-- @endif --}}
+                    @if($project->isIncluded() === true)
+                    <div class="pds_sec01_R_btn01">
+                        <div class="more_btn_01_01">プロジェクトサポーターになる</div>
+                        <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                        <a href="{{ route('user.project.support', ['project' => $project]) }}" class="cover_link"></a>
                     </div>
-                @elseif (DateFormat::checkDateIsPast($project->start_date) && DateFormat::checkDateIsFuture($project->end_date))
-                    <div class="pds_sec01_R_nokori01">募集終了まで残り</div>
-                    <div class="pds_sec01_R_nokori02 E-font">
-                        {{-- @if (DateFormat::checkDateIsWithInADay($project->end_date))
-                            {{ DateFormat::getDiffCompareWithToday($project->end_date) }}<span>時間</span>
-                        @else --}}
-                            {{ DateFormat::getDiffCompareWithToday($project->end_date) }}<span>日</span>
-                        {{-- @endif --}}
+                    <div class="pds_sec01_R_btn01">
+                        <div class="more_btn_01_01">PSランキングを見る</div>
+                        <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
+                        <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
                     </div>
-                @elseif (DateFormat::checkDateIsPast($project->end_date))
-                    <div class="pds_sec01_R_nokori02"><span>FINISHED</span></div>
-                @endif
-            </div><!--/pds_sec01_R_nin01-->
-
-            <div class="pds_sec01_R_btn_base">
-                <div class="pds_sec01_R_btn01_wrapper">
-                    @if ($project->end_date > now())
-                        <div class="pds_sec01_R_btn01">
-                            <div class="more_btn_01_01">支援する</div>
-                            <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                            <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
-                        </div>
-                    @else
-                        <div class="pds_sec01_R_btn01">
-                            <div class="more_btn_01_01">FINISHED</div>
-                            <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                        </div>
                     @endif
-                    @isset($project->user->snsLink)
-                        @if ($project->user->snsLink->twitter_url)
-                        <div class="project_sns_icon">
-                            <a href="{{ $project->user->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
-                        </div>
-                        @endif
-                        @if ($project->user->snsLink->instagram_url)
-                        <div class="project_sns_icon">
-                            <a href="{{ $project->user->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
-                        </div>
-                        @endif
-                        @if ($project->user->snsLink->youtube_url)
-                        <div class="project_sns_icon">
-                            <a href="{{ $project->user->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
-                        </div>
-                        @endif
-                        @if ($project->user->snsLink->tiktok_url)
-                        <div class="project_sns_icon">
-                            <a href="{{ $project->user->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
-                        </div>
-                        @endif
-                        @if ($project->user->snsLink->other_url)
-                        <div class="project_sns_icon">
-                            <a href="{{ $project->user->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
-                        </div>
-                        @endif
-                    @endisset
-                </div>
-                @if($project->isIncluded() === true)
-                <div class="pds_sec01_R_btn01">
-                    <div class="more_btn_01_01">プロジェクトサポーターになる</div>
-                    <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                    <a href="{{ route('user.project.support', ['project' => $project]) }}" class="cover_link"></a>
-                </div>
-                <div class="pds_sec01_R_btn01">
-                    <div class="more_btn_01_01">PSランキングを見る</div>
-                    <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                    <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
-                </div>
-                @endif
-            </div><!--/pds_sec01_R_nin01-->
+                </div><!--/pds_sec01_R_nin01-->
 
-            </div><!--/pds_sec01_R-->
+                </div><!--/pds_sec01_R-->
 
 
-        </div><!--/pds_sec01-->
+            </div><!--/pds_sec01-->
+        </div>
         <div class="project_switch_tabs">
             <div class="project_show_select_tab selected_tab" onClick="switchTabs(this,'#project_content_section')">プロジェクト</div>
             <div class="project_show_select_tab" onClick="switchTabs(this,'#report_section')">活動レポート</div>
