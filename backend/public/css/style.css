@@ -1140,7 +1140,7 @@ input[type=radio]:checked + .radio-fan::after {
 .pds_sec02_tit{ font-size: 1.8rem; font-weight: bold; color: #00AEBD; width: 100%; margin: 0 0 15px 0;}
 .pds_sec02_txt{ font-size: 1.4rem; width: 100%; margin: 0 0 30px 0; white-space: pre-line;}
 .pds_sec02_txt img{ object-fit: contain;}
-.pds_sec02_txt iframe{ width: 100%;}
+.pds_sec02_txt iframe{max-width: -webkit-fill-available;}
 .pds_sec02_img{ width: 100%; margin: 0 0 15px 0; text-align: center;}
 .pds_sec02_img img{ height: auto; max-width: 352px; max-height: 234px; border-radius: 8px 8px 0px 0px; object-fit: contain;}
 .pds_sec02_01{ width: 100%; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; margin: 0 0 15px 0;}
@@ -1717,7 +1717,7 @@ input[name="tab_item"] {
 
 .ps_rank_return_text{ width: 100%; white-space: pre-line;}
 .ps_rank_return_text img{ width:initial; max-width: 100%;height: auto;}
-.ps_rank_return_text iframe{ width: 100%;}
+.ps_rank_return_text iframe{ max-width: -webkit-fill-available;}
 
 .ps_rank_02{ width: 100%; display: flex; flex-wrap: wrap; justify-content:space-between;}
 
