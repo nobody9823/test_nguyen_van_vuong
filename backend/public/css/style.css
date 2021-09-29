@@ -2646,52 +2646,86 @@ div.spinner-wrapper {
 }
 
 /* 支援者一覧 */
-.supporters table {
-	width: 63%;
+.supporters th {
+	width: 150px;
+	display: flex;
+	align-items: center;
+  justify-content: center;
+}
+
+.supporters td {
+	width: 150px;
+	display: flex;
+	align-items: center;
+  justify-content: center;
+}
+
+.notification {
+	color: #00AEBD;
+	font-size: 85%;
+}
+
+.scrollable div:first-child {
+	display: flex;
+	align-items: center;
+  justify-content: center;
+	flex-direction: column;
+	margin: 20px;
 }
 
 .supporters tr:first-child {
-	width: 100%;
+	width: 200%;
 	display: flex;
 	min-height: 75px;
 	background: #F7FDFF;
 	color: #00AEBD;
-	justify-content: space-between;
+	justify-content: space-around;
 	white-space: nowrap;
 }
 
-.supporters tr:first-child th {
-	margin: 20px;
-}
-
-.supporters th:nth-child(2) {
-	width: 12vw;
-}
-
-.supporters th:nth-child(3) {
-	width: 24vw;
-}
-
 .supporters .edit_row {
+	width: 200%;
     font-size: 12px;
     padding: 10px 0;
     min-height: 75px;
     display: flex;
     align-items: center;
     align-content: center;
-    justify-content: space-between;
+    justify-content: space-around;
+		border-bottom: solid 1px #00AEBD;
 }
 
-.supporters .edit_row td:nth-child(4) {
-	width: 16vw;
+.supporters th:nth-child(2) {
+	width: 10px;
 }
 
-.reports .prof_edit_row td:nth-child(2) {
-	width: 400px;
+.supporters td:first-child {
+	padding-left: 40px;
 }
 
-.supporters td {
-	/* margin: 20px; */
+.supporters td:nth-child(2) {
+	padding-right: 50px;
+}
+
+.supporters td:nth-child(3) {
+	padding-right: 160px;
+}
+
+.supporters td:nth-child(4) {
+	padding-right: 50px;
+}
+
+.plan_detail td {
+	width: auto;
+	border-bottom: solid 1px #00AEBD;
+}
+
+@media (max-width: 767px) {
+	.plan_detail td {
+	  width: 325px;  
+    position: relative;
+    left: 490px;
+	}
 }
 
 .supporters td.supporter_name {
@@ -2704,7 +2738,6 @@ div.spinner-wrapper {
 
 .supporters .plan_detail {
 	font-size: 1.2rem;
-	border-bottom: solid 1px #00AEBD;
 }
 
 .scrollable {
