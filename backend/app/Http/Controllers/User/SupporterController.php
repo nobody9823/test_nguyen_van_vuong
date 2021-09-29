@@ -15,7 +15,7 @@ class SupporterController extends Controller
      */
     public function index(Project $project)
     {
-        // $this->authorize('checkOwnProject', $project);
+        $this->authorize('checkOwnProject', $project);
         $project->load(['payments', 'payments.user', 'payments.includedPlans', 'payments.user.address']);
         return view('user.supporter.index', ['project' => $project]);
     }

@@ -2722,7 +2722,7 @@ div.spinner-wrapper {
 
 @media (max-width: 767px) {
 	.plan_detail td {
-	  width: 325px;  
+	  width: 90vw;
     position: relative;
     left: 490px;
 	}
