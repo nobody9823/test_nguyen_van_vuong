@@ -25,7 +25,11 @@
 
         <div class="pds_inner">
             <div class="pds_sec01">
-
+                <div class="project_author_wrapper">
+                    <div class="author_image" style="background-image: url({{ Storage::url($project->user->profile->image_url) }})">
+                    </div>
+                    <span>{{ $project->user->name }}</span>
+                </div>
                 <div class="pds_sec01_tit">{{ $project->title }}</div><!--/pds_sec01_tit-->
                 <div class="pds_sec01_tag">
                     @foreach($project->tags as $tag)
@@ -92,7 +96,7 @@
                 <div class="pds_sec01_R_nin_base">
                     <div class="pds_sec01_R_en01">現在の支援者数</div>
                     <div class="pds_sec01_R_en02 E-font">{{ $project->payments_count }}<span>人</span></div>
-                      {{-- <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div> --}}
+                        {{-- <div class="pds_sec01_R_nin03">24時間以内に{{ $project->payments_count_within_a_day }}人からの支援がありました</div> --}}
                 </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_nokori_base">
@@ -180,7 +184,7 @@
 
 
             </div><!--/pds_sec01-->
-        </div><!--/pds_inner-->
+        </div>
         <div class="project_switch_tabs">
             <div class="project_show_select_tab selected_tab" onClick="switchTabs(this,'#project_content_section')">プロジェクト</div>
             <div class="project_show_select_tab" onClick="switchTabs(this,'#report_section')">活動レポート</div>

@@ -22,14 +22,15 @@
                         発送済みにする
                         <button type="submit" class="cover_link disable-btn"></button>
                 </div>
+                <p class="notification">※右にスライドすると、各情報を参照出来ます。</p>
             </div>
             <table>
                 <tr>
                     <th>発送状況</th>
                     <th>支援者名</th>
-                    <th>住所</th>
-                    <th>メールアドレス</th>
                     <th>購入したリターン</th>
+                    <th>メールアドレス</th>
+                    <th>住所</th>
                 </tr>
                 @if($project->payments)
                     @foreach($project->payments as $payment)
@@ -49,11 +50,7 @@
                             <i class="fas fa-copy" style="cursor: pointer" onclick="copyInnerText(this.previousElementSibling);displayToast('success','','コピーが完了しました。')"></i>
                         </td>
                         <td>
-                            <span class="formatted_postal_code">
-                                {{ $payment->user->address->formatted_postal_code }}<br>
-                                {{ $payment->user->address->full_address }}
-                            </span>
-                            <i class="fas fa-copy" style="cursor: pointer" onclick="copyInnerText(this.previousElementSibling);displayToast('success','','コピーが完了しました。')"></i>
+                            <a onClick="display.planDetail({{ $payment->id }})"><span class="accordion__title" style="font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px; white-space: nowrap;">一覧</span></a>
                         </td>
                         <td>
                             <span>
@@ -62,7 +59,11 @@
                             <i class="fas fa-copy" style="cursor: pointer" onclick="copyInnerText(this.previousElementSibling);displayToast('success','','コピーが完了しました。')"></i>
                         </td>
                         <td>
-                            <a onClick="display.planDetail({{ $payment->id }})"><span class="accordion__title" style="font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px; white-space: nowrap;">一覧</span></a>
+                            <span class="formatted_postal_code">
+                                {{ $payment->user->address->formatted_postal_code }}<br>
+                                {{ $payment->user->address->full_address }}
+                            </span>
+                            <i class="fas fa-copy" style="cursor: pointer" onclick="copyInnerText(this.previousElementSibling);displayToast('success','','コピーが完了しました。')"></i>
                         </td>
                     </tr>
                     <tr class="plan_detail">
