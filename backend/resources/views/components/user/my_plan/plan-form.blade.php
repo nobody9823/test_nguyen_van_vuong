@@ -62,8 +62,9 @@
     <div class="form_item_tit">
         金額
         <span class="hissu_txt">必須</span>
+        <span class="disclaimer">※半角数字のみで入力してください。</span>
     </div>
-    <input type="" name="price" class="p-postal-code def_input_100p" value="{{ old('price', optional($plan)->price) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})" min="0">
+    <input type="number" name="price" class="p-postal-code def_input_50p" value="{{ old('price', optional($plan)->price) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})" min="0"><span>&emsp;円</span>
     <div class="form_item_tit">
         <x-common.async-submit-message propName="return_price{{ $plan === null ? '' : '_'.$plan->id }}" />
     </div>
