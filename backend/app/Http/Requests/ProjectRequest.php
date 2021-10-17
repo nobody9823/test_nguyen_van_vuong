@@ -41,7 +41,7 @@ class ProjectRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'], // 最大16,777,215文字（約16Mバイト）
             // WARNING:支援総額順のPSリターンを使用する際はprepareForValidationの空文字登録処理を削除して下さい。
-            // 'reward_by_total_amount' => ['required', 'string', 'max:100000'], // 最大16,777,215文字（約16Mバイト）
+            // 'reward_by_total_amount' => ['required', 'string'], // 最大16,777,215文字（約16Mバイト）
             'reward_by_total_quantity' => ['required', 'string'], // 最大16,777,215文字（約16Mバイト）
             // 'target_amount' => ['required', 'integer', 'min:10000', 'max:99999999'],
             'target_number' => ['required', 'integer', 'min:1', 'max:9999999'],
