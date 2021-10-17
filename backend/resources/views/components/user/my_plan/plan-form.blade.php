@@ -52,7 +52,7 @@
 <div class="form_item_row">
     <div class="form_item_tit">お届け予定日<span class="hissu_txt">必須</span></div>
     <input type="text" name="delivery_date" class="p-postal-code def_input_100p delivery_date"
-        value="{{ old('delivery_date', optional($plan)->delivery_date) ?: $project->end_date }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
+        value="{{ old('delivery_date', optional($plan)->delivery_date) ?: $project->end_date->addDays(10) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
     <div class="form_item_tit">
         <x-common.async-submit-message propName="return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}" />
     </div>

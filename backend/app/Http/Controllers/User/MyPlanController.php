@@ -102,7 +102,7 @@ class MyPlanController extends Controller
 
     public function createReturn(Project $project)
     {
-        return response()->json($project->plans()->save(Plan::initialize())->toArray());
+        return response()->json($project->plans()->save(Plan::initialize($project))->toArray());
     }
 
     public function updateReturn(Project $project, Plan $plan, MyPlanRequest $request)
