@@ -63,7 +63,7 @@
         金額
         <span class="hissu_txt">必須</span>
     </div>
-    <input type="number" name="price" class="p-postal-code def_input_100p" value="{{ old('price', optional($plan)->price) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})" min="0">
+    <input type="" name="price" class="p-postal-code def_input_100p" value="{{ old('price', optional($plan)->price) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})" min="0">
     <div class="form_item_tit">
         <x-common.async-submit-message propName="return_price{{ $plan === null ? '' : '_'.$plan->id }}" />
     </div>
