@@ -33,7 +33,7 @@ class MyProjectRequest extends FormRequest
     {
         return [
             'title' => ['nullable', 'string', 'max:255'],
-            'content' => ['nullable', 'string', 'max:100000'],
+            'content' => ['nullable', 'string'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['nullable', 'string'],
             'image_url' => ['nullable', 'array'],
@@ -44,8 +44,8 @@ class MyProjectRequest extends FormRequest
             'target_number' => ['nullable', 'integer', 'min:1', 'max:9999999'],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', /*'after_or_equal:+14 day'*/],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', new MyProjectEndDate($this->route('project'))],
-            'reward_by_total_amount' => ['nullable', 'string', 'max:100000'],
-            'reward_by_total_quantity' => ['nullable', 'string', 'max:100000'],
+            'reward_by_total_amount' => ['nullable', 'string'],
+            'reward_by_total_quantity' => ['nullable', 'string'],
             'first_name_kana' => ['nullable', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'last_name_kana' => ['nullable', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
             'first_name' => ['nullable', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
