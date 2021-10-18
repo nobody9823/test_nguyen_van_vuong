@@ -29,7 +29,7 @@
 </div>
 
 {{--NOTICE: MyProjectController, create action --}}
-<a href="{{ route('user.project.create_return', ['project' => $project]) }}" class="footer-over_L my_new_project">
+<a href="{{ route('user.project.create_return', ['project' => $project]) }}" class="footer-over_L my_new_project" id="create_new_return_button">
     <div class="footer-over_L_02">
     <div class="footer-over_L_02_01">New Return</div>
     <div class="footer-over_L_02_02">新規リターン作成はこちら</div>

@@ -108,6 +108,9 @@
 <script>
     window.addEventListener('load',()=>{
         removeProjectImage('.js-image_delete');
+        if (getParam('is_new_plan')) {
+            document.getElementById('create_new_return_button').scrollIntoView({ block: 'end' });
+        }
     });
     if (getParam('status') == 422 || getParam('is_new_plan')) {
         getParam('plan') != null
