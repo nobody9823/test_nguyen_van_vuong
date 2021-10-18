@@ -429,8 +429,8 @@ class Project extends Model
             'reward_by_total_quantity' => '',
             'target_number' => 0,
             'curator' => '',
-            'start_date' => Carbon::now(),
-            'end_date' => $date->addYear(2),
+            'start_date' => $date->copy()->addDays(1),
+            'end_date' => $date->addDays(20),
             'release_status' => '---',
         ]);
     }
