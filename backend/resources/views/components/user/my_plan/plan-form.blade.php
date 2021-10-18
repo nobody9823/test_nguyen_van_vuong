@@ -1,7 +1,8 @@
 <div class="form_item_row">
     <div class="form_item_tit">
-        タイトル
+        リターン名
         <span class="hissu_txt">必須</span>
+        <span class="disclaimer">※45文字以内で入力してください</span>
     </div>
     <input type="text" name="title" class="def_input_100p" value="{{ old('title', optional($plan)->title) }}" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
     <div class="form_item_tit">
@@ -11,7 +12,7 @@
 
 <div class="form_item_row">
     <div class="form_item_tit">
-        本文
+        詳細
         <span class="hissu_txt">必須</span>
         <span class="disclaimer">※2000文字以内で入力してください</span>
     </div>
