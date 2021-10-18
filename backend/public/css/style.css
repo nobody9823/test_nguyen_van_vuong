@@ -1693,6 +1693,7 @@ input[name="tab_item"] {
 .nm_other span{ background: #fff; padding: 5px 15px;}
 .nm_other div{ position: absolute; left: 0; top: 50%; width: 100%; height: 2px; background: #DBDBDB; z-index: -1;}
 
+input[type="number"][name="price"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
 @media screen and (max-width: 768px){
 	.my-page_btn {
