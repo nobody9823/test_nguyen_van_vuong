@@ -29,7 +29,7 @@
 </div>
 
 {{--NOTICE: MyProjectController, create action --}}
-<a onclick="createNewPlanAndOpenModal({{ $project->id }})" class="footer-over_L my_new_project">
+<a href="{{ route('user.project.create_return', ['project' => $project]) }}" class="footer-over_L my_new_project">
     <div class="footer-over_L_02">
     <div class="footer-over_L_02_01">New Return</div>
     <div class="footer-over_L_02_02">新規リターン作成はこちら</div>
@@ -59,7 +59,6 @@
                 @csrf
                 <x-user.my_plan.plan-form :plan="$plan" :project="$project" />
             </form>
-            <a style="cursor: pointer" onclick="closePlanFormModal({{ $plan->id }})">閉じる</a>
         </div>
     </section>
 @endforeach
@@ -73,6 +72,5 @@
             <input type="hidden" id="new_plan_id" name="plan_id" value={{ $plan->id ?? '' }}>
             <x-user.my_plan.plan-form :plan=null :project=$project />
         </form>
-        <a style="cursor: pointer" onclick="closeNewPlanFormModal()">閉じる</a>
     </div>
 </section>

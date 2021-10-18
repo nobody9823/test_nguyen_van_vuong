@@ -25,14 +25,3 @@ const closeNewPlanFormModal = () => {
     // 第一引数に要素、第二引数にアニメーションの速度
     fadeOut(closeModal, 300);
 }
-
-const createNewPlanAndOpenModal = (projectId) => {
-    axios.get(`/my_project/project/${projectId}/createReturn`).then(res => {
-        if (res.status === 200){
-            document.getElementById('new_plan_id').value = res.data.id;
-            openNewPlanFormModal();
-        }
-    }).catch(res => {
-        console.log(res);
-    });
-}

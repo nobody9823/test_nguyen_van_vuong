@@ -43,9 +43,8 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::post('project/{project}/uploadProjectImage/{project_file?}', [MyProjectController::class, 'uploadProjectImage'])->name('project.uploadProjectImage');
         Route::post('project/{project}/uploadIdentifyImage/{identification}', [MyProjectController::class, 'uploadIdentifyImage'])->name('uploadIdentifyImage');
         Route::post('project/{project}/apply', [MyProjectController::class, 'apply'])->name('project.apply');
-        Route::get('project/{project}/create_plan', [MyProjectController::class, 'createPlan'])->name('project.create_plan');
+        Route::get('project/{project}/create_return', [MyPlanController::class, 'createReturn'])->name('project.create_return');
         Route::prefix('project/{project}')->group(function () {
-            Route::get('createReturn', [MyPlanController::class, 'createReturn']);
             Route::patch('updatePlan/{plan}', [MyPlanController::class, 'updateReturn']);
             Route::delete('delete_plan/{plan}', [MyPlanController::class, 'deletePlan']);
             Route::resource('plan', MyPlanController::class)->only(['store', 'update']);
