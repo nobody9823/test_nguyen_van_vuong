@@ -57,6 +57,9 @@ class MyPlanRequest extends FormRequest
             $this->merge([
                 'price' => 0
             ]);
+        } else {
+            $this->price = mb_convert_kana($this->price, "n");
+            $this->price = preg_replace('/[^ぁ-んァ-ンーa-zA-Z0-9一-０-９\.]+/u', '', $this->price);
         }
 
         if ($this->input('limit_of_supporters_is_required') === 0) {
