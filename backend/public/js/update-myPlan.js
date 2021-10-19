@@ -107,13 +107,7 @@ const updateMyPlan = (() => {
     return {
         textInput: (el, projectId, planId) => {
             data = {};
-            console.log(el.name === 'price');
-            if (el.name === 'price') {
-                data[el.name] = el.value.replace(/[^0-9]/g, '');
-                el.value = data.price;
-            } else {
-                data[el.name] = el.value
-            }
+            data[el.name] = el.value
             setTimer(data, projectId, planId);
         },
 
