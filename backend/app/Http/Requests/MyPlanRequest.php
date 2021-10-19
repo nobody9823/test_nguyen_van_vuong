@@ -6,7 +6,6 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Carbon\Carbon;
-use Log;
 
 class MyPlanRequest extends FormRequest
 {
@@ -27,7 +26,6 @@ class MyPlanRequest extends FormRequest
      */
     public function rules()
     {
-        Log::debug($this->price);
         return [
             'title' => ['nullable', 'string', 'max:45'],
             'content' => ['nullable', 'string', 'max:2000'],
