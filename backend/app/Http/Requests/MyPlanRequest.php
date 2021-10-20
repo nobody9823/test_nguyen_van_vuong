@@ -58,8 +58,11 @@ class MyPlanRequest extends FormRequest
                 'price' => 0
             ]);
         } else {
-            $this->price = mb_convert_kana($this->price, "n");
-            $this->price = preg_replace('/[^ぁ-んァ-ンーa-zA-Z0-9一-０-９\.]+/u', '', $this->price);
+            $converted_price = mb_convert_kana($this->price, "n");
+            $replaced_price = preg_replace('/[^ぁ-んァ-ンーa-zA-Z0-9一-０-９\.]+/u', '', $converted_price);
+            $this->merge([
+                'price' => $replaced_price,
+            ]);
         }
 
         if ($this->input('limit_of_supporters_is_required') === 0) {
