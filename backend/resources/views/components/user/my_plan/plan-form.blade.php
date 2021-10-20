@@ -4,7 +4,7 @@
         <span class="hissu_txt">必須</span>
         <span class="disclaimer">※45文字以内で入力してください</span>
     </div>
-    <input type="text" name="title" class="def_input_100p" value="{{ old('title', optional($plan)->title) }}" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
+    <input type="text" name="title" class="def_input_100p" value="{{ optional($plan)->title }}" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
     <div class="form_item_tit">
         <x-common.async-submit-message propName="return_title{{ $plan === null ? '' : '_'.$plan->id }}" />
     </div>
@@ -16,7 +16,7 @@
         <span class="hissu_txt">必須</span>
         <span class="disclaimer">※2000文字以内で入力してください</span>
     </div>
-    <textarea name="content" class="def_textarea" rows="6" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">{{ old('content', optional($plan)->content) }}</textarea>
+    <textarea name="content" class="def_textarea" rows="6" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">{{ optional($plan)->content }}</textarea>
     <div class="form_item_tit">
         <x-common.async-submit-message propName="return_content{{ $plan === null ? '' : '_'.$plan->id }}" />
     </div>
@@ -53,7 +53,7 @@
 <div class="form_item_row">
     <div class="form_item_tit">お届け予定日<span class="hissu_txt">必須</span></div>
     <input type="text" name="delivery_date" class="p-postal-code def_input_100p delivery_date"
-        value="{{ old('delivery_date', optional($plan)->delivery_date) ?: $project->end_date->addDays(10) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
+        value="{{ optional($plan)->delivery_date ?: $project->end_date->addDays(10) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
     <div class="form_item_tit">
         <x-common.async-submit-message propName="return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}" />
     </div>
@@ -65,7 +65,7 @@
         <span class="hissu_txt">必須</span>
         <span class="disclaimer">※半角数字のみで入力してください。</span>
     </div>
-    <input type="number" name="price" class="p-postal-code def_input_50p" value="{{ old('price', optional($plan)->price) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})" min="0"><span>&emsp;円</span>
+    <input type="number" name="price" class="p-postal-code def_input_50p" value="{{ optional($plan)->price }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})" min="0"><span>&emsp;円</span>
     <div class="form_item_tit">
         <x-common.async-submit-message propName="return_price{{ $plan === null ? '' : '_'.$plan->id }}" />
     </div>
