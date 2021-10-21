@@ -57,7 +57,7 @@ class MyPlanRequest extends FormRequest
             $this->merge([
                 'price' => 0
             ]);
-        } else {
+        } else if ($this->has('price') && !is_null($this->input('price'))) {
             $converted_price = mb_convert_kana($this->price, "n");
             $replaced_price = preg_replace('/[^ぁ-んァ-ンーa-zA-Z0-9一-０-９\.]+/u', '', $converted_price);
             $this->merge([
