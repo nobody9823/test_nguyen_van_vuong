@@ -95,7 +95,10 @@ const updateMyProject = (() => {
             } else {
                 document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
             }
-        }).catch(res => {
+        }).catch(err => {
+            if (err.response.status == 419) {
+                location.reload();
+            }
             document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
             console.log(res);
         });
@@ -109,7 +112,10 @@ const updateMyProject = (() => {
                 document.getElementById('spinner_' + data.name).style.display = 'none';
                 displayIcon(document.getElementById('saved_' + data.name));
             }
-        }).catch(res => {
+        }).catch(err => {
+            if (err.response.status == 419) {
+                location.reload();
+            }
             console.log(res);
             document.getElementById('spinner_' + data.name).style.display = 'none';
         });

@@ -98,16 +98,19 @@ const updateMyPlan = (() => {
                 }
                 displayError(data, res.data.message[Object.keys(data)[0]], planId);
             }
-        }).catch(res => {
+        }).catch((err) => {
+            console.log(err.response);
+            if (err.response.status == 419) {
+                location.reload();
+            }
             spinner.style.display = 'none';
-            console.log(res);
         });
     }
 
     return {
         textInput: (el, projectId, planId) => {
             data = {};
-            data[el.name] = el.value;
+            data[el.name] = el.value
             setTimer(data, projectId, planId);
         },
 
@@ -160,8 +163,11 @@ const updateMyPlan = (() => {
                     if(res.data.result){
                         el.parentNode.parentNode.remove();
                     };
-                }).catch(res =>{
-                    console.log(res);
+                }).catch((err) =>{
+                    console.log(err.response);
+                    if (err.response.status == 419) {
+                        location.reload();
+                    }
                 });
         }
     }

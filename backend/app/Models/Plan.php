@@ -153,7 +153,7 @@ class Plan extends Model
     //     }
     // }
 
-    public static function initialize()
+    public static function initialize($project)
     {
         return self::make([
             'title' => '',
@@ -162,7 +162,7 @@ class Plan extends Model
             'address_is_required' => false,
             'limit_of_supporters' => 1,
             'limit_of_supporters_is_required' => false,
-            'delivery_date' => Carbon::now(),
+            'delivery_date' => $project->end_date->addDays(10),
             'image_url' => 'public/sampleImage/now_printing.png'
         ]);
     }

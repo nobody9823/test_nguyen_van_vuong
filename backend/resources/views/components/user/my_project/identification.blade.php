@@ -1,6 +1,12 @@
 <form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr" enctype="multipart/form-data">
     @csrf
     @method('PUT')
+    <div class="ps_description">
+        <h4 style="color: #e65d65">以下の注意事項をご確認ください。</h4>
+        <ul>
+            <li>ここで入力した個人情報を第三者に開示する、もしくはプロジェクトに掲載される事はありません。</li>
+        </ul>
+    </div>
     <span class="p-country-name" style="display:none;">Japan</span>
     <div class="form_item_row">
         <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>

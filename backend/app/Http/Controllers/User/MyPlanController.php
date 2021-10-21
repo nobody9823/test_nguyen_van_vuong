@@ -102,7 +102,14 @@ class MyPlanController extends Controller
 
     public function createReturn(Project $project)
     {
-        return response()->json($project->plans()->save(Plan::initialize())->toArray());
+        $project->plans()->save(Plan::initialize($project));
+        return redirect()->route(
+            'user.my_project.project.edit',
+            [
+                'project' => $project, 'next_tab' => 'return',
+                'is_new_plan' => true, 'plan' => $project->plans()->latest()->first()
+            ]
+        );
     }
 
     public function updateReturn(Project $project, Plan $plan, MyPlanRequest $request)
