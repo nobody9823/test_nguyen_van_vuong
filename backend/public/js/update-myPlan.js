@@ -85,7 +85,12 @@ const updateMyPlan = (() => {
         var spinner = getSpinner(data, planId);
         spinner.style.display = 'block';
 
-        axios.patch(`/my_project/project/${projectId}/updatePlan/${planId === undefined ? document.getElementById('new_plan_id').value : planId}`, data).then(res => {
+        axios.post(`/my_project/project/${projectId}/updatePlan/${planId === undefined ? document.getElementById('new_plan_id').value : planId}`, data,
+            {
+                headers: {
+                    'X-HTTP-Method-Override': 'PUT'
+                }
+            }).then(res => {
             spinner.style.display = 'none';
             if(res.data.result === true){
                 if (data instanceof FormData){
