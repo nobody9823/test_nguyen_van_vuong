@@ -4,7 +4,7 @@
     <div class="ps_description">
         <h4 style="color: #e65d65">以下の注意事項をご確認ください。</h4>
         <ul>
-            <li>ここで入力した個人情報を第三者に開示する、もしくはプロジェクトに掲載される事はありません。</li>
+            <li>ここで入力した個人情報は第三者に開示したり、プロジェクトに掲載される事はありません。</li>
         </ul>
     </div>
     <span class="p-country-name" style="display:none;">Japan</span>
