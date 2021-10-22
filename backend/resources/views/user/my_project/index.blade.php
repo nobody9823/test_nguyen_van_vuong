@@ -57,7 +57,7 @@
 
                                     @if ($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack'))
                                     <div class="def_btn my_project_apply">
-                                        <form action="{{ route('user.my_project.project.destroy', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
+                                        <form action="{{ route('user.my_project.project.destroy', ['project' => $project]) }}" method="POST" onsubmit="return confirm('削除しますか？')">
                                             @csrf
                                             @method('DELETE')
                                             削除する
