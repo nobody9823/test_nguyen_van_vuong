@@ -13,16 +13,6 @@
             <x-user.mypage-navigation-bar/>
         </div>
         <div class="prof_page_R">
-            <div class="my_new_project_wrapper">
-                {{--NOTICE: MyProjectController, create action --}}
-                <a href="{{ route('user.my_project.project.create') }}" class="footer-over_L my_new_project">
-                    <div class="footer-over_L_02">
-                    <div class="footer-over_L_02_01">New Project</div>
-                    <div class="footer-over_L_02_02">新規プロジェクト作成はこちら</div>
-                    </div>
-                    <div class="footer-over_L_03"><i class="fas fa-chevron-right"></i></div>
-                </a>
-            </div>
             <section id="pc-top_04" class="section_base">
                 <div class="my_project_container">
                     @foreach($projects as $project)
@@ -91,6 +81,16 @@
                     @endforeach
                 </div>
             </section><!--/#pc-top_04-->
+            <div class="my_new_project_wrapper">
+                {{--NOTICE: MyProjectController, create action --}}
+                <a href="{{ route('user.my_project.project.create') }}" class="footer-over_L my_new_project">
+                    <div class="footer-over_L_02">
+                    <div class="footer-over_L_02_01">New Project</div>
+                    <div class="footer-over_L_02_02">新規プロジェクト作成はこちら</div>
+                    </div>
+                    <div class="footer-over_L_03"><i class="fas fa-chevron-right"></i></div>
+                </a>
+            </div>
         </div>
     </div>
 </section>
