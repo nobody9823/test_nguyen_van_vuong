@@ -19,10 +19,10 @@
                     <div class="my_project_img_box_wrapper">
                         @if ($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack'))
                         <div>
-                            <form action="{{ route('user.my_project.project.destroy', ['project' => $project]) }}" method="POST" onsubmit="return confirm('本当に削除しますか？')" class="project_delete_form">
+                            <form action="{{ route('user.my_project.project.destroy', ['project' => $project]) }}" method="POST" onsubmit="return confirm('本当に削除しますか？')" class="my_project_delete_form">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="fas fa-times-circle fa-2x project_delete_btn"></button>
+                                <button type="submit" class="fas fa-times-circle fa-2x my_project_delete_btn"></button>
                             </form>
                         </div>
                         @endif
@@ -93,57 +93,3 @@
     </div>
 </section>
 @endsection
-
-<style>
-    #supported-projects .edit_btn {
-        width: 80%;
-    }
-
-    .project_delete_form {
-        position: relative;
-        bottom: 15px;        
-        z-index: 1;
-        height: 0px;
-    }
-
-    .project_delete_btn {
-        color: red;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-    }
-
-    @media (max-width: 767px) {
-        .project_delete_form { right: 25px; }
-    }
-    
-    @media (min-width: 1000px) {
-        .project_delete_form { left: 275px; }
-    }
-
-    .apply_btn {
-        border-color: #00aebd;
-        background-color: white;
-        border-radius: 5px;
-        cursor: pointer;
-        outline: none;
-        padding: 0;
-        appearance: none;
-        color: #00aebd;
-        font-weight: bold;
-        font-size: 105%; 
-
-        position: absolute;
-        width: 100%;
-        height: 180%;
-        top: 0;
-        left: 0;
-        z-index: 1;
-    }
-
-     .display_release_status {
-        text-align: center;
-        padding-top: 7px;
-        color: red;
-    }
-</style>
