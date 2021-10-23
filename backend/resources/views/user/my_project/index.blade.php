@@ -62,13 +62,18 @@
                                     <div class="def_btn my_project_apply">
                                         <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
                                             @csrf
-                                            <!-- <button type="submit" class="cover_link disable-btn"> -->
                                             <button type="submit" class="apply_btn">申請</button>
                                         </form>
                                     </div>
                                     @endif
                                 </div>
                             </div>
+                            @if($project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
+                            <div class="display_release_status">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                {{ $project->release_status === ProjectReleaseStatus::getValue('Default') ? '申請前' : $project->release_status }}
+                            </div>
+                            @endif
                         </div>
                     </div><!--/.img_box_01_L_item-->
                     @endforeach
@@ -134,5 +139,11 @@
         top: 0;
         left: 0;
         z-index: 1;
+    }
+
+     .display_release_status {
+        text-align: center;
+        padding-top: 7px;
+        color: red;
     }
 </style>
