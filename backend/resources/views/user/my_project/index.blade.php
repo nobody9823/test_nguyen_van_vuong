@@ -56,13 +56,14 @@
                         </div>
 
                         <div class="my_project_img_content_wrapper">
-                            <div class="ib02_02 my_project_release_status">
+                            <div class="my_project_release_status">
                                 <div class="my_project_apply_wrapper">
                                     @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
-                                    <div class="def_btn my_project_apply">
+                                    <div class="apply_btn">
                                         <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
                                             @csrf
-                                            <button type="submit" class="apply_btn">申請</button>
+                                            申請
+                                            <button type="submit" class="cover_link disable-btn"></button>
                                         </form>
                                     </div>
                                     @endif
