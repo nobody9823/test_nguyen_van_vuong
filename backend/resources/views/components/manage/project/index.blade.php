@@ -164,8 +164,9 @@
                                     <p>郵便番号:{{ optional($project->user->address)->postal_code }}</p>
                                     <p>都道府県:{{ optional($project->user->address)->prefecture }}</p>
                                     <p>住所1(市町村など):{{ optional($project->user->address)->city }}</p>
-                                    <p>住所2(番地など):{{ optional($project->user->address)->block }}</p>
-                                    <p>住所3(建物番号など):{{ optional($project->user->address)->building }}</p>
+                                    <p>住所2(丁目など):{{ optional($project->user->address)->block }}</p>
+                                    <p>住所3(番地など):{{ optional($project->user->address)->block_number }}</p>
+                                    <p>住所4(建物番号など):{{ optional($project->user->address)->building }}</p>
                                     <div class="card-header">本人確認項目</div>
                                     <p>金融機関コード:{{ optional($project->user->identification)->bank_code }}</p>
                                     <p>支店コード:{{ optional($project->user->identification)->branch_code }}</p>
