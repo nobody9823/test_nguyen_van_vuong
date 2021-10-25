@@ -60,7 +60,7 @@
                                 <div class="my_project_apply_wrapper">
                                     @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
                                     <div class="apply_btn">
-                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
+                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('本当に申請してもよろしいでしょうか？')">
                                             @csrf
                                             申請
                                             <button type="submit" class="cover_link disable-btn"></button>
