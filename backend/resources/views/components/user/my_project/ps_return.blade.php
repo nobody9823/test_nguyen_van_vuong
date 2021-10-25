@@ -34,7 +34,7 @@
             <div class="form_item_tit">
                 支援総額順リターン内容
                 <span class="hissu_txt">必須</span>
-                <p class="disclaimer">※スマートフォンからは動画の埋め込みは行えません</p>
+                <p class="disclaimer">※動画の埋め込みはスマートフォンからはできません。PCから埋め込みをお願いします。</p>
             </div>
             <textarea name="reward_by_total_amount" class="def_textarea tiny_editor" rows="6">{{ old('reward_by_total_amount', optional($project)->reward_by_total_amount) }}</textarea>
             <x-common.async-submit-message propName="reward_by_total_amount" />
@@ -43,7 +43,7 @@
             <div class="form_item_tit">
                 支援人数順リターン内容
                 <span class="hissu_txt">必須</span>
-                <p class="disclaimer">※スマートフォンからは動画の埋め込みは行えません</p>
+                <p class="disclaimer">※動画の埋め込みはスマートフォンからはできません。PCから埋め込みをお願いします。</p>
             </div>
             <textarea name="reward_by_total_quantity" class="def_textarea tiny_editor" rows="6">{{ old('reward_by_total_quantity', optional($project)->reward_by_total_quantity) }}</textarea>
             <x-common.async-submit-message propName="reward_by_total_quantity" />
