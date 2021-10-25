@@ -270,24 +270,6 @@
             <a href="{{ route('user.profile', ['input_type' => 'image_url']) }}" class="cover_link"></a>
         </div>
     </div>
-    @if(!$authUser->sns_user_exists)
-    <div class="prof_edit_row">
-        <div class="prof_edit_01">メールアドレス</div>
-        <div class="prof_edit_02">{{ $authUser->email }}</div>
-        <div class="prof_edit_03">
-            編集
-            <a href="{{ route('user.profile', ['input_type' => 'email']) }}" class="cover_link"></a>
-        </div>
-    </div>
-    <div class="prof_edit_row">
-        <div class="prof_edit_01">パスワード</div>
-        <div class="prof_edit_02">********</div>
-        <div class="prof_edit_03">
-            編集
-            <a href="{{ route('user.profile', ['input_type' => 'password']) }}" class="cover_link"></a>
-        </div>
-    </div>
-    @endif
     <div class="prof_edit_row">
         <div class="prof_edit_01">URL</div>
         <div class="prof_edit_02 my_sns_icon_wrapper">
@@ -360,5 +342,23 @@
         </div>
         <div class="prof_edit_03">編集<a href="{{ route('user.profile', ['input_type' => 'introduction']) }}" class="cover_link"></a></div>
     </div>
+    @if(!$authUser->sns_user_exists)
+    <div class="prof_edit_row prof_address">
+        <div class="prof_edit_01">メールアドレス</div>
+        <div class="prof_edit_02">{{ $authUser->email }}</div>
+        <div class="prof_edit_03">
+            編集
+            <a href="{{ route('user.profile', ['input_type' => 'email']) }}" class="cover_link"></a>
+        </div>
+    </div>
+    <div class="prof_edit_row">
+        <div class="prof_edit_01">パスワード</div>
+        <div class="prof_edit_02">********</div>
+        <div class="prof_edit_03">
+            編集
+            <a href="{{ route('user.profile', ['input_type' => 'password']) }}" class="cover_link"></a>
+        </div>
+    </div>
+    @endif
 @endif
 </div>
