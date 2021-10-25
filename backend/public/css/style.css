@@ -2928,7 +2928,7 @@ margin: 20px 0;
     /*   .openクラスがついた時の要素の角度を指定 */
 }
 /* アコーディオンメニュー */
-
+#supported-projects .edit_btn { width: 80%; }
 .my_project_dashboard {justify-content: center;}
 .my_project_dashboard .def_btn {width: 40%; margin-bottom: 10px;}
 .my_project_dashboard_status {text-align: center; width: 100%; margin: 0; padding-bottom: 20px;}
@@ -2938,15 +2938,37 @@ margin: 20px 0;
 
 .my_project_container {display: flex; flex-wrap: wrap; justify-content: flex-start; margin-bottom: 50px;}
 .my_project_img_box_wrapper { display: flex; flex-flow: column; justify-content: space-between; width: 40%; margin: 5%; border-radius: 5px; box-shadow: 0px 3px 8px 0px rgb(173 173 173 / 15%);}
-.my_project_img_content_wrapper {flex-grow: 1;};
+.my_project_img_content_wrapper {flex-grow: 1; margin-bottom: 20px;};
 .my_project_release_status {display: flex; justify-content: space-between;}
 .my_project_apply_wrapper {display: flex; flex-direction: row; justify-content: space-between;}
 .my_project_apply { margin: 15px;}
+.my_project_delete_btn { color: red; background-color: transparent; border: none; cursor: pointer; }
+.apply_btn {
+    width: 80%;
+    color: #00aebd;
+    border: 1px solid #00aebd;
+	background-color: white;
+    max-width: 400px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 14px;
+    margin: 15px auto 15px auto;
+    position: relative;
+    border-radius: 6px;
+}
+.display_release_status { text-align: center; padding-top: 7px; color: red; }
 .my_plan_img_box_wrapper {display: flex; flex-flow: column; justify-content: space-between; width: 21%; margin: 2%; border-radius: 5px; box-shadow: 0px 3px 8px 0px rgb(173 173 173 / 15%);}
 
+.my_project_delete_form { position: relative; bottom: 15px; z-index: 1; height: 0px;}
 @media screen and (max-width: 768px){
     .my_project_img_box_wrapper {width: 90vw;}
     .my_plan_img_box_wrapper {width: 90vw;}
+		.my_project_delete_form { right: 25px; }
+}
+
+@media (min-width: 1000px) {
+	  .my_project_delete_form { left: 275px; }
 }
 
 .progress_bar_color_case_of_less_than_30{
