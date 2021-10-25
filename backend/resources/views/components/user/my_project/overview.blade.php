@@ -14,7 +14,7 @@
     <div class="form_item_tit">
         <span>概要文</span>
         <span class="hissu_txt">必須</span>
-        <p class="disclaimer">※スマートフォンからは動画の埋め込みは行えません</p>
+        <p class="disclaimer">※動画の埋め込みはスマートフォンからはできません。PCから埋め込みをお願いします。</p>
     </div>
     <textarea name="content" id="content" class="def_textarea tiny_editor" rows="6">{{ old('content', optional($project)->content) }}</textarea>
     <x-common.async-submit-message propName="content" />
