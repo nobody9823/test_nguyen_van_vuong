@@ -964,7 +964,7 @@ input[type=radio]:checked + .radio-fan::after {
 .prof_edit_03{ width: 3rem; font-size: 1.5rem; font-weight: bold; position: relative; color: #1C81D8;}
 .prof_edit_taikai_btn{ width: 100%; text-align: right; font-size: 1.4rem; margin: 7px 0 0 0; }
 .prof_edit_taikai_btn a{ color: #1C81D8;}
-.prof_address{ margin-top : 75px; }
+.prof_address_caution{ margin-top : 75px; }
 
 @media screen and (max-width: 1000px){
 	.prof_img_box{ width: 150px;}
@@ -983,7 +983,7 @@ input[type=radio]:checked + .radio-fan::after {
 	.prof_edit_02{ width: calc(100% - 3rem);}
 	.prof_edit_03{ font-size: 1.2rem;}
 	.prof_edit_taikai_btn{font-size: 1.2rem; }
-	.prof_address{ margin-top : 50px; }
+	.prof_address_caution{ margin-top : 50px; }
 }
 
 
