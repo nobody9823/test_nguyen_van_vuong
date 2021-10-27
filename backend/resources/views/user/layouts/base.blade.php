@@ -67,51 +67,9 @@ if(isiOS) {
 		</div>
 	</div>
 	<div id="header_03">
-
-        @guest('web')
-		<div id="wm_btn">
-			<div class="menuset_03 wm_login_btn">
-				<a href="{{ route('login') }}" class="">
-					ログイン
-				</a>
-			</div>
-			<div class="menuset_03 wm_signup_btn">
-				<a href="{{ route('user.pre_create') }}" class="">
-					新規登録
-				</a>
-			</div>
-		</div>
-        @endguest
-        @auth('web')
-		<div id="wm_btn" class="login_after_user_btn">
-			<div id="user_btn">
-				<div class="user_btn_01">
-                    <a href="{{ route('user.profile') }}">
-                        @if(isset(Auth::user()->profile))
-                        <div class="user_btn_01_01" style="background-image: url({{ Storage::url(Auth::user()->profile->image_url) }})">
-                        @else
-                        <div class="user_btn_01_01" style="background-image: url('image/my-page.svg')">
-                        @endif
-                        </div>
-                    </a>
-					<div class="user_btn_01_03">
-                        <a href="{{ route('user.profile') }}"><i class="fas fa-edit"></i></a>
-                    </div>
-                    <div class="user_btn_01_04">
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button class="disable-btn" type="submit"><i class="fas fa-sign-out-alt"></i></button>
-                        </form>
-                    </div>
-				</div>
-			</div>
-		</div>
-        @endauth
-
 		<input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
 		<label for="nav-tgl" class="open nav-tgl-btn"><span></span></label>
 		<label for="nav-tgl" class="close nav-tgl-btn"></label>
-
 	</div>
 </div>
 
@@ -143,6 +101,18 @@ if(isiOS) {
                     <p class="nav_btn_tit_L">ファンリターンとは</p>
 				</a>
 			</li>
+            @guest('web')
+            <li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">ログイン</p>
+				</a>
+			</li>
+            <li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">新規登録</p>
+				</a>
+			</li>
+            @endguest
             <form method="get" action="{{ route('user.search') }}" name="word_search">
                 <li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
                     <i class="fas fa-search"></i><input type="text" name="word" placeholder="キーワードを検索" value="{{ Request::get('word') }}">
@@ -180,12 +150,12 @@ if(isiOS) {
 
 
 			@guest('web')
-			<li class="menu-item nav_btn taso_li menuset_03 login_btn">
+			<li class="menu-item nav_btn taso_li menuset_03 login_btn mobile_hide">
                 <a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">ログイン</p>
 				</a>
 			</li>
-			<li class="menu-item nav_btn taso_li menuset_03 signup_btn">
+			<li class="menu-item nav_btn taso_li menuset_03 signup_btn mobile_hide">
                 <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
                     <p>新規登録</p>
 				</a>
@@ -233,6 +203,17 @@ if(isiOS) {
 				</a>
 			</li> --}}
             @auth('web')
+            <li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.profile') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">プロフィール</p>
+				</a>
+			</li>
+            <li class="menu-item nav_btn taso_li menuset_06">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="top_menu-1 top_menu_logout">ログアウト</button>
+                </form>
+			</li>
 			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.withdraw') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">退会について</p>
@@ -247,29 +228,16 @@ if(isiOS) {
 
 			<!--▼ ★★★ログイン時-->
             @auth('web')
-			<li class="menuset_05 login_after_user_btn">
-				<div id="user_btn">
-					<div class="user_btn_01">
-                        <a href="{{ route('user.profile') }}">
-                            @if(isset(Auth::user()->profile))
-                            <div class="user_btn_01_01" style="background-image: url({{ Storage::url(Auth::user()->profile->image_url) }})">
-                            @else
-                            <div class="user_btn_01_01" style="background-image: url('image/my-page.svg')">
-                            @endif
-                            </div>
-                        </a>
-                        <div class="user_btn_01_02">{{ Auth::user()->name }}さん</div>
-                        <div class="user_btn_01_03">
-                            <a href="{{ route('user.profile') }}"><i class="fas fa-edit"></i></a>
-                        </div>
-                        <div class="user_btn_01_04">
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button class="disable-btn" type="submit"><i class="fas fa-sign-out-alt"></i></button>
-                            </form>
-                        </div>
-					</div>
-				</div>
+            <li class="menu-item nav_btn taso_li menuset_03 login_btn mobile_hide">
+                <a href="{{ route('user.profile') }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">プロフィール</p>
+				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_03 signup_btn mobile_hide">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="top_menu-1 logout_btn">ログアウト</button>
+                </form>
 			</li>
             @endauth
 			<!--▲ ★★★ログイン時-->
