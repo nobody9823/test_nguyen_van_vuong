@@ -191,6 +191,17 @@ if(isiOS) {
 				</a>
 			</li> --}}
             @auth('web')
+            <li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.profile') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">プロフィール</p>
+				</a>
+			</li>
+            <li class="menu-item nav_btn taso_li menuset_06">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="top_menu-1 top_menu_logout">ログアウト</button>
+                </form>
+			</li>
 			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.withdraw') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">退会について</p>
@@ -205,12 +216,12 @@ if(isiOS) {
 
 			<!--▼ ★★★ログイン時-->
             @auth('web')
-            <li class="menu-item nav_btn taso_li menuset_03 login_btn">
+            <li class="menu-item nav_btn taso_li menuset_03 login_btn mobile_hide">
                 <a href="{{ route('user.profile') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">プロフィール</p>
 				</a>
 			</li>
-			<li class="menu-item nav_btn taso_li menuset_03 signup_btn">
+			<li class="menu-item nav_btn taso_li menuset_03 signup_btn mobile_hide">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button class="top_menu-1 logout_btn">ログアウト</button>

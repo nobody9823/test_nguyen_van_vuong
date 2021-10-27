@@ -231,6 +231,10 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 .ninki_tag_li div{ width: 96%; margin: 0 2% 10px 2%;}
 .ninki_tag_li a {color: #00AEBD !important;}
 
+@media screen and (max-width: 1000px){
+	.mobile_hide{ display: none;}
+}
+
 
 
 @media screen and (max-width: 1000px){
@@ -294,7 +298,7 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 	.login_btn .nav_btn_link{ display: inline;}
 	.signup_btn .nav_btn_link{ display: inline;}
 	.top_menu-1{ height: auto; padding:15px 7px;}
-
+	.top_menu_logout{ background-color: transparent; border: none; color: white; font-weight: bold; }
 }
 
 /**footer********************************************************************/
