@@ -101,6 +101,18 @@ if(isiOS) {
                     <p class="nav_btn_tit_L">ファンリターンとは</p>
 				</a>
 			</li>
+            @guest('web')
+            <li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">ログイン</p>
+				</a>
+			</li>
+            <li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">新規登録</p>
+				</a>
+			</li>
+            @endguest
             <form method="get" action="{{ route('user.search') }}" name="word_search">
                 <li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
                     <i class="fas fa-search"></i><input type="text" name="word" placeholder="キーワードを検索" value="{{ Request::get('word') }}">
@@ -138,12 +150,12 @@ if(isiOS) {
 
 
 			@guest('web')
-			<li class="menu-item nav_btn taso_li menuset_03 login_btn">
+			<li class="menu-item nav_btn taso_li menuset_03 login_btn mobile_hide">
                 <a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">ログイン</p>
 				</a>
 			</li>
-			<li class="menu-item nav_btn taso_li menuset_03 signup_btn">
+			<li class="menu-item nav_btn taso_li menuset_03 signup_btn mobile_hide">
                 <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
                     <p>新規登録</p>
 				</a>
