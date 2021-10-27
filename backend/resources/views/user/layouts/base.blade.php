@@ -82,31 +82,6 @@ if(isiOS) {
 			</div>
 		</div>
         @endguest
-        @auth('web')
-		<div id="wm_btn" class="login_after_user_btn">
-			<div id="user_btn">
-				<div class="user_btn_01">
-                    <a href="{{ route('user.profile') }}">
-                        @if(isset(Auth::user()->profile))
-                        <div class="user_btn_01_01" style="background-image: url({{ Storage::url(Auth::user()->profile->image_url) }})">
-                        @else
-                        <div class="user_btn_01_01" style="background-image: url('image/my-page.svg')">
-                        @endif
-                        </div>
-                    </a>
-					<div class="user_btn_01_03">
-                        <a href="{{ route('user.profile') }}"><i class="fas fa-edit"></i></a>
-                    </div>
-                    <div class="user_btn_01_04">
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button class="disable-btn" type="submit"><i class="fas fa-sign-out-alt"></i></button>
-                        </form>
-                    </div>
-				</div>
-			</div>
-		</div>
-        @endauth
 
 		<input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
 		<label for="nav-tgl" class="open nav-tgl-btn"><span></span></label>
