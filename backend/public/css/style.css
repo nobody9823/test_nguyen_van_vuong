@@ -223,36 +223,13 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
     width: 102px;
     height: 36px;
 }
-#wm_btn{ display:none; width: 230px; }
-#wm_btn.login_after_user_btn{ width: 135px; }
 .wm_login_btn{ background: #fff; width: 96px; border: solid 1px #00AEBD; border-radius: 5px; margin: 0 0 0 0; padding: 10px 0 10px 0; display: flex; align-items: center; align-content: center; justify-content: center; }
 .wm_login_btn a { color: #00AEBD;}
 .wm_signup_btn{ background: #00AEBD; width: 96px; border-radius: 5px; margin: 0 30px 0 0; padding: 10px 0 10px 0; display: flex; align-items: center; align-content: center; justify-content: center;}
 .wm_signup_btn a { color: #fff;}
 
-#user_btn{display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between; padding: 8px; background: #fff; width: 100%;}
-.login_after_user_btn #user_btn{ padding: 0px;}
-.user_btn_01{ width: 100%; display: flex; flex-wrap: wrap; align-items: center; align-content: center;}
-.user_btn_01_01{ width: 42px; height: 42px; background-position: center; background-size: cover;}
-.login_after_user_btn .user_btn_01_01{margin-right: auto; border-radius: 25px;}
-.user_btn_01_04 button{ font-size: 2rem; color:#00AEBD;}
-.login_after_user_btn .user_btn_01_01{margin-right: 5px; width: 38px;}
-.login_after_user_btn img{ border-radius: 21px; }
-.login_after_user_btn .user_btn_01_02{ display: none;}
-.user_btn_01_02{ font-size: 1.4rem; font-weight: bold; margin: 0 0 0 8px; color:#00AEBD; width: calc(100% - 120px); }
-.user_btn_01_03{ font-size: 2rem; width: 32px; text-align: center;}
-.user_btn_01_03 a{ color:#00AEBD;}
-.user_btn_01_04{ font-size: 2rem; width: 32px; text-align: center;}
-.user_btn_01_04 a{ color:#00AEBD;}
-
 .ninki_tag_li div{ width: 96%; margin: 0 2% 10px 2%;}
 .ninki_tag_li a {color: #00AEBD !important;}
-
-@media screen and (max-width: 1000px){
-	.login_after_user_btn #user_btn{ padding: 8px;}
-	.login_after_user_btn .user_btn_01_01{ width: 42px;}
-	.login_after_user_btn .user_btn_01_02{ display: block;}
-}
 
 
 
@@ -260,7 +237,6 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 	header{font-size: 1.4rem;}
 	#header_wrap{min-height:65px;}
 	#header{min-height:65px;}
-	#wm_btn{ display: flex; align-items: center; align-content: center; justify-content:space-between;}
 	#header_03{display:flex;flex-wrap:wrap;align-items:center; max-width: 350px; }
 	.menu_base{ height: auto; padding: 0 15px;}
 	.item_c{justify-content:flex-start;padding:0 0 0 7px;}
@@ -319,11 +295,6 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 	.signup_btn .nav_btn_link{ display: inline;}
 	.top_menu-1{ height: auto; padding:15px 7px;}
 
-}
-
-
-@media screen and (max-width: 500px){
-	#wm_btn{ display:none;}
 }
 
 /**footer********************************************************************/
