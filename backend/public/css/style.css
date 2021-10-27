@@ -135,7 +135,7 @@ main .section_base:first-of-type{ margin: 0px auto 100px auto;}
 .menuset_05{ order: 5;}
 .menuset_06{display: none !important;}
 .login_btn{ background: #fff; border: solid 1px #00AEBD; border-radius: 5px; margin: 0 8px 0 0;}
-.logout_btn{ color: #fff; background-color:#00AEBD; border: solid 1px #00AEBD; font-weight: bold; }
+.logout_btn{ color: #fff; background-color:#00AEBD; border: solid 1px #00AEBD; font-weight: bold; cursor: pointer; }
 .signup_btn{ background: #00AEBD; border-radius: 5px;}
 .signup_btn a { color: #fff;}
 .signup_btn p { color: #fff;}
@@ -183,7 +183,7 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 #header_01{display:flex;flex-wrap:wrap;align-items:center;}
 .h_logo_css{width:224px;margin:2px 0 0 0;display:block;}
 .h_logo_css_sp{display:none;}
-#branding{display:flex;flex-wrap:wrap;justify-content:space-between; height:80px; padding:0 5px;line-height:1; width:240px;}
+#branding{display:flex;flex-wrap:wrap;justify-content:space-between; height:80px; padding:0 5px;line-height:1; width:225px;}
 #header_03{display:none;}
 #menu{display:flex;flex-wrap:wrap;align-items:center; background:#fff;}
 .navgation_inner{width:100%;}
