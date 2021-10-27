@@ -135,6 +135,7 @@ main .section_base:first-of-type{ margin: 0px auto 100px auto;}
 .menuset_05{ order: 5;}
 .menuset_06{display: none !important;}
 .login_btn{ background: #fff; border: solid 1px #00AEBD; border-radius: 5px; margin: 0 8px 0 0;}
+.logout_btn{ color: #fff; background-color:#00AEBD; border: solid 1px #00AEBD; font-weight: bold; }
 .signup_btn{ background: #00AEBD; border-radius: 5px;}
 .signup_btn a { color: #fff;}
 .signup_btn p { color: #fff;}

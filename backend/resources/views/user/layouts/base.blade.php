@@ -205,7 +205,7 @@ if(isiOS) {
 
 			<!--▼ ★★★ログイン時-->
             @auth('web')
-			<li class="menuset_05 login_after_user_btn">
+			<!-- <li class="menuset_05 login_after_user_btn">
 				<div id="user_btn">
 					<div class="user_btn_01">
                         <a href="{{ route('user.profile') }}">
@@ -228,6 +228,17 @@ if(isiOS) {
                         </div>
 					</div>
 				</div>
+			</li> -->
+            <li class="menu-item nav_btn taso_li menuset_03 login_btn">
+                <a href="{{ route('user.profile') }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">プロフィール</p>
+				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_03 signup_btn">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="top_menu-1 logout_btn">ログアウト</button>
+                </form>
 			</li>
             @endauth
 			<!--▲ ★★★ログイン時-->
