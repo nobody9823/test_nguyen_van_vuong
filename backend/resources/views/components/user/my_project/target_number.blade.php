@@ -42,7 +42,7 @@
             </span>
             <br/>
             <span class="disclaimer">
-                ※掲載期間は最長60日で設定してください
+                ※掲載期間は最長50日で設定してください
             </span>
         </div>
         <input type="text" id="end_date" name="end_date" class="p-postal-code def_input_100p"
