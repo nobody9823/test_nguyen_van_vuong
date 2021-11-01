@@ -6,7 +6,7 @@ const endDate = date.setDate(date.getDate() + 50);
 const config = {
     dateFormat: "Y-m-d H:i",
     minDate: startDate,
-    maxDate: endDate,
+    // maxDate: endDate,
     enableTime: true,
     "locale": "ja",
 };
