@@ -14,4 +14,5 @@ final class PaymentWay extends Enum
     const PayPay = 'PayPay';
     const PayJp = 'PayJp';
     const Stripe = 'Stripe';
+    const GMO = 'GMO';
 }

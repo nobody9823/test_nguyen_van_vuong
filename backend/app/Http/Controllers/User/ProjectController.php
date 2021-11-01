@@ -241,7 +241,7 @@ class ProjectController extends Controller
             $this->plan->updatePlansByIds($plans, $validated_request['plans']);
             $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
             $payment->paymentToken()->save(PaymentToken::make([
-                'token' => !empty($validated_request['payment_method_id']) ? $validated_request['payment_method_id'] : $unique_token,
+                'order_id' => !empty($validated_request['payment_method_id']) ? $validated_request['payment_method_id'] : $unique_token,
             ]));
             DB::commit();
         } catch (\Exception $e) {
@@ -257,7 +257,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * do payment for Pay Jp
+     * do payment for credit
      *
      *@param App\Models\Project
      *@param App\Models\Payment
@@ -266,17 +266,21 @@ class ProjectController extends Controller
      */
     public function paymentForCredit(Project $project, Payment $payment)
     {
-        $response = $this->card_payment->charge($payment->price, $payment->paymentToken->token, $project->user->identification->connected_account_id);
+        $order_id = UniqueToken::getToken();
+        $entry_response = $this->card_payment->entryTran($payment->price, $order_id);
+        $exec_response = $this->card_payment->execTran($payment->paymentToken->order_id, $entry_response['accessID'], $entry_response['accessPass'], $order_id);
         DB::beginTransaction();
         try {
             $payment->payment_is_finished = true;
-            $payment->paymentToken->token = $response->id;
+            $payment->paymentToken->order_id = $exec_response['orderID'];
+            $payment->paymentToken->access_id = $entry_response['accessID'];
+            $payment->paymentToken->access_pass = $entry_response['accessPass'];
             $payment->save();
             $payment->paymentToken->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            $this->card_payment->refund($response->id);
+            $this->card_payment->refund($entry_response['accessID'], $entry_response['accessPass'], $payment->price);
             throw $e;
         }
         $this->user->notify(new PaymentNotification($project, $payment));

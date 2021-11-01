@@ -24,7 +24,7 @@ class PaymentTokenFactory extends Factory
     {
         return [
             'payment_id' => random_int(1, 100),
-            'token' => UniqueToken::getToken(),
+            'order_id' => UniqueToken::getToken(),
         ];
     }
 }

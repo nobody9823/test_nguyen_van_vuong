@@ -94,7 +94,7 @@
         @endif
         <table class="table">
             <tr>
-                <th style="width:15%">支援ID</th>
+                <th style="width:15%">オーダーID</th>
                 <th style="width:5%">支援時刻</th>
                 <th style="width:5%">支援者名</th>
                 <th style="width:5%">招待者名</th>
@@ -107,7 +107,9 @@
             @foreach($payments as $payment)
             <tr>
                 <td>
-                    {{ $payment->paymentToken->token }}
+                    <a href="{{ config('app.gmo_payment_detail_url') }}/{{ $payment->paymentToken->order_id }}/?page=1" target="_blank">
+                        {{ $payment->paymentToken->order_id }}
+                    </a>
                 </td>
                 <td>
                     {{ $payment->created_at }}
