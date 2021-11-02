@@ -60,36 +60,37 @@
 </div> -->
 
 <div class="form_item_row">
-<div class="form_item_tit">お届け予定日<span class="hissu_txt">必須</span></div>
-<div class="prof_edit_editbox pee_select_hori">
-    <div class="cp_ipselect cp_normal">
-        <select name="year">
-            <option value="">年</option>
-            <?php $years = array_reverse(range(today()->year + 10, today()->year)); 
-                  $delivery_year = date('Y', strtotime(optional($plan)->delivery_date));
-            ?>
-                @foreach($years as $year)
-                    <option 
-                        value="{{ $year }}" 
-                        {{ $delivery_year == $year ? 'selected' : '' }}>
-                        {{ $year }}
-                    </option>
-                @endforeach
-        </select>
-    </div>
+    <div class="form_item_tit">お届け予定日<span class="hissu_txt">必須</span></div>
+    <div class="prof_edit_editbox pee_select_hori">
+        <div class="cp_ipselect cp_normal">
+            <select name="year">
+                <option value="">年</option>
+                <?php $years = array_reverse(range(today()->year + 10, today()->year)); 
+                    $delivery_year = date('Y', strtotime(optional($plan)->delivery_date));
+                ?>
+                    @foreach($years as $year)
+                        <option 
+                            value="{{ $year }}" 
+                            {{ $delivery_year == $year ? 'selected' : '' }}>
+                            {{ $year }}
+                        </option>
+                    @endforeach
+            </select>
+        </div>
 
-    <div class="cp_ipselect cp_normal">
-        <select name="month">
-            <option value="">月</option>
-            <?php $delivery_month = date('m', strtotime(optional($plan)->delivery_date)); ?>
-                @foreach(range(1, 12) as $month)
-                    <option 
-                        value="{{ $month }}"
-                        {{ $delivery_month == $month ? 'selected' : '' }}>
-                        {{ $month }}
-                    </option>
-                @endforeach
-        </select>
+        <div class="cp_ipselect cp_normal">
+            <select name="month">
+                <option value="">月</option>
+                <?php $delivery_month = date('m', strtotime(optional($plan)->delivery_date)); ?>
+                    @foreach(range(1, 12) as $month)
+                        <option 
+                            value="{{ $month }}"
+                            {{ $delivery_month == $month ? 'selected' : '' }}>
+                            {{ $month }}
+                        </option>
+                    @endforeach
+            </select>
+        </div>
     </div>
 </div>
 

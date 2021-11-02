@@ -114,6 +114,9 @@ const updateMyPlan = (() => {
 
     return {
         textInput: (el, projectId, planId) => {
+            console.log(el);
+            console.log(planId);
+            console.log(projectId);
             data = {};
             data[el.name] = el.value
             setTimer(data, projectId, planId);
