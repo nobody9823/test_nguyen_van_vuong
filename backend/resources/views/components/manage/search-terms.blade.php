@@ -10,10 +10,10 @@
         aria-controls="collapseFilter">
         検索条件▼
     </span>
-    <a class="btn btn-sm btn-outline-primary ml-4" href={{route($role.'.'.$model.'.index')}}>すべての検索条件をクリア</a>
     @if(Request::get('project'))
         <a class="btn btn-sm btn-outline-success ml-4" href={{route($role.'.'.$model.'.index', ['project' => Request::get('project')])}}>プロジェクトを維持したまま検索条件をクリア</a>
     @endif
+    <a class="btn btn-sm btn-outline-primary ml-4" href={{route($role.'.'.$model.'.index')}}>すべての検索条件をクリア</a>
 </div>
 <div class="collapse show" id="collapseSearchFilter">
     @if(Request::get('word'))
