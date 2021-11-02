@@ -8,14 +8,16 @@ const updateMyPlan = (() => {
 
     var savedTimer = null;
 
-    var deliveryYear = document.getElementById('delivery_year');
+    var deliveryDate = {};
 
-    var deliveryMonth = document.getElementById('delivery_month');
+    var deliveryYear = document.getElementById('deliveryYear');
 
-    var deliveryDay = document.getElementById('delivery_day');
+    var deliveryMonth = document.getElementById('deliveryMonth');
+
+    // var deliveryDay = document.getElementById('delivery_day');
 
     const getSpinner = (data, planId) => {
-        if (data instanceof FormData){
+        if (data instanceof FormData) {
             return document.getElementById('spinner_return_image_url' + (planId === undefined ? '' : '_' + planId));
         } else {
             return document.getElementById('spinner_return_' + Object.keys(data)[0] + (planId === undefined ? '' : '_' + planId));
@@ -30,7 +32,7 @@ const updateMyPlan = (() => {
             ul.appendChild(childElement);
         });
         document.getElementById('errors_return_' + (Object.keys(data)[0]) + (planId !== undefined ? '_' + planId : '')).appendChild(ul);
-        setTimeout(() => { disappearError(data, planId); }, 5000 );
+        setTimeout(() => { disappearError(data, planId); }, 5000);
     }
 
     const disappearError = (data, planId) => {
@@ -41,7 +43,7 @@ const updateMyPlan = (() => {
 
         var el;
 
-        if (data instanceof FormData){
+        if (data instanceof FormData) {
             el = document.getElementById('saved_return_image_url' + (planId === undefined ? '' : '_' + planId));
         } else {
             el = document.getElementById('saved_return_' + Object.keys(data)[0] + (planId === undefined ? '' : '_' + planId));
@@ -56,15 +58,15 @@ const updateMyPlan = (() => {
     }
 
     const setTimer = (data, projectId, planId) => {
-        if (Timer) {clearTimeout(Timer);}
-        Timer = setTimeout(() => {uploadPlan(data, projectId, planId);}, 1000)
+        if (Timer) { clearTimeout(Timer); }
+        Timer = setTimeout(() => { uploadPlan(data, projectId, planId); }, 1000)
     }
 
     const previewUploadedImage = (file, planId) => {
 
         var preview;
 
-        if (!(preview = document.getElementById('image_url_' + planId))){
+        if (!(preview = document.getElementById('image_url_' + planId))) {
             preview = document.getElementById('image_url');
         }
 
@@ -91,49 +93,53 @@ const updateMyPlan = (() => {
                     'X-HTTP-Method-Override': 'PUT'
                 }
             }).then(res => {
-            spinner.style.display = 'none';
-            if(res.data.result === true){
-                if (data instanceof FormData){
-                    previewUploadedImage(data, planId);
+                spinner.style.display = 'none';
+                if (res.data.result === true) {
+                    if (data instanceof FormData) {
+                        previewUploadedImage(data, planId);
+                    }
+                    displayIcon(data, planId);
+                } else if (res.data.message !== undefined) {
+                    if (data instanceof FormData) {
+                        displayError({ image_url: data }, res.data.message['image_url'], planId);
+                    }
+                    displayError(data, res.data.message[Object.keys(data)[0]], planId);
                 }
-                displayIcon(data, planId);
-            } else if (res.data.message !== undefined){
-                if (data instanceof FormData){
-                    displayError({image_url: data}, res.data.message['image_url'], planId);
+            }).catch((err) => {
+                console.log(err.response);
+                if (err.response.status == 419) {
+                    location.reload();
                 }
-                displayError(data, res.data.message[Object.keys(data)[0]], planId);
-            }
-        }).catch((err) => {
-            console.log(err.response);
-            if (err.response.status == 419) {
-                location.reload();
-            }
-            spinner.style.display = 'none';
-        });
+                spinner.style.display = 'none';
+            });
     }
-
+    
     return {
-        textInput: (el, projectId, planId) => {
-            console.log(el);
-            console.log(planId);
-            console.log(projectId);
+        textInput: (el, projectId, planId) => { 
             data = {};
             data[el.name] = el.value
             setTimer(data, projectId, planId);
         },
 
-        checkDateIsFilled: (el, projectId, planId) => {
-            if (el.name.indexOf('delivery') !== -1){
-                if (deliveryYear.value !== "" && deliveryMonth.value > 0 && deliveryDay.value > 0){
-                    data = {};
-                    data["delivery_date"] = 'delivery_date';
-                    data[deliveryYear.name] = deliveryYear.value;
-                    data[deliveryMonth.name] = deliveryMonth.value;
-                    data[deliveryDay.name] = deliveryDay.value;
-                    setTimer(data, projectId, planId);
-                }
-            }
+        updateDeliveryDate: (el, projectId, planId) => {
+            el.name === 'year' ?  deliveryDate.year = el.value :  deliveryDate.month = el.value;
+            data = {};
+            data['delivery_date'] =  deliveryDate;
+            ( deliveryDate.year &&  deliveryDate.month) !== undefined && setTimer(data, projectId, planId);
         },
+
+        // checkDateIsFilled: (el, projectId, planId) => {
+        //     if (el.name.indexOf('delivery') !== -1) {
+        //         if (deliveryYear.value !== "" && deliveryMonth.value > 0 && deliveryDay.value > 0) {
+        //             data = {};
+        //             data["delivery_date"] = 'delivery_date';
+        //             data[deliveryYear.name] = deliveryYear.value;
+        //             data[deliveryMonth.name] = deliveryMonth.value;
+        //             data[deliveryDay.name] = deliveryDay.value;
+        //             setTimer(data, projectId, planId);
+        //         }
+        //     }
+        // },
 
         selectorInput: (el, projectId, planId) => {
             data = {};
@@ -151,7 +157,7 @@ const updateMyPlan = (() => {
         limitOfSupportersIsChecked: (el, projectId, planId) => {
             data = {};
             data['limit_of_supporters_is_required'] = {};
-            if (el.type === 'checkbox' && el.checked){
+            if (el.type === 'checkbox' && el.checked) {
                 data['limit_of_supporters_is_required'] = 1;
                 document.getElementById(`limit_of_supporters${planId === undefined ? '' : '_' + planId}`).style.display = 'block';
             } else {
@@ -168,10 +174,10 @@ const updateMyPlan = (() => {
             axios.delete(`/my_project/project/${projectId}/delete_plan/${planId}`)
                 .then(res => {
                     spinner.style.display = 'none';
-                    if(res.data.result){
+                    if (res.data.result) {
                         el.parentNode.parentNode.remove();
                     };
-                }).catch((err) =>{
+                }).catch((err) => {
                     console.log(err.response);
                     if (err.response.status == 419) {
                         location.reload();

@@ -82,13 +82,15 @@ class MyPlanRequest extends FormRequest
                 'limit_of_supporters' => 1,
             ]);
         }
-
+     
         if ($this->has('year') && $this->has('month')) {
             $delivery_date = Carbon::createFromDate($this->year, $this->month)->format('Y-m');
-            $this->merge([
-                'delivery_date' => $delivery_date
-            ]);
+        } elseif ($this->delivery_date) {
+            $delivery_date = Carbon::createFromDate($this->delivery_date['year'], $this->delivery_date['month'])->format('Y-m');
         }
+        $this->merge([
+            'delivery_date' => $delivery_date
+        ]);
     }
 
     public function failedValidation(Validator $validator)
@@ -117,7 +119,7 @@ class MyPlanRequest extends FormRequest
     public function messages()
     {
         return [
-            'delivery_date.date_format' => ':attributeの形式は、「年-月-日」で指定してください。',
+            'delivery_date.date_format' => ':attributeの形式は、「年-月」で指定してください。',
             'delivery_date.after' => ':attributeには、プロジェクト掲載終了日以降の日付を指定してください。',
         ];
     }
