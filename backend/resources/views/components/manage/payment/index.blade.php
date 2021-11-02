@@ -14,7 +14,7 @@
             <input type="hidden" name="project" value="{{ Request::get('project') }}" />
         @endif
         <p>
-            <a class="btn btn-secondary mt-3 mr-3" data-toggle="collapse" href="#collapseExample" role="button"
+            <a class="btn btn-secondary mt-3 mr-2" data-toggle="collapse" href="#collapseExample" role="button"
                 aria-expanded="false" aria-controls="collapseExample">
                 詳細条件 ▼
             </a>
@@ -81,7 +81,6 @@
                 </option>
             @endforeach
         </select>
-        </select>
         <x-manage.sort_form :props_array="[
             'created_at' => '支援時刻',
             'user_name' => '支援者名',
@@ -90,7 +89,7 @@
             {{-- 'plan_payment_included_plan_project_user_name' => 'インフルエンサー名',
             'plan_payment_included_plan_project_title' => 'プロジェクト名', --}}
         ]" />
-        <input name="word" type="search" class="form-control" aria-lavel="Search" placeholder="キーワードで検索"
+        <input name="word" type="search" class="form-control mr-2" aria-lavel="Search" placeholder="キーワードで検索"
             value="{{ Request::get('word') }}">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
@@ -275,10 +274,7 @@
                 </tbody>
             </table>
         </div>
-
-        <div class="d-flex justify-content-center">
-            {{ $payments->appends(request()->input())->links() }}
-        </div>
+        {{ $payments->appends(request()->input())->links() }}
     @endif
 </div>
 @section('script')
