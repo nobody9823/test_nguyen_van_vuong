@@ -236,6 +236,7 @@ return [
         'DisplayVideoHelper' => App\Helpers\DisplayVideoHelper::class,
         'PrefectureHelper' => App\Helpers\PrefectureHelper::class,
         'ProjectReleaseStatus' => App\Enums\ProjectReleaseStatus::class,
+        'PaymentJobCd' => App\Enums\PaymentJobCd::class,
         'Slack' => App\Services\Slack\SlackFacade::class,
         'DateFormat' => App\Services\Date\DateFormatFacade::class,
         'EditMyProjectTab' => App\Services\View\EditMyProjectTabFacade::class,
