@@ -29,29 +29,13 @@ class MyProjectEndDate implements Rule
     public function passes($attribute, $value)
     {
         $end_date = new Carbon($value);
-        // dd($this->project->start_date->addDays(50));
-        // dd($end_date->lt($this->project->start_date->addDays(50)) || $end_date->gt($this->project->start_date) === true);
-        // dd($end_date->lt($this->project->start_date->addDays(50)));
-        // dd($end_date->gt($this->project->start_date));
-
         if ($end_date->gt($this->project->start_date->addDays(50))) {
-            // dd('test');
             return false;
-        }
-
-        if ($end_date->lt($this->project->start_date)) {
-            // dd('test2');
+        } elseif ($end_date->lt($this->project->start_date)) {
             return false;
         } else {
-            // dd('成功');
             return true;
         }
-        
-        // if ($end_date->lt($this->project->start_date->addDays(50)) || $end_date->gt($this->project->start_date) === true) {
-        //     return false;
-        // } else {
-        //     return true;
-        // }
     }
 
     /**
