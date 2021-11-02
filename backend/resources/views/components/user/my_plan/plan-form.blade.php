@@ -50,12 +50,35 @@
     </div>
 </div>
 
-<div class="form_item_row">
+<!-- <div class="form_item_row">
     <div class="form_item_tit">お届け予定日<span class="hissu_txt">必須</span></div>
     <input type="text" name="delivery_date" class="p-postal-code def_input_100p"
         value="{{ optional($plan)->delivery_date ?: $project->end_date->addDays(10) }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
     <div class="form_item_tit">
         <x-common.async-submit-message propName="return_delivery_date{{ $plan === null ? '' : '_'.$plan->id }}" />
+    </div>
+</div> -->
+
+<div class="form_item_row">
+<div class="form_item_tit">お届け予定日<span class="hissu_txt">必須</span></div>
+<div class="prof_edit_editbox pee_select_hori">
+    <div class="cp_ipselect cp_normal">
+        <select id="year" name="year">
+            <option value="">年</option>
+            <?php $years = array_reverse(range(today()->year + 10, today()->year)); ?>
+                @foreach($years as $year)
+                    <option value="{{ $year }}">{{ $year }}</option>
+                @endforeach
+        </select>
+    </div>
+
+    <div class="cp_ipselect cp_normal">
+        <select id="month" name="month">
+            <option value="">月</option>
+                @foreach(range(1, 12) as $month)
+                    <option value="{{ $month }}">{{ $month }}</option>
+                @endforeach
+        </select>
     </div>
 </div>
 

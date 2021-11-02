@@ -26,6 +26,7 @@ class MyPlanRequest extends FormRequest
      */
     public function rules()
     {
+        dd($this);
         return [
             'title' => ['nullable', 'string', 'max:45'],
             'content' => ['nullable', 'string', 'max:2000'],
