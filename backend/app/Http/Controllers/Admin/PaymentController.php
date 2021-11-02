@@ -16,17 +16,18 @@ class PaymentController extends Controller
     public function index(Request $request)
     {
         $payments = Payment::search()
-                    ->narrowDownPaymentToken()
-                    ->narrowDownWithProject()
-                    ->narrowDownByDate()
-                    ->narrowDownByPrice()
-                    ->with([
-                        'user' => function ($query) {
-                            $query->with(['profile', 'address']);
-                        },
-                        'inviter'
-                    ])
-                    ->sortBySelected($request->sort_type);
+            ->narrowDownPaymentToken()
+            ->narrowDownPaymentJobCd()
+            ->narrowDownWithProject()
+            ->narrowDownByDate()
+            ->narrowDownByPrice()
+            ->with([
+                'user' => function ($query) {
+                    $query->with(['profile', 'address']);
+                },
+                'inviter'
+            ])
+            ->sortBySelected($request->sort_type);
 
         //リレーション先OrderBy
         if ($request->sort_type === 'user_name_asc') {
@@ -37,14 +38,14 @@ class PaymentController extends Controller
             $payments = $payments->get()->sortBy('inviter.name')->paginate(10);
         } elseif ($request->sort_type === 'inviter_name_desc') {
             $payments = $payments->get()->sortByDesc('inviter.name')->paginate(10);
-        // } elseif ($request->sort_type === 'plan_payment_included_plan_project_user_name_asc') {
-        //     $payments = $payments->get()->sortBy('includedPlans.project.user.name')->paginate(10);
-        // } elseif ($request->sort_type === 'plan_payment_included_plan_project_user_name_desc') {
-        //     $payments = $payments->get()->sortByDesc('includedPlans.project.user.name')->paginate(10);
-        // } elseif ($request->sort_type === 'plan_payment_included_plan_project_title_asc') {
-        //     $payments = $payments->get()->sortBy('includedPlans.project.title')->paginate(10);
-        // } elseif ($request->sort_type === 'plan_payment_included_plan_project_title_desc') {
-        //     $payments = $payments->get()->sortByDesc('includedPlans.project.title')->paginate(10);
+            // } elseif ($request->sort_type === 'plan_payment_included_plan_project_user_name_asc') {
+            //     $payments = $payments->get()->sortBy('includedPlans.project.user.name')->paginate(10);
+            // } elseif ($request->sort_type === 'plan_payment_included_plan_project_user_name_desc') {
+            //     $payments = $payments->get()->sortByDesc('includedPlans.project.user.name')->paginate(10);
+            // } elseif ($request->sort_type === 'plan_payment_included_plan_project_title_asc') {
+            //     $payments = $payments->get()->sortBy('includedPlans.project.title')->paginate(10);
+            // } elseif ($request->sort_type === 'plan_payment_included_plan_project_title_desc') {
+            //     $payments = $payments->get()->sortByDesc('includedPlans.project.title')->paginate(10);
         } else {
             $payments = $payments->paginate(10);
         }

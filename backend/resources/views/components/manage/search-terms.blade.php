@@ -32,6 +32,14 @@
         </div>
     </div>
     @endif
+    @if(Request::get('job_cd'))
+    <div class="card-header d-flex align-items-center">
+        処理区分 :
+        <div class="flex-grow-1">
+            【{{ Request::get('job_cd') }}】
+        </div>
+    </div>
+    @endif
     @if(Request::get('sort_type'))
     <div class="card-header d-flex align-items-center">
         並び替え条件 :

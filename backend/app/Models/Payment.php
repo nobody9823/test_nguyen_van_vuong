@@ -121,6 +121,13 @@ class Payment extends Model
         }
         return $query;
     }
+    public function scopeNarrowDownPaymentJobCd($query)
+    {
+        if (Request::get('job_cd')) {
+            $query->whereIn('id', PaymentToken::where('job_cd', Request::get('job_cd'))->pluck('payment_id'));
+        }
+        return $query;
+    }
     public function scopeNarrowDownByDate($query)
     {
         if (Request::get('from_date')) {
