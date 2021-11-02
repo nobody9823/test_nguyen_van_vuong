@@ -70,7 +70,7 @@
                                     <div><span>残り</span><br>{{ $plan->limit_of_supporters }}個</div>
                                 </div><!--/su_pr_02_03-->
                                 <div class="su_pr_02_04 m_b_1510">
-                                    <div>お届け予定日：{{ $plan->delivery_date }}</div>
+                                    <div>お届け予定日：{{ $plan->formatted_delivery_date }}</div>
                                 </div><!--/su_pr_02_04-->
                             @endforeach
                             </div>

@@ -31,7 +31,7 @@
             @foreach($plans as $plan)
             <div class="av_txt">
                 <div>{{ $plan->title }}<br>支援金額：{{ $plan->price }}円</div>
-                支援者：{{ $plan->included_payments_count }}人 <br>お届け予定：{{ $plan->delivery_date }}
+                支援者：{{ $plan->included_payments_count }}人 <br>お届け予定：{{ $plan->formatted_delivery_date }}
             </div>
             <br>
             @endforeach
