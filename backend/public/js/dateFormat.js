@@ -1,19 +1,27 @@
 const date = new Date();
-const startDate = date.setDate(date.getDate() + 1);
+const dateLowerLimit = date.setDate(date.getDate() + 1);
 
 const config = {
     dateFormat: "Y-m-d H:i",
-    minDate: startDate,
+    minDate: dateLowerLimit,
     enableTime: true,
     "locale": "ja",
 };
 
-const startDateElement = document.getElementById('start_date');
-const getValueStartDate = () => {
-    const dateData = new Date(startDateElement.value);
-    config['maxDate'] = dateData.setDate(dateData.getDate() + 50);
+const variableEndDate = () => {
+    const startDateElement = document.getElementById('start_date');
+    const startDate = new Date(startDateElement.value);
+    config['maxDate'] = startDate.setDate(startDate.getDate() + 49);
     flatpickr("#end_date", config);
+    startDate.setDate(startDate.getDate() - 49);
+}
+window.onload = () => {
+    variableEndDate();
 };
+const getValueStartDate = () => {
+    variableEndDate();
+};
+
 
 flatpickr("#start_date", config);
 
