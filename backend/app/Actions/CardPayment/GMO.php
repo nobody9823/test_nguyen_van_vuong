@@ -3,7 +3,6 @@
 namespace App\Actions\CardPayment;
 
 use App\Actions\CardPayment\CardPaymentInterface;
-use App\Traits\UniqueToken;
 use Illuminate\Support\Facades\Http;
 
 class GMO implements CardPaymentInterface
@@ -23,7 +22,7 @@ class GMO implements CardPaymentInterface
             'shopPass' => config('app.gmo_shop_pass'),
             'orderID' => $order_id,
             'jobCd' => 'AUTH',
-            'amount' => (string)$price,
+            'amount' => $price,
         ]);
 
         if (!$entry_response->ok() || isset($entry_response['errCode'])) {
@@ -68,9 +67,9 @@ class GMO implements CardPaymentInterface
      */
     public function refund(string $access_id, string $access_pass, int $price): object
     {
-        $response = Http::retry(5, 100)->post('https://pt01.mul-pay.jp/payment/AlterTran.json', [
-            'shopID' => 'tshop11223344',
-            'shopPass' => '9xxyifua',
+        $response = Http::retry(5, 100)->post(config('app.gmo_alter_payment_url'), [
+            'shopID' => config('app.gmo_shop_id'),
+            'shopPass' => config('app.gmo_shop_pass'),
             'accessID' => $access_id,
             'accessPass' => $access_pass,
             'jobCd' => 'CANCEL',
