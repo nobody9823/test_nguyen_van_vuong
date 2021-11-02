@@ -25,7 +25,7 @@
                     <div class="form-check flex-column">
                         <div class="form-group">
                             <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">支援ID</span>
+                                <span class="input-group-text" id="basic-addon2">オーダーID</span>
                             </div>
                             <input type="text" class="form-control" value="{{ Request::get('payment_token') }}"
                                 name="payment_token" id="payment_token">
