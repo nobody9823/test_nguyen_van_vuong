@@ -4,17 +4,7 @@ const updateMyPlan = (() => {
 
     var data = {};
 
-    var validatedTimer = null;
-
     var savedTimer = null;
-
-    var deliveryDate = {};
-
-    // var deliveryYear = document.getElementById('deliveryYear');
-
-    // var deliveryMonth = document.getElementById('deliveryMonth');
-
-    // var deliveryDay = document.getElementById('delivery_day');
 
     const getSpinner = (data, planId) => {
         if (data instanceof FormData) {
@@ -121,25 +111,19 @@ const updateMyPlan = (() => {
             setTimer(data, projectId, planId);
         },
 
-        updateDeliveryDate: (el, projectId, planId) => {
-            el.name === 'year' ?  deliveryDate.year = el.value :  deliveryDate.month = el.value;
+        updateDeliveryDate: (projectId, planId) => {
+
+            let deliveryYear = document.getElementById('deliveryYear_' + planId);
+            let deliveryMonth = document.getElementById('deliveryMonth_' + planId);
+            let deliveryDate = {
+                'year': deliveryYear.value,
+                'month': deliveryMonth.value,
+            };
+            
             data = {};
             data['delivery_date'] =  deliveryDate;
-            ( deliveryDate.year &&  deliveryDate.month) !== undefined && setTimer(data, projectId, planId);
+            setTimer(data, projectId, planId);
         },
-
-        // checkDateIsFilled: (el, projectId, planId) => {
-        //     if (el.name.indexOf('delivery') !== -1) {
-        //         if (deliveryYear.value !== "" && deliveryMonth.value > 0 && deliveryDay.value > 0) {
-        //             data = {};
-        //             data["delivery_date"] = 'delivery_date';
-        //             data[deliveryYear.name] = deliveryYear.value;
-        //             data[deliveryMonth.name] = deliveryMonth.value;
-        //             data[deliveryDay.name] = deliveryDay.value;
-        //             setTimer(data, projectId, planId);
-        //         }
-        //     }
-        // },
 
         selectorInput: (el, projectId, planId) => {
             data = {};

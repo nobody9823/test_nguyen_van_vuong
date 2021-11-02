@@ -46,7 +46,7 @@
         value="{{ optional($plan)->limit_of_supporters ?: 1 }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
     <div class="form_item_tit">
         <x-common.async-submit-message propName="return_limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}" />
-        <x-common.async-submit-message propName="return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}" />
+        <x-common.async-submit-message propName="return_limit_of_supporters2" />
     </div>
 </div>
 
@@ -59,8 +59,9 @@
     <div class="prof_edit_editbox pee_select_hori">
         <div class="cp_ipselect cp_normal">
             <select
-                name="year" 
-                oninput="updateMyPlan.updateDeliveryDate(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
+                id="deliveryYear{{ $plan === null ? '' : '_'.$plan->id }}"
+                name="year"
+                oninput="updateMyPlan.updateDeliveryDate({{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
                 <option value="">年</option>
                 <?php $years = array_reverse(range(today()->year + 10, today()->year)); 
                     $delivery_year = date('Y', strtotime(optional($plan)->delivery_date));
@@ -77,8 +78,9 @@
 
         <div class="cp_ipselect cp_normal">
             <select
+                id="deliveryMonth{{ $plan === null ? '' : '_'.$plan->id }}"
                 name="month"
-                oninput="updateMyPlan.updateDeliveryDate(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
+                oninput="updateMyPlan.updateDeliveryDate({{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
                 <option value="">月</option>
                 <?php $delivery_month = date('m', strtotime(optional($plan)->delivery_date)); ?>
                     @foreach(range(1, 12) as $month)
