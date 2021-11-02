@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\CardPayment\CardPaymentInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AlterTranRequest;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    public function __construct(CardPaymentInterface $card_payment_interface)
+    {
+        $this->card_payment = $card_payment_interface;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -118,5 +124,27 @@ class PaymentController extends Controller
     public function destroy(payment $payment)
     {
         //
+    }
+
+    public function alterSales(AlterTranRequest $request)
+    {
+        $payments = Payment::find($request->payments);
+        foreach ($payments as $payment) {
+            $this->card_payment->alterSales($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
+            $payment->paymentToken->job_cd = "実売上";
+            $payment->paymentToken->save();
+        }
+        return redirect()->route('admin.payment.index', ['project' => $request->project])->with('flash_message', '実売上計上に成功しました。');
+    }
+
+    public function alterCancel(AlterTranRequest $request)
+    {
+        $payments = Payment::find($request->payments);
+        foreach ($payments as $payment) {
+            $this->card_payment->refund($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
+            $payment->paymentToken->job_cd = "キャンセル";
+            $payment->paymentToken->save();
+        }
+        return redirect()->route('admin.payment.index', ['project' => $request->project])->with('flash_message', '売上キャンセルに成功しました。');
     }
 }

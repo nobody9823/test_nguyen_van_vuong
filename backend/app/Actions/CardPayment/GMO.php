@@ -25,10 +25,6 @@ class GMO implements CardPaymentInterface
             'amount' => $price,
         ]);
 
-        if (!$entry_response->ok() || isset($entry_response['errCode'])) {
-            abort(500, '決済処理に失敗しました。');
-        }
-
         return $entry_response;
     }
 
@@ -48,10 +44,6 @@ class GMO implements CardPaymentInterface
             'method' => '1',
             'token' => $payment_method_id,
         ]);
-
-        if (!$exec_response->ok() || isset($entry_response['errCode'])) {
-            abort(500, '決済処理に失敗しました。');
-        }
 
         return $exec_response;
     }
@@ -76,9 +68,28 @@ class GMO implements CardPaymentInterface
             'amount' => $price,
         ]);
 
-        if (!$response->ok() || isset($entry_response['errCode'])) {
-            abort(500, '決済処理に失敗しました。');
-        }
+        return $response;
+    }
+
+    /**
+     * Return result of alter sales by GMO
+     *
+     * @param string
+     * @param string
+     * @param int
+     *
+     * @return object
+     */
+    public function alterSales(string $access_id, string $access_pass, int $price): object
+    {
+        $response = Http::retry(5, 100)->post(config('app.gmo_alter_payment_url'), [
+            'shopID' => config('app.gmo_shop_id'),
+            'shopPass' => config('app.gmo_shop_pass'),
+            'accessID' => $access_id,
+            'accessPass' => $access_pass,
+            'jobCd' => 'SALES',
+            'amount' => $price,
+        ]);
 
         return $response;
     }

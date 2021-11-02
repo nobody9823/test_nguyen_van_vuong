@@ -100,12 +100,34 @@
         <p>表示する投稿はありません。</p>
     @else
         <div class="d-flex align-items-center justify-content-between">
-            @if(Request::get('project'))
-            <form action="{{ route('admin.project.output_purchases_list_to_csv', ['project' => Request::get('project')]) }}">
-                @csrf
-                <button class="btn btn-secondary mb-4">CSV出力</button>
-            </form>
-            @endif
+            <div class="d-flex">
+                @if(Request::get('project'))
+                    <form action="{{ route('admin.project.output_purchases_list_to_csv', ['project' => Request::get('project')]) }}" class="mr-4">
+                        @csrf
+                        <button class="btn btn-secondary mb-4">CSV出力</button>
+                    </form>
+                    <form action="{{ route('admin.payment.alter_sales') }}" method="POST" class="mr-4">
+                        @csrf
+                        <input name="project" type="hidden" value="{{ Request::get('project') }}" />
+                            @foreach($payments as $key => $payment)
+                                <input name="payments[]" type="hidden" value="{{ $payment->id }}" />
+                            @endforeach
+                        <button class="btn btn-success mb-4" onclick="return confirm('実売上計上を行うと確保していた与信枠は無くなってしまいます。本当に実売上計上してもよろしいでしょうか。')" type="submit">
+                            実売上計上
+                        </button>
+                    </form>
+                    <form action="{{ route('admin.payment.alter_cancel') }}" method="POST">
+                        @csrf
+                        <input name="project" type="hidden" value="{{ Request::get('project') }}" />
+                            @foreach($payments as $key => $payment)
+                                <input name="payments[]" type="hidden" value="{{ $payment->id }}" />
+                            @endforeach
+                        <button class="btn btn-danger mb-4" onclick="return confirm('売上キャンセルを行うと確保していた与信枠は無くなってしまいます。本当に売上キャンセルしてもよろしいでしょうか。')" type="submit">
+                            売上キャンセル
+                        </button>
+                    </form>
+                @endif
+            </div>
             <p>※画面サイズが足りない場合は横にスクロールが可能です。</p>
         </div>
         <div class="table-responsive">
@@ -135,7 +157,7 @@
                             </a>
                         </th>
                         <td>
-                            <p class="
+                            <p class="text-nowrap
                                 {{ $payment->paymentToken->job_cd === '仮売上' ? 'text-secondary' : '' }}
                                 {{ $payment->paymentToken->job_cd === '実売上' ? 'text-success' : '' }}
                                 {{ $payment->paymentToken->job_cd === 'キャンセル' ? 'text-danger' : '' }}
@@ -277,6 +299,8 @@
         {{ $payments->appends(request()->input())->links() }}
     @endif
 </div>
+@endsection
+
 @section('script')
 <script>
     $(function(){
@@ -308,6 +332,4 @@
         });
     });
 </script>
-@endsection
-
 @endsection

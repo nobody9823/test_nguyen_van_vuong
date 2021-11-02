@@ -37,5 +37,16 @@ interface CardPaymentInterface
      */
     public function refund(string $access_id, string $access_pass, int $price): object;
 
+    /**
+     * Return result of alter sales by GMO
+     *
+     * @param string
+     * @param string
+     * @param int
+     *
+     * @return object
+     */
+    public function alterSales(string $access_id, string $access_pass, int $price): object;
+
     public function getPaymentApiName(): string;
 }
