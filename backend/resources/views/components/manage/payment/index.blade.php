@@ -159,13 +159,14 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="user_content_modal">
                                                 {{ $payment->user->name }}
-                                                {{ $payment->user->email }}
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
+                                            <p>メールアドレス:<a href="mailto:{{ $payment->user->email }}">{{ $payment->user->email }}</a></p>
+                                            <p>電話番号:{{ optional($payment->user->profile)->phone_number }}</p>
                                             <p>姓:{{ optional($payment->user->profile)->last_name }}</p>
                                             <p>名:{{ optional($payment->user->profile)->first_name }}</p>
                                             <p>姓(カナ):{{ optional($payment->user->profile)->last_name_kana }}</p>
