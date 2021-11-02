@@ -56,7 +56,7 @@ class Plan extends Model
 
     public function getFormattedDeliveryDateAttribute()
     {
-        return $this->delivery_date->format('Y-m-d');
+        return $this->delivery_date->format('Y年m月');
     }
 
     //--------------local scope----------------//
