@@ -18,7 +18,7 @@ class GMO implements CardPaymentInterface
      */
     public function entryTran(int $price, string $order_id): object
     {
-        $entry_response = Http::post(config('app.gmo_entry_payment_url'), [
+        $entry_response = Http::retry(5, 100)->post(config('app.gmo_entry_payment_url'), [
             'shopID' => config('app.gmo_shop_id'),
             'shopPass' => config('app.gmo_shop_pass'),
             'orderID' => $order_id,
@@ -42,7 +42,7 @@ class GMO implements CardPaymentInterface
      */
     public function execTran(string $payment_method_id, string $access_id, string $access_pass, string $order_id): object
     {
-        $exec_response = Http::post(config('app.gmo_exec_payment_url'), [
+        $exec_response = Http::retry(5, 100)->post(config('app.gmo_exec_payment_url'), [
             'accessID' => $access_id,
             'accessPass' => $access_pass,
             'orderID' => $order_id,
