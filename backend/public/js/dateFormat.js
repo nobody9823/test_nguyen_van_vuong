@@ -18,7 +18,7 @@ const variableEndDate = () => {
 window.onload = () => {
     variableEndDate();
 };
-const getValueStartDate = () => {
+const onInputStartDate = () => {
     variableEndDate();
 };
 
