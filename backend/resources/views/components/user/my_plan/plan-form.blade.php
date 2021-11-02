@@ -2,7 +2,7 @@
     <div class="form_item_tit">
         リターン名
         <span class="hissu_txt">必須</span>
-        <span class="disclaimer">※45文字以内で入力してください</span>
+        <div class="disclaimer">※45文字以内で入力してください</div>
     </div>
     <input type="text" name="title" class="def_input_100p" value="{{ optional($plan)->title }}" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
     <div class="form_item_tit">
@@ -14,7 +14,7 @@
     <div class="form_item_tit">
         詳細
         <span class="hissu_txt">必須</span>
-        <span class="disclaimer">※2000文字以内で入力してください</span>
+        <div class="disclaimer">※2000文字以内で入力してください</div>
     </div>
     <textarea name="content" class="def_textarea" rows="6" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">{{ optional($plan)->content }}</textarea>
     <div class="form_item_tit">
@@ -25,7 +25,7 @@
 <div class="form_item_row">
     <div class="form_item_tit">
         限定数
-        <span class="disclaimer">※個数に制限がない場合、チェックを入れる必要はありません</span>
+        <div class="disclaimer">※個数に制限がない場合、チェックを入れる必要はありません</div>
     </div>
     <input type="checkbox" id="limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}" class="ac_list_checks" name="limit_of_supporters_is_required" value="1"
     onchange="updateMyPlan.limitOfSupportersIsChecked(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})"
@@ -51,7 +51,11 @@
 </div>
 
 <div class="form_item_row">
-    <div class="form_item_tit">お届け予定日<span class="hissu_txt">必須</span></div>
+    <div class="form_item_tit">
+        お届け予定日
+        <span class="hissu_txt">必須</span>
+        <div class="disclaimer">※お届け予定日は設定した月の末日となります。</div>
+    </div>
     <div class="prof_edit_editbox pee_select_hori">
         <div class="cp_ipselect cp_normal">
             <select
@@ -97,7 +101,7 @@
     <div class="form_item_tit">
         金額
         <span class="hissu_txt">必須</span>
-        <span class="disclaimer">※半角数字のみで入力してください。</span>
+        <div class="disclaimer">※半角数字のみで入力してください。</div>
     </div>
     <input type="text" name="price" class="p-postal-code def_input_50p" value="{{ optional($plan)->price }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})" min="0"><span>&emsp;円</span>
     <div class="form_item_tit">

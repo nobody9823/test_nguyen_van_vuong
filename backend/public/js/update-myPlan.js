@@ -10,9 +10,9 @@ const updateMyPlan = (() => {
 
     var deliveryDate = {};
 
-    var deliveryYear = document.getElementById('deliveryYear');
+    // var deliveryYear = document.getElementById('deliveryYear');
 
-    var deliveryMonth = document.getElementById('deliveryMonth');
+    // var deliveryMonth = document.getElementById('deliveryMonth');
 
     // var deliveryDay = document.getElementById('delivery_day');
 
