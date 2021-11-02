@@ -63,7 +63,7 @@
 <div class="form_item_tit">お届け予定日<span class="hissu_txt">必須</span></div>
 <div class="prof_edit_editbox pee_select_hori">
     <div class="cp_ipselect cp_normal">
-        <select id="year" name="year">
+        <select name="year">
             <option value="">年</option>
             <?php $years = array_reverse(range(today()->year + 10, today()->year)); ?>
                 @foreach($years as $year)
@@ -73,7 +73,7 @@
     </div>
 
     <div class="cp_ipselect cp_normal">
-        <select id="month" name="month">
+        <select name="month">
             <option value="">月</option>
                 @foreach(range(1, 12) as $month)
                     <option value="{{ $month }}">{{ $month }}</option>

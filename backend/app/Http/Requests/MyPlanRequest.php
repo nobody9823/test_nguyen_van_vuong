@@ -26,7 +26,6 @@ class MyPlanRequest extends FormRequest
      */
     public function rules()
     {
-        dd($this);
         return [
             'title' => ['nullable', 'string', 'max:45'],
             'content' => ['nullable', 'string', 'max:2000'],
@@ -34,7 +33,7 @@ class MyPlanRequest extends FormRequest
             'address_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters' => ['integer', 'min:1'],
-            'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$this->route('project')->end_date->format('Y-m-d H:i:s')}"],
+            'delivery_date' => ['nullable', 'date_format:Y-m', "after:{$this->route('project')->end_date->format('Y-m-d H:i:s')}"],
             'image_url' => ['nullable', 'image']
         ];
     }
@@ -64,7 +63,7 @@ class MyPlanRequest extends FormRequest
             $this->merge([
                 'price' => $replaced_price,
             ]);
-        }
+        } 
 
         if ($this->input('limit_of_supporters_is_required') === 0) {
             $this->merge([
@@ -84,8 +83,11 @@ class MyPlanRequest extends FormRequest
             ]);
         }
 
-        if (!$this->filled('delivery_date')) {
-            $this->offsetUnset('delivery_date');
+        if ($this->has('year') && $this->has('month')) {
+            $delivery_date = Carbon::createFromDate($this->year, $this->month)->format('Y-m');
+            $this->merge([
+                'delivery_date' => $delivery_date
+            ]);
         }
     }
 
