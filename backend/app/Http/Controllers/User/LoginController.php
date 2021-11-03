@@ -65,8 +65,9 @@ class LoginController extends Controller
                 } catch (\Throwable $th) {
                     DB::rollback();
                     Log::alert($th->getMessage());
-                    return redirect()->action([ProjectController::class, 'index'])->withErrors('ログインに失敗しました。管理会社に確認をお願いします。');
+                    return redirect()->action([ProjectController::class, 'index'])->withErrors('FanReturnへの新規登録に失敗しました。管理会社に確認をお願いします。');
                 }
+                return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'FanReturnへの登録が完了致しました。');
             } elseif (($oauth_user->user->email !== $sns_email) || ($oauth_user->user->name !== $sns_name)) {
                 DB::beginTransaction();
                 try {
@@ -84,7 +85,7 @@ class LoginController extends Controller
                 }
             }
             Auth::login($oauth_user->user);
-            return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'FanReturnへの登録が完了致しました。');
+            return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'ログインが完了致しました。');
         }
         return '情報が取得できませんでした。';
     }
