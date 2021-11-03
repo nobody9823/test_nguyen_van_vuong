@@ -32,7 +32,7 @@ class PlanRequest extends FormRequest
             'address_is_required' => ['required'],
             'limit_of_supporters_is_required' => ['required', 'boolean'],
             'limit_of_supporters' => ['required', 'integer', 'min:1'],
-            'delivery_date' => ['required', 'date_format:Y-m-d', 'after:now'],
+            'delivery_date' => ['required', 'date_format:Y-m', 'after:now'],
             'image_url' => ['image', Rule::requiredIf($request->isMethod('post'))],
             // NOTE:現状オプションは使用しない為、コメントアウト
             // 'options' => ['array'],
