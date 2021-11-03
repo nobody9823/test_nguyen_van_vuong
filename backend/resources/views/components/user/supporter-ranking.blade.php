@@ -10,6 +10,7 @@
                     <div class="sub_tit_L">プロジェクトサポーター(PS)ランキング</div>
                 </div>
                 <div class="ps_rank_base">
+                    
                     <div class="ps_rank_img m_b_1510">
                         <img src="{{ Storage::url(optional($project->projectFiles()->where('file_content_type', 'image_url')->first())->file_url) }}">
                     </div>
