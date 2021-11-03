@@ -117,7 +117,7 @@ class Payment extends Model
     public function scopeNarrowDownPaymentToken($query)
     {
         if (Request::get('payment_token')) {
-            $query->whereIn('id', PaymentToken::where('token', Request::get('payment_token'))->pluck('payment_id'));
+            $query->whereIn('id', PaymentToken::where('order_id', Request::get('payment_token'))->pluck('payment_id'));
         }
         return $query;
     }
