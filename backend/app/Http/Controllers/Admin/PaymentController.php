@@ -26,7 +26,6 @@ class PaymentController extends Controller
             ->narrowDownWithProject()
             ->narrowDownByDate()
             ->narrowDownByPrice()
-            ->isSucceedPurchase()
             ->with([
                 'user' => function ($query) {
                     $query->with(['profile', 'address']);

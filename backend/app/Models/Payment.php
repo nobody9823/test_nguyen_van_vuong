@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
 use Request;
@@ -30,6 +31,13 @@ class Payment extends Model
     protected $casts = [
         'is_sent' => 'boolean'
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope('payment_is_finished', function (Builder $builder) {
+            $builder->where('payment_is_finished', true);
+        });
+    }
 
     public function user()
     {
@@ -144,11 +152,6 @@ class Payment extends Model
             $query->where('price', '<=', Request::get('to_price'));
         }
         return $query;
-    }
-
-    public function scopeIsSucceedPurchase($query)
-    {
-        return $query->where('payment_is_finished', 1);
     }
 
     public function getAddedPaymentAmountAttribute()
