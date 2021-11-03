@@ -50,5 +50,5 @@
         </div>
     </div>
 
-    <x-common.navigating_page_buttons :project="$project" />
+    <x-common.navigating_page_buttons :project="$project" previewForPsReturn="previewForPsReturn" />
 </form>

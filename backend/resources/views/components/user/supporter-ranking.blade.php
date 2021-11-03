@@ -59,7 +59,7 @@
                 <!--/ps_rank_base-->
 
                 <div class="m_b_1510">
-                    <div class="def_btn">
+                    <div class="def_btn"> 
                         <a href="{{ route('user.project.support', ['project' => $project]) }}" style="color: white">
                             プロジェクトサポーター(PS)になる
                         </a>
