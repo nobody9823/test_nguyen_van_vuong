@@ -76,7 +76,7 @@
             <option value="" {{ !Request::get('job_cd') ? 'selected' : '' }}>
                 処理状況</option>
             @foreach(PaymentJobCd::getValues() as $job_cd)
-                <option {{ Request::get('job_cd') === $job_cd ? 'selected' : '' }} value="{{ $job_cd }}">
+                <option {{ Request::get('job_cd') === PaymentJobCd::fromValue($job_cd)->key ? 'selected' : '' }} value="{{ PaymentJobCd::fromValue($job_cd)->key }}">
                     {{ $job_cd }}
                 </option>
             @endforeach
@@ -128,7 +128,13 @@
                     </form>
                 @endif
             </div>
-            <p>※画面サイズが足りない場合は横にスクロールが可能です。</p>
+            <p>
+                ※画面サイズが足りない場合は横にスクロールが可能です。
+                <br/>
+                ※売上キャンセルはプロジェクトの掲載開始期間から
+                <br/>
+                130日以内に実行してください。
+            </p>
         </div>
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
@@ -158,11 +164,11 @@
                         </th>
                         <td>
                             <p class="text-nowrap
-                                {{ $payment->paymentToken->job_cd === '仮売上' ? 'text-secondary' : '' }}
-                                {{ $payment->paymentToken->job_cd === '実売上' ? 'text-success' : '' }}
-                                {{ $payment->paymentToken->job_cd === 'キャンセル' ? 'text-danger' : '' }}
+                                {{ $payment->gmo_job_cd === 'AUTH' ? 'text-secondary' : '' }}
+                                {{ $payment->gmo_job_cd === 'SALES' ? 'text-success' : '' }}
+                                {{ $payment->gmo_job_cd === 'VOID' ? 'text-danger' : '' }}
                             ">
-                                {{ $payment->paymentToken->job_cd }}
+                                {{ PaymentJobCd::fromKey($payment->gmo_job_cd) }}
                             </p>
                         </td>
                         <td>

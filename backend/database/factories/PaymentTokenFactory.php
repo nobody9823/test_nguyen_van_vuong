@@ -28,7 +28,6 @@ class PaymentTokenFactory extends Factory
             'order_id' => UniqueToken::getToken(),
             'access_id' => UniqueToken::getToken(),
             'access_pass' => UniqueToken::getToken(),
-            'job_cd' => PaymentJobCd::getValues()[random_int(0, 2)],
         ];
     }
 }

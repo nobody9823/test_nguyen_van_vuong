@@ -8,6 +8,7 @@ use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
 use Request;
 
 class Payment extends Model
@@ -121,13 +122,6 @@ class Payment extends Model
         }
         return $query;
     }
-    public function scopeNarrowDownPaymentJobCd($query)
-    {
-        if (Request::get('job_cd')) {
-            $query->whereIn('id', PaymentToken::where('job_cd', Request::get('job_cd'))->pluck('payment_id'));
-        }
-        return $query;
-    }
     public function scopeNarrowDownByDate($query)
     {
         if (Request::get('from_date')) {
@@ -150,6 +144,11 @@ class Payment extends Model
             $query->where('price', '<=', Request::get('to_price'));
         }
         return $query;
+    }
+
+    public function scopeIsSucceedPurchase($query)
+    {
+        return $query->where('payment_is_finished', 1);
     }
 
     public function getAddedPaymentAmountAttribute()

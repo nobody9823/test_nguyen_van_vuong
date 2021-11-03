@@ -36,7 +36,7 @@
     <div class="card-header d-flex align-items-center">
         処理区分 :
         <div class="flex-grow-1">
-            【{{ Request::get('job_cd') }}】
+            【{{ PaymentJobCd::fromKey(Request::get('job_cd')) }}】
         </div>
     </div>
     @endif

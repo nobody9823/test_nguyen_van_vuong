@@ -31,8 +31,6 @@ function doPurchase() {
     // セキュリティコードフォームの生成
     var securitycode = document.getElementById("cvc-form");
 
-    console.log(`${expireyear.value}${expiremonth.value}`);
-
     Multipayment.getToken({
         cardno: cardno.value,
         expire: `${expireyear.value}${expiremonth.value}`,

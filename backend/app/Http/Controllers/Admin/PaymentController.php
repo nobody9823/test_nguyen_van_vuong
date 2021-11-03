@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AlterTranRequest;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class PaymentController extends Controller
 {
@@ -23,10 +24,10 @@ class PaymentController extends Controller
     {
         $payments = Payment::search()
             ->narrowDownPaymentOrderId()
-            ->narrowDownPaymentJobCd()
             ->narrowDownWithProject()
             ->narrowDownByDate()
             ->narrowDownByPrice()
+            ->isSucceedPurchase()
             ->with([
                 'user' => function ($query) {
                     $query->with(['profile', 'address']);
@@ -37,13 +38,13 @@ class PaymentController extends Controller
 
         //リレーション先OrderBy
         if ($request->sort_type === 'user_name_asc') {
-            $payments = $payments->get()->sortBy('user.name')->paginate(10);
+            $payments = $payments->get()->sortBy('user.name');
         } elseif ($request->sort_type === 'user_name_desc') {
-            $payments = $payments->get()->sortByDesc('user.name')->paginate(10);
+            $payments = $payments->get()->sortByDesc('user.name');
         } elseif ($request->sort_type === 'inviter_name_asc') {
-            $payments = $payments->get()->sortBy('inviter.name')->paginate(10);
+            $payments = $payments->get()->sortBy('inviter.name');
         } elseif ($request->sort_type === 'inviter_name_desc') {
-            $payments = $payments->get()->sortByDesc('inviter.name')->paginate(10);
+            $payments = $payments->get()->sortByDesc('inviter.name');
             // } elseif ($request->sort_type === 'plan_payment_included_plan_project_user_name_asc') {
             //     $payments = $payments->get()->sortBy('includedPlans.project.user.name')->paginate(10);
             // } elseif ($request->sort_type === 'plan_payment_included_plan_project_user_name_desc') {
@@ -53,10 +54,26 @@ class PaymentController extends Controller
             // } elseif ($request->sort_type === 'plan_payment_included_plan_project_title_desc') {
             //     $payments = $payments->get()->sortByDesc('includedPlans.project.title')->paginate(10);
         } else {
-            $payments = $payments->paginate(10);
+            $payments = $payments->get();
         }
+
+        $payments->map(function ($payment) {
+            $response = Http::retry(5, 100)->post('https://pt01.mul-pay.jp/payment/SearchTrade.json', [
+                'shopID' => config('app.gmo_shop_id'),
+                'shopPass' => config('app.gmo_shop_pass'),
+                'orderID' => $payment->paymentToken->order_id,
+            ]);
+            // return $response['jobCd'] ?: '---';
+            $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+        });
+        if ($request->job_cd) {
+            $payments = $payments->filter(function ($payment) use ($request) {
+                return $payment->gmo_job_cd === $request->job_cd;
+            });
+        }
+
         return view('admin.payment.index', [
-            'payments' => $payments
+            'payments' => $payments->paginate(10)
         ]);
     }
 
@@ -131,8 +148,6 @@ class PaymentController extends Controller
         $payments = Payment::find($request->payments);
         foreach ($payments as $payment) {
             $this->card_payment->alterSales($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
-            $payment->paymentToken->job_cd = "実売上";
-            $payment->paymentToken->save();
         }
         return redirect()->route('admin.payment.index', ['project' => $request->project])->with('flash_message', '実売上計上に成功しました。');
     }
@@ -142,8 +157,6 @@ class PaymentController extends Controller
         $payments = Payment::find($request->payments);
         foreach ($payments as $payment) {
             $this->card_payment->refund($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
-            $payment->paymentToken->job_cd = "キャンセル";
-            $payment->paymentToken->save();
         }
         return redirect()->route('admin.payment.index', ['project' => $request->project])->with('flash_message', '売上キャンセルに成功しました。');
     }

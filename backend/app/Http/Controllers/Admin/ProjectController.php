@@ -316,7 +316,7 @@ class ProjectController extends Controller
             foreach ($payments as $payment) {
                 $payment_data = [
                     $payment->paymentToken->order_id,
-                    $payment->paymentToken->job_cd,
+                    $payment->gmo_job_cd,
                     $payment->user->profile->last_name . $payment->user->profile->first_name,
                     $payment->user->email,
                     $payment->user->address->postal_code . $payment->user->address->prefecture . $payment->user->address->city . $payment->user->address->block . $payment->user->address->building,
