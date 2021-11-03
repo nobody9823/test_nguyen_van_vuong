@@ -1,5 +1,12 @@
 <!-- マイプロジェクトの「保存する」「プロジェクト一覧へ戻る」ボタン -->
-@if(!isset($saveButton))
+
+@if(isset($nextPageButtonForReturn))
+<div class="def_btn">
+    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'ps_return']) }}">
+        次へ進む
+    </a>
+</div>
+@elseif (!isset($nextPageButton))
 <div class="def_btn">
     <button type="submit" class="disable-btn">
         <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">次へ進む</p>
@@ -10,5 +17,12 @@
 <div class="def_btn">
     <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.index') }}">
         プロジェクト一覧へ戻る
+    </a>
+</div>
+
+<div class="def_btn">
+    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" 
+    href="{{ route('admin.project.preview', ['project' => $project] )}}">
+        プレビュー表示
     </a>
 </div>

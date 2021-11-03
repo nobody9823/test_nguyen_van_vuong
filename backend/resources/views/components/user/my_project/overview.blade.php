@@ -35,6 +35,18 @@
     </div>
     <x-common.async-submit-message propName="tags" />
 </div>
-
-<x-common.navigating_page_buttons />
+<x-common.navigating_page_buttons :project="$project" />
 </form>
+
+{{--
+<div class="def_btn">
+    <button type="submit" class="disable-btn">
+        <a href="{{ route('admin.project.preview', ['project' => $project] )}}"
+           class="btn btn-sm btn-success mt-1">
+            <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">
+                プレビュー表示
+            </p>
+        </a>
+    </button>
+</div>
+--}}
