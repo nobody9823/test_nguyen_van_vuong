@@ -23,7 +23,7 @@
 @if (isset($previewForPsReturn))
 <div class="def_btn">
     <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" 
-    href="{{ route('user.my_project.reward_sample')}}">
+    href="{{ route('user.my_project.reward_preview', ['project' => $project])}}">
         PSリターンプレビュー
     </a>
 </div>

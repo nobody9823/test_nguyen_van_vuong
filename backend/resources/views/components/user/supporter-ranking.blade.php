@@ -4,12 +4,12 @@
 
             <div class="prof_page_base_not_flex">
 
+                @isset($usersRankedByTotalQuantity, $usersRankedByTotalQuantity)
                 <div class="tit_L_01 E-font">
                     <h2>RANKING</h2>
                     <div class="sub_tit_L">プロジェクトサポーター(PS)ランキング</div>
                 </div>
                 <div class="ps_rank_base">
-
                     <div class="ps_rank_img m_b_1510">
                         <img src="{{ Storage::url(optional($project->projectFiles()->where('file_content_type', 'image_url')->first())->file_url) }}">
                     </div>
@@ -59,7 +59,7 @@
                 <!--/ps_rank_base-->
 
                 <div class="m_b_1510">
-                    <div class="def_btn"> 
+                    <div class="def_btn">
                         <a href="{{ route('user.project.support', ['project' => $project]) }}" style="color: white">
                             プロジェクトサポーター(PS)になる
                         </a>
@@ -215,10 +215,10 @@
                             </div>
                         </div>
                     </div>
-
-                    <x-user.project.ps-return-toggle :project="$project" />
                     <!--/ps_rank_02_R-->
                 </div>
+                @endisset
+                <x-user.project.ps-return-toggle :project="$project" />
                 <!--/ps_rank_02-->
 
             </div>

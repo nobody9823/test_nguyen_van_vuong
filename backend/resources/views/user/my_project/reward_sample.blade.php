@@ -2,7 +2,12 @@
 
 @section('content')
     <x-common.sample />
-    <x-user.supporter-ranking :project="null" :usersRankedByTotalAmount="null" :usersRankedByTotalQuantity="null"/>
+    <x-user.supporter-ranking 
+        :project="$project ?: null" 
+        :usersRankedByTotalAmount="null" 
+        :usersRankedByTotalQuantity="null"
+    />
+    
 @endsection
 
 @section('script')

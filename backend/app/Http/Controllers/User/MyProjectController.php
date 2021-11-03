@@ -254,4 +254,9 @@ class MyProjectController extends Controller
     {
         return view('user.my_project.reward_sample');
     }
+
+    public function rewardPreview(Project $project)
+    {
+        return view('user.my_project.reward_sample', ['project' => $project]);
+    }
 }
