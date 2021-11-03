@@ -22,7 +22,7 @@ class PaymentController extends Controller
     public function index(Request $request)
     {
         $payments = Payment::search()
-            ->narrowDownPaymentToken()
+            ->narrowDownPaymentOrderId()
             ->narrowDownPaymentJobCd()
             ->narrowDownWithProject()
             ->narrowDownByDate()
