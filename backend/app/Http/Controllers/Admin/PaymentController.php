@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AlterTranRequest;
 use App\Models\Payment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class PaymentController extends Controller
 {
@@ -58,13 +57,12 @@ class PaymentController extends Controller
         }
 
         $payments->map(function ($payment) {
-            $response = Http::retry(5, 100)->post('https://pt01.mul-pay.jp/payment/SearchTrade.json', [
-                'shopID' => config('app.gmo_shop_id'),
-                'shopPass' => config('app.gmo_shop_pass'),
-                'orderID' => $payment->paymentToken->order_id,
-            ]);
-            // return $response['jobCd'] ?: '---';
-            $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+            if ($payment->payment_way === 'GMO') {
+                $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
+                $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+            } else {
+                $payment->setAttribute('gmo_job_cd', 'DEFAULT');
+            }
         });
         if ($request->job_cd) {
             $payments = $payments->filter(function ($payment) use ($request) {

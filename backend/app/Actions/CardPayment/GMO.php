@@ -95,6 +95,24 @@ class GMO implements CardPaymentInterface
     }
 
     /**
+     * Return result of search trade by GMO
+     *
+     * @param string
+     *
+     * @return object
+     */
+    public function searchTrade(string $order_id): object
+    {
+        $response = Http::retry(5, 100)->post(config('app.gmo_search_payment_url'), [
+            'shopID' => config('app.gmo_shop_id'),
+            'shopPass' => config('app.gmo_shop_pass'),
+            'orderID' => $order_id,
+        ]);
+
+        return $response;
+    }
+
+    /**
      * Get payment api name as 'GMO'
      *
      * @return string

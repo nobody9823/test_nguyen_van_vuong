@@ -48,5 +48,14 @@ interface CardPaymentInterface
      */
     public function alterSales(string $access_id, string $access_pass, int $price): object;
 
+    /**
+     * Return result of search trade by GMO
+     *
+     * @param string
+     *
+     * @return object
+     */
+    public function searchTrade(string $order_id): object;
+
     public function getPaymentApiName(): string;
 }
