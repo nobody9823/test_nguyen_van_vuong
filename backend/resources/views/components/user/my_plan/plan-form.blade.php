@@ -46,7 +46,7 @@
         value="{{ optional($plan)->limit_of_supporters ?: 1 }}" placeholder="（例）100000" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
     <div class="form_item_tit">
         <x-common.async-submit-message propName="return_limit_of_supporters_is_required{{ $plan === null ? '' : '_'.$plan->id }}" />
-        <x-common.async-submit-message propName="return_limit_of_supporters2" />
+        <x-common.async-submit-message propName="return_limit_of_supporters{{ $plan === null ? '' : '_'.$plan->id }}" />
     </div>
 </div>
 
