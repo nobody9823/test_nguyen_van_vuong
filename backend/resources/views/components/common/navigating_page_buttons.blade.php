@@ -22,15 +22,21 @@
 
 @if (isset($previewForPsReturn))
 <div class="def_btn">
-    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" 
-    href="{{ route('user.my_project.reward_preview', ['project' => $project])}}">
+    <a 
+        style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" 
+        href="{{ route('user.my_project.reward_preview', ['project' => $project])}}"
+        target="_blank"
+    >
         PSリターンプレビュー
     </a>
 </div>
 @else
 <div class="def_btn">
-    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" 
-    href="{{ route('admin.project.preview', ['project' => $project] )}}">
+    <a 
+        style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" 
+        href="{{ route('admin.project.preview', ['project' => $project] )}}"
+        target="_blank"
+    >
         プロジェクトプレビュー
     </a>
 </div>
