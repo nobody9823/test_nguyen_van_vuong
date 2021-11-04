@@ -34,7 +34,7 @@
 <div class="def_btn">
     <a 
         style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" 
-        href="{{ route('user.my_project.project_preview', ['project' => $project] )}}"
+        href="{{ route('user.project_preview', ['project' => $project] )}}"
         target="_blank"
     >
         プロジェクトプレビュー

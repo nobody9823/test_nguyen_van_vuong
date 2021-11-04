@@ -51,7 +51,6 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('project', ProjectController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show']]);
     Route::post('project/operate_projects', [ProjectController::class, 'operate_projects'])->name('project.operate_projects');
     Route::get('project/{project}/release', [ProjectController::class, 'release'])->name('project.release');
-    // Route::get('project/{project}/preview', [ProjectController::class, 'preview'])->name('project.preview');
     Route::get('project/{project}/output_purchases_list_to_csv', [ProjectController::class, 'outputPurchasesListToCsv'])->name('project.output_purchases_list_to_csv');
     Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');
     Route::post('project/upload_editor_file', [ProjectController::class, 'uploadEditorFile'])->name('upload_editor_file');

@@ -438,4 +438,9 @@ class ProjectController extends Controller
             ],
         );
     }
+
+    public function projectPreview(Project $project)
+    {
+        return view('user.project.preview', ['project' => $project]);
+    }
 }
