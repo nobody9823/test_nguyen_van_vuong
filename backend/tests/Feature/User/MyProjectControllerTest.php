@@ -148,12 +148,12 @@ class MyProjectControllerTest extends TestCase
         $response->assertRedirect(route('user.my_project.project.edit', ['project' => Project::orderby('id', 'desc')->first()]));
     }
 
-    // public function testEditAction()
-    // {
-    //     $response = $this->actingAs($this->user)->get(route('user.my_project.project.edit', ['project' => $this->my_project]));
+    public function testEditAction()
+    {
+        $response = $this->actingAs($this->user)->get(route('user.my_project.project.edit', ['project' => $this->my_project]));
 
-    //     $response->assertOk();
-    // }
+        $response->assertOk();
+    }
 
     // public function testCreateActionByUserNotHavingConnectedAccount()
     // {
