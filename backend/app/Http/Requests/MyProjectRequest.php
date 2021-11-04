@@ -73,8 +73,8 @@ class MyProjectRequest extends FormRequest
         $validator->after(function ($validator) {
             if ($this->filled(['start_date', 'end_date'])) {
                 $start_date = new Carbon($this->start_date);
-                if ($this->end_date > $start_date->addDay(60)) {
-                    $validator->errors()->add('end_date', '掲載終了日(日付、時刻)には掲載開始日(日付、時刻)より60日以内の日付で指定してください。');
+                if ($this->end_date > $start_date->addDay(50)) {
+                    $validator->errors()->add('end_date', '掲載終了日(日付、時刻)には掲載開始日(日付、時刻)より50日以内の日付で指定してください。');
                 }
             }
         });

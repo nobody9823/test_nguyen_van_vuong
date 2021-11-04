@@ -341,7 +341,7 @@
                                             <td>{{ $plan->title }}</td>
                                             <td>{{ number_format($plan->price) }}円</td>
                                             <td>{{ date_format($user->created_at, "Y-m-d") }}</td>
-                                            <td>{{ $plan->delivery_date }}</td>
+                                            <td>{{ $plan->formatted_delivery_date }}</td>
                                             <td>{{ $user->address->prefecture.$user->address->city.$user->address->block.$user->address->building }}
                                             </td>
                                         </tr>

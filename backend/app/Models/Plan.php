@@ -56,7 +56,7 @@ class Plan extends Model
 
     public function getFormattedDeliveryDateAttribute()
     {
-        return $this->delivery_date->format('Y-m-d');
+        return $this->delivery_date->format('Y年m月');
     }
 
     //--------------local scope----------------//
@@ -162,7 +162,7 @@ class Plan extends Model
             'address_is_required' => false,
             'limit_of_supporters' => 1,
             'limit_of_supporters_is_required' => false,
-            'delivery_date' => $project->end_date->addDays(10),
+            'delivery_date' => $project->end_date,
             'image_url' => 'public/sampleImage/now_printing.png'
         ]);
     }
