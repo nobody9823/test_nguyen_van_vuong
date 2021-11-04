@@ -81,7 +81,7 @@
                                         価格 : {{ $plan->price }}
                                     </li>
                                     <li>
-                                        お届け予定日：{{ $plan->delivery_date }}
+                                        お届け予定日：{{ $plan->formatted_delivery_date }}
                                     </li>
                                     <li>
                                         個数：{{ $plan->pivot->quantity }}

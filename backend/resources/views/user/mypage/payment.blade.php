@@ -40,7 +40,7 @@
                             </div><!--/su_pr_02_03-->
                             <div class="su_pr_02_04 m_b_1510">
                                 <div>支援日：{{ DateFormat::forJapanese($payment->created_at) }}</div>
-                                <div>お届け予定日：{{ DateFormat::forJapanese($plan->delivery_date) }}</div>
+                                <div>お届け予定日：{{ $plan->formatted_delivery_date }}</div>
                             </div><!--/su_pr_02_04-->
                             <div class="su_pr_02_05 m_b_1510">
                                 商品の紹介文：

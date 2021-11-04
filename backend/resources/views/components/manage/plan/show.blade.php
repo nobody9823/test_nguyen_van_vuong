@@ -74,7 +74,7 @@
                             お返し予定日
                         </div>
                         <div class="col-sm-3">
-                            {{ $plan->delivery_date }}
+                            {{ $plan->formatted_delivery_date }}
                         </div>
                     </div>
                 </div>

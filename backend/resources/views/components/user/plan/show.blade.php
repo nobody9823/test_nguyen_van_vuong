@@ -31,7 +31,7 @@
                 <p>残数 : {{ $plan->limit_of_supporters ?: "残数設定なし" }}</p>
                 <p>お返しお届け予定日</p>
                 <div>
-                    {{ $plan->delivery_date }}
+                    {{ $plan->formatted_delivery_date }}
                 </div>
                 <p>インフルエンサー</p>
                 <div class="project-user detail-user">

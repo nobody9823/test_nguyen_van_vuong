@@ -32,9 +32,9 @@ class ProjectRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-        // プロジェクト開始から終了までの期間は上限60日までしか設定出来ない。
+        // プロジェクト開始から終了までの期間は上限50日までしか設定出来ない。
         $start_date = new DateTime($request->start_date);
-        $end_date_limit = ($start_date->modify("+60 day"))->format('Y-m-d H:i:s');
+        $end_date_limit = ($start_date->modify("+50 day"))->format('Y-m-d H:i:s');
 
         return [
             'user_id' => ['required', 'integer'],
@@ -47,7 +47,7 @@ class ProjectRequest extends FormRequest
             'target_number' => ['required', 'integer', 'min:1', 'max:9999999'],
             'curator_id' => ['nullable', 'exists:curators,id'],
             // タレント画面でプロジェクト作成をする時のみ、タレントidのバリデーションは実行しない。
-            'start_date' => ['required', 'date_format:Y-m-d H:i:s', $this->isMethod('post') ? 'after:1 week' : ''],
+            'start_date' => ['required', 'date_format:Y-m-d H:i:s', /* $this->isMethod('post') ? 'after:2 week' : ''*/],
             'end_date' => ['required', 'date_format:Y-m-d H:i:s', 'after:start_date', "before:{$end_date_limit}"],
             'tags' => ['required', new Tags($request)],
             'images' => [Rule::requiredIf($request->isMethod('post')), new ProjectImages($request)],
@@ -129,7 +129,7 @@ class ProjectRequest extends FormRequest
             'end_date.required' => "掲載終了日時を入力してください。",
             'end_date.date_format' => "掲載終了日時の形式を確認してください。",
             'end_date.after' => "掲載終了日時を掲載開始日時より後にしてください。",
-            'end_date.before' => "プロジェクトの掲載期間は60日が上限です。",
+            'end_date.before' => "プロジェクトの掲載期間は50日が上限です。",
             'images.required' => "画像は必須項目です。",
             'images.*.image' => "画像の形式が不正です。ご確認下さい。(jpg、jpeg、png、bmp、gif、svg、webp)",
             'video_url.regex' => "動画URLに問題がありました。ご確認ください。"
