@@ -213,5 +213,5 @@
         <x-common.async-submit-message propName="account_name" />
     </div>
 
-    <x-common.navigating_page_buttons saveButton="unnecessary" />
+    <x-common.navigating_page_buttons :project="$project" nextPageButton="unnecessary" />
 </form>

@@ -198,4 +198,18 @@ class MyProjectControllerTest extends TestCase
             $response->assertRedirect(route('user.my_project.project.edit', ['project' => $this->my_project, 'next_tab' => $next_tab]));
         }
     }
+
+    public function test_reward_preview()
+    {
+        $response = $this
+          ->actingAs($this->user)
+          ->from(
+              route('user.my_project.project.edit', ['project' => $this->my_project])
+            )
+          ->get(
+              route('user.my_project.reward_preview', ['project' => $this->my_project]
+            ));
+        $response->assertOk();
+        $response->assertViewIs('user.my_project.reward_sample');
+    }
 }

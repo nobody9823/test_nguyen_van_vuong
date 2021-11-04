@@ -6,6 +6,8 @@ use App\Models\Payment;
 use App\Models\PlanPaymentIncluded;
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Admin;
+use Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProjectPolicy
@@ -49,5 +51,14 @@ class ProjectPolicy
     {
         $check_purchased = $project->payments->where('user_id',$user->id);        
         return $check_purchased->isNotEmpty() ? true : false;
+    }
+
+    public function checkOwnProjectAndAdmin(User $user, Project $project)
+    {
+        if (Auth::guard('admin')->user()) {
+            return true;
+        } else {
+            return $user->id === $project->user_id;
+        }
     }
 }
