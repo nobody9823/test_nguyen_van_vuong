@@ -99,7 +99,7 @@
     @if($payments->count() <= 0)
         <p>表示する投稿はありません。</p>
     @else
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
             <div class="d-flex">
                 @if(Request::get('project'))
                     <form action="{{ route('admin.project.output_purchases_list_to_csv', ['project' => Request::get('project')]) }}" class="mr-4">
@@ -128,13 +128,12 @@
                     </form>
                 @endif
             </div>
-            <p>
-                ※画面サイズが足りない場合は横にスクロールが可能です。
-                <br/>
-                ※売上キャンセルはプロジェクトの掲載開始期間から
-                <br/>
-                130日以内に実行してください。
-            </p>
+            <div>
+                <p class="mb-0">※画面サイズが足りない場合は横にスクロールが可能です。</p>
+                <p class="mb-0">※仮売上状態（オーソリ）は60日までです。</p>
+                <p class="mb-0">※売上キャンセルはプロジェクトの掲載開始期間から</p>
+                <p class="mb-0">130日以内に実行してください。</p>
+            </div>
         </div>
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
