@@ -6,6 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Carbon\Carbon;
+use Log;
 
 class MyPlanRequest extends FormRequest
 {
@@ -33,7 +34,7 @@ class MyPlanRequest extends FormRequest
             'address_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters' => ['integer', 'min:1'],
-            'delivery_date' => ['nullable', 'date_format:Y-m', "after:{$this->route('project')->end_date->format('Y-m-d H:i:s')}"],
+            'delivery_date' => ['nullable', 'date_format:Y-m-d H:i:s', "after:{$this->route('project')->end_date->format('Y-m-d H:i')}"],
             'image_url' => ['nullable', 'image']
         ];
     }
@@ -82,15 +83,22 @@ class MyPlanRequest extends FormRequest
                 'limit_of_supporters' => 1,
             ]);
         }
-     
-        if ($this->has('year') && $this->has('month')) {
-            $delivery_date = Carbon::createFromDate($this->year, $this->month)->format('Y-m');
-        } elseif ($this->delivery_date) {
-            $delivery_date = Carbon::createFromDate($this->delivery_date['year'], $this->delivery_date['month'])->format('Y-m');
+
+        if (($this->has('year') && $this->has('month')) || $this->delivery_date) { 
+            $delivery_date_array = ($this->has('year') && $this->has('month')) 
+             ? [$this->year, $this->month]
+             : [$this->delivery_date['year'], $this->delivery_date['month']];
+
+            $delivery_date = Carbon::createFromDate
+            (
+                $delivery_date_array[0], 
+                $delivery_date_array[1]
+            )->format('Y-m-t 23:59:59');
+            
+            $this->merge([
+                'delivery_date' => $delivery_date
+            ]);
         }
-        $this->merge([
-            'delivery_date' => $delivery_date
-        ]);
     }
 
     public function failedValidation(Validator $validator)

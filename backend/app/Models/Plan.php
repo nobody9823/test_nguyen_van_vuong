@@ -162,7 +162,7 @@ class Plan extends Model
             'address_is_required' => false,
             'limit_of_supporters' => 1,
             'limit_of_supporters_is_required' => false,
-            'delivery_date' => $project->end_date->addDays(10),
+            'delivery_date' => $project->end_date,
             'image_url' => 'public/sampleImage/now_printing.png'
         ]);
     }
