@@ -72,7 +72,7 @@ class PlanRequest extends FormRequest
             'limit_of_supporters.min' => "個数は１以上の値で入力してください。",
             'delivery_date.required' => "リターン提供日を入力してください。",
             'delivery_date.date_format' => "リターン提供日のフォーマットを確認してください。",
-            'delivery_date.after' => "リターン提供日を現在時刻より後にしてください。",
+            'delivery_date.after' => "リターン提供日を今月以降に設定して下さい。",
             'image.image' => "画像の拡張子を確認してください。",
             // NOTE:現状オプションは使用しない為、コメントアウト
             // 'options.array' => '不正なアクセスが検知されました。管理会社へのお問い合わせをお願い致します。',

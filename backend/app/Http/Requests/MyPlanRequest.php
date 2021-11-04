@@ -6,7 +6,6 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Carbon\Carbon;
-use Log;
 
 class MyPlanRequest extends FormRequest
 {
@@ -128,7 +127,7 @@ class MyPlanRequest extends FormRequest
     {
         return [
             'delivery_date.date_format' => ':attributeの形式は、「年-月」で指定してください。',
-            'delivery_date.after' => ':attributeには、プロジェクト掲載終了日以降の日付を指定してください。',
+            'delivery_date.after' => ':attributeには、プロジェクト掲載終了日以降の月を指定してください。',
         ];
     }
 }
