@@ -37,17 +37,7 @@
     <div class="footer-over_L_03"><i class="fas fa-chevron-right"></i></div>
 </a>
 
-<div class="def_btn">
-    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'ps_return']) }}">
-        次へ進む
-    </a>
-</div>
-
-<div class="def_btn">
-    <a style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block" href="{{ route('user.my_project.project.index') }}">
-        プロジェクト一覧へ戻る
-    </a>
-</div>
+<x-common.navigating_page_buttons :project="$project" nextPageButtonForReturn="necessary" />
 
 {{-- 「編集」ボタンを押したときに表示されるモーダル部 --}}
 @foreach($project->plans as $plan)

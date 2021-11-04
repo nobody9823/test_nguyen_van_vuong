@@ -45,5 +45,5 @@
             value="{{ old('end_date', optional($project)->end_date) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="end_date" />
     </div>
-    <x-common.navigating_page_buttons />
+    <x-common.navigating_page_buttons :project="$project" />
 </form>
