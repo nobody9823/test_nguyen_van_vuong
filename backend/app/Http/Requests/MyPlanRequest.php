@@ -33,7 +33,7 @@ class MyPlanRequest extends FormRequest
             'address_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters' => ['integer', 'min:1'],
-            'delivery_date' => ['nullable', 'date_format:Y-m-d', "after:{$this->route('project')->end_date->format('Y-m-d H:i:s')}"],
+            'delivery_date' => ['nullable', 'date_format:Y-m-d H:i:s', "after:{$this->route('project')->end_date->format('Y-m-d H:i')}"],
             'image_url' => ['nullable', 'image']
         ];
     }
@@ -63,7 +63,7 @@ class MyPlanRequest extends FormRequest
             $this->merge([
                 'price' => $replaced_price,
             ]);
-        }
+        } 
 
         if ($this->input('limit_of_supporters_is_required') === 0) {
             $this->merge([
@@ -83,8 +83,20 @@ class MyPlanRequest extends FormRequest
             ]);
         }
 
-        if (!$this->filled('delivery_date')) {
-            $this->offsetUnset('delivery_date');
+        if (($this->has('year') && $this->has('month')) || $this->delivery_date) { 
+            $delivery_date_array = ($this->has('year') && $this->has('month')) 
+             ? [$this->year, $this->month]
+             : [$this->delivery_date['year'], $this->delivery_date['month']];
+
+            $delivery_date = Carbon::createFromDate
+            (
+                $delivery_date_array[0], 
+                $delivery_date_array[1]
+            )->format('Y-m-t 23:59:59');
+            
+            $this->merge([
+                'delivery_date' => $delivery_date
+            ]);
         }
     }
 
@@ -114,8 +126,8 @@ class MyPlanRequest extends FormRequest
     public function messages()
     {
         return [
-            'delivery_date.date_format' => ':attributeの形式は、「年-月-日」で指定してください。',
-            'delivery_date.after' => ':attributeには、プロジェクト掲載終了日以降の日付を指定してください。',
+            'delivery_date.date_format' => ':attributeの形式は、「年-月」で指定してください。',
+            'delivery_date.after' => ':attributeには、プロジェクト掲載終了日以降の月を指定してください。',
         ];
     }
 }

@@ -104,7 +104,7 @@
                     {{ number_format($plan->price) }}円
                 </td>
                 <td>
-                    {{ $plan->delivery_date }}
+                    {{ $plan->formatted_delivery_date }}
                 </td>
                 <!-- <td>
                     <a href="{{ route($role.'.plan.preview', ['project' => $plan->project->id, 'plan' => $plan]) }}"
