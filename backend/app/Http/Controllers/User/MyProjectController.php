@@ -257,6 +257,7 @@ class MyProjectController extends Controller
 
     public function rewardPreview(Project $project)
     {
+        $this->authorize('checkOwnProject', $project);
         return view('user.my_project.reward_sample', ['project' => $project]);
     }
 }
