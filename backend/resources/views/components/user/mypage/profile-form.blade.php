@@ -17,24 +17,6 @@
             </div>
         </div>
     </form>
-@elseif(Request::get('input_type') === 'image_url')
-    <form action="{{ route('user.update_profile', ['user' => $authUser]) }}" method="POST" name="imageForm" enctype="multipart/form-data">
-        @method('PATCH')
-        @csrf
-        <div class="prof_edit_row">
-            <div class="prof_edit_01">プロフィール写真<br><span>編集中</span></div>
-            <div class="prof_edit_editbox">
-                <input type="file" id="files_input" name="image_url" accept=".png, .jpg, .jpeg, .gif"><br><span class="prof_edit_editbox_desc">ファイルサイズは1MB以下<br>ファイル形式は jpeg、gif、png 形式のみ可</span>
-            </div>
-            <div class="prof_edit_03">
-            </div>
-            <div class="def_btn">
-                <button type="submit" class="disable-btn">
-                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
-                </button>
-            </div>
-        </div>
-    </form>
 @elseif(Request::get('input_type') === 'email' && !$authUser->sns_user_exists)
     <form action="{{ route('user.update_profile', ['user' => $authUser]) }}" method="POST" name="mailForm">
         @method('PATCH')
@@ -262,14 +244,25 @@
             <a href="{{ route('user.profile', ['input_type' => 'name']) }}" class="cover_link"></a>
         </div>
     </div>
-    <div class="prof_edit_row">
-        <div class="prof_edit_01">プロフィール写真</div>
-        <div class="prof_edit_02"></div>
-        <div class="prof_edit_03">
-            編集
-            <a href="{{ route('user.profile', ['input_type' => 'image_url']) }}" class="cover_link"></a>
+    <form action="{{ route('user.update_profile', ['user' => $authUser]) }}" method="POST" name="imageForm" enctype="multipart/form-data">
+        @method('PATCH')
+        @csrf
+        <div class="prof_edit_row">
+            <div class="prof_edit_01">プロフィール写真</div>
+            <div class="prof_edit_02">
+                <div class="prof_edit_editbox">
+                    <input type="file" id="files_input" name="image_url" accept=".png, .jpg, .jpeg, .gif">
+                    <p class="prof_edit_editbox_desc">ファイルサイズは1MB以下</p>
+                    <p class="prof_edit_editbox_desc">ファイル形式は jpeg、gif、png 形式のみ可</p>
+                </div>
+            </div>
+            <div class="prof_edit_03">
+                <button type="submit" class="disable-btn prof_edit_03">
+                    更新
+                </button>
+            </div>
         </div>
-    </div>
+    </form>
     <div class="prof_edit_row">
         <div class="prof_edit_01">URL</div>
         <div class="prof_edit_02 my_sns_icon_wrapper">
