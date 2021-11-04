@@ -262,14 +262,6 @@
             <a href="{{ route('user.profile', ['input_type' => 'name']) }}" class="cover_link"></a>
         </div>
     </div>
-    <div class="prof_edit_row">
-        <div class="prof_edit_01">プロフィール写真</div>
-        <div class="prof_edit_02"></div>
-        <div class="prof_edit_03">
-            編集
-            <a href="{{ route('user.profile', ['input_type' => 'image_url']) }}" class="cover_link"></a>
-        </div>
-    </div>
     <form action="{{ route('user.update_profile', ['user' => $authUser]) }}" method="POST" name="imageForm" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
