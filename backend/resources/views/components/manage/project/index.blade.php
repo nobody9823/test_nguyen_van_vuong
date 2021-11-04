@@ -218,7 +218,7 @@
                     <div class="card" style="border: none; background-color: #f8f9fa;">
                         <a href="{{ route($role.'.project.show', ['project' => $project]) }}"
                             class="btn btn-sm btn-primary mt-1">確認</a>
-                        <a href="{{ route($role.'.project.preview', ['project' => $project] )}}"
+                        <a href="{{ route('user.my_project.project_preview', ['project' => $project] )}}"
                             class="btn btn-sm btn-success mt-1">プレビュー表示</a>
                     </div>
                 </div>

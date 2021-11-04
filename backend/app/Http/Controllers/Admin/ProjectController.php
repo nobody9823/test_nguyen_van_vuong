@@ -190,10 +190,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function preview(Project $project)
-    {
-        return view('admin.project.preview', ['project' => $project,]);
-    }
+    // public function preview(Project $project)
+    // {
+    //     return view('admin.project.preview', ['project' => $project,]);
+    // }
 
     /**
      * @param  ProjectImage  $projectImage
