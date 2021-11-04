@@ -151,8 +151,7 @@ class ProjectTest extends TestCase
         $response = $this->actingAs($this->user)
             ->get(route('user.plan.prepare_for_payment', array_merge(['project' => $this->project], $this->data_for_credit)));
 
-        $this->payment = $this->user->payments()->first();
-        $response->assertRedirect(route('user.plan.payment_for_credit', ['project' => $this->project, 'payment' => $this->payment]));
+        $response->assertRedirect(route('user.plan.payment_for_credit', ['project' => $this->project, 'payment_without_globalscope' => $this->user->payments()->withoutGlobalScopes()->first()]));
     }
 
     public function testPrepareForPaymentForPayPay()
@@ -170,7 +169,7 @@ class ProjectTest extends TestCase
             ->get(route('user.plan.prepare_for_payment', array_merge(['project' => $this->project], $this->data_for_paypay)));
 
         $response->assertRedirect('https://qr-stg.sandbox.paypay.ne.jp/28180104c6BFhmBN9MGwhLaz');
-        $payments = $this->user->payments()->get();
+        $payments = $this->user->payments()->withoutGlobalScopes()->get();
         $this->assertCount(1, $payments);
     }
 }
