@@ -32,6 +32,12 @@
 </div>
 
 <div class="form-group">
+    <label>出身地</label>
+    <input type="text" name="birth_place" class="form-control"
+        value="{{ old('birth_place', optional($user->profile)->birth_place) }}" required>
+</div>
+
+<div class="form-group">
     <label>誕生日(公開する)
         <input type="checkbox" name="birthday_is_published"
             {{ optional($user->profile)->birthday_is_published === 1 ?'checked':'' }} value=1>
@@ -58,8 +64,7 @@
 
 <div class="form-group">
     <label>紹介文</label>
-    <input type="text" name="introduction" class="form-control"
-        value="{{ old('introduction', optional($user->profile)->introduction) }}" required>
+    <textarea name="introduction" class="form-control" required>{{ old('introduction', optional($user->profile)->introduction) }}</textarea>
 </div>
 
 <div class="form-group">
