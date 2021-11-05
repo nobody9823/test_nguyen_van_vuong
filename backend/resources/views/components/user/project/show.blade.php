@@ -277,7 +277,9 @@
 <script src={{ asset('/js/blade-functions.js') }}></script>
 <script type="text/javascript">
     window.addEventListener('load', ()=>{
-        omit('more_looking_target',150);
+        if (window.screen.width <= 768) {
+            omit('more_looking_target',150);
+        }
     });
 
     //タブを押した際にスイッチする用のJS
