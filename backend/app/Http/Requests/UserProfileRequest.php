@@ -93,5 +93,8 @@ class UserProfileRequest extends FormRequest
         if ($this->has('introduction') && is_null($this->input('introduction'))) {
             $this->merge(['introduction' => ""]);
         }
+        if ($this->has('birth_place') && is_null($this->input('birth_place'))) {
+            $this->merge(['birth_place' => ""]);
+        }
     }
 }
