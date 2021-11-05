@@ -1,7 +1,4 @@
 <div class="pds_sec02_box inner_item">
-    <div class="pds_sec02_img">
-        <img class="" src="{{ Storage::url($plan->image_url) }}">
-    </div>
     <div class="pds_sec02_01">
         <div class="pds_sec02_01_en">{{ $plan->price }}円</div>
         @if($plan->limit_of_supporters_is_required === 1 && $plan->limit_of_supporters > 0)
@@ -10,10 +7,15 @@
             <div class="pds_sec02_01_nokori_nin" style="color: #e65d65">OUT OF STOCK</div>
         @endif
     </div>
-
+    
     <div class="pds_sec02_txt">
         {{ $plan->title }}
     </div>
+
+    <div class="pds_sec02_img">
+        <img class="" src="{{ Storage::url($plan->image_url) }}">
+    </div>
+
     <div class="pds_sec02_txt">
         {{ $plan->content }}
     </div>
