@@ -121,4 +121,92 @@ class GMO implements CardPaymentInterface
     {
         return 'GMO';
     }
+
+    /**
+     * Get bank account as 'GMO'
+     *
+     * @param string
+     *
+     * @return object
+     */
+    public function getBankAccount(string $bank_id): object
+    {
+        $response = Http::retry(5, 100)->post(config('app.gmo_bank_account_url'), [
+            'shopID' => config('app.gmo_shop_id'),
+            'shopPass' => config('app.gmo_shop_pass'),
+            'bankId' => $bank_id,
+        ]);
+
+        return $response;
+    }
+
+    /**
+     * Register bank account as 'GMO'
+     *
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     *
+     * @return object
+     */
+    public function registerBankAccount(
+        string $bank_id,
+        string $bank_code,
+        string $branch_code,
+        string $account_type,
+        string $account_number,
+        string $account_name
+    ): object {
+        $response = Http::retry(5, 100)->post(config('app.gmo_bank_account_url'), [
+            'shopID' => config('app.gmo_shop_id'),
+            'shopPass' => config('app.gmo_shop_pass'),
+            'method' => '1',
+            'bankId' => $bank_id,
+            'bankCode' => $bank_code,
+            'branchCode' => $branch_code,
+            'accountType' => $account_type,
+            'accountNumber' => $account_number,
+            'accountName' => $account_name,
+        ]);
+
+        return $response;
+    }
+
+    /**
+     * Update bank account as 'GMO'
+     *
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     *
+     * @return object
+     */
+    public function updateBankAccount(
+        string $bank_id,
+        string $bank_code,
+        string $branch_code,
+        string $account_type,
+        string $account_number,
+        string $account_name
+    ): object {
+        $response = Http::retry(5, 100)->post(config('app.gmo_bank_account_url'), [
+            'shopID' => config('app.gmo_shop_id'),
+            'shopPass' => config('app.gmo_shop_pass'),
+            'method' => '2',
+            'bankId' => $bank_id,
+            'bankCode' => $bank_code,
+            'branchCode' => $branch_code,
+            'accountType' => $account_type,
+            'accountNumber' => $account_number,
+            'accountName' => $account_name,
+        ]);
+
+        return $response;
+    }
 }

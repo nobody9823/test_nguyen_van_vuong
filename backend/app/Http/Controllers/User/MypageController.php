@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Actions\CardPayment\CardPaymentInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BankAccountRequest;
 use App\Http\Requests\UserProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\UniqueToken;
 use Log;
 
 class MypageController extends Controller
@@ -125,6 +127,42 @@ class MypageController extends Controller
         // $account = $this->card_payment->attachIdentityDocument($file['id'], Auth::user()->identification->connected_account_id);
 
         return $account;
+    }
+
+    public function editBankAccount()
+    {
+        return Auth::user()->identification->bank_id
+            ? view(
+                'user.mypage.bank_account',
+                [
+                    'bank_account' => $this->card_payment->getBankAccount(Auth::user()->identification->bank_id)
+                ]
+            )
+            : view('user.mypage.bank_account', ['bank_account' => null]);
+    }
+
+    public function updateBankAccount(BankAccountRequest $request)
+    {
+        if (Auth::user()->identification->bank_id) {
+            $response = $this->card_payment->updateBankAccount(
+                Auth::user()->identification->bank_id,
+                $request->bank_code,
+                $request->branch_code,
+                $request->account_type,
+                $request->account_number,
+                $request->account_name,
+            );
+        } else {
+            $response = $this->card_payment->updateBankAccount(
+                UniqueToken::getToken(),
+                $request->bank_code,
+                $request->branch_code,
+                $request->account_type,
+                $request->account_number,
+                $request->account_name,
+            );
+        }
+        dd($response);
     }
 
     public function commission()

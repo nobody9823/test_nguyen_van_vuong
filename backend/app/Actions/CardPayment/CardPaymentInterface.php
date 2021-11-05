@@ -57,5 +57,61 @@ interface CardPaymentInterface
      */
     public function searchTrade(string $order_id): object;
 
+    /**
+     * Get bank account as 'GMO'
+     *
+     * @return string
+     */
     public function getPaymentApiName(): string;
+
+    /**
+     * Get bank account as 'GMO'
+     *
+     * @param string
+     *
+     * @return object
+     */
+    public function getBankAccount(string $bank_id): object;
+
+    /**
+     * Register bank account as 'GMO'
+     *
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     *
+     * @return object
+     */
+    public function registerBankAccount(
+        string $bank_id,
+        string $bank_code,
+        string $branch_code,
+        string $account_type,
+        string $account_number,
+        string $account_name
+    ): object;
+
+    /**
+     * Update bank account as 'GMO'
+     *
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     *
+     * @return object
+     */
+    public function updateBankAccount(
+        string $bank_id,
+        string $bank_code,
+        string $branch_code,
+        string $account_type,
+        string $account_number,
+        string $account_name
+    ): object;
 }

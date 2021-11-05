@@ -184,6 +184,11 @@ if(isiOS) {
 					<p class="nav_btn_tit_L">マイプロジェクト管理</p>
 				</a>
 			</li>
+			<li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.bank_account.edit') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">銀行口座</p>
+				</a>
+			</li>
 
 			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.liked_projects') }}" class="top_menu-1 nav_btn_link">
