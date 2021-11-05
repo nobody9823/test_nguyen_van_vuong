@@ -39,7 +39,8 @@ class UserProfileRequest extends FormRequest
             'image_url' => ['nullable', 'image', 'mimes:jpeg,jpg,gif,png'],
             'gender' => ['nullable', 'string', Rule::in(['女性', '男性', 'その他'])],
             'gender_is_published' => ['nullable', 'boolean'],
-            'introduction' => ['nullable', 'string', 'max:255'],
+            'introduction' => ['nullable', 'string'],
+            'birth_place' => ['nullable', 'string', 'max:50'],
         ];
     }
 
