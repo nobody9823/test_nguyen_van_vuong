@@ -2,10 +2,10 @@
 
 namespace App\Traits;
 
-trait UniqueToken
-{
+trait UniqueToken {
+
     public static function getToken()
     {
-        return uniqid(random_int(0, 99999999) . '-');
+        return uniqid('', true);
     }
 }
