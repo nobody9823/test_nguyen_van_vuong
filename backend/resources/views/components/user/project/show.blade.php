@@ -200,7 +200,7 @@
 
                 <div class="wlr_64_L inner_item tab_contents" id='project_content_section'>
                     <div class="pds_sec02_tit">{{ $project->title }}</div>
-                    <div class="pds_sec02_txt">{!! $project->content !!}</div>
+                    <div class="pds_sec02_txt more_looking_target">{!! $project->content !!}</div>
                     {{-- <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div> --}}
                 </div><!--/wlr_64_L-->
 
@@ -274,8 +274,15 @@
 <script src="{{ asset('js/switch-display-style.js') }}"></script>
 <script src="{{ asset('js/toggle-class-name.js') }}"></script>
 <script src="{{ asset('js/more-looking.js') }}"></script>
+<script src={{ asset('/js/blade-functions.js') }}></script>
 <script type="text/javascript">
-//タブを押した際にスイッチする用のJS
+    window.addEventListener('load', ()=>{
+        if (window.screen.width <= 768) {
+            omit('more_looking_target',150);
+        }
+    });
+
+    //タブを押した際にスイッチする用のJS
     window.addEventListener('DOMContentLoaded', () => {
         moreLooking('a_comment', 3, 30, 'comments_more_looking_button','comments_close_button');
     });

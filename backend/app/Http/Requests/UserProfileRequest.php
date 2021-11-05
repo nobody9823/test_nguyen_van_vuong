@@ -39,7 +39,8 @@ class UserProfileRequest extends FormRequest
             'image_url' => ['nullable', 'image', 'mimes:jpeg,jpg,gif,png'],
             'gender' => ['nullable', 'string', Rule::in(['女性', '男性', 'その他'])],
             'gender_is_published' => ['nullable', 'boolean'],
-            'introduction' => ['nullable', 'string', 'max:255'],
+            'introduction' => ['nullable', 'string'],
+            'birth_place' => ['nullable', 'string', 'max:50'],
         ];
     }
 
@@ -91,6 +92,9 @@ class UserProfileRequest extends FormRequest
 
         if ($this->has('introduction') && is_null($this->input('introduction'))) {
             $this->merge(['introduction' => ""]);
+        }
+        if ($this->has('birth_place') && is_null($this->input('birth_place'))) {
+            $this->merge(['birth_place' => ""]);
         }
     }
 }
