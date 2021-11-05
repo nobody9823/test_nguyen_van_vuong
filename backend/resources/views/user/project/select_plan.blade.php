@@ -17,7 +17,7 @@
     </div><!--/as_header-->
 
     <div class="as_header_02 inner_item">リターンを選択し、必要情報を入力してください</div>
-    <form action="{{ route('user.plan.confirmPayment', ['project' => $project, 'inviter_code' => $inviter_code ?? '']) }}" class="h-adr" onsubmit="return onSubmit(this)" method="post">
+    <form action="{{ route('user.plan.confirmPayment', ['project' => $project, 'inviter_code' => $inviter_code ?? '']) }}" class="h-adr" method="post" id="purchaseForm">
         @csrf
         <input type="hidden" class="p-country-name" value="Japan">
         <!--★選択時 ↓as_select_return　に　asr_currentを追加-->
@@ -134,26 +134,49 @@
                                 <div class="tab_content_description tab1_desc">
                                     <div class="tab1_01">
                                         <div class="tab1_01_01">クレジットカード番号</div>
-                                        <div name="number_form" id="number-form"></div>
-                                        <span id="number_errors" style="color: red;"></span>
+                                        <input type="text" name="number_form" id="number-form" class="number_form" placeholder="（例）123456789" />
                                     </div>
 
                                     <div class="tab1_01">
                                         <div class="tab1_01_01">セキュリティコード</div>
                                         <div class="cvc-wrapper">
-                                            <div name="cvc-form" id="cvc-form" class="cvc_form"></div>
+                                            <input type="text" name="cvc-form" id="cvc-form" class="cvc_form" placeholder="（例）123" />
                                             <div class="tooltip1">
                                                 <p>？</p>
                                                 <div class="description1">カードの裏面にある末尾3桁の数字</div>
                                             </div>
                                         </div>
-                                        <span id="cvc_errors" style="color: red;"></span>
                                     </div>
 
                                     <div class="tab1_01">
                                         <div class="tab1_01_01">有効期限</div>
-                                        <div name="expiry-form" id="expiry-form"></div>
-                                        <span id="expiry_errors" style="color: red;"></span>
+                                        <div class="expiry-wrapper">
+                                            <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
+                                                <select name="expiry_month" id="expiry-month" class="expiry">
+                                                    <option value="">月</option>
+                                                    <option value="01">01月</option>
+                                                    <option value="02">02月</option>
+                                                    <option value="03">03月</option>
+                                                    <option value="04">04月</option>
+                                                    <option value="05">05月</option>
+                                                    <option value="06">06月</option>
+                                                    <option value="07">07月</option>
+                                                    <option value="08">08月</option>
+                                                    <option value="09">09月</option>
+                                                    <option value="10">10月</option>
+                                                    <option value="11">11月</option>
+                                                    <option value="12">12月</option>
+                                                </select>
+                                            </div>
+                                            <div class="cp_ipselect cp_normal">
+                                                <select name="expiry_year" id="expiry-year" class="expiry">
+                                                    <option value="">年</option>
+                                                    @for($i = Carbon\Carbon::now()->year; $i <= Carbon\Carbon::now()->addYear(10)->year; $i ++)
+                                                        <option value="{{ $i }}">{{ $i }}年</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -340,7 +363,7 @@
                         <textarea name="comments" class="def_textarea" rows="6">{{ old('comments') }}</textarea>
                     </div><!--/form_item_row-->
                     <div class="def_btn">
-                        <button type="submit" class="disable-btn">
+                        <button type="button" class="disable-btn" onclick="doPurchase()">
                             <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">確認画面へ</p>
                         </button>
                     </div>
@@ -429,6 +452,13 @@ window.onload = function(){
         var stripe = Stripe('{{ config("app.stripe_key") }}');
     </script>
     <script src="{{ asset('/js/stripe-create-card-token.js') }}"></script>
+@elseif(config('app.card_payment_api') === 'GMO')
+    {{-- 以下テスト環境URL --}}
+    <script src="https://stg.static.mul-pay.jp/ext/js/token.js"></script>
+    <script>
+        Multipayment.init('{{ config("app.gmo_shop_id") }}');
+    </script>
+    <script src="{{ asset('/js/gmo-create-card-token.js') }}"></script>
 @endif
 
 <script>
