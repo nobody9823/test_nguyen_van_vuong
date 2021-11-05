@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Http;
 use Request;
 
 class Payment extends Model
@@ -31,13 +29,6 @@ class Payment extends Model
     protected $casts = [
         'is_sent' => 'boolean'
     ];
-
-    protected static function booted()
-    {
-        static::addGlobalScope('payment_is_finished', function (Builder $builder) {
-            $builder->where('payment_is_finished', true);
-        });
-    }
 
     public function user()
     {
@@ -123,10 +114,10 @@ class Payment extends Model
             return $query->whereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->whereIn('project_id', Project::select('id')->where('id', $project_id))));
         }
     }
-    public function scopeNarrowDownPaymentOrderId($query)
+    public function scopeNarrowDownPaymentToken($query)
     {
-        if (Request::get('order_id')) {
-            $query->whereIn('id', PaymentToken::where('order_id', Request::get('order_id'))->pluck('payment_id'));
+        if (Request::get('payment_token')) {
+            $query->whereIn('id', PaymentToken::where('token', Request::get('payment_token'))->pluck('payment_id'));
         }
         return $query;
     }

@@ -16,7 +16,7 @@ class ReportControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    Public function setUp(): void
     {
         parent::setUp();
 
@@ -30,23 +30,22 @@ class ReportControllerTest extends TestCase
         $this->report = Report::factory()->state([
             'project_id' => $this->project->id,
             'image_url' => UploadedFile::fake()->image('avatar.jpeg')
-        ])->create();
+        ])->create(); 
 
         $this->payment = Payment::factory()->state([
             'user_id' => $this->user,
-            'project_id' => $this->project->id,
-            'payment_is_finished' => true,
+            'project_id' => $this->project->id
         ])->create();
 
-        $this->data =
-            [
-                'project_id' => $this->report->project_id,
-                'title' => $this->report->title,
-                'content' => $this->report->content,
-                'image_url' => UploadedFile::fake()->image('avatar.jpeg')
-            ];
+        $this->data = 
+        [
+            'project_id' => $this->report->project_id,
+            'title' => $this->report->title,
+            'content' => $this->report->content,
+            'image_url' => UploadedFile::fake()->image('avatar.jpeg')
+        ];
 
-        $this->data_for_delete = array_merge($this->data, array('delete' => 'delete'));
+        $this->data_for_delete = array_merge($this->data, array('delete'=>'delete'));
     }
 
 
@@ -55,11 +54,11 @@ class ReportControllerTest extends TestCase
         $this->withoutExceptionHandling();
 
         $response = $this->actingAs($this->user)
-            ->from(route('user.my_project.project.show', ['project' => $this->project]))
-            ->get(route('user.report.index', ['project' => $this->project]));
+                         ->from(route('user.my_project.project.show', ['project' => $this->project]))
+                         ->get(route('user.report.index', ['project' => $this->project]));
         $response->assertOk()
-            ->assertViewIs('user.report.index')
-            ->assertViewHas(['reports', 'project']);
+                 ->assertViewIs('user.report.index')
+                 ->assertViewHas(['reports','project']);
     }
 
     public function testCreateAction()
@@ -67,34 +66,34 @@ class ReportControllerTest extends TestCase
         $this->withoutExceptionHandling();
 
         $response = $this->actingAs($this->user)
-            ->from(route('user.report.index', ['project' => $this->project]))
-            ->get(route('user.report.create', ['project' => $this->project]));
+                         ->from(route('user.report.index', ['project' => $this->project]))
+                         ->get(route('user.report.create', ['project' => $this->project]));
         $response->assertOk()
-            ->assertViewIs('user.report.create')
-            ->assertViewHas('project');
+                 ->assertViewIs('user.report.create')
+                 ->assertViewHas('project');
     }
 
     public function testStoreAction()
     {
         $this->withoutExceptionHandling();
         Storage::fake('avatars');
-
+        
         $response = $this->actingAs($this->user)
-            ->from(route('user.report.create', ['project' => $this->project]))
-            ->post(route('user.report.store', ['project' => $this->project]), $this->data);
+                         ->from(route('user.report.create', ['project' => $this->project]))
+                         ->post(route('user.report.store', ['project' => $this->project]), $this->data);
         $response->assertRedirect(route('user.report.index', ['project' => $this->project]));
     }
 
     public function testShowAction()
     {
         $this->withoutExceptionHandling();
-
+ 
         $response = $this->actingAs($this->user)
-            ->from(route('user.project.show', ['project' => $this->project]))
-            ->get(route('user.report.show', ['project' => $this->project, 'report' => $this->report]));
+                         ->from(route('user.project.show', ['project' => $this->project]))
+                         ->get(route('user.report.show', ['project' => $this->project, 'report' => $this->report]));
         $response->assertOk()
-            ->assertViewIs('user.report.show')
-            ->assertViewHas(['project', 'report']);
+                 ->assertViewIs('user.report.show')
+                 ->assertViewHas(['project','report']);
     }
 
     public function testEditAction()
@@ -102,11 +101,11 @@ class ReportControllerTest extends TestCase
         $this->withoutExceptionHandling();
 
         $response = $this->actingAs($this->user)
-            ->from(route('user.report.index', ['project' => $this->project]))
-            ->get(route('user.report.edit', ['project' => $this->project, 'report' => $this->report]));
+                         ->from(route('user.report.index', ['project' => $this->project]))
+                         ->get(route('user.report.edit', ['project' => $this->project, 'report' => $this->report]));
         $response->assertOk()
-            ->assertViewIs('user.report.edit')
-            ->assertViewHas(['project', 'report']);
+                 ->assertViewIs('user.report.edit')
+                 ->assertViewHas(['project','report']);
     }
 
     public function testUpdateActionForUpdate()
@@ -115,24 +114,22 @@ class ReportControllerTest extends TestCase
         Storage::fake('avatars');
 
         $response = $this->actingAs($this->user)
-            ->from(route('user.report.edit', ['project' => $this->project, 'report' => $this->report]))
-            ->put(route('user.report.update', ['project' => $this->project, 'report' => $this->report]), $this->data);
+                         ->from(route('user.report.edit', ['project' => $this->project, 'report' => $this->report]))
+                         ->put(route('user.report.update', ['project' => $this->project, 'report' => $this->report]),$this->data);
         $response->assertRedirect(route('user.report.index', ['project' => $this->project]));
     }
-
+    
     public function testUpdateActionForDelete()
     {
         $this->withoutExceptionHandling();
         Storage::fake('avatars');
 
         $response = $this->actingAs($this->user)
-            ->from(route('user.report.edit', ['project' => $this->project, 'report' => $this->report]))
-            ->put(
-                route('user.report.update', ['project' => $this->project, 'report' => $this->report]),
-                $this->data_for_delete
-            );
+                         ->from(route('user.report.edit', ['project' => $this->project, 'report' => $this->report]))
+                         ->put(route('user.report.update', ['project' => $this->project, 'report' => $this->report]),
+                         $this->data_for_delete);
         $response->assertRedirect(route('user.report.index', ['project' => $this->project]));
         $this->assertSoftDeleted($this->report)
-            ->assertEquals(0, Report::count());
+             ->assertEquals(0, Report::count());
     }
 }
