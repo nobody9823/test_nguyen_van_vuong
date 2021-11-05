@@ -7,8 +7,8 @@
             <div class="pds_sec02_01_nokori_nin" style="color: #e65d65">OUT OF STOCK</div>
         @endif
     </div>
-    
-    <div class="pds_sec02_txt">
+
+    <div class="pds_sec02_tit">
         {{ $plan->title }}
     </div>
 
