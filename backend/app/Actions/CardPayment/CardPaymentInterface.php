@@ -76,6 +76,7 @@ interface CardPaymentInterface
     /**
      * Register bank account as 'GMO'
      *
+     * @param int
      * @param string
      * @param string
      * @param string
@@ -86,27 +87,7 @@ interface CardPaymentInterface
      * @return object
      */
     public function registerBankAccount(
-        string $bank_id,
-        string $bank_code,
-        string $branch_code,
-        string $account_type,
-        string $account_number,
-        string $account_name
-    ): object;
-
-    /**
-     * Update bank account as 'GMO'
-     *
-     * @param string
-     * @param string
-     * @param string
-     * @param string
-     * @param string
-     * @param string
-     *
-     * @return object
-     */
-    public function updateBankAccount(
+        int $method,
         string $bank_id,
         string $bank_code,
         string $branch_code,

@@ -259,6 +259,8 @@ return [
     'gmo_bank_account_url' => env('GMO_BANK_ACCOUNT_URL'),
     'gmo_shop_id' => env('GMO_SHOP_ID'),
     'gmo_shop_pass' => env('GMO_SHOP_PASS'),
+    'gmo_pg_shop_id' => env('GMO_PG_SHOP_ID'),
+    'gmo_pg_shop_pass' => env('GMO_PG_SHOP_PASS'),
     'merchant_id' => env('MERCHANT_ID'),
     'production_env' => env('PRODUCTION_ENV'),
     'sandbox' => env('SANDBOX'),

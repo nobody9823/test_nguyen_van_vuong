@@ -143,26 +143,17 @@ class MypageController extends Controller
 
     public function updateBankAccount(BankAccountRequest $request)
     {
-        if (Auth::user()->identification->bank_id) {
-            $response = $this->card_payment->updateBankAccount(
-                Auth::user()->identification->bank_id,
-                $request->bank_code,
-                $request->branch_code,
-                $request->account_type,
-                $request->account_number,
-                $request->account_name,
-            );
-        } else {
-            $response = $this->card_payment->updateBankAccount(
-                UniqueToken::getToken(),
-                $request->bank_code,
-                $request->branch_code,
-                $request->account_type,
-                $request->account_number,
-                $request->account_name,
-            );
-        }
-        dd($response);
+        $response = $this->card_payment->registerBankAccount(
+            Auth::user()->identification->bank_id ? 2 : 1,
+            Auth::user()->identification->bank_id ?: UniqueToken::getToken(),
+            $request->bank_code,
+            $request->branch_code,
+            $request->account_type,
+            $request->account_number,
+            $request->account_name,
+        );
+        Auth::user()->identification->bank_id = $response['Bank_ID'];
+        Auth::user()->identification->save();
     }
 
     public function commission()

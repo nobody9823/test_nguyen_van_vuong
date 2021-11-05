@@ -132,9 +132,9 @@ class GMO implements CardPaymentInterface
     public function getBankAccount(string $bank_id): object
     {
         $response = Http::retry(5, 100)->post(config('app.gmo_bank_account_url'), [
-            'shopID' => config('app.gmo_shop_id'),
-            'shopPass' => config('app.gmo_shop_pass'),
-            'bankId' => $bank_id,
+            'Shop_ID' => config('app.gmo_pg_shop_id'),
+            'Shop_Pass' => config('app.gmo_pg_shop_pass'),
+            'Bank_ID' => $bank_id,
         ]);
 
         return $response;
@@ -143,6 +143,7 @@ class GMO implements CardPaymentInterface
     /**
      * Register bank account as 'GMO'
      *
+     * @param int
      * @param string
      * @param string
      * @param string
@@ -153,6 +154,7 @@ class GMO implements CardPaymentInterface
      * @return object
      */
     public function registerBankAccount(
+        int $method,
         string $bank_id,
         string $bank_code,
         string $branch_code,
@@ -161,50 +163,15 @@ class GMO implements CardPaymentInterface
         string $account_name
     ): object {
         $response = Http::retry(5, 100)->post(config('app.gmo_bank_account_url'), [
-            'shopID' => config('app.gmo_shop_id'),
-            'shopPass' => config('app.gmo_shop_pass'),
-            'method' => '1',
-            'bankId' => $bank_id,
-            'bankCode' => $bank_code,
-            'branchCode' => $branch_code,
-            'accountType' => $account_type,
-            'accountNumber' => $account_number,
-            'accountName' => $account_name,
-        ]);
-
-        return $response;
-    }
-
-    /**
-     * Update bank account as 'GMO'
-     *
-     * @param string
-     * @param string
-     * @param string
-     * @param string
-     * @param string
-     * @param string
-     *
-     * @return object
-     */
-    public function updateBankAccount(
-        string $bank_id,
-        string $bank_code,
-        string $branch_code,
-        string $account_type,
-        string $account_number,
-        string $account_name
-    ): object {
-        $response = Http::retry(5, 100)->post(config('app.gmo_bank_account_url'), [
-            'shopID' => config('app.gmo_shop_id'),
-            'shopPass' => config('app.gmo_shop_pass'),
-            'method' => '2',
-            'bankId' => $bank_id,
-            'bankCode' => $bank_code,
-            'branchCode' => $branch_code,
-            'accountType' => $account_type,
-            'accountNumber' => $account_number,
-            'accountName' => $account_name,
+            'Shop_ID' => config('app.gmo_pg_shop_id'),
+            'Shop_Pass' => config('app.gmo_pg_shop_pass'),
+            'Method' => $method,
+            'Bank_ID' => $bank_id,
+            'Bank_Code' => $bank_code,
+            'Branch_Code' => $branch_code,
+            'Account_Type' => $account_type,
+            'Account_Number' => $account_number,
+            'Account_Name' => $account_name,
         ]);
 
         return $response;
