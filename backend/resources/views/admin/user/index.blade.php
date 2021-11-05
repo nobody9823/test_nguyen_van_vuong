@@ -68,6 +68,7 @@
                                     <p>名:{{ optional($user->profile)->first_name }}</p>
                                     <p>姓(カナ):{{ optional($user->profile)->last_name_kana }}</p>
                                     <p>名(カナ):{{ optional($user->profile)->first_name_kana }}</p>
+                                    <p>出身地:{{ optional($user->profile)->birth_place }}</p>
                                     <p>生年月日:{{ optional($user->profile)->birthday }}</p>
                                     <p>公開状態:{{ optional($user->profile)->birthday_is_published ?'公開中':'非公開中' }}</p>
                                     <p>性別:{{ optional($user->profile)->gender }}</p>
