@@ -27,17 +27,18 @@ class ProfileRequest extends FormRequest
     {
         $expire_date = Carbon::now()->format('Y-m-d');
         return [
-            'image_url' =>['nullable', 'image'],
-            'first_name_kana' =>['required', 'string'],
-            'last_name_kana' =>['required', 'string'],
-            'first_name' =>['required', 'string'],
-            'last_name' =>['required', 'string'],
-            'birthday' => ['required', 'date_format:Y-m-d',"before:{$expire_date}"],
-            'birthday_is_published' =>['nullable', 'integer'],
-            'gender' =>['required', 'string'],
-            'gender_is_published' =>['nullable', 'integer'],
-            'introduction' =>['required', 'string'],
-            'phone_number' =>['required', 'string'],
+            'image_url' => ['nullable', 'image'],
+            'first_name_kana' => ['required', 'string'],
+            'last_name_kana' => ['required', 'string'],
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'birthday' => ['required', 'date_format:Y-m-d', "before:{$expire_date}"],
+            'birthday_is_published' => ['nullable', 'integer'],
+            'gender' => ['required', 'string'],
+            'gender_is_published' => ['nullable', 'integer'],
+            'introduction' => ['required', 'string'],
+            'birth_place' => ['required', 'string', 'max:50'],
+            'phone_number' => ['required', 'string'],
         ];
     }
 }
