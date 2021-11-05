@@ -12,7 +12,10 @@ class PaymentToken extends Model
 
     protected $fillable = [
         'payment_id',
-        'token',
+        'order_id',
+        'access_id',
+        'access_pass',
+        'job_cd',
     ];
     public function payment()
     {
