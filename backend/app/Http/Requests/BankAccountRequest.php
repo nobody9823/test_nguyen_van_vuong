@@ -33,19 +33,4 @@ class BankAccountRequest extends FormRequest
             'account_name' => ['required', 'string']
         ];
     }
-
-    public function passedValidation()
-    {
-        switch ($this->input('account_type')) {
-            case '普通':
-                $this->merge(['account_type' => '1']);
-                return;
-            case '当座':
-                $this->merge(['account_type' => '2']);
-                return;
-            case '貯蓄':
-                $this->merge(['account_type' => '4']);
-                return;
-        }
-    }
 }
