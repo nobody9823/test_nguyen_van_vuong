@@ -256,6 +256,7 @@ return [
     'gmo_alter_payment_url' => env('GMO_ALTER_PAYMENT_URL'),
     'gmo_search_payment_url' => env('GMO_SEARCH_PAYMENT_URL'),
     'gmo_payment_detail_url' => env('GMO_PAYMENT_DETAIL_URL'),
+    'gmo_bank_account_search_url' => env('GMO_BANK_ACCOUNT_SEARCH_URL'),
     'gmo_bank_account_url' => env('GMO_BANK_ACCOUNT_URL'),
     'gmo_shop_id' => env('GMO_SHOP_ID'),
     'gmo_shop_pass' => env('GMO_SHOP_PASS'),

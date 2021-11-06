@@ -154,6 +154,7 @@ class MypageController extends Controller
         );
         Auth::user()->identification->bank_id = $response['Bank_ID'];
         Auth::user()->identification->save();
+        return redirect()->route('user.bank_account.edit')->with('flash_message', '銀行口座の登録が完了しました。');
     }
 
     public function commission()

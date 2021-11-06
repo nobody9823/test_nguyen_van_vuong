@@ -35,21 +35,29 @@
                                 </span>
                             </div>
                             <input id="bankCode" type="number" name="bank_code" class="def_input_100p"
-                                value="{{ old('bank_code') }}">
+                                value="{{ old('bank_code', $bank_account ? $bank_account['Bank_Code'] : '') }}">
                         </div>
 
                         <div class="form_item_row">
                             <div class="form_item_tit">支店番号</div>
                             <input id="branchCode" type="number" name="branch_code" class="def_input_100p"
-                                value="{{ old('branch_code') }}">
+                                value="{{ old('branch_code', $bank_account ? $bank_account['Branch_Code'] : '') }}">
                         </div>
 
                         <div class="form_item_row">
                             <div class="form_item_tit">口座種別</div>
                             <div class="cp_ipselect cp_normal">
                                 <select name="account_type">
-                                    @foreach(\App\Enums\BankAccountType::getValues() as $account_type)
-                                        <option value="{{ $account_type }}" {{ $account_type === old('account_type') ? 'selected' : '' }}>{{ $account_type }}</option>
+                                    @foreach(\App\Enums\GmoBankAccountType::getValues() as $account_type)
+                                        <option value="{{ $account_type }}" {{ $account_type === old('account_type') ? 'selected' : ($bank_account && $bank_account['Account_Type'] === $account_type ? 'selected' : '') }}>
+                                            @if($account_type === '1')
+                                            普通
+                                            @elseif($account_type === '2')
+                                            当座
+                                            @elseif($account_type === '4')
+                                            貯蓄
+                                            @endif
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -58,13 +66,13 @@
                         <div class="form_item_row">
                             <div class="form_item_tit">口座番号</div>
                             <input id="accountNumber" type="number" name="account_number" class="def_input_100p"
-                                value="{{ old('account_number') }}">
+                                value="{{ old('account_number', $bank_account ? $bank_account['Account_Number'] : '') }}">
                         </div>
 
                         <div class="form_item_row">
                             <div class="form_item_tit">口座名義</div>
                             <input id="holderName" type="text" name="account_name" class="def_input_100p"
-                                value="{{ old('account_name') }}">
+                                value="{{ old('account_name', $bank_account ? $bank_account['Account_Name'] : '') }}">
                         </div>
                         <div class="def_btn">
                             <button type="submit" class="disable-btn">

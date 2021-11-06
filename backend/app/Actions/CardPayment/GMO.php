@@ -131,7 +131,7 @@ class GMO implements CardPaymentInterface
      */
     public function getBankAccount(string $bank_id): object
     {
-        $response = Http::retry(5, 100)->post(config('app.gmo_bank_account_url'), [
+        $response = Http::retry(5, 100)->post(config('app.gmo_bank_account_search_url'), [
             'Shop_ID' => config('app.gmo_pg_shop_id'),
             'Shop_Pass' => config('app.gmo_pg_shop_pass'),
             'Bank_ID' => $bank_id,
