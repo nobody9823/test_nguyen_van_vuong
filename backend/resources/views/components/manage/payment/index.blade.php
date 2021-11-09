@@ -22,14 +22,12 @@
         <div class="collapse" id="collapseExample" style="position: absolute; top: 55px; left: -100px;">
             <div class="card card-body">
                 <div class="form-group mb-2 flex-column">
-                    <div class="form-check flex-column">
-                        <div class="form-group">
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">オーダーID</span>
-                            </div>
-                            <input type="text" class="form-control" value="{{ Request::get('order_id') }}"
-                                name="order_id" id="order_id">
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">オーダーID</span>
                         </div>
+                        <input type="text" class="form-control" value="{{ Request::get('order_id') }}"
+                            name="order_id" id="order_id">
                     </div>
                     <div class="form-check flex-column">
                         <label>

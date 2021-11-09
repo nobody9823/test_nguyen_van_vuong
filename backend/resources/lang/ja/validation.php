@@ -216,6 +216,7 @@ return [
         'end_minute' => '掲載終了日(日付、時刻)',
         'reward_by_total_amount' => '支援総額順リターン内容',
         'reward_by_total_quantity' => '支援人数順リターン内容',
+        'option_fee' => 'オプション料金',
         'bank_code' => '金融機関コード・銀行コード',
         'branch_code' => '支店番号',
         'account_type' => '口座種別',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\CardPayment\CardPaymentInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LikeCalculationRequest;
 use App\Http\Requests\ProjectRequest;
@@ -11,18 +12,25 @@ use App\Models\Plan;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Curator;
+use App\Models\Deposit;
 use App\Models\Project;
 use App\Models\ProjectFile;
+use App\Services\Date\DateFormatFacade;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Traits\UniqueToken;
 use Mail;
 
 class ProjectController extends Controller
 {
+    public function __construct(CardPaymentInterface $card_payment_interface)
+    {
+        $this->card_payment = $card_payment_interface;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -31,26 +39,41 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $projects = Project::search($role = "admin")
-            ->searchWithReleaseStatus($request->release_statuses)
+            ->narrowDownWithProject()
+            ->searchWithReleaseStatus()
+            ->searchWithReleasePeriod()
+            ->getWithDepositsExistsAndDeposits()
+            ->getWithPaymentsCountAndSumPrice()
             ->sortBySelected($request->sort_type);
 
         //リレーション先OrderBy
         if ($request->sort_type === 'user_name_asc') {
-            $projects = $projects->get()->sortBy('user.name')->paginate(10);
+            $projects = $projects->get()->sortBy('user.name');
         } elseif ($request->sort_type === 'user_name_desc') {
-            $projects = $projects->get()->sortByDesc('user.name')->paginate(10);
+            $projects = $projects->get()->sortByDesc('user.name');
         } elseif ($request->sort_type === 'liked_users_count_asc') {
             $projects = $projects->get()->sortBy(function ($project, $key) {
                 return $project->total_likes;
-            })->paginate(10);
+            });
         } elseif ($request->sort_type === 'liked_users_count_desc') {
             $projects = $projects->get()->sortByDesc(function ($project, $key) {
                 return $project->total_likes;
-            })->paginate(10);
+            });
         } else {
-            $projects = $projects->with('curator')->paginate(10);
+            $projects = $projects->get();
         }
-        return view('admin.project.index', ['projects' => $projects]);
+
+        $projects->map(function ($project) {
+            if ($project->deposits_exists) {
+                $project->deposits->map(function ($deposit) {
+                    $response = $this->card_payment->searchRemittance($deposit->deposit_id);
+                    $deposit->setAttribute('gmo_deposit_amount', $response['Amount']);
+                    $deposit->setAttribute('gmo_deposit_result', $response['bank']['Result']);
+                });
+            }
+        });
+
+        return view('admin.project.index', ['projects' => $projects->paginate(10)]);
     }
 
     /**
@@ -389,8 +412,60 @@ class ProjectController extends Controller
             'curator_id.exists' => '選択されたキュレーターは存在しておりません。',
         ]);
         return $project->curator()->associate($request->curator_id)->save()
-            ? redirect()->action([ProjectController::class, 'index'])->with('flash_message', '担当するキュレーターの更新が完了しました。')
-            : redirect()->action([ProjectController::class, 'index'])->with('flash_message', '担当するキュレーターの更新に失敗しました。管理者にご連絡ください。');
+            ? redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', '担当するキュレーターの更新が完了しました。')
+            : redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', '担当するキュレーターの更新に失敗しました。管理者にご連絡ください。');
+    }
+
+    public function associateOptionFee(Project $project, Request $request)
+    {
+        $request->validate([
+            'option_fee' => 'required|integer|min:0',
+        ]);
+        return $project->update(['option_fee' => $request->option_fee])
+            ? redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', 'オプション料金の更新が完了しました。')
+            : redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', 'オプション料金の更新に失敗しました。管理者にご連絡ください。');
+    }
+
+    public function remittance(Project $project)
+    {
+        if (DateFormatFacade::checkDateIsFuture($project->end_date)) {
+            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('プロジェクトの終了時刻が過ぎていないため実行できません。');
+        }
+        $project->getLoadIncludedPaymentsCountAndSumPrice();
+        $remaining_amount = $project->remittance_amount;
+
+        if ($remaining_amount > 1000000) {
+            while ($remaining_amount > 1000000) {
+                $deposit_id = UniqueToken::getToken();
+                DB::beginTransaction();
+                try {
+                    $response = $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, 1000000, 1);
+                    $project->deposits()->save(Deposit::make(['deposit_id' => $response['Deposit_ID']]));
+                    DB::commit();
+                } catch (Exception $e) {
+                    DB::rollBack();
+                    $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, 1000000, 2);
+                    Log::alert($e);
+                }
+                $remaining_amount -= 1000000;
+            }
+        }
+
+        if ($remaining_amount <= 1000000) {
+            $deposit_id = UniqueToken::getToken();
+            DB::beginTransaction();
+            try {
+                $response = $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $remaining_amount, 1);
+                $project->deposits()->save(Deposit::make(['deposit_id' => $response['Deposit_ID']]));
+                DB::commit();
+            } catch (Exception $e) {
+                DB::rollBack();
+                $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $remaining_amount, 2);
+                Log::alert($e);
+            }
+        }
+
+        return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', 'インフルエンサーへの送金が完了しました。');
     }
 
     // public function incrementLikes(LikeCalculationRequest $request, Project $project)

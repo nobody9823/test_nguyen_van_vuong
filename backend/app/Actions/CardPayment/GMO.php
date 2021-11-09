@@ -176,4 +176,46 @@ class GMO implements CardPaymentInterface
 
         return $response;
     }
+
+    /**
+     * remittance deposit as 'GMO'
+     *
+     * @param string
+     * @param string
+     * @param int
+     * @param int
+     *
+     * @return object
+     */
+    public function remittance(string $deposit_id, string $bank_id, int $amount, int $method): object
+    {
+        $response = Http::post(config('app.gmo_remittance_deposit_url'), [
+            'Shop_ID' => config('app.gmo_pg_shop_id'),
+            'Shop_Pass' => config('app.gmo_pg_shop_pass'),
+            'Method' => $method,
+            'Deposit_ID' => $deposit_id,
+            'Bank_ID' => $bank_id,
+            'Amount' => $amount,
+        ]);
+
+        return $response;
+    }
+
+    /**
+     * search deposit as 'GMO'
+     *
+     * @param string
+     *
+     * @return object
+     */
+    public function searchRemittance(string $deposit_id): object
+    {
+        $response = Http::post(config('app.gmo_search_remittance_url'), [
+            'Shop_ID' => config('app.gmo_pg_shop_id'),
+            'Shop_Pass' => config('app.gmo_pg_shop_pass'),
+            'Deposit_ID' => $deposit_id,
+        ]);
+
+        return $response;
+    }
 }

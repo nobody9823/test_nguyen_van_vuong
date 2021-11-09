@@ -258,6 +258,8 @@ return [
     'gmo_payment_detail_url' => env('GMO_PAYMENT_DETAIL_URL'),
     'gmo_bank_account_search_url' => env('GMO_BANK_ACCOUNT_SEARCH_URL'),
     'gmo_bank_account_url' => env('GMO_BANK_ACCOUNT_URL'),
+    'gmo_remittance_deposit_url' => env('GMO_REMITTANCE_DEPOSIT_URL'),
+    'gmo_search_remittance_url' => env('GMO_SEARCH_REMITTANCE_URL'),
     'gmo_shop_id' => env('GMO_SHOP_ID'),
     'gmo_shop_pass' => env('GMO_SHOP_PASS'),
     'gmo_pg_shop_id' => env('GMO_PG_SHOP_ID'),

@@ -50,11 +50,8 @@ Route::middleware('auth:admin')->group(function () {
     //プロジェクト管理
     Route::resource('project', ProjectController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show']]);
     Route::post('project/operate_projects', [ProjectController::class, 'operate_projects'])->name('project.operate_projects');
-    Route::get('project/{project}/release', [ProjectController::class, 'release'])->name('project.release');
-    Route::get('project/{project}/output_purchases_list_to_csv', [ProjectController::class, 'outputPurchasesListToCsv'])->name('project.output_purchases_list_to_csv');
     Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');
     Route::post('project/upload_editor_file', [ProjectController::class, 'uploadEditorFile'])->name('upload_editor_file');
-    Route::put('project/{project}/associate_curator', [ProjectController::class, 'associateCurator'])->name('project.associate_curator');
     // Route::patch('project/{project}/increment_likes', [ProjectController::class, 'incrementLikes'])->name('project.increment_likes');
     // Route::patch('project/{project}/decrement_likes', [ProjectController::class, 'decrementLikes'])->name('project.decrement_likes');
     Route::prefix('project/{project}')->group(function () {
@@ -63,6 +60,11 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('send_back', [ProjectController::class, 'sendBack'])->name('project.send_back');
         Route::get('approved', [ProjectController::class, 'approved'])->name('project.approved');
         Route::get('under_suspension', [ProjectController::class, 'underSuspension'])->name('project.under_suspension');
+        Route::get('release', [ProjectController::class, 'release'])->name('project.release');
+        Route::get('output_purchases_list_to_csv', [ProjectController::class, 'outputPurchasesListToCsv'])->name('project.output_purchases_list_to_csv');
+        Route::put('associate_curator', [ProjectController::class, 'associateCurator'])->name('project.associate_curator');
+        Route::put('associate_option_fee', [ProjectController::class, 'associateOptionFee'])->name('project.associate_option_fee');
+        Route::post('remittance', [ProjectController::class, 'remittance'])->name('project.remittance');
         Route::resource('report', ReportController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     });
     Route::get('project/{project}/create_cheering_users_mail', [MailController::class, 'createCheeringUsersMail'])->name('project.mail.create_cheering_users_mail');
