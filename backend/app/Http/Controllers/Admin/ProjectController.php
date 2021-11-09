@@ -70,6 +70,12 @@ class ProjectController extends Controller
                     $deposit->setAttribute('gmo_deposit_amount', $response['Amount']);
                     $deposit->setAttribute('gmo_deposit_result', $response['bank']['Result']);
                 });
+                $project->setAttribute(
+                    'succeed_sum_deposits_amount',
+                    $project->deposits->filter(function ($deposit) {
+                        return $deposit->gmo_deposit_result === '3';
+                    })->sum('gmo_deposit_amount')
+                );
             }
         });
 
@@ -428,7 +434,9 @@ class ProjectController extends Controller
 
     public function remittance(Project $project)
     {
-        if (DateFormatFacade::checkDateIsFuture($project->end_date)) {
+        if (is_null($project->user->identification->bank_id)) {
+            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('インフルエンサーの銀行口座が登録されておりません。');
+        } else if (DateFormatFacade::checkDateIsFuture($project->end_date)) {
             return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('プロジェクトの終了時刻が過ぎていないため実行できません。');
         }
         $project->getLoadIncludedPaymentsCountAndSumPrice();
@@ -463,6 +471,32 @@ class ProjectController extends Controller
                 $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $remaining_amount, 2);
                 Log::alert($e);
             }
+        }
+
+        return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', 'インフルエンサーへの送金が完了しました。');
+    }
+
+    public function againRemittance(Project $project, Request $request)
+    {
+        $request->validate([
+            'again_remittance_amount' => 'required|integer|min:1',
+        ]);
+        if (is_null($project->user->identification->bank_id)) {
+            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('インフルエンサーの銀行口座が登録されておりません。');
+        } else if (DateFormatFacade::checkDateIsFuture($project->end_date)) {
+            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('プロジェクトの終了時刻が過ぎていないため実行できません。');
+        }
+
+        $deposit_id = UniqueToken::getToken();
+        DB::beginTransaction();
+        try {
+            $response = $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $request->again_remittance_amount, 1);
+            $project->deposits()->save(Deposit::make(['deposit_id' => $response['Deposit_ID']]));
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $request->again_remittance_amount, 2);
+            Log::alert($e);
         }
 
         return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', 'インフルエンサーへの送金が完了しました。');

@@ -65,6 +65,7 @@ Route::middleware('auth:admin')->group(function () {
         Route::put('associate_curator', [ProjectController::class, 'associateCurator'])->name('project.associate_curator');
         Route::put('associate_option_fee', [ProjectController::class, 'associateOptionFee'])->name('project.associate_option_fee');
         Route::post('remittance', [ProjectController::class, 'remittance'])->name('project.remittance');
+        Route::post('again_remittance', [ProjectController::class, 'againRemittance'])->name('project.again_remittance');
         Route::resource('report', ReportController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     });
     Route::get('project/{project}/create_cheering_users_mail', [MailController::class, 'createCheeringUsersMail'])->name('project.mail.create_cheering_users_mail');

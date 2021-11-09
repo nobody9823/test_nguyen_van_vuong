@@ -160,8 +160,8 @@
                         開始日: {{ $project->start_date }}
                         <br/>
                         終了日: {{ $project->end_date }}
-                        <div class="d-flex justify-content-around">
-                        @if(DateFormat::checkDateIsPast($project->end_date))
+                        <div class="d-flex justify-content-around align-items-center pt-1">
+                        @if(DateFormat::checkDateIsPast($project->end_date) && !$project->deposits_exists)
                             <form action="{{ route('admin.project.remittance', ['project' => $project]) }}" method="POST">
                                 @csrf
                                 <button class="btn btn-outline-danger" type="submit" onclick="return confirm('本当に送金してもよろしいでしょうか。')">
@@ -170,47 +170,71 @@
                             </form>
                         @endif
                         @if($project->deposits_exists)
-                        <a class="mt-1" data-toggle="modal" data-target="#deposit_index{{ $project->id }}">
-                            送金履歴
-                        </a>
-                        <div class="modal fade" id="deposit_index{{ $project->id }}" tabindex="-1" role="dialog"
-                            aria-labelledby="user_content_modal" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="user_content_modal">
-                                            送金履歴
-                                        </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <a href="https://test-remittance.gmopg.jp/admin/depositSearch" target="_blank">GMOのダッシュボードで確認</a>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col" width="10%" class="text-nowrap">送金ID</th>
-                                                        <th scope="col" width="10%" class="text-nowrap">送金金額</th>
-                                                        <th scope="col" width="10%" class="text-nowrap">送金状況</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach($project->deposits as $deposit)
-                                                    <tr>
-                                                        <td>{{ $deposit->deposit_id }}</td>
-                                                        <td class="text-right">{{ number_format($deposit->gmo_deposit_amount) }}円</td>
-                                                        <td>{{ config('depositresult')[$deposit->gmo_deposit_result] }}</td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                            @if($project->succeed_sum_deposits_amount >= $project->remittance_amount)
+                                <button class="btn btn-success" type="button" disabled>
+                                    送金完了
+                                </button>
+                            @else
+                                <button class="btn btn-secondary" type="button" disabled>
+                                    送金中
+                                </button>
+                            @endif
+                            <a class="mt-1" data-toggle="modal" data-target="#deposit_index{{ $project->id }}">
+                                送金履歴
+                            </a>
+                            <div class="modal fade" id="deposit_index{{ $project->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="user_content_modal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="user_content_modal">
+                                                送金履歴
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <a href="https://test-remittance.gmopg.jp/admin/depositSearch" target="_blank">GMOのダッシュボードで確認</a>
+                                            <p>
+                                                送金完了:
+                                                {{ number_format($project->succeed_sum_deposits_amount) }}円
+                                            </p>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th scope="col" width="10%" class="text-nowrap">送金ID</th>
+                                                            <th scope="col" width="10%" class="text-nowrap">送金金額</th>
+                                                            <th scope="col" width="10%" class="text-nowrap">送金状況</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($project->deposits as $deposit)
+                                                        <tr>
+                                                            <td>{{ $deposit->deposit_id }}</td>
+                                                            <td class="text-right">{{ number_format($deposit->gmo_deposit_amount) }}円</td>
+                                                            <td class="text-center">
+                                                                {{ config('depositresult')[$deposit->gmo_deposit_result] }}
+                                                                @if($deposit->gmo_deposit_result === '2' || $deposit->gmo_deposit_result === '4' || $deposit->gmo_deposit_result === '9')
+                                                                    <form action="{{ route('admin.project.again_remittance', ['project' => $project]) }}" method="POST">
+                                                                        @csrf
+                                                                        <input type="hidden" name="again_remittance_amount" value="{{ $deposit->gmo_deposit_amount }}" />
+                                                                        <button class="btn btn-outline-danger mt-1" type="submit" onclick="return confirm('本当に送金してもよろしいでしょうか。')">
+                                                                            再送金
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endif
                         </div>
                     </td>
