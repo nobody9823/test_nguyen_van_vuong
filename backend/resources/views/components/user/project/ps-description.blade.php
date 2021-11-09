@@ -90,9 +90,10 @@
 
     <div class="ps_description_title">
         <p>③ランキング</p>
-        <span>あなた専用の招待リンクから購入した支援者の、紹介支援総額と紹介支援人数が表示されます。</span>
+        {{-- NOTICE: 支援総額が戻ったらこちらのコメントアウトを外す --}}
+        <span>あなた専用の招待リンクから購入した支援者の、{{--紹介支援総額と--}}紹介支援人数が表示されます。</span>
     </div>
-    <p class="ps_description_text">紹介支援総額とは、あなた専用の招待リンクから支援者が購入した総額です。</p>
+    {{-- <p class="ps_description_text">紹介支援総額とは、あなた専用の招待リンクから支援者が購入した総額です。</p> --}}
     <p class="ps_description_text">紹介支援人数とは、あなた専用の招待リンクから購入したリターンの件数です。</p>
     <div class="ps_description_items_wrapper">
 
@@ -104,8 +105,8 @@
         <div class="ps_description_border"></div>
         <div class="ps_description_item">
 
-            <div class="ps_description_ranking_wrapper">
-                <div class="ps_ranking_example_wrapper">
+            <div class="ps_description_ranking_wrapper" style="justify-content: center;"><!-- FIXME: こちらのスタイルも支援総額が戻ったら削除 -->
+                {{-- <div class="ps_ranking_example_wrapper">
                     <div class="ps_rank_02_tit">支援総額</div>
 
                     <div class="ps_rank_02_rank_item_row">
@@ -149,9 +150,9 @@
 
                 </div><!--/ps_rank_02_L-->
 
-                <div class="ps_ranking_example_right_border"></div>
+                <div class="ps_ranking_example_right_border"></div> --}}
 
-                <div class="ps_ranking_example_wrapper">
+                <div class="ps_ranking_example_wrapper" style="width: 70%;"><!-- FIXME: こちらのスタイルも支援総額が戻ったら削除 -->
 
                     <div class="ps_rank_02_tit">紹介人数</div>
 
