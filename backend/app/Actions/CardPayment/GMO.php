@@ -3,7 +3,9 @@
 namespace App\Actions\CardPayment;
 
 use App\Actions\CardPayment\CardPaymentInterface;
+use Exception;
 use Illuminate\Support\Facades\Http;
+use Log;
 
 class GMO implements CardPaymentInterface
 {
@@ -137,6 +139,11 @@ class GMO implements CardPaymentInterface
             'Bank_ID' => $bank_id,
         ]);
 
+        if (!\Illuminate\Support\Arr::has($response->json(), 'Bank_ID')) {
+            Log::alert($response->body());
+            throw new Exception($response->body());
+        }
+
         return $response;
     }
 
@@ -174,6 +181,11 @@ class GMO implements CardPaymentInterface
             'Account_Name' => $account_name,
         ]);
 
+        if (!\Illuminate\Support\Arr::has($response->json(), 'Bank_ID')) {
+            Log::alert($response->body());
+            throw new Exception($response->body());
+        }
+
         return $response;
     }
 
@@ -189,7 +201,7 @@ class GMO implements CardPaymentInterface
      */
     public function remittance(string $deposit_id, string $bank_id, int $amount, int $method): object
     {
-        $response = Http::post(config('app.gmo_remittance_deposit_url'), [
+        $response = Http::retry(5, 100)->post(config('app.gmo_remittance_deposit_url'), [
             'Shop_ID' => config('app.gmo_pg_shop_id'),
             'Shop_Pass' => config('app.gmo_pg_shop_pass'),
             'Method' => $method,
@@ -197,6 +209,11 @@ class GMO implements CardPaymentInterface
             'Bank_ID' => $bank_id,
             'Amount' => $amount,
         ]);
+
+        if (!\Illuminate\Support\Arr::has($response->json(), 'Deposit_ID')) {
+            Log::alert($response->body());
+            throw new Exception($response->body());
+        }
 
         return $response;
     }
@@ -210,11 +227,16 @@ class GMO implements CardPaymentInterface
      */
     public function searchRemittance(string $deposit_id): object
     {
-        $response = Http::post(config('app.gmo_search_remittance_url'), [
+        $response = Http::retry(5, 100)->post(config('app.gmo_search_remittance_url'), [
             'Shop_ID' => config('app.gmo_pg_shop_id'),
             'Shop_Pass' => config('app.gmo_pg_shop_pass'),
             'Deposit_ID' => $deposit_id,
         ]);
+
+        if (!\Illuminate\Support\Arr::has($response->json(), 'Deposit_ID')) {
+            Log::alert($response->body());
+            throw new Exception($response->body());
+        }
 
         return $response;
     }
