@@ -454,6 +454,7 @@ class ProjectController extends Controller
                     DB::rollBack();
                     $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, 1000000, 2);
                     Log::alert($e);
+                    return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('インフルエンサーへの送金に失敗しました。時間をおいてもう一度お試しください。');
                 }
                 $remaining_amount -= 1000000;
             }
@@ -470,6 +471,7 @@ class ProjectController extends Controller
                 DB::rollBack();
                 $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $remaining_amount, 2);
                 Log::alert($e);
+                return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('インフルエンサーへの送金に失敗しました。時間をおいてもう一度お試しください。');
             }
         }
 
@@ -497,6 +499,7 @@ class ProjectController extends Controller
             DB::rollBack();
             $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $request->again_remittance_amount, 2);
             Log::alert($e);
+            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('インフルエンサーへの送金に失敗しました。時間をおいてもう一度お試しください。');
         }
 
         return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', 'インフルエンサーへの送金が完了しました。');
