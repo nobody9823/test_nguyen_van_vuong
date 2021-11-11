@@ -212,7 +212,7 @@ class ProjectController extends Controller
             Log::alert($e);
             return redirect()->back()->withErrors('プロジェクトの削除に失敗しました。管理会社に連絡をお願いします。');
         }
-        return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', '削除が成功しました。');
+        return redirect()->action([ProjectController::class, 'index'])->with('flash_message', '削除が成功しました。');
     }
 
     /**
