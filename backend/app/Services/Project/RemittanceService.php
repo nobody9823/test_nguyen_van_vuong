@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Log;
 use App\Actions\CardPayment\CardPaymentInterface;
+use App\Enums\PaymentJobCd;
 use App\Services\Date\DateFormatFacade;
 
 class RemittanceService
@@ -34,7 +35,7 @@ class RemittanceService
         }
     }
 
-    public function checkRequiredPaymentsJobCdConditions(Project $project)
+    public function IsExistsPaymentsJobCdConditions(Project $project, $condition)
     {
         $project->payments->map(function ($payment) {
             if ($payment->payment_way === 'GMO') {
@@ -44,17 +45,41 @@ class RemittanceService
                 $payment->setAttribute('gmo_job_cd', 'DEFAULT');
             }
         });
-        $payments = $project->payments->filter(function ($payment) {
-            return $payment->gmo_job_cd === 'AUTH';
+        $payments = $project->payments->filter(function ($payment) use ($condition) {
+            return $payment->gmo_job_cd === $condition;
         });
         if ($payments->isNotEmpty()) {
             return [
-                'status' => false,
-                'message' => '仮売上状態の決済が存在しています。実売上計上を実行してください。',
+                'status' => true,
+                'message' => PaymentJobCd::fromKey($condition) . '状態の決済が含まれています。',
             ];
         }
         return [
-            'status' => true,
+            'status' => false,
+        ];
+    }
+
+    public function IsNotExistsPaymentsJobCdConditions(Project $project, $condition)
+    {
+        $project->payments->map(function ($payment) {
+            if ($payment->payment_way === 'GMO') {
+                $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
+                $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+            } else {
+                $payment->setAttribute('gmo_job_cd', 'DEFAULT');
+            }
+        });
+        $payments = $project->payments->filter(function ($payment) use ($condition) {
+            return $payment->gmo_job_cd !== $condition;
+        });
+        if ($payments->isNotEmpty()) {
+            return [
+                'status' => true,
+                'message' => PaymentJobCd::fromKey($condition) . '以外の決済が含まれています。',
+            ];
+        }
+        return [
+            'status' => false,
         ];
     }
 
@@ -62,17 +87,17 @@ class RemittanceService
     {
         if (is_null($project->user->identification->bank_id)) {
             return [
-                'status' => false,
+                'status' => true,
                 'message' => 'インフルエンサーの銀行口座が登録されておりません。',
             ];
         } else if (DateFormatFacade::checkDateIsFuture($project->end_date)) {
             return [
-                'status' => false,
+                'status' => true,
                 'message' => 'プロジェクトの終了時刻が過ぎていないため実行できません。',
             ];
         }
         return [
-            'status' => true,
+            'status' => false,
         ];
     }
 }

@@ -437,11 +437,11 @@ class ProjectController extends Controller
     public function remittance(Project $project)
     {
         $result = $this->remittance->checkRequiredConditions($project);
-        if (!$result['status']) {
+        if ($result['status']) {
             return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }
-        $result = $this->remittance->checkRequiredPaymentsJobCdConditions($project);
-        if (!$result['status']) {
+        $result = $this->remittance->IsExistsPaymentsJobCdConditions($project, 'AUTH');
+        if ($result['status']) {
             return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }
         $project->getLoadIncludedPaymentsCountAndSumPrice();
@@ -468,7 +468,7 @@ class ProjectController extends Controller
         ]);
 
         $result = $this->remittance->checkRequiredConditions($project);
-        if (!$result['status']) {
+        if ($result['status']) {
             return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }
 

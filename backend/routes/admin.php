@@ -64,6 +64,8 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('output_purchases_list_to_csv', [ProjectController::class, 'outputPurchasesListToCsv'])->name('project.output_purchases_list_to_csv');
         Route::put('associate_curator', [ProjectController::class, 'associateCurator'])->name('project.associate_curator');
         Route::put('associate_option_fee', [ProjectController::class, 'associateOptionFee'])->name('project.associate_option_fee');
+        Route::post('payment/alter_sales', [PaymentController::class, 'alterSales'])->name('payment.alter_sales');
+        Route::post('payment/alter_cancel', [PaymentController::class, 'alterCancel'])->name('payment.alter_cancel');
         Route::post('remittance', [ProjectController::class, 'remittance'])->name('project.remittance');
         Route::post('again_remittance', [ProjectController::class, 'againRemittance'])->name('project.again_remittance');
         Route::resource('report', ReportController::class, ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
@@ -81,8 +83,6 @@ Route::middleware('auth:admin')->group(function () {
 
     // 応募者管理
     Route::resource('payment', PaymentController::class, ['only' => ['index', 'show', 'destroy']]);
-    Route::post('payment/alter_sales', [PaymentController::class, 'alterSales'])->name('payment.alter_sales');
-    Route::post('payment/alter_cancel', [PaymentController::class, 'alterCancel'])->name('payment.alter_cancel');
 
     // 活動報告管理
     Route::resource('report', ReportController::class, ['only' => ['index', 'show']]);
