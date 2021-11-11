@@ -1426,14 +1426,8 @@ input[name="tab_item"] {
 .tab1_05{ width: 100%; }
 
 .tab1_01_01{ width: 100%; font-weight: bold; }
-.cvc-wrapper, .expiry-wrapper{display: flex; align-items: center; justify-content: flex-start;}
-.cvc-wrapper .cvc_form, .tab1_01 .number_form, .tab1_01 .expiry{
-    padding: 17px 20px 17px 20px;
-    border-radius: 4px;
-    border: solid 1px #dbdbdb;
-    background-color: #fff;
-    width: 100%;
-}
+.cvc-wrapper{display: flex; align-items: center; justify-content: flex-start;}
+.cvc-wrapper .cvc_form{width: 100%;}
 .cvc-wrapper .tooltip1{margin: 10px;}
 .tab1_03_01{ width: 100%; margin: 0 0 10px 0; font-weight: bold;}
 
@@ -1578,6 +1572,7 @@ input[name="tab_item"] {
 	}
 }
 
+/****
 @media only screen and (max-width: 767px){
   .pager .pagination li{
     display: none;
@@ -1598,14 +1593,16 @@ input[name="tab_item"] {
   }
 
   .pager .pagination li.pager_pre span::after{
-    content: "　前のページへ";
+    content: "　前の10件へ";
   }
 
   .pager .pagination li.pager_next span::before{
-    content: "次のページへ　";
+    content: "次の10件へ　";
   }
 
 }
+***/
+
 
 @media screen and (max-width: 768px){
 	#supported-projects .prof_page_L{display: none;}
