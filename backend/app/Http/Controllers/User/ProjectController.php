@@ -241,7 +241,7 @@ class ProjectController extends Controller
             $this->plan->updatePlansByIds($plans, $validated_request['plans']);
             $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
             $payment->paymentToken()->save(PaymentToken::make([
-                'token' => !empty($validated_request['payment_method_id']) ? $validated_request['payment_method_id'] : $unique_token,
+                'order_id' => !empty($validated_request['payment_method_id']) ? $validated_request['payment_method_id'] : $unique_token,
             ]));
             DB::commit();
         } catch (\Exception $e) {
@@ -250,43 +250,49 @@ class ProjectController extends Controller
         }
 
         if ($validated_request['payment_way'] === 'credit') {
-            return redirect()->action([ProjectController::class, 'paymentForCredit'], ['project' => $project, 'payment' => $payment]);
+            return redirect()->action([ProjectController::class, 'paymentForCredit'], ['project' => $project, 'payment_without_globalscope' => $payment]);
         } elseif ($validated_request['payment_way'] === 'paypay') {
             return redirect()->away($qr_code['data']['url']);
         }
     }
 
     /**
-     * do payment for Pay Jp
+     * do payment for credit
      *
      *@param App\Models\Project
      *@param App\Models\Payment
      *
      *@return \Illuminate\Http\Response
      */
-    public function paymentForCredit(Project $project, Payment $payment)
+    public function paymentForCredit(Project $project, Payment $payment_without_globalscope)
     {
-        $response = $this->card_payment->charge($payment->price, $payment->paymentToken->token, $project->user->identification->connected_account_id);
+        $order_id = UniqueToken::getToken();
+        $entry_response = $this->card_payment
+            ->entryTran($payment_without_globalscope->price, $order_id);
+        $exec_response = $this->card_payment
+            ->execTran($payment_without_globalscope->paymentToken->order_id, $entry_response['accessID'], $entry_response['accessPass'], $order_id);
         DB::beginTransaction();
         try {
-            $payment->payment_is_finished = true;
-            $payment->paymentToken->token = $response->id;
-            $payment->save();
-            $payment->paymentToken->save();
+            $payment_without_globalscope->payment_is_finished = true;
+            $payment_without_globalscope->paymentToken->order_id = $exec_response['orderID'];
+            $payment_without_globalscope->paymentToken->access_id = $entry_response['accessID'];
+            $payment_without_globalscope->paymentToken->access_pass = $entry_response['accessPass'];
+            $payment_without_globalscope->save();
+            $payment_without_globalscope->paymentToken->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            $this->card_payment->refund($response->id);
+            $this->card_payment->refund($entry_response['accessID'], $entry_response['accessPass'], $payment_without_globalscope->price);
             throw $e;
         }
-        $this->user->notify(new PaymentNotification($project, $payment));
+        $this->user->notify(new PaymentNotification($project, $payment_without_globalscope));
 
-        return view('user.plan.supported', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice(), 'payment' => $payment]);
+        return view('user.plan.supported', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice(), 'payment' => $payment_without_globalscope]);
     }
 
-    public function paymentForPayPay(Project $project, Payment $payment)
+    public function paymentForPayPay(Project $project, Payment $payment_without_globalscope)
     {
-        $response = $this->pay_pay->getPaymentDetail($payment->paymentToken->token);
+        $response = $this->pay_pay->getPaymentDetail($payment_without_globalscope->paymentToken->token);
 
         if ($response['data']['status'] !== 'COMPLETED') {
             return redirect()->action([ProjectController::class, 'selectPlans'], ['project' => $project])->withError('決済処理に失敗しました。管理会社に連絡をお願いします。');
@@ -294,17 +300,17 @@ class ProjectController extends Controller
 
         DB::beginTransaction();
         try {
-            $payment->payment_is_finished = true;
-            $payment->save();
+            $payment_without_globalscope->payment_is_finished = true;
+            $payment_without_globalscope->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
             $this->pay_pay->cancelPayment($response['data']['merchantPaymentId']);
             throw $e;
         }
-        $this->user->notify(new PaymentNotification($project, $payment));
+        $this->user->notify(new PaymentNotification($project, $payment_without_globalscope));
 
-        return view('user.plan.supported', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice(), 'payment' => $payment]);
+        return view('user.plan.supported', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice(), 'payment' => $payment_without_globalscope]);
     }
 
     /**
