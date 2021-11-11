@@ -159,7 +159,7 @@ class PaymentController extends Controller
     public function alterCancel(AlterTranRequest $request)
     {
         $payments = Payment::find($request->payments);
-        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($payments, 'SALES');
+        $result = $this->remittance->IsExistsPaymentsJobCdConditions($payments, 'VOID');
         if ($result['status']) {
             return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
         }
