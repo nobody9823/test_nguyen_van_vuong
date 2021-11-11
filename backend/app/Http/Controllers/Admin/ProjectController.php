@@ -440,19 +440,9 @@ class ProjectController extends Controller
         if (!$result['status']) {
             return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }
-        $project->payments->map(function ($payment) {
-            if ($payment->payment_way === 'GMO') {
-                $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
-                $payment->setAttribute('gmo_job_cd', $response['jobCd']);
-            } else {
-                $payment->setAttribute('gmo_job_cd', 'DEFAULT');
-            }
-        });
-        $payments = $project->payments->filter(function ($payment) {
-            return $payment->gmo_job_cd === 'AUTH';
-        });
-        if ($payments->isNotEmpty()) {
-            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('仮売上状態の決済が存在しています。実売上計上を実行してください。');
+        $result = $this->remittance->checkRequiredPaymentsJobCdConditions($project);
+        if (!$result['status']) {
+            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }
         $project->getLoadIncludedPaymentsCountAndSumPrice();
         $remaining_amount = $project->remittance_amount;

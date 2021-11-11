@@ -161,14 +161,14 @@
                         <br/>
                         終了日: {{ $project->end_date }}
                         <div class="d-flex justify-content-around align-items-center pt-1">
-                        {{-- @if(DateFormat::checkDateIsPast($project->end_date) && !$project->deposits_exists) --}}
+                        @if(DateFormat::checkDateIsPast($project->end_date) && !$project->deposits_exists)
                             <form action="{{ route('admin.project.remittance', ['project' => $project]) }}" method="POST">
                                 @csrf
                                 <button class="btn btn-outline-danger" type="submit" onclick="return confirm('本当に送金してもよろしいでしょうか。')">
                                     送金実行
                                 </button>
                             </form>
-                        {{-- @endif --}}
+                        @endif
                         @if($project->deposits_exists)
                             @if($project->succeed_sum_deposits_amount >= $project->remittance_amount)
                                 <button class="btn btn-success" type="button" disabled>
