@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\CardPayment\CardPaymentInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AlterTranRequest;
 use App\Models\Payment;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -142,27 +143,29 @@ class PaymentController extends Controller
         //
     }
 
-    public function alterSales(Project $project)
+    public function alterSales(AlterTranRequest $request)
     {
-        $result = $this->remittance->IsNotExistsPaymentsJobCdConditions($project, 'AUTH');
+        $payments = Payment::find($request->payments);
+        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($payments, 'AUTH');
         if ($result['status']) {
-            return redirect()->route('admin.payment.index', ['project' => $project])->withErrors($result['message']);
+            return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
         }
-        foreach ($project->payments as $payment) {
+        foreach ($payments as $payment) {
             $this->card_payment->alterSales($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
         }
-        return redirect()->route('admin.payment.index', ['project' => $project])->with('flash_message', '実売上計上に成功しました。');
+        return redirect()->route('admin.payment.index', ['project' => $request->project])->with('flash_message', '実売上計上に成功しました。');
     }
 
-    public function alterCancel(Project $project)
+    public function alterCancel(AlterTranRequest $request)
     {
-        $result = $this->remittance->IsNotExistsPaymentsJobCdConditions($project, 'SALES');
+        $payments = Payment::find($request->payments);
+        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($payments, 'SALES');
         if ($result['status']) {
-            return redirect()->route('admin.payment.index', ['project' => $project])->withErrors($result['message']);
+            return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
         }
-        foreach ($project->payments as $payment) {
+        foreach ($payments as $payment) {
             $this->card_payment->refund($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
         }
-        return redirect()->route('admin.payment.index', ['project' => $project])->with('flash_message', '売上キャンセルに成功しました。');
+        return redirect()->route('admin.payment.index', ['project' => $request->project])->with('flash_message', '売上キャンセルに成功しました。');
     }
 }

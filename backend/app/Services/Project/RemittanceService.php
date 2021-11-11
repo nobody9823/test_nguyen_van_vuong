@@ -35,9 +35,9 @@ class RemittanceService
         }
     }
 
-    public function IsExistsPaymentsJobCdConditions(Project $project, $condition)
+    public function IsExistsPaymentsJobCdConditions($payments, $condition)
     {
-        $project->payments->map(function ($payment) {
+        $payments->map(function ($payment) {
             if ($payment->payment_way === 'GMO') {
                 $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
                 $payment->setAttribute('gmo_job_cd', $response['jobCd']);
@@ -45,7 +45,7 @@ class RemittanceService
                 $payment->setAttribute('gmo_job_cd', 'DEFAULT');
             }
         });
-        $payments = $project->payments->filter(function ($payment) use ($condition) {
+        $payments = $payments->filter(function ($payment) use ($condition) {
             return $payment->gmo_job_cd === $condition;
         });
         if ($payments->isNotEmpty()) {
@@ -59,9 +59,9 @@ class RemittanceService
         ];
     }
 
-    public function IsNotExistsPaymentsJobCdConditions(Project $project, $condition)
+    public function IsNotFilledPaymentsJobCdConditions($payments, $condition)
     {
-        $project->payments->map(function ($payment) {
+        $payments->map(function ($payment) {
             if ($payment->payment_way === 'GMO') {
                 $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
                 $payment->setAttribute('gmo_job_cd', $response['jobCd']);
@@ -69,7 +69,7 @@ class RemittanceService
                 $payment->setAttribute('gmo_job_cd', 'DEFAULT');
             }
         });
-        $payments = $project->payments->filter(function ($payment) use ($condition) {
+        $payments = $payments->filter(function ($payment) use ($condition) {
             return $payment->gmo_job_cd !== $condition;
         });
         if ($payments->isNotEmpty()) {

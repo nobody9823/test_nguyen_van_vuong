@@ -190,7 +190,7 @@ class ProjectController extends Controller
             Log::alert($e);
             return redirect()->back()->withErrors('プロジェクトの更新に失敗しました。管理会社に連絡をお願いします。');
         }
-        return redirect()->action([ProjectController::class, 'index'])->with('flash_message', '更新が成功しました。');
+        return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', '更新が成功しました。');
     }
 
     /**
@@ -212,7 +212,7 @@ class ProjectController extends Controller
             Log::alert($e);
             return redirect()->back()->withErrors('プロジェクトの削除に失敗しました。管理会社に連絡をお願いします。');
         }
-        return redirect()->action([ProjectController::class, 'index'])->with('flash_message', '削除が成功しました。');
+        return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', '削除が成功しました。');
     }
 
     /**
@@ -440,7 +440,7 @@ class ProjectController extends Controller
         if ($result['status']) {
             return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }
-        $result = $this->remittance->IsExistsPaymentsJobCdConditions($project, 'AUTH');
+        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($project->payments, 'SALES');
         if ($result['status']) {
             return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }
