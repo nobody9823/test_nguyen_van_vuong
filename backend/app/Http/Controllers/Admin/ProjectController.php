@@ -16,6 +16,7 @@ use App\Models\Deposit;
 use App\Models\Project;
 use App\Models\ProjectFile;
 use App\Services\Date\DateFormatFacade;
+use App\Services\Project\RemittanceService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -27,9 +28,10 @@ use Mail;
 
 class ProjectController extends Controller
 {
-    public function __construct(CardPaymentInterface $card_payment_interface)
+    public function __construct(CardPaymentInterface $card_payment_interface, RemittanceService $remittance)
     {
         $this->card_payment = $card_payment_interface;
+        $this->remittance = $remittance;
     }
     /**
      * Display a listing of the resource.
@@ -434,10 +436,9 @@ class ProjectController extends Controller
 
     public function remittance(Project $project)
     {
-        if (is_null($project->user->identification->bank_id)) {
-            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('インフルエンサーの銀行口座が登録されておりません。');
-        } else if (DateFormatFacade::checkDateIsFuture($project->end_date)) {
-            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('プロジェクトの終了時刻が過ぎていないため実行できません。');
+        $result = $this->remittance->checkRequiredConditions($project);
+        if (!$result['status']) {
+            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }
         $project->payments->map(function ($payment) {
             if ($payment->payment_way === 'GMO') {
@@ -458,35 +459,13 @@ class ProjectController extends Controller
 
         if ($remaining_amount > 1000000) {
             while ($remaining_amount > 1000000) {
-                $deposit_id = UniqueToken::getToken();
-                DB::beginTransaction();
-                try {
-                    $response = $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, 1000000, 1);
-                    $project->deposits()->save(Deposit::make(['deposit_id' => $response['Deposit_ID']]));
-                    DB::commit();
-                } catch (Exception $e) {
-                    DB::rollBack();
-                    $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, 1000000, 2);
-                    Log::alert($e);
-                    return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('インフルエンサーへの送金に失敗しました。時間をおいてもう一度お試しください。');
-                }
+                $this->remittance->createDepositsAndGmoRemittance($project, 1000000);
                 $remaining_amount -= 1000000;
             }
         }
 
         if ($remaining_amount <= 1000000) {
-            $deposit_id = UniqueToken::getToken();
-            DB::beginTransaction();
-            try {
-                $response = $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $remaining_amount, 1);
-                $project->deposits()->save(Deposit::make(['deposit_id' => $response['Deposit_ID']]));
-                DB::commit();
-            } catch (Exception $e) {
-                DB::rollBack();
-                $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $remaining_amount, 2);
-                Log::alert($e);
-                return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('インフルエンサーへの送金に失敗しました。時間をおいてもう一度お試しください。');
-            }
+            $this->remittance->createDepositsAndGmoRemittance($project, $remaining_amount);
         }
 
         return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', 'インフルエンサーへの送金が完了しました。');
@@ -497,24 +476,13 @@ class ProjectController extends Controller
         $request->validate([
             'again_remittance_amount' => 'required|integer|min:1',
         ]);
-        if (is_null($project->user->identification->bank_id)) {
-            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('インフルエンサーの銀行口座が登録されておりません。');
-        } else if (DateFormatFacade::checkDateIsFuture($project->end_date)) {
-            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('プロジェクトの終了時刻が過ぎていないため実行できません。');
+
+        $result = $this->remittance->checkRequiredConditions($project);
+        if (!$result['status']) {
+            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }
 
-        $deposit_id = UniqueToken::getToken();
-        DB::beginTransaction();
-        try {
-            $response = $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $request->again_remittance_amount, 1);
-            $project->deposits()->save(Deposit::make(['deposit_id' => $response['Deposit_ID']]));
-            DB::commit();
-        } catch (Exception $e) {
-            DB::rollBack();
-            $this->card_payment->remittance($deposit_id, $project->user->identification->bank_id, $request->again_remittance_amount, 2);
-            Log::alert($e);
-            return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors('インフルエンサーへの送金に失敗しました。時間をおいてもう一度お試しください。');
-        }
+        $this->remittance->createDepositsAndGmoRemittance($project, $request->again_remittance_amount);
 
         return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', 'インフルエンサーへの送金が完了しました。');
     }

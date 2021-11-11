@@ -152,6 +152,12 @@ class MypageController extends Controller
             $request->account_number,
             $request->account_name,
         );
+
+        if (!\Illuminate\Support\Arr::has($response->json(), 'Bank_ID')) {
+            Log::alert($response->body());
+            return redirect()->route('user.bank_account.edit')->withErrors('銀行口座の登録に失敗しました。入力内容をご確認ください。');
+        }
+
         Auth::user()->identification->bank_id = $response['Bank_ID'];
         Auth::user()->identification->save();
         return redirect()->route('user.bank_account.edit')->with('flash_message', '銀行口座の登録が完了しました。');

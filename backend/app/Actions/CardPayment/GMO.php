@@ -181,11 +181,6 @@ class GMO implements CardPaymentInterface
             'Account_Name' => $account_name,
         ]);
 
-        if (!\Illuminate\Support\Arr::has($response->json(), 'Bank_ID')) {
-            Log::alert($response->body());
-            throw new Exception($response->body());
-        }
-
         return $response;
     }
 
