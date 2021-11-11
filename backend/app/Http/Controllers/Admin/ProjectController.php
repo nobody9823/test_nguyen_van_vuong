@@ -297,14 +297,14 @@ class ProjectController extends Controller
             //保存しない形でファイルのアウトプットを作成（良く分かってないので文章変です。）
             $stream = fopen('php://output', 'w');
 
-            $payment_csv_head = ['オーダーID', '支援者名', 'メールアドレス', 'お届け先', '上乗せ課金額', '支援総額', '支援日'];
+            $payment_csv_head = ['支援ID', '支援者名', 'メールアドレス', 'お届け先', '上乗せ課金額', '支援総額', '支援日'];
             mb_convert_variables('SJIS', 'UTF-8', $payment_csv_head);
             fputcsv($stream, $payment_csv_head);
 
             //プロジェクト詳細画面出力情報に合わせてデータを作成
             foreach ($payments as $payment) {
                 $payment_data = [
-                    $payment->paymentToken->order_id,
+                    $payment->paymentToken->token,
                     $payment->user->profile->last_name . $payment->user->profile->first_name,
                     $payment->user->email,
                     $payment->user->address->postal_code . $payment->user->address->prefecture . $payment->user->address->city . $payment->user->address->block . $payment->user->address->building,

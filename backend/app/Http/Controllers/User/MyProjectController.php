@@ -28,12 +28,14 @@ class MyProjectController extends Controller
 
     protected $my_project_tab_service;
 
-    public function __construct(ProjectService $project_service, EditMyProjectTabService $my_project_tab_service)
+    public function __construct(CardPaymentInterface $card_payment, ProjectService $project_service, EditMyProjectTabService $my_project_tab_service)
     {
         $this->middleware(function ($request, $next) {
             $this->user = \Auth::user();
             return $next($request);
         });
+
+        $this->card_payment = $card_payment;
 
         $this->project_service = $project_service;
 
@@ -59,6 +61,19 @@ class MyProjectController extends Controller
     public function create()
     {
         $project = $this->user->projects()->save(Project::initialize());
+        if (!isset(Auth::user()->identification->connected_account_id)) {
+            DB::beginTransaction();
+            try {
+                $account = $this->card_payment->createConnectedAccount(\Request::ip());
+                Auth::user()->identification->connected_account_id = $account['id'];
+                Auth::user()->identification->save();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                Log::alert($e->getMessage());
+                return redirect()->back()->withErrors('サーバーエラーが発生しました。管理者にお問い合わせください。');
+            }
+        }
 
         return redirect()->action([MyProjectController::class, 'edit'], ['project' => $project])->with('attention_message', '※申請には本人確認が必須となります。お早めにご記入ください。');
     }
@@ -97,9 +112,24 @@ class MyProjectController extends Controller
     public function edit(Project $project)
     {
         $this->authorize('checkOwnProjectWithPublishedStatus', $project);
+        if (!isset(Auth::user()->identification->connected_account_id)) {
+            DB::beginTransaction();
+            try {
+                $account = $this->card_payment->createConnectedAccount(\Request::ip());
+                Auth::user()->identification->connected_account_id = $account['id'];
+                Auth::user()->identification->save();
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                Log::alert($e->getMessage());
+                return redirect()->back()->withErrors('サーバーエラーが発生しました。管理者にお問い合わせください。');
+            }
+        } else {
+            $account = $this->card_payment->retrieveConnectedAccount(Auth::user()->identification->connected_account_id);
+        }
         $tags = Tag::pluck('name', 'id');
 
-        return view('user.my_project.edit', ['project' => $project, 'tags' => $tags]);
+        return view('user.my_project.edit', ['project' => $project, 'tags' => $tags, 'account' => $account]);
     }
 
     /**
@@ -210,8 +240,9 @@ class MyProjectController extends Controller
             $this->user->address->fill($request->all())->save();
             $this->project_service->attachTags($project, $request);
             $this->project_service->saveVideoUrl($project, $request);
+            $account = $this->card_payment->updatePersonalInformation(Auth::user()->identification->connected_account_id, $request->all());
             DB::commit();
-            return response()->json(['result' => true]);
+            return response()->json(['result' => true, 'account' => $account]);
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;

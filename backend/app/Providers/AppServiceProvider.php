@@ -6,7 +6,6 @@ use App\Actions\PayPay\PayPay;
 use App\Actions\CardPayment\PayJp;
 use App\Actions\PayPay\PayPayInterface;
 use App\Actions\CardPayment\CardPaymentInterface;
-use App\Actions\CardPayment\GMO;
 use App\Actions\CardPayment\Stripe;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -25,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(PayPayInterface::class, PayPay::class);
 
-        $this->app->bind(CardPaymentInterface::class, GMO::class);
+        $this->app->bind(CardPaymentInterface::class, Stripe::class);
 
         Cashier::ignoreMigrations();
     }
