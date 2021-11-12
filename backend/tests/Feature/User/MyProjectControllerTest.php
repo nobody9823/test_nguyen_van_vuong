@@ -155,21 +155,21 @@ class MyProjectControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testCreateActionByUserNotHavingConnectedAccount()
-    {
-        $response = $this->actingAs($this->user_not_having_connected_account)->get(route('user.my_project.project.create'));
+    // public function testCreateActionByUserNotHavingConnectedAccount()
+    // {
+    //     $response = $this->actingAs($this->user_not_having_connected_account)->get(route('user.my_project.project.create'));
 
-        $response->assertRedirect(route('user.my_project.project.edit', ['project' => Project::orderby('id', 'desc')->first()]));
-        $this->assertNotEmpty($this->user_not_having_connected_account->identification->connected_account_id);
-    }
+    //     $response->assertRedirect(route('user.my_project.project.edit', ['project' => Project::orderby('id', 'desc')->first()]));
+    //     $this->assertNotEmpty($this->user_not_having_connected_account->identification->connected_account_id);
+    // }
 
-    public function testEditActionByUserNotHavingConnectedAccount()
-    {
-        $response = $this->actingAs($this->user_not_having_connected_account)->get(route('user.my_project.project.edit', ['project' => $this->my_project_by_user_not_having_connected_account]));
+    // public function testEditActionByUserNotHavingConnectedAccount()
+    // {
+    //     $response = $this->actingAs($this->user_not_having_connected_account)->get(route('user.my_project.project.edit', ['project' => $this->my_project_by_user_not_having_connected_account]));
 
-        $response->assertOk();
-        $this->assertNotEmpty($this->user_not_having_connected_account->identification->connected_account_id);
-    }
+    //     $response->assertOk();
+    //     $this->assertNotEmpty($this->user_not_having_connected_account->identification->connected_account_id);
+    // }
 
     public function dataProviderForTestUpdateActionForEachTab(): array
     {
