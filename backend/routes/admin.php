@@ -78,8 +78,6 @@ Route::middleware('auth:admin')->group(function () {
 
     // 応募者管理
     Route::resource('payment', PaymentController::class, ['only' => ['index', 'show', 'destroy']]);
-    Route::post('payment/alter_sales', [PaymentController::class, 'alterSales'])->name('payment.alter_sales');
-    Route::post('payment/alter_cancel', [PaymentController::class, 'alterCancel'])->name('payment.alter_cancel');
 
     // 活動報告管理
     Route::resource('report', ReportController::class, ['only' => ['index', 'show']]);
