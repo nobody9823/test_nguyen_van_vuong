@@ -80,12 +80,6 @@ const updateMyProject = (() => {
         axios.post(`/my_project/uploadProject/${projectId}`, data).then(res => {
             if(res.data.result === true){
                 console.log(res);
-                var pastDue = res.data.account.requirements.past_due
-                if (pastDue.length) {
-                    displayIndividualStatus(pastDue);
-                } else {
-                    toastr["clear"]();
-                }
 
                 document.getElementById('spinner_' + Object.keys(data)[0]).style.display = 'none';
                 displayIcon(document.getElementById('saved_' + Object.keys(data)[0]));

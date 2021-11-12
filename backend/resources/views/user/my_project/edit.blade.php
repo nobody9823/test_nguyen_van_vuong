@@ -117,10 +117,6 @@
         ? openPlanFormModal(getParam('plan'))
         : openNewPlanFormModal();
     }
-    var pastDue = @json($account->requirements->past_due);
-    if (pastDue.length) {
-        displayIndividualStatus(pastDue);
-    }
 </script>
 
 <script>

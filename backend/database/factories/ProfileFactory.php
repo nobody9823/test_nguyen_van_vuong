@@ -29,6 +29,7 @@ class ProfileFactory extends Factory
             'last_name_kana' => $last_kana_name,
             'first_name' => mb_convert_kana($first_kana_name, 'c', 'utf-8'),
             'last_name' => mb_convert_kana($last_kana_name, 'c', 'utf-8'),
+            'birth_place' => $this->faker->realText(10),
             'birthday' => $this->faker->dateTimeBetween('+15year', '+30year')->format('Y-m-d H:i'),
             'gender' => Arr::random([
                 '男性',

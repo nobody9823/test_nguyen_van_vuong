@@ -43,15 +43,3 @@
   });
 });
 </script>
-
-<!-- datetimepicker -->
-<script src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
-<script>
-    $(function () {
-        $('#delivery_date').datetimepicker({
-            format: 'Y-m-d'
-        });
-    });
-</script>
-@endsection

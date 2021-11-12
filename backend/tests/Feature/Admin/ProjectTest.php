@@ -162,12 +162,16 @@ class ProjectTest extends TestCase
      *
      * @return void
      */
-    public function test_preview()
+    public function test_project_preview()
     {
         $this->project->save();
         $this->project->plans()->saveMany(Plan::factory(5));
-        $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.index'))->get(route('admin.project.preview', ['project' => $this->project]));
+        $response = $this
+          ->actingAs($this->admin, 'admin')
+          ->actingAs($this->user)
+          ->from(route('admin.project.index'))
+          ->get(route('user.project_preview', ['project' => $this->project]));
         $response->assertOk();
-        $response->assertViewIs('admin.project.preview');
+        $response->assertViewIs('user.project.preview');
     }
 }

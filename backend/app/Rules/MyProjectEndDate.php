@@ -29,7 +29,13 @@ class MyProjectEndDate implements Rule
     public function passes($attribute, $value)
     {
         $end_date = new Carbon($value);
-        return $end_date->gt($this->project->start_date);
+        if ($end_date->gt($this->project->start_date->addDays(50))) {
+            return false;
+        } elseif ($end_date->lt($this->project->start_date)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -39,6 +45,6 @@ class MyProjectEndDate implements Rule
      */
     public function message()
     {
-        return '掲載終了日(日付、時刻)には、掲載開始日(日付、時刻)より後の日付を指定してください。';
+        return '掲載終了日(日付、時刻)には、掲載開始日(日付、時刻)より50日後までの日付を指定してください。';
     }
 }

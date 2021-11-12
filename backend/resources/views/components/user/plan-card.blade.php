@@ -1,7 +1,4 @@
 <div class="pds_sec02_box inner_item">
-    <div class="pds_sec02_img">
-        <img class="" src="{{ Storage::url($plan->image_url) }}">
-    </div>
     <div class="pds_sec02_01">
         <div class="pds_sec02_01_en">{{ $plan->price }}円</div>
         @if($plan->limit_of_supporters_is_required === 1 && $plan->limit_of_supporters > 0)
@@ -11,9 +8,14 @@
         @endif
     </div>
 
-    <div class="pds_sec02_txt">
+    <div class="pds_sec02_tit">
         {{ $plan->title }}
     </div>
+
+    <div class="pds_sec02_img">
+        <img class="" src="{{ Storage::url($plan->image_url) }}">
+    </div>
+
     <div class="pds_sec02_txt">
         {{ $plan->content }}
     </div>
@@ -33,7 +35,7 @@
 
     <div class="pds_sec02_01">
         <div class="pds_sec02_01_shien_nin">支援者：{{ $plan->included_payments_count }}人</div>
-        <div class="pds_sec02_01_day">お届け予定日：{{ $plan->formatted_delivery_date }}</div>
+        <div class="pds_sec02_01_day">{{ $plan->formatted_delivery_date }}末までにお届け予定</div>
     </div>
 </div>
 {{-- <div class="plan">

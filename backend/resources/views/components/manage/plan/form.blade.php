@@ -98,7 +98,8 @@
 
 <div class="form-group">
     <label>リターン提供日</label>
-    <input type="text" name="delivery_date" class="form-control" id="delivery_date" value="{{ old('delivery_date', optional($plan)->delivery_date) }}">
+    <input type="month" name="delivery_date" class="form-control" 
+    value="{{ old('delivery_date', isset($plan) ? $plan->delivery_date->format('Y-m') : today()->format('Y-m') )}}">
 </div>
 
 <div class="form-group">

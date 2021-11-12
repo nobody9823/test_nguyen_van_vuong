@@ -438,4 +438,10 @@ class ProjectController extends Controller
             ],
         );
     }
+
+    public function projectPreview(Project $project)
+    {
+        $this->authorize('checkOwnProjectAndAdmin', $project);
+        return view('user.project.preview', ['project' => $project]);
+    }
 }

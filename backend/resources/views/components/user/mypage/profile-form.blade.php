@@ -17,24 +17,6 @@
             </div>
         </div>
     </form>
-@elseif(Request::get('input_type') === 'image_url')
-    <form action="{{ route('user.update_profile', ['user' => $authUser]) }}" method="POST" name="imageForm" enctype="multipart/form-data">
-        @method('PATCH')
-        @csrf
-        <div class="prof_edit_row">
-            <div class="prof_edit_01">プロフィール写真<br><span>編集中</span></div>
-            <div class="prof_edit_editbox">
-                <input type="file" id="files_input" name="image_url" accept=".png, .jpg, .jpeg, .gif"><br><span class="prof_edit_editbox_desc">ファイルサイズは1MB以下<br>ファイル形式は jpeg、gif、png 形式のみ可</span>
-            </div>
-            <div class="prof_edit_03">
-            </div>
-            <div class="def_btn">
-                <button type="submit" class="disable-btn">
-                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">変更する</p>
-                </button>
-            </div>
-        </div>
-    </form>
 @elseif(Request::get('input_type') === 'email' && !$authUser->sns_user_exists)
     <form action="{{ route('user.update_profile', ['user' => $authUser]) }}" method="POST" name="mailForm">
         @method('PATCH')
@@ -131,22 +113,15 @@
             </div>
         </div>
     </form>
-@elseif(Request::get('input_type') === 'prefecture_id')
-    <form action="{{ route('user.update_profile', ['user' => $authUser]) }}" method="POST" name="prefectureForm">
+@elseif(Request::get('input_type') === 'birth_place')
+    <form action="{{ route('user.update_profile', ['user' => $authUser]) }}" method="POST" name="birthPlaceForm">
         @method('PATCH')
         @csrf
         <div class="prof_edit_row">
-            <div class="prof_edit_01">現在地<br><span>編集中</span></div>
-            <div class="prof_edit_editbox pee_select_hori">
-                <div class="cp_ipselect cp_normal">
-                    <select name="prefecture">
-                        @foreach( PrefectureHelper::getPrefectures() as $key => $value)
-                        <option value="{{ $value }}" {{$authUser->address->prefecture == $value || old('prefecture') === $value ?  'selected' : ''}}>{{$value}}</option>
-                        @endforeach
-                    </select>
-                </div><!-- /.cp_ipselect -->
-
-            </div><!-- prof_edit_editbox -->
+            <div class="prof_edit_01">出身地<br><span>編集中</span></div>
+            <div class="prof_edit_editbox">
+                <input name="birth_place" type="text" placeholder="例）東京都" value="{{ old('birth_place', $authUser->profile->birth_place) }}"/>
+            </div>
             <div class="prof_edit_03">
             </div>
             <div class="def_btn">
@@ -262,14 +237,25 @@
             <a href="{{ route('user.profile', ['input_type' => 'name']) }}" class="cover_link"></a>
         </div>
     </div>
-    <div class="prof_edit_row">
-        <div class="prof_edit_01">プロフィール写真</div>
-        <div class="prof_edit_02"></div>
-        <div class="prof_edit_03">
-            編集
-            <a href="{{ route('user.profile', ['input_type' => 'image_url']) }}" class="cover_link"></a>
+    <form action="{{ route('user.update_profile', ['user' => $authUser]) }}" method="POST" name="imageForm" enctype="multipart/form-data">
+        @method('PATCH')
+        @csrf
+        <div class="prof_edit_row">
+            <div class="prof_edit_01">プロフィール写真</div>
+            <div class="prof_edit_02">
+                <div class="prof_edit_editbox">
+                    <input type="file" id="files_input" name="image_url" accept=".png, .jpg, .jpeg, .gif">
+                    <p class="prof_edit_editbox_desc">ファイルサイズは1MB以下</p>
+                    <p class="prof_edit_editbox_desc">ファイル形式は jpeg、gif、png 形式のみ可</p>
+                </div>
+            </div>
+            <div class="prof_edit_03">
+                <button type="submit" class="disable-btn prof_edit_03">
+                    更新
+                </button>
+            </div>
         </div>
-    </div>
+    </form>
     <div class="prof_edit_row">
         <div class="prof_edit_01">URL</div>
         <div class="prof_edit_02 my_sns_icon_wrapper">
@@ -301,13 +287,17 @@
         </div>
     </div>
     <div class="prof_edit_row">
-        <div class="prof_edit_01">現在地</div>
+        <div class="prof_edit_01">出身地</div>
         <div class="prof_edit_02">
-            {{ $authUser->address->prefecture }}
+            @if($authUser->profile->birth_place !== '')
+                {{ $authUser->profile->birth_place }}
+            @else
+                設定されていません
+            @endif
         </div>
         <div class="prof_edit_03">
             編集
-            <a href="{{ route('user.profile', ['input_type' => 'prefecture_id']) }}" class="cover_link"></a></div>
+            <a href="{{ route('user.profile', ['input_type' => 'birth_place']) }}" class="cover_link"></a></div>
     </div>
     <div class="prof_edit_row">
         <div class="prof_edit_01">生年月日</div>

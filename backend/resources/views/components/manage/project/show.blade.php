@@ -59,7 +59,7 @@
                                 </a>
                             </div>
                             <div class="text-right">
-                                <a href="{{ route($role.'.project.preview', compact('project')) }}"
+                                <a href="{{ route('user.project_preview', compact('project')) }}"
                                     class="btn btn-success">プレビュー</a>
                                 @if ($project->release_status !== '掲載中' && $project->release_status !== '承認待ち' || $role
                                 === "admin")
@@ -341,7 +341,7 @@
                                             <td>{{ $plan->title }}</td>
                                             <td>{{ number_format($plan->price) }}円</td>
                                             <td>{{ date_format($user->created_at, "Y-m-d") }}</td>
-                                            <td>{{ $plan->delivery_date }}</td>
+                                            <td>{{ $plan->formatted_delivery_date }}</td>
                                             <td>{{ $user->address->prefecture.$user->address->city.$user->address->block.$user->address->building }}
                                             </td>
                                         </tr>
