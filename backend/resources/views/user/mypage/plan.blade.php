@@ -29,7 +29,7 @@
                         <div class="my-page_project_box my-page_my_money">
                             <div class="my-page_project_tit_S"><i class="fas fa-yen-sign pri_color_f i_icon"></i>支援金額
                             </div>
-                            <div>{{$plan->price}}円</div>
+                            <div>{{$plan->price}}円(税込)</div>
                         </div>
 
                         <div class="my-page_project_box my-page_project-my_time">

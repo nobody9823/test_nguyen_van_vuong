@@ -19,7 +19,7 @@
                                 checked
                             @endif
                         />
-                        <label for="{{ $plan->id }}" class="checkbox-fan_02">{{ $plan->price }}円</label>
+                        <label for="{{ $plan->id }}" class="checkbox-fan_02">{{ $plan->price }}円(税込)</label>
                         @elseif($plan->limit_of_supporters < 1)
                         <div class="pds_sec02_01_nokori_nin" style="color: #e65d65">OUT OF STOCK</div>
                         @endif

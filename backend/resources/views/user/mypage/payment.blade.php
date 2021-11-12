@@ -34,8 +34,8 @@
                             <div class="su_pr_02_01 m_b_1510">リターン名</div>
                             <div class="su_pr_02_02 m_b_1510">{{ $plan->title }}</div>
                             <div class="su_pr_02_03 m_b_1510">
-                                <div><span>支払い総額</span><br>{{ number_format( $plan->pivot->quantity * $plan->price ) }}円</div>
-                                <div><span>商品単価</span><br>{{ number_format( $plan->price ) }}円</div>
+                                <div><span>支払い総額</span><br>{{ number_format( $plan->pivot->quantity * $plan->price ) }}円(税込)</div>
+                                <div><span>商品単価</span><br>{{ number_format( $plan->price ) }}円(税込)</div>
                                 <div><span>数量</span><br>{{ $plan->pivot->quantity }}個</div>
                             </div><!--/su_pr_02_03-->
                             <div class="su_pr_02_04 m_b_1510">

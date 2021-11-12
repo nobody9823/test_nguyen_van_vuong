@@ -125,60 +125,72 @@
                 </div><!--/pds_sec01_R_nin01-->
 
                 <div class="pds_sec01_R_btn_base">
-                    <div class="pds_sec01_R_btn01_wrapper">
-                        @if ($project->end_date > now())
-                            <div class="pds_sec01_R_btn01">
-                                <div class="more_btn_01_01">支援する</div>
+                    <div class="pds_button_and_sns_button_wrapper">
+                        <div class="pds_sec01_R_btn01_wrapper pds_purchase_button">
+                            @if ($project->end_date > now())
+                                <div class="pds_sec01_R_btn01">
+                                    <div class="more_btn_01_01">支援する</div>
+                                    <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
+                                </div>
                                 <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                                <a href="{{ route('user.plan.selectPlans', ['project' => $project, 'inviter_code' => $inviterCode ?? '' ]) }}" class="cover_link"></a>
-                            </div>
-                        @else
-                            <div class="pds_sec01_R_btn01">
-                                <div class="more_btn_01_01">FINISHED</div>
+                            @else
+                                <div class="pds_sec01_R_btn01">
+                                    <div class="more_btn_01_01">FINISHED</div>
+                                </div>
                                 <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                            </div>
-                        @endif
+                            @endif
+                        </div>
                         @isset($project->user->snsLink)
-                            @if ($project->user->snsLink->twitter_url)
-                            <div class="project_sns_icon">
-                                <a href="{{ $project->user->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
+                            <div class="pds_sec01_R_btn01_wrapper">
+                                @if ($project->user->snsLink->twitter_url)
+                                <div class="project_sns_icon">
+                                    <a href="{{ $project->user->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
+                                </div>
+                                @endif
+                                @if ($project->user->snsLink->instagram_url)
+                                <div class="project_sns_icon">
+                                    <a href="{{ $project->user->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
+                                </div>
+                                @endif
+                                @if ($project->user->snsLink->youtube_url)
+                                <div class="project_sns_icon">
+                                    <a href="{{ $project->user->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
+                                </div>
+                                @endif
+                                @if ($project->user->snsLink->tiktok_url)
+                                <div class="project_sns_icon">
+                                    <a href="{{ $project->user->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
+                                </div>
+                                @endif
+                                @if ($project->user->snsLink->other_url)
+                                <div class="project_sns_icon">
+                                    <a href="{{ $project->user->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
+                                </div>
+                                @endif
                             </div>
-                            @endif
-                            @if ($project->user->snsLink->instagram_url)
-                            <div class="project_sns_icon">
-                                <a href="{{ $project->user->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
-                            </div>
-                            @endif
-                            @if ($project->user->snsLink->youtube_url)
-                            <div class="project_sns_icon">
-                                <a href="{{ $project->user->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
-                            </div>
-                            @endif
-                            @if ($project->user->snsLink->tiktok_url)
-                            <div class="project_sns_icon">
-                                <a href="{{ $project->user->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
-                            </div>
-                            @endif
-                            @if ($project->user->snsLink->other_url)
-                            <div class="project_sns_icon">
-                                <a href="{{ $project->user->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
-                            </div>
-                            @endif
                         @endisset
                     </div>
-                    @if($project->isIncluded() === true)
-                    <div class="pds_sec01_R_btn01">
-                        <div class="more_btn_01_01">プロジェクトサポーターになる</div>
-                        <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                        <a href="{{ route('user.project.support', ['project' => $project]) }}" class="cover_link"></a>
+                </div>
+                @if($project->isIncluded() === true)
+                <div class="pds_sec01_R_btn_base">
+                    <div class="pds_sec01_R_btn01_wrapper">
+                        <div class="pds_sec01_R_btn01_supporter">
+                            <div class="more_btn_01_01">プロジェクトサポーター(PS)になる</div>
+                            <a href="{{ route('user.project.support', ['project' => $project]) }}" class="cover_link"></a>
+                        </div>
+                        <div class="more_btn_01_02_supporter"><i class="fas fa-arrow-right"></i></div>
                     </div>
-                    <div class="pds_sec01_R_btn01">
-                        <div class="more_btn_01_01">PSランキングを見る</div>
-                        <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-                        <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
+                </div>
+                <div class="pds_sec01_R_btn_base">
+                    <div class="pds_sec01_R_btn01_wrapper">
+                        <div class="pds_sec01_R_btn01_ranking">
+                            <div class="more_btn_01_01">PSランキングを見る</div>
+                            <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
+                        </div>
+                        <div class="more_btn_01_02_ranking"><i class="fas fa-arrow-right"></i></div>
                     </div>
-                    @endif
                 </div><!--/pds_sec01_R_nin01-->
+                @endif
 
                 </div><!--/pds_sec01_R-->
 

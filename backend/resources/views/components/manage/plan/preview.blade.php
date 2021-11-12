@@ -16,7 +16,7 @@
                 </div>
                 <div class="detail_info_content">
                     <p>価格</p>
-                    <div><span>{{ $plan->price }}</span>円</div>
+                    <div><span>{{ $plan->price }}</span>円(税込)</div>
                     <p>目標人数 {{ number_format($project->target_number) }}人</p>
 
                     <p style="white-space: pre-line;">詳細<br>{!! $plan->content !!}</p>

@@ -1,6 +1,6 @@
 <div class="pds_sec02_box inner_item">
     <div class="pds_sec02_01">
-        <div class="pds_sec02_01_en">{{ $plan->price }}円</div>
+        <div class="pds_sec02_01_en">{{ $plan->price }}円(税込)</div>
         @if($plan->limit_of_supporters_is_required === 1 && $plan->limit_of_supporters > 0)
             <div class="pds_sec02_01_nokori_nin">残り：{{ $plan->limit_of_supporters }}人まで</div>
         @elseif($plan->limit_of_supporters_is_required === 1 && $plan->limit_of_supporters < 1)
@@ -39,7 +39,7 @@
     </div>
 </div>
 {{-- <div class="plan">
-    <h3 class="plan-price">{{ number_format($plan->price) }}円</h3>
+    <h3 class="plan-price">{{ number_format($plan->price) }}円(税込)</h3>
     @if($plan->image_url == "Public/image/contribution.jpeg")
         <p class="plan-img"><img src="/image/contribution.jpeg"></p>
     @else
