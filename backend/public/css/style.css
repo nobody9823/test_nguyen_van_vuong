@@ -3148,9 +3148,3 @@ margin: 20px 0;
         font-size: 16px;
     }
 }
-
-.showmore_list {
-    overflow: hidden;
-    line-height: 1.6;
-    transition: all .3s ease-in;
-}
