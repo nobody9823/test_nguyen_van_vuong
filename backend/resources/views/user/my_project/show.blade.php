@@ -66,7 +66,7 @@
                                 <div class="su_pr_02_01 m_b_1510">リターン名 : {{ $plan->title }}</div>
                                 <div class="su_pr_02_02 m_b_1510"></div>
                                 <div class="su_pr_02_03 m_b_1510">
-                                    <div><span>商品単価</span><br>{{ $plan->price }}円</div>
+                                    <div><span>商品単価</span><br>{{ $plan->price }}円(税込)</div>
                                     <div><span>残り</span><br>{{ $plan->limit_of_supporters }}個</div>
                                 </div><!--/su_pr_02_03-->
                                 <div class="su_pr_02_04 m_b_1510">

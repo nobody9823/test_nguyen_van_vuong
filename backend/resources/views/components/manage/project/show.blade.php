@@ -197,7 +197,7 @@
                                                 </li>
                                                 <li class="list-group-item">
                                                     <h6 class="font-weight-bold mb-2">価格</h6>
-                                                    {{ number_format( $plan->price) }}円
+                                                    {{ number_format( $plan->price) }}円(税込)
                                                 </li>
                                                 <li class="list-group-item">
                                                     <h6 class="font-weight-bold mb-2">
@@ -339,7 +339,7 @@
                                             </td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $plan->title }}</td>
-                                            <td>{{ number_format($plan->price) }}円</td>
+                                            <td>{{ number_format($plan->price) }}円(税込)</td>
                                             <td>{{ date_format($user->created_at, "Y-m-d") }}</td>
                                             <td>{{ $plan->formatted_delivery_date }}</td>
                                             <td>{{ $user->address->prefecture.$user->address->city.$user->address->block.$user->address->building }}

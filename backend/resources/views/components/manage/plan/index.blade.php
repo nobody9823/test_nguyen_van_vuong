@@ -101,7 +101,7 @@
                     <p class="plan-content">{{ Str::limit($plan->content, 200) }}</p>
                 </td>
                 <td>
-                    {{ number_format($plan->price) }}円
+                    {{ number_format($plan->price) }}円(税込)
                 </td>
                 <td>
                     {{ $plan->formatted_delivery_date }}

@@ -50,7 +50,7 @@
                             価格
                         </div>
                         <div class="col-sm-9">
-                            {{ $plan->price }}円
+                            {{ $plan->price }}円(税込)
                         </div>
                     </div>
                     <div class="row row-col-2 pt-3" style="font-size: 20px">

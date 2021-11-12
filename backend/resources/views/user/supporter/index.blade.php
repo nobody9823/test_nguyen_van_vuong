@@ -78,7 +78,7 @@
                                         {{ $plan->content }}
                                     </li>
                                     <li>
-                                        価格 : {{ $plan->price }}
+                                        価格(税込) : {{ $plan->price }}
                                     </li>
                                     <li>
                                         お届け予定日：{{ $plan->formatted_delivery_date }}
