@@ -137,44 +137,44 @@ class ProjectControllerForPayPayTest extends TestCase
      *
      * @return void
      */
-    public function testPaymentForPayPayIsTrue()
-    {
-        $this->withoutExceptionHandling();
-        $mock = \Mockery::mock(PayPay::class);
-        $mock->shouldReceive('getPaymentDetail')
-            ->once()
-            ->andReturn($this->response_payment_detail);
+    // public function testPaymentForPayPayIsTrue()
+    // {
+    //     $this->withoutExceptionHandling();
+    //     $mock = \Mockery::mock(PayPay::class);
+    //     $mock->shouldReceive('getPaymentDetail')
+    //         ->once()
+    //         ->andReturn($this->response_payment_detail);
 
-        $this->app->bind(PayPayInterface::class, function () use ($mock) {
-            return $mock;
-        });
-        $response = $this->actingAs($this->supporter)
-            ->get(route('user.plan.payment_for_pay_pay', ['project' => $this->project, 'payment' => $this->payment]));
-        $response->assertOk();
-        $payment = $this->supporter->payments()->where('payment_is_finished', true)->get();
-        $this->assertCount(1, $payment);
-    }
+    //     $this->app->bind(PayPayInterface::class, function () use ($mock) {
+    //         return $mock;
+    //     });
+    //     $response = $this->actingAs($this->supporter)
+    //         ->get(route('user.plan.payment_for_pay_pay', ['project' => $this->project, 'payment' => $this->payment]));
+    //     $response->assertOk();
+    //     $payment = $this->supporter->payments()->where('payment_is_finished', true)->get();
+    //     $this->assertCount(1, $payment);
+    // }
 
-    /**
-     * test of payment as pay pay is fail
-     *
-     *@return void
-     */
-    public function testPaymentForPayPayIsFail()
-    {
-        $this->withoutExceptionHandling();
-        $this->expectException(Exception::class);
-        $mock = \Mockery::mock(PayPay::class);
-        $mock->shouldReceive('getPaymentDetail')
-            ->once()
-            ->andThrow(Exception::class);
+    // /**
+    //  * test of payment as pay pay is fail
+    //  *
+    //  *@return void
+    //  */
+    // public function testPaymentForPayPayIsFail()
+    // {
+    //     $this->withoutExceptionHandling();
+    //     $this->expectException(Exception::class);
+    //     $mock = \Mockery::mock(PayPay::class);
+    //     $mock->shouldReceive('getPaymentDetail')
+    //         ->once()
+    //         ->andThrow(Exception::class);
 
-        $this->app->bind(PayPayInterface::class, function () use ($mock) {
-            return $mock;
-        });
-        ($this->actingAs($this->supporter)
-            ->get(route('user.plan.payment_for_pay_pay', ['project' => $this->project, 'payment' => $this->payment])))->execute(1);
-        $payment = $this->supporter->payments()->where('payment_is_finished', true)->get();
-        $this->assertCount(0, $payment);
-    }
+    //     $this->app->bind(PayPayInterface::class, function () use ($mock) {
+    //         return $mock;
+    //     });
+    //     ($this->actingAs($this->supporter)
+    //         ->get(route('user.plan.payment_for_pay_pay', ['project' => $this->project, 'payment' => $this->payment])))->execute(1);
+    //     $payment = $this->supporter->payments()->where('payment_is_finished', true)->get();
+    //     $this->assertCount(0, $payment);
+    // }
 }
