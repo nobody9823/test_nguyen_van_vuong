@@ -99,7 +99,7 @@
 
 
             <div class="av_box">
-                <div class="av_tit">オーダーID</div>
+                <div class="av_tit">支援ID</div>
                 <div class="av_txt">
                     {{ $payment->paymentToken->order_id }}<br>
                 </div>

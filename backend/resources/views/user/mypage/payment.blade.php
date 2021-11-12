@@ -25,7 +25,7 @@
                                 <span>上乗せ金額 : </span>{{ number_format($payment->added_payment_amount) }}円
                             </div>
                             <div>
-                                <span>オーダーID : </span>{{ $payment->paymentToken->order_id }}
+                                <span>支援ID : </span>{{ $payment->paymentToken->token }}
                             </div>
                         </div>
                     </div>
