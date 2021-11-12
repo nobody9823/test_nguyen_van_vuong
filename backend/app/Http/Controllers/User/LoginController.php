@@ -84,9 +84,9 @@ class LoginController extends Controller
                     Log::alert($e->getMessage());
                     return redirect()->action([ProjectController::class, 'index'])->withErrors('ログインに失敗しました。管理会社に確認をお願いします。');
                 }
-                Auth::login($oauth_user->user);
-                return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'ログインが完了致しました。');
             }
+            Auth::login($oauth_user->user);
+            return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'ログインが完了致しました。');
         }
         return '情報が取得できませんでした。';
     }
