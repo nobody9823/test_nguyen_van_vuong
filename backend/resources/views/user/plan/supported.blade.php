@@ -75,8 +75,16 @@
                     <div class="ps_rank_01_02 m_b_1510">
                         {{ $project->title }}
                     </div>
-                    <div class="ps_rank_01_03 m_b_1510">
-                        {!! Str::limit($project->content, 400) !!}
+                    <div class="ps_rank_01_03 m_b_1510 showmore_list">
+                        {!! $project->content !!}
+                    </div>
+                    <div class="row justify-content-center mb-5" style="margin-top: 5px;">
+                        <div class="ps_rank_more_btn" id="showmore_button">
+                            続きを表示 <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="ps_rank_more_btn" id="hidemore_button">
+                            表示を少なくする <i class="fas fa-chevron-up"></i>
+                        </div>
                     </div>
                 </div>
                 <!--/ps_rank_01-->
@@ -93,7 +101,7 @@
             <div class="av_box">
                 <div class="av_tit">支援ID</div>
                 <div class="av_txt">
-                    {{ $payment->paymentToken->token }}<br>
+                    {{ $payment->paymentToken->order_id }}<br>
                 </div>
             </div>
             <!--/av_box-->
@@ -117,4 +125,35 @@
         <!--/av_box_base-->
     </div>
     <!--/.Assist-input_base-->
+@endsection
+
+@section('script')
+<script>
+window.addEventListener('load', ()=>{
+    let showmoreList = $('.showmore_list');
+    let showmoreListOpen = parseInt(showmoreList.height());
+
+    //初期値
+    showmoreList.css('height', '120px');
+    $('#hidemore_button').hide();
+
+    $('#showmore_button').click(function () {
+        let thisBtn = $(this);
+        showmoreTop = showmoreList.offset().top
+
+        thisBtn.hide();
+        $('#hidemore_button').show();
+        showmoreList.css('height', showmoreListOpen + 'px');
+    });
+
+    $('#hidemore_button').click(function () {
+        let thisBtn = $(this);
+        showmoreTop = showmoreList.offset().top
+
+        thisBtn.hide();
+        $('#showmore_button').show();
+        showmoreList.css('height', '120px');
+    });
+});
+</script>
 @endsection
