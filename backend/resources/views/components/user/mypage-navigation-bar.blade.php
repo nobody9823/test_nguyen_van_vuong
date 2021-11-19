@@ -34,6 +34,9 @@
             <div class="pbb_01_link">プロフィール編集<i class="fas fa-chevron-right"></i>
                 <a href="{{ route('user.profile') }}" class="cover_link"></a>
             </div>
+            <div class="pbb_01_link">銀行口座<i class="fas fa-chevron-right"></i>
+                <a href="{{ route('user.bank_account.edit') }}" class="cover_link"></a>
+            </div>
             <div class="pbb_01_link">退会について<i class="fas fa-chevron-right"></i>
                 <a href="{{ route('user.withdraw') }}" class="cover_link"></a>
             </div>

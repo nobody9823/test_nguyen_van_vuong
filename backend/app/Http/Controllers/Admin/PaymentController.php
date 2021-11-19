@@ -6,13 +6,16 @@ use App\Actions\CardPayment\CardPaymentInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AlterTranRequest;
 use App\Models\Payment;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Services\Project\RemittanceService;
 
 class PaymentController extends Controller
 {
-    public function __construct(CardPaymentInterface $card_payment_interface)
+    public function __construct(CardPaymentInterface $card_payment_interface, RemittanceService $remittance)
     {
         $this->card_payment = $card_payment_interface;
+        $this->remittance = $remittance;
     }
     /**
      * Display a listing of the resource.
@@ -143,6 +146,10 @@ class PaymentController extends Controller
     public function alterSales(AlterTranRequest $request)
     {
         $payments = Payment::find($request->payments);
+        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($payments, 'AUTH');
+        if ($result['status']) {
+            return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
+        }
         foreach ($payments as $payment) {
             $this->card_payment->alterSales($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
         }
@@ -152,6 +159,10 @@ class PaymentController extends Controller
     public function alterCancel(AlterTranRequest $request)
     {
         $payments = Payment::find($request->payments);
+        $result = $this->remittance->IsExistsPaymentsJobCdConditions($payments, 'VOID');
+        if ($result['status']) {
+            return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
+        }
         foreach ($payments as $payment) {
             $this->card_payment->refund($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
         }

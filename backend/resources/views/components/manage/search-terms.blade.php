@@ -10,25 +10,35 @@
         aria-controls="collapseFilter">
         検索条件▼
     </span>
-    @if(Request::get('project'))
-        <a class="btn btn-sm btn-outline-success ml-4" href={{route($role.'.'.$model.'.index', ['project' => Request::get('project')])}}>プロジェクトを維持したまま検索条件をクリア</a>
+    @if($project)
+        <a class="btn btn-sm btn-outline-success ml-4" href={{route($role.'.'.$model.'.index', ['project' => $project->id])}}>プロジェクトを維持したまま検索条件をクリア</a>
     @endif
     <a class="btn btn-sm btn-outline-primary ml-4" href={{route($role.'.'.$model.'.index')}}>すべての検索条件をクリア</a>
 </div>
 <div class="collapse show" id="collapseSearchFilter">
-    @if(Request::get('word'))
-    <div class="card-header d-flex align-items-center">
-        検索ワード :
-        <div class="flex-grow-1">
-            【{{ Request::get('word') }}】
-        </div>
-    </div>
-    @endif
     @if($project)
     <div class="card-header d-flex align-items-center">
         プロジェクトタイトル :
         <div class="flex-grow-1">
-            【{{ $project->title }}】
+            【{{ $project->title }}】<a class="btn btn-sm btn-outline-secondary ml-4" href={{route($role.'.project.index', ['project' => $project->id])}}>{{ $project->display_id }}</a>
+        </div>
+    </div>
+    @endif
+    @if(Request::get('release_statuses'))
+    <div class="card-header d-flex align-items-center">
+        掲載状態 :
+        <div class="flex-grow-1">
+            @foreach(Request::get('release_statuses') as $release_status)
+            【{{ ProjectReleaseStatus::fromValue($release_status) }}】
+            @endforeach
+        </div>
+    </div>
+    @endif
+    @if(Request::get('release_period'))
+    <div class="card-header d-flex align-items-center">
+        掲載期間 :
+        <div class="flex-grow-1">
+            【{{ App\Enums\ProjectReleasePeriod::fromValue(Request::get('release_period')) }}】
         </div>
     </div>
     @endif
@@ -45,6 +55,14 @@
         並び替え条件 :
         <div class="flex-grow-1">
             【{{ config('sort')[Request::get('sort_type')]}}】
+        </div>
+    </div>
+    @endif
+    @if(Request::get('word'))
+    <div class="card-header d-flex align-items-center">
+        検索ワード :
+        <div class="flex-grow-1">
+            【{{ Request::get('word') }}】
         </div>
     </div>
     @endif
