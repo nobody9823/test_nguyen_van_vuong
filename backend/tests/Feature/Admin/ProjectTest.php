@@ -141,7 +141,7 @@ class ProjectTest extends TestCase
             'release_status' => $this->project->release_status,
             'images' => [$file],
         ]);
-        $response->assertRedirect(route('admin.project.index'));
+        $response->assertRedirect(route('admin.project.index', ['project' => $this->project]));
     }
 
     /**
@@ -167,10 +167,10 @@ class ProjectTest extends TestCase
         $this->project->save();
         $this->project->plans()->saveMany(Plan::factory(5));
         $response = $this
-          ->actingAs($this->admin, 'admin')
-          ->actingAs($this->user)
-          ->from(route('admin.project.index'))
-          ->get(route('user.project_preview', ['project' => $this->project]));
+            ->actingAs($this->admin, 'admin')
+            ->actingAs($this->user)
+            ->from(route('admin.project.index'))
+            ->get(route('user.project_preview', ['project' => $this->project]));
         $response->assertOk();
         $response->assertViewIs('user.project.preview');
     }

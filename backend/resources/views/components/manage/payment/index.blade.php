@@ -22,14 +22,12 @@
         <div class="collapse" id="collapseExample" style="position: absolute; top: 55px; left: -100px;">
             <div class="card card-body">
                 <div class="form-group mb-2 flex-column">
-                    <div class="form-check flex-column">
-                        <div class="form-group">
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">オーダーID</span>
-                            </div>
-                            <input type="text" class="form-control" value="{{ Request::get('order_id') }}"
-                                name="order_id" id="order_id">
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">オーダーID</span>
                         </div>
+                        <input type="text" class="form-control" value="{{ Request::get('order_id') }}"
+                            name="order_id" id="order_id">
                     </div>
                     <div class="form-check flex-column">
                         <label>
@@ -170,15 +168,15 @@
                                 {{ PaymentJobCd::fromKey($payment->gmo_job_cd) }}
                             </p>
                         </td>
-                        <td>
+                        <td class="text-nowrap">
                             {{ $payment->created_at }}
                         </td>
                         <td>
-                            <a class="mt-1" data-toggle="modal"
-                                        data-target="#user_index{{ $payment->id }}">
+                            <a class="mt-1 text-nowrap" data-toggle="modal"
+                                        data-target="#support_user_index{{ $payment->user->id }}">
                                 {{ $payment->user->name }}
                             </a>
-                            <div class="modal fade" id="user_index{{ $payment->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="support_user_index{{ $payment->user->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="user_content_modal" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -191,8 +189,12 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>メールアドレス:<a href="mailto:{{ $payment->user->email }}">{{ $payment->user->email }}</a></p>
-                                            <p>電話番号:{{ optional($payment->user->profile)->phone_number }}</p>
+                                            <p>電話番号:
+                                                <a href="tel:{{ optional($payment->user->profile)->phone_number }}">
+                                                    {{ optional($payment->user->profile)->phone_number }}
+                                                </a>
+                                            </p>
+                                            <p>E-mail:<a href="mailto:{{ $payment->user->email }}">{{ $payment->user->email }}</a></p>
                                             <p>姓:{{ optional($payment->user->profile)->last_name }}</p>
                                             <p>名:{{ optional($payment->user->profile)->first_name }}</p>
                                             <p>姓(カナ):{{ optional($payment->user->profile)->last_name_kana }}</p>
@@ -220,15 +222,104 @@
                         <td>
                             {{ optional($payment->inviter)->name }}
                         </td>
-                        <td>
+                        <td class="text-nowrap">
                             {{ $payment->price }}円
                         </td>
                         <td>
-                            {{ $payment->project->user->name }}
+                            <a class="mt-1 text-nowrap" data-toggle="modal" data-target="#project_user_index{{ $payment->project->user->id }}">
+                                {{ $payment->project->user->name }}
+                            </a>
+                            <div class="modal fade" id="project_user_index{{ $payment->project->user->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="user_content_modal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="user_content_modal">
+                                                {{ $payment->project->user->name }}
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>電話番号:
+                                                <a href="tel:{{ optional($payment->project->user->profile)->phone_number }}">
+                                                    {{ optional($payment->project->user->profile)->phone_number }}
+                                                </a>
+                                            </p>
+                                            <p>Email:<a href="mailto:{{ $payment->project->user->email }}">{{ $payment->project->user->email }}</a></p>
+                                            <p>StripeのアカウントID: {{ optional($payment->project->user->identification)->connected_account_id }}</p>
+                                            <p>プロフィール画像:
+                                                <div class="text-center">
+                                                    <img style="max-height:15vw; object-fit: contain;"
+                                                        src="{{ Storage::url(optional($payment->project->user->profile)->image_url) }}">
+                                                </div>
+                                            </p>
+                                            <p>SNS:
+                                                <div class="d-flex justify-content-around">
+                                                    @if (optional($payment->project->user->snsLink)->twitter_url)
+                                                    <a href="{{ optional($payment->project->user->snsLink)->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt="" height="48px" width="48px"></a>
+                                                    @endif
+                                                    @if (optional($payment->project->user->snsLink)->instagram_url)
+                                                    <a href="{{ optional($payment->project->user->snsLink)->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt="" height="48px" width="48px"></a>
+                                                    @endif
+                                                    @if (optional($payment->project->user->snsLink)->youtube_url)
+                                                    <a href="{{ optional($payment->project->user->snsLink)->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt="" height="48px" width="48px"></a>
+                                                    @endif
+                                                    @if (optional($payment->project->user->snsLink)->tiktok_url)
+                                                    <a href="{{ optional($payment->project->user->snsLink)->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt="" height="48px" width="48px"></a>
+                                                    @endif
+                                                    @if (optional($payment->project->user->snsLink)->other_url)
+                                                    <a href="{{ optional($payment->project->user->snsLink)->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt="" height="48px" width="48px"></a>
+                                                    @endif
+                                                </div>
+                                            </p>
+                                            <p>姓:{{ optional($payment->project->user->profile)->last_name }}</p>
+                                            <p>名:{{ optional($payment->project->user->profile)->first_name }}</p>
+                                            <p>姓(カナ):{{ optional($payment->project->user->profile)->last_name_kana }}</p>
+                                            <p>名(カナ):{{ optional($payment->project->user->profile)->first_name_kana }}</p>
+                                            <p>生年月日:{{ optional($payment->project->user->profile)->birthday }}</p>
+                                            <p>公開状態:{{ optional($payment->project->user->profile)->birthday_is_published ?'公開中':'非公開中' }}</p>
+                                            <p>性別:{{ optional($payment->project->user->profile)->gender }}</p>
+                                            <p>公開状態:{{ optional($payment->project->user->profile)->gender_is_published ?'公開中':'非公開中' }}</p>
+                                            <p>紹介文:{{ optional($payment->project->user->profile)->introduction }}</p>
+                                            <p></p>
+                                            <p>郵便番号:{{ optional($payment->project->user->address)->postal_code }}</p>
+                                            <p>都道府県:{{ optional($payment->project->user->address)->prefecture }}</p>
+                                            <p>住所1(市町村など):{{ optional($payment->project->user->address)->city }}</p>
+                                            <p>住所2(丁目など):{{ optional($payment->project->user->address)->block }}</p>
+                                            <p>住所3(番地など):{{ optional($payment->project->user->address)->block_number }}</p>
+                                            <p>住所4(建物番号など):{{ optional($payment->project->user->address)->building }}</p>
+                                            <div class="card-header">本人確認項目</div>
+                                            <p>金融機関コード:{{ optional($payment->project->user->identification)->bank_code }}</p>
+                                            <p>支店コード:{{ optional($payment->project->user->identification)->branch_code }}</p>
+                                            <p>口座種別:{{ optional($payment->project->user->identification)->account_type }}</p>
+                                            <p>口座番号:{{ optional($payment->project->user->identification)->account_number }}</p>
+                                            <p>口座名義人名:{{ optional($payment->project->user->identification)->account_name }}</p>
+                                            <p>本人確認書類１:</p>
+                                            <span class="text-danger">※クリックすると画像をダウンロードできます。</span>
+                                            <div class="text-center">
+                                                <a class="text-center" href="{{ route('admin.user.download_identify_image', ['user' => $payment->project->user, 'column_name' => 'identify_image_1']) }}">
+                                                    <img style="max-height:15vw; object-fit: contain;"
+                                                        src="{{ Storage::url(optional($payment->project->user->identification)->identify_image_1) }}">
+                                                </a>
+                                            </div>
+                                            <p>本人確認書類２:</p>
+                                            <span class="text-danger">※クリックすると画像をダウンロードできます。</span>
+                                            <div class="text-center">
+                                                <a href="{{ route('admin.user.download_identify_image', ['user' => $payment->project->user, 'column_name' => 'identify_image_2']) }}">
+                                                    <img style="max-height:15vw; object-fit: contain;"
+                                                        src="{{ Storage::url(optional($payment->project->user->identification)->identify_image_2) }}">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                         @if(!Request::get('project'))
-                            <td>
-                                {{ $payment->project->title }}
+                            <td class="text-nowrap">
+                                {{ Str::limit($payment->project->title, 30) }}
                             </td>
                         @endif
                         <td>
