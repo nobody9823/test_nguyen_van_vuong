@@ -26,16 +26,26 @@
                         <div class="form_item_row">
                             <div class="form_item_tit">
                                 金融機関コード・銀行コード
-                                <br/>
-                                <span>
-                                    <a href="https://www.zenginkyo.or.jp/abstract/outline/organization/member-01/" target="_blank">
-                                        <i class="fas fa-external-link-alt"></i>
-                                        金融機関コードが不明な方はこちら
-                                    </a>
-                                </span>
+                                <input id="bankCode" type="number" name="bank_code" class="def_input_100p"
+                                    value="{{ old('bank_code', $bank_account ? $bank_account['Bank_Code'] : '') }}">
+                                <div class="ps_description">
+                                    <ul>
+                                        <li>みずほ銀行: 0001</li>
+                                        <li>三菱UFJ銀行: 0005</li>
+                                        <li>三井住友銀行: 0009</li>
+                                        <li>りそな銀行: 0010</li>
+                                        <li>楽天銀行: 0036</li>
+                                        <li>PayPay銀行: 0033</li>
+                                        <li>ゆうちょ銀行: 9900</li>
+                                    </ul>
+                                    <span>
+                                        <a href="https://www.zenginkyo.or.jp/abstract/outline/organization/member-01/" target="_blank">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            その他の金融機関コードはこちら
+                                        </a>
+                                    </span>
+                                </div>
                             </div>
-                            <input id="bankCode" type="number" name="bank_code" class="def_input_100p"
-                                value="{{ old('bank_code', $bank_account ? $bank_account['Bank_Code'] : '') }}">
                         </div>
 
                         <div class="form_item_row">
