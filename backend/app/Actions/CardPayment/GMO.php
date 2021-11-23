@@ -39,15 +39,19 @@ class GMO implements CardPaymentInterface
      */
     public function execTran(string $payment_method_id, string $access_id, string $access_pass, string $order_id): object
     {
-        $exec_response = Http::retry(5, 100)->post(config('app.gmo_exec_payment_url'), [
-            'accessID' => $access_id,
-            'accessPass' => $access_pass,
-            'orderID' => $order_id,
-            'method' => '1',
-            'token' => $payment_method_id,
-        ]);
-
-        return $exec_response;
+        try {
+            $exec_response = Http::retry(5, 100)->post(config('app.gmo_exec_payment_url'), [
+                'accessID' => $access_id,
+                'accessPass' => $access_pass,
+                'orderID' => $order_id,
+                'method' => '1',
+                'token' => $payment_method_id,
+            ]);
+            return $exec_response;
+        } catch (Exception $e) {
+            Log::alert($e->getMessage());
+            return response('決済処理に失敗しました。もう一度カード番号の入力とリターンを選択してください。', 400);
+        }
     }
 
     /**

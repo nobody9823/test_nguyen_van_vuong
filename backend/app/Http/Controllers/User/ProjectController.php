@@ -271,6 +271,9 @@ class ProjectController extends Controller
             ->entryTran($payment_without_globalscope->price, $order_id);
         $exec_response = $this->card_payment
             ->execTran($payment_without_globalscope->paymentToken->order_id, $entry_response['accessID'], $entry_response['accessPass'], $order_id);
+        if ($exec_response->status() === 400) {
+            return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors($exec_response->content());
+        }
         DB::beginTransaction();
         try {
             $payment_without_globalscope->payment_is_finished = true;
