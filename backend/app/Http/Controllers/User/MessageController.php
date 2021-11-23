@@ -20,8 +20,8 @@ class MessageController extends Controller
 
     public function index(Payment $selected_message = null)
     {
-        $chating_messages = Payment::where('user_id', Auth::id())->messaging()->seeking()->orderBy('updated_at', 'desc')->get();
-        $not_chating_messages = Payment::where('user_id', Auth::id())->notMessaging()->seeking()->orderBy('updated_at', 'desc')->get();
+        $chating_messages = Payment::where('user_id', Auth::id())->messaging()->orderBy('updated_at', 'desc')->get();
+        $not_chating_messages = Payment::where('user_id', Auth::id())->notMessaging()->orderBy('updated_at', 'desc')->get();
         return view('user.mypage.message.index', [
             'chating_messages' => $chating_messages,
             'not_chating_messages' => $not_chating_messages,
@@ -60,8 +60,8 @@ class MessageController extends Controller
     public function indexByExecutor(Project $project, Payment $selected_message = null)
     {
         $this->authorize('checkOwnProject', $project);
-        $chating_messages = Payment::where('project_id', $project->id)->messaging()->seeking()->orderBy('updated_at', 'desc')->get();
-        $not_chating_messages = Payment::where('project_id', $project->id)->notMessaging()->seeking()->orderBy('updated_at', 'desc')->get();
+        $chating_messages = Payment::where('project_id', $project->id)->messaging()->orderBy('updated_at', 'desc')->get();
+        $not_chating_messages = Payment::where('project_id', $project->id)->notMessaging()->orderBy('updated_at', 'desc')->get();
         return view('user.my_project.message.index', [
             'project' => $project,
             'chating_messages' => $chating_messages,
