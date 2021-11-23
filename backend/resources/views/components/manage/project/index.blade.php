@@ -120,8 +120,8 @@
                         <th scope="col" width="10%" class="text-nowrap">インフルエンサー</th>
                         <th scope="col" width="10%" class="text-nowrap">目標金額</th>
                         <th scope="col" width="10%" class="text-nowrap">達成金額</th>
-                        <th scope="col" width="10%" class="text-nowrap">手数料</th>
-                        <th scope="col" width="10%" class="text-nowrap">オプション料金</th>
+                        <th scope="col" width="10%" class="text-nowrap">FR売上(20%)</th>
+                        <th scope="col" width="10%" class="text-nowrap">プロジェクト経費</th>
                         <th scope="col" width="10%" class="text-nowrap">合計支払い金額</th>
                         <th scope="col" width="10%" class="text-nowrap">キュレーター</th>
                         <th scope="col" width="10%" class="text-nowrap">詳細</th>
@@ -171,7 +171,7 @@
                                 <form action="{{ route('admin.project.remittance', ['project' => $project]) }}" method="POST">
                                     @csrf
                                     <button class="btn btn-outline-danger" type="submit" onclick="return confirm('本当に送金してもよろしいでしょうか。')">
-                                        送金実行
+                                        送金実行する
                                     </button>
                                 </form>
                             @endif
@@ -213,6 +213,7 @@
                                                                 <th scope="col" width="10%" class="text-nowrap">送金ID</th>
                                                                 <th scope="col" width="10%" class="text-nowrap">送金金額</th>
                                                                 <th scope="col" width="10%" class="text-nowrap">送金状況</th>
+                                                                <th scope="col" width="10%" class="text-nowrap">送金実行日</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -232,6 +233,7 @@
                                                                         </form>
                                                                     @endif
                                                                 </td>
+                                                                <td class="text-center">{{ $deposit->gmo_deposit_date === "" ? "---" : $deposit->gmo_deposit_date }}</td>
                                                             </tr>
                                                             @endforeach
                                                         </tbody>

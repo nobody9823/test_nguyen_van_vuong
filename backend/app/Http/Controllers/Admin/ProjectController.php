@@ -71,6 +71,7 @@ class ProjectController extends Controller
                     $response = $this->card_payment->searchRemittance($deposit->deposit_id);
                     $deposit->setAttribute('gmo_deposit_amount', $response['Amount']);
                     $deposit->setAttribute('gmo_deposit_result', $response['bank']['Result']);
+                    $deposit->setAttribute('gmo_deposit_date', $response['bank']['Deposit_Date']);
                 });
                 $project->setAttribute(
                     'succeed_sum_deposits_amount',
