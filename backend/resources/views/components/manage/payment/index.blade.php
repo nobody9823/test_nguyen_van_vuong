@@ -163,7 +163,7 @@
                             <p class="text-nowrap
                                 {{ $payment->gmo_job_cd === 'AUTH' ? 'text-secondary' : '' }}
                                 {{ $payment->gmo_job_cd === 'SALES' ? 'text-success' : '' }}
-                                {{ $payment->gmo_job_cd === 'VOID' ? 'text-danger' : '' }}
+                                {{ $payment->gmo_job_cd === 'VOID' || $payment->gmo_job_cd === 'RETURN' || $payment->gmo_job_cd === 'RETURNX' ? 'text-danger' : '' }}
                             ">
                                 {{ PaymentJobCd::fromKey($payment->gmo_job_cd) }}
                             </p>
