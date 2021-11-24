@@ -27,7 +27,8 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $payments = Payment::search()
+        $payments = Payment::withoutGlobalScopes()
+            ->search()
             ->narrowDownPaymentOrderId()
             ->narrowDownWithProject()
             ->narrowDownByDate()
