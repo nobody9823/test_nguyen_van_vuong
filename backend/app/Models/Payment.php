@@ -109,6 +109,7 @@ class Payment extends Model
                 $query->where(function ($query) use ($word) {
                     $query->whereIn('user_id', User::select('id')->where('name', 'like', "%$word%"))
                         ->orWhereIn('inviter_id', User::select('id')->where('name', 'like', "%$word%"))
+                        ->orWhereIn('id', PaymentToken::select('payment_id')->where('order_id', 'like', "%$word%"))
                         ->orWhereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->whereIn('project_id', Project::select('id')->where('title', 'like', "%$word%"))))
                         ->orWhereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->where('title', 'like', "%$word%")));
                 });
