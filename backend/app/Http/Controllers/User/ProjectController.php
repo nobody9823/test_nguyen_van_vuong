@@ -238,7 +238,6 @@ class ProjectController extends Controller
                 $comment = $this->comment->fill(['project_id' =>  $project->id, 'content' => $validated_request['comments']]);
                 $this->user->comments()->save($comment);
             }
-            $this->plan->updatePlansByIds($plans, $validated_request['plans']);
             $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
             $payment->paymentToken()->save(PaymentToken::make([
                 'order_id' => !empty($validated_request['payment_method_id']) ? $validated_request['payment_method_id'] : $unique_token,
@@ -273,6 +272,7 @@ class ProjectController extends Controller
             ->execTran($payment_without_globalscope->paymentToken->order_id, $entry_response['accessID'], $entry_response['accessPass'], $order_id);
         DB::beginTransaction();
         try {
+            $payment_without_globalscope->decrementIncludedPlansQuantity();
             $payment_without_globalscope->payment_is_finished = true;
             $payment_without_globalscope->paymentToken->order_id = $exec_response['orderID'];
             $payment_without_globalscope->paymentToken->access_id = $entry_response['accessID'];

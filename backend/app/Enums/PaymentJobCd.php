@@ -15,4 +15,6 @@ final class PaymentJobCd extends Enum
     const AUTH = '仮売上';
     const SALES = '実売上';
     const VOID = 'キャンセル';
+    const RETURN = 'キャンセル';
+    const RETURNX = 'キャンセル';
 }

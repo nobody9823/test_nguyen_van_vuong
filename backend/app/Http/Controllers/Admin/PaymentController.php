@@ -9,6 +9,9 @@ use App\Models\Payment;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Services\Project\RemittanceService;
+use DB;
+use Exception;
+use Log;
 
 class PaymentController extends Controller
 {
@@ -24,7 +27,8 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $payments = Payment::search()
+        $payments = Payment::withoutGlobalScopes()
+            ->search()
             ->narrowDownPaymentOrderId()
             ->narrowDownWithProject()
             ->narrowDownByDate()
@@ -163,8 +167,18 @@ class PaymentController extends Controller
         if ($result['status']) {
             return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
         }
-        foreach ($payments as $payment) {
-            $this->card_payment->refund($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
+        DB::beginTransaction();
+        try {
+            foreach ($payments as $payment) {
+                $payment->offsetUnset('gmo_job_cd');
+                $payment->update(['payment_is_finished' => false]);
+                $this->card_payment->refund($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
+            }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::alert($e->getMessage());
+            return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors('売上キャンセルに失敗しました。管理者にご確認ください。');
         }
         return redirect()->route('admin.payment.index', ['project' => $request->project])->with('flash_message', '売上キャンセルに成功しました。');
     }
