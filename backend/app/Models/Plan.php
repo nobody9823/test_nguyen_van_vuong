@@ -131,20 +131,6 @@ class Plan extends Model
         return $query->getPlansByIds($plan_ids)->lockForUpdate();
     }
 
-    public function scopeUpdatePlansByIds($query, Collection $plans, array $plan_ids)
-    {
-        foreach ($plans as $plan) {
-            if ($plan->limit_of_supporters_is_required === 1) {
-                foreach ($plan_ids as $key => $value) {
-                    if ($plan->id === $key) {
-                        $plan->limit_of_supporters -= $value['quantity'];
-                        $plan->save();
-                    }
-                }
-            }
-        }
-    }
-
     // NOTE:現状オプションは使用しない為、コメントアウト
     // public function saveOptions(Request $request): void
     // {
