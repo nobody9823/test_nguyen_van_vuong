@@ -6,6 +6,6 @@
         <div>ご支援ありがとうございます。</div>
         <div>あなたは、{{ $billing_users_count }}人目の支援者です。</div>
         <div>プロジェクト名 : {{ $project_title }}</div>
-        <div>支援ID : {{ $payment_id }}</div>
+        <div>オーダーID : {{ $payment_id }}</div>
     </p>
 @endsection
