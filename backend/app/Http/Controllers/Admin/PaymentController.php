@@ -68,7 +68,7 @@ class PaymentController extends Controller
                 if ($response->status() === 200) {
                     $payment->setAttribute('gmo_job_cd', $response['jobCd']);
                 } else {
-                    $payment->setAttribute('gmo_job_cd', 'DEFAULT');
+                    $payment->setAttribute('gmo_job_cd', 'FAILED');
                 }
             } else {
                 $payment->setAttribute('gmo_job_cd', 'DEFAULT');

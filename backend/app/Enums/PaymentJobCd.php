@@ -12,6 +12,7 @@ use BenSampo\Enum\Enum;
 final class PaymentJobCd extends Enum
 {
     const DEFAULT = '---';
+    const FAILED = '購入失敗';
     const AUTH = '仮売上';
     const SALES = '実売上';
     const VOID = 'キャンセル';
