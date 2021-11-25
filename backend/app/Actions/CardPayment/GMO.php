@@ -109,13 +109,17 @@ class GMO implements CardPaymentInterface
      */
     public function searchTrade(string $order_id): object
     {
-        $response = Http::retry(5, 100)->post(config('app.gmo_search_payment_url'), [
-            'shopID' => config('app.gmo_shop_id'),
-            'shopPass' => config('app.gmo_shop_pass'),
-            'orderID' => $order_id,
-        ]);
-
-        return $response;
+        try {
+            $response = Http::retry(5, 100)->post(config('app.gmo_search_payment_url'), [
+                'shopID' => config('app.gmo_shop_id'),
+                'shopPass' => config('app.gmo_shop_pass'),
+                'orderID' => $order_id,
+            ]);
+            return $response;
+        } catch (Exception $e) {
+            Log::alert($e->getMessage());
+            return response('決済検索に失敗しました。', 400);
+        }
     }
 
     /**
