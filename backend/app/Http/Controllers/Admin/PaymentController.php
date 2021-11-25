@@ -65,7 +65,11 @@ class PaymentController extends Controller
         $payments->map(function ($payment) {
             if ($payment->payment_way === 'GMO') {
                 $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
-                $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+                if ($response->status() === 200) {
+                    $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+                } else {
+                    $payment->setAttribute('gmo_job_cd', 'FAILED');
+                }
             } else {
                 $payment->setAttribute('gmo_job_cd', 'DEFAULT');
             }
