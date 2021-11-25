@@ -162,4 +162,14 @@ class Payment extends Model
         }
         return $this->price - $total_amount;
     }
+
+    public function decrementIncludedPlansQuantity()
+    {
+        foreach ($this->includedPlans as $includedPlan) {
+            if ($includedPlan->limit_of_supporters_is_required === 1) {
+                $includedPlan->limit_of_supporters -= $includedPlan->pivot->quantity;
+                $includedPlan->save();
+            }
+        }
+    }
 }
