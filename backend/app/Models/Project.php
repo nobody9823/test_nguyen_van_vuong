@@ -143,9 +143,9 @@ class Project extends Model
     {
         // 重複するuser_idを削除して、支援者数を算出する。
         $sub_query = Payment::selectRaw('count(distinct(`user_id`))')
-                    ->from('payments')
-                    ->whereColumn('projects.id','payments.project_id')
-                    ->toSql();
+            ->from('payments')
+            ->whereColumn('projects.id', 'payments.project_id')
+            ->toSql();
 
         return $query->selectRaw("`projects`.*,($sub_query) as `payments_count`")->withSum('payments', 'price');
     }
@@ -269,7 +269,7 @@ class Project extends Model
     {
         return $this->payments->groupBy('user_id')->count();
     }
-    
+
     public function getPaymentsCountWithinADayAttribute()
     {
         return $this->payments->where('created_at', '>=', Carbon::now()->subHours(24))->groupBy('user_id')->count();
@@ -289,13 +289,13 @@ class Project extends Model
 
     public function loadOtherRelations()
     {
-        $relationTables = ['comments','reports','payments'];
-        foreach($relationTables as $relationTable){
+        $relationTables = ['comments', 'reports', 'payments'];
+        foreach ($relationTables as $relationTable) {
             $this->load([$relationTable => function ($query) {
                 $query->orderBy('created_at', 'desc');
             }]);
         }
-        
+
         return $this;
     }
 
@@ -398,10 +398,10 @@ class Project extends Model
         // ユーザーがURLを入力していないor更新する際にURLが変更されていない場合
         if (optional($projectVideo)->file_url === null || optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === optional($projectVideo)->file_url) {
             return false;
-        // 新規作成の時or更新する際に動画のURLが存在しない場合
+            // 新規作成の時or更新する際に動画のURLが存在しない場合
         } elseif (optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === null && optional($projectVideo)->file_url !== null) {
             $this->projectFiles()->save($projectVideo);
-        // プロジェクト更新時に既に埋め込んでいるURLから別のURLに変更した場合
+            // プロジェクト更新時に既に埋め込んでいるURLから別のURLに変更した場合
         } elseif (optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url !== optional($projectVideo)->file_url) {
             $this->projectFiles()->where('file_content_type', 'video_url')->first()->delete();
             $this->projectFiles()->save($projectVideo);

@@ -61,33 +61,35 @@
 
                     {{-- 検索結果踏まえて送信する用フォーム --}}
 
-                    <div class="accordion js-accordion">
-                        {{-- チャット中プロジェクト --}}
-                        <div class="accordion__item js-accordion-trigger">
-                            @if ($chating_messages->isNotEmpty())
-                            <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>やりとりしている支援プロジェクト</p>
-                            @endif
-                            <div class="accordion__content">
-                                @foreach ($chating_messages as $message)
-                                <x-common.message.a_message_of_index :message="$message" guard='supporter'
-                                    :selectedMessage="isset($selected_message)?$selected_message:null" />
-                                @endforeach
+                    <div class="chat_wrapper">
+                        <div class="accordion js-accordion">
+                            {{-- チャット中プロジェクト --}}
+                            <div class="accordion__item js-accordion-trigger">
+                                @if ($chating_myprojects->isNotEmpty())
+                                <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>自分のプロジェクトから選択</p>
+                                @endif
+                                <div class="accordion__content">
+                                    @foreach ($chating_myprojects as $project)
+                                    <x-common.message.a_chat_project_of_index :project="$project"/>
+                                    @endforeach
+                                </div>
                             </div>
+                            {{-- チャット中プロジェクト --}}
                         </div>
-                        {{-- チャット中プロジェクト --}}
-
-                        {{-- 未チャットプロジェクト --}}
-                        <div class="accordion__item js-accordion-trigger">
-                            @if ($not_chating_messages->isNotEmpty())
-                            <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>やりとりしていない支援プロジェクト</p>
-                            @endif
-                            <div class="accordion__content">
-                                @foreach ($not_chating_messages as $message)
-                                <x-common.message.a_message_of_index :message="$message" guard='supporter'
-                                    :selectedMessage="isset($selected_message)?$selected_message:null" />
-                                @endforeach
+                        <div class="accordion js-accordion">
+                            {{-- チャット中プロジェクト --}}
+                            <div class="accordion__item js-accordion-trigger">
+                                @if ($chating_messages->isNotEmpty())
+                                <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>支援プロジェクトから選択</p>
+                                @endif
+                                <div class="accordion__content">
+                                    @foreach ($chating_messages as $message)
+                                    <x-common.message.a_message_of_index :message="$message" guard='supporter'
+                                        :selectedMessage="isset($selected_message)?$selected_message:null" />
+                                    @endforeach
+                                </div>
                             </div>
-                            {{-- 未チャットプロジェクト --}}
+                            {{-- チャット中プロジェクト --}}
                         </div>
                     </div>
 

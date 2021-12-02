@@ -20,11 +20,11 @@ class MessageController extends Controller
 
     public function index(Payment $selected_message = null)
     {
-        $chating_messages = Payment::where('user_id', Auth::id())->messaging()->orderBy('updated_at', 'desc')->get();
-        $not_chating_messages = Payment::where('user_id', Auth::id())->notMessaging()->orderBy('updated_at', 'desc')->get();
+        $chating_messages = Payment::where('user_id', Auth::id())->orderBy('updated_at', 'desc')->get();
+        $chating_myprojects = Project::where('user_id', Auth::id())->whereIn('id', Payment::select('project_id'))->get();
         return view('user.mypage.message.index', [
             'chating_messages' => $chating_messages,
-            'not_chating_messages' => $not_chating_messages,
+            'chating_myprojects' => $chating_myprojects,
             'selected_message' => $selected_message,
         ]);
     }

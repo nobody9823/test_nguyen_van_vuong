@@ -3158,3 +3158,8 @@ margin: 20px 0;
     line-height: 1.6;
     transition: all .3s ease-in;
 }
+
+.chat_wrapper {
+    display: flex;
+    flex-direction: column;
+}
