@@ -67,9 +67,16 @@ if(isiOS) {
 		</div>
 	</div>
 	<div id="header_03">
-		<input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
-		<label for="nav-tgl" class="open nav-tgl-btn"><span></span></label>
-		<label for="nav-tgl" class="close nav-tgl-btn"></label>
+        <a href="{{ route('user.message.index') }}" class="header_message_icon">
+            <i class="far fa-envelope"></i>
+            <span class="chat_unread_count">
+                327
+                {{-- {{ $message->message_contents_count }} --}}
+            </span>
+        </a>
+        <input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
+        <label for="nav-tgl" class="open nav-tgl-btn"><span></span></label>
+        <label for="nav-tgl" class="close nav-tgl-btn"></label>
 	</div>
 </div>
 
