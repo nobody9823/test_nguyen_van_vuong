@@ -24,7 +24,7 @@ class MessageContentRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => ['required', 'string'],
+            'content' => ['required', 'string', 'max:10000'],
             'file_path' => ['nullable', 'file'],
         ];
     }
@@ -34,6 +34,7 @@ class MessageContentRequest extends FormRequest
         return [
             'content.required' => "テキストを入力してください。",
             'content.string' => "テキストは文字で入力してください。",
+            'content.max' => "テキストは10000文字以内で入力してください。",
             'file_path.file' => "ファイルは指定されたものを使用してください。",
         ];
     }
