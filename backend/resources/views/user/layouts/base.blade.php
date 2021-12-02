@@ -176,7 +176,7 @@ if(isiOS) {
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.message.index') }}" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">メッセージ一覧</p>
+					<p class="nav_btn_tit_L">ダイレクトメッセージ一覧</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_06">

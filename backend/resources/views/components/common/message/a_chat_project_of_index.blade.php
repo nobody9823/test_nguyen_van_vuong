@@ -3,7 +3,7 @@
     data-href={{ route('user.my_project.message.index', ['project' => $project]) }}
 >
     <div class="unread_mark_parent">
-        {{-- <x-common.message.unread_mark :guard="$guard" :message="$message" /> --}}
+        <x-common.message.unread_mark :guard="$guard" :message="$project" />
         {{$project->payments()->latest()->first()->updated_at->format('Y/m/d H:i:s')}}<br>
         【{{Str::limit($project->title,40)}}】
     </div>

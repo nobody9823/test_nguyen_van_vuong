@@ -25,7 +25,7 @@
             {{-- <div class="pbb_01_link">投稿コメント一覧<i class="fas fa-chevron-right"></i>
                 <a href="{{ route('user.contribution_comments') }}" class="cover_link"></a>
             </div> --}}
-            <div class="pbb_01_link">メッセージ一覧<i class="fas fa-chevron-right"></i>
+            <div class="pbb_01_link">ダイレクトメッセージ一覧<i class="fas fa-chevron-right"></i>
                 <a href="{{ route('user.message.index') }}" class="cover_link"></a>
             </div>
         </div>

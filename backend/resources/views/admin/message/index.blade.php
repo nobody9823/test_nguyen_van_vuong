@@ -1,5 +1,5 @@
 @extends('admin.layouts.base')
-@section('title', 'メッセージ一覧')
+@section('title', 'ダイレクトメッセージ一覧')
 @section('content')
 <div class="content">
     <div class="section">
@@ -13,7 +13,7 @@
                                 <div class="text-left">
                                     <form name='form_to_keep_request' action="">
                                         <x-common.add_hidden_query />
-                                        メッセージ一覧(新着順) 全{{count($chating_messages) + count($not_chating_messages)}}件<br>
+                                        ダイレクトメッセージ一覧(新着順) 全{{count($chating_messages) + count($not_chating_messages)}}件<br>
                                         絞り込み状況 :
                                         @if (Request::query())
                                         <a class="btn btn-sm btn-primary"
@@ -55,12 +55,12 @@
                                 </div>
                                 @else
 
-                                {{-- 左側メッセージ一覧部分 --}}
+                                {{-- 左側ダイレクトメッセージ一覧部分 --}}
                                 <div class="col-sm-4 chat_group_list" style="height:100vh; overflow-y:scroll;">
 
                                     {{-- チャット中リターン --}}
                                     @if ($chating_messages->isNotEmpty())
-                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>やりとり中支援リターン</p>
+                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>ダイレクトメッセージ中支援リターン</p>
                                     @endif
                                     @foreach ($chating_messages as $message)
                                     <x-common.message.a_message_of_index :message="$message" guard='admin'
@@ -70,7 +70,7 @@
 
                                     {{-- 未チャットリターン --}}
                                     @if ($not_chating_messages->isNotEmpty())
-                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>やりとりしていない支援リターン
+                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>ダイレクトメッセージしていない支援リターン
                                     </p>
                                     @endif
                                     @foreach ($not_chating_messages as $message)
@@ -84,7 +84,7 @@
                                         <a class="btn btn-info" style="display: none" id="closed_btn">閉じる</a>
                                     </div>
                                 </div>
-                                {{-- 左側メッセージ一覧部分 --}}
+                                {{-- 左側ダイレクトメッセージ一覧部分 --}}
 
                                 {{-- 選択によって変わるメッセージ部分 --}}
                                 <div class="col-sm-8">

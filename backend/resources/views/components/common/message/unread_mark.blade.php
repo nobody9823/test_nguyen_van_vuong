@@ -3,13 +3,15 @@
 @switch($guard)
 @case('executor')
 @if ($message->messageContents()->checkReadByExecutor())
-<span style="display:inline-block;width: 12px;height: 12px;border-radius: 50%;background-color:red;">
+<span class="chat_unread_count">
+    {{ $message->message_contents_count }}
 </span>
 @endif
 @break
 @case('supporter')
 @if ($message->messageContents()->checkReadBySupporter())
-<span style="width: 12px;height: 12px;border-radius: 50%;background-color:red;">
+<span class="chat_unread_count">
+    {{ $message->message_contents_count }}
 </span>
 @endif
 @break

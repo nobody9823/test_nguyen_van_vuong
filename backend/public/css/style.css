@@ -3163,3 +3163,13 @@ margin: 20px 0;
     display: flex;
     flex-direction: column;
 }
+
+.chat_unread_count {
+    display:inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color:red;
+    color: white;
+    text-align: center;
+}

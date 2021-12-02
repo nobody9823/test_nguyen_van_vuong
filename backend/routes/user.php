@@ -79,8 +79,8 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::delete('/withdraw/{user}', [MypageController::class, 'deleteUser'])->name('delete_user');
     Route::post('update_external_account', [MypageController::class, 'updateExternalAccount'])->name('update_external_account');
 
-    //---------------------メッセージ一覧-----------------------------------------------
-    Route::get('message/{selected_message?}', [MessageController::class, 'index'])->name('message.index');
+    //---------------------ダイレクトメッセージ一覧-----------------------------------------------
+    Route::get('message_index/{selected_message?}', [MessageController::class, 'index'])->name('message.index');
     Route::get('message/{payment}', [MessageController::class, 'show'])->name('message.show');
     Route::post('message/{payment}', [MessageController::class, 'store'])->name('message_content.store');
     Route::get('message/{message_content}/file_download', [MessageController::class, 'fileDownload'])->name('message_content.file_download');

@@ -1,6 +1,6 @@
 @extends('user.layouts.base')
 
-@section('title', '支援者とのやりとり')
+@section('title', '支援者とのダイレクトメッセージ')
 
 @section('css')
 <style type="text/css">
@@ -13,8 +13,8 @@
 @section('content')
 <section id="supported-projects" class="section_base">
     <div class="tit_L_01 E-font">
-        <h2>MESSAGE TO SUPPORTERS</h2>
-        <div class="sub_tit_L">支援者とのやりとり</div>
+        <h2>DIRECT MESSAGE TO SUPPORTERS</h2>
+        <div class="sub_tit_L">支援者とのダイレクトメッセージ</div>
     </div>
     <div class="prof_page_base inner_item">
         <div class="prof_page_L">
@@ -34,14 +34,14 @@
                     <div class="message_container__body">
                         <div class="message_container__body-menu">
                             <p class="message_container_menu is-pc">
-                                メッセージ一覧
+                                ダイレクトメッセージ一覧
                                 @if (Request::get('message_word'))
                                 検索ワード:{{ Request::get("message_word") }}
                                 @endif
                             </p>
 
                     <button class="message_container_menu is-sp">
-                        メッセージ一覧を見る
+                        ダイレクトメッセージ一覧を見る
                         @if (Request::get('message_word'))
                         検索ワード:{{ Request::get("message_word") }}
                         @endif
@@ -72,7 +72,14 @@
                         {{-- チャット中の支援者 --}}
                         <div class="accordion__item js-accordion-trigger">
                             @if ($chating_messages->isNotEmpty())
-                            <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>やりとりしている支援者</p>
+                            <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>
+                                ダイレクトメッセージしている支援者
+                                @if($chating_messages->sum('message_contents_count') !== 0)
+                                <span class="chat_unread_count">
+                                    {{ $chating_messages->sum('message_contents_count') }}
+                                </span>
+                                @endif
+                            </p>
                             @endif
                             <div class="accordion__content">
                                 @foreach ($chating_messages as $message)
@@ -86,7 +93,14 @@
                         {{-- 未チャットの支援者 --}}
                         <div class="accordion__item js-accordion-trigger">
                             @if ($not_chating_messages->isNotEmpty())
-                            <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>やりとりしていない支援者</p>
+                            <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>
+                                ダイレクトメッセージしていない支援者
+                                @if($not_chating_messages->sum('message_contents_count') !== 0)
+                                <span class="chat_unread_count">
+                                    {{ $not_chating_messages->sum('message_contents_count') }}
+                                </span>
+                                @endif
+                            </p>
                             @endif
                             <div class="accordion__content">
                                 @foreach ($not_chating_messages as $message)
@@ -128,7 +142,7 @@
     //     console.log(target);
     //     if (target.classList.contains('open')) {
     //         target.classList.remove('active');
-    //         target.replaceChild(document.createTextNode("メッセージ一覧"),target.firstChild);
+    //         target.replaceChild(document.createTextNode("ダイレクトメッセージ一覧"),target.firstChild);
     //         document.getElementsByClassName('chat_group_list').classList.remove("open");
     //         document.getElementsByClassName('chat_group_list__background').classList.remove("open");
     //     } else {
@@ -147,7 +161,7 @@
             message_container_menu = document.getElementsByClassName('message_container_menu')[0];
             chat_group_list = document.getElementsByClassName('chat_group_list')[0];
             message_container_menu.classList.remove('active');
-            message_container_menu.replaceChild(document.createTextNode("メッセージ一覧"),message_container_menu.firstChild);
+            message_container_menu.replaceChild(document.createTextNode("ダイレクトメッセージ一覧"),message_container_menu.firstChild);
             chat_group_list.classList.remove("open");
         }
     }

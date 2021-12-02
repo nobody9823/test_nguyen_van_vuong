@@ -131,6 +131,11 @@ class Project extends Model
         return $this->belongsTo('App\Models\Curator', 'curator_id');
     }
 
+    public function messageContents()
+    {
+        return $this->hasManyThrough('App\Models\MessageContent', 'App\Models\Payment');
+    }
+
     //--------------local scope----------------//
 
     public function scopeGetReleasedProject($query)
@@ -245,6 +250,14 @@ class Project extends Model
         }
     }
 
+    public function scopeWithNotReadByExecutor($query)
+    {
+        return $query->withCount(['messageContents' => function ($query) {
+            $query->notReadByExecutor();
+        }])->with(['payments' => function ($query) {
+            $query->withCountNotReadByExecutor();
+        }]);
+    }
     //--------------local scope----------------//
 
 
