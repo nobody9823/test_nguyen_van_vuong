@@ -80,7 +80,7 @@
                             {{-- チャット中プロジェクト --}}
                             <div class="accordion__item js-accordion-trigger">
                                 @if ($chating_messages->isNotEmpty())
-                                <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>支援プロジェクトから選択</p>
+                                <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>支援したプロジェクトから選択</p>
                                 @endif
                                 <div class="accordion__content">
                                     @foreach ($chating_messages as $message)
