@@ -66,6 +66,10 @@
 
 </form>
 
+<script type="text/javascript">
+    let target = document.getElementById('scroll-inner');
+    target.scrollIntoView(false);
+</script>
 
 @section('css')
 @stack('temporary_css')
