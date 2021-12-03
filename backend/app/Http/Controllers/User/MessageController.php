@@ -25,9 +25,9 @@ class MessageController extends Controller
         return view('user.mypage.message.index', [
             'chating_messages' => $chating_messages,
             'chating_myprojects' => $chating_myprojects,
-            'selected_message' => $selected_message->load(['messageContents' => function ($query) {
+            'selected_message' => $selected_message ? $selected_message->load(['messageContents' => function ($query) {
                 $query->orderBy('created_at', 'asc');
-            }]),
+            }]) : $selected_message,
         ]);
     }
 
@@ -68,9 +68,9 @@ class MessageController extends Controller
             'project' => $project,
             'chating_messages' => $chating_messages,
             'not_chating_messages' => $not_chating_messages,
-            'selected_message' => $selected_message->load(['messageContents' => function ($query) {
+            'selected_message' => $selected_message ? $selected_message->load(['messageContents' => function ($query) {
                 $query->orderBy('created_at', 'asc');
-            }]),
+            }]) : $selected_message,
         ]);
     }
 
