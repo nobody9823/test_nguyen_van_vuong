@@ -20,12 +20,14 @@ class MessageController extends Controller
 
     public function index(Payment $selected_message = null)
     {
-        $chating_messages = Payment::where('user_id', Auth::id())->messaging()->orderBy('updated_at', 'desc')->get();
-        $not_chating_messages = Payment::where('user_id', Auth::id())->notMessaging()->orderBy('updated_at', 'desc')->get();
+        $chating_messages = Payment::where('user_id', Auth::id())->withCountNotRead("支援者")->orderBy('updated_at', 'desc')->get();
+        $chating_myprojects = Project::where('user_id', Auth::id())->withNotReadByExecutor()->get();
         return view('user.mypage.message.index', [
             'chating_messages' => $chating_messages,
-            'not_chating_messages' => $not_chating_messages,
-            'selected_message' => $selected_message,
+            'chating_myprojects' => $chating_myprojects,
+            'selected_message' => $selected_message ? $selected_message->load(['messageContents' => function ($query) {
+                $query->orderBy('created_at', 'asc');
+            }]) : $selected_message,
         ]);
     }
 
@@ -42,9 +44,9 @@ class MessageController extends Controller
     public function show(Payment $payment)
     {
         $this->authorize('checkOwnedBySupporter', $payment);
-        $payment->messageContents()->readBySupporter();
-        $selected_message = $payment;
-        return redirect()->action([MessageController::class, 'index'], ['selected_message' => $selected_message]);
+        $payment->messageContents()->read("支援者");
+        $payment->refresh();
+        return redirect()->action([MessageController::class, 'index'], ['selected_message' => $payment]);
     }
 
     public function fileDownload(MessageContent $message_content)
@@ -60,13 +62,15 @@ class MessageController extends Controller
     public function indexByExecutor(Project $project, Payment $selected_message = null)
     {
         $this->authorize('checkOwnProject', $project);
-        $chating_messages = Payment::where('project_id', $project->id)->messaging()->orderBy('updated_at', 'desc')->get();
-        $not_chating_messages = Payment::where('project_id', $project->id)->notMessaging()->orderBy('updated_at', 'desc')->get();
+        $chating_messages = Payment::where('project_id', $project->id)->messaging()->withCountNotRead("実行者")->orderBy('updated_at', 'desc')->get();
+        $not_chating_messages = Payment::where('project_id', $project->id)->notMessaging()->withCountNotRead("実行者")->orderBy('updated_at', 'desc')->get();
         return view('user.my_project.message.index', [
             'project' => $project,
             'chating_messages' => $chating_messages,
             'not_chating_messages' => $not_chating_messages,
-            'selected_message' => $selected_message,
+            'selected_message' => $selected_message ? $selected_message->load(['messageContents' => function ($query) {
+                $query->orderBy('created_at', 'asc');
+            }]) : $selected_message,
         ]);
     }
 
@@ -83,9 +87,9 @@ class MessageController extends Controller
     public function showByExecutor(Payment $payment)
     {
         $this->authorize('checkOwnedByExecutor', $payment);
-        $payment->messageContents()->readByExecutor();
-        $selected_message = $payment;
-        return redirect()->action([MessageController::class, 'indexByExecutor'], ['project' => $selected_message->project, 'selected_message' => $selected_message]);
+        $payment->messageContents()->read("実行者");
+        $payment->refresh();
+        return redirect()->action([MessageController::class, 'indexByExecutor'], ['project' => $payment->project, 'selected_message' => $payment]);
     }
 
     public function fileDownloadByExecutor(MessageContent $message_content)

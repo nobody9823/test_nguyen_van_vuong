@@ -77,6 +77,13 @@ class Payment extends Model
         return $query->whereNotIn('id', MessageContent::select('payment_id'));
     }
 
+    public function scopeWithCountNotRead($query, $guard)
+    {
+        return $query->withCount(['messageContents' => function ($query) use ($guard) {
+            $query->notRead($guard);
+        }]);
+    }
+
     public function scopeSeeking($query)
     {
         return $query->whereIn(
