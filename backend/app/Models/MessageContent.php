@@ -28,33 +28,23 @@ class MessageContent extends Model
         return $this->belongsTo(Payment::class, 'payment_id');
     }
 
-    public function scopeNotReadBySupporter($query)
+    public function scopeNotRead($query, $guard)
     {
-        return $query->whereIn('message_contributor', ['実行者', '管理者'])->where('is_read', false);
+        switch ($guard) {
+            case "支援者":
+                return $query->whereIn('message_contributor', ['実行者', '管理者'])->where('is_read', false);
+            case "実行者":
+                return $query->where('message_contributor', '支援者')->where('is_read', false);
+        }
     }
 
-    public function scopeNotReadByExecutor($query)
+    public function scopeRead($query, $guard)
     {
-        return $query->where('message_contributor', '支援者')->where('is_read', false);
+        return $query->notRead($guard)->update(['is_read' => true]);
     }
 
-    public function scopeReadBySupporter($query)
+    public function scopeCheckRead($query, $guard)
     {
-        return $query->notReadBySupporter()->update(['is_read' => true]);
-    }
-
-    public function scopeReadByExecutor($query)
-    {
-        return $query->notReadByExecutor()->update(['is_read' => true]);
-    }
-
-    public function scopeCheckReadBySupporter($query)
-    {
-        return $query->notReadBySupporter()->exists();
-    }
-
-    public function scopeCheckReadByExecutor($query)
-    {
-        return $query->notReadByExecutor()->exists();
+        return $query->notRead($guard)->exists();
     }
 }

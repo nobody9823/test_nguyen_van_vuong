@@ -253,9 +253,9 @@ class Project extends Model
     public function scopeWithNotReadByExecutor($query)
     {
         return $query->withCount(['messageContents' => function ($query) {
-            $query->notReadByExecutor();
+            $query->notRead("実行者");
         }])->with(['payments' => function ($query) {
-            $query->withCountNotReadByExecutor();
+            $query->withCountNotRead("実行者");
         }]);
     }
     //--------------local scope----------------//
