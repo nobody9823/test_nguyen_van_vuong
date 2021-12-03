@@ -14,9 +14,6 @@
         @endif
     </div>
     <div>
-        @if($guard === 'supporter')
-            【{{$message->project->user->name}}】
-        @endif
         【{{$message->user->name}}】
     </div>
 </div>
