@@ -26,7 +26,7 @@
             @endif
             {{-- ガードがuserなら'あなた'表記 --}}
             <span
-                style="font-weight: normal;color: gray;font-size: 80%;">{{$messageContent->payment->updated_at}}</span>
+                style="font-weight: normal;color: gray;font-size: 80%;">{{$messageContent->created_at}}</span>
         </div>
         @if ($guard === 'admin')
         <div class="icons">

@@ -31,16 +31,16 @@ class ProjectPolicy
 
     public function checkOwnProjectWithPublishedStatus(User $user, Project $project)
     {
-        if(($project->release_status === "---" || $project->release_status === "差し戻し") &&  ($user->id === $project->user_id)) {
+        if (($project->release_status === "---" || $project->release_status === "差し戻し") &&  ($user->id === $project->user_id)) {
             return true;
         } else {
             return false;
         }
     }
-    
+
     public function checkOwnProjectWithPublishedStatusForRepoert(User $user, Project $project)
     {
-        if(($project->release_status === "掲載中" || $project->release_status === "掲載停止中") && ($user->id === $project->user_id)) {
+        if (($project->release_status === "掲載中" || $project->release_status === "掲載停止中") && ($user->id === $project->user_id)) {
             return true;
         } else {
             return false;
@@ -49,16 +49,12 @@ class ProjectPolicy
 
     public function checkIsFinishedPayment(User $user, Project $project)
     {
-        $check_purchased = $project->payments->where('user_id',$user->id);        
+        $check_purchased = $project->payments->where('user_id', $user->id);
         return $check_purchased->isNotEmpty() ? true : false;
     }
 
     public function checkOwnProjectAndAdmin(User $user, Project $project)
     {
-        if (Auth::guard('admin')->user()) {
-            return true;
-        } else {
-            return $user->id === $project->user_id;
-        }
+        return $user->id === $project->user_id;
     }
 }

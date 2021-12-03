@@ -72,7 +72,7 @@
                     <option value="過去にFanReturnを実施したことがある">過去にFanReturnを実施したことがある</option>
                     {{-- <option value="その他">その他</option> FIXME その他選択時にインプットフォームの値をname="motive"にセットされるように今後実装します--}}
                 </select>
-                <label>紹介の場合や過去にFanReturnの担当者とやりとりされている場合は、紹介企業名や、紹介者名、FanReturnの担当者名をご記入ください。</label>
+                <label>紹介の場合や過去にFanReturnの担当者とダイレクトメッセージされている場合は、紹介企業名や、紹介者名、FanReturnの担当者名をご記入ください。</label>
                 <input type="text" name="introducer" value="{{ old('introducer') }}"/>
                 <label style="color: red;">相談内容[必須]</label>
                 <textarea name="consultation_content" required>{{ old('consultation_content') }}</textarea>

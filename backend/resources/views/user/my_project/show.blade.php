@@ -130,7 +130,7 @@
                                 </div><!--/su_pr_02--> --}}
                             </div>
                             <div class="tit_L_01 E-font">
-                                <div class="sub_tit_L"><a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">支援者とのやりとり : {{ $project->payments_count }}人</a></div>
+                                <div class="sub_tit_L"><a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">支援者とのダイレクトメッセージ : {{ $project->payments_count }}人</a></div>
                                     {{-- <div class="su_pr_02">
                                         <div class="su_pr_02_01 m_b_1510">リターン名</div>
                                         <div class="su_pr_02_02 m_b_1510"></div>

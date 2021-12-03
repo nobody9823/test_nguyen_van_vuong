@@ -67,9 +67,10 @@ if(isiOS) {
 		</div>
 	</div>
 	<div id="header_03">
-		<input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
-		<label for="nav-tgl" class="open nav-tgl-btn"><span></span></label>
-		<label for="nav-tgl" class="close nav-tgl-btn"></label>
+        <x-user.header-chat-message />
+        <input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
+        <label for="nav-tgl" class="open nav-tgl-btn"><span></span></label>
+        <label for="nav-tgl" class="close nav-tgl-btn"></label>
 	</div>
 </div>
 
@@ -100,6 +101,9 @@ if(isiOS) {
                 <a href="{{ route('user.question') }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">ファンリターンとは</p>
 				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_01">
+                <x-user.header-chat-message />
 			</li>
             @guest('web')
             <li class="menu-item nav_btn taso_li menuset_06">
@@ -176,7 +180,7 @@ if(isiOS) {
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.message.index') }}" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">メッセージ一覧</p>
+					<p class="nav_btn_tit_L">ダイレクトメッセージ一覧</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_06">
