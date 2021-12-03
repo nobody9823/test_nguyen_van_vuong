@@ -67,8 +67,8 @@
                         </div>
                     </div>
                     <div class="ps_rank_01_01 m_b_1510">
-                        <!-- <div>現在：{{ number_format($project->payments_sum_price) }}円</div> -->
-                        <div>支援者数：{{ $project->payments_count }}人</div>
+                        <div>現在の支援金額：{{ number_format($project->payments_sum_price) }}円</div>
+                        <div>現在の支援者数：{{ $project->payments_count }}人</div>
                         <div>募集終了まで残り：{{ $project->number_of_days_left }}日</div>
                     </div>
                     <!--/ps_rank_01_03-->

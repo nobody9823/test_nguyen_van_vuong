@@ -320,7 +320,7 @@ class Project extends Model
     {
         // 金額の達成率の算出
         if ($this->target_number > 0) {
-            return round($this->payments_count * 100 / $this->target_number);
+            return round($this->payments_sum_price * 100 / $this->target_number);
         } else { // ゼロ除算対策
             return 100;
         }

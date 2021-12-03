@@ -3,10 +3,10 @@
     @method('PUT')
     <div class="form_item_row">
         <div class="form_item_tit">
-            目標人数<span class="hissu_txt">必須</span>
+            目標金額<span class="hissu_txt">必須</span>
             <br/>
             <span class="disclaimer">
-                ※目標人数は最低1人以上設定してください。
+                ※目標金額は最低1円以上設定してください。
             </span>
         </div>
         <input type="number" name="target_number" class="p-postal-code def_input_100p"

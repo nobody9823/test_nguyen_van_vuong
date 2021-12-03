@@ -73,7 +73,8 @@
 
 
                 <div class="pds_sec01_R">
-
+                <div class="pds_sec01_R_en01">現在の支援総額</div>
+                <div class="pds_sec01_R_en02 E-font">¥ {{ number_format($project->payments_sum_price) }}円</div>
                 <div class="pds_sec01_progress-bar">
                     <div class="progress_arrow_box_wrapper">
                         <div class="{{ ProgressBarState::getArrowBoxClassName($project) }}">{{ ProgressBarState::getArrowBoxText($project) }}</div>
@@ -91,7 +92,7 @@
                     </div>
                 </div>
 
-                <div class="pds_sec01_R_en03">目標人数は{{ $project->target_number }}人</div>
+                <div class="pds_sec01_R_en03">目標金額は¥{{ number_format($project->target_number) }}</div>
 
                 <div class="pds_sec01_R_nin_base">
                     <div class="pds_sec01_R_en01">現在の支援者数</div>
