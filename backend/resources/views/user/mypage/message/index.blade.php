@@ -67,7 +67,7 @@
                             <div class="accordion__item js-accordion-trigger">
                                 @if ($chating_myprojects->isNotEmpty())
                                 <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>
-                                    自分のプロジェクトから選択
+                                    自分が立ち上げたプロジェクトのDM
                                     @if($chating_myprojects->sum('message_contents_count') !== 0)
                                     <span class="chat_unread_count">
                                         {{ $chating_myprojects->sum('message_contents_count') }}
@@ -88,7 +88,7 @@
                             <div class="accordion__item js-accordion-trigger">
                                 @if ($chating_messages->isNotEmpty())
                                 <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>
-                                    支援したプロジェクトから選択
+                                    支援したプロジェクトのDM
                                     @if($chating_messages->sum('message_contents_count') !== 0)
                                     <span class="chat_unread_count">
                                         {{ $chating_messages->sum('message_contents_count') }}
