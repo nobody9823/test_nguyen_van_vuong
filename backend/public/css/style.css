@@ -194,7 +194,7 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 .nav_btn_link:hover{opacity:0.7;}
 .taso_menu > .taso_li > .taso_ul{top:65px;}
 
-.top_menu-1{ height:33px; border-radius:5px;padding:0 16px;}
+.top_menu-1{ height:33px; border-radius:5px;padding:0 10px;}
 #header_wrap{ width: 100%; min-height: 80px; box-shadow: 0px 2px 5px 0px rgba(157,157,157,0.16); }
 #header_banner{ width: 100%; min-height: 80px; background-color: #00aebd; padding: 10px;}
 #header{width:100%;max-width:1100px; min-height:80px; display: flex; flex-flow: wrap; justify-content:space-between;}
@@ -3195,4 +3195,7 @@ margin: 20px 0;
     top: auto;
     right: 53px;
     line-height: 22px;
+}
+.menuset_01 .header_message_icon span {
+    right: 7px;
 }
