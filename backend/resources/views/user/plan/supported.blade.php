@@ -36,7 +36,7 @@
         <div class="as_header_02 inner_item" style="padding: 50px 0 5px 0;">ありがとうございます！</div>
         <div class="as_header_03">
             あなたは、{{ $project->payments_count }}人目の支援者です。
-            <!-- <br>支援総額は{{ $project->payments_sum_price }}円になりました -->
+            <br>支援総額は{{ $project->payments_sum_price }}円になりました
         </div>
 
         <div class="av_box_base def_inner inner_item">

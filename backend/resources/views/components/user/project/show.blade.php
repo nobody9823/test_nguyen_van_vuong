@@ -369,7 +369,7 @@
         <p><i class="far fa-lightbulb pri_color_f i_icon"></i>達成額</p>
         <div><span>{{ $project->payments_sum_price }}</span>円</div>
         <p>
-            <i class="fas fa-yen-sign pri_color_f i_icon"></i>目標人数 {{ number_format($project->target_number) }}
+            <i class="fas fa-yen-sign pri_color_f i_icon"></i>目標金額 {{ number_format($project->target_number) }}
             人</p>
         @if($project->achievement_rate < 100) <div class="complete">
             <div class="bar" style="width: {{ $project->achievement_rate }}%;"></div>

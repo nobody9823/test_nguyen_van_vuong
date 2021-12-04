@@ -201,7 +201,7 @@ return [
         'content' => '本文',
         'tags' => 'タグ',
         'video_url' => '動画',
-        'target_number' => '目標人数',
+        'target_number' => '目標金額',
         'start_date' => '掲載開始日(日付、時刻)',
         'start_year' => '掲載開始日(日付、時刻)',
         'start_month' => '掲載開始日(日付、時刻)',

@@ -30,9 +30,9 @@
 
 <div class="form-row">
     <div class="col-md-11 mb-3">
-        <label>目標人数</label>
+        <label>目標金額</label>
         <ul>
-            <li>目標人数は最低1人以上設定してください。</li>
+            <li>目標金額は最低1人以上設定してください。</li>
         </ul>
         <input type="number" name="target_number" class="form-control mb-2 mr-sm-2" min="1"
             value="{{ old('target_number', optional($project ?? null)->target_number) }}" step="1">
