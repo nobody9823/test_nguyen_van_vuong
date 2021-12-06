@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->call(new NotifyProjectFinished)->everyMinute()->emailOutputOnFailure(config('mail.customer_support.address'));
+        $schedule->call(new NotifyProjectFinished)->everyFifteenMinute()->emailOutputOnFailure(config('mail.customer_support.address'));
     }
 
     /**
