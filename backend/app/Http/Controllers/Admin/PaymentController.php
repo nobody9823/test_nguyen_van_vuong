@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AlterTranRequest;
 use App\Models\Payment;
 use App\Models\Project;
+use App\Notifications\AlterPaymentNotification;
 use Illuminate\Http\Request;
 use App\Services\Project\RemittanceService;
 use DB;
 use Exception;
+use Illuminate\Support\Facades\Notification;
 use Log;
 
 class PaymentController extends Controller
@@ -161,6 +163,7 @@ class PaymentController extends Controller
         foreach ($payments as $payment) {
             $this->card_payment->alterSales($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
         }
+        Notification::route('mail', config('mail.customer_support.address'))->notify(new AlterPaymentNotification($request->project, '実売上計上'));
         return redirect()->route('admin.payment.index', ['project' => $request->project])->with('flash_message', '実売上計上に成功しました。');
     }
 
