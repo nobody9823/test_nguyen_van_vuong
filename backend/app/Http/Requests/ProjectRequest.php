@@ -97,10 +97,10 @@ class ProjectRequest extends FormRequest
 
         // 現状支援総額順のPSリターンは使用しない為、reward_by_total_amountは空文字で登録する。
         if ($this->reward_by_total_amount === null) {
-                $this->merge([
-                    'reward_by_total_amount' => ''
-                ]);
-            };
+            $this->merge([
+                'reward_by_total_amount' => ''
+            ]);
+        };
     }
 
     public function messages()
@@ -117,10 +117,10 @@ class ProjectRequest extends FormRequest
             // 'target_amount.integer' => "目標金額は数字で入力してください。",
             // 'target_amount.min' => "目標金額は10,000円以上にしてください。",
             // 'target_amount.max' => "目標金額は99,999,999円以内にしてください。",
-            'target_number.required' => "目標人数を入力してください。",
-            'target_number.integer' => "目標人数は数字で入力してください。",
-            'target_number.min' => "目標人数は1人以上にしてください。",
-            'target_number.max' => "目標人数は9,999,999人以内にしてください。",
+            'target_number.required' => "目標金額を入力してください。",
+            'target_number.integer' => "目標金額は数字で入力してください。",
+            'target_number.min' => "目標金額は1人以上にしてください。",
+            'target_number.max' => "目標金額は9,999,999人以内にしてください。",
             'curator_id.required' => "キュレーターを入力してください。",
             'curator_id.exists' => '選択されたキュレーターは存在しておりません。',
             'start_date.required' => "掲載開始日時を入力してください。",

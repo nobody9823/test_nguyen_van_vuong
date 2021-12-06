@@ -60,10 +60,10 @@
                 <span>終了日が近い順</span>
             </label>
             <!-- NOTE:支援総額は非表示にするとの事。将来元に戻す際にコメントアウトを解除する。 -->
-            <!-- <input class="filter_sort_type_radio" type="radio" name="sort_type" value="3" id="filter_sort_type_radio_3" {{ $sort_type === '3'  ? 'checked' : '' }} onchange="selectedRadioButtonHandler()"/>
+            <input class="filter_sort_type_radio" type="radio" name="sort_type" value="3" id="filter_sort_type_radio_3" {{ $sort_type === '3'  ? 'checked' : '' }} onchange="selectedRadioButtonHandler()"/>
             <label class="filter_item_white_base" for="filter_sort_type_radio_3">
                 <span>支援総額順</span>
-            </label> -->
+            </label>
             <input class="filter_sort_type_radio" type="radio" name="sort_type" value="4" id="filter_sort_type_radio_4" {{ $sort_type === '4'  ? 'checked' : '' }} onchange="selectedRadioButtonHandler()"/>
             <label class="filter_item_white_base" for="filter_sort_type_radio_4">
                 <span>支援者数順</span>
