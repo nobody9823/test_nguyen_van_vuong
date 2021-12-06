@@ -29,6 +29,7 @@ class Project extends Model
         'reward_by_total_amount',
         'reward_by_total_quantity',
         'target_number',
+        'funded_type',
         'start_date',
         'end_date',
         'option_fee',
