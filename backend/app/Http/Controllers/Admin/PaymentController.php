@@ -187,6 +187,7 @@ class PaymentController extends Controller
             Log::alert($e->getMessage());
             return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors('売上キャンセルに失敗しました。管理者にご確認ください。');
         }
+        Notification::route('mail', config('mail.customer_support.address'))->notify(new AlterPaymentNotification($request->project, '売上キャンセル'));
         return redirect()->route('admin.payment.index', ['project' => $request->project])->with('flash_message', '売上キャンセルに成功しました。');
     }
 }

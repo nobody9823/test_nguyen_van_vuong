@@ -2,7 +2,6 @@
 
 @section('content')
     <p>
-        <div>Fan Returnです。</div>
         <div><strong>{{ $alter_type }}</strong>が実行されました。</div>
         <div>プロジェクト名 : {{ $project->title }}</div>
         <div>インフルエンサー名 : {{ $project->user->name }}</div>

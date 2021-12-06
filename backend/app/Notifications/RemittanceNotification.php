@@ -2,13 +2,12 @@
 
 namespace App\Notifications;
 
-use App\Models\Project;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AlterPaymentNotification extends Notification
+class RemittanceNotification extends Notification
 {
     use Queueable;
 
@@ -17,10 +16,9 @@ class AlterPaymentNotification extends Notification
      *
      * @return void
      */
-    public function __construct($project, $alter_type)
+    public function __construct($project)
     {
-        $this->project = Project::find($project)->getLoadIncludedPaymentsCountAndSumPrice();
-        $this->alter_type = $alter_type;
+        $this->project = $project->getLoadIncludedPaymentsCountAndSumPrice();
     }
 
     /**
@@ -43,11 +41,10 @@ class AlterPaymentNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('【FanReturn】' . $this->alter_type . 'が完了しました。')
+            ->subject('【FanReturn】送金が完了しました。')
             ->view(
-                'user.mail.template.alter_payment',
+                'user.mail.template.remittance',
                 [
-                    'alter_type' => $this->alter_type,
                     'project' => $this->project,
                 ]
             );
