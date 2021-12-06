@@ -45,9 +45,13 @@ class ProjectFinishedNotification extends Notification
             ? $notifiable->routeNotificationFor('mail')
             : $notifiable->email;
 
-        $url = $address === $this->project->user->email
-            ? route('user.my_project.project.show', ['project' => $this->project])
-            : route('user.project.show', ['project' => $this->project]);
+        if ($address === $this->project->user->email) {
+            $url = route('user.my_project.project.show', ['project' => $this->project]);
+        } else if ($address === config('mail.customer_support.address')) {
+            $url = route('admin.project.index', ['project' => $this->project]);
+        } else {
+            $url = route('user.project.show', ['project' => $this->project]);
+        }
 
         return (new MailMessage)
             ->subject('【FanReturn】プロジェクトの掲載が終了しました。')
