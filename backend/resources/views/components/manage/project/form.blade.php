@@ -11,6 +11,34 @@
 </div>
 
 <div class="form-group">
+    <label>募集方式</label>
+    <div class="form-check">
+        <input type="radio" name="funded_type" class="" value="AllIn" id="AllIn"
+            @if(old('funded_type') === 'AllIn')
+                checked
+            @elseif(optional($project ?? null)->funded_type === 'AllIn')
+                checked
+            @endif
+        />
+        <label class="form-check-label" for="AllIn">
+          All-in
+        </label>
+    </div>
+    <div class="form-check">
+        <input type="radio" name="funded_type" class="" value="AllOrNothing" id="AllOrNothing"
+            @if(old('funded_type') === 'AllOrNothing')
+                checked
+            @elseif(optional($project ?? null)->funded_type === 'AllOrNothing')
+                checked
+            @endif
+        />
+        <label class="form-check-label" for="AllOrNothing">
+            All-or-Nothing
+        </label>
+    </div>
+</div>
+
+<div class="form-group">
     <label>プロジェクト内容</label>
     <textarea type="text" name="content"
         class="form-control">{{old('content', optional($project ?? null)->content)}}</textarea>

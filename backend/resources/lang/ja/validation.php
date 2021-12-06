@@ -198,6 +198,7 @@ return [
         'comments' => '任意コメント',
         'payment_method_id' => 'クレジットカード情報',
         'title' => 'タイトル',
+        'funded_type' => '募集方式',
         'content' => '本文',
         'tags' => 'タグ',
         'video_url' => '動画',

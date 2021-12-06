@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\FundedType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use App\Models\ProjectFile;
@@ -9,6 +10,7 @@ use App\Models\ProjectVideo;
 use App\Models\ProjectTagTagging;
 use App\Rules\ProjectImages;
 use App\Rules\Tags;
+use BenSampo\Enum\Rules\EnumValue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use DateTime;
@@ -39,6 +41,7 @@ class ProjectRequest extends FormRequest
         return [
             'user_id' => ['required', 'integer'],
             'title' => ['required', 'string', 'max:255'],
+            'funded_type' => ['required', new EnumValue(FundedType::class)],
             'content' => ['required', 'string'], // 最大16,777,215文字（約16Mバイト）
             // WARNING:支援総額順のPSリターンを使用する際はprepareForValidationの空文字登録処理を削除して下さい。
             // 'reward_by_total_amount' => ['required', 'string'], // 最大16,777,215文字（約16Mバイト）
