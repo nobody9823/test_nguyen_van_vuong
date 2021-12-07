@@ -72,7 +72,7 @@
                             @if($project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
                             <div class="caution_release_status">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                {{ $project->release_status === ProjectReleaseStatus::getValue('Default') ? '申請前' : $project->release_status }}
+                                {{ $project->release_status }}
                             </div>
                             @endif
                         </div>
