@@ -356,7 +356,7 @@
                             {{ number_format($project->payments_sum_price) }}円
                         </td>
                         <td class="text-nowrap">
-                            {{ number_format($project->aplication_fee) }}円
+                            {{ number_format($project->application_fee) }}円
                         </td>
                         <td class="text-nowrap">
                             <form action="{{ route('admin.project.associate_option_fee', ['project' => $project]) }}" method="POST" style="width: 200px;">

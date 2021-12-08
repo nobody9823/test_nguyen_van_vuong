@@ -305,7 +305,7 @@ class Project extends Model
         return $this->payments->where('created_at', '>=', Carbon::now()->subHours(24))->groupBy('user_id')->count();
     }
 
-    public function getAplicationFeeAttribute()
+    public function getApplicationFeeAttribute()
     {
         return ceil(bcmul($this->payments_sum_price, 0.2, 1));
     }
