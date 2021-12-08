@@ -2947,7 +2947,8 @@ margin: 20px 0;
 @media screen and (max-width: 768px){
     .my_project_img_box_wrapper {width: 90vw;}
     .my_plan_img_box_wrapper {width: 90vw;}
-		.my_project_delete_form { right: 25px; }
+	.my_project_delete_form { right: 25px; }
+    .my_plan_img_box_wrapper .content { width: 80%; height: 100px; margin: 25px; }
 }
 
 @media (min-width: 1000px) {
