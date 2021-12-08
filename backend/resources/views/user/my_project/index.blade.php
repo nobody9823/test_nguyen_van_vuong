@@ -48,10 +48,10 @@
                             @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
                             編集
                             {{-- NOTICE: MyProjectController, edit action --}}
-                            <a class="cover_link" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
+                            <a class="display_release_status" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
                             @elseif($project->release_status === '承認待ち' || $project->release_status === '掲載中')
                             {{ $project->release_status }}
-                            <a class="cover_link"></a>
+                            <a class="display_release_status"></a>
                             @endif
                         </div>
 
@@ -70,9 +70,9 @@
                                 </div>
                             </div>
                             @if($project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
-                            <div class="display_release_status">
+                            <div class="caution_release_status">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                {{ $project->release_status === ProjectReleaseStatus::getValue('Default') ? '申請前' : $project->release_status }}
+                                {{ $project->release_status }}
                             </div>
                             @endif
                         </div>
