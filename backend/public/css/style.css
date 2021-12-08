@@ -3157,3 +3157,24 @@ margin: 20px 0;
     line-height: 1.6;
     transition: all .3s ease-in;
 }
+
+.funded_type_wrapper {
+    padding-bottom: 0;
+}
+
+.funded_type_wrapper input:checked + .tab_item {
+    border: 1px solid #00AEBD;
+    border-radius: 5px;
+}
+
+.funded_type_wrapper .tab_item {
+    width: 100%;
+    border-right: none;
+    text-align: left;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.funded_type_wrapper .tab_item:hover {
+    cursor: pointer;
+}
