@@ -307,6 +307,7 @@ footer a{ color: #707070;}
 
 .footer-over_base{ width: 100%; max-width: 760px; margin: 80px auto 50px auto; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
 .footer-over_L{ display: flex; align-items: center; align-content: center; justify-content:space-between; border: solid 1px #1C81D8; padding: 14px 25px; width: calc(50% - 15px);}
+.footer-over-L-return{ display: flex; align-items: center; align-content: center; justify-content:space-between; border: solid 1px #1C81D8; margin-bottom: 50px; padding: 14px 25px; width: calc(50% - 15px);}
 .footer-over_L_01{ width: 60px;}
 .footer-over_L_01 img {width: 100%;}
 .footer-over_L_02{}
