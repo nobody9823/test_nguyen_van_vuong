@@ -36,7 +36,7 @@ class MypageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // 購入履歴
+    // 購入履歴 / PSになる
     public function paymentHistory()
     {
         $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project'])->paginate(1);
@@ -55,20 +55,6 @@ class MypageController extends Controller
         $comments = Comment::getOwnComments()->orderBy('created_at', 'DESC')->get();
         return view('user.mypage.comment', [
             'comments' => $comments,
-        ]);
-    }
-
-    // 応援購入したプロジェクト一覧
-    public function purchasedProjects()
-    {
-        $projects = Project::whereIn(
-            'id',
-            Payment::select('project_id')->where('user_id', Auth::id())
-        )->with(['projectFiles' => function ($query) {
-            $query->where('file_content_type', 'image_url');
-        }, 'tags'])->getWithPaymentsCountAndSumPrice()->paginate(1);
-        return view('user.mypage.project', [
-            'projects' => $projects,
         ]);
     }
 

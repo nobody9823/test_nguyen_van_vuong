@@ -165,13 +165,8 @@ if(isiOS) {
 
             @auth('web')
 			<li class="menu-item nav_btn taso_li menuset_06">
-				<a href="{{ route('user.purchased_projects') }}" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">応援購入したプロジェクト</p>
-				</a>
-			</li>
-			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.payment_history') }}" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">購入履歴一覧</p>
+					<p class="nav_btn_tit_L">購入履歴 / PSになる一覧</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_06">
