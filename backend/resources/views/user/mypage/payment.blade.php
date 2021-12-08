@@ -5,7 +5,7 @@
 @section('content')
 <section id="supported-projects" class="section_base">
     <div class="tit_L_01 E-font">
-        <h2>PURCHASE HISTORY / BECOME PS</h2>
+        <h2>PURCHASE HISTORY / PS</h2>
         <div class="sub_tit_L">購入履歴 / PSになる</div>
     </div>
     <div class="prof_page_base inner_item">
@@ -29,6 +29,22 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="su_pr_02">
+                        <div class="m_b_1510">
+                            <div class="def_btn">
+                                <a href="{{ route('user.project.support', ['project' => $project]) }}" style="color: white">
+                                    プロジェクトサポーター(PS)になる
+                                </a>
+                            </div>
+                        </div>
+                        <div class="m_b_4030">
+                            <div class="def_btn">ランキングを見る
+                                <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
+                            </div>
+                        </div>
+                    </div><!--/su_pr_02-->
+
                     @foreach($payment->includedPlans as $plan)
                         <div class="su_pr_02">
                             <div class="su_pr_02_01 m_b_1510">リターン名</div>
@@ -52,23 +68,6 @@
                     @endforeach
                 </div><!--/su_pr_base-->
             @endforeach
-
-            <div class="su_pr_base">
-                <div class="su_pr_02">
-                    <div class="m_b_1510">
-                        <div class="def_btn">
-                            <a href="{{ route('user.project.support', ['project' => $project]) }}" style="color: white">
-                                プロジェクトサポーター(PS)になる
-                            </a>
-                        </div>
-                    </div>
-                    <div class="m_b_4030">
-                        <div class="def_btn">ランキングを見る
-                            <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
-                        </div>
-                    </div>
-                </div><!--/su_pr_02-->
-            </div><!--/su_pr_base-->
 
             {{ $payments->appends(request()->input())->onEachSide(1)->links() }}
         </div>
