@@ -2951,6 +2951,10 @@ margin: 20px 0;
 	  .my_project_delete_form { left: 275px; }
 }
 
+.btn_margin_bottom {
+    margin-bottom: 40px;
+}
+
 .progress_bar_color_case_of_less_than_30{
     background-color: #00aebd;
 }
