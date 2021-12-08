@@ -53,42 +53,42 @@ class DateFormatServiceTest extends TestCase
         $this->assertFalse($response);
     }
 
-    public function testcheckDateIsWithInADayExpectTrue()
-    {
-        $now = Carbon::now();
-        $date = $now->subHours(12);
+    // public function testcheckDateIsWithInADayExpectTrue()
+    // {
+    //     $now = Carbon::now();
+    //     $date = $now->subHours(12);
 
-        $response = DateFormatFacade::checkDateIsWithInADay($date);
+    //     $response = DateFormatFacade::checkDateIsWithInADay($date);
 
-        $this->assertTrue($response);
-    }
+    //     $this->assertTrue($response);
+    // }
 
-    public function testcheckDateIsWithInADayExpectFalse()
-    {
-        $now = Carbon::now();
-        $date = $now->subHours(30);
+    // public function testcheckDateIsWithInADayExpectFalse()
+    // {
+    //     $now = Carbon::now();
+    //     $date = $now->subHours(30);
 
-        $response = DateFormatFacade::checkDateIsWithInADay($date);
+    //     $response = DateFormatFacade::checkDateIsWithInADay($date);
 
-        $this->assertFalse($response);
-    }
+    //     $this->assertFalse($response);
+    // }
 
-    public function testGetDiffCompareWithTodayExpect1()
-    {
-        $now = Carbon::now();
-        $date = $now->subDays(1);
-        $response = DateFormatFacade::getDiffCompareWithToday($date);
+    // public function testGetDiffCompareWithTodayExpect1()
+    // {
+    //     $now = Carbon::now();
+    //     $date = $now->subDays(1);
+    //     $response = DateFormatFacade::getDiffCompareWithToday($date);
 
-        $this->assertSame(1, $response);
-    }
+    //     $this->assertSame(1, $response);
+    // }
 
-    public function testGetDiffCompareWithTodayExpectNullWhenArgumentIsNow()
-    {
-        $now = Carbon::now();
-        $response = DateFormatFacade::getDiffCompareWithToday($now);
+    // public function testGetDiffCompareWithTodayExpectNullWhenArgumentIsNow()
+    // {
+    //     $now = Carbon::now();
+    //     $response = DateFormatFacade::getDiffCompareWithToday($now);
 
-        $this->assertSame(0, $response);
-    }
+    //     $this->assertSame(0, $response);
+    // }
 
     public function testForJapanese()
     {
