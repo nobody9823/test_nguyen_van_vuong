@@ -16,7 +16,7 @@
         <div class="title">{{ Str::limit($plan->title, 46) }}</div>
 
         <div class="content">
-            {{ Str::limit($plan->content, 100) }}
+            {{ Str::limit($plan->content, 170) }}
         </div>
 
         @if($plan->limit_of_supporters_is_required === 1 && $plan->limit_of_supporters > 0)
