@@ -6,15 +6,29 @@
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return{{ '_'.$plan->id }}"></i>
             <span id="errors_return{{ '_'.$plan->id }}" style="color: red;"></span>
         </div>
-        <div class="ib02_01 E-font my_project_img_wrapper">
+        <div class="my_project_img_wrapper pds_sec02_img">
             <img src="{{ Storage::url($plan->image_url) }}">
             <a class="cover_link" onclick="openPlanFormModal({{ $plan->id }})"></a>
         </div>
 
-        <div class="ib02_03">
+        <div class="pds_sec02_01_en">{{ $plan->price }}円</div>
+
+        <div class="pds_sec02_tit">
             <h3>{{ Str::limit($plan->title, 46) }}</h3>
             <a class="cover_link" onclick="openPlanFormModal({{ $plan->id }})"></a>
         </div>
+
+        <div class="pds_sec02_txt">
+            {{ Str::limit($plan->content) }}
+        </div>
+
+        @if($plan->limit_of_supporters_is_required === 1 && $plan->limit_of_supporters > 0)
+            <div class="pds_sec02_01_nokori_nin">限定数：{{ $plan->limit_of_supporters }}</div>
+        @else()
+            <div class="pds_sec02_01_nokori_nin">限定数：なし</div>
+        @endif
+
+        <div class="pds_sec02_01_day">お届け予定日：{{ $plan->formatted_delivery_date }}</div>
 
         <div class="def_btn">
             編集
