@@ -64,15 +64,15 @@ class DateFormatService
     public function getDiffCompareWithToday($date)
     {
         new Carbon($date);
-        $diff = $this->today->diffInDays($date);
+        $diff = $this->today->diffInMinutes($date);
 
-        return $diff;
-
-        // NOTICE: 追加開発が決まったらこちらを適用させてください
-        // NOTICE: 差分が24時間以内になると時間が出力されます。
-        // return $diff === 0
-        //     ? $this->today->diffInHours($date)
-        //     : $diff;
+        if ($diff <= 60) {
+            return $this->today->diffInMinutes($date).'分';
+        } else if ($diff <= 1440) {
+            return $this->today->diffInHours($date).'時間';
+        } else {
+            return $this->today->diffInDays($date).'日';
+        }
     }
 
     /**

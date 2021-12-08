@@ -104,21 +104,12 @@
                     @if (DateFormat::checkDateIsFuture($project->start_date))
                         <div class="pds_sec01_R_nokori01">募集開始まで残り</div>
                         <div class="pds_sec01_R_nokori02 E-font">
-                            {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
-                            {{-- @if (DateFormat::checkDateIsWithInADay($project->start_date))
-                                {{ DateFormat::getDiffCompareWithToday($project->start_date) }}<span>時間</span>
-                            @else --}}
-                                {{ DateFormat::getDiffCompareWithToday($project->start_date) }}<span>日</span>
-                            {{-- @endif --}}
+                            {{ DateFormat::getDiffCompareWithToday($project->start_date) }}
                         </div>
                     @elseif (DateFormat::checkDateIsPast($project->start_date) && DateFormat::checkDateIsFuture($project->end_date))
                         <div class="pds_sec01_R_nokori01">募集終了まで残り</div>
                         <div class="pds_sec01_R_nokori02 E-font">
-                            {{-- @if (DateFormat::checkDateIsWithInADay($project->end_date))
-                                {{ DateFormat::getDiffCompareWithToday($project->end_date) }}<span>時間</span>
-                            @else --}}
-                                {{ DateFormat::getDiffCompareWithToday($project->end_date) }}<span>日</span>
-                            {{-- @endif --}}
+                            {{ DateFormat::getDiffCompareWithToday($project->end_date) }}
                         </div>
                     @elseif (DateFormat::checkDateIsPast($project->end_date))
                         <div class="pds_sec01_R_nokori02"><span>FINISHED</span></div>
