@@ -1,16 +1,30 @@
 @if($project)
-    @if($project->target_number <= $project->payments_sum_price)
-    <form action="{{ route('admin.payment.alter_sales') }}" method="POST" class="mr-4" id="alter_sales">
-        @csrf
-        <input name="project" type="hidden" value="{{ Request::get('project') }}" />
-            @foreach($payments as $key => $payment)
-                <input name="payments[]" type="hidden" value="{{ $payment->id }}" />
-            @endforeach
-        <button class="btn btn-success mb-4" onclick="alterSales()" type="button">
-            実売上計上
-        </button>
-    </form>
+    @if($project->funded_type === 'AllOrNothing')
+        @if($project->target_number <= $project->payments_sum_price)
+        <form action="{{ route('admin.payment.alter_sales') }}" method="POST" class="mr-4" id="alter_sales">
+            @csrf
+            <input name="project" type="hidden" value="{{ Request::get('project') }}" />
+                @foreach($payments as $key => $payment)
+                    <input name="payments[]" type="hidden" value="{{ $payment->id }}" />
+                @endforeach
+            <button class="btn btn-success mb-4" onclick="alterSales()" type="button">
+                実売上計上
+            </button>
+        </form>
+        @endif
+    @elseif($project->funded_type === 'AllIn')
+        <form action="{{ route('admin.payment.alter_sales') }}" method="POST" class="mr-4" id="alter_sales">
+            @csrf
+            <input name="project" type="hidden" value="{{ Request::get('project') }}" />
+                @foreach($payments as $key => $payment)
+                    <input name="payments[]" type="hidden" value="{{ $payment->id }}" />
+                @endforeach
+            <button class="btn btn-success mb-4" onclick="alterSales()" type="button">
+                実売上計上
+            </button>
+        </form>
     @endif
+
     <form action="{{ route('admin.payment.alter_cancel') }}" method="POST" id="alter_cancel">
         @csrf
         <input name="project" type="hidden" value="{{ Request::get('project') }}" />
