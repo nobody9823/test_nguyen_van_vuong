@@ -67,7 +67,6 @@ class LoginController extends Controller
                     Log::alert($th->getMessage());
                     return redirect()->action([ProjectController::class, 'index'])->withErrors('FanReturnへの新規登録に失敗しました。管理会社に確認をお願いします。');
                 }
-                Auth::login($oauth_user->user);
                 return redirect()->intended(RouteServiceProvider::HOME)->with('flash_message', 'FanReturnへの登録が完了致しました。');
             } elseif (($oauth_user->user->email !== $sns_email) || ($oauth_user->user->name !== $sns_name)) {
                 DB::beginTransaction();

@@ -1694,7 +1694,6 @@ input[type="number"][name="price"]::-webkit-inner-spin-button { -webkit-appearan
 .ps_rank_01_01 div{ margin-right: 2rem;}
 .ps_rank_01_02{ width: 100%; font-size: 1.4rem;}
 .ps_rank_01_03{ width: 100%; font-size: 1.2rem; white-space: pre-line;}
-.ps_rank_01_03 img{ object-fit: contain;}
 
 .ps_rank_return_text{ width: 100%; white-space: pre-line;}
 .ps_rank_return_text img{ width:initial; max-width: 100%;height: auto;}
