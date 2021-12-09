@@ -36,7 +36,7 @@
         <div class="as_header_02 inner_item" style="padding: 50px 0 5px 0;">ありがとうございます！</div>
         <div class="as_header_03">
             あなたは、{{ $project->payments_count }}人目の支援者です。
-            <!-- <br>支援総額は{{ $project->payments_sum_price }}円になりました -->
+            <br>支援総額は{{ $project->payments_sum_price }}円になりました
         </div>
 
         <div class="av_box_base def_inner inner_item">
@@ -67,8 +67,8 @@
                         </div>
                     </div>
                     <div class="ps_rank_01_01 m_b_1510">
-                        <!-- <div>現在：{{ number_format($project->payments_sum_price) }}円</div> -->
-                        <div>支援者数：{{ $project->payments_count }}人</div>
+                        <div>現在の支援金額：{{ number_format($project->payments_sum_price) }}円</div>
+                        <div>現在の支援者数：{{ $project->payments_count }}人</div>
                         <div>募集終了まで残り：{{ $project->number_of_days_left }}日</div>
                     </div>
                     <!--/ps_rank_01_03-->

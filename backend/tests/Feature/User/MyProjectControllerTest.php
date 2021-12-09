@@ -174,7 +174,7 @@ class MyProjectControllerTest extends TestCase
     public function dataProviderForTestUpdateActionForEachTab(): array
     {
         return [
-            '「目標人数」更新処理' => ['target_tab', 'overview', 'target_number_params'],
+            '「目標金額」更新処理' => ['target_tab', 'overview', 'target_number_params'],
             '「概要」更新処理' => ['overview', 'visual', 'overview_params'],
             '「TOP画像」更新処理' => ['visual', 'return', 'visual_params'],
             '「PSリターン(支援総額)」更新処理' => ['ps_return', 'identification', 'reward_by_total_amount_params'],
@@ -202,13 +202,16 @@ class MyProjectControllerTest extends TestCase
     public function test_reward_preview()
     {
         $response = $this
-          ->actingAs($this->user)
-          ->from(
-              route('user.my_project.project.edit', ['project' => $this->my_project])
+            ->actingAs($this->user)
+            ->from(
+                route('user.my_project.project.edit', ['project' => $this->my_project])
             )
-          ->get(
-              route('user.my_project.reward_preview', ['project' => $this->my_project]
-            ));
+            ->get(
+                route(
+                    'user.my_project.reward_preview',
+                    ['project' => $this->my_project]
+                )
+            );
         $response->assertOk();
         $response->assertViewIs('user.my_project.reward_sample');
     }

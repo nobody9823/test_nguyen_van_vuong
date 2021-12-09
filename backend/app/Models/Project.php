@@ -29,6 +29,7 @@ class Project extends Model
         'reward_by_total_amount',
         'reward_by_total_quantity',
         'target_number',
+        'funded_type',
         'start_date',
         'end_date',
         'option_fee',
@@ -304,7 +305,7 @@ class Project extends Model
         return $this->payments->where('created_at', '>=', Carbon::now()->subHours(24))->groupBy('user_id')->count();
     }
 
-    public function getAplicationFeeAttribute()
+    public function getApplicationFeeAttribute()
     {
         return ceil(bcmul($this->payments_sum_price, 0.2, 1));
     }
@@ -320,7 +321,7 @@ class Project extends Model
     {
         // 金額の達成率の算出
         if ($this->target_number > 0) {
-            return round($this->payments_count * 100 / $this->target_number);
+            return round($this->payments_sum_price * 100 / $this->target_number);
         } else { // ゼロ除算対策
             return 100;
         }

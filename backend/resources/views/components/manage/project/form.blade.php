@@ -11,6 +11,34 @@
 </div>
 
 <div class="form-group">
+    <label>募集方式</label>
+    <div class="form-check">
+        <input type="radio" name="funded_type" class="" value="AllIn" id="AllIn"
+            @if(old('funded_type') === 'AllIn')
+                checked
+            @elseif(optional($project ?? null)->funded_type === 'AllIn')
+                checked
+            @endif
+        />
+        <label class="form-check-label" for="AllIn">
+          All-in
+        </label>
+    </div>
+    <div class="form-check">
+        <input type="radio" name="funded_type" class="" value="AllOrNothing" id="AllOrNothing"
+            @if(old('funded_type') === 'AllOrNothing')
+                checked
+            @elseif(optional($project ?? null)->funded_type === 'AllOrNothing')
+                checked
+            @endif
+        />
+        <label class="form-check-label" for="AllOrNothing">
+            All-or-Nothing
+        </label>
+    </div>
+</div>
+
+<div class="form-group">
     <label>プロジェクト内容</label>
     <textarea type="text" name="content"
         class="form-control">{{old('content', optional($project ?? null)->content)}}</textarea>
@@ -30,9 +58,9 @@
 
 <div class="form-row">
     <div class="col-md-11 mb-3">
-        <label>目標人数</label>
+        <label>目標金額</label>
         <ul>
-            <li>目標人数は最低1人以上設定してください。</li>
+            <li>目標金額は最低1円以上設定してください。</li>
         </ul>
         <input type="number" name="target_number" class="form-control mb-2 mr-sm-2" min="1"
             value="{{ old('target_number', optional($project ?? null)->target_number) }}" step="1">

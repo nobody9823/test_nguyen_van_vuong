@@ -15,6 +15,7 @@ use App\Models\Curator;
 use App\Models\Deposit;
 use App\Models\Project;
 use App\Models\ProjectFile;
+use App\Notifications\RemittanceNotification;
 use App\Services\Date\DateFormatFacade;
 use App\Services\Project\RemittanceService;
 use Exception;
@@ -24,6 +25,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Traits\UniqueToken;
+use Illuminate\Support\Facades\Notification;
 use Mail;
 
 class ProjectController extends Controller
@@ -459,6 +461,8 @@ class ProjectController extends Controller
             $this->remittance->createDepositsAndGmoRemittance($project, $remaining_amount);
         }
 
+        Notification::route('mail', config('mail.customer_support.address'))->notify(new RemittanceNotification($project));
+        Notification::route('mail', $project->user->email)->notify(new RemittanceNotification($project));
         return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->with('flash_message', 'インフルエンサーへの送金が完了しました。');
     }
 

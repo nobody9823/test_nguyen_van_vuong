@@ -3,15 +3,57 @@
     @method('PUT')
     <div class="form_item_row">
         <div class="form_item_tit">
-            目標人数<span class="hissu_txt">必須</span>
+            目標金額<span class="hissu_txt">必須</span>
             <br/>
             <span class="disclaimer">
-                ※目標人数は最低1人以上設定してください。
+                ※目標金額は最低1円以上設定してください。
             </span>
         </div>
         <input type="number" name="target_number" class="p-postal-code def_input_100p"
             value="{{ old('target_number', optional($project)->target_number) }}" placeholder="（例）1000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="target_number" />
+    </div>
+
+    <div class="form_item_row">
+        <div class="form_item_tit">
+            募集方式<span class="hissu_txt">必須</span>
+            <br/>
+            <div class="tab_container funded_type_wrapper">
+                <input type="radio" id="funded_type_all_in" name="funded_type" value="AllIn" oninput="updateMyProject.textInput(this, {{ $project->id }})"
+                    @if(old('funded_type') === 'AllIn')
+                        checked
+                    @elseif(optional($project)->funded_type === 'AllIn')
+                        checked
+                    @endif
+                />
+                <label class="tab_item" for="funded_type_all_in">
+                    All-In 方式
+                    <br/>
+                    目標金額を達成しなかったとしても、終了日までの支援金を受け取れます。
+                    <br/>
+                    <span class="disclaimer prof_edit_editbox_desc">
+                        ※1人の支援からリターン履行義務が発生します
+                    </span>
+                </label>
+                <input type="radio" id="funded_type_all_or_nothing" name="funded_type" value="AllOrNothing" oninput="updateMyProject.textInput(this, {{ $project->id }})"
+                    @if(old('funded_type') === 'AllOrNothing')
+                        checked
+                    @elseif(optional($project)->funded_type === 'AllOrNothing')
+                        checked
+                    @endif
+                />
+                <label class="tab_item" for="funded_type_all_or_nothing">
+                    All-or-Nothing 方式
+                    <br/>
+                    期間内に目標金額を達成した場合に、支援金を受け取れます。
+                    <br/>
+                    <span class="disclaimer prof_edit_editbox_desc">
+                        ※目標金額の達成後リターン履行義務が発生します
+                    </span>
+                </label>
+            </div>
+        </div>
+        <x-common.async-submit-message propName="funded_type" />
     </div>
 
     <div class="form_item_row">

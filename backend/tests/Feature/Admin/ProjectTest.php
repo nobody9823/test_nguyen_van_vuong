@@ -73,6 +73,7 @@ class ProjectTest extends TestCase
         $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.create'))->post(route('admin.project.store'), [
             'user_id' => $this->user->id,
             'title' => $this->project->title,
+            'funded_type' => $this->project->funded_type,
             'content' => $this->project->content,
             'target_number' => $this->project->target_number,
             'reward_by_total_amount' => $this->project->reward_by_total_amount,
@@ -130,6 +131,7 @@ class ProjectTest extends TestCase
         $response = $this->actingAs($this->admin, 'admin')->from(route('admin.project.edit', ['project' => $this->project]))->put(route('admin.project.update', ['project' => $this->project]), [
             'user_id' => $this->project->user_id,
             'title' => $this->project->title,
+            'funded_type' => $this->project->funded_type,
             'content' => $this->project->content,
             'reward_by_total_amount' => $this->project->reward_by_total_amount,
             'reward_by_total_quantity' => $this->project->reward_by_total_quantity,

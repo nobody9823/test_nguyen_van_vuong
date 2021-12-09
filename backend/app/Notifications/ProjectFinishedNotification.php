@@ -2,14 +2,13 @@
 
 namespace App\Notifications;
 
-use App\Models\Project;
-use App\Models\Payment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PaymentNotification extends Notification
+class ProjectFinishedNotification extends Notification
 {
     use Queueable;
 
@@ -18,11 +17,9 @@ class PaymentNotification extends Notification
      *
      * @return void
      */
-    public function __construct(Project $project, Payment $payment)
+    public function __construct($project)
     {
         $this->project = $project->getLoadIncludedPaymentsCountAndSumPrice();
-
-        $this->payment = $payment;
     }
 
     /**
@@ -44,16 +41,23 @@ class PaymentNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $address = $notifiable instanceof AnonymousNotifiable
+            ? $notifiable->routeNotificationFor('mail')
+            : $notifiable->email;
+
+        if ($address === $this->project->user->email) {
+            $url = route('user.my_project.project.show', ['project' => $this->project]);
+        } else if ($address === config('mail.customer_support.address')) {
+            $url = route('admin.project.index', ['project' => $this->project]);
+        } else {
+            $url = route('user.project.show', ['project' => $this->project]);
+        }
+
         return (new MailMessage)
-            ->subject('【FanReturn】リターンの購入が完了しました。')
+            ->subject('【FanReturn】プロジェクトの掲載が終了しました。')
             ->view(
-                'user.mail.template.payment_finished',
-                [
-                    'billing_users_count' => $this->project->payments_count,
-                    'payments_sum_price' => $this->project->payments_sum_price,
-                    'project_title' => $this->project->title,
-                    'payment_id' => $this->payment->paymentToken->order_id,
-                ]
+                'user.mail.template.project_is_finished',
+                ['project' => $this->project, 'url' => $url]
             );
     }
 

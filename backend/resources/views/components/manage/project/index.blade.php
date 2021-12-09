@@ -103,6 +103,11 @@
                 <p class="mb-0">※画面サイズが足りない場合は横にスクロールが可能です。</p>
                 <p class="mb-0">※送金は「関連一覧画面」→「支援者(ファン)一覧」で全ての仮売上計上を実売上計上へと変更した後に実行してください。</p>
                 <p class="mb-0">※送金を実行してから送金完了となるまで２〜３営業日かかる場合があります。都度、送金履歴から送金状態の確認を行ってください。</p>
+                <p class="mb-0 mt-3">※以下の色で募集方式が分かれています</p>
+                <div class="d-flex">
+                    <h4><span class="badge badge-warning text-white mr-2">All-in 方式</span></h4>
+                    <h4><span class="badge badge-info text-white">All-or-Nothing 方式</span></h4>
+                </div>
             </div>
         </div>
         <div class="table-responsive">
@@ -134,7 +139,7 @@
                 </thead>
                 <tbody>
                     @foreach($projects as $project)
-                    <tr>
+                    <tr class="{{ $project->funded_type === 'AllIn' ? 'table-warning' : 'table-info' }}">
                         <td>
                             <input form="operate_projects" class="checkbox" type="checkbox" name="project_id[]" id="project_id[]"
                                 value={{ $project->id }}>
@@ -351,7 +356,7 @@
                             {{ number_format($project->payments_sum_price) }}円
                         </td>
                         <td class="text-nowrap">
-                            {{ number_format($project->aplication_fee) }}円
+                            {{ number_format($project->application_fee) }}円
                         </td>
                         <td class="text-nowrap">
                             <form action="{{ route('admin.project.associate_option_fee', ['project' => $project]) }}" method="POST" style="width: 200px;">

@@ -3,13 +3,12 @@
 namespace App\Notifications;
 
 use App\Models\Project;
-use App\Models\Payment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PaymentNotification extends Notification
+class AlterPaymentNotification extends Notification
 {
     use Queueable;
 
@@ -18,11 +17,10 @@ class PaymentNotification extends Notification
      *
      * @return void
      */
-    public function __construct(Project $project, Payment $payment)
+    public function __construct($project, $alter_type)
     {
-        $this->project = $project->getLoadIncludedPaymentsCountAndSumPrice();
-
-        $this->payment = $payment;
+        $this->project = Project::find($project)->getLoadIncludedPaymentsCountAndSumPrice();
+        $this->alter_type = $alter_type;
     }
 
     /**
@@ -45,14 +43,12 @@ class PaymentNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('【FanReturn】リターンの購入が完了しました。')
+            ->subject('【FanReturn】' . $this->alter_type . 'が完了しました。')
             ->view(
-                'user.mail.template.payment_finished',
+                'user.mail.template.alter_payment',
                 [
-                    'billing_users_count' => $this->project->payments_count,
-                    'payments_sum_price' => $this->project->payments_sum_price,
-                    'project_title' => $this->project->title,
-                    'payment_id' => $this->payment->paymentToken->order_id,
+                    'alter_type' => $this->alter_type,
+                    'project' => $this->project,
                 ]
             );
     }
