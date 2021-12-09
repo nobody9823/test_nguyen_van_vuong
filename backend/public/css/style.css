@@ -307,6 +307,7 @@ footer a{ color: #707070;}
 
 .footer-over_base{ width: 100%; max-width: 760px; margin: 80px auto 50px auto; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content:space-between;}
 .footer-over_L{ display: flex; align-items: center; align-content: center; justify-content:space-between; border: solid 1px #1C81D8; padding: 14px 25px; width: calc(50% - 15px);}
+.footer-over-L-return{ display: flex; align-items: center; align-content: center; justify-content:space-between; border: solid 1px #1C81D8; margin-bottom: 50px; padding: 14px 25px; width: calc(50% - 15px);}
 .footer-over_L_01{ width: 60px;}
 .footer-over_L_01 img {width: 100%;}
 .footer-over_L_02{}
@@ -2936,15 +2937,21 @@ margin: 20px 0;
     position: relative;
     border-radius: 6px;
 }
+.display_release_status { text-align: center; padding-top: 7px; color: red; }
+.my_plan_img_box_wrapper {display: flex; flex-flow: column; justify-content: space-between; align-items: center; width: 45%; margin: 2%; border-radius: 5px; box-shadow: 0px 3px 8px 0px rgb(173 173 173 / 15%);}
+.my_plan_img_box_wrapper .price { font-size: 2.8rem; font-weight: bold; margin: auto 25px; width: 90%; }
+.my_plan_img_box_wrapper .title { font-size: 1.8rem; font-weight: bold; color: #00AEBD; width: 90%; height: 55px; margin: auto 25px; }
+.my_plan_img_box_wrapper .content { width: 90%; height: 90px; margin: 25px; }
+.my_plan_img_box_wrapper .text { font-size: 1.6rem; font-weight: bold; margin: auto 25px; width: 90%; }
 .display_release_status { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1;}
 .caution_release_status { text-align: center; padding-top: 7px; color: red; }
-.my_plan_img_box_wrapper {display: flex; flex-flow: column; justify-content: space-between; width: 21%; margin: 2%; border-radius: 5px; box-shadow: 0px 3px 8px 0px rgb(173 173 173 / 15%);}
 
 .my_project_delete_form { position: relative; bottom: 15px; z-index: 1; height: 0px;}
 @media screen and (max-width: 768px){
     .my_project_img_box_wrapper {width: 90vw;}
     .my_plan_img_box_wrapper {width: 90vw;}
-		.my_project_delete_form { right: 25px; }
+	.my_project_delete_form { right: 25px; }
+    .my_plan_img_box_wrapper .content { width: 90%; height: 120px; margin: 25px; }
 }
 
 @media (min-width: 1000px) {
