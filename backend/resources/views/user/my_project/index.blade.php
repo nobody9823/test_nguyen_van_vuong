@@ -63,7 +63,7 @@
                                         <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" id="apply_form">
                                             @csrf
                                             申請
-                                            <button type="button" class="cover_link disable-btn" onclick="applySubmit()"></button>
+                                            <button type="button" class="cover_link disable-btn" onclick="applySubmit({{$project}})"></button>
                                         </form>
                                         {{-- <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('本当に申請してもよろしいでしょうか？')">
                                             @csrf
@@ -102,14 +102,34 @@
 
 @section('script')
 <script>
-    function applySubmit() {
-        // if ({{ $project->title === "" }}) {
-        //     alert('タイトルが記述されていません');
-        // } else if ({{ $project->description === "" }}) {
-        //     alert('概要が記述されていません');
-        // } else {
+    function applySubmit(project) {
+        const projectFields = {
+            title : 'プロジェクト名',
+            content : '概要文',
+            start_date : '掲載開始日',
+            end_date : '掲載終了日',
+            reward_by_total_quantity : '支援人数順リターン内容',
+            reward_by_total_quantity : '支援総額順リターン内容',
+        }
+
+        let requiredFields = [];
+        let targetNumberField = '・' + '目標金額' + '\n';
+        project['target_number'] < 1 && requiredFields.push(targetNumberField);
+        for( key in projectFields ) {
+            let field = '・' + projectFields[key] + '\n';
+            project[key] === '' && requiredFields.push(field);
+        }
+
+
+        let fieldMessages = requiredFields.join('');
+
+        if( requiredFields === '' ) {
+            alert('申請してもよろしいですか？');
             document.getElementById('apply_form').submit();
-        // }
+        } else {
+            let validationMessage = '下記の項目を正しく入力してから申請してください。\n' + fieldMessages;
+            alert(validationMessage);
+        }
     }
 </script>
 @endsection
