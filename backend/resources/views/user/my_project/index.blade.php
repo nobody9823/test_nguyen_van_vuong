@@ -63,7 +63,11 @@
                                         <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" id="apply_form">
                                             @csrf
                                             申請
-                                            <button type="button" class="cover_link disable-btn" onclick="applySubmit({{$project}})"></button>
+                                            <button
+                                                type="button"
+                                                class="cover_link disable-btn"
+                                                onclick="applySubmit({{ $project }}, {{ $project->plans }})">
+                                            </button>
                                         </form>
                                         {{-- <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('本当に申請してもよろしいでしょうか？')">
                                             @csrf
@@ -102,28 +106,51 @@
 
 @section('script')
 <script>
-    function applySubmit(project) {
-        const projectFields = {
-            title : 'プロジェクト名',
-            content : '概要文',
-            start_date : '掲載開始日',
-            end_date : '掲載終了日',
-            reward_by_total_quantity : '支援人数順リターン内容',
-            reward_by_total_quantity : '支援総額順リターン内容',
-        }
+    const projectFields = {
+        title : 'プロジェクト名',
+        content : 'プロジェクト概要文',
+        start_date : '掲載開始日',
+        end_date : '掲載終了日',
+        reward_by_total_quantity : '支援人数順リターン内容',
+        // NOTE: こちらは支援総額順のリターンを使用する際にコメントアウトを解除してください。
+        // reward_by_total_quantity : '支援総額順リターン内容',
+    }
+    const planFields = {
+        title : 'リターン名',
+        content : 'リターン詳細',
+    }
 
+    function applySubmit(project, plans) {
+        // プロジェクト
         let requiredFields = [];
-        let targetNumberField = '・' + '目標金額' + '\n';
-        project['target_number'] < 1 && requiredFields.push(targetNumberField);
+
+        if (project['target_number'] < 1)
+            requiredFields.push('・目標金額\n');
+
         for( key in projectFields ) {
             let field = '・' + projectFields[key] + '\n';
             project[key] === '' && requiredFields.push(field);
         }
 
+        // リターン
+        if (plans.length === 0)
+            requiredFields.push('・リターンを1つ以上作成してください\n');
 
+        let count = 0;
+        for (const plan of plans) {
+            count += 1;
+            for( key in planFields ) {
+                let field = '・' + count + 'つ目の' + planFields[key] + '\n';
+                plan[key] === '' && requiredFields.push(field);
+            }
+            if (plan['price'] < 1)
+                requiredFields.push('・' + count + 'つ目のリターン金額\n');
+        }
+
+        // 配列に入った必須項目フィールドを一つの文字列にまとめる
         let fieldMessages = requiredFields.join('');
 
-        if( requiredFields === '' ) {
+        if(requiredFields.length === 0) {
             alert('申請してもよろしいですか？');
             document.getElementById('apply_form').submit();
         } else {
