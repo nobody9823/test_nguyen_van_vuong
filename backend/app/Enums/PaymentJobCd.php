@@ -15,7 +15,7 @@ final class PaymentJobCd extends Enum
     const FAILED = '購入失敗';
     const AUTH = '仮売上';
     const SALES = '実売上';
-    const VOID = 'キャンセル';
-    const RETURN = 'キャンセル';
-    const RETURNX = 'キャンセル';
+    const VOID = 'キャンセル(取消)';
+    const RETURN = 'キャンセル(返品)';
+    const RETURNX = 'キャンセル(月跨り返品)';
 }
