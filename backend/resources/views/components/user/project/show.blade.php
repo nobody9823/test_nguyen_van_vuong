@@ -201,15 +201,7 @@
 
                 <div class="wlr_64_L inner_item tab_contents" id='project_content_section'>
                     <div class="pds_sec02_tit">{{ $project->title }}</div>
-                    <div class="pds_sec02_txt showmore_list">{!! $project->content !!}</div>
-                    <div class="row justify-content-center mb-5" style="margin-top: 5px;">
-                        <div class="ps_rank_more_btn" id="showmore_button">
-                            続きを表示 <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="ps_rank_more_btn" id="hidemore_button">
-                            表示を少なくする <i class="fas fa-chevron-up"></i>
-                        </div>
-                    </div>
+                    <div class="pds_sec02_txt more_looking_target">{!! $project->content !!}</div>
                     {{-- <div class="pds_sec02_img"><img class="" src="{{ asset('image/test_img.svg') }}"></div> --}}
                 </div><!--/wlr_64_L-->
 
@@ -287,33 +279,7 @@
 <script type="text/javascript">
     window.addEventListener('load', ()=>{
         if (window.screen.width <= 768) {
-            let showmoreList = $('.showmore_list');
-            let showmoreListOpen = parseInt(showmoreList.height());
-
-            //初期値
-            showmoreList.css('height', '120px');
-            $('#hidemore_button').hide();
-
-            $('#showmore_button').click(function () {
-                let thisBtn = $(this);
-                showmoreTop = showmoreList.offset().top
-
-                thisBtn.hide();
-                $('#hidemore_button').show();
-                showmoreList.css('height', showmoreListOpen + 'px');
-            });
-
-            $('#hidemore_button').click(function () {
-                let thisBtn = $(this);
-                showmoreTop = showmoreList.offset().top
-
-                thisBtn.hide();
-                $('#showmore_button').show();
-                showmoreList.css('height', '120px');
-            });
-        } else {
-            $('#hidemore_button').hide();
-            $('#showmore_button').hide();
+            omit('more_looking_target',150);
         }
     });
 

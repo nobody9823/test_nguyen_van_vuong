@@ -31,7 +31,7 @@
             @foreach($plans as $plan)
             <div class="av_txt">
                 <div>{{ $plan->title }}<br>支援金額：{{ $plan->price }}円</div>
-                支援者：{{ $plan->included_payments_count }}人 <br>{{ $plan->formatted_delivery_date }}末までにお届け予定
+                支援者：{{ $plan->included_payments_count }}人 <br>お届け予定：{{ $plan->formatted_delivery_date }}
             </div>
             <br>
             @endforeach
@@ -68,8 +68,8 @@
         <div class="av_box">
             <div class="av_tit">お客様情報</div>
             <div class="av_txt">
-                お名前(フリガナ)：{{ Auth::user()->profile->last_name_kana }} {{ Auth::user()->profile->first_name_kana }}<br>
-                お名前：{{ Auth::user()->profile->last_name }} {{ Auth::user()->profile->first_name }}<br>
+                お名前(フリガナ)：{{ Auth::user()->profile->first_name_kana }} {{ Auth::user()->profile->last_name_kana }}<br>
+                お名前：{{ Auth::user()->profile->first_name }} {{ Auth::user()->profile->last_name }}<br>
                 性別：{{ Auth::user()->profile->gender }}<br>
                 電話番号：{{ Auth::user()->profile->phone_number }}<br>
                 生年月日：{{ Auth::user()->profile->birthday }}<br>
