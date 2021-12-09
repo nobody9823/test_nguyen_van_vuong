@@ -41,20 +41,6 @@ class DateFormatService
     }
 
     /**
-     * check argument date is within a day
-     *
-     * @param $date
-     *
-     * @return boolean
-     */
-    public function checkDateIsWithInADay($date)
-    {
-        $date = new Carbon($date);
-        $diff = $this->today->diffInHours($date);
-        return $diff <= 24;
-    }
-
-    /**
      * get diff compare with today
      *
      * @param $date

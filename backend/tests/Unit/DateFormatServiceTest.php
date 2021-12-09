@@ -53,42 +53,26 @@ class DateFormatServiceTest extends TestCase
         $this->assertFalse($response);
     }
 
-    // public function testcheckDateIsWithInADayExpectTrue()
-    // {
-    //     $now = Carbon::now();
-    //     $date = $now->subHours(12);
+    public function dataProviderFortestGetDiffCompareWithTodayExpect(): array
+    {
+        return [
+            '60分を出力' => [60, '60分'],
+            '24時間を出力' => [1440, '24時間'],
+            '1日を出力' => [1441, '1日'],
+        ];
+    }
 
-    //     $response = DateFormatFacade::checkDateIsWithInADay($date);
+    /**
+     * @dataProvider dataProviderFortestGetDiffCompareWithTodayExpect
+     */
+    public function testGetDiffCompareWithTodayExpect(int $minutes, string $left_time)
+    {
+        $now = Carbon::now();
+        $date = $now->subMinute($minutes);
+        $response = DateFormatFacade::getDiffCompareWithToday($date);
 
-    //     $this->assertTrue($response);
-    // }
-
-    // public function testcheckDateIsWithInADayExpectFalse()
-    // {
-    //     $now = Carbon::now();
-    //     $date = $now->subHours(30);
-
-    //     $response = DateFormatFacade::checkDateIsWithInADay($date);
-
-    //     $this->assertFalse($response);
-    // }
-
-    // public function testGetDiffCompareWithTodayExpect1()
-    // {
-    //     $now = Carbon::now();
-    //     $date = $now->subDays(1);
-    //     $response = DateFormatFacade::getDiffCompareWithToday($date);
-
-    //     $this->assertSame(1, $response);
-    // }
-
-    // public function testGetDiffCompareWithTodayExpectNullWhenArgumentIsNow()
-    // {
-    //     $now = Carbon::now();
-    //     $response = DateFormatFacade::getDiffCompareWithToday($now);
-
-    //     $this->assertSame(0, $response);
-    // }
+        $this->assertSame($left_time, $response);
+    }
 
     public function testForJapanese()
     {
