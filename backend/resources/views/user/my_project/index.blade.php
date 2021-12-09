@@ -60,11 +60,16 @@
                                 <div class="my_project_apply_wrapper">
                                     @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
                                     <div class="apply_btn">
-                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('本当に申請してもよろしいでしょうか？')">
+                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" id="apply_form">
+                                            @csrf
+                                            申請
+                                            <button type="button" class="cover_link disable-btn" onclick="applySubmit()"></button>
+                                        </form>
+                                        {{-- <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('本当に申請してもよろしいでしょうか？')">
                                             @csrf
                                             申請
                                             <button type="submit" class="cover_link disable-btn"></button>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                     @endif
                                 </div>
@@ -93,4 +98,18 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('script')
+<script>
+    function applySubmit() {
+        // if ({{ $project->title === "" }}) {
+        //     alert('タイトルが記述されていません');
+        // } else if ({{ $project->description === "" }}) {
+        //     alert('概要が記述されていません');
+        // } else {
+            document.getElementById('apply_form').submit();
+        // }
+    }
+</script>
 @endsection
