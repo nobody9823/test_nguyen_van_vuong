@@ -83,16 +83,10 @@ const applySubmit = (
 
     // 本人確認
     if (
-        identification['identify_image_1'] ===
-        'public/sampleImage/now_printing.png'
+        identification['identify_image_1'] && identification['identify_image_2']
+        ==='public/sampleImage/now_printing.png'
     )
-        requiredFields.push('・本人確認書類1\n');
-
-    if (
-        identification['identify_image_2'] ===
-        'public/sampleImage/now_printing.png'
-    )
-        requiredFields.push('・本人確認書類2\n');
+        requiredFields.push('・本人確認書類\n');
 
     // 銀行口座
     if (bankAccount === null) {
