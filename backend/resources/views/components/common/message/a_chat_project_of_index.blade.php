@@ -4,9 +4,7 @@
 >
     <div class="unread_mark_parent">
         <x-common.message.unread_mark :guard="$guard" :message="$project" />
-        @if($project->payments->isNotEmpty())
         {{$project->payments()->latest()->first()->updated_at->format('Y/m/d H:i:s')}}<br>
-        @endif
         【{{Str::limit($project->title,40)}}】
     </div>
 </div>
