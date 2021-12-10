@@ -102,7 +102,7 @@ if(isiOS) {
                     <p class="nav_btn_tit_L">ファンリターンとは</p>
 				</a>
 			</li>
-			<li class="menu-item nav_btn taso_li menuset_01">
+			<li class="menu-item nav_btn taso_li menuset_01 header_message_hamburger">
                 <x-user.header-chat-message />
 			</li>
             @guest('web')
