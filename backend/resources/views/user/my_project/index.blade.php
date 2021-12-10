@@ -71,6 +71,7 @@
                                                     {{ $project->plans }},
                                                     {{ $project->tags }},
                                                     {{ $project->user->profile }},
+                                                    {{ $project->user->address }},
                                                 )"
                                             >
                                             </button>
@@ -112,6 +113,7 @@
 
 @section('script')
 <script>
+    // インフルエンサーのプロジェクト作成の必須項目はこちらに追加してください
     const projectFields = {
         title : 'プロジェクト名',
         content : 'プロジェクト概要文',
@@ -132,7 +134,13 @@
         first_name_kana : '名（カナ）',
     }
 
-    const applySubmit = (project, plans, tags, profile) => {
+    const addressFields = {
+        city : '市区町村',
+        block : '町域',
+        block_number : '番地',
+    }
+
+    const applySubmit = (project, plans, tags, profile, address) => {
         let requiredFields = [];
 
         const getRequiredFields = (fields, table) => {
@@ -167,7 +175,12 @@
         // プロフィール
         getRequiredFields(profileFields, profile);
         if (profile['phone_number'] === '00000000000')
-            requiredFields.push('・電話番号を正しく入力してください\n');
+            requiredFields.push('・電話番号\n');
+
+        // アドレス
+        getRequiredFields(addressFields, address);
+        if (address['postal_code'] === '0')
+            requiredFields.push('・郵便番号\n');
 
         // 配列に入った必須項目フィールドを一つの文字列にまとめる
         let fieldMessages = requiredFields.join('');
