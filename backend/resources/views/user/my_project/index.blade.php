@@ -66,7 +66,12 @@
                                             <button
                                                 type="button"
                                                 class="cover_link disable-btn"
-                                                onclick="applySubmit({{ $project }}, {{ $project->plans }})">
+                                                onclick="applySubmit(
+                                                    {{ $project }},
+                                                    {{ $project->plans }},
+                                                    {{ $project->tags }},
+                                                )"
+                                            >
                                             </button>
                                         </form>
                                         {{-- <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('本当に申請してもよろしいでしょうか？')">
@@ -120,7 +125,7 @@
         content : 'リターン詳細',
     }
 
-    function applySubmit(project, plans) {
+    const applySubmit = (project, plans, tags) => {
         // プロジェクト
         let requiredFields = [];
 
@@ -144,6 +149,10 @@
             if (plans[0]['price'] < 1)
                 requiredFields.push('・' + i + 'つ目のリターン金額\n');
         }
+
+        // タグ
+        if (tags.length < 1)
+            requiredFields.push('・タグを1つ以上設定してください\n');
 
         // 配列に入った必須項目フィールドを一つの文字列にまとめる
         let fieldMessages = requiredFields.join('');
