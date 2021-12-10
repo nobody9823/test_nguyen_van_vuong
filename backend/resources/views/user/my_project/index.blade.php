@@ -73,6 +73,7 @@
                                                     {{ $project->user->profile }},
                                                     {{ $project->user->address }},
                                                     {{$project->user->identification}},
+                                                    {{ $bank_account }}
                                                 )"
                                             >
                                             </button>
@@ -134,14 +135,27 @@
         last_name_kana : '姓（カナ）',
         first_name_kana : '名（カナ）',
     }
-
     const addressFields = {
         city : '市区町村',
         block : '町域',
         block_number : '番地',
     }
+    const bankAccountFields = {
+        Bank_Code : '金融機関コード / 銀行コード',
+        Branch_Name : '支店番号',
+        Account_Number : '口座番号',
+        Account_Name : '口座名義',
+    }
 
-    const applySubmit = (project, plans, tags, profile, address, identification) => {
+    const applySubmit = (
+        project,
+        plans,
+        tags,
+        profile,
+        address,
+        identification,
+        bankAccount
+        ) => {
         let requiredFields = [];
 
         const getRequiredFields = (fields, table) => {
@@ -195,6 +209,13 @@
                 'public/sampleImage/now_printing.png'
             )
             requiredFields.push('・本人確認書類2\n');
+
+        // 銀行口座
+        if (bankAccount === null) {
+            requiredFields.push('・銀行口座情報を入力してください\n');
+        } else {
+            getRequiredFields(bankAccountFields, bankAccount);
+        }
 
         // 配列に入った必須項目フィールドを一つの文字列にまとめる
         let fieldMessages = requiredFields.join('');
