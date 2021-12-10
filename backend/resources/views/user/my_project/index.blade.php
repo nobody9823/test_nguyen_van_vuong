@@ -72,6 +72,7 @@
                                                     {{ $project->tags }},
                                                     {{ $project->user->profile }},
                                                     {{ $project->user->address }},
+                                                    {{$project->user->identification}},
                                                 )"
                                             >
                                             </button>
@@ -140,7 +141,7 @@
         block_number : '番地',
     }
 
-    const applySubmit = (project, plans, tags, profile, address) => {
+    const applySubmit = (project, plans, tags, profile, address, identification) => {
         let requiredFields = [];
 
         const getRequiredFields = (fields, table) => {
@@ -181,6 +182,19 @@
         getRequiredFields(addressFields, address);
         if (address['postal_code'] === '0')
             requiredFields.push('・郵便番号\n');
+
+        // 本人確認
+        if (
+            identification['identify_image_1'] ===
+                'public/sampleImage/now_printing.png'
+            )
+            requiredFields.push('・本人確認書類1\n');
+
+        if (
+            identification['identify_image_2'] ===
+                'public/sampleImage/now_printing.png'
+            )
+            requiredFields.push('・本人確認書類2\n');
 
         // 配列に入った必須項目フィールドを一つの文字列にまとめる
         let fieldMessages = requiredFields.join('');
