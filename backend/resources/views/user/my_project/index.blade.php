@@ -136,15 +136,13 @@
         if (plans.length === 0)
             requiredFields.push('・リターンを1つ以上作成してください\n');
 
-        let count = 0;
-        for (const plan of plans) {
-            count += 1;
+        for (let i = 1; i < plans.length + 1; i++) {
             for( key in planFields ) {
-                let field = '・' + count + 'つ目の' + planFields[key] + '\n';
-                plan[key] === '' && requiredFields.push(field);
+                let field = '・' + i + 'つ目の' + planFields[key] + '\n';
+                plans[0][key] === '' && requiredFields.push(field);
             }
-            if (plan['price'] < 1)
-                requiredFields.push('・' + count + 'つ目のリターン金額\n');
+            if (plans[0]['price'] < 1)
+                requiredFields.push('・' + i + 'つ目のリターン金額\n');
         }
 
         // 配列に入った必須項目フィールドを一つの文字列にまとめる
