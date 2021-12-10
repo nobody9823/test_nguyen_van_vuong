@@ -3199,3 +3199,8 @@ margin: 20px 0;
 .menuset_01 .header_message_icon span {
     right: 7px;
 }
+@media screen and (max-width: 1000px){
+    .header_message_hamburger {
+        display: none;
+    }
+}
