@@ -46,7 +46,7 @@
     </div>
 
     <div class="{{ empty($cardSize) ? 'ib01R_04' : 'ib01L_04' }}">
-        <div>現在の支援金額 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
+        <div>現在の支援総額 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
         <div class="supporter_count">現在の支援者数 <span>{{ $project->payments_count }}人</span></div>
         @if (DateFormat::checkDateIsFuture($project->start_date))
             <div>残り <span>{{ DateFormat::getDiffCompareWithToday($project->start_date) }}</span></div>
