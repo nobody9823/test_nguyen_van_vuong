@@ -58,13 +58,15 @@ const applySubmit = (
     if (plans.length === 0)
         requiredFields.push('・リターンを1つ以上作成してください\n');
 
-    for (let i = 1; i < plans.length + 1; i++) {
+    for (let i = 0; i < plans.length; i++) {
         for (let key in planFields) {
-            let field = '・' + i + 'つ目の' + planFields[key] + '\n';
-            plans[0][key] === '' && requiredFields.push(field);
+            let field = '・' + ( i + 1) + '番目の' + planFields[key] + '\n';
+            plans[i][key] === '' && requiredFields.push(field);
         }
-        if (plans[0]['price'] < 1)
-            requiredFields.push('・' + i + 'つ目のリターン金額\n');
+        if (plans[i]['price'] < 1)
+            requiredFields.push('・' + (i + 1) + '番目のリターン金額\n');
+        if (plans[i]['image_url'] === 'public/sampleImage/now_printing.png')
+            requiredFields.push('・' + (i + 1) + '番目のリターン画像\n');
     }
 
     // タグ
