@@ -70,6 +70,7 @@
                                                     {{ $project }},
                                                     {{ $project->plans }},
                                                     {{ $project->tags }},
+                                                    {{ $project->user->profile }},
                                                 )"
                                             >
                                             </button>
@@ -124,18 +125,27 @@
         title : 'リターン名',
         content : 'リターン詳細',
     }
+    const profileFields = {
+        last_name : '姓',
+        first_name : '名',
+        last_name_kana : '姓（カナ）',
+        first_name_kana : '名（カナ）',
+    }
 
-    const applySubmit = (project, plans, tags) => {
-        // プロジェクト
+    const applySubmit = (project, plans, tags, profile) => {
         let requiredFields = [];
 
+        const getRequiredFields = (fields, table) => {
+            for( key in fields ) {
+                let field = '・' + fields[key] + '\n';
+                table[key] === '' && requiredFields.push(field);
+            }
+        }
+
+        // プロジェクト
         if (project['target_number'] < 1)
             requiredFields.push('・目標金額\n');
-
-        for( key in projectFields ) {
-            let field = '・' + projectFields[key] + '\n';
-            project[key] === '' && requiredFields.push(field);
-        }
+        getRequiredFields(projectFields, project);
 
         // リターン
         if (plans.length === 0)
@@ -153,6 +163,11 @@
         // タグ
         if (tags.length < 1)
             requiredFields.push('・タグを1つ以上設定してください\n');
+
+        // プロフィール
+        getRequiredFields(profileFields, profile);
+        if (profile['phone_number'] === '00000000000')
+            requiredFields.push('・電話番号を正しく入力してください\n');
 
         // 配列に入った必須項目フィールドを一つの文字列にまとめる
         let fieldMessages = requiredFields.join('');
