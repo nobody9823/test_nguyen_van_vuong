@@ -56,7 +56,6 @@ class MyProjectController extends Controller
         $bank_account = Auth::user()->identification->bank_id
         ? $this->card_payment->getBankAccount(Auth::user()->identification->bank_id)
         : 'null';
-        // dd($bank_account->json());
 
         $projects = $this->user->projects()->get();
         return view('user.my_project.index', [
