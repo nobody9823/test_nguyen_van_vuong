@@ -60,7 +60,7 @@ const applySubmit = (
 
     for (let i = 0; i < plans.length; i++) {
         for (let key in planFields) {
-            let field = '・' + ( i + 1) + '番目の' + planFields[key] + '\n';
+            let field = '・' + (i + 1) + '番目の' + planFields[key] + '\n';
             plans[i][key] === '' && requiredFields.push(field);
         }
         if (plans[i]['price'] < 1)
