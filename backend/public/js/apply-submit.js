@@ -101,8 +101,7 @@ const applySubmit = (
     let joinedRequiredFields = requiredFields.join('');
 
     if (requiredFields.length === 0) {
-        alert('申請してもよろしいですか？');
-        document.getElementById('apply_form').submit();
+        confirm('申請してもよろしいですか？') && document.getElementById('apply_form').submit();
     } else {
         let validationMessage = '下記の項目を正しく入力してから申請してください。\n' + joinedRequiredFields;
         alert(validationMessage);
