@@ -6,7 +6,7 @@ const projectFields = {
     end_date: '掲載終了日',
     reward_by_total_quantity: '支援人数順PSリターン内容',
     // NOTE: こちらは支援総額順のリターンを使用する際にコメントアウトを解除してください。
-    // reward_by_total_quantity : '支援総額順リターン内容',
+    // reward_by_total_amount : '支援総額順リターン内容',
 }
 const planFields = {
     title: 'リターン名',
