@@ -46,21 +46,12 @@
     </div>
 
     <div class="{{ empty($cardSize) ? 'ib01R_04' : 'ib01L_04' }}">
-        <div>現在の支援金額 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
+        <div>現在の支援総額 <span>{{ number_format($project->payments_sum_price) }}円</span></div>
         <div class="supporter_count">現在の支援者数 <span>{{ $project->payments_count }}人</span></div>
         @if (DateFormat::checkDateIsFuture($project->start_date))
-            {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
-            {{-- @if (DateFormat::checkDateIsWithInADay($project->start_date))
-                <div style="color: #e65d65;">残り <span>{{ DateFormat::getDiffCompareWithToday($project->start_date) }}時間</span></div>
-            @else --}}
-                <div>残り <span>{{ DateFormat::getDiffCompareWithToday($project->start_date) }}日</span></div>
-            {{-- @endif --}}
+            <div>残り <span>{{ DateFormat::getDiffCompareWithToday($project->start_date) }}</span></div>
         @elseif (DateFormat::checkDateIsPast($project->start_date) && DateFormat::checkDateIsFuture($project->end_date))
-            {{-- @if (DateFormat::checkDateIsWithInADay($project->end_date))
-                <div style="color: #e65d65;">残り <span>{{ DateFormat::getDiffCompareWithToday($project->end_date) }}時間</span></div>
-            @else --}}
-                <div>残り <span>{{ DateFormat::getDiffCompareWithToday($project->end_date) }}日</span></div>
-            {{-- @endif --}}
+            <div>残り <span>{{ DateFormat::getDiffCompareWithToday($project->end_date) }}</span></div>
         @elseif (DateFormat::checkDateIsPast($project->end_date))
             <div>募集終了</div>
         @endif
