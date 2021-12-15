@@ -46,7 +46,7 @@ jobs:
         run: |
           cd backend && composer install -n --prefer-dist
       - name: fix composer version
-        run: cd backend && composer self-update 2.1.11
+        run: cd backend && sudo composer self-update 2.1.11
       - name: copy .env
         run: cd backend && cp .env.example .env
       - name: generate key
