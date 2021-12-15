@@ -100,11 +100,10 @@ const applySubmit = (
     // 配列に入った必須項目フィールドを一つの文字列にまとめる
     let joinedRequiredFields = requiredFields.join('');
 
-    if (requiredFields.length === 0) {
-        alert('申請してもよろしいですか？');
-        document.getElementById('apply_form').submit();
-    } else {
-        let validationMessage = '下記の項目を正しく入力してから申請してください。\n' + joinedRequiredFields;
-        alert(validationMessage);
-    }
+    // if (requiredFields.length === 0) {
+    //     confirm('申請してもよろしいですか？') && document.getElementById('apply_form').submit();
+    // } else {
+    //     let validationMessage = '下記の項目を正しく入力してから申請してください。\n' + joinedRequiredFields;
+    //     alert(validationMessage);
+    // }
 }
