@@ -7,6 +7,7 @@ use App\Http\Requests\MessageContentRequest;
 use App\Models\MessageContent;
 use App\Models\Payment;
 use App\Models\Project;
+use App\Notifications\AppliedMessageNotification;
 use App\Traits\message\MessageFunctions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,7 @@ class MessageController extends Controller
     {
         $this->authorize('checkOwnedBySupporter', $payment);
         if ($this->message_store($request, $payment, 'supporter')) {
+            $payment->project->user->notify(new AppliedMessageNotification($payment));
             return redirect()->back()->with('flash_message', 'メッセージ送信が完了しました。');
         } else {
             return redirect()->back()->with('error', 'メッセージ送信に失敗しました。時間をおいてお試しください。');
@@ -78,6 +80,7 @@ class MessageController extends Controller
     {
         $this->authorize('checkOwnedByExecutor', $payment);
         if ($this->message_store($request, $payment, 'executor')) {
+            $payment->user->notify(new AppliedMessageNotification($payment));
             return redirect()->back()->with('flash_message', 'メッセージ送信が完了しました。');
         } else {
             return redirect()->back()->with('error', 'メッセージ送信に失敗しました。時間をおいてお試しください。');
