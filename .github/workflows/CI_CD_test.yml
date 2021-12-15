@@ -4,6 +4,8 @@ on:
     types: [opened, synchronize]
     branches:
       - "develop"
+      - "staging"
+      - "hotfix"
       - "main"
 jobs:
   test:
@@ -43,6 +45,8 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd backend && composer install -n --prefer-dist
+      - name: fix composer version
+        run: cd backend && composer self-update 2.1.11
       - name: copy .env
         run: cd backend && cp .env.example .env
       - name: generate key
