@@ -60,11 +60,11 @@
                                 <div class="my_project_apply_wrapper">
                                     @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
                                     <div class="apply_btn">
-                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" id="apply_form">
+                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST">
                                             @csrf
                                             申請
                                             <button
-                                                type="button"
+                                                type="submit"
                                                 class="cover_link disable-btn"
                                             >
                                             </button>
@@ -98,7 +98,3 @@
     </div>
 </section>
 @endsection
-
-{{-- @section('script')
-    <script src={{ asset('/js/apply-submit.js') }}></script>
-@endsection --}}
