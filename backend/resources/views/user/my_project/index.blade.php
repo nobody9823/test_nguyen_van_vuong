@@ -60,10 +60,23 @@
                                 <div class="my_project_apply_wrapper">
                                     @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
                                     <div class="apply_btn">
-                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('本当に申請してもよろしいでしょうか？')">
+                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" id="apply_form">
                                             @csrf
                                             申請
-                                            <button type="submit" class="cover_link disable-btn"></button>
+                                            <button
+                                                type="button"
+                                                class="cover_link disable-btn"
+                                                onclick="applySubmit(
+                                                    {{ $project }},
+                                                    {{ $project->plans }},
+                                                    {{ $project->tags }},
+                                                    {{ $project->user->profile }},
+                                                    {{ $project->user->address }},
+                                                    {{$project->user->identification}},
+                                                    {{ $bank_account }}
+                                                )"
+                                            >
+                                            </button>
                                         </form>
                                     </div>
                                     @endif
@@ -93,4 +106,8 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('script')
+    <script src={{ asset('/js/apply-submit.js') }}></script>
 @endsection
