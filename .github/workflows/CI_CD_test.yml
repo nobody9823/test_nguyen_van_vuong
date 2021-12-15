@@ -50,8 +50,6 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd backend && composer install -n --prefer-dist
-      - name: fix composer version
-        run: cd backend && sudo composer self-update 2.0.14
       - name: copy .env
         run: cd backend && cp .env.example .env
       - name: generate key
