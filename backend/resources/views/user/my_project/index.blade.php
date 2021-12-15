@@ -66,15 +66,6 @@
                                             <button
                                                 type="button"
                                                 class="cover_link disable-btn"
-                                                onclick="applySubmit(
-                                                    {{ $project }},
-                                                    {{ $project->plans }},
-                                                    {{ $project->tags }},
-                                                    {{ $project->user->profile }},
-                                                    {{ $project->user->address }},
-                                                    {{$project->user->identification}},
-                                                    {{ $bank_account }}
-                                                )"
                                             >
                                             </button>
                                         </form>
@@ -108,6 +99,6 @@
 </section>
 @endsection
 
-@section('script')
+{{-- @section('script')
     <script src={{ asset('/js/apply-submit.js') }}></script>
-@endsection
+@endsection --}}
