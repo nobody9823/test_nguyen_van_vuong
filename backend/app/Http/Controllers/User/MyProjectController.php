@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Actions\CardPayment\CardPaymentInterface;
 use App\Http\Controllers\Controller;
 use App\Services\Project\ProjectService;
 use App\Http\Requests\MyProjectRequest;
@@ -27,9 +28,7 @@ class MyProjectController extends Controller
 
     protected $my_project_tab_service;
 
-    public function __construct(
-        ProjectService $project_service,
-        EditMyProjectTabService $my_project_tab_service,
+    public function __construct(ProjectService $project_service, EditMyProjectTabService $my_project_tab_service,
     )
     {
         $this->middleware(function ($request, $next) {
@@ -49,12 +48,8 @@ class MyProjectController extends Controller
      */
     public function index()
     {
-        $bank_account = Auth::user()->identification->bank_id
-
         $projects = $this->user->projects()->get();
-        return view('user.my_project.index', [
-            'projects' => $projects->load('projectFiles'),
-        ]);
+        return view('user.my_project.index', ['projects' => $projects->load('projectFiles')]);
     }
 
     /**
