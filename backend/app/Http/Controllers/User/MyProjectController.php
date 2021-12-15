@@ -28,8 +28,7 @@ class MyProjectController extends Controller
 
     protected $my_project_tab_service;
 
-    public function __construct(ProjectService $project_service, EditMyProjectTabService $my_project_tab_service,
-    )
+    public function __construct(ProjectService $project_service, EditMyProjectTabService $my_project_tab_service)
     {
         $this->middleware(function ($request, $next) {
             $this->user = \Auth::user();
