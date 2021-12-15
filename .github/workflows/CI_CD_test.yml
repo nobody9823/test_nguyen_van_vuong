@@ -33,6 +33,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: php-actions/composer@v6
+        with:
+          version: 2.1.11
       - name: cache vendor
         id: cache
         uses: actions/cache@v1
