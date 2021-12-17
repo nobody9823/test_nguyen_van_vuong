@@ -4,6 +4,8 @@ on:
     types: [opened, synchronize]
     branches:
       - "develop"
+      - "staging"
+      - "hotfix"
       - "main"
 jobs:
   test:
@@ -31,6 +33,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: setup php & composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          tools: composer:2.1.11
       - name: cache vendor
         id: cache
         uses: actions/cache@v1
