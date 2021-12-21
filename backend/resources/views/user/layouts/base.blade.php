@@ -15,7 +15,7 @@ if(isiOS) {
 }
 </script>
 
-<title>FanReturn (ファンリターン) 〜インフルエンサーの「やりたい」が叶う〜 | @yield('title')</title>
+<title>FanReturn (ファンリターン)  | @yield('title')</title>
 <meta name="description" content="グッズを作りたい！ファンイベントを開きたい！そんなインフルエンサーに特化したクラウドファンディングサービスです。更にファンの満足度をUPさせる仕組みが多数！">
 <link rel="shortcut icon" href="{{ asset('image/fanreturn.ico') }}">
 <link rel="apple-touch-icon" href="{{ asset('image/fanreturn_apple_touch_icon.png') }}">

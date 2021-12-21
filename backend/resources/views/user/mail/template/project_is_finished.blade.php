@@ -2,7 +2,7 @@
 
 @section('content')
     <p>
-        <div>Fan Returnです。</div>
+        <div>FanReturnです。</div>
         <div>下記プロジェクトの掲載が終了しました。</div>
         <div>プロジェクト名: {{ $project->title }}</div>
         <div>目標金額: ¥{{ number_format($project->target_number) }}</div>

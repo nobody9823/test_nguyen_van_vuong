@@ -41,7 +41,7 @@ class RemittanceNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('【FanReturn】送金が完了しました。')
+            ->subject('【FanReturn】送金完了')
             ->view(
                 'user.mail.template.remittance',
                 [
