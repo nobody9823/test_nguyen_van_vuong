@@ -30,7 +30,7 @@
                         <tr>
                             <th>
                                 <div class="send_btn">
-                                    発送済みにする
+                                    発送済にする
                                     <button type="submit" class="cover_link disable-btn"></button>
                                 </div>
                             </th>
