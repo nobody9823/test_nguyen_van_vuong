@@ -47,7 +47,7 @@
                                 @if ($payment->is_sent)
                                     <p class="sent_return">
                                         <i class="fas fa-check-circle"></i>
-                                        発送済み
+                                        発送済
                                     </p>
                                 @else
                                     <input type="checkbox" id="payment_{{ $payment->id }}" class="ac_list_checks" name="payment_ids[]" value="{{ $payment->id }}">
