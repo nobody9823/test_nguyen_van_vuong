@@ -81,7 +81,12 @@
                     </div><!--/su_pr_02--> --}}
 
                     <div class="tit_L_01 E-font">
-                        <div class="sub_tit_L"><a href="{{ route('user.report.index', ['project' => $project]) }}">活動報告 : {{ $project->reports_count }}件</a></div>
+                        <div class="sub_tit_L">
+                            <a href="{{ route('user.report.index', ['project' => $project]) }}">
+                                <i class="fas fa-file-alt"></i>
+                                活動報告 : {{ $project->reports_count }}件
+                            </a>
+                        </div>
                             {{-- <div class="su_pr_02">
                                 <div class="su_pr_02_01 m_b_1510">リターン名</div>
                                 <div class="su_pr_02_02 m_b_1510"></div>
@@ -98,64 +103,75 @@
                                     商品の紹介文：
                                 </div>
                             </div><!--/su_pr_02--> --}}
+                    </div>
+                    {{-- <div class="def_btn">
+                        @if ($project->relaese_status === '掲載中' && $project->relaese_status === '掲載停止中')
+                            <a class="disable-btn">
+                                <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">作成画面へ</p>
+                            </a>
+                        @else
+                            <a class="disable-btn">
+                                <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">掲載後に投稿できます。</p>
+                            </a>
+                        @endif
+                    </div> --}}
+                    <div class="tit_L_01 E-font">
+                        <div class="sub_tit_L">
+                            <a href="{{ route('user.comment.index', ['project' => $project]) }}">
+                                <i class="fas fa-comments"></i>
+                                コメント : {{ $project->comments_count }}件
+                            </a>
                         </div>
-                        {{-- <div class="def_btn">
-                            @if ($project->relaese_status === '掲載中' && $project->relaese_status === '掲載停止中')
-                                <a class="disable-btn">
-                                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">作成画面へ</p>
-                                </a>
-                            @else
-                                <a class="disable-btn">
-                                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">掲載後に投稿できます。</p>
-                                </a>
-                            @endif
-                        </div> --}}
-                        <div class="tit_L_01 E-font">
-                            <div class="sub_tit_L"><a href="{{ route('user.comment.index', ['project' => $project]) }}">コメント : {{ $project->comments_count }}件</a></div>
-                                {{-- <div class="su_pr_02">
-                                    <div class="su_pr_02_01 m_b_1510">リターン名</div>
-                                    <div class="su_pr_02_02 m_b_1510"></div>
-                                    <div class="su_pr_02_03 m_b_1510">
-                                        <div><span>支払い総額</span><br>円</div>
-                                        <div><span>商品単価</span><br>円</div>
-                                        <div><span>数量</span><br>個</div>
-                                    </div><!--/su_pr_02_03-->
-                                    <div class="su_pr_02_04 m_b_1510">
-                                        <div>支援日：{{ DateFormat::forJapanese($project->created_at) }}</div>
-                                        <div>お届け予定日：</div>
-                                    </div><!--/su_pr_02_04-->
-                                    <div class="su_pr_02_05 m_b_1510">
-                                        商品の紹介文：
-                                    </div>
-                                </div><!--/su_pr_02--> --}}
+                        {{-- <div class="su_pr_02">
+                            <div class="su_pr_02_01 m_b_1510">リターン名</div>
+                            <div class="su_pr_02_02 m_b_1510"></div>
+                            <div class="su_pr_02_03 m_b_1510">
+                                <div><span>支払い総額</span><br>円</div>
+                                <div><span>商品単価</span><br>円</div>
+                                <div><span>数量</span><br>個</div>
+                            </div><!--/su_pr_02_03-->
+                            <div class="su_pr_02_04 m_b_1510">
+                                <div>支援日：{{ DateFormat::forJapanese($project->created_at) }}</div>
+                                <div>お届け予定日：</div>
+                            </div><!--/su_pr_02_04-->
+                            <div class="su_pr_02_05 m_b_1510">
+                                商品の紹介文：
                             </div>
-                            <div class="tit_L_01 E-font">
-                                <div class="sub_tit_L"><a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">支援者とのやりとり : {{ $project->payments_count }}人</a></div>
-                                    {{-- <div class="su_pr_02">
-                                        <div class="su_pr_02_01 m_b_1510">リターン名</div>
-                                        <div class="su_pr_02_02 m_b_1510"></div>
-                                        <div class="su_pr_02_03 m_b_1510">
-                                            <div><span>支払い総額</span><br>円</div>
-                                            <div><span>商品単価</span><br>円</div>
-                                            <div><span>数量</span><br>個</div>
-                                        </div><!--/su_pr_02_03-->
-                                        <div class="su_pr_02_04 m_b_1510">
-                                            <div>支援日：{{ DateFormat::forJapanese($project->created_at) }}</div>
-                                            <div>お届け予定日：</div>
-                                        </div><!--/su_pr_02_04-->
-                                        <div class="su_pr_02_05 m_b_1510">
-                                            商品の紹介文：
-                                        </div>
-                                    </div><!--/su_pr_02--> --}}
+                        </div><!--/su_pr_02--> --}}
+                    </div>
+                    <div class="tit_L_01 E-font">
+                        <div class="sub_tit_L">
+                            <a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">
+                                <i class="fas fa-envelope"></i>
+                                支援者とのDM : {{ $project->payments_count }}人
+                            </a>
+                        </div>
+                            {{-- <div class="su_pr_02">
+                                <div class="su_pr_02_01 m_b_1510">リターン名</div>
+                                <div class="su_pr_02_02 m_b_1510"></div>
+                                <div class="su_pr_02_03 m_b_1510">
+                                    <div><span>支払い総額</span><br>円</div>
+                                    <div><span>商品単価</span><br>円</div>
+                                    <div><span>数量</span><br>個</div>
+                                </div><!--/su_pr_02_03-->
+                                <div class="su_pr_02_04 m_b_1510">
+                                    <div>支援日：{{ DateFormat::forJapanese($project->created_at) }}</div>
+                                    <div>お届け予定日：</div>
+                                </div><!--/su_pr_02_04-->
+                                <div class="su_pr_02_05 m_b_1510">
+                                    商品の紹介文：
                                 </div>
-                            <div class="tit_L01 E-font">
-                                <div class="sub_tit_L">
-                                    <a href="{{ route('user.supporter.index', ['project' => $project]) }}">支援者一覧</a>
-                                </div>
-                            </div>
-                            </div>
+                            </div><!--/su_pr_02--> --}}
+                    </div>
+                    <div class="tit_L01 E-font">
+                        <div class="sub_tit_L">
+                            <a href="{{ route('user.supporter.index', ['project' => $project]) }}">
+                                <i class="fas fa-address-card"></i>
+                                支援者一覧
+                            </a>
                         </div>
                     </div>
+                </div>
             </div>
     </div>
 </section>
