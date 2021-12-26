@@ -87,49 +87,89 @@
                             <h2><i class="fas fa-address-card"></i>&ensp;支援者一覧</h2>
                             <p>プロジェクト支援者の個人情報(住所や電話番号等)が閲覧できます。</p>
                         </div>
+                        @if ($project->release_status === '掲載中')
                         <a href="{{ route('user.supporter.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
+                                @if ($project->payments_count > 0)
                                 <p>{{ $project->payments_count }}人の支援者がいます</p>
+                                @else
+                                <p>現在支援者はいません</p>
+                                @endif
                             </div>
-                            <i class="fas fa-arrow-circle-right test"></i>
+                            <i class="fas fa-arrow-circle-right"></i>
                         </a>
+                        @else
+                        <div class="caution_box">
+                            <p>プロジェクトの審査を通過すると閲覧可能です</p>
+                        </div>
+                        @endif
                     </div>
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-envelope"></i>&ensp;支援者とのDM</h2>
                             <p>プロジェクト支援者とのダイレクトメッセージができます。</p>
                         </div>
+                        @if ($project->release_status === '掲載中')
                         <a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
                                 {{-- FIXME: ここはmainブランチとコンフリクトすると思いますので、支援者のDM件数が表示されるようにしてください。 2021/12/26 --}}
+                                @if ($project->payments_count > 0)
                                 <p>{{ $project->payments_count }}件のDMがあります</p>
+                                @else
+                                <p>現在支援者からのDMはありません</p>
+                                @endif
                             </div>
-                            <i class="fas fa-arrow-circle-right test"></i>
+                            <i class="fas fa-arrow-circle-right"></i>
                         </a>
+                        @else
+                        <div class="caution_box">
+                            <p>プロジェクトの審査を通過すると閲覧可能です</p>
+                        </div>
+                        @endif
                     </div>
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-comments"></i>&ensp;コメント</h2>
                             <p>プロジェクト支援者からの応援コメントの閲覧や返信ができます。</p>
                         </div>
+                        @if ($project->release_status === '掲載中')
                         <a href="{{ route('user.comment.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
+                                @if ($project->comments_count > 0)
                                 <p>{{ $project->comments_count }}人からのコメントがあります</p>
+                                @else
+                                <p>現在支援者からのコメントはありません</p>
+                                @endif
                             </div>
+                            <i class="fas fa-arrow-circle-right"></i>
                         </a>
-                        <i class="fas fa-arrow-circle-right test"></i>
+                        @else
+                        <div class="caution_box">
+                            <p>プロジェクトの審査を通過すると閲覧可能です</p>
+                        </div>
+                        @endif
                     </div>
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-bullhorn"></i>&ensp;活動報告</h2>
                             <p>プロジェクトの活動進捗を支援者に向け、発信する事ができます。</p>
                         </div>
+                        @if ($project->release_status === '掲載中')
                         <a href="{{ route('user.report.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
+                                @if ($project->reports_count > 0)
                                 <p>{{ $project->reports_count }}件の活動報告があります</p>
+                                @else
+                                <p>活動報告は未作成です</p>
+                                @endif
                             </div>
+                            <i class="fas fa-arrow-circle-right"></i>
                         </a>
-                        <i class="fas fa-arrow-circle-right test"></i>
+                        @else
+                        <div class="caution_box">
+                            <p>プロジェクトの審査を通過すると投稿可能です</p>
+                        </div>
+                        @endif
                     </div>
                     {{-- <div class="su_pr_02">
                         <div class="su_pr_02_01 m_b_1510">リターン名</div>
