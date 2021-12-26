@@ -85,6 +85,7 @@
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-address-card"></i>&ensp;支援者一覧</h2>
+                            <p>プロジェクト支援者の個人情報(住所や電話番号等)が閲覧できます。</p>
                         </div>
                         <a href="{{ route('user.supporter.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
@@ -96,6 +97,7 @@
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-envelope"></i>&ensp;支援者とのDM</h2>
+                            <p>プロジェクト支援者とのダイレクトメッセージができます。</p>
                         </div>
                         <a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
@@ -108,10 +110,11 @@
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-comments"></i>&ensp;コメント</h2>
+                            <p>プロジェクト支援者からの応援コメントの閲覧や返信ができます。</p>
                         </div>
                         <a href="{{ route('user.comment.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
-                                <p>{{ $project->comments_count }}件のコメントがあります</p>
+                                <p>{{ $project->comments_count }}人からのコメントがあります</p>
                             </div>
                         </a>
                         <i class="fas fa-arrow-circle-right test"></i>
@@ -119,6 +122,7 @@
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-bullhorn"></i>&ensp;活動報告</h2>
+                            <p>プロジェクトの活動進捗を支援者に向け、発信する事ができます。</p>
                         </div>
                         <a href="{{ route('user.report.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
