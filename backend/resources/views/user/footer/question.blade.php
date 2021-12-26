@@ -60,7 +60,7 @@
             <h2 class="about__title">FanReturnとは</h2>
             <time class="about__date" datetime="2021-06-08">2021.6.8</time>
             <p class="about__img-wrapper"><img src="{{ asset('image/logo-color.svg') }}" alt="FanReturn"></p>
-            <p class="about__text sp-text-center">イベントを開きたい…<br class="is-sp">オリジナルグッズを作りたい…<br>そんなインフルエンサーの“やりたい”を叶える<br class="is-sp">クラウドファンディングサービスです。</p>
+            <p class="about__text sp-text-center">イベントを開きたい…<br class="is-sp">オリジナルグッズを作りたい…<br>そんな“やりたい”を叶える<br class="is-sp">クラウドファンディングサービスです。</p>
             <ul class="about-fanreturn__list">
                 <li class="about-fanreturn__item">
                     <p class="about-fanreturn__item__text">オリジナルTシャツを<br>作りたい！</p>

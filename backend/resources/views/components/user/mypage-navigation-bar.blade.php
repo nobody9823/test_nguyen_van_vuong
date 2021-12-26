@@ -1,14 +1,18 @@
 <div class="prof_page_L">
 
     <div class="prof_img_box">
-        <div class="prof_img">
-            @if(isset(Auth::user()->profile))
-            <img src="{{ Storage::url(Auth::user()->profile->image_url) }}">
-            @else
-            <img src="image/my-page.svg">
-            @endif
-        </div>
-        <div class="prof_img_name">{{ Auth::user()->name }}</div>
+        <a href="{{ route('user.profile') }}">
+            <div class="prof_img">
+                @if(isset(Auth::user()->profile))
+                <img src="{{ Storage::url(Auth::user()->profile->image_url) }}">
+                @else
+                <img src="image/my-page.svg">
+                @endif
+            </div>
+        </a>
+        <a href="{{ route('user.profile') }}">
+            <p class="prof_img_name">{{ Auth::user()->name }}</p>
+        </a>
     </div>
     <div class="prof_btn_box_base">
         <div class="prof_btn_box_01">

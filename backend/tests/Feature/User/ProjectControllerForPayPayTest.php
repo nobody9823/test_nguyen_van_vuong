@@ -90,7 +90,7 @@ class ProjectControllerForPayPayTest extends TestCase
                 "status" => "COMPLETED",
                 "acceptedAt" => 1625220437,
                 "refunds" => [],
-                "merchantPaymentId" => $this->payment->paymentToken->token,
+                "merchantPaymentId" => $this->payment->paymentToken->order_id,
                 "amount" => [],
                 "requestedAt" => 1625220437,
                 "storeId" => "",
