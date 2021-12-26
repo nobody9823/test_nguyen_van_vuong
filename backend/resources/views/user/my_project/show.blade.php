@@ -11,7 +11,7 @@
     <div class="prof_page_base inner_item">
         <x-user.mypage-navigation-bar/>
 
-            <div class="prof_page_R">
+            <div class="prof_page_R my_project_detail">
                 <div class="su_pr_base">
                     <x-common.mypage.project-information :project="$project" />
 
@@ -55,6 +55,7 @@
                             @endif
                         </div>
                     </div>
+                </div>
 
                     {{-- NOTICE: キャンプファイアの方ではリターンの一覧が特になかったので一旦コメントアウトにしています。 --}}
                     {{-- <div class="tit_L_01 E-font accordion js-accordion">
@@ -80,39 +81,51 @@
                         @endif
                     </div><!--/su_pr_02--> --}}
 
-                    <div>
-                        <div class="tit_L_01 E-font">
-                            <div class="sub_tit_L">
-                                <a href="{{ route('user.supporter.index', ['project' => $project]) }}">
-                                    <i class="fas fa-address-card"></i>
-                                    支援者一覧
-                                </a>
-                            </div>
+                <div>
+                    <div class="content">
+                        <div class="sub_tit_L">
+                            <h2><i class="fas fa-address-card"></i>&ensp;支援者一覧</h2>
                         </div>
-                        <div class="tit_L_01 E-font">
-                            <div class="sub_tit_L">
-                                <a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">
-                                    <i class="fas fa-envelope"></i>
-                                    支援者とのDM : {{ $project->payments_count }}人
-                                </a>
+                        <a href="{{ route('user.supporter.index', ['project' => $project]) }}">
+                            <div class="display_count_btn">
+                                <p>{{ $project->payments_count }}人の支援者がいます</p>
                             </div>
+                            <i class="fas fa-arrow-circle-right test"></i>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="sub_tit_L">
+                            <h2><i class="fas fa-envelope"></i>&ensp;支援者とのDM</h2>
                         </div>
-                        <div class="tit_L_01 E-font">
-                            <div class="sub_tit_L">
-                                <a href="{{ route('user.comment.index', ['project' => $project]) }}">
-                                    <i class="fas fa-comments"></i>
-                                    コメント : {{ $project->comments_count }}件
-                                </a>
+                        <a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">
+                            <div class="display_count_btn">
+                                {{-- FIXME: ここはmainブランチとコンフリクトすると思いますので、支援者のDM件数が表示されるようにしてください。 2021/12/26 --}}
+                                <p>{{ $project->payments_count }}件のDMがあります</p>
                             </div>
+                            <i class="fas fa-arrow-circle-right test"></i>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="sub_tit_L">
+                            <h2><i class="fas fa-comments"></i>&ensp;コメント</h2>
                         </div>
-                        <div class="tit_L_01 E-font">
-                            <div class="sub_tit_L">
-                                <a href="{{ route('user.report.index', ['project' => $project]) }}">
-                                    <i class="fas fa-bullhorn"></i>
-                                    活動報告 : {{ $project->reports_count }}件
-                                </a>
+                        <a href="{{ route('user.comment.index', ['project' => $project]) }}">
+                            <div class="display_count_btn">
+                                <p>{{ $project->comments_count }}件のコメントがあります</p>
                             </div>
+                        </a>
+                        <i class="fas fa-arrow-circle-right test"></i>
+                    </div>
+                    <div class="content">
+                        <div class="sub_tit_L">
+                            <h2><i class="fas fa-bullhorn"></i>&ensp;活動報告</h2>
                         </div>
+                        <a href="{{ route('user.report.index', ['project' => $project]) }}">
+                            <div class="display_count_btn">
+                                <p>{{ $project->reports_count }}件の活動報告があります</p>
+                            </div>
+                        </a>
+                        <i class="fas fa-arrow-circle-right test"></i>
                     </div>
                     {{-- <div class="su_pr_02">
                         <div class="su_pr_02_01 m_b_1510">リターン名</div>
