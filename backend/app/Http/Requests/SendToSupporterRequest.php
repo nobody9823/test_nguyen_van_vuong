@@ -26,15 +26,15 @@ class SendToSupporterRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
-            'payment_ids' => ['nullable', 'array'],
-            'payment_ids.*' => ['nullable', 'integer', new PaymentHasSameProjectId($request)],
+            'payment_ids' => ['required', 'array'],
+            'payment_ids.*' => ['integer', new PaymentHasSameProjectId($request)],
         ];
     }
 
-    public function messages()
+    public function attributes()
     {
         return [
-            'payment_ids' => '決済情報'
+            'payment_ids' => '「未発送」チェックボックス'
         ];
     }
 }

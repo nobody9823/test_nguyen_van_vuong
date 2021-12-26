@@ -1086,7 +1086,6 @@ input[type=radio]:checked + .radio-fan::after {
 .def_inner{ width: 100%; max-width: 1000px; margin: 0 auto; padding-top: 50px; padding-bottom: 50px;}
 .def_textarea{width: 100%; border: solid 1px #DBDBDB; border-radius: 4px;}
 .def_btn{width: 100%; max-width: 400px; font-size: 1.8rem; font-weight: bold; text-align: center; padding: 15px; background: #00AEBD; margin: 15px auto 15px auto; position: relative; color: #fff; border-radius: 6px;}
-.send_btn{width: 100%; max-width: 160px; font-size: 1.8rem; font-weight: bold; text-align: center; padding: 15px; background: #00AEBD; margin: 15px auto 15px auto; position: relative; color: #fff; border-radius: 6px;}
 .def_btn_02{width: 100%; max-width: 400px; font-size: 1.8rem; font-weight: bold; text-align: center; padding: 15px; background: #fff; margin: 0 auto 15px auto; position: relative; color: #00AEBD; border-radius: 6px; border: solid 1px #00AEBD;}
 .def_input_50p{ width: 50%; height: 47px; padding: 10px; border: solid 1px #DBDBDB; border-radius: 4px;font-size: 1.6rem;}
 .def_input_50p::placeholder{ color: #ddd;font-size: 1.4rem;}
@@ -2628,25 +2627,6 @@ div.spinner-wrapper {
 }
 
 /* 支援者一覧 */
-.supporters th {
-	width: 150px;
-	display: flex;
-	align-items: center;
-  justify-content: center;
-}
-
-.supporters td {
-	width: 150px;
-	display: flex;
-	align-items: center;
-  justify-content: center;
-}
-
-.notification {
-	color: #00AEBD;
-	font-size: 85%;
-}
-
 .scrollable div:first-child {
 	display: flex;
 	align-items: center;
@@ -2655,46 +2635,92 @@ div.spinner-wrapper {
 	margin: 20px;
 }
 
-.supporters tr:first-child {
-	width: 200%;
-	display: flex;
-	min-height: 75px;
-	background: #F7FDFF;
-	color: #00AEBD;
-	justify-content: space-around;
-	white-space: nowrap;
+.supporters_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
 
-.supporters .edit_row {
-	width: 200%;
-    font-size: 12px;
-    padding: 10px 0;
-    min-height: 75px;
+.supporters_table {
+    width: 100%;
+}
+
+.supporters_table thead {
+    background: #F7FDFF;
+	color: #00AEBD;
+}
+.supporters_table tr {
     display: flex;
+    justify-content: space-around;
+}
+
+.supporters_table tr th, .supporters_table tr td{
+    width: 50%;
+    padding: 15px;
+    display: flex;
+	align-items: center;
+    justify-content: flex-start;
+}
+
+.supporters_sending_header {
+    flex-direction: column;
+}
+
+.supporters_info_item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px 0;
+    border-bottom: solid 2px #00AEBD;
+}
+
+.supporters_info_item p {
+    color: #00AEBD;
+    cursor: pointer;
+}
+
+.supporters_payment_info {
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     align-content: center;
-    justify-content: space-around;
-		border-bottom: solid 1px #00AEBD;
 }
 
-.supporters th:nth-child(2) {
-	width: 10px;
+.supporters_payment_info div {
+    margin: 0 2rem 0 0;
 }
 
-.supporters td:first-child {
-	padding-left: 40px;
+.supporters_purchased_return_info {
+    padding: 10px 0;
+    border-top: solid 2px #dbdbdb;
 }
 
-.supporters td:nth-child(2) {
-	padding-right: 50px;
+.supporters_purchased_return_info .su_pr_02_01 {
+    color: #00AEBD;
+    font-weight: bold;
 }
 
-.supporters td:nth-child(3) {
-	padding-right: 160px;
+.send_btn {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background: #00AEBD;
+    position: relative;
+    color: #fff;
+    border-radius: 6px;
 }
 
-.supporters td:nth-child(4) {
-	padding-right: 50px;
+.sent_return {
+    color: #00bd65;
+}
+
+.sent_return i {
+    padding: 5px;
 }
 
 .plan_detail td {
@@ -2708,10 +2734,6 @@ div.spinner-wrapper {
     position: relative;
     left: 490px;
 	}
-}
-
-.supporters td.supporter_name {
-	white-space: nowrap;
 }
 
 .supporters td span.formatted_postal_code {
@@ -2920,7 +2942,6 @@ margin: 20px 0;
 .my_project_img_content_wrapper {flex-grow: 1; margin-bottom: 20px;};
 .my_project_release_status {display: flex; justify-content: space-between;}
 .my_project_apply_wrapper {display: flex; flex-direction: row; justify-content: space-between;}
-.my_project_apply { margin: 15px;}
 .my_project_delete_btn { color: red; background-color: transparent; border: none; cursor: pointer; }
 .apply_btn {
     width: 80%;
