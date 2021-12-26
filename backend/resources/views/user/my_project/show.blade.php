@@ -85,7 +85,7 @@
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-address-card"></i>&ensp;支援者一覧</h2>
-                            <p>プロジェクト支援者の個人情報(住所や電話番号等)が閲覧できます。</p>
+                            <p class="content_explanatory_text">プロジェクト支援者の個人情報(住所や電話番号等)が閲覧できます。</p>
                         </div>
                         @if ($project->release_status === '掲載中')
                         <a href="{{ route('user.supporter.index', ['project' => $project]) }}">
@@ -107,7 +107,7 @@
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-envelope"></i>&ensp;支援者とのDM</h2>
-                            <p>プロジェクト支援者とのダイレクトメッセージができます。</p>
+                            <p class="content_explanatory_text">プロジェクト支援者とのダイレクトメッセージができます。</p>
                         </div>
                         @if ($project->release_status === '掲載中')
                         <a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">
@@ -130,7 +130,7 @@
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-comments"></i>&ensp;コメント</h2>
-                            <p>プロジェクト支援者からの応援コメントの閲覧や返信ができます。</p>
+                            <p class="content_explanatory_text">プロジェクト支援者からの応援コメントの閲覧や返信ができます。</p>
                         </div>
                         @if ($project->release_status === '掲載中')
                         <a href="{{ route('user.comment.index', ['project' => $project]) }}">
@@ -152,7 +152,7 @@
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-bullhorn"></i>&ensp;活動報告</h2>
-                            <p>プロジェクトの活動進捗を支援者に向け、発信する事ができます。</p>
+                            <p class="content_explanatory_text">プロジェクトの活動進捗を支援者に向け、発信する事ができます。</p>
                         </div>
                         @if ($project->release_status === '掲載中')
                         <a href="{{ route('user.report.index', ['project' => $project]) }}">
