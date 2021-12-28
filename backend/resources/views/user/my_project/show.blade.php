@@ -45,10 +45,23 @@
                             </div>
                             @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
                             <div class="def_btn">
-                                <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('送信しますか？')">
+                                <form
+                                    action="{{ route('user.project.apply', ['project' => $project]) }}"
+                                    method="POST"
+                                    onclick=
+                                    "applySubmit(
+                                        {{ $project }},
+                                        {{ $project->plans }},
+                                        {{ $project->tags }},
+                                        {{ $project->user->profile }},
+                                        {{ $project->user->address }},
+                                        {{$project->user->identification}},
+                                        {{ $bank_account }}
+                                    )"
+                                >
                                     @csrf
                                     申請する
-                                    <button type="submit" class="cover_link disable-btn">
+                                    <button type="button" class="cover_link disable-btn">
                                     </button>
                                 </form>
                             </div>
@@ -206,4 +219,5 @@
 
 @section('script')
 <script src="{{ asset('js/accordion.js') }}"></script>
+<script src={{ asset('/js/apply-submit.js') }}></script>
 @endsection
