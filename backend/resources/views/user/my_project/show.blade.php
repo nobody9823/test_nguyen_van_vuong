@@ -120,7 +120,7 @@
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-envelope"></i>&ensp;支援者とのDM</h2>
-                            <p class="content_explanatory_text">プロジェクト支援者とのダイレクトメッセージができます。</p>
+                            <p class="content_explanatory_text">プロジェクト支援者と起案者でやり取りが必要な場合、ダイレクトメッセージをご利用ください。</p>
                         </div>
                         @if ($project->release_status === '掲載中')
                         <a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">
@@ -143,7 +143,7 @@
                     <div class="content">
                         <div class="sub_tit_L">
                             <h2><i class="fas fa-comments"></i>&ensp;コメント</h2>
-                            <p class="content_explanatory_text">プロジェクト支援者からの応援コメントの閲覧や返信ができます。</p>
+                            <p class="content_explanatory_text">プロジェクト支援者から受け取った応援コメントの閲覧や返信ができます。</p>
                         </div>
                         @if ($project->release_status === '掲載中')
                         <a href="{{ route('user.comment.index', ['project' => $project]) }}">
