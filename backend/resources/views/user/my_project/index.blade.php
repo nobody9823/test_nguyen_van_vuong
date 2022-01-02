@@ -50,8 +50,8 @@
                             {{-- NOTICE: MyProjectController, edit action --}}
                             <a class="display_release_status" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
                             @elseif($project->release_status === '承認待ち' || $project->release_status === '掲載中')
-                            {{ $project->release_status }}
-                            <a class="display_release_status"></a>
+                            プロジェクト詳細
+                            <a class="display_release_status" href="{{ route('user.my_project.project.show', ['project' => $project]) }}"></a>
                             @endif
                         </div>
 
@@ -79,15 +79,23 @@
                                             </button>
                                         </form>
                                     </div>
+                                    @else
+                                    <div class="apply_btn">
+                                        <form action="{{ route('user.my_project.message.index', ['project' => $project]) }}" method="GET">
+                                            @csrf
+                                            支援者とのやりとり
+                                            <button type="submit" class="cover_link disable-btn"></button>
+                                        </form>
+                                    </div>
                                     @endif
                                 </div>
                             </div>
-                            @if($project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
+                            {{-- @if($project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
                             <div class="caution_release_status">
                                 <i class="fas fa-exclamation-triangle"></i>
                                 {{ $project->release_status }}
                             </div>
-                            @endif
+                            @endif --}}
                         </div>
                     </div><!--/.img_box_01_L_item-->
                     @endforeach
