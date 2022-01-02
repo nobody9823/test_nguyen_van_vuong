@@ -26,7 +26,7 @@
                             </form>
                         </div>
                         @endif
-                        <div class="ib02_01 E-font my_project_img_wrapper">
+                        <div class="ib02_01 draft_band E-font my_project_img_wrapper">
                             <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}">
                                 @if ($project->projectFiles()->where('file_content_type', 'image_url')->count() > 0)
                                     <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">

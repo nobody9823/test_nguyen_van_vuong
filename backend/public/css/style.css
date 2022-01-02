@@ -711,6 +711,16 @@ input[type=radio]:checked + .radio-fan::after {
 .new_project_obi{ position: relative; overflow: hidden;}
 .new_project_obi:before{ content: "NEW"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
 
+.draft_band{ position: relative; overflow: hidden;}
+.draft_band:before{ content: "下書き中"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
+.approval_band{ position: relative; overflow: hidden;}
+.approval_band:before{ content: "承認待ち"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
+.release_band{ position: relative; overflow: hidden;}
+.release_band:before{ content: "掲載中"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
+.remand_band{ position: relative; overflow: hidden;}
+.remand_band:before{ content: "差し戻し"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
+.release_stop_band{ position: relative; overflow: hidden;}
+.release_stop_band:before{ content: "掲載停止"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
 
 @media screen and (max-width: 768px){
 	.more_btn_01{max-width: 215px;}
