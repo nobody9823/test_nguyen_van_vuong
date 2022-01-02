@@ -26,7 +26,27 @@
                             </form>
                         </div>
                         @endif
-                        <div class="ib02_01 draft_band E-font my_project_img_wrapper">
+
+                        <div class="ib02_01 E-font my_project_img_wrapper
+                        @switch($project->release_status)
+                            @case(ProjectReleaseStatus::getValue('Default'))
+                                default_band
+                                @break
+                            @case(ProjectReleaseStatus::getValue('Pending'))
+                                pending_band
+                                @break
+                            @case(ProjectReleaseStatus::getValue('Published'))
+                                published_band
+                                @break
+                            @case(ProjectReleaseStatus::getValue('UnderSuspension'))
+                                under_suspension_band
+                                @break
+                            @case(ProjectReleaseStatus::getValue('SendBack'))
+                                send_back_band
+                                @break
+                        @endswitch
+                        ">
+                        {{-- <div class="ib02_01 draft_band E-font my_project_img_wrapper"> --}}
                             <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}">
                                 @if ($project->projectFiles()->where('file_content_type', 'image_url')->count() > 0)
                                     <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
@@ -36,7 +56,6 @@
                             </a>
                             {{-- NOTICE: MyProjectController, show action --}}
                         </div>
-
                         <div class="ib02_03">
                             <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}">
                                 <h3>{{ Str::limit($project->title, 40) }}</h3>
