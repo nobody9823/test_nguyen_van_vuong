@@ -47,8 +47,9 @@ use Carbon\Carbon;
         <div class="ccb_line_02"></div>
         <div class="ccb_line_03"></div>
         <div class="catch_copy_01">
-            <div class="catch_copy_txt01">“The influencer’s” want to do “will come true” That is the fan return</div>
-            <div class="catch_copy_txt02">”インフルエンサーの「やりたい」が叶う”それがファンリターン</div>
+            <div class="catch_copy_txt01">"I want to do it" becomes "I can do it", that's FanReturn.</div>
+            <div class="catch_copy_txt02">「やりたい」が叶うそれがファンリターン
+</div>
         </div>
     </div>
 

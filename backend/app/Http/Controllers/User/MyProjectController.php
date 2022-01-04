@@ -57,9 +57,12 @@ class MyProjectController extends Controller
         ? $this->card_payment->getBankAccount(Auth::user()->identification->bank_id)
         : 'null';
 
-        $projects = $this->user->projects()->get();
+        $projects = $this->user
+                         ->projects()
+                         ->with('projectFiles', 'plans', 'tags', 'user', 'user.profile', 'user.address', 'user.identification')
+                         ->get();
         return view('user.my_project.index', [
-            'projects' => $projects->load('projectFiles'),
+            'projects' => $projects,
             'bank_account' => $bank_account
         ]);
     }
@@ -97,8 +100,13 @@ class MyProjectController extends Controller
     public function show(Project $project)
     {
         $this->authorize('checkOwnProject', $project);
-        $project->getLoadIncludedPaymentsCountAndSumPrice()->loadCount(['reports', 'plans', 'comments']);
-        return view('user.my_project.show', ['project' => $project]);
+        $bank_account = Auth::user()->identification->bank_id
+        ? $this->card_payment->getBankAccount(Auth::user()->identification->bank_id)
+        : 'null';
+        $project->getLoadIncludedPaymentsCountAndSumPrice()
+                ->load('plans', 'tags', 'user', 'user.profile', 'user.address', 'user.identification')
+                ->loadCount(['reports', 'plans', 'comments']);
+        return view('user.my_project.show', ['project' => $project, 'bank_account' => $bank_account]);
     }
 
     /**

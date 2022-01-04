@@ -295,7 +295,7 @@ class ProjectController extends Controller
 
     public function paymentForPayPay(Project $project, Payment $payment_without_globalscope)
     {
-        $response = $this->pay_pay->getPaymentDetail($payment_without_globalscope->paymentToken->token);
+        $response = $this->pay_pay->getPaymentDetail($payment_without_globalscope->paymentToken->order_id);
 
         if ($response['data']['status'] !== 'COMPLETED') {
             return redirect()->action([ProjectController::class, 'selectPlans'], ['project' => $project])->withError('決済処理に失敗しました。管理会社に連絡をお願いします。');
