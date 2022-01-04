@@ -1,0 +1,5 @@
+table.pb_attendance_table { width:100%; border-collapse:collapse; border-spacing:0; }
+table.pb_attendance_table th,
+table.pb_attendance_table td { padding:4px 6px; border:1px solid #ccc; }
+table.pb_attendance_table td.check-column { text-align: center; }
+table.pb_attendance_table td.check-column label { display:block; }
