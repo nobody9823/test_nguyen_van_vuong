@@ -1,0 +1,16 @@
+.pb_pricemenu_title { margin:0; padding:10px 22px; font-size:22px; font-weight:400; line-height:1.6; }
+table.pb_pricemenu td { vertical-align:middle; border:1px solid #ddd; }
+table.pb_pricemenu td.menu { color:#c2aa99; border-right:none; }
+table.pb_pricemenu td.price { text-align:right; border-left:none; }
+
+@media only screen and (max-width:767px) {
+  .pb_pricemenu_title { font-size:16.5px; font-weight:400; line-height:1.6; }
+  table.pb_pricemenu, .course_content table.pb_pricemenu tbody, .course_content table.pb_pricemenu tr, .course_content table.pb_pricemenu th, .course_content table.pb_pricemenu td,
+  .post_content table.pb_pricemenu tbody, .post_content table.pb_pricemenu tr, .post_content table.pb_pricemenu th, .post_content table.pb_pricemenu td { display:block; }
+  /* table.pb_pricemenu { border-top:1px solid #ddd; } */
+  table.pb_pricemenu tr { border:1px solid #ddd; border-top:none; }
+  table.pb_pricemenu th, table.pb_pricemenu td { line-height:2; }
+	
+  table.pb_pricemenu td.menu { padding-bottom:0; border:none; font-size:14px!important; }
+  table.pb_pricemenu td.price { text-align:left; padding-top:0; border:none; font-size:14px!important; }
+}
