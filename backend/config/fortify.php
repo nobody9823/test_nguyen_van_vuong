@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'home' => 'fanding/profile',
+    'home' => 'profile',
 
     /*
     |--------------------------------------------------------------------------
@@ -74,7 +74,7 @@ return [
     |
     */
 
-    'prefix' => 'fanding',
+    'prefix' => '',
 
     'domain' => null,
 

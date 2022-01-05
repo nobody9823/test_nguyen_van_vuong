@@ -17,16 +17,6 @@ class FortifyServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        $this->app->instance(LogoutResponse::class, new class implements LogoutResponse
-        {
-            public function toResponse($request)
-            {
-                return redirect('/fanding');
-            }
-        });
-    }
 
     /**HJHHj
      * Bootstrap any application services.
