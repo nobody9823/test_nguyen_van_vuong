@@ -13,7 +13,7 @@
     </div>
 
     <div class="pds_sec02_img">
-        <img class="" src="{{ Storage::url($plan->image_url) }}">
+        <img class="" src="{{ asset(Storage::url($plan->image_url)) }}">
     </div>
 
     <div class="pds_sec02_txt">

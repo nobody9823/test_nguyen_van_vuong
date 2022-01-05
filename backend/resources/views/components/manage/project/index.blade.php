@@ -284,7 +284,7 @@
                                             <p>プロフィール画像:
                                                 <div class="text-center">
                                                     <img style="max-height:15vw; object-fit: contain;"
-                                                        src="{{ Storage::url(optional($project->user->profile)->image_url) }}">
+                                                        src="{{ asset(Storage::url(optional($project->user->profile)->image_url)) }}">
                                                 </div>
                                             </p>
                                             <p>SNS:
@@ -333,7 +333,7 @@
                                             <div class="text-center">
                                                 <a class="text-center" href="{{ route('admin.user.download_identify_image', ['user' => $project->user, 'column_name' => 'identify_image_1']) }}">
                                                     <img style="max-height:15vw; object-fit: contain;"
-                                                        src="{{ Storage::url(optional($project->user->identification)->identify_image_1) }}">
+                                                        src="{{ asset(Storage::url(optional($project->user->identification)->identify_image_1)) }}">
                                                 </a>
                                             </div>
                                             <p>本人確認書類２:</p>
@@ -341,7 +341,7 @@
                                             <div class="text-center">
                                                 <a href="{{ route('admin.user.download_identify_image', ['user' => $project->user, 'column_name' => 'identify_image_2']) }}">
                                                     <img style="max-height:15vw; object-fit: contain;"
-                                                        src="{{ Storage::url(optional($project->user->identification)->identify_image_2) }}">
+                                                        src="{{ asset(Storage::url(optional($project->user->identification)->identify_image_2)) }}">
                                                 </a>
                                             </div>
                                         </div>

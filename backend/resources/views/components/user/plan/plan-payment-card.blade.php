@@ -4,7 +4,7 @@
         <div class="wlr_64">
             <div class="wlr_64_L">
                 <div class="as_img">
-                    <img class="" src="{{ Storage::url($plan->image_url) }}">
+                    <img class="" src="{{ asset(Storage::url($plan->image_url)) }}">
                 </div>
             </div><!--/wlr_64_L-->
 

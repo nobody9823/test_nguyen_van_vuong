@@ -22,7 +22,7 @@
                 {{-- <div class="prof_edit_row" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}"> --}}
                 <div class="comment_wrapper" style="{{ isset($comment->reply) ? 'border-bottom: none;' : '' }}">
                   <div style="display: flex; min-width: 80%;">
-                    <img src="{{ Storage::url(optional($comment->user->profile)->image_url) }}" alt="プロフィール画像" class="user_image">
+                    <img src="{{ asset(Storage::url(optional($comment->user->profile)->image_url)) }}" alt="プロフィール画像" class="user_image">
                     <div class="comment_content">{{ $comment->content }}<br>
                         <div>
                         <span>{{ $comment->user->name }}&emsp;</span>
@@ -44,7 +44,7 @@
 
                 @if($comment->reply)
                 <div class="prof_edit_row" style="{{ isset($comment->reply) ? '' : 'border-bottom: none;' }}">
-                    <img src="{{ Storage::url(optional($comment->project->user)->profile->image_url) }}" alt="プロフィール画像" class="user_image reply_user">
+                    <img src="{{ asset(Storage::url(optional($comment->project->user)->profile->image_url)) }}" alt="プロフィール画像" class="user_image reply_user">
                     <div class="comment_content reply_content">{{ $comment->reply->content }}<br>
                     <div>
                         <span>{{ $comment->project->user->name }}&emsp;</span><span>{{ $comment->reply->created_at->format('Y年m月d日 H:i') }}</span>

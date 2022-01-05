@@ -7,7 +7,7 @@
             <span id="errors_return{{ '_'.$plan->id }}" style="color: red;"></span>
         </div>
         <div class="my_project_img_wrapper pds_sec02_img">
-            <img src="{{ Storage::url($plan->image_url) }}">
+            <img src="{{ asset(Storage::url($plan->image_url)) }}">
             <a class="cover_link" onclick="openPlanFormModal({{ $plan->id }})"></a>
         </div>
 

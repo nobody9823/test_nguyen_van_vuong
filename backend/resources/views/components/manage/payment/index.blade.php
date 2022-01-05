@@ -187,7 +187,7 @@
                                             <p>紹介文:{{ optional($payment->user->profile)->introduction }}</p>
                                             <p>画像:
                                                 <img style="max-height:5vw;"
-                                                    src="{{ Storage::url(optional($payment->user->profile)->image_url) }}">
+                                                    src="{{ asset(Storage::url(optional($payment->user->profile)->image_url)) }}">
                                             </p>
                                             <p></p>
                                             <p>郵便番号:{{ optional($payment->user->address)->postal_code }}</p>
@@ -233,7 +233,7 @@
                                             <p>プロフィール画像:
                                                 <div class="text-center">
                                                     <img style="max-height:15vw; object-fit: contain;"
-                                                        src="{{ Storage::url(optional($payment->project->user->profile)->image_url) }}">
+                                                        src="{{ asset(Storage::url(optional($payment->project->user->profile)->image_url)) }}">
                                                 </div>
                                             </p>
                                             <p>SNS:
@@ -282,7 +282,7 @@
                                             <div class="text-center">
                                                 <a class="text-center" href="{{ route('admin.user.download_identify_image', ['user' => $payment->project->user, 'column_name' => 'identify_image_1']) }}">
                                                     <img style="max-height:15vw; object-fit: contain;"
-                                                        src="{{ Storage::url(optional($payment->project->user->identification)->identify_image_1) }}">
+                                                        src="{{ asset(Storage::url(optional($payment->project->user->identification)->identify_image_1)) }}">
                                                 </a>
                                             </div>
                                             <p>本人確認書類２:</p>
@@ -290,7 +290,7 @@
                                             <div class="text-center">
                                                 <a href="{{ route('admin.user.download_identify_image', ['user' => $payment->project->user, 'column_name' => 'identify_image_2']) }}">
                                                     <img style="max-height:15vw; object-fit: contain;"
-                                                        src="{{ Storage::url(optional($payment->project->user->identification)->identify_image_2) }}">
+                                                        src="{{ asset(Storage::url(optional($payment->project->user->identification)->identify_image_2)) }}">
                                                 </a>
                                             </div>
                                         </div>

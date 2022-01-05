@@ -9,7 +9,7 @@
 
     <div style="font-weight: bold;display:flex;justify-content:space-between;">
         <div>
-            <img class="contributor-icon" src={{Storage::url('public/sampleImage/person_sample.jpg')}}
+            <img class="contributor-icon" src={{asset(Storage::url('public/sampleImage/person_sample.jpg'))}}
                 style="margin-right: 0.5rem;width: 25px;height: 25px;">
             FanReturn運営:
             <span style="font-weight: normal;color: gray;font-size: 80%;">

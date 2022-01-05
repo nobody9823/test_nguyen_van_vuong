@@ -48,9 +48,9 @@
                         ">
                             <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}">
                                 @if ($project->projectFiles()->where('file_content_type', 'image_url')->count() > 0)
-                                    <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
+                                    <img src="{{ asset(Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url)) }}">
                                 @else
-                                    <img src={{ Storage::url('public/sampleImage/now_printing.png') }}>
+                                    <img src={{ asset(Storage::url('public/sampleImage/now_printing.png')) }}>
                                 @endif
                             </a>
                             {{-- NOTICE: MyProjectController, show action --}}

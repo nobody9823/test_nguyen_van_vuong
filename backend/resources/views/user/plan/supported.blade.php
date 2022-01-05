@@ -47,7 +47,7 @@
 
                 <div class="ps_rank_img m_b_1510">
                     <img
-                        src="{{ Storage::url(optional($project->projectFiles()->where('file_content_type', 'image_url')->first())->file_url) }}">
+                        src="{{ asset(Storage::url(optional($project->projectFiles()->where('file_content_type', 'image_url')->first())->file_url)) }}">
                 </div>
                 <div class="m_b_3020">
                     <div class="pds_sec01_progress-bar m_b_1510">
@@ -69,7 +69,7 @@
                     <div class="ps_rank_01_01 m_b_1510">
                         <div>現在の支援総額：{{ number_format($project->payments_sum_price) }}円</div>
                         <div>現在の支援者数：{{ $project->payments_count }}人</div>
-                        <div>募集終了まで残り：{{ $project->number_of_days_left }}日</div>
+                        <div>募集終了まで残り：{{ DateFormat::getDiffCompareWithToday($project->end_date) }}</div>
                     </div>
                     <!--/ps_rank_01_03-->
                     <div class="ps_rank_01_02 m_b_1510">

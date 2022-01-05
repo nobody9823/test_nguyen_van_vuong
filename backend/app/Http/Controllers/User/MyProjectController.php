@@ -32,8 +32,7 @@ class MyProjectController extends Controller
         ProjectService $project_service,
         EditMyProjectTabService $my_project_tab_service,
         CardPaymentInterface $card_payment_interface
-    )
-    {
+    ) {
         $this->middleware(function ($request, $next) {
             $this->user = \Auth::user();
             return $next($request);
@@ -54,13 +53,13 @@ class MyProjectController extends Controller
     public function index()
     {
         $bank_account = Auth::user()->identification->bank_id
-        ? $this->card_payment->getBankAccount(Auth::user()->identification->bank_id)
-        : 'null';
+            ? $this->card_payment->getBankAccount(Auth::user()->identification->bank_id)
+            : 'null';
 
         $projects = $this->user
-                         ->projects()
-                         ->with('projectFiles', 'plans', 'tags', 'user', 'user.profile', 'user.address', 'user.identification')
-                         ->get();
+            ->projects()
+            ->with('projectFiles', 'plans', 'tags', 'user', 'user.profile', 'user.address', 'user.identification')
+            ->get();
         return view('user.my_project.index', [
             'projects' => $projects,
             'bank_account' => $bank_account
@@ -101,11 +100,11 @@ class MyProjectController extends Controller
     {
         $this->authorize('checkOwnProject', $project);
         $bank_account = Auth::user()->identification->bank_id
-        ? $this->card_payment->getBankAccount(Auth::user()->identification->bank_id)
-        : 'null';
+            ? $this->card_payment->getBankAccount(Auth::user()->identification->bank_id)
+            : 'null';
         $project->getLoadIncludedPaymentsCountAndSumPrice()
-                ->load('plans', 'tags', 'user', 'user.profile', 'user.address', 'user.identification')
-                ->loadCount(['reports', 'plans', 'comments']);
+            ->load('plans', 'tags', 'user', 'user.profile', 'user.address', 'user.identification')
+            ->loadCount(['reports', 'plans', 'comments']);
         return view('user.my_project.show', ['project' => $project, 'bank_account' => $bank_account]);
     }
 
@@ -189,7 +188,7 @@ class MyProjectController extends Controller
             'file' => 'required|file',
         ]);
         $path = $request->file('file')->store('public/image');
-        return ['location' => Storage::url($path)];
+        return ['location' => asset(Storage::url($path))];
     }
 
     public function uploadProjectImage(Project $project, ProjectFile $project_file = null, AxiosUploadFileRequest $request)
