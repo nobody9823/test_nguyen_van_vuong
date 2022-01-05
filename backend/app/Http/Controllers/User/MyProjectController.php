@@ -188,7 +188,7 @@ class MyProjectController extends Controller
             'file' => 'required|file',
         ]);
         $path = $request->file('file')->store('public/image');
-        return ['location' => asset(Storage::url($path))];
+        return ['location' => Storage::url($path)];
     }
 
     public function uploadProjectImage(Project $project, ProjectFile $project_file = null, AxiosUploadFileRequest $request)
