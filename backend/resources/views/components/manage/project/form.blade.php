@@ -168,7 +168,7 @@ tinymce.init({
         data.append('file', blobInfo.blob(), blobInfo.filename());
         axios.post('/admin/project/upload_editor_file', data)
             .then(function (res) {
-                success(res.data.location);
+                success({{asset(res.data.location)}});
             })
             .catch(function (err) {
                 console.log(err);
