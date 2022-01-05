@@ -105,8 +105,8 @@
                 <p class="mb-0">※送金を実行してから送金完了となるまで２〜３営業日かかる場合があります。都度、送金履歴から送金状態の確認を行ってください。</p>
                 <p class="mb-0 mt-3">※以下の色で募集方式が分かれています</p>
                 <div class="d-flex">
-                    <h4><span class="badge badge-warning text-white mr-2">All-in 方式</span></h4>
-                    <h4><span class="badge badge-info text-white">All-or-Nothing 方式</span></h4>
+                    <h4><span class="badge badge-warning mr-2 font-weight-normal">All-in 方式</span></h4>
+                    <h4><span class="badge badge-info font-weight-normal">All-or-Nothing 方式</span></h4>
                 </div>
             </div>
         </div>

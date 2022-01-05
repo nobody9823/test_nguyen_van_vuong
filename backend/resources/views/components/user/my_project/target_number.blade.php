@@ -29,10 +29,10 @@
                 <label class="tab_item" for="funded_type_all_in">
                     All-In 方式
                     <br/>
-                    目標金額を達成しなかったとしても、終了日までの支援金を受け取れます。
+                    目標金額を達成しなかったとしても、支援金が発生します。
                     <br/>
                     <span class="disclaimer prof_edit_editbox_desc">
-                        ※1人の支援からリターン履行義務が発生します
+                        ※支援者1名からリターン実行の義務が生じます。
                     </span>
                 </label>
                 <input type="radio" id="funded_type_all_or_nothing" name="funded_type" value="AllOrNothing" oninput="updateMyProject.textInput(this, {{ $project->id }})"
@@ -45,10 +45,10 @@
                 <label class="tab_item" for="funded_type_all_or_nothing">
                     All-or-Nothing 方式
                     <br/>
-                    期間内に目標金額を達成した場合に、支援金を受け取れます。
+                    目標金額を達成した場合、支援金を受け取れます。
                     <br/>
                     <span class="disclaimer prof_edit_editbox_desc">
-                        ※目標金額の達成後リターン履行義務が発生します
+                        ※目標金額が達成した場合、リターン実行義務が生じます。
                     </span>
                 </label>
             </div>
@@ -61,9 +61,9 @@
             掲載開始日(日付、時刻)
             <span class="hissu_txt">必須</span>
             <br/>
-            <span class="disclaimer">
+            {{-- <span class="disclaimer">
                 ※審査期間があるため、2週間以降の日付を設定してください。
-            </span>
+            </span> --}}
         </div>
         <input type="text" id="start_date" name="start_date" class="p-postal-code def_input_100p"
             value="{{ old('start_date', optional($project)->start_date) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }}), onInputStartDate()">
