@@ -41,12 +41,14 @@ class ProjectFinishedNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $is_executor = false;
         $address = $notifiable instanceof AnonymousNotifiable
             ? $notifiable->routeNotificationFor('mail')
             : $notifiable->email;
 
         if ($address === $this->project->user->email) {
             $url = route('user.my_project.project.show', ['project' => $this->project]);
+            $is_executor = true;
         } else if ($address === config('mail.customer_support.address')) {
             $url = route('admin.project.index', ['project' => $this->project]);
         } else {
@@ -57,7 +59,7 @@ class ProjectFinishedNotification extends Notification
             ->subject('【FanReturn】プロジェクトの掲載が終了しました。')
             ->view(
                 'user.mail.template.project_is_finished',
-                ['project' => $this->project, 'url' => $url]
+                ['project' => $this->project, 'url' => $url, 'is_executor' => $is_executor]
             );
     }
 

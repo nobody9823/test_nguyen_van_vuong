@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'home' => '/profile',
+    'home' => 'fanding/profile',
 
     /*
     |--------------------------------------------------------------------------
@@ -74,7 +74,7 @@ return [
     |
     */
 
-    'prefix' => '',
+    'prefix' => 'fanding',
 
     'domain' => null,
 
@@ -132,13 +132,13 @@ return [
 
     'features' => [
         Features::registration(),
-//        Features::resetPasswords(),
+        //        Features::resetPasswords(),
         // Features::emailVerification(),
-//        Features::updateProfileInformation(),
-//        Features::updatePasswords(),
-//        Features::twoFactorAuthentication([
-//            'confirmPassword' => true,
-//        ]),
+        //        Features::updateProfileInformation(),
+        //        Features::updatePasswords(),
+        //        Features::twoFactorAuthentication([
+        //            'confirmPassword' => true,
+        //        ]),
     ],
 
 ];
