@@ -83,7 +83,7 @@
     <input type="file" name="image_url" id="imageUploader" value="{{ old('image_url') }}"><br>
     @if(isset(optional($user->profile)->image_url))
     <div>
-        <img style="max-height:200px; max-width:300px;" src="{{ Storage::url(optional($user->profile)->image_url) }}">
+        <img style="max-height:200px; max-width:300px;" src="{{ asset(Storage::url(optional($user->profile)->image_url)) }}">
     </div>
     @endif
 </div>

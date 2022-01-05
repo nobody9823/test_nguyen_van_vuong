@@ -76,7 +76,7 @@
                                     <p>紹介文:{{ optional($user->profile)->introduction }}</p>
                                     <p>画像:
                                         <img style="max-height:5vw;"
-                                            src="{{ Storage::url(optional($user->profile)->image_url) }}">
+                                            src="{{ asset(Storage::url(optional($user->profile)->image_url)) }}">
                                     </p>
                                     <p></p>
                                 </div>

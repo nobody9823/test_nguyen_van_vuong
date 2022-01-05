@@ -12,7 +12,7 @@
                 <div class="ps_rank_base">
 
                     <div class="ps_rank_img m_b_1510">
-                        <img src="{{ Storage::url(optional($project->projectFiles()->where('file_content_type', 'image_url')->first())->file_url) }}">
+                        <img src="{{ asset(Storage::url(optional($project->projectFiles()->where('file_content_type', 'image_url')->first())->file_url)) }}">
                     </div>
                     <div class="ps_rank_01 m_b_3020">
                         <div class="pds_sec01_progress-bar m_b_1510">
@@ -243,7 +243,7 @@
                 <div class="ps_rank_base">
 
                     <div class="ps_rank_img m_b_1510">
-                        <img class="" src="{{Storage::url('public/sampleImage/now_printing.png')}}">
+                        <img class="" src="{{asset(Storage::url('public/sampleImage/now_printing.png'))}}">
                     </div>
                     <div class="ps_rank_01 m_b_3020">
                         <div class="pds_sec01_progress-bar m_b_1510">

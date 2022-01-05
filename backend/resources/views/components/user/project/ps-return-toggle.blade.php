@@ -79,7 +79,7 @@
         <!--/ps_rank_01-->
         <div class="ps_rank_return_text return_content">
             <p>上位３名の方に特別お礼イベント開催！</p>
-            <img class="" src="{{Storage::url('public/sampleImage/now_printing.png')}}">
+            <img class="" src="{{asset(Storage::url('public/sampleImage/now_printing.png'))}}">
             <br/>
         </div>
     </div>

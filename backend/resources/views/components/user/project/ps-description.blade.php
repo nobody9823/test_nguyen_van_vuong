@@ -5,7 +5,7 @@
     </div>
     <div class="ps_description_items_wrapper">
         <div class="ps_description_item">
-            <div class="ps_desc_img"><img src="/image/fan_psd_L_01.svg"></div>
+            <div class="ps_desc_img"><img src="{{ asset('image/fan_psd_L_01.svg') }}"></div>
         </div>
         <div class="ps_description_border"></div>
         <div class="ps_description_item">
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="ps_desc_img ps_desc_img_a"><img src="/image/fan_psd_arrow.svg"></div>
+    <div class="ps_desc_img ps_desc_img_a"><img src="{{asset('image/fan_psd_arrow.svg')}}"></div>
 
     <div class="ps_description_title">
         <p>②招待リンクをSNSなどで宣伝</p>
@@ -39,7 +39,7 @@
     </div>
     <div class="ps_description_items_wrapper">
         <div class="ps_description_item">
-            <div class="ps_desc_img"><img src="/image/fan_psd_L_02.svg"></div>
+            <div class="ps_desc_img"><img src="{{asset('image/fan_psd_L_02.svg')}}"></div>
         </div>
         <div class="ps_description_border"></div>
         <div class="ps_description_item">
@@ -86,7 +86,7 @@
         </div>
     </div>
 
-    <div class="ps_desc_img ps_desc_img_a"><img src="/image/fan_psd_arrow.svg"></div>
+    <div class="ps_desc_img ps_desc_img_a"><img src="{{asset('image/fan_psd_arrow.svg')}}"></div>
 
     <div class="ps_description_title">
         <p>③ランキング</p>
@@ -99,7 +99,7 @@
 
         <div class="ps_description_item">
 
-            <div class="ps_desc_img"><img src="/image/fan_psd_L_03.svg"></div>
+            <div class="ps_desc_img"><img src="{{asset('image/fan_psd_L_03.svg')}}"></div>
 
         </div>
         <div class="ps_description_border"></div>
@@ -202,7 +202,7 @@
 
     </div>
 
-    <div class="ps_desc_img ps_desc_img_a"><img src="/image/fan_psd_arrow.svg"></div>
+    <div class="ps_desc_img ps_desc_img_a"><img src="{{asset('image/fan_psd_arrow.svg')}}"></div>
 
     <div class="ps_description_title">
         <p>
@@ -216,7 +216,7 @@
 
         <div class="" style="width: 70%;">
 
-            <div class="ps_desc_img"><img src="/image/fan_psd_L_04.svg"></div>
+            <div class="ps_desc_img"><img src="{{asset('image/fan_psd_L_04.svg')}}"></div>
 
         </div>
 

@@ -26,7 +26,7 @@
         <div class="pds_inner">
             <div class="pds_sec01">
                 <div class="project_author_wrapper">
-                    <div class="author_image" style="background-image: url({{ Storage::url($project->user->profile->image_url) }})">
+                    <div class="author_image" style="background-image: url({{ asset(Storage::url($project->user->profile->image_url)) }})">
                     </div>
                     <span>{{ $project->user->name }}</span>
                 </div>
@@ -43,7 +43,7 @@
                             @foreach($project->projectFiles as $project_file)
                                 @if($project_file->file_content_type === 'image_url')
                                 <li class="slide-item">
-                                    <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                                    <img src="{{ asset(Storage::url($project_file->file_url)) }}" alt="画像">
                                 </li>
                                 @elseif($project_file->file_content_type === 'video_url')
                                 <li class="slide-item">
@@ -57,7 +57,7 @@
                                 @foreach($project->projectFiles as $project_file)
                                     @if($project_file->file_content_type === 'image_url')
                                     <li class="thumbnail-item">
-                                        <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                                        <img src="{{ asset(Storage::url($project_file->file_url)) }}" alt="画像">
                                     </li>
                                     @elseif($project_file->file_content_type === 'video_url')
                                     <li class="thumbnail-item">
@@ -305,7 +305,7 @@
             <div class="detail_imgs">
                 <div class="detail-slider-for">
                     @foreach($project->projectFiles as $project_file)
-                    <div><img src="{{ Storage::url($project_file->file_url) }}"></div>
+                    <div><img src="{{ asset(Storage::url($project_file->file_url)) }}"></div>
                     @endforeach
                     {{-- @if($project->projectVideo !== null)
                         <div>{{ DisplayVideoHelper::getThumbnail(optional(optional($project)->projectVideo)->video_url) }}
@@ -314,7 +314,7 @@
             {{-- </div>
             <div class="detail-slider-nav">
                 @foreach($project->projectFiles as $project_file)
-                <div><img src="{{ Storage::url($project_file->file_url) }}"></div>
+                <div><img src="{{ asset(Storage::url($project_file->file_url)) }}"></div>
                 @endforeach --}}
                 {{-- @if($project->projectVideo !== null)
                         <div>{{ DisplayVideoHelper::getThumbnail(optional(optional($project)->projectVideo)->video_url) }}

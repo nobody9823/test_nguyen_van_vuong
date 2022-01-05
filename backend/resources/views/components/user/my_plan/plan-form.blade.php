@@ -63,12 +63,12 @@
                 name="year"
                 oninput="updateMyPlan.updateDeliveryDate({{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
                 <option value="">年</option>
-                <?php $years = array_reverse(range(today()->year + 10, today()->year)); 
+                <?php $years = array_reverse(range(today()->year + 10, today()->year));
                     $delivery_year = date('Y', strtotime(optional($plan)->delivery_date));
                 ?>
                     @foreach($years as $year)
-                        <option 
-                            value="{{ $year }}" 
+                        <option
+                            value="{{ $year }}"
                             {{ $delivery_year == $year ? 'selected' : '' }}>
                             {{ $year }}
                         </option>
@@ -84,7 +84,7 @@
                 <option value="">月</option>
                 <?php $delivery_month = date('m', strtotime(optional($plan)->delivery_date)); ?>
                     @foreach(range(1, 12) as $month)
-                        <option 
+                        <option
                             value="{{ $month }}"
                             {{ $delivery_month == $month ? 'selected' : '' }}>
                             {{ $month }}
@@ -121,9 +121,9 @@
         @endif
 
         @if (optional($plan)->image_url !== null)
-            <img src="{{ Storage::url($plan->image_url) }}">
+            <img src="{{ asset(Storage::url($plan->image_url)) }}">
         @else
-            <img src="{{ Storage::url('public/sampleImage/now_printing.png') }}">
+            <img src="{{ asset(Storage::url('public/sampleImage/now_printing.png')) }}">
         @endif
         </div>
         <div class="form_item_tit" style="margin-bottom: 10px"></div>

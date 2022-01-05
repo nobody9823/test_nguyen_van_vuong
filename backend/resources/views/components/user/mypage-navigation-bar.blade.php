@@ -4,7 +4,7 @@
         <a href="{{ route('user.profile') }}">
             <div class="prof_img">
                 @if(isset(Auth::user()->profile))
-                <img src="{{ Storage::url(Auth::user()->profile->image_url) }}">
+                <img src="{{ asset(Storage::url(Auth::user()->profile->image_url)) }}">
                 @else
                 <img src="image/my-page.svg">
                 @endif

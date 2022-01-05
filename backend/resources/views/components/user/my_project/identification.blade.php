@@ -111,7 +111,7 @@
             <div>
                 <div style="text-align: center;">
                     <div id="identify_image_1" class="ib02_01 E-font my_project_img_wrapper identify_img">
-                        <img src="{{ Storage::url($user->identification->identify_image_1) }}">
+                        <img src="{{ asset(Storage::url($user->identification->identify_image_1)) }}">
                     </div>
                     <div class="form_item_tit" style="margin-bottom: 10px">本人確認書類1</div>
                     <div class="input_file_button_wrapper">
@@ -126,7 +126,7 @@
                 </div>
                 <div style="text-align: center;">
                     <div id="identify_image_2" class="ib02_01 E-font my_project_img_wrapper identify_img">
-                        <img src="{{ Storage::url($user->identification->identify_image_2) }}">
+                        <img src="{{ asset(Storage::url($user->identification->identify_image_2)) }}">
                     </div>
                     <div class="form_item_tit" style="margin-bottom: 10px">本人確認書類2</div>
                     <div class="input_file_button_wrapper">

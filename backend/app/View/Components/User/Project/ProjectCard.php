@@ -33,11 +33,11 @@ class ProjectCard extends Component
         $projectVideoFiles = $this->project->projectFiles->where('file_content_type', 'video_url');
 
         if ($projectImageFiles->isNotEmpty()) {
-            return Storage::url($projectImageFiles->first()->file_url);
+            return asset(Storage::url($projectImageFiles->first()->file_url));
         } else if ($projectVideoFiles->isNotEmpty()) {
             return DisplayVideoHelper::getThumbnail($projectVideoFiles->first()->file_url);
         } else {
-            return Storage::url('public/sampleImage/now_printing.png');
+            return asset(Storage::url('public/sampleImage/now_printing.png'));
         }
     }
 

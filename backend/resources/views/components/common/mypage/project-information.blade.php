@@ -1,10 +1,10 @@
 <div class="su_pr_img m_b_1510">
     @if ($project->projectFiles()->where('file_content_type', 'image_url')->exists())
-        <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
+        <img src="{{ asset(Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url)) }}">
     @elseif($project->projectFiles()->where('file_content_type', 'video_url')->exists())
         <img src="{{ DisplayVideoHelper::getThumbnail($project->projectFiles()->where('file_content_type', 'video_url')->first()->file_url) }}">
     @else
-        <img src="{{ Storage::url('public/sampleImage/now_printing.png') }}">
+        <img src="{{ asset(Storage::url('public/sampleImage/now_printing.png')) }}">
     @endif
 </div>
 <div class="su_pr_01 m_b_1510">
