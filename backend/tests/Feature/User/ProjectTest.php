@@ -128,7 +128,7 @@ class ProjectTest extends TestCase
 
     public function testIndexAction()
     {
-        $response = $this->get('/fanding');
+        $response = $this->get('/');
         $response->assertOk();
     }
 
