@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/profile';
+    public const HOME = '/fanding/profile';
 
     /**
      * The controller namespace for the application.
@@ -48,7 +48,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
 
             //user page
-            Route::middleware('web')
+            Route::prefix('fanding')
+                ->middleware('web')
                 ->as('user.')
                 ->group(base_path('routes/user.php'));
 
