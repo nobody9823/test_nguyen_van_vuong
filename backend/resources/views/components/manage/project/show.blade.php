@@ -144,10 +144,12 @@
                                                 <h5 class="mb-3">{{ Str::limit($project->finally) }}</h5>
                                             </div>
                                             <div class="col-sm-4">
-                                                <h3>目標人数 : </h3>
+                                                <h3>目標金額 : </h3>
                                                 <h5 class="mb-3">
                                                     {{ number_format($project->target_number) }}人
                                                 </h5>
+                                                <h3>募集方式 : </h3>
+                                                <h5 class="mb-3">{{ $project->funded_type }}</h5>
                                                 <h3>支援者総数 : </h3>
                                                 <h5 class="mb-3">{{ $project->payments_count }}人</h5>
                                                 <h3>支援金総額 : </h3>

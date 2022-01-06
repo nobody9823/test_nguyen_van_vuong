@@ -53,7 +53,7 @@ class ProjectPolicy
         return $check_purchased->isNotEmpty() ? true : false;
     }
 
-    public function checkOwnProjectAndAdmin(User $user, Project $project)
+    public function checkOwnProjectAndAdmin(?User $user, Project $project)
     {
         return $user->id === $project->user_id;
     }

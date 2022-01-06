@@ -15,7 +15,7 @@ if(isiOS) {
 }
 </script>
 
-<title>FanReturn (ファンリターン) 〜インフルエンサーの「やりたい」が叶う〜 | @yield('title')</title>
+<title>FanReturn (ファンリターン)  | @yield('title')</title>
 <meta name="description" content="グッズを作りたい！ファンイベントを開きたい！そんなインフルエンサーに特化したクラウドファンディングサービスです。更にファンの満足度をUPさせる仕組みが多数！">
 <link rel="shortcut icon" href="{{ asset('image/fanreturn.ico') }}">
 <link rel="apple-touch-icon" href="{{ asset('image/fanreturn_apple_touch_icon.png') }}">
@@ -169,13 +169,8 @@ if(isiOS) {
 
             @auth('web')
 			<li class="menu-item nav_btn taso_li menuset_06">
-				<a href="{{ route('user.purchased_projects') }}" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">応援購入したプロジェクト</p>
-				</a>
-			</li>
-			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.payment_history') }}" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">購入履歴一覧</p>
+					<p class="nav_btn_tit_L">購入履歴 / PSになる一覧</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_06">
@@ -186,6 +181,11 @@ if(isiOS) {
 			<li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.my_project.project.index') }}" class="top_menu-1 nav_btn_link">
 					<p class="nav_btn_tit_L">マイプロジェクト管理</p>
+				</a>
+			</li>
+			<li class="menu-item nav_btn taso_li menuset_06">
+				<a href="{{ route('user.bank_account.edit') }}" class="top_menu-1 nav_btn_link">
+					<p class="nav_btn_tit_L">銀行口座</p>
 				</a>
 			</li>
 

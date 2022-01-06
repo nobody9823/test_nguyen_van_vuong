@@ -1,7 +1,7 @@
 <div class="a_report">
     <div class="pds_sec02_box inner_item">
         <div class="pds_sec02_img">
-            <img src="{{ Storage::url($report->image_url) }}">
+            <img src="{{ asset(Storage::url($report->image_url)) }}">
         </div>
 
         <div class="disclaimer">

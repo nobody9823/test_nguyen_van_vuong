@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Actions\PayPay;
 
 use App\Models\Payment;
@@ -21,9 +22,9 @@ class PayPay implements PayPayInterface
     {
         $this->client = new Client([
             'API_KEY' => config('app.pay_pay_key_for_test'),
-            'API_SECRET'=>config('app.pay_pay_secret_for_test'),
-            'MERCHANT_ID'=>config('app.merchant_id'),
-        ],config('app.sandbox'));
+            'API_SECRET' => config('app.pay_pay_secret_for_test'),
+            'MERCHANT_ID' => config('app.merchant_id'),
+        ], config('app.sandbox'));
 
         $this->CQCPayload = $CQCPayload;
     }
@@ -45,7 +46,7 @@ class PayPay implements PayPayInterface
             // 支払いがウェブブラウザで発生している場合は WEB_LINK になります。
             $this->CQCPayload->setRedirectType('WEB_LINK');
             // 支払い後のリダイレクト先
-            $this->CQCPayload->setRedirectUrl(route('user.plan.payment_for_pay_pay', ['project' => $project, 'payment' => $payment]));
+            $this->CQCPayload->setRedirectUrl(route('user.plan.payment_for_pay_pay', ['project' => $project, 'payment_without_globalscope' => $payment]));
 
             // QRコードを生成
             return $this->client->code->createQRCode($this->CQCPayload);
@@ -53,7 +54,6 @@ class PayPay implements PayPayInterface
             Log::alert($e->getMessage(), $e->getTrace());
             throw $e;
         }
-
     }
 
     public function getPaymentDetail(string $merchant_payment_id): array

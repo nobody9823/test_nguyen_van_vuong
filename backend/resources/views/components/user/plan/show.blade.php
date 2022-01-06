@@ -2,7 +2,7 @@
     <div class="fixedcontainer">
         <div class="breadcrumb">
             <p>
-                <a href="/">TOP</a>　＞　<a href="/search">応援プロジェクト</a>　＞　
+                <a href="/">TOP</a>　＞　<a href="/search">応援プロジェクト</a>　＞
                 @if($project->category)
                 <a href="{{ route('user.search', ['category_id' => $project->category_id]) }}">{{ $project->category->name }}<a>
                 @else
@@ -23,7 +23,7 @@
             <div class="detail_info_content detail_info_content_mb">
                 <p>価格</p>
                 <div><span>{{ $plan->price }}</span>円(税込)</div>
-                <p>目標人数 {{ number_format($project->target_number) }}人</p>
+                <p>目標金額 {{ number_format($project->target_number) }}人</p>
 
                 <p class="plan-content">詳細<br>{{ $plan->content }}</p>
                 <p>支援状況</p>

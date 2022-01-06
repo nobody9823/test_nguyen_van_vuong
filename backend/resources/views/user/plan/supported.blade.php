@@ -36,7 +36,7 @@
         <div class="as_header_02 inner_item" style="padding: 50px 0 5px 0;">ありがとうございます！</div>
         <div class="as_header_03">
             あなたは、{{ $project->payments_count }}人目の支援者です。
-            <!-- <br>支援総額は{{ $project->payments_sum_price }}円になりました -->
+            <br>支援総額は{{ $project->payments_sum_price }}円になりました
         </div>
 
         <div class="av_box_base def_inner inner_item">
@@ -47,7 +47,7 @@
 
                 <div class="ps_rank_img m_b_1510">
                     <img
-                        src="{{ Storage::url(optional($project->projectFiles()->where('file_content_type', 'image_url')->first())->file_url) }}">
+                        src="{{ asset(Storage::url(optional($project->projectFiles()->where('file_content_type', 'image_url')->first())->file_url)) }}">
                 </div>
                 <div class="m_b_3020">
                     <div class="pds_sec01_progress-bar m_b_1510">
@@ -67,9 +67,9 @@
                         </div>
                     </div>
                     <div class="ps_rank_01_01 m_b_1510">
-                        <!-- <div>現在：{{ number_format($project->payments_sum_price) }}円</div> -->
-                        <div>支援者数：{{ $project->payments_count }}人</div>
-                        <div>募集終了まで残り：{{ $project->number_of_days_left }}日</div>
+                        <div>現在の支援総額：{{ number_format($project->payments_sum_price) }}円</div>
+                        <div>現在の支援者数：{{ $project->payments_count }}人</div>
+                        <div>募集終了まで残り：{{ DateFormat::getDiffCompareWithToday($project->end_date) }}</div>
                     </div>
                     <!--/ps_rank_01_03-->
                     <div class="ps_rank_01_02 m_b_1510">
@@ -91,9 +91,9 @@
 
 
             <div class="av_box">
-                <div class="av_tit">支援ID</div>
+                <div class="av_tit">オーダーID</div>
                 <div class="av_txt">
-                    {{ $payment->paymentToken->token }}<br>
+                    {{ $payment->paymentToken->order_id }}<br>
                 </div>
             </div>
             <!--/av_box-->

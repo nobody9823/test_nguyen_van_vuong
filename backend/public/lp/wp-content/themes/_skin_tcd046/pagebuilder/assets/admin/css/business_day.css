@@ -1,0 +1,5 @@
+table.pb_business_day { width:100%; border-collapse:collapse; border-spacing:0; }
+table.pb_business_day th,
+table.pb_business_day td { padding:4px 6px; border:1px solid #ccc; }
+table.pb_business_day td.check-column { text-align: center; }
+table.pb_business_day td.check-column label { display:block; }

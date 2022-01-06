@@ -6,15 +6,27 @@
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return{{ '_'.$plan->id }}"></i>
             <span id="errors_return{{ '_'.$plan->id }}" style="color: red;"></span>
         </div>
-        <div class="ib02_01 E-font my_project_img_wrapper">
-            <img src="{{ Storage::url($plan->image_url) }}">
+        <div class="my_project_img_wrapper pds_sec02_img">
+            <img src="{{ asset(Storage::url($plan->image_url)) }}">
             <a class="cover_link" onclick="openPlanFormModal({{ $plan->id }})"></a>
         </div>
 
-        <div class="ib02_03">
-            <h3>{{ Str::limit($plan->title, 46) }}</h3>
-            <a class="cover_link" onclick="openPlanFormModal({{ $plan->id }})"></a>
+        <div class="price">{{ $plan->price }}円</div>
+
+        <div class="title">{{ Str::limit($plan->title, 46) }}</div>
+
+        <div class="content">
+            {{ Str::limit($plan->content, 170) }}
         </div>
+
+        @if($plan->limit_of_supporters_is_required === 1 && $plan->limit_of_supporters > 0)
+            <div class="text">限定数：{{ $plan->limit_of_supporters }}</div>
+        @else()
+            <div class="text">限定数：なし</div>
+        @endif
+
+        <div class="text">住所情報の取得：{{ $plan->address_is_required === 0 ? '要' : '不要' }}</div>
+        <div class="text">{{ $plan->formatted_delivery_date }}末までにお届け予定</div>
 
         <div class="def_btn">
             編集
@@ -29,7 +41,7 @@
 </div>
 
 {{--NOTICE: MyProjectController, create action --}}
-<a href="{{ route('user.project.create_return', ['project' => $project]) }}" class="footer-over_L my_new_project" id="create_new_return_button">
+<a href="{{ route('user.project.create_return', ['project' => $project]) }}" class="footer-over-L-return my_new_project" id="create_new_return_button">
     <div class="footer-over_L_02">
     <div class="footer-over_L_02_01">New Return</div>
     <div class="footer-over_L_02_02">新規リターン作成はこちら</div>

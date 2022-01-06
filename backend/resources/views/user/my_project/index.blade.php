@@ -26,17 +26,35 @@
                             </form>
                         </div>
                         @endif
-                        <div class="ib02_01 E-font my_project_img_wrapper">
+
+                        <div class="ib02_01 E-font my_project_img_wrapper
+                        @switch($project->release_status)
+                            @case(ProjectReleaseStatus::getValue('Default'))
+                                default_band
+                                @break
+                            @case(ProjectReleaseStatus::getValue('Pending'))
+                                pending_band
+                                @break
+                            @case(ProjectReleaseStatus::getValue('Published'))
+                                published_band
+                                @break
+                            @case(ProjectReleaseStatus::getValue('UnderSuspension'))
+                                under_suspension_band
+                                @break
+                            @case(ProjectReleaseStatus::getValue('SendBack'))
+                                send_back_band
+                                @break
+                        @endswitch
+                        ">
                             <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}">
                                 @if ($project->projectFiles()->where('file_content_type', 'image_url')->count() > 0)
-                                    <img src="{{ Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url) }}">
+                                    <img src="{{ asset(Storage::url($project->projectFiles()->where('file_content_type', 'image_url')->first()->file_url)) }}">
                                 @else
-                                    <img src={{ Storage::url('public/sampleImage/now_printing.png') }}>
+                                    <img src={{ asset(Storage::url('public/sampleImage/now_printing.png')) }}>
                                 @endif
                             </a>
                             {{-- NOTICE: MyProjectController, show action --}}
                         </div>
-
                         <div class="ib02_03">
                             <a href="{{ route('user.my_project.project.show', ['project' => $project]) }}">
                                 <h3>{{ Str::limit($project->title, 40) }}</h3>
@@ -45,36 +63,60 @@
                         </div>
 
                         <div class="def_btn edit_btn">
-                            @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
+                            @if(
+                            $project->release_status === ProjectReleaseStatus::getValue('Default') ||
+                            $project->release_status === ProjectReleaseStatus::getValue('SendBack') ||
+                            $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
+                            )
                             編集
                             {{-- NOTICE: MyProjectController, edit action --}}
-                            <a class="cover_link" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
-                            @elseif($project->release_status === '承認待ち' || $project->release_status === '掲載中')
-                            {{ $project->release_status }}
-                            <a class="cover_link"></a>
+                            <a class="display_release_status" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
+                            @elseif(
+                            $project->release_status === ProjectReleaseStatus::getValue('Pending') ||
+                            $project->release_status === ProjectReleaseStatus::getValue('Published')
+                            )
+                            プロジェクト詳細
+                            <a class="display_release_status" href="{{ route('user.my_project.project.show', ['project' => $project]) }}"></a>
                             @endif
                         </div>
 
                         <div class="my_project_img_content_wrapper">
                             <div class="my_project_release_status">
                                 <div class="my_project_apply_wrapper">
-                                    @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
+                                    @if(
+                                        $project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
+                                        )
                                     <div class="apply_btn">
-                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" onsubmit="return confirm('本当に申請してもよろしいでしょうか？')">
+                                        <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" id="apply_form">
                                             @csrf
                                             申請
+                                            <button
+                                                type="button"
+                                                class="cover_link disable-btn"
+                                                onclick="applySubmit(
+                                                    {{ $project }},
+                                                    {{ $project->plans }},
+                                                    {{ $project->tags }},
+                                                    {{ $project->user->profile }},
+                                                    {{ $project->user->address }},
+                                                    {{$project->user->identification}},
+                                                    {{ $bank_account }}
+                                                )"
+                                            >
+                                            </button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="apply_btn">
+                                        <form action="{{ route('user.my_project.message.index', ['project' => $project]) }}" method="GET">
+                                            @csrf
+                                            支援者とのやりとり
                                             <button type="submit" class="cover_link disable-btn"></button>
                                         </form>
                                     </div>
                                     @endif
                                 </div>
                             </div>
-                            @if($project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
-                            <div class="display_release_status">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                {{ $project->release_status === ProjectReleaseStatus::getValue('Default') ? '申請前' : $project->release_status }}
-                            </div>
-                            @endif
                         </div>
                     </div><!--/.img_box_01_L_item-->
                     @endforeach
@@ -93,4 +135,8 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('script')
+    <script src={{ asset('/js/apply-submit.js') }}></script>
 @endsection

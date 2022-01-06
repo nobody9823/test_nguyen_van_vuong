@@ -28,8 +28,8 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/selectPlans/{plan?}', [ProjectController::class, 'selectPlans'])->name('plan.selectPlans')->middleware('CheckProjectIsPublished');
     Route::post('plan/confirmPayment', [ProjectController::class, 'confirmPayment'])->name('plan.confirmPayment');
     Route::get('plan/prepare_for_payment', [ProjectController::class, 'prepareForPayment'])->name('plan.prepare_for_payment');
-    Route::get('plan/{payment}/payment_for_credit', [ProjectController::class, 'paymentForCredit'])->name('plan.payment_for_credit');
-    Route::get('plan/{payment}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
+    Route::get('plan/{payment_without_globalscope}/payment_for_credit', [ProjectController::class, 'paymentForCredit'])->name('plan.payment_for_credit');
+    Route::get('plan/{payment_without_globalscope}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
     Route::post('comment', [CommentController::class, 'store'])->name('comment.store')->middleware('project.released');
     Route::get('support', [ProjectController::class, 'support'])->name('project.support');
@@ -78,6 +78,10 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('/withdraw', [MypageController::class, 'withdraw'])->name('withdraw');
     Route::delete('/withdraw/{user}', [MypageController::class, 'deleteUser'])->name('delete_user');
     Route::post('update_external_account', [MypageController::class, 'updateExternalAccount'])->name('update_external_account');
+
+    //---------------------口座登録-----------------------------------------------
+    Route::get('bank_account/edit', [MypageController::class, 'editBankAccount'])->name('bank_account.edit');
+    Route::post('bank_account/update', [MypageController::class, 'updateBankAccount'])->name('bank_account.update');
 
     //---------------------ダイレクトメッセージ一覧-----------------------------------------------
     Route::get('message_index/{selected_message?}', [MessageController::class, 'index'])->name('message.index');

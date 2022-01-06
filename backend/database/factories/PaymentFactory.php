@@ -29,7 +29,7 @@ class PaymentFactory extends Factory
             'user_id' => User::inRandomOrder()->first()->id,
             'project_id' => Project::inRandomOrder()->first()->id,
             'inviter_id' => $this->faker->numberBetween(1, 100),
-            'price' => $this->faker->numberBetween(1000, 50000),
+            'price' => $this->faker->numberBetween(100000, 500000),
             'message_status' => 'ステータスなし',
             'payment_way' => PaymentWay::getValues()[random_int(0, 2)],
             'payment_is_finished' => $this->faker->boolean(50),

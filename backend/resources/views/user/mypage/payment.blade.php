@@ -5,8 +5,8 @@
 @section('content')
 <section id="supported-projects" class="section_base">
     <div class="tit_L_01 E-font">
-        <h2>PURCHASE HISTORY</h2>
-        <div class="sub_tit_L">購入履歴</div>
+        <h2>PURCHASE HISTORY / PS</h2>
+        <div class="sub_tit_L">購入履歴 / PSになる</div>
     </div>
     <div class="prof_page_base inner_item">
         <div class="prof_page_L">
@@ -25,10 +25,26 @@
                                 <span>上乗せ金額 : </span>{{ number_format($payment->added_payment_amount) }}円
                             </div>
                             <div>
-                                <span>支援ID : </span>{{ $payment->paymentToken->token }}
+                                <span>オーダーID : </span>{{ $payment->paymentToken->order_id }}
                             </div>
                         </div>
                     </div>
+
+                    <div class="su_pr_02">
+                        <div class="m_b_1510">
+                            <div class="def_btn">
+                                <a href="{{ route('user.project.support', ['project' => $project]) }}" style="color: white">
+                                    プロジェクトサポーター(PS)になる
+                                </a>
+                            </div>
+                        </div>
+                        <div class="m_b_4030">
+                            <div class="def_btn">ランキングを見る
+                                <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}" class="cover_link"></a>
+                            </div>
+                        </div>
+                    </div><!--/su_pr_02-->
+
                     @foreach($payment->includedPlans as $plan)
                         <div class="su_pr_02">
                             <div class="su_pr_02_01 m_b_1510">リターン名</div>
@@ -40,7 +56,7 @@
                             </div><!--/su_pr_02_03-->
                             <div class="su_pr_02_04 m_b_1510">
                                 <div>支援日：{{ DateFormat::forJapanese($payment->created_at) }}</div>
-                                <div>お届け予定日：{{ $plan->formatted_delivery_date }}</div>
+                                <div>お届け：{{ $plan->formatted_delivery_date }}末までにお届け予定</div>
                             </div><!--/su_pr_02_04-->
                             <div class="su_pr_02_05 m_b_1510">
                                 商品の紹介文：
@@ -52,6 +68,7 @@
                     @endforeach
                 </div><!--/su_pr_base-->
             @endforeach
+
             {{ $payments->appends(request()->input())->onEachSide(1)->links() }}
         </div>
     </div>

@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
 use Request;
 
 class Payment extends Model
@@ -29,6 +31,13 @@ class Payment extends Model
     protected $casts = [
         'is_sent' => 'boolean'
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope('payment_is_finished', function (Builder $builder) {
+            $builder->where('payment_is_finished', true);
+        });
+    }
 
     public function user()
     {
@@ -107,7 +116,7 @@ class Payment extends Model
                 $query->where(function ($query) use ($word) {
                     $query->whereIn('user_id', User::select('id')->where('name', 'like', "%$word%"))
                         ->orWhereIn('inviter_id', User::select('id')->where('name', 'like', "%$word%"))
-                        ->orWhereIn('id', PaymentToken::select('payment_id')->where('token', 'like', "%$word%"))
+                        ->orWhereIn('id', PaymentToken::select('payment_id')->where('order_id', 'like', "%$word%"))
                         ->orWhereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->whereIn('project_id', Project::select('id')->where('title', 'like', "%$word%"))))
                         ->orWhereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->where('title', 'like', "%$word%")));
                 });
@@ -122,10 +131,10 @@ class Payment extends Model
             return $query->whereIn('id', PlanPaymentIncluded::select('payment_id')->whereIn('plan_id', Plan::select('id')->whereIn('project_id', Project::select('id')->where('id', $project_id))));
         }
     }
-    public function scopeNarrowDownPaymentToken($query)
+    public function scopeNarrowDownPaymentOrderId($query)
     {
-        if (Request::get('payment_token')) {
-            $query->whereIn('id', PaymentToken::where('token', Request::get('payment_token'))->pluck('payment_id'));
+        if (Request::get('order_id')) {
+            $query->whereIn('id', PaymentToken::where('order_id', Request::get('order_id'))->pluck('payment_id'));
         }
         return $query;
     }
@@ -160,5 +169,15 @@ class Payment extends Model
             $total_amount += ($plan->price * $plan->pivot->quantity);
         }
         return $this->price - $total_amount;
+    }
+
+    public function decrementIncludedPlansQuantity()
+    {
+        foreach ($this->includedPlans as $includedPlan) {
+            if ($includedPlan->limit_of_supporters_is_required === 1) {
+                $includedPlan->limit_of_supporters -= $includedPlan->pivot->quantity;
+                $includedPlan->save();
+            }
+        }
     }
 }

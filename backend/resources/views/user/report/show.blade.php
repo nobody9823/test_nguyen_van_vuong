@@ -9,7 +9,7 @@
 
     <div class="content">
         <div class="pds_sec02_img">
-            <img src="{{ Storage::url($report->image_url) }}">
+            <img src="{{ asset(Storage::url($report->image_url)) }}">
         </div>
         <div class="disclaimer">
             {{ $report->created_at }}

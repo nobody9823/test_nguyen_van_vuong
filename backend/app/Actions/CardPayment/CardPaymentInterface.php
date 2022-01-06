@@ -5,80 +5,115 @@ namespace App\Actions\CardPayment;
 interface CardPaymentInterface
 {
     /**
-     * Return result of payment by Stripe
+     * Return result of entryTran by GMO
      *
      * @param int
      * @param string
+     *
+     * @return object
+     */
+    public function entryTran(int $price, string $order_id): object;
+
+    /**
+     * Return result of execTran by GMO
+     *
+     * @param string
+     * @param string
+     * @param string
      * @param string
      *
      * @return object
      */
-    public function charge(int $price, string $payment_method_id, string $connected_account_id): object;
+    public function execTran(string $payment_method_id, string $access_id, string $access_pass, string $order_id): object;
 
     /**
-     * Refund already finished payment
-     *
-     * @param string
-     *
-     * @return object
-     */
-    public function refund(string $payment_id): object;
-
-    /**
-     * Create connected account
-     *
-     * @param string
-     * @return object
-     */
-    public function createConnectedAccount(string $ip): object;
-
-    /**
-     * Retrieve connected account
-     *
-     * @param string
-     * @return object
-     */
-    public function retrieveConnectedAccount(string $connected_account_id): object;
-
-    /**
-     * Update personal information
-     *
-     * @param string
-     * @param object
-     * @return object
-     */
-    public function updatePersonalInformation(string $connected_account_id, array $request): object;
-
-    /**
-     * Update external account
+     * Return result of refund by GMO
      *
      * @param string
      * @param string
-     * @return object
-     */
-    public function updateExternalAccount(string $connected_account_id, string $bank_token): object;
-
-    /**
-     * Create identity document file
-     *
      * @param int
+     *
      * @return object
      */
-    public function createIdentityDocument(int $user_id): object;
+    public function refund(string $access_id, string $access_pass, int $price): object;
 
     /**
-     * Attach identity document to connected account
+     * Return result of alter sales by GMO
      *
      * @param string
      * @param string
+     * @param int
+     *
      * @return object
      */
-    public function attachIdentityDocument(string $file_id, string $connected_account_id): object;
+    public function alterSales(string $access_id, string $access_pass, int $price): object;
 
     /**
-     * Get payment api name
+     * Return result of search trade by GMO
+     *
+     * @param string
+     *
+     * @return object
+     */
+    public function searchTrade(string $order_id): object;
+
+    /**
+     * Get bank account as 'GMO'
      *
      * @return string
      */
     public function getPaymentApiName(): string;
+
+    /**
+     * Get bank account as 'GMO'
+     *
+     * @param string
+     *
+     * @return object
+     */
+    public function getBankAccount(string $bank_id): object;
+
+    /**
+     * Register bank account as 'GMO'
+     *
+     * @param int
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     *
+     * @return object
+     */
+    public function registerBankAccount(
+        int $method,
+        string $bank_id,
+        string $bank_code,
+        string $branch_code,
+        string $account_type,
+        string $account_number,
+        string $account_name
+    ): object;
+
+    /**
+     * remittance deposit as 'GMO'
+     *
+     * @param string
+     * @param string
+     * @param int
+     * @param int
+     *
+     * @return object
+     */
+    public function remittance(string $deposit_id, string $bank_id, int $amount, int $method): object;
+
+    /**
+     * search deposit as 'GMO'
+     *
+     * @param string
+     *
+     * @return object
+     */
+    public function searchRemittance(string $deposit_id): object;
 }

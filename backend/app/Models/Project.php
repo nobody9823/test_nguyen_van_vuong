@@ -8,12 +8,11 @@ use App\Models\UserProjectLiked;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Storage;
 
 use function PHPUnit\Framework\isEmpty;
@@ -30,8 +29,10 @@ class Project extends Model
         'reward_by_total_amount',
         'reward_by_total_quantity',
         'target_number',
+        'funded_type',
         'start_date',
         'end_date',
+        'option_fee',
     ];
 
     protected $dates = ['start_date', 'end_date'];
@@ -52,6 +53,7 @@ class Project extends Model
             $project->projectFiles()->delete();
             $project->projectTagTagging()->delete();
             $project->reports()->delete();
+            $project->deposits()->delete();
 
             // リターンのリレーション先も論理削除
             $plan_ids = $project->plans()->pluck('id')->toArray();
@@ -136,6 +138,11 @@ class Project extends Model
         return $this->hasManyThrough('App\Models\MessageContent', 'App\Models\Payment');
     }
 
+    public function deposits()
+    {
+        return $this->hasMany('App\Models\Deposit');
+    }
+
     //--------------local scope----------------//
 
     public function scopeGetReleasedProject($query)
@@ -146,13 +153,9 @@ class Project extends Model
     // 'Payments'テーブルのユーザーカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        // 重複するuser_idを削除して、支援者数を算出する。
-        $sub_query = Payment::selectRaw('count(distinct(`user_id`))')
-            ->from('payments')
-            ->whereColumn('projects.id', 'payments.project_id')
-            ->toSql();
-
-        return $query->selectRaw("`projects`.*,($sub_query) as `payments_count`")->withSum('payments', 'price');
+        return $query->withCount(['payments' => function ($query) {
+            $query->select(DB::raw('count(distinct(`user_id`))'));
+        }])->withSum('payments', 'price');
     }
 
     public function getLoadIncludedPaymentsCountAndSumPrice()
@@ -214,14 +217,36 @@ class Project extends Model
         return $query->whereBetween($start_or_end_date, [Carbon::now(), Carbon::now()->addWeek(1)]);
     }
 
-    public function scopeSearchWithReleaseStatus($query, $release_statuses)
+    public function scopeNarrowDownWithProject($query)
     {
-        if (is_array($release_statuses) && optional($release_statuses)[0] !== null) {
-            $query->where(function ($query) use ($release_statuses) {
-                foreach ($release_statuses as $release_status) {
+        if (Request::get('project')) {
+            return $query->where('id', Request::get('project'));
+        }
+    }
+
+    public function scopeSearchWithReleaseStatus($query)
+    {
+        if (Request::get('release_statuses')) {
+            $query->where(function ($query) {
+                foreach (Request::get('release_statuses') as $release_status) {
                     $query->orWhere('release_status', $release_status);
                 }
             });
+        }
+        return $query;
+    }
+
+    public function scopeSearchWithReleasePeriod($query)
+    {
+        if (Request::get('release_period')) {
+            switch (Request::get('release_period')) {
+                case '掲載開始前':
+                    return $query->beforeSeeking();
+                case '掲載中':
+                    return $query->seeking();
+                case '掲載終了後':
+                    return $query->afterSeeking();
+            }
         }
         return $query;
     }
@@ -258,6 +283,12 @@ class Project extends Model
             $query->withCountNotRead("実行者");
         }]);
     }
+
+    public function scopeGetWithDepositsExistsAndDeposits($query)
+    {
+        return $query->withExists('deposits');
+    }
+
     //--------------local scope----------------//
 
 
@@ -288,13 +319,23 @@ class Project extends Model
         return $this->payments->where('created_at', '>=', Carbon::now()->subHours(24))->groupBy('user_id')->count();
     }
 
+    public function getApplicationFeeAttribute()
+    {
+        return ceil(bcmul($this->payments_sum_price, 0.2, 1));
+    }
+
+    public function getRemittanceAmountAttribute()
+    {
+        return ceil(bcmul($this->payments_sum_price, 0.8, 1)) - $this->option_fee;
+    }
+
     // 目標金額に対する支援総額の割合
     // scopeGetWithPlansWithInPaymentsCountAndSumPriceを呼んでいないと使えないです。
     public function getAchievementRateAttribute()
     {
         // 金額の達成率の算出
         if ($this->target_number > 0) {
-            return round($this->payments_count * 100 / $this->target_number);
+            return round($this->payments_sum_price * 100 / $this->target_number);
         } else { // ゼロ除算対策
             return 100;
         }

@@ -1,0 +1,608 @@
+@charset "UTF-8";
+/*
+Theme Name:rumble_tcd058 child
+Theme URI:
+Description:WordPressテーマ「rumble_tcd058」の自作子テーマです。
+Template:rumble_tcd058
+Author:
+Author URI:
+Version:0.0.3
+*/
+
+/* ページレイアウト */
+.txt_tit_basic h2{
+    text-align: left;
+    font-size: 40px;
+    line-height: 1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00aebd;
+    margin: 0px 0 40px;
+    padding: 0px;
+    position: relative;
+}
+.txt_tit_basic h2 span {
+    font-family: 'Cormorant Infant', serif;
+    font-size: 14px;
+    line-height: 1.4em;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 10px;
+}
+.txt_tit_basic h2 b {
+    font-style: normal;
+    display: inline-block;
+    background-color: #FFFFFF;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.txt_tit_basic h2 b:after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #00aebd;
+    top: 50%;
+    display: inline-block;
+    position: absolute;
+    margin: auto;
+    padding: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: -1;
+}
+/* フロー */
+/*! CSS Used from: https://unc10.jp/css/basic.css */
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+div,h4,p,br,var{margin:0;padding:0;}
+section{display:block;margin:0;padding:0;}
+h4{line-height:130%;font-weight:bold;margin:0px;padding:0px;}
+p{margin:0;padding:0;color:#1b1b1b;font-size:14px;line-height:1.8em;font-weight:100;}
+.pagewrapper p{font-size:13px;line-height:1.8em;font-weight:100;}
+.contact-ex-inner{padding:0 0 80px 0;}
+.flow{padding:20px 0;}
+.flow h4{font-size:28px;line-height:1em;font-weight:700;color:#9ABDB7;margin-bottom:15px;}
+.flow h4 var{font-family:'Cormorant Infant', serif;font-size:78px;line-height:1em;font-weight:700;display:block;}
+@media screen and (max-width: 640px){
+.contact-ex-inner{padding:0 0 30px 0!important;}
+}
+@media screen and (max-width: 480px){
+.flow p br{display:none;}
+}
+/*! CSS Used fontfaces */
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDkhQ4UeNrjfIg.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDAhQ4UeNrjfIg.woff2) format('woff2');unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDshQ4UeNrjfIg.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDohQ4UeNrjfIg.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDQhQ4UeNrg.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDkhQ4UeNrjfIg.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDAhQ4UeNrjfIg.woff2) format('woff2');unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDshQ4UeNrjfIg.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDohQ4UeNrjfIg.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDQhQ4UeNrg.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
+/* 募集要項 */
+/*! CSS Used from: https://unc10.jp/css/basic.css */
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+div,dl,h3,dd,dt,a,b,br,span{margin:0;padding:0;}
+h3{line-height:130%;font-weight:bold;margin:0px;padding:0px;}
+a{text-decoration:underline;outline:none;color:#1a1a1a;}
+a:hover{color:#666666;text-decoration:none;}
+.contactblock{padding:30px 0 0 0;}
+.contact-ex-inner{padding:0 0 80px 0;}
+.contactblock h3{font-family:'Cormorant Infant',"游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;font-size:24px;line-height:1.4em;font-weight:100;color:#1a1a1a;letter-spacing:0.05em;margin-bottom:55px;}
+.contactblock h3 span{font-size:13px;font-weight:100;display:block;margin-top:8px;}
+dl.contact-ex:first-of-type{border-top:solid 1px #00aebd;}
+dl.contact-ex{color:#1a1a1a;font-size:0px;line-height:0px;margin:0;border-bottom:solid 1px #00aebd;text-align:left;margin:0;display:table;width:100%;padding:20px 0;}
+dl.contact-ex.overview{padding:30px 0 28px;}
+dl.contact-ex dt{width:27%;padding-right:20px;}
+dl.contact-ex dd{width:73%;}
+dl.contact-ex dt,dl.contact-ex dd{text-align:left;vertical-align:middle;display:table-cell;font-size:15px;line-height:1.6em;font-weight:400;}
+.contactblock h3{text-align:center;font-size:40px;line-height:1em;font-weight:700;text-transform:uppercase;color:#1a1a1a;margin:0px 0 40px;padding:0px;position:relative;}
+.contactblock h3 b{font-style:normal;display:inline-block;background-color:#FFFFFF;padding-right:20px;padding-left:20px;}
+.contactblock h3 b:after{content:'';width:100%;height:1px;background-color:#CCCCCC;top:50%;display:inline-block;position:absolute;margin:auto;padding:0px;left:0px;right:0px;bottom:0px;z-index:-1;}
+.contactblock h3 span{font-family:'Cormorant Infant', serif;font-size:14px;line-height:1.4em;font-weight:700;display:block;margin-bottom:10px;}
+.warning{padding-bottom:25px;font-size:13px;line-height:1.4em;font-weight:100;color:#1a1a1a;text-align: left;}
+@media screen and (max-width: 640px){
+.contact-ex-inner{padding:0 0 30px 0!important;}
+}
+@media screen and (max-width: 480px){
+.contactblock{padding:20px 0 0 0;}
+.contactblock h3{font-size:32px;margin:0px 0 30px;}
+.contactblock h3 span{font-size:13px;}
+.contactblock h3 b{padding-right:10px;padding-left:10px;}
+}
+/*! CSS Used fontfaces */
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDkhQ5cd.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDAhQ5cd.woff2) format('woff2');unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDshQ5cd.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDohQ5cd.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDQhQw.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDkhQ5cd.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDAhQ5cd.woff2) format('woff2');unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDshQ5cd.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDohQ5cd.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDQhQw.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
+/* フロー */
+/*! CSS Used from: https://unc10.jp/css/basic.css */
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+div,h3,h4,p,b,br,span,var{margin:0;padding:0;}
+section{display:block;margin:0;padding:0;}
+h3,h4{line-height:130%;font-weight:bold;margin:0px;padding:0px;}
+p{margin:0;padding:0;color:#1b1b1b;font-size:14px;line-height:1.8em;font-weight:100;}
+.pagewrapper p{font-size:13px;line-height:1.8em;font-weight:100;}
+.contactblock{padding:30px 0 0 0;}
+.contact-ex-inner{padding:0 0 80px 0;}
+.contactblock h3{font-family:'Cormorant Infant',"游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;font-size:24px;line-height:1.4em;font-weight:100;color:#1a1a1a;letter-spacing:0.05em;margin-bottom:55px;}
+.contactblock h3 span{font-size:13px;font-weight:100;display:block;margin-top:8px;}
+.contactblock h3{text-align:center;font-size:40px;line-height:1em;font-weight:700;text-transform:uppercase;color:#1a1a1a;margin:0px 0 40px;padding:0px;position:relative;}
+.contactblock h3 b{font-style:normal;display:inline-block;background-color:#FFFFFF;padding-right:20px;padding-left:20px;}
+.contactblock h3 b:after{content:'';width:100%;height:1px;background-color:#CCCCCC;top:50%;display:inline-block;position:absolute;margin:auto;padding:0px;left:0px;right:0px;bottom:0px;z-index:-1;}
+.contactblock h3 span{font-family:'Cormorant Infant', serif;font-size:14px;line-height:1.4em;font-weight:700;display:block;margin-bottom:10px;}
+.flow{padding:20px 0;text-align: center;}
+.flow h4{font-size:28px;line-height:1em;font-weight:700;color:#9ABDB7;margin-bottom:15px;}
+.flow h4 var{font-family:'Cormorant Infant', serif;font-size:78px;line-height:1em;font-weight:700;display:block;}
+@media screen and (max-width: 640px){
+.contact-ex-inner{padding:0 0 30px 0!important;}
+}
+@media screen and (max-width: 480px){
+.contactblock{padding:20px 0 0 0;}
+.contactblock h3{font-size:32px;margin:0px 0 30px;}
+.contactblock h3 span{font-size:13px;}
+.contactblock h3 b{padding-right:10px;padding-left:10px;}
+.flow p br{display:none;}
+}
+/*! CSS Used fontfaces */
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDkhQ5cd.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDAhQ5cd.woff2) format('woff2');unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDshQ5cd.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDohQ5cd.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:300;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9951w3zDQhQw.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDkhQ5cd.woff2) format('woff2');unicode-range:U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDAhQ5cd.woff2) format('woff2');unicode-range:U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDshQ5cd.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDohQ5cd.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face{font-family:'Cormorant Infant';font-style:normal;font-weight:700;src:url(https://fonts.gstatic.com/s/cormorantinfant/v11/HhyIU44g9vKiM1sORYSiWeAsLN9950wwzDQhQw.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
+
+
+/* contact form 7 お問合せ */
+.wpcf7 form {
+    margin: 1.5em 0 3.5em;
+}
+.contact_txt input{
+    border: solid 1px #00aebd;
+    background-color: #fff;
+}
+.contact_row {
+    border-bottom: solid 2px #00aebd !important;
+}
+.contact_row {
+    border-bottom: solid 2px #00aebd !important;
+}
+.contact_form_btn .wpcf7-confirm {
+    border: 2px solid #008b97 !important;
+    background-color: #00aebd !important;
+    color: #FFF !important;
+}
+.contact_form_btn .wpcf7-submit {
+    border: 2px solid #008b97 !important;
+    background-color: #00aebd !important;
+    color: #FFF !important;
+}
+.contact_txt textarea {
+    border: solid 1px #00aebd;
+}
+.contact_txt select {
+    border: solid 1px #00aebd;
+    background-color: #fff!important;
+}
+.contact_form_btn .wpcf7-submit {
+    /* background: url(https://universal-zero.com/wp-content/uploads/2020/11/uz_arrow_w.svg) no-repeat center right; */
+    /* background-size: 19px 19px; */
+    /* background-position: top 13px right 15px; */
+    text-align: center !important;
+    /* padding: 30px 0 30px 0; */
+    border: 2px solid #CD1F19;
+    font-weight: bold;
+    background-color: #CD1F19;
+    color: #fff;
+    width: 160px;
+    margin: 0 0 0 30px;
+    height: auto;
+    font-size: 150%;
+    text-align: center;
+}
+/* contact form 7 お問合せ */
+.wpcf7 {
+    border: none;
+}
+
+.content_col {
+    display: inline-block;
+    width: 33%;
+}
+
+.content_col select {
+    width: 100%;
+}
+
+#page_header {
+    /* height: 0px; */
+}
+
+/* フォーム------------ */
+/* .post_content h2 {
+padding: 0 7px 0;
+border-left: 4px solid #0F103F;
+} */
+
+.post_content h2 {
+    position: relative;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #000;
+}
+
+.post_content h2:before {
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 30px);
+    width: 60px;
+    height: 5px;
+    content: '';
+    border-radius: 3px;
+    background: #0F103F;
+}
+
+.contact_lavel {
+    background: none;
+}
+
+.contact_row {
+    padding-bottom: 15px;
+    border-bottom: solid 2px #ddd;
+}
+
+/* 必須 */
+.req {
+    border-radius: 5px;
+    margin: 5px 5px 5px 0px;
+    padding: 6px 0;
+    width: 40px;
+    display: inline-block;
+    text-align: center;
+    background: #0F103F;
+    color: #fff;
+    font-size: 75%;
+    font-weight: bold;
+}
+
+/* 任意 */
+.opt {
+    border-radius: 5px;
+    margin: 5px 5px 5px 0px;
+    padding: 6px 0;
+    width: 40px;
+    display: inline-block;
+    text-align: center;
+    background: #ddd;
+    color: #0e0e0e;
+    font-size: 75%;
+    font-weight: bold;
+}
+
+.wpcf7 {
+    background: none;
+}
+
+.wpcf7-list-item {
+    display: inline-block !important;
+}
+
+/*! CSS Used from: https://universal-zero.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.2.2 ; media=all */
+@media all {
+    .wpcf7 .screen-reader-response {
+        position: absolute;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        width: 1px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    .wpcf7 form .wpcf7-response-output {
+        margin: 2em 0.5em 1em;
+        padding: 0.2em 1em;
+        border: 2px solid #00a0d2;
+    }
+
+    .wpcf7 form.init .wpcf7-response-output {
+        display: none;
+    }
+
+    .wpcf7-form-control-wrap {
+        position: relative;
+    }
+
+    div.wpcf7 .ajax-loader {
+        visibility: hidden;
+        display: inline-block;
+        background-image: url('https://universal-zero.com/wp-content/plugins/contact-form-7/images/ajax-loader.gif');
+        width: 16px;
+        height: 16px;
+        border: none;
+        padding: 0;
+        margin: 0 0 0 4px;
+        vertical-align: middle;
+    }
+
+    div.wpcf7 .wpcf7-submit:disabled {
+        cursor: not-allowed;
+    }
+
+    .wpcf7 input[type="email"],
+    .wpcf7 input[type="tel"] {
+        direction: ltr;
+    }
+}
+
+/*! CSS Used from: https://universal-zero.com/wp-content/plugins/contact-form-7-add-confirm/includes/css/styles.css?ver=5.1 ; media=all */
+@media all {
+    .wpcf7c-force-hide {
+        display: none !important;
+    }
+
+    #page_content {
+        padding-top: 0;
+    }
+
+    #page_content .wpcf7 {
+        margin-top: 0px !important;
+    }
+}
+
+/*! CSS Used from: https://universal-zero.com/wp-content/themes/growb_temp_1.0/style.css?ver=5.5.3 ; media=all */
+@media all {
+
+    div,
+    span,
+    p,
+    form {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+
+    textarea,
+    input[type="text"],
+    input[type="button"],
+    input[type="submit"] {
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 0;
+    }
+
+    * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .txt_all {
+        font-size: 16px;
+        letter-spacing: 1.6px;
+        line-height: 2.0;
+        padding: 0 15px;
+    }
+
+    .col-all {
+        width: 100%;
+    }
+
+    .contact_block {
+        width: 100%;
+        margin: 0 auto;
+        color: #000;
+    }
+
+    .contact_box {
+        margin-bottom: 40px;
+    }
+
+    .contact_row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 0 15px 0;
+    }
+
+    .contact_lavel {
+        width: 28%;
+        margin: 0 2% 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        color: #000;
+        padding: 8px 15px;
+        /* background: #ddd; */
+    }
+
+    @media screen and (max-width: 768px) {
+        .contact_lavel {
+            width: 100%;
+            margin: 0 0 0 0;
+            padding-left: 0px;
+        }
+    }
+
+    .contact_lavel_txt_s {
+        font-size: 85%;
+    }
+
+    .contact_txt {
+        width: 70%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .contact_txt input {
+        width: 100%;
+        border: solid 1px #ccc;
+        padding: 12px 10px;
+    }
+
+    .contact_txt select {
+        border: solid 1px #ccc;
+        padding: 10px 10px;
+    }
+
+    .contact_txt textarea {
+        width: 100%;
+        border: solid 1px #ccc;
+        padding: 10px 10px;
+    }
+
+    .contact_txt_ad {
+        width: 100%;
+        line-height: 1.5;
+        margin: 0 0 10px 0;
+    }
+
+    .contact_input_text {
+        width: 100%;
+    }
+
+    .contact_input_text_row {
+        display: flex;
+    }
+
+    .contact_textarea {
+        width: 100%;
+    }
+
+    .wpcf7-form input::placeholder {
+        color: #aaa;
+    }
+
+    .wpcf7-form input::-webkit-input-placeholder {
+        color: #aaa;
+    }
+
+    .wpcf7-form input:-ms-input-placeholder {
+        color: #aaa;
+    }
+
+    .wpcf7-form input::placeholder {
+        color: #aaa;
+    }
+
+    .wpcf7-submit {
+        padding: 0.8em 5em;
+    }
+
+    .wpcf7-response-output {
+        text-align: center;
+    }
+
+    .wpcf7 .wpcf7-list-item {
+        text-align: center;
+    }
+
+    @media screen and (max-width: 768px) {
+        .contact_lavel {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .contact_txt {
+            width: 100%;
+        }
+    }
+
+    .wpcf7-submit {
+        background: #C00;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+    }
+
+    .contact_form_btn {
+        width: 100%;
+        margin: 0 auto 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .contact_form_btn .wpcf7-submit {
+        /* background: url(https://universal-zero.com/wp-content/uploads/2020/11/uz_arrow_w.svg) no-repeat center right; */
+        background-size: 19px 19px;
+        background-position: top 13px right 15px;
+        text-align: center !important;
+        padding: 30px 20px 30px 20px;
+        border: 2px solid #CD1F19;
+        font-weight: bold;
+        background-color: #CD1F19;
+        color: #fff;
+        width: 160px !important;
+        margin: 0 0 0 30px;
+        height: auto;
+        font-size: 100%;
+    }
+
+    .contact_form_btn .wpcf7-confirm {
+        /* background: url(https://universal-zero.com/wp-content/uploads/2020/11/uz_arrow_bl.svg) no-repeat center right; */
+        background-size: 19px 19px;
+        background-position: top 13px right 15px;
+        text-align: center !important;
+        padding: 30px 20px 30px 20px;
+        border: 2px solid #0F103F;
+        font-weight: bold;
+        color: #0F103F;
+        width: 160px !important;
+        font-size: 100%;
+    }
+
+    .contact_form_btn .wpcf7-back {
+        /* background: url(https://universal-zero.com/wp-content/uploads/2020/11/uz_arrow_bl_02.svg) no-repeat center right; */
+        background-size: 19px 19px;
+        background-position: top 13px left 15px;
+        text-align: center !important;
+        padding: 30px 20px 30px 20px;
+        border: 2px solid #0F103F;
+        font-weight: bold;
+        color: #0F103F;
+        width: 160px !important;
+        font-size: 100%;
+    }
+
+    div.wpcf7 .ajax-loader {
+        display: none;
+    }
+}
+
+#page_content {
+    /* width: 1030px; */
+    margin: 0 auto;
+    /* padding: 0px 0 150px; */
+}
+
+#page_content .wpcf7 {
+    /* padding: 50px 50px 60px; */
+    background: none;
+}
+
+
+
+.l-layout-type1 .l-tertiary, .l-layout-type2 .l-secondary, .l-layout-type4 .l-primary {
+    display: none;
+}
+

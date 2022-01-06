@@ -26,7 +26,7 @@
         <div class="pds_inner">
             <div class="pds_sec01">
                 <div class="project_author_wrapper">
-                    <div class="author_image" style="background-image: url({{ Storage::url($project->user->profile->image_url) }})">
+                    <div class="author_image" style="background-image: url({{ asset(Storage::url($project->user->profile->image_url)) }})">
                     </div>
                     <span>{{ $project->user->name }}</span>
                 </div>
@@ -43,7 +43,7 @@
                             @foreach($project->projectFiles as $project_file)
                                 @if($project_file->file_content_type === 'image_url')
                                 <li class="slide-item">
-                                    <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                                    <img src="{{ asset(Storage::url($project_file->file_url)) }}" alt="画像">
                                 </li>
                                 @elseif($project_file->file_content_type === 'video_url')
                                 <li class="slide-item">
@@ -57,7 +57,7 @@
                                 @foreach($project->projectFiles as $project_file)
                                     @if($project_file->file_content_type === 'image_url')
                                     <li class="thumbnail-item">
-                                        <img src="{{ Storage::url($project_file->file_url) }}" alt="画像">
+                                        <img src="{{ asset(Storage::url($project_file->file_url)) }}" alt="画像">
                                     </li>
                                     @elseif($project_file->file_content_type === 'video_url')
                                     <li class="thumbnail-item">
@@ -73,7 +73,8 @@
 
 
                 <div class="pds_sec01_R">
-
+                <div class="pds_sec01_R_en01">現在の支援総額</div>
+                <div class="pds_sec01_R_en02 E-font">¥ {{ number_format($project->payments_sum_price) }}円</div>
                 <div class="pds_sec01_progress-bar">
                     <div class="progress_arrow_box_wrapper">
                         <div class="{{ ProgressBarState::getArrowBoxClassName($project) }}">{{ ProgressBarState::getArrowBoxText($project) }}</div>
@@ -91,7 +92,7 @@
                     </div>
                 </div>
 
-                <div class="pds_sec01_R_en03">目標人数は{{ $project->target_number }}人</div>
+                <div class="pds_sec01_R_en03">目標金額は¥{{ number_format($project->target_number) }}</div>
 
                 <div class="pds_sec01_R_nin_base">
                     <div class="pds_sec01_R_en01">現在の支援者数</div>
@@ -103,21 +104,12 @@
                     @if (DateFormat::checkDateIsFuture($project->start_date))
                         <div class="pds_sec01_R_nokori01">募集開始まで残り</div>
                         <div class="pds_sec01_R_nokori02 E-font">
-                            {{-- NOTICE: 追加開発が決まったらコメントアウトを外してください --}}
-                            {{-- @if (DateFormat::checkDateIsWithInADay($project->start_date))
-                                {{ DateFormat::getDiffCompareWithToday($project->start_date) }}<span>時間</span>
-                            @else --}}
-                                {{ DateFormat::getDiffCompareWithToday($project->start_date) }}<span>日</span>
-                            {{-- @endif --}}
+                            {{ DateFormat::getDiffCompareWithToday($project->start_date) }}
                         </div>
                     @elseif (DateFormat::checkDateIsPast($project->start_date) && DateFormat::checkDateIsFuture($project->end_date))
                         <div class="pds_sec01_R_nokori01">募集終了まで残り</div>
                         <div class="pds_sec01_R_nokori02 E-font">
-                            {{-- @if (DateFormat::checkDateIsWithInADay($project->end_date))
-                                {{ DateFormat::getDiffCompareWithToday($project->end_date) }}<span>時間</span>
-                            @else --}}
-                                {{ DateFormat::getDiffCompareWithToday($project->end_date) }}<span>日</span>
-                            {{-- @endif --}}
+                            {{ DateFormat::getDiffCompareWithToday($project->end_date) }}
                         </div>
                     @elseif (DateFormat::checkDateIsPast($project->end_date))
                         <div class="pds_sec01_R_nokori02"><span>FINISHED</span></div>
@@ -353,7 +345,7 @@
             <div class="detail_imgs">
                 <div class="detail-slider-for">
                     @foreach($project->projectFiles as $project_file)
-                    <div><img src="{{ Storage::url($project_file->file_url) }}"></div>
+                    <div><img src="{{ asset(Storage::url($project_file->file_url)) }}"></div>
                     @endforeach
                     {{-- @if($project->projectVideo !== null)
                         <div>{{ DisplayVideoHelper::getThumbnail(optional(optional($project)->projectVideo)->video_url) }}
@@ -362,7 +354,7 @@
             {{-- </div>
             <div class="detail-slider-nav">
                 @foreach($project->projectFiles as $project_file)
-                <div><img src="{{ Storage::url($project_file->file_url) }}"></div>
+                <div><img src="{{ asset(Storage::url($project_file->file_url)) }}"></div>
                 @endforeach --}}
                 {{-- @if($project->projectVideo !== null)
                         <div>{{ DisplayVideoHelper::getThumbnail(optional(optional($project)->projectVideo)->video_url) }}
@@ -374,7 +366,7 @@
         <p><i class="far fa-lightbulb pri_color_f i_icon"></i>達成額</p>
         <div><span>{{ $project->payments_sum_price }}</span>円</div>
         <p>
-            <i class="fas fa-yen-sign pri_color_f i_icon"></i>目標人数 {{ number_format($project->target_number) }}
+            <i class="fas fa-yen-sign pri_color_f i_icon"></i>目標金額 {{ number_format($project->target_number) }}
             人</p>
         @if($project->achievement_rate < 100) <div class="complete">
             <div class="bar" style="width: {{ $project->achievement_rate }}%;"></div>

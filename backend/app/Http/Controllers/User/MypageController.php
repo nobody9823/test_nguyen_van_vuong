@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Actions\CardPayment\CardPaymentInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BankAccountRequest;
 use App\Http\Requests\UserProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\UniqueToken;
 use Log;
 
 class MypageController extends Controller
@@ -34,7 +36,7 @@ class MypageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // 購入履歴
+    // 購入履歴 / PSになる
     public function paymentHistory()
     {
         $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project'])->paginate(1);
@@ -53,20 +55,6 @@ class MypageController extends Controller
         $comments = Comment::getOwnComments()->orderBy('created_at', 'DESC')->get();
         return view('user.mypage.comment', [
             'comments' => $comments,
-        ]);
-    }
-
-    // 応援購入したプロジェクト一覧
-    public function purchasedProjects()
-    {
-        $projects = Project::whereIn(
-            'id',
-            Payment::select('project_id')->where('user_id', Auth::id())
-        )->with(['projectFiles' => function ($query) {
-            $query->where('file_content_type', 'image_url');
-        }, 'tags'])->getWithPaymentsCountAndSumPrice()->paginate(1);
-        return view('user.mypage.project', [
-            'projects' => $projects,
         ]);
     }
 
@@ -125,6 +113,40 @@ class MypageController extends Controller
         // $account = $this->card_payment->attachIdentityDocument($file['id'], Auth::user()->identification->connected_account_id);
 
         return $account;
+    }
+
+    public function editBankAccount()
+    {
+        return Auth::user()->identification->bank_id
+            ? view(
+                'user.mypage.bank_account',
+                [
+                    'bank_account' => $this->card_payment->getBankAccount(Auth::user()->identification->bank_id)
+                ]
+            )
+            : view('user.mypage.bank_account', ['bank_account' => null]);
+    }
+
+    public function updateBankAccount(BankAccountRequest $request)
+    {
+        $response = $this->card_payment->registerBankAccount(
+            Auth::user()->identification->bank_id ? 2 : 1,
+            Auth::user()->identification->bank_id ?: UniqueToken::getToken(),
+            $request->bank_code,
+            $request->branch_code,
+            $request->account_type,
+            $request->account_number,
+            $request->account_name,
+        );
+
+        if (!\Illuminate\Support\Arr::has($response->json(), 'Bank_ID')) {
+            Log::alert($response->body());
+            return redirect()->route('user.bank_account.edit')->withErrors('銀行口座の登録に失敗しました。入力内容をご確認ください。');
+        }
+
+        Auth::user()->identification->bank_id = $response['Bank_ID'];
+        Auth::user()->identification->save();
+        return redirect()->route('user.bank_account.edit')->with('flash_message', '銀行口座の登録が完了しました。');
     }
 
     public function commission()

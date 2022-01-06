@@ -11,11 +11,11 @@
         <div>
             @if (isset($messageContent->payment->project->user->profile->image_url))
             <img class="contributor-icon"
-                src="{{Storage::url($messageContent->payment->project->user->profile->image_url)}}"
+                src="{{asset(Storage::url($messageContent->payment->project->user->profile->image_url))}}"
                 style="float:left;margin-right: 0.5rem;width: 25px;height: 25px;">
             @else
             {{-- DB構造変えられないため、ない場合はサンプル出すよう応急処置 --}}
-            <img class="contributor-icon" src="{{Storage::url('public/sampleImage/my-page.svg')}}"
+            <img class="contributor-icon" src="{{asset(Storage::url('public/sampleImage/my-page.svg'))}}"
                 style="float:left;margin-right: 0.5rem;width: 25px;height: 25px;">
             @endif
             {{-- ガードがexecutorなら'あなた'表記 ちょっと冗長--}}

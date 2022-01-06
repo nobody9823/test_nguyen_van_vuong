@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
 use BenSampo\Enum\Rules\EnumValue;
 use App\Enums\BankAccountType;
+use App\Enums\FundedType;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Validation\Validator;
@@ -42,6 +43,7 @@ class MyProjectRequest extends FormRequest
             'video_url' => ['nullable', 'url', 'regex:#(https?\:\/\/)(www\.youtube\.com\/watch\?v=|youtu\.be\/)+[\S]{11}#'],
             // 'target_amount' => ['nullable', 'integer', 'min:10000', 'max:99999999'],
             'target_number' => ['nullable', 'integer', 'min:1', 'max:9999999'],
+            'funded_type' => ['nullable', new EnumValue(FundedType::class)],
             'start_date' => ['nullable', 'date_format:Y-m-d H:i', /*'after_or_equal:+14 day'*/],
             'end_date' => ['nullable', 'date_format:Y-m-d H:i', new MyProjectEndDate($this->route('project'))],
             'reward_by_total_amount' => ['nullable', 'string'],

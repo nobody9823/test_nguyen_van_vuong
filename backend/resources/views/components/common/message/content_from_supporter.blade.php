@@ -9,7 +9,7 @@
     style="border-bottom: 2px solid #EEE;padding: 0.5rem 0.5rem;margin-left: 0rem;margin-bottom: 3px;">
     <div style="font-weight: bold;display:flex;justify-content:space-between;">
         <div>
-            <img class="contributor-icon" src="{{Storage::url($messageContent->payment->user->profile->image_url)}}"
+            <img class="contributor-icon" src="{{asset(Storage::url($messageContent->payment->user->profile->image_url))}}"
                 style="float:left;margin-right: 0.5rem;width: 25px;height: 25px;">
             {{-- ガードがsupporterなら'あなた'表記 ちょっと冗長--}}
             @if ($guard === 'supporter')
