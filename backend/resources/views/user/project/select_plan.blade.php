@@ -138,17 +138,6 @@
                                     </div>
 
                                     <div class="tab1_01">
-                                        <div class="tab1_01_01">セキュリティコード</div>
-                                        <div class="cvc-wrapper">
-                                            <input type="text" name="cvc-form" id="cvc-form" class="cvc_form" placeholder="（例）123" />
-                                            <div class="tooltip1">
-                                                <p>？</p>
-                                                <div class="description1">カードの裏面にある末尾3桁の数字</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tab1_01">
                                         <div class="tab1_01_01">有効期限</div>
                                         <div class="expiry-wrapper">
                                             <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
@@ -178,6 +167,18 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="tab1_01">
+                                        <div class="tab1_01_01">セキュリティコード</div>
+                                        <div class="cvc-wrapper">
+                                            <input type="text" name="cvc-form" id="cvc-form" class="cvc_form" placeholder="（例）123" />
+                                            <div class="tooltip1">
+                                                <p>？</p>
+                                                <div class="description1">カードの裏面にある末尾3桁の数字</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 {{-- <div class="tab1_04"><input type="checkbox" id="aaa" class="ac_list_checks"><label for="aaa" class="checkbox-fan">このクレジットカード情報を保存する</label></div> --}}
