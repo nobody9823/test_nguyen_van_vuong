@@ -166,7 +166,7 @@ endif;
 
 <div id="header_top_banner">
     <div class="header_banner_text">
-        プロジェクトを始めたい方は、まずご相談！
+        エントリーに興味がある方は、まずご相談
     </div>
     <div class="header_banner_link_wrapper">
         <a class="header_banner_link" href="https://lin.ee/JTL9trf">
@@ -183,8 +183,10 @@ endif;
 		<div id="gb_site-title">
 		<h1><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="" rel="home"><img src="<?php echo get_template_directory_uri(); ?>/img/logo-color.svg" alt="" /></a></h1>
 		</div>
+
 		<div id="gb_site-description">
-		</div>
+<p class="" style="-webkit-text-size-adjust: 100%;-webkit-font-smoothing: antialiased;box-sizing: border-box;-webkit-tap-highlight-color: transparent;outline: 0;border: 0;font: inherit;vertical-align: baseline;margin: 10px 0 0 0;padding: 0;line-height: 1.8em;color: #00AEBD;font-size: 14px;font-weight: bold;">〜エンタメ業界の人脈をあなたのものに〜</p>
+</div>
 	</div>
 	<div id="gb_header_03">
 		<input type="checkbox" id="gb_nav-tgl_clone" name="gb_nav-tgl_clone" style="display: none;">
@@ -205,7 +207,7 @@ endif;
 					<li id="gb_menu-item-1" class="gb_menu-item gb_menu-item-1 nav_btn m_t_1 under_arrow_no">
 							<a href="<?php echo esc_url( home_url( '/' ) ); ?>%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e4%b8%80%e8%a6%a7/" id="top_gb_menu1" data-megamenu="js-megagb_menu1" class="nav_btn_link current_h_btn">
 								<div>
-									<p class="nav_btn_tit_L">募集中のプロジェクト</p>
+									<p class="nav_btn_tit_L">エントリー一覧</p>
 								</div>
 							</a>
 					</li>
@@ -215,7 +217,7 @@ endif;
 							<a href="" id="top_gb_menu1" data-megamenu="js-megagb_menu1" class="nav_btn_link current_h_btn">
 								<label for="item_c_1" class="item_c">
 									<div>
-									<p class="nav_btn_tit_L">募集中のプロジェクト</p>
+									<p class="nav_btn_tit_L">エントリー一覧</p>
 					
 									</div>
 									<div class="under_arrow">▼</div>
@@ -239,9 +241,9 @@ endif;
 					
 					
 					<li id="gb_menu-item-2" class="gb_menu-item gb_menu-item-2 nav_btn m_t_2 under_arrow_yes">
-							<a href="https://fanreturn.com/search?word=" id="top_gb_menu2" data-megamenu="js-megagb_menu2" class="nav_btn_link">
+							<a href="https://fanreturn.com/" id="top_gb_menu2" data-megamenu="js-megagb_menu2" class="nav_btn_link">
 								<div>
-									<p class="nav_btn_tit_L">実施中のプロジェクト</p>
+									<p class="nav_btn_tit_L">プロジェクト一覧</p>
 								</div>
 							</a>
 					</li>
@@ -287,6 +289,7 @@ endif;
 					</li>
 					-->
 					
+					<!--
 					<li id="gb_menu-item-4" class="menu-item nav_btn taso_li menuset_05 login_btn mobile_hide">
 						<a href="https://fanreturn.com/login" class="top_menu-1 nav_btn_link">
 							<p class="nav_btn_tit_L">ログイン</p>
@@ -298,6 +301,7 @@ endif;
 							<p style="color: #fff;">新規登録</p>
 						</a>
 					</li>				
+					-->
 
 
 					<li id="media_menu">

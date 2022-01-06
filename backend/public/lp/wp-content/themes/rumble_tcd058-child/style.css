@@ -6,7 +6,7 @@ Description:WordPressテーマ「rumble_tcd058」の自作子テーマです。
 Template:rumble_tcd058
 Author:
 Author URI:
-Version:0.0.1
+Version:0.0.3
 */
 
 /* ページレイアウト */
@@ -173,6 +173,7 @@ p{margin:0;padding:0;color:#1b1b1b;font-size:14px;line-height:1.8em;font-weight:
 }
 .contact_txt input{
     border: solid 1px #00aebd;
+    background-color: #fff;
 }
 .contact_row {
     border-bottom: solid 2px #00aebd !important;
@@ -195,6 +196,7 @@ p{margin:0;padding:0;color:#1b1b1b;font-size:14px;line-height:1.8em;font-weight:
 }
 .contact_txt select {
     border: solid 1px #00aebd;
+    background-color: #fff!important;
 }
 .contact_form_btn .wpcf7-submit {
     /* background: url(https://universal-zero.com/wp-content/uploads/2020/11/uz_arrow_w.svg) no-repeat center right; */
@@ -505,6 +507,10 @@ border-left: 4px solid #0F103F;
     }
 
     .wpcf7-response-output {
+        text-align: center;
+    }
+
+    .wpcf7 .wpcf7-list-item {
         text-align: center;
     }
 
