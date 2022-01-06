@@ -388,7 +388,7 @@ endif;
         <div class="footer_main_inner">
 
             <div class="footer_main_01">
-                <h4 class="footer_tit">募集中のプロジェクト</h4>
+                <h4 class="footer_tit">エントリー一覧</h4>
 
 <div id="media_menu_footer">
 	<?php wp_nav_menu(
@@ -406,7 +406,7 @@ endif;
                             </div>
 
             <div class="footer_main_02">
-                <h4 class="footer_tit">実施中のプロジェクト</h4>
+                <h4 class="footer_tit">プロジェクト一覧</h4>
                 
                 <div class="footer_item"><a href="https://fanreturn.com/my_project/project">プロジェクトを作る</a></div>
             </div>
@@ -414,6 +414,7 @@ endif;
             <div class="footer_main_03">
                 <h4 class="footer_tit">fanreturnについて</h4>
                 
+                <div class="footer_item"><a href="https://fanreturn.com/trade_law">運営会社</a></div>
                 <div class="footer_item"><a href="https://fanreturn.com/terms_of_service">利用規約</a></div>
                 <div class="footer_item"><a href="https://fanreturn.com/ps_terms_of_service">プロジェクトサポーター利用規約</a></div>
                 <div class="footer_item"><a href="https://fanreturn.com/privacy_policy">プライバシーポリシー</a></div>
@@ -435,15 +436,15 @@ endif;
 					<li id="gb_menu-item-1" class="gb_menu-item gb_menu-item-1 nav_btn m_t_1 under_arrow_no">
 							<a href="<?php echo esc_url( home_url( '/' ) ); ?>%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e4%b8%80%e8%a6%a7/" id="top_gb_menu1" data-megamenu="js-megagb_menu1" class="nav_btn_link current_h_btn">
 								<div>
-									<p class="nav_btn_tit_L">募集中のプロジェクト</p>
+									<p class="nav_btn_tit_L">エントリー一覧</p>
 								</div>
 							</a>
 					</li>
 			
 					<li id="gb_menu-item-2" class="gb_menu-item gb_menu-item-2 nav_btn m_t_2 under_arrow_yes">
-							<a href="https://fanreturn.com/search?word=" id="top_gb_menu2" data-megamenu="js-megagb_menu2" class="nav_btn_link">
+							<a href="https://fanreturn.com/" id="top_gb_menu2" data-megamenu="js-megagb_menu2" class="nav_btn_link">
 								<div>
-									<p class="nav_btn_tit_L">実施中のプロジェクト</p>
+									<p class="nav_btn_tit_L">プロジェクト一覧</p>
 								</div>
 							</a>
 					</li>
@@ -455,6 +456,7 @@ endif;
 						</a>
 					</li>
 					
+					<!--
 					<li id="gb_menu-item-4" class="menu-item nav_btn taso_li menuset_05 login_btn mobile_hide">
 						<a href="https://fanreturn.com/login" class="top_menu-1 nav_btn_link">
 							<p class="nav_btn_tit_L">ログイン</p>
@@ -466,6 +468,7 @@ endif;
 							<p style="color: #fff;">新規登録</p>
 						</a>
 					</li>				
+					-->
 
 
 
