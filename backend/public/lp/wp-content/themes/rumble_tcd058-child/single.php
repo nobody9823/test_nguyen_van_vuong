@@ -117,16 +117,11 @@ if ( have_posts() ) :
 		endif;
 ?>
 
-
 <?php //▼▼▼▼▼ACF▼▼▼▼▼ ?>
 
-<?php while(has_sub_field('見出し＆文章＆画像')) : ?>
 
-<?php if(get_row_layout() == '基本見出し') : ?>
-<div class="col-all txt_tit_basic <?php the_sub_field('基本見出し-見出し-追加class(親)'); ?> col_h2 animate" data-animate="fadeIn" data-duration="1.2s" data-delay="0.1s">
-	<h2 class="<?php the_sub_field('基本見出し-見出し-追加class'); ?>"><span><?php the_sub_field('基本見出し-見出し-サブタイトル'); ?></span><b><?php the_sub_field('基本見出し-見出し'); ?></b></h2>
-</div>
-<?php endif; ?>
+
+<?php while(has_sub_field('見出し＆文章＆画像')) : ?>
 
 <?php if(get_row_layout() == '見出しのみ') : ?>
 <div class="col-all <?php the_sub_field('見出しのみ-見出し-追加class(親)'); ?> col_<?php the_sub_field('見出しのみ-見出しタグ'); ?> animate" data-animate="fadeIn" data-duration="1.2s" data-delay="0.1s">
@@ -410,63 +405,42 @@ if ( have_posts() ) :
 <?php endwhile; ?>
 <?php //▲▲▲▲▲ACF▲▲▲▲▲ ?>
 
-
-
-<?php if(get_row_layout() == '募集要項タイトル') : ?>
-		<div class="col-all <?php the_sub_field('html_ソースコード-追加class(親)'); ?> animate" data-animate="fadeIn" data-duration="1.2s" data-delay="0.1s">
-			<?php the_sub_field('タイトル'); ?>
-			<?php the_sub_field('内容'); ?>
-		</div>
-<?php endif; ?>
-
-
-
 <div class="txt_tit_basic">
-	<h2><span><?php the_field('サブタイトル'); ?></span><b><?php the_field('タイトル'); ?></b></h2>
-	<div class="warning"><?php the_field('説明'); ?></div>
-<div class="contact-ex-inner">
+	<h3><span>Introduction</span><b>はじめに</b></h3>
+</div>
+
+<?php //▼▼▼▼▼募集要項▼▼▼▼▼ ?>
+<?php the_field('タイトル') ?>
+<?php the_field('サブタイトル') ?>
+<?php the_field('説明') ?>
 <?php while(has_sub_field('募集要項')) : ?>
-	<?php if(get_row_layout() == 'テーブル') : ?>
 
-      <dl class="contact-ex overview">
-        <dt><?php the_sub_field('見出し'); ?></dt>
-        <dd><?php the_sub_field('内容'); ?></dd>
-      </dl>
-	  <?php endif; ?>
+<?php if(get_row_layout() == 'テーブル') : ?>
 
-	  <?php endwhile; ?>
-    </div><!-- /.contact-ex-inner -->
-  </div>
+<?php the_sub_field('見出し') ?>
+<?php the_sub_field('内容') ?>
+<?php endif; ?>
+<?php endwhile; ?>
 
+<?php echo '<br>'; ?>
+<?php //▼▼▼▼▼フロー▼▼▼▼▼ ?>
 
+<?php the_field('フロータイトル') ?>
+<?php the_field('フローサブタイトル') ?>
+<?php while(has_sub_field('フロー詳細')) : ?>
 
-<div class="txt_tit_basic">
-	<h2><span><?php the_field('フローサブタイトル'); ?></span><b><?php the_field('フロー＿タイトル'); ?></b></h2>
-</div>
-<div class="contact_nagare ">
-	<div class="contact-ex-inner">
-		<?php while(has_sub_field('フロー詳細')) : ?>
-			<?php if(get_row_layout() == '詳細') : ?>
-				<section class="flow">
+<?php if(get_row_layout() == '詳細') : ?>
 
-				<div class="nagare_num"><div class="nagare_num_step">STEP</div><div class="nagare_num_num"><?php the_sub_field('番号'); ?></div></div>
-				<div class="nagare_txt_block">
-					<h4 class="nagare_tit"><div><?php the_sub_field('項目'); ?></div></h4>
-					<div class="nagare_txt"><?php the_sub_field('詳細テキスト'); ?></div></div>
-				</section>
-				<?php endif; ?>
-				<div class="flow_line_base"><div class="flow_line"></div></div>
-				<?php endwhile; ?>
-	</div>
-</div>
+<?php the_sub_field('番号') ?>
+<?php the_sub_field('項目') ?>
+<?php the_sub_field('詳細テキスト') ?>
+<?php endif; ?>
+<?php endwhile; ?>
 
-
-
+<?php //▼▼▼▼▼掲載相談▼▼▼▼▼ ?>
 <?php
   $form = get_field('form');
   if( $form && in_array('on', $form)){
-	echo '<div class="col-all txt_tit_basic  col_h2 animate" data-animate="fadeIn" data-duration="1.2s" data-delay="0.1s"><h2 class=""><span>form</span><b>掲載相談</b></h2>
-</div>';
 	echo do_shortcode('[contact-form-7 id="84" title="掲載相談"]');
   }
 ?>
