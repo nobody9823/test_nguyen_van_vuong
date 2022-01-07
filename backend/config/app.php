@@ -243,6 +243,7 @@ return [
         'ProgressBarState' => App\Services\View\ProgressBarStateFacade::class,
     ],
 
+    'axios_baseURL' => env('AXIOS_BASEURL'),
     'basic_auth' => env('BASIC_AUTH', false),
     'card_payment_api' => env('CARD_PAYMENT_API'),
     'pay_jp_secret' => env('PAY_JP_SECRET'),

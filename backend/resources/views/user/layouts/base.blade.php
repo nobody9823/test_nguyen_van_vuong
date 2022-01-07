@@ -23,7 +23,10 @@ if(isiOS) {
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
+</script>
 
 {{-- toastr読み込み --}}
 <script src={{ asset("js/toastr.min.js") }}></script>
