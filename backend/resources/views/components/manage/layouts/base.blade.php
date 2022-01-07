@@ -13,7 +13,10 @@ use \Illuminate\Support\Str;
     @yield('title_content')
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+    axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
+    </script>
     @yield('css')
 </head>
 
