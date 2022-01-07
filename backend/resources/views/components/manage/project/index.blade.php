@@ -452,7 +452,7 @@
                             <div class="d-flex flex-column justify-content-center">
                                 <div class="d-flex justify-content-center">
                                     <p>
-                                        <img style="height:1em" src="/image/heart.jpg">
+                                        <img style="height:1em" src="{{asset('image/heart.jpg')}}">
                                     </p>
                                     <p id="total_likes_{{ $project->id }}">
                                         {{ $project->total_likes }}
