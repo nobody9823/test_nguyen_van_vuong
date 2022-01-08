@@ -181,6 +181,8 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 .taso_menu .taso_li .taso_ul .taso_li:last-child{border-bottom:1px none;}
 .taso_menu > .taso_li > .taso_ul{width:100%;}
 #header_01{display:flex;flex-wrap:wrap;align-items:center;}
+.h_logo_wrapper{display:flex;width: max-content;align-items: center;}
+.h_logo_subtitle{color: #00AEBD;margin: 10px 0 0 10px;}
 .h_logo_css{width:224px;margin:2px 0 0 0;display:block;}
 .h_logo_css_sp{display:none;}
 #branding{display:flex;flex-wrap:wrap;justify-content:space-between; height:80px; padding:0 5px;line-height:1; width:225px;}
@@ -300,6 +302,9 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 	.top_menu-1{ height: auto; padding:15px 7px;}
 	.top_menu_logout{ background-color: transparent; border: none; color: white; font-weight: bold; font-size: 100%;}
 }
+@media screen and (max-width: 1100px) {
+    .h_logo_subtitle{display: none;}
+}
 
 /**footer********************************************************************/
 footer{background: #F4F4F4; font-size: 1.4rem; font-weight: bold;}
@@ -339,6 +344,7 @@ footer a{ color: #707070;}
 .footer_list li {margin-right: 25px;}
 .footer_logo { margin: 0 25px 0 0;}
 .footer_logo img {width: 180px;}
+.footer_list_items{color: #00AEBD;}
 
 @media screen and (max-width: 768px){
 	.footer-over_base{ width: 100%; padding: 0 15px;}

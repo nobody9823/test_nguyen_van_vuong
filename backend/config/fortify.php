@@ -63,6 +63,10 @@ return [
 
     'home' => 'profile',
 
+    'redirects' => [
+        'logout' => config('app.wp_baseURL'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Fortify Routes Prefix / Subdomain
