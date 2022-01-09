@@ -185,8 +185,8 @@ endif;
 		</div>
 
 		<div id="gb_site-description">
-<p class="" style="-webkit-text-size-adjust: 100%;-webkit-font-smoothing: antialiased;box-sizing: border-box;-webkit-tap-highlight-color: transparent;outline: 0;border: 0;font: inherit;vertical-align: baseline;margin: 10px 0 0 0;padding: 0;line-height: 1.8em;color: #00AEBD;font-size: 14px;font-weight: bold;">〜エンタメ業界の人脈をあなたのものに〜</p>
-</div>
+			<p class="" style="-webkit-text-size-adjust: 100%;-webkit-font-smoothing: antialiased;box-sizing: border-box;-webkit-tap-highlight-color: transparent;outline: 0;border: 0;font: inherit;vertical-align: baseline;margin: 10px 0 0 0;padding: 0;line-height: 1.8em;color: #00AEBD;font-size: 14px;font-weight: bold;">〜エンタメ業界の人脈をあなたのものに〜</p>
+		</div>
 	</div>
 	<div id="gb_header_03">
 		<input type="checkbox" id="gb_nav-tgl_clone" name="gb_nav-tgl_clone" style="display: none;">
@@ -333,6 +333,30 @@ endif;
 </div><!--/#gb_menu-->
 
 </div>
+
+<style>
+#sp_btn_nemu_base{display: none;}
+@media screen and (max-width: 991px){
+	#sp_btn_nemu_base{ display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content: center; border-top: solid 1px #ddd; border-bottom: solid 1px #ddd;}
+	#sp_btn_nemu_01{ width: 50%; border-right: solid 1px #ddd;}
+	#sp_btn_nemu_02{ width: 50%;}
+	.sp_btn_nemu_tit{ font-size: 13px; font-weight: bold; color: #00AEBD; text-align: center; padding: 14px 0; max-height: 50px; }
+}
+
+</style>
+<div id="sp_btn_nemu_base">
+	<div id="sp_btn_nemu_01">
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e4%b8%80%e8%a6%a7/">
+			<p class="sp_btn_nemu_tit">エントリー一覧</p>
+		</a>
+	</div>
+	<div id="sp_btn_nemu_02">
+		<a href="https://fanreturn.com/">
+			<p class="sp_btn_nemu_tit">プロジェクト一覧</p>
+		</a>
+	</div>
+</div>
+
 
 <style>
 #header_top_banner{ width: 100%; text-align: center; background: #00AEBD;min-height: 80px; padding: 10px; font-family: YuGothic; font-size: 14px; font-weight: bold;  font-stretch: normal;  font-style: normal;  line-height: 1.57; letter-spacing: normal; text-align: center; color: #fff;}
@@ -511,7 +535,7 @@ img{-webkit-backface-visibility:hidden;}
 	#media_menu ul{ margin-top: 0px; padding-left: 10px;}
 	#media_menu ul li { padding: 8px 10px;}
 	
-	.l-main{ margin-top: 70px;}
+	.l-main{ margin-top: 120px;}
 }
 
 #js-global-nav{ margin-bottom: ;}

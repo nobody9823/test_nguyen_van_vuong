@@ -120,13 +120,8 @@ if ( have_posts() ) :
 <?php //▼▼▼▼▼ACF▼▼▼▼▼ ?>
 
 
-<?php while(has_sub_field('見出し＆文章＆画像')) : ?>
 
-	<?php if(get_row_layout() == '基本見出し') : ?>
-	<div class="txt_tit_basic">
-		<h2><span><?php the_sub_field('基本見出し-見出し-サブタイトル') ?></span><b><?php the_sub_field('基本見出し-見出し') ?></b></h2>
-	</div>
-	<?php endif; ?>
+<?php while(has_sub_field('見出し＆文章＆画像')) : ?>
 
 <?php if(get_row_layout() == '見出しのみ') : ?>
 <div class="col-all <?php the_sub_field('見出しのみ-見出し-追加class(親)'); ?> col_<?php the_sub_field('見出しのみ-見出しタグ'); ?> animate" data-animate="fadeIn" data-duration="1.2s" data-delay="0.1s">
@@ -410,63 +405,37 @@ if ( have_posts() ) :
 <?php endwhile; ?>
 <?php //▲▲▲▲▲ACF▲▲▲▲▲ ?>
 
-<?php //▼▼▼▼▼募集要項▼▼▼▼▼ ?>
 <div class="txt_tit_basic">
-	<h2><span><?php the_field('サブタイトル') ?></span><b><?php the_field('タイトル') ?></b></h2>
+	<h2><span>Introduction</span><b>はじめに</b></h2>
 </div>
-<?php the_field('説明') ?>
 
+<?php //▼▼▼▼▼募集要項▼▼▼▼▼ ?>
+<?php the_field('タイトル') ?>
+<?php the_field('サブタイトル') ?>
+<?php the_field('説明') ?>
 <?php while(has_sub_field('募集要項')) : ?>
 
-	<?php if(get_row_layout() == 'テーブル') : ?>
+<?php if(get_row_layout() == 'テーブル') : ?>
 
-		<dl class="contact-ex overview">
-		<dt><?php the_sub_field('見出し') ?></dt>
-		<dd><?php the_sub_field('内容') ?></dd>
-		</dl>
-
-
+<?php the_sub_field('見出し') ?>
+<?php the_sub_field('内容') ?>
 <?php endif; ?>
 <?php endwhile; ?>
 
 <?php echo '<br>'; ?>
 <?php //▼▼▼▼▼フロー▼▼▼▼▼ ?>
 
-<div class="txt_tit_basic">
-	<h2><span><?php the_field('フローサブタイトル') ?></span><b><?php the_field('フロー＿タイトル') ?></b></h2>
-</div>
-
-
-
-
+<?php the_field('フロータイトル') ?>
+<?php the_field('フローサブタイトル') ?>
 <?php while(has_sub_field('フロー詳細')) : ?>
-	<?php if(get_row_layout() == '詳細') : ?>
 
-<div class="contact_nagare">
-<!-- <div class="contact-ex-inner"> -->
-<section class="flow">
-<div class="nagare_num">
-<div class="nagare_num_step">STEP</div>
-<div class="nagare_num_num"><?php the_sub_field('番号') ?></div>
-</div>
-<div class="nagare_txt_block">
-<h4 class="nagare_tit">
-<div><?php the_sub_field('項目') ?></div>
-</h4>
-<div class="nagare_txt"><?php the_sub_field('詳細テキスト') ?></div>
-</div>
-</section>
-<div class="flow_line_base">
-<div class="flow_line"></div>
-</div>
+<?php if(get_row_layout() == '詳細') : ?>
 
-<!-- </div> -->
-</div>
-
+<?php the_sub_field('番号') ?>
+<?php the_sub_field('項目') ?>
+<?php the_sub_field('詳細テキスト') ?>
 <?php endif; ?>
 <?php endwhile; ?>
-
-
 
 <?php //▼▼▼▼▼掲載相談▼▼▼▼▼ ?>
 <?php
