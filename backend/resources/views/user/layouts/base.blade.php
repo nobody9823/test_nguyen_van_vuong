@@ -276,6 +276,14 @@ axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
 
 </header>
 </div>
+<div class="header_bottom">
+    <a href="{{ config('app.wp_baseURL').'/プロジェクト一覧' }}">
+        エントリー一覧
+    </a>
+    <a href="{{ route('user.index') }}">
+        プロジェクト一覧
+    </a>
+</div>
 
 <style>
 /**他ページヘッダー**/
