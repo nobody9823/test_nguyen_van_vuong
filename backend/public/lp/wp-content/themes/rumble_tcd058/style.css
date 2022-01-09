@@ -1709,10 +1709,28 @@ a:hover img.fade { opacity: 0.7; filter: alpha(opacity=70); -ms-filter: "alpha( 
     border-radius: 3px !important;
 }
 
+/**220107追加　上　***************************************/
+.p-pagetop a {
+    height: 41px !important;
+    width: 40px !important;
+}
+.p-pagetop {
+    bottom: 20px !important;
+    right: 10px !important;
+}
+.p-pagetop a::after {
+    font-size: 25px !important;
+    font-weight: bold;
+    top: 5px !important;
+    position: absolute;
+    text-shadow: 0.8px 0.8px 0, 0.8px -0.8px 0px, -0.8px 0.8px 0, -0.8px -0.8px 0px, 0.8px 0px 0px, 0px 0.8px 0px, -0.8px 0px 0px, 0px -0.8px 0px;
+}
 
-
-
-
+@media screen and (max-width: 990px){
+	.p-pagetop a::after {
+		top: 10px !important;
+	}
+}
 
 
 

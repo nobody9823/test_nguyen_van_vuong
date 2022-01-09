@@ -414,12 +414,12 @@ endif;
             <div class="footer_main_03">
                 <h4 class="footer_tit">fanreturnについて</h4>
                 
-                <div class="footer_item"><a href="https://fanreturn.com/trade_law">運営会社</a></div>
                 <div class="footer_item"><a href="https://fanreturn.com/terms_of_service">利用規約</a></div>
                 <div class="footer_item"><a href="https://fanreturn.com/ps_terms_of_service">プロジェクトサポーター利用規約</a></div>
                 <div class="footer_item"><a href="https://fanreturn.com/privacy_policy">プライバシーポリシー</a></div>
                 <div class="footer_item"><a href="https://fanreturn.com/trade_law">特定商取引法に基づく表記</a></div>
                 <div class="footer_item"><a href="https://fanreturn.com/inquiry/create">お問い合わせ</a></div>
+                <div class="footer_item"><a href="https://ichj.co.jp">運営会社</a></div>
                 
                 
             </div>

@@ -24,6 +24,9 @@ if(isiOS) {
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
+</script>
 
 {{-- toastr読み込み --}}
 <script src={{ asset("js/toastr.min.js") }}></script>
@@ -61,8 +64,11 @@ if(isiOS) {
 <div id="branding">
 	<div id="header_01">
 		<div id="site-title">
-			<a href="{{ route('user.index') }}" title="FanReturn" rel="home">
-				<img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
+			<a href="{{ config('app.wp_baseURL') }}" title="FanReturn" rel="home">
+                <div class="h_logo_wrapper">
+                    <img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
+                    <p class="h_logo_subtitle">〜エンタメ業界の人脈をあなたのものに〜</p>
+                </div>
 			</a>
 		</div>
 	</div>
@@ -88,13 +94,13 @@ if(isiOS) {
 		<ul id="js-global-nav" class="p-global-nav main-menu menu_base taso_menu">
 
             <li class="menu-item nav_btn taso_li menuset_01">
-                <a href="{{ route('user.my_project.project.index') }}" class="top_menu-1 nav_btn_link">
-                    <p class="nav_btn_tit_L">はじめる</p>
+                <a href="{{ config('app.wp_baseURL').'/プロジェクト一覧' }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">エントリー一覧</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
-                <a href="{{ route('user.search') }}" class="top_menu-1 nav_btn_link">
-                    <p class="nav_btn_tit_L">さがす</p>
+                <a href="{{ route('user.index') }}" class="top_menu-1 nav_btn_link">
+                    <p class="nav_btn_tit_L">プロジェクト一覧</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_01">
@@ -117,14 +123,15 @@ if(isiOS) {
 				</a>
 			</li>
             @endguest
-            <form method="get" action="{{ route('user.search') }}" name="word_search">
+            {{-- NOTICE: こちらは必要となったらコメントアウト解除、デザイン崩れる恐れあり --}}
+            {{-- <form method="get" action="{{ route('user.search') }}" name="word_search">
                 <li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
                     <i class="fas fa-search"></i><input type="text" name="word" placeholder="キーワードを検索" value="{{ Request::get('word') }}">
                     <a href="javascript:word_search.submit()" class="top_menu-1 nav_btn_link signup_btn" style="justify-content: center;">
                         <p>検索</p>
                     </a>
                 </li>
-            </form>
+            </form> --}}
 
 
 			{{-- <li id="menu-item-2" class="menu-item menu-item-2 nav_btn menu-item-has-children taso_li menuset_02">
@@ -268,6 +275,14 @@ if(isiOS) {
 </div> --}}
 
 </header>
+</div>
+<div class="header_bottom">
+    <a href="{{ config('app.wp_baseURL').'/プロジェクト一覧' }}">
+        エントリー一覧
+    </a>
+    <a href="{{ route('user.index') }}">
+        プロジェクト一覧
+    </a>
 </div>
 
 <style>
