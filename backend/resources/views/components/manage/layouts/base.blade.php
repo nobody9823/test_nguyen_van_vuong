@@ -14,6 +14,9 @@ use \Illuminate\Support\Str;
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
+    </script>
     @yield('css')
 </head>
 
