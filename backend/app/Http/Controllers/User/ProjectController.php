@@ -69,7 +69,7 @@ class ProjectController extends Controller
         $new_projects = Project::mainProjects()->orderBy('start_date', 'DESC')->take(6)->get();
 
         // 掲載終了プロジェクト
-        $complete_projects = Project::CompletedProjects()->orderBy('end_date', 'ASC')->get();
+        $complete_projects = Project::CompletedProjects()->where('end_date', '>', Carbon::create(2022, 1, 6))->orderBy('end_date', 'ASC')->get();
 
         // 応援プロジェクト（目標金額の高い順）
         // $cheer_projects = Project::getReleasedProject()->seeking()->orderBy('target_number', 'DESC')
@@ -323,7 +323,7 @@ class ProjectController extends Controller
      */
     public function search(Request $request)
     {
-        $projectsQuery = Project::query();
+        $projectsQuery = Project::query()->where('end_date', '>', Carbon::create(2022, 1, 6));
         if ($request->tag_id) {
             $tags = Tag::pluck("name", "id");
         } else {
