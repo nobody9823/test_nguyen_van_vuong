@@ -328,7 +328,7 @@
                                         </div>
                                         <div class="modal-body">
                                             @foreach ($payment->includedPlans as $plan)
-                                                {{ $plan->title }} </br>個数 : {{ $plan->pivot->quantity }}<br/><br/>
+                                                {{ $plan->title }} <br/>個数 : {{ $plan->pivot->quantity }} 金額: {{ number_format($plan->price) }}円<br/><br/>
                                             @endforeach
                                         </div>
                                     </div>
