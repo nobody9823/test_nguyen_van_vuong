@@ -257,7 +257,7 @@ if (!$dp_options) $dp_options = get_design_plus_option();
 
 
                                             <li id="gb_menu-item-2" class="gb_menu-item gb_menu-item-2 nav_btn m_t_2 under_arrow_yes">
-                                                <a href="https://fanreturn.com/fanding" id="top_gb_menu2" data-megamenu="js-megagb_menu2" class="nav_btn_link">
+                                                <a href="<?php echo esc_url(home_url('/')); ?>fanding" id="top_gb_menu2" data-megamenu="js-megagb_menu2" class="nav_btn_link">
                                                     <div>
                                                         <p class="nav_btn_tit_L">プロジェクト一覧</p>
                                                     </div>
@@ -288,7 +288,7 @@ if (!$dp_options) $dp_options = get_design_plus_option();
 
                                             <li id="gb_menu-item-3" class="gb_menu-item gb_menu-item-3 nav_btn m_t_3 under_arrow_no">
 
-                                                <a href="https://fanreturn.com/fanding/question" id="top_gb_menu3" data-megamenu="js-megagb_menu3" class="nav_btn_link">
+                                                <a href="<?php echo esc_url(home_url('/')); ?>fanding/question" id="top_gb_menu3" data-megamenu="js-megagb_menu3" class="nav_btn_link">
                                                     <div>
                                                         <p class="nav_btn_tit_L">ファンリターンとは</p>
                                                     </div>
@@ -310,13 +310,13 @@ if (!$dp_options) $dp_options = get_design_plus_option();
 
                                             <!--
 					<li id="gb_menu-item-4" class="menu-item nav_btn taso_li menuset_05 login_btn mobile_hide">
-						<a href="https://fanreturn.com/fanding/login" class="top_menu-1 nav_btn_link">
+						<a href="<?php echo esc_url(home_url('/')); ?>fanding/login" class="top_menu-1 nav_btn_link">
 							<p class="nav_btn_tit_L">ログイン</p>
 						</a>
 					</li>
 
 					<li id="gb_menu-item-5" class="menu-item nav_btn taso_li menuset_06 signup_btn mobile_hide">
-						<a href="https://fanreturn.com/fanding/pre_create" class="top_menu-1 nav_btn_link">
+						<a href="<?php echo esc_url(home_url('/')); ?>fanding/pre_create" class="top_menu-1 nav_btn_link">
 							<p style="color: #fff;">新規登録</p>
 						</a>
 					</li>
@@ -398,7 +398,7 @@ if (!$dp_options) $dp_options = get_design_plus_option();
                         </a>
                     </div>
                     <div id="sp_btn_nemu_02">
-                        <a href="https://fanreturn.com/fanding">
+                        <a href="<?php echo esc_url(home_url('/')); ?>fanding">
                             <p class="sp_btn_nemu_tit">プロジェクト一覧</p>
                         </a>
                     </div>
@@ -1122,10 +1122,10 @@ if (!$dp_options) $dp_options = get_design_plus_option();
                         if (empty($value['categories'])) continue;
                 ?>
                         <div id="p-megamenu--<?php echo esc_attr($menu_id) ?>" class="p-megamenu p-megamenu--<?php echo esc_attr($value['type']); ?><?php
-                                                                                                                                                        if (!empty($value['item']->object_id) && 'taxonomy' === $value['item']->type && 'category' === $value['item']->object) :
-                                                                                                                                                            echo ' p-megamenu-parent-category p-megamenu-term-id-' . esc_attr($value['item']->object_id);
-                                                                                                                                                        endif;
-                                                                                                                                                        ?>">
+                                                                                                                                                    if (!empty($value['item']->object_id) && 'taxonomy' === $value['item']->type && 'category' === $value['item']->object) :
+                                                                                                                                                        echo ' p-megamenu-parent-category p-megamenu-term-id-' . esc_attr($value['item']->object_id);
+                                                                                                                                                    endif;
+                                                                                                                                                    ?>">
                             <ul class="l-inner p-megamenu__bg">
                                 <?php
                                 $cnt = 0;
