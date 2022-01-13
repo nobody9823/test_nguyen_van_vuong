@@ -163,54 +163,16 @@
 
     <div class="form_item_row">
         <div class="form_item_tit">
-            金融機関コード・銀行コード
-            <span class="hissu_txt">必須</span>
-        <br/>
-            <span>
-                <a href="https://www.zenginkyo.or.jp/abstract/outline/organization/member-01/" target="_blank">
-                    <i class="fas fa-external-link-alt"></i>
-                    金融機関コードが不明な方はこちら
-                </a>
+            銀行口座<span class="hissu_txt">必須</span>
+            <br/>
+            <span class="disclaimer">
+                ※銀行口座が未設定の方は以下のリンクから銀行口座を設定してください。
             </span>
         </div>
-        <input id="bankCode" type="number" name="bank_code" class="def_input_100p"
-            value="{{ old('bank_code', optional($user->identification)->bank_code) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="bank_code" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">支店番号<span class="hissu_txt">必須</span></div>
-        <input id="branchCode" type="number" name="branch_code" class="def_input_100p"
-            value="{{ old('branch_code', optional($user->identification)->branch_code) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="branch_code" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">口座種別<span class="hissu_txt">必須</span></div>
-        <div class="cp_ipselect cp_normal">
-            <select name="account_type" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-                @foreach(\App\Enums\BankAccountType::getValues() as $account_type)
-                    <option value="{{ $account_type }}" {{ optional($user->identification)->account_type === $account_type ? 'selected' : '' }}>{{ $account_type }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form_item_tit">
-            <x-common.async-submit-message propName="account_type" />
-        </div>
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">口座番号<span class="hissu_txt">必須</span></div>
-        <input id="accountNumber" type="number" name="account_number" class="def_input_100p"
-            value="{{ old('account_number', optional($user->identification)->account_number) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="account_number" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">口座名義<span class="hissu_txt">必須</span></div>
-        <input id="holderName" type="text" name="account_name" class="def_input_100p"
-            value="{{ old('account_name', optional($user->identification)->account_name) }}" onchange="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="account_name" />
+        <a href="{{ route('user.bank_account.edit') }}" target="_blank">
+            <i class="fas fa-external-link-alt"></i>
+            銀行口座入力フォーム
+        </a>
     </div>
 
     <x-common.navigating_page_buttons :project="$project" nextPageButton="unnecessary" />
