@@ -99,11 +99,11 @@
 <script src={{ asset('/js/uploaded-image-handler.js') }}></script>
 <script src={{ asset('/js/plan-form-modal.js') }}></script>
 <script src={{ asset('/js/fade-element.js') }}></script>
-<script src="https://js.stripe.com/v3/"></script>
+{{-- <script src="https://js.stripe.com/v3/"></script>
 <script>
     var stripe = Stripe('{{ config("app.stripe_key") }}');
 </script>
-<script src="{{ asset('/js/stripe-create-bank-account-token.js') }}"></script>
+<script src="{{ asset('/js/stripe-create-bank-account-token.js') }}"></script> --}}
 
 <script>
     window.addEventListener('load',()=>{

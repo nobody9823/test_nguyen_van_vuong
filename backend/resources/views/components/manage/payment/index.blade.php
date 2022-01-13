@@ -124,6 +124,7 @@
                         <th scope="col" width="10%" class="text-nowrap">支援者名</th>
                         <th scope="col" width="10%" class="text-nowrap">招待者名</th>
                         <th scope="col" width="10%" class="text-nowrap">支援額</th>
+                        <th scope="col" width="10%" class="text-nowrap">上乗せ金額</th>
                         <th scope="col" width="10%" class="text-nowrap">インフルエンサー名</th>
                         @if(!Request::get('project'))
                             <th scope="col" width="10%" class="text-nowrap">プロジェクト名</th>
@@ -205,6 +206,9 @@
                         </td>
                         <td class="text-nowrap">
                             {{ $payment->price }}円
+                        </td>
+                        <td class="text-nowrap">
+                            {{ $payment->added_payment_amount }}円
                         </td>
                         <td>
                             <a class="mt-1 text-nowrap" data-toggle="modal" data-target="#project_user_index{{ $payment->project->user->id }}">
@@ -324,7 +328,7 @@
                                         </div>
                                         <div class="modal-body">
                                             @foreach ($payment->includedPlans as $plan)
-                                                {{ $plan->title }} </br>個数 : {{ $plan->pivot->quantity }}<br/><br/>
+                                                {{ $plan->title }} <br/>個数 : {{ $plan->pivot->quantity }} 金額: {{ number_format($plan->price) }}円<br/><br/>
                                             @endforeach
                                         </div>
                                     </div>

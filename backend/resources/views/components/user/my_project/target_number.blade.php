@@ -66,7 +66,7 @@
             </span> --}}
         </div>
         <input type="text" id="start_date" name="start_date" class="p-postal-code def_input_100p"
-            value="{{ old('start_date', optional($project)->start_date) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }}), onInputStartDate()">
+            value="{{ old('start_date', optional($project)->start_date->format('Y-m-d H:i')) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }}), onInputStartDate()">
         <x-common.async-submit-message propName="start_date" />
     </div>
 
@@ -84,7 +84,7 @@
             </span>
         </div>
         <input type="text" id="end_date" name="end_date" class="p-postal-code def_input_100p"
-            value="{{ old('end_date', optional($project)->end_date) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
+            value="{{ old('end_date', optional($project)->end_date->format('Y-m-d H:i')) }}" placeholder="（例）100000" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="end_date" />
     </div>
     <x-common.navigating_page_buttons :project="$project" />
