@@ -632,17 +632,17 @@ endif;
             <div class="footer_main_02">
                 <h4 class="footer_tit">プロジェクト一覧</h4>
 
-                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>/fanding/my_project/project">プロジェクトを作る</a></div>
+                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>fanding/my_project/project">プロジェクトを作る</a></div>
             </div>
 
             <div class="footer_main_03">
                 <h4 class="footer_tit">fanreturnについて</h4>
 
-                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>/fanding/terms_of_service">利用規約</a></div>
-                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>/fanding/ps_terms_of_service">プロジェクトサポーター利用規約</a></div>
-                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>/fanding/privacy_policy">プライバシーポリシー</a></div>
-                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>/fanding/trade_law">特定商取引法に基づく表記</a></div>
-                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>/fanding/inquiry/create">お問い合わせ</a></div>
+                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>fanding/terms_of_service">利用規約</a></div>
+                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>fanding/ps_terms_of_service">プロジェクトサポーター利用規約</a></div>
+                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>fanding/privacy_policy">プライバシーポリシー</a></div>
+                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>fanding/trade_law">特定商取引法に基づく表記</a></div>
+                <div class="footer_item"><a href="<?php echo esc_url(home_url('/')); ?>fanding/inquiry/create">お問い合わせ</a></div>
                 <div class="footer_item"><a href="https://ichj.co.jp">運営会社</a></div>
 
 
@@ -655,7 +655,7 @@ endif;
     <div class="footer_under">
         <div class="footer_under_inner">
             <div class="footer_logo">
-                <img class="h_logo_css" src="<?php echo esc_url(home_url('/')); ?>/fanding/image/logo-color.svg">
+                <img class="h_logo_css" src="<?php echo esc_url(home_url('/')); ?>fanding/image/logo-color.svg">
             </div>
             <ul id="js-global-nav" class="p-gb_global-nav main-gb_menu gb_menu_base">
 
@@ -668,7 +668,7 @@ endif;
                 </li>
 
                 <li id="gb_menu-item-2" class="gb_menu-item gb_menu-item-2 nav_btn m_t_2 under_arrow_yes">
-                    <a href="<?php echo esc_url(home_url('/')); ?>/fanding" id="top_gb_menu2" data-megamenu="js-megagb_menu2" class="nav_btn_link">
+                    <a href="<?php echo esc_url(home_url('/')); ?>fanding" id="top_gb_menu2" data-megamenu="js-megagb_menu2" class="nav_btn_link">
                         <div>
                             <p class="nav_btn_tit_L">プロジェクト一覧</p>
                         </div>
@@ -677,7 +677,7 @@ endif;
 
                 <li id="gb_menu-item-3" class="gb_menu-item gb_menu-item-3 nav_btn m_t_3 under_arrow_no">
 
-                    <a href="<?php echo esc_url(home_url('/')); ?>/fanding/question" id="top_gb_menu3" data-megamenu="js-megagb_menu3" class="nav_btn_link">
+                    <a href="<?php echo esc_url(home_url('/')); ?>fanding/question" id="top_gb_menu3" data-megamenu="js-megagb_menu3" class="nav_btn_link">
                         <div>
                             <p class="nav_btn_tit_L">ファンリターンとは</p>
                         </div>
@@ -686,13 +686,13 @@ endif;
 
                 <!--
 					<li id="gb_menu-item-4" class="menu-item nav_btn taso_li menuset_05 login_btn mobile_hide">
-						<a href="<?php echo esc_url(home_url('/')); ?>/fanding/login" class="top_menu-1 nav_btn_link">
+						<a href="<?php echo esc_url(home_url('/')); ?>fanding/login" class="top_menu-1 nav_btn_link">
 							<p class="nav_btn_tit_L">ログイン</p>
 						</a>
 					</li>
 
 					<li id="gb_menu-item-5" class="menu-item nav_btn taso_li menuset_06 signup_btn mobile_hide">
-						<a href="<?php echo esc_url(home_url('/')); ?>/fanding/pre_create" class="top_menu-1 nav_btn_link">
+						<a href="<?php echo esc_url(home_url('/')); ?>fanding/pre_create" class="top_menu-1 nav_btn_link">
 							<p style="color: #fff;">新規登録</p>
 						</a>
 					</li>
