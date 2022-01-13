@@ -39,7 +39,7 @@
     <div class="form_item_row">
         <div class="form_item_tit">電話番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
         <input type="number" name="phone_number" class="def_input_100p"
-            value="{{ old('phone_number', optional($user->profile)->phone_number) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
+            value="{{ old('phone_number', optional($user->profile)->phone_number !== '00000000000' ? optional($user->profile)->phone_number : '') }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="phone_number" />
     </div>
 
@@ -98,7 +98,7 @@
             生年月日<span class="hissu_txt">必須</span>
         </div>
         <input type="text" id="birthday" name="birthday" class="def_input_100p"
-            value="{{ old('start_date', $user->profile->birthday) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
+            value="{{ old('start_date', $user->profile->birthday !== '0001-01-01' ? $user->profile->birthday : '') }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
         <x-common.async-submit-message propName="birthday" />
     </div>
 
