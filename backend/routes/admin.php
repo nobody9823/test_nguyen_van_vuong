@@ -101,11 +101,10 @@ Route::middleware('auth:admin')->group(function () {
     Route::resource('curator', CuratorController::class, ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
 
     // メッセージ管理
-    Route::resource('message', MessageController::class)->only(['index', 'show']);
-    Route::post('message/{user_plan_cheering}', [MessageController::class, 'store'])->name('message_content.store');
-    Route::put('message/{message_content}', [MessageController::class, 'update'])->name('message_content.update');
-    Route::delete('message/{message_content}', [MessageController::class, 'destroy'])->name('message_content.destroy');
-    Route::get('message/{message_content}/file_download', [MessageController::class, 'file_download'])->name('message_content.file_download');
+    Route::get('message_index/{selected_message?}', [MessageController::class, 'index'])->name('message.index');
+    Route::get('message/{user}', [MessageController::class, 'show'])->name('message.show');
+    Route::post('message/{user}', [MessageController::class, 'store'])->name('message_content.store');
+    Route::get('message/{message_content}/file_download', [MessageController::class, 'fileDownload'])->name('message_content.file_download');
 });
 
 // 上記以外のパラメーターを取得して、route('admin.dashboard')にリダイレクトする。

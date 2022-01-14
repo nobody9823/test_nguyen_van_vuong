@@ -65,6 +65,7 @@ class User extends Authenticatable
             $user->snsLink()->delete();
             $user->identification()->delete();
             $user->profile()->delete();
+            $user->adminMessageContents()->delete();
 
             $project_ids = Project::where('user_id', $user->id)->pluck('id')->toArray();
             ProjectFile::whereIn('project_id', $project_ids)->delete();
@@ -162,6 +163,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Identification');
     }
 
+    public function adminMessageContents()
+    {
+        return $this->hasMany('App\Models\AdminMessageContent');
+    }
+
     //--------------- local scopes -------------
     public function scopeGetUsers()
     {
@@ -224,6 +230,13 @@ class User extends Authenticatable
                 $inviter_code
             )
         );
+    }
+
+    public function scopeWithCountNotReadAdminMessageContents($query, $guard)
+    {
+        return $query->withCount(['adminMessageContents' => function ($query) use ($guard) {
+            $query->notRead($guard);
+        }]);
     }
     //--------------- local scopes -------------
 

@@ -1,5 +1,5 @@
 @extends('admin.layouts.base')
-@section('title', 'ダイレクトメッセージ一覧')
+@section('title', 'DM一覧')
 @section('content')
 <div class="content">
     <div class="section">
@@ -13,7 +13,7 @@
                                 <div class="text-left">
                                     <form name='form_to_keep_request' action="">
                                         <x-common.add_hidden_query />
-                                        ダイレクトメッセージ一覧(新着順) 全{{count($chating_messages) + count($not_chating_messages)}}件<br>
+                                        DM一覧(新着順) 全{{count($messages)}}件<br>
                                         絞り込み状況 :
                                         @if (Request::query())
                                         <a class="btn btn-sm btn-primary"
@@ -29,10 +29,8 @@
                                 </div>
                                 <form class="text-right" action={{route('admin.message.index')}} method="get">
 
-                                    <a class="btn btn-info mr-2" href={{route('admin.user.index')}}>ユーザー一覧</a>
-                                    <a class="btn btn-info mr-2" href={{route('admin.company.index')}}>企業一覧</a>
                                     {{-- ここ重複するためmessage_wordはhidden含めない --}}
-                                    @if (Request::get('user'))
+                                    {{-- @if (Request::get('user'))
                                     <input type="hidden" name='user' value={{ Request::get('user') }}>
                                     @endif
                                     @if (Request::get('company'))
@@ -40,51 +38,40 @@
                                     @endif
                                     @if (Request::get('job_offer'))
                                     <input type="hidden" name='job_offer' value={{ Request::get('job_offer') }}>
-                                    @endif
+                                    @endif --}}
                                     {{-- ここ重複するためmessage_wordはhidden含めない --}}
-                                    <input name="message_word" type="text" placeholder="未実装" class="my_search_input"
-                                        style="line-height: 2.0;" value={{Request::get('message_word')}}>
+                                    {{-- <input name="message_word" type="text" placeholder="未実装" class="my_search_input"
+                                        style="line-height: 2.0;" value={{Request::get('message_word')}}> --}}
                                     <button type="submit" class="btn btn-info">検索</button>
 
                                 </form>
                             </div>
                             <div class="row mt-3">
-                                @if ($chating_messages->isEmpty() && $not_chating_messages->isEmpty())
+                                @if ($messages->isEmpty())
                                 <div class=" col-sm-12 align-self-center">
                                     メッセージ履歴がありません。
                                 </div>
                                 @else
 
-                                {{-- 左側ダイレクトメッセージ一覧部分 --}}
+                                {{-- 左側DM一覧部分 --}}
                                 <div class="col-sm-4 chat_group_list" style="height:100vh; overflow-y:scroll;">
 
                                     {{-- チャット中リターン --}}
-                                    @if ($chating_messages->isNotEmpty())
-                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>ダイレクトメッセージ中支援リターン</p>
+                                    @if ($messages->isNotEmpty())
+                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>DMグループ一覧</p>
                                     @endif
-                                    @foreach ($chating_messages as $message)
+                                    @foreach ($messages as $message)
                                     <x-common.message.a_message_of_index :message="$message" guard='admin'
                                         :selectedMessage="isset($selected_message)?$selected_message:null" />
                                     @endforeach
                                     {{-- チャット中リターン --}}
-
-                                    {{-- 未チャットリターン --}}
-                                    @if ($not_chating_messages->isNotEmpty())
-                                    <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>ダイレクトメッセージしていない支援リターン
-                                    </p>
-                                    @endif
-                                    @foreach ($not_chating_messages as $message)
-                                    <x-common.message.a_message_of_index :message="$message" guard='admin'
-                                        :selectedMessage="isset($selected_message)?$selected_message:null" />
-                                    @endforeach
-                                    {{-- 未チャットリターン --}}
 
                                     <div class="row justify-content-center mb-5" style="margin-top: 5px;">
                                         <a class="btn btn-info" style="display: none" id="more_btn">もっと見る</a>
                                         <a class="btn btn-info" style="display: none" id="closed_btn">閉じる</a>
                                     </div>
                                 </div>
-                                {{-- 左側ダイレクトメッセージ一覧部分 --}}
+                                {{-- 左側DM一覧部分 --}}
 
                                 {{-- 選択によって変わるメッセージ部分 --}}
                                 <div class="col-sm-8">

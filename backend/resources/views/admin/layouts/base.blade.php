@@ -61,8 +61,13 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.message.index') }}">
+            DM 一覧
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{route('admin.user.index')}}">
-            ユーザ管理
+            ユーザー管理
         </a>
         {{-- <a role='button' class="dropdown-toggle" href="#collapse_user" data-toggle="collapse"
                 aria-controls="collapse_user" aria-expanded="true">
