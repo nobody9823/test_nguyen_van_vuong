@@ -105,8 +105,7 @@ class MyProjectController extends Controller
         $project->getLoadIncludedPaymentsCountAndSumPrice()
             ->load('plans', 'tags', 'user', 'user.profile', 'user.address', 'user.identification')
             ->loadCount(['reports', 'plans', 'comments']);
-        $not_read_message_count =
-            $project->payments()->withCountNotRead("実行者")->orderBy('updated_at', 'desc')->get()->sum('message_contents_count');
+        $not_read_message_count = $project->payments()->withCountNotRead("実行者")->get()->sum('message_contents_count');
 
         return view('user.my_project.show',
             [
