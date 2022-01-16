@@ -150,6 +150,11 @@ class Project extends Model
         return $query->where('release_status', '掲載中');
     }
 
+    public function scopeNotGetUnderSuspensionProject($query)
+    {
+        return $query->where('release_status', '<>', '掲載停止中');
+    }
+
     // 'Payments'テーブルのユーザーカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
