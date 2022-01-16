@@ -121,8 +121,9 @@
                         <a href="{{ route('user.my_project.message.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
                                 {{-- FIXME: ここはmainブランチとコンフリクトすると思いますので、支援者のDM件数が表示されるようにしてください。 2021/12/26 --}}
-                                @if ($project->payments_count > 0)
-                                <p>{{ $project->payments_count }}件のDMがあります</p>
+                                @if ($not_read_message_count > 0)
+                                {{-- <p>{{ $project->payments_count }}件のDMがあります</p> --}}
+                                <p>未読のDMが{{ $not_read_message_count }}件のあります</p>
                                 @else
                                 <p>現在支援者からのDMはありません</p>
                                 @endif
