@@ -113,7 +113,12 @@
                         </a>
                         @else
                         <div class="caution_box">
-                            <p>プロジェクトの審査を通過すると閲覧可能です</p>
+                            <p>
+                                {{ ProjectReleaseStatus::getValue('UnderSuspension')
+                                    ? '掲載停止中の為、閲覧できません'
+                                    : 'プロジェクトの審査を通過すると閲覧可能です'
+                                }}
+                            </p>
                         </div>
                         @endif
                     </div>
@@ -136,7 +141,12 @@
                         </a>
                         @else
                         <div class="caution_box">
-                            <p>プロジェクトの審査を通過すると閲覧可能です</p>
+                            <p>
+                                {{ ProjectReleaseStatus::getValue('UnderSuspension')
+                                    ? '掲載停止中の為、閲覧できません'
+                                    : 'プロジェクトの審査を通過すると閲覧可能です'
+                                }}
+                            </p>
                         </div>
                         @endif
                     </div>
@@ -158,7 +168,12 @@
                         </a>
                         @else
                         <div class="caution_box">
-                            <p>プロジェクトの審査を通過すると閲覧可能です</p>
+                            <p>
+                                {{ ProjectReleaseStatus::getValue('UnderSuspension')
+                                    ? '掲載停止中の為、閲覧できません'
+                                    : 'プロジェクトの審査を通過すると閲覧可能です'
+                                }}
+                            </p>
                         </div>
                         @endif
                     </div>
@@ -180,7 +195,12 @@
                         </a>
                         @else
                         <div class="caution_box">
-                            <p>プロジェクトの審査を通過すると投稿可能です</p>
+                            <p>
+                                {{ ProjectReleaseStatus::getValue('UnderSuspension')
+                                    ? '掲載停止中の為、投稿できません'
+                                    : 'プロジェクトの審査を通過すると投稿可能です'
+                                }}
+                            </p>
                         </div>
                         @endif
                     </div>
