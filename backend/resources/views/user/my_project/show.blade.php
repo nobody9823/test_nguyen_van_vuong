@@ -34,16 +34,22 @@
                                 です。
                             </div>
                             <div class="def_btn">
-                                @if($project->release_status === '---' || $project->release_status === '差し戻し' || $project->release_status === '掲載停止中')
+                                @if($project->release_status === '---' || $project->release_status === '差し戻し')
                                 プロジェクトを編集する
                                 {{-- NOTICE: MyProjectController, edit action --}}
                                 <a class="cover_link" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
-                                @elseif($project->release_status === '承認待ち' || $project->release_status === '掲載中')
+                                @elseif(
+                                    $project->release_status === '承認待ち' ||
+                                    $project->release_status === '掲載中' ||
+                                    $project->release_status === '掲載停止中'
+                                )
                                 {{ $project->release_status }}
                                 <a class="cover_link"></a>
                                 @endif
                             </div>
-                            @if($project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
+                            @if(
+                                $project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack')
+                            )
                             <div class="def_btn">
                                 <form
                                     action="{{ route('user.project.apply', ['project' => $project]) }}"
