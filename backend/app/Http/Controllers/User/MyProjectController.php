@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use App\Models\ProjectFile;
 use App\Models\Tag;
+use App\Models\Payment;
 use App\Notifications\MyProjectAppliedMail;
 use App\Services\View\EditMyProjectTabService;
 use Auth;
@@ -55,11 +56,10 @@ class MyProjectController extends Controller
         $bank_account = Auth::user()->identification->bank_id
             ? $this->card_payment->getBankAccount(Auth::user()->identification->bank_id)
             : 'null';
+        $projects = $this->user->projects()->with(
+            'projectFiles', 'plans', 'tags', 'user', 'user.profile', 'user.address', 'user.identification'
+            )->get();
 
-        $projects = $this->user
-            ->projects()
-            ->with('projectFiles', 'plans', 'tags', 'user', 'user.profile', 'user.address', 'user.identification')
-            ->get();
         return view('user.my_project.index', [
             'projects' => $projects,
             'bank_account' => $bank_account
@@ -105,7 +105,15 @@ class MyProjectController extends Controller
         $project->getLoadIncludedPaymentsCountAndSumPrice()
             ->load('plans', 'tags', 'user', 'user.profile', 'user.address', 'user.identification')
             ->loadCount(['reports', 'plans', 'comments']);
-        return view('user.my_project.show', ['project' => $project, 'bank_account' => $bank_account]);
+        $not_read_message_count = $project->payments()->withCountNotRead("実行者")->get()->sum('message_contents_count');
+
+        return view('user.my_project.show',
+            [
+                'project' => $project,
+                'bank_account' => $bank_account,
+                'not_read_message_count' => $not_read_message_count,
+            ]
+        );
     }
 
     /**

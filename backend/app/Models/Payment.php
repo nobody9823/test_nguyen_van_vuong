@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
+use App\Enums\ProjectReleaseStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -74,6 +75,12 @@ class Payment extends Model
     public function messageContents()
     {
         return $this->hasMany('App\Models\MessageContent');
+    }
+
+    public function scopeNotGetUnderSuspensionProject($query)
+    {
+        return $query->whereIn('project_id', Project::select('id')
+                     ->where('release_status', '<>', ProjectReleaseStatus::getValue('UnderSuspension')));
     }
 
     public function scopeMessaging($query)

@@ -3,6 +3,8 @@
         <p>
             @if ($guard === 'supporter')
             【{{$selectedMessage->project->user->name}}】
+            @elseif($guard === 'admin')
+            【{{$selectedMessage->name}}】様
             @else
             【{{$selectedMessage->user->name}} 】様
             @endif
@@ -19,31 +21,45 @@
 </div>
 <div
     style='max-height:70vh; min-height:40vh; background-color: #fff; border: 1px solid #00aebd; margin-bottom: 1rem; padding: 0.5rem;overflow-y:scroll;'>
-    <table id="scroll-inner">
-        @if ($selectedMessage->messageContents->isNotEmpty())
-
-        @foreach ($selectedMessage->messageContents as $messageContent)
-        @if($messageContent->message_contributor === '支援者')
-        <x-common.message.content_from_supporter :guard="$guard" :messageContent="$messageContent" />
-        @elseif($messageContent->message_contributor === '実行者')
-        <x-common.message.content_from_executor :guard="$guard" :messageContent="$messageContent" />
-        @elseif($messageContent->message_contributor === '管理者')
-        <x-common.message.content_from_admin :guard="$guard" :messageContent="$messageContent" />
-        @endif
-        @endforeach
-
-        @else
-
-        まだメッセージ履歴がありません
-
-        @endif
-    </table>
+    @if($guard === 'admin')
+        <table id="scroll-inner">
+            @if ($selectedMessage->adminMessageContents->isNotEmpty())
+                @foreach ($selectedMessage->adminMessageContents as $messageContent)
+                    @if($messageContent->message_contributor === 'ユーザー')
+                        <x-common.message.content_from_supporter :guard="$guard" :messageContent="$messageContent" />
+                    @elseif($messageContent->message_contributor === '管理者')
+                        <x-common.message.content_from_admin :guard="$guard" :messageContent="$messageContent" />
+                    @endif
+                @endforeach
+            @else
+                まだメッセージ履歴がありません
+            @endif
+        </table>
+    @else
+        <table id="scroll-inner">
+            @if ($selectedMessage->messageContents->isNotEmpty())
+                @foreach ($selectedMessage->messageContents as $messageContent)
+                    @if($messageContent->message_contributor === '支援者')
+                        <x-common.message.content_from_supporter :guard="$guard" :messageContent="$messageContent" />
+                    @elseif($messageContent->message_contributor === '実行者')
+                        <x-common.message.content_from_executor :guard="$guard" :messageContent="$messageContent" />
+                    @elseif($messageContent->message_contributor === '管理者')
+                        <x-common.message.content_from_admin :guard="$guard" :messageContent="$messageContent" />
+                    @endif
+                @endforeach
+            @else
+                まだメッセージ履歴がありません
+            @endif
+        </table>
+    @endif
 </div>
 
 @if($guard === 'supporter')
     <form action={{route('user.message_content.store', ['payment' => $selectedMessage])}} method='post'
 @elseif($guard === 'executor')
     <form action={{route('user.my_project.message_content.store', ['payment' => $selectedMessage])}} method='post'
+@elseif($guard === 'admin')
+    <form action={{route('admin.message_content.store', ['user' => $selectedMessage])}} method='post'
 @endif
     enctype="multipart/form-data">
     @csrf
@@ -58,17 +74,23 @@
         <label for="file_path">*ファイル形式は.pdf .jpg .png のいずれかになります。
         </label>
     </div>
+    @if($guard === 'admin')
+        <button type="submit" class="btn btn-primary btn-lg w-100" id="send_message_button">送信</button>
+    @else
     <div class="def_btn">
         <button type="submit" class="disable-btn">
-            <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">送信</p>
+            <p style="font-size: 1.8rem;font-weight: bold;color: #fff;" id="send_message_button">送信</p>
         </button>
     </div>
+    @endif
 
 </form>
 
 <script type="text/javascript">
     let target = document.getElementById('scroll-inner');
+    let sendMessageButton = document.getElementById('send_message_button');
     target.scrollIntoView(false);
+    sendMessageButton.scrollIntoView(false);
 </script>
 
 @section('css')
