@@ -153,14 +153,18 @@ class Project extends Model
     // 'Payments'テーブルのユーザーカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
     public function scopeGetWithPaymentsCountAndSumPrice($query)
     {
-        return $query->withCount(['payments' => function ($query) {
-            $query->select(DB::raw('count(distinct(`user_id`))'));
-        }])->withSum('payments', 'price');
+        return $query->withCount('payments')->withSum('payments', 'price');
+
+        // NOTE: 現状は購入数1回につき、支援者数を1人でカウントする為、上記のロジックを使用する。
+        // 下記は購入したユーザー1人につき1人としてカウントする算出ロジック
+        // return $query->withCount(['payments' => function ($query) {
+        //     $query->select(DB::raw('count(distinct(`user_id`))'));
+        // }])->withSum('payments', 'price');
     }
 
     public function getLoadIncludedPaymentsCountAndSumPrice()
     {
-        $this->plans->loadCount('includedPayments');
+        $this->loadCount('payments');
         $this->loadSum('payments', 'price');
         return $this;
     }
@@ -307,11 +311,6 @@ class Project extends Model
         $end_date = new Carbon($this->end_date);
         $today = Carbon::now();
         return $end_date->diffInDays($today);
-    }
-
-    public function getPaymentsCountAttribute()
-    {
-        return $this->payments->groupBy('user_id')->count();
     }
 
     public function getPaymentsCountWithinADayAttribute()
