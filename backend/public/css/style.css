@@ -2959,6 +2959,8 @@ margin: 20px 0;
 .my_project_dashboard {justify-content: center;}
 .my_project_dashboard .def_btn {width: 40%; margin-bottom: 10px;}
 .my_project_dashboard_status {text-align: center; width: 100%; margin: 0; padding-bottom: 20px;}
+.my_project_dashboard .status_text {border-bottom: 2px solid #555353; font-size: 120%;}
+
 @media screen and (max-width: 768px){
     .my_project_dashboard .def_btn {width: 100%;}
 }
