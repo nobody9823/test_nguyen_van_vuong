@@ -65,15 +65,15 @@
                         <div class="def_btn edit_btn">
                             @if(
                             $project->release_status === ProjectReleaseStatus::getValue('Default') ||
-                            $project->release_status === ProjectReleaseStatus::getValue('SendBack') ||
-                            $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
+                            $project->release_status === ProjectReleaseStatus::getValue('SendBack')
                             )
                             編集
                             {{-- NOTICE: MyProjectController, edit action --}}
                             <a class="display_release_status" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
                             @elseif(
                             $project->release_status === ProjectReleaseStatus::getValue('Pending') ||
-                            $project->release_status === ProjectReleaseStatus::getValue('Published')
+                            $project->release_status === ProjectReleaseStatus::getValue('Published') ||
+                            $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
                             )
                             プロジェクト詳細
                             <a class="display_release_status" href="{{ route('user.my_project.project.show', ['project' => $project]) }}"></a>
@@ -84,7 +84,7 @@
                             <div class="my_project_release_status">
                                 <div class="my_project_apply_wrapper">
                                     @if(
-                                        $project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack') || $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
+                                        $project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack')
                                         )
                                     <div class="apply_btn">
                                         <form action="{{ route('user.project.apply', ['project' => $project]) }}" method="POST" id="apply_form">
@@ -106,7 +106,7 @@
                                             </button>
                                         </form>
                                     </div>
-                                    @else
+                                    @elseif ($project->release_status === ProjectReleaseStatus::getValue('Published'))
                                     <div class="apply_btn">
                                         <form action="{{ route('user.my_project.message.index', ['project' => $project]) }}" method="GET">
                                             @csrf

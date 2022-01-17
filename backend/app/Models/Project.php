@@ -7,6 +7,7 @@ use Auth;
 use App\Models\UserProjectLiked;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
+use App\Enums\ProjectReleaseStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -147,7 +148,12 @@ class Project extends Model
 
     public function scopeGetReleasedProject($query)
     {
-        return $query->where('release_status', '掲載中');
+        return $query->where('release_status', ProjectReleaseStatus::getValue('Published'));
+    }
+
+    public function scopeNotGetUnderSuspensionProject($query)
+    {
+        return $query->where('release_status', '<>', ProjectReleaseStatus::getValue('UnderSuspension'));
     }
 
     // 'Payments'テーブルのユーザーカウント数と'price'の合計をカラムに持たせた'payments'をリレーションとして取得しています。
@@ -376,7 +382,7 @@ class Project extends Model
     public function changeStatusToRelease()
     {
         DB::transaction(function () {
-            $this->release_status = '掲載中';
+            $this->release_status = ProjectReleaseStatus::getValue('Published');
             $this->save();
         });
         \Session::flash('flash_message', '掲載状態の変更が完了しました。');
@@ -385,7 +391,7 @@ class Project extends Model
     public function changeStatusToPending()
     {
         DB::transaction(function () {
-            $this->release_status = '承認待ち';
+            $this->release_status = ProjectReleaseStatus::getValue('Pending');
             $this->save();
         });
         \Session::flash('flash_message', '掲載状態の変更が完了しました。');
@@ -394,7 +400,7 @@ class Project extends Model
     public function changeStatusToSendBack()
     {
         DB::transaction(function () {
-            $this->release_status = '差し戻し';
+            $this->release_status = ProjectReleaseStatus::getValue('SendBack');
             $this->save();
         });
         \Session::flash('flash_message', '掲載状態の変更が完了しました。');
@@ -403,7 +409,7 @@ class Project extends Model
     public function changeStatusToDefault()
     {
         DB::transaction(function () {
-            $this->release_status = '---';
+            $this->release_status = ProjectReleaseStatus::getValue('Default');
             $this->save();
         });
         \Session::flash('flash_message', '掲載状態の変更が完了しました。');
@@ -412,7 +418,7 @@ class Project extends Model
     public function changeStatusToUnderSuspension()
     {
         DB::transaction(function () {
-            $this->release_status = '掲載停止中';
+            $this->release_status = ProjectReleaseStatus::getValue('UnderSuspension');
             $this->save();
         });
         \Session::flash('flash_message', '掲載状態の変更が完了しました。');
