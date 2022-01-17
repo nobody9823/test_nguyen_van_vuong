@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageContentRequest;
 use App\Mail\Admin\NotificationMessage;
+use App\Models\AdminMessageContent;
 use App\Models\MessageContent;
 use App\Models\User;
 use App\Traits\message\AdminMessageFunctions;
@@ -19,7 +20,7 @@ class MessageController extends Controller
         $messages = User::orderBy('updated_at', 'desc')
             ->with('adminMessageContents')
             ->withCountNotReadAdminMessageContents("管理者")
-            ->paginate(20);
+            ->get();
         return view('admin.message.index', [
             'messages' => $messages,
             'selected_message' => $selected_message ? $selected_message->load(['adminMessageContents' => function ($query) {
@@ -45,8 +46,8 @@ class MessageController extends Controller
         return redirect()->action([MessageController::class, 'index'], ['selected_message' => $user]);
     }
 
-    public function fileDownload(MessageContent $message_content)
+    public function fileDownload(AdminMessageContent $admin_message_content)
     {
-        return Storage::download($message_content->file_path, $message_content->file_original_name);
+        return Storage::download($admin_message_content->file_path, $admin_message_content->file_original_name);
     }
 }

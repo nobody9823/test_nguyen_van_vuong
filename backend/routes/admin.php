@@ -104,7 +104,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('message_index/{selected_message?}', [MessageController::class, 'index'])->name('message.index');
     Route::get('message/{user}', [MessageController::class, 'show'])->name('message.show');
     Route::post('message/{user}', [MessageController::class, 'store'])->name('message_content.store');
-    Route::get('message/{message_content}/file_download', [MessageController::class, 'fileDownload'])->name('message_content.file_download');
+    Route::get('message/{admin_message_content}/file_download', [MessageController::class, 'fileDownload'])->name('message_content.file_download');
 });
 
 // 上記以外のパラメーターを取得して、route('admin.dashboard')にリダイレクトする。
