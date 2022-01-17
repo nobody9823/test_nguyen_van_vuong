@@ -13,8 +13,8 @@
                                 <div class="text-left">
                                     <form name='form_to_keep_request' action="">
                                         <x-common.add_hidden_query />
-                                        DM一覧(新着順) 全{{count($messages)}}件<br>
-                                        絞り込み状況 :
+                                        DM一覧 <br/>全{{count($messages)}}グループ<br>
+                                        {{-- 絞り込み状況 :
                                         @if (Request::query())
                                         <a class="btn btn-sm btn-primary"
                                             href="{{ route('admin.message.index') }}">検索条件をリセット</a>
@@ -23,7 +23,7 @@
                                         <div class="d-flex align-items-center">
                                             検索ワード :{{ Request::get('message_word') }}
                                         </div>
-                                        @endif
+                                        @endif --}}
                                     </form>
 
                                 </div>
@@ -42,7 +42,7 @@
                                     {{-- ここ重複するためmessage_wordはhidden含めない --}}
                                     {{-- <input name="message_word" type="text" placeholder="未実装" class="my_search_input"
                                         style="line-height: 2.0;" value={{Request::get('message_word')}}> --}}
-                                    <button type="submit" class="btn btn-info">検索</button>
+                                    {{-- <button type="submit" class="btn btn-info">検索</button> --}}
 
                                 </form>
                             </div>
