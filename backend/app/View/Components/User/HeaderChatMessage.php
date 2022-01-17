@@ -20,8 +20,10 @@ class HeaderChatMessage extends Component
     public function messageContentsCount()
     {
         if (Auth::guard('web')->check()) {
-            $chat_messages_by_supporter = Auth::user()->payments()->withCountNotRead("支援者")->get();
-            $chat_messages_by_executor = Auth::user()->projects()->withNotReadByExecutor()->get();
+            $chat_messages_by_supporter =
+                Auth::user()->payments()->notGetUnderSuspensionProject()->withCountNotRead("支援者")->get();
+            $chat_messages_by_executor =
+                Auth::user()->projects()->notGetUnderSuspensionProject()->withNotReadByExecutor()->get();
             return $chat_messages_by_supporter->sum('message_contents_count') + $chat_messages_by_executor->sum('message_contents_count');
         }
         return 0;

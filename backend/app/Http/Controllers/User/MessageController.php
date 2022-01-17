@@ -21,8 +21,11 @@ class MessageController extends Controller
 
     public function index(Payment $selected_message = null)
     {
-        $chating_messages = Payment::where('user_id', Auth::id())->withCountNotRead("支援者")->orderBy('updated_at', 'desc')->get();
-        $chating_myprojects = Project::where('user_id', Auth::id())->withNotReadByExecutor()->get();
+        $chating_messages = Payment::where('user_id', Auth::id())
+            ->withCountNotRead("支援者")->NotGetUnderSuspensionProject()->orderBy('updated_at', 'desc')->get();
+        $chating_myprojects = Project::where('user_id', Auth::id())
+            ->notGetUnderSuspensionProject()->withNotReadByExecutor()->get();
+
         return view('user.mypage.message.index', [
             'chating_messages' => $chating_messages,
             'chating_myprojects' => $chating_myprojects,
