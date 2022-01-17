@@ -455,7 +455,12 @@ window.onload = function(){
     <script src="{{ asset('/js/stripe-create-card-token.js') }}"></script>
 @elseif(config('app.card_payment_api') === 'GMO')
     {{-- 以下テスト環境URL --}}
+    @env('production')
+    <script src="https://static.mul-pay.jp/ext/js/token.js"></script>
+    @endenv
+    @env(['staging', 'local'])
     <script src="https://stg.static.mul-pay.jp/ext/js/token.js"></script>
+    @endenv
     <script>
         Multipayment.init('{{ config("app.gmo_shop_id") }}');
     </script>
