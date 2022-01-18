@@ -8,6 +8,7 @@ use App\Models\AdminMessageContent;
 use App\Models\MessageContent;
 use App\Models\Payment;
 use App\Models\Project;
+use App\Notifications\AppliedAdminMessageNotification;
 use App\Notifications\AppliedMessageNotification;
 use App\Traits\message\AdminMessageFunctions;
 use App\Traits\message\MessageFunctions;
@@ -15,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller
@@ -129,7 +131,8 @@ class MessageController extends Controller
     public function storeToAdmin(MessageContentRequest $request)
     {
         if ($this->admin_message_store($request, Auth::guard('web')->user(), 'user')) {
-            // $user->notify(new AppliedMessageNotification($payment));
+            Notification::route('mail', config('mail.customer_support.address'))
+                ->notify(new AppliedAdminMessageNotification(Auth::guard('web')->user(), 'admin'));
             return redirect()->back()->with('flash_message', 'メッセージ送信が完了しました。');
         } else {
             return redirect()->back()->with('error', 'メッセージ送信に失敗しました。時間をおいてお試しください。');
