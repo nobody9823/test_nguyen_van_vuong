@@ -62,11 +62,23 @@
                     {{-- 検索結果踏まえて送信する用フォーム --}}
 
                     <div class="chat_wrapper">
+                        <div>
+                            {{-- チャット中プロジェクト --}}
+                            <a href="{{ route('user.admin_message_content.index') }}" class="chat_group_title admin_chat_group_title">
+                                FanReturn運営とのDM
+                                @if($admin_message->admin_message_contents_count !== 0)
+                                <span class="chat_unread_count">
+                                    {{ $admin_message->admin_message_contents_count }}
+                                </span>
+                                @endif
+                            </a>
+                            {{-- チャット中プロジェクト --}}
+                        </div>
                         <div class="accordion js-accordion">
                             {{-- チャット中プロジェクト --}}
                             <div class="accordion__item js-accordion-trigger">
                                 @if ($chating_myprojects->isNotEmpty())
-                                <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>
+                                <p class="accordion__title accordion__arrow chat_group_title">
                                     自分が立ち上げたプロジェクトのDM
                                     @if($chating_myprojects->sum('message_contents_count') !== 0)
                                     <span class="chat_unread_count">
@@ -87,7 +99,7 @@
                             {{-- チャット中プロジェクト --}}
                             <div class="accordion__item js-accordion-trigger">
                                 @if ($chating_messages->isNotEmpty())
-                                <p class="accordion__title accordion__arrow" style='font-size: 1.4rem;font-weight: bold;background-color:#F7FDFF;color:#00aebd;margin:10px 0px 0 0;padding:12px 10px;'>
+                                <p class="accordion__title accordion__arrow chat_group_title">
                                     支援したプロジェクトのDM
                                     @if($chating_messages->sum('message_contents_count') !== 0)
                                     <span class="chat_unread_count">

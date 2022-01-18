@@ -31,7 +31,7 @@ class MessageController extends Controller
 
     public function store(MessageContentRequest $request, User $user)
     {
-        if ($this->message_store($request, $user, 'admin')) {
+        if ($this->admin_message_store($request, $user, 'admin')) {
             // $payment->project->user->notify(new AppliedMessageNotification($payment));
             return redirect()->back()->with('flash_message', 'メッセージ送信が完了しました。');
         } else {
