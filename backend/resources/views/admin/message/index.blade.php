@@ -13,7 +13,15 @@
                                 <div class="text-left">
                                     <form name='form_to_keep_request' action="">
                                         <x-common.add_hidden_query />
-                                        DM一覧 <br/>全{{count($messages)}}グループ<br>
+                                        DM一覧
+                                        <br/>
+                                        全{{count($messages)}}グループ
+                                        @if($messages->sum('admin_message_contents_count') !== 0)
+                                        <span class="chat_unread_count">
+                                            {{ $messages->sum('admin_message_contents_count') }}
+                                        </span>
+                                        @endif
+                                        <br>
                                         {{-- 絞り込み状況 :
                                         @if (Request::query())
                                         <a class="btn btn-sm btn-primary"
@@ -60,7 +68,7 @@
                                     @if ($messages->isNotEmpty())
                                     <p style='background-color:rgb(182, 182, 182);margin:10px 0px 0 0;'>DMグループ一覧</p>
                                     @endif
-                                    @foreach ($messages as $message)
+                                    @foreach ($messages->sortByDesc('admin_message_contents_count') as $message)
                                     <x-common.message.a_message_of_index :message="$message" guard='admin'
                                         :selectedMessage="isset($selected_message)?$selected_message:null" />
                                     @endforeach

@@ -2954,11 +2954,42 @@ margin: 20px 0;
     top: 45%;
     /*   .openクラスがついた時の要素の角度を指定 */
 }
+.chat_group_title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    background-color:#F7FDFF;
+    color:#00aebd;
+    margin:10px 0px 0 0;
+    padding:12px 10px;
+}
+.admin_chat_group_title {
+    position: relative;
+    display: block;
+    margin-block-start: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.admin_chat_group_title:after {
+    content: "";
+    position: absolute;
+    right: 25px;
+    top: 38%;
+    transition: all 0.5s ease-in-out;
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-top: solid 4px #00AEBD;
+    border-right: solid 4px #00AEBD;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
 /* アコーディオンメニュー */
 #supported-projects .edit_btn { width: 80%; }
 .my_project_dashboard {justify-content: center;}
 .my_project_dashboard .def_btn {width: 40%; margin-bottom: 10px;}
 .my_project_dashboard_status {text-align: center; width: 100%; margin: 0; padding-bottom: 20px;}
+.my_project_dashboard .status_text {border-bottom: 2px solid #555353; font-size: 120%;}
+
 @media screen and (max-width: 768px){
     .my_project_dashboard .def_btn {width: 100%;}
 }
