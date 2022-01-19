@@ -1,5 +1,9 @@
-const date = new Date();
-const dateLowerLimit = date.setDate(date.getDate() + 1);
+const dateLowerLimit = new Date();
+dateLowerLimit.setDate(dateLowerLimit.getDate() + 1);
+dateLowerLimit.setHours(12);
+dateLowerLimit.setMinutes(0);
+dateLowerLimit.setSeconds(0);
+dateLowerLimit.setMilliseconds(0);
 
 const config = {
     dateFormat: "Y-m-d H:i",
