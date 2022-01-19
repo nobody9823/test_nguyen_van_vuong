@@ -488,8 +488,8 @@ class Project extends Model
             'reward_by_total_quantity' => '',
             'target_number' => 0,
             'curator' => '',
-            'start_date' => $date->copy()->addDays(1),
-            'end_date' => $date->addDays(20),
+            'start_date' => $date->copy()->addDays(1)->setTime(12, 0, 0),
+            'end_date' => $date->addDays(20)->setTime(12, 0, 0),
             'release_status' => '---',
         ]);
     }
