@@ -11,6 +11,8 @@
         href={{ route('user.my_project.message_content.file_download', ['message_content' => $messageContent]) }}
     @elseif($guard === 'admin')
         href={{ route('admin.message_content.file_download', ['admin_message_content' => $messageContent]) }}
+    @elseif($guard === 'user')
+        href={{ route('user.admin_message_content.file_download', ['admin_message_content' => $messageContent]) }}
     @endif
 >
     {{ $messageContent->file_original_name }}
