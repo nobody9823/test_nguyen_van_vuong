@@ -205,7 +205,13 @@
                         @if ($project->release_status === ProjectReleaseStatus::getValue('Published'))
                         <a href="{{ route('user.project.support', ['project' => $project]) }}">
                             <div class="display_count_btn">
-                                <p>プロジェクトサポーター(PS)解説画面</p>
+                                <p>プロジェクトサポーター(PS)解説画面へ</p>
+                            </div>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                        <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}">
+                            <div class="display_count_btn">
+                                <p>プロジェクトサポーター(PS)ランキングページへ</p>
                             </div>
                             <i class="fas fa-arrow-circle-right"></i>
                         </a>
@@ -238,7 +244,7 @@
         padding: 0.5em 1em;
         margin-top: 2em;
         background-color: #F7FDFF;
-        height: 240px;
+        height: 350px;
         border: solid 2px;
         border-radius: 9px;
         border-color: #00aebd;

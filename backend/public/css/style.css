@@ -2974,12 +2974,11 @@ font-size: 1.8rem; font-weight: bold; text-align: center; padding: 14px; margin:
 border-radius: 6px;}
 .my_project_detail .content { font-size: 1.9rem; font-weight: bold; text-align: left; padding: 0.5em 1em; margin-top: 2em;
 background: #EFEFEF; height: 240px; border-radius: 9px; border-bottom: solid 3px #757474; }
-.my_project_detail .content_explanatory_text { height: 57px; }
-.my_project_detail .display_count_btn { margin-top: 2em; color: white; background: #00aebd; border-bottom: solid 6px #008996;
+.my_project_detail .content_explanatory_text { height: 57px; margin-bottom: 2em; }
+.my_project_detail .display_count_btn { color: white; background: #00aebd; border-bottom: solid 6px #008996;
 border-radius: 9px; display: flex; justify-content: center; align-items: center; height: 80px; }
 .my_project_detail .fa-arrow-circle-right { position: relative; bottom: 57px; left: calc(100% - 60px); color: white; }
-.caution_box { margin-top: 0.5em; background: #d7dbdb; border: dashed 2px #aaadad; border-radius: 8px;
-display: flex; justify-content: center; align-items: center; height: 100px; }
+.caution_box { background: #d7dbdb; border: dashed 2px #aaadad; border-radius: 8px; display: flex; justify-content: center; align-items: center; height: 80px; }
 .caution_box p { color: #707070; }
 @media screen and (max-width: 768px) {
     .my_project_detail .display_count_btn { height: 60px; }
