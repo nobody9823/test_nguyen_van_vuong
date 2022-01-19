@@ -217,7 +217,7 @@ class ProjectController extends Controller
         $validated_request = $request->validated_request;
         $unique_token = UniqueToken::getToken();
         $this->user->load(['profile', 'address']);
-        $inviter = !empty($validated_request['inviter_code']) ? User::getInviterFromInviterCode($validated_request['inviter_code'])->first() : null;
+        $inviter = !empty($validated_request['inviter_code']) ? User::getInviterFromInviterCode($validated_request['inviter_code'], $request->user())->first() : null;
         DB::beginTransaction();
         try {
             $plans = $this->plan->lockForUpdatePlansByIds(array_keys($validated_request['plans']))->get();

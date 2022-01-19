@@ -59,6 +59,11 @@ class Plan extends Model
         return $this->delivery_date->format('Y年m月');
     }
 
+    public function getIncludedPaymentsCountAttribute()
+    {
+        return $this->includedPayments()->count();
+    }
+
     //--------------local scope----------------//
     public function scopeNarrowDownWithProject($query)
     {
