@@ -450,8 +450,8 @@ class ProjectController extends Controller
     public function projectPreview(Project $project)
     {
         if (!Auth::guard('admin')->check()) {
-            $this->authorize('checkOwnProjectAndAdmin', $project);
+            $this->authorize('checkOwnProject', $project);
         }
-        return view('user.project.preview', ['project' => $project]);
+        return view('user.project.preview', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice()]);
     }
 }
