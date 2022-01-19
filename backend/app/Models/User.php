@@ -221,7 +221,7 @@ class User extends Authenticatable
             ->orderBy('invited_payments_sum_price', 'DESC');
     }
 
-    public function scopeGetInviterFromInviterCode($query, $inviter_code)
+    public function scopeGetInviterFromInviterCode($query, $inviter_code, $request_user)
     {
         return $query->whereIn(
             'id',
@@ -229,7 +229,7 @@ class User extends Authenticatable
                 'inviter_code',
                 $inviter_code
             )
-        );
+        )->where('id', '<>', $request_user->id);
     }
 
     public function scopeWithCountNotReadAdminMessageContents($query, $guard)
