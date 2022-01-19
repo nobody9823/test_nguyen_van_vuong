@@ -194,6 +194,31 @@
                         </div>
                         @endif
                     </div>
+                    <div class="test">
+                        <div class="sub_tit_L test2">
+                            <h2><i class="fas fa-gift fa-lg"></i>&ensp;このプロジェクトのPSリターン</h2>
+                            <p class="content_explanatory_text">
+                                支援者達があなたのプロジェクトを知人やSNSで紹介し、世に広めます。<br>
+                                その見返りとして、支援者に特別なリターンを贈ることが出来ます。
+                            </p>
+                        </div>
+                        @if ($project->release_status === ProjectReleaseStatus::getValue('Published'))
+                        <a href="{{ route('user.project.support', ['project' => $project]) }}">
+                            <div class="display_count_btn">
+                                <p>プロジェクトサポーター(PS)解説画面</p>
+                            </div>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                        @elseif ($project->release_status === ProjectReleaseStatus::getValue('UnderSuspension'))
+                        <div class="caution_box">
+                            <p>掲載停止中の為、閲覧できません</p>
+                        </div>
+                        @else
+                        <div class="caution_box">
+                            <p>テスト</p>
+                        </div>
+                        @endif
+                    </div>
                 </div>
             </div>
     </div>
@@ -204,3 +229,23 @@
 <script src="{{ asset('js/accordion.js') }}"></script>
 <script src={{ asset('/js/apply-submit.js') }}></script>
 @endsection
+
+<style>
+    .test {
+        font-size: 1.9rem;
+        font-weight: bold;
+        text-align: left;
+        padding: 0.5em 1em;
+        margin-top: 2em;
+        background-color: #F7FDFF;
+        height: 240px;
+        border: solid 2px;
+        border-radius: 9px;
+        border-color: #00aebd;
+        border-bottom: solid 4px #00aebd;
+    }
+
+    .test2{
+        color: #00aebd;
+    }
+</style>
