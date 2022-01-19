@@ -65,7 +65,7 @@
                         <div>
                             {{-- チャット中プロジェクト --}}
                             <a href="{{ route('user.admin_message_content.index') }}" class="chat_group_title admin_chat_group_title">
-                                FanReturn運営とのDM
+                                運営事務局とのDM
                                 @if($admin_message->admin_message_contents_count !== 0)
                                 <span class="chat_unread_count">
                                     {{ $admin_message->admin_message_contents_count }}
