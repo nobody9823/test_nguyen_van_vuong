@@ -10,7 +10,9 @@
     >
     <div class="unread_mark_parent">
         <x-common.message.unread_mark :guard="$guard" :message="$message" />
-        {{$message->updated_at->format('Y/m/d H:i:s')}}<br>
+        @if($guard !== 'admin')
+            {{$message->updated_at->format('Y/m/d H:i:s')}}<br>
+        @endif
         @if($guard === 'supporter')
             【{{Str::limit($message->project->title,40)}}】
         @endif

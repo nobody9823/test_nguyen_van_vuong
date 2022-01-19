@@ -88,6 +88,9 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::get('message/{payment}', [MessageController::class, 'show'])->name('message.show');
     Route::post('message/{payment}', [MessageController::class, 'store'])->name('message_content.store');
     Route::get('message/{message_content}/file_download', [MessageController::class, 'fileDownload'])->name('message_content.file_download');
+    Route::get('admin_message', [MessageController::class, 'indexToAdmin'])->name('admin_message_content.index');
+    Route::post('admin_message', [MessageController::class, 'storeToAdmin'])->name('admin_message_content.store');
+    Route::get('admin_message/{admin_message_content}/file_download', [MessageController::class, 'fileDownloadFromAdmin'])->name('admin_message_content.file_download');
 });
 
 Route::middleware(['guest:web', 'throttle:10'])->group(function () {

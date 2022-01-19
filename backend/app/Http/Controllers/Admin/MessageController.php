@@ -8,7 +8,9 @@ use App\Mail\Admin\NotificationMessage;
 use App\Models\AdminMessageContent;
 use App\Models\MessageContent;
 use App\Models\User;
+use App\Notifications\AppliedAdminMessageNotification;
 use App\Traits\message\AdminMessageFunctions;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller
@@ -31,8 +33,8 @@ class MessageController extends Controller
 
     public function store(MessageContentRequest $request, User $user)
     {
-        if ($this->message_store($request, $user, 'admin')) {
-            // $payment->project->user->notify(new AppliedMessageNotification($payment));
+        if ($this->admin_message_store($request, $user, 'admin')) {
+            $user->notify(new AppliedAdminMessageNotification($user, 'user'));
             return redirect()->back()->with('flash_message', 'メッセージ送信が完了しました。');
         } else {
             return redirect()->back()->with('error', 'メッセージ送信に失敗しました。時間をおいてお試しください。');

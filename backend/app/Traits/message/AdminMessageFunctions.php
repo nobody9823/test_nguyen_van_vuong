@@ -2,6 +2,7 @@
 
 namespace App\Traits\message;
 
+use App\Enums\AdminMessageContributor;
 use App\Enums\MessageContributor;
 use App\Models\AdminMessageContent;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,7 @@ trait AdminMessageFunctions
     /**
      * Store a message created by Kosei.
      */
-    public function message_store(Object $request, Object $target, String $guard)
+    public function admin_message_store(Object $request, Object $target, String $guard)
     {
         DB::beginTransaction();
         try {
@@ -21,7 +22,7 @@ trait AdminMessageFunctions
                 $message_content->file_original_name = $request->file('file_path')->getClientOriginalName();
             }
             $message_content->content = $request->content;
-            $message_content->message_contributor = $this->setMessageContributor($guard);
+            $message_content->message_contributor = $this->setAdminMessageContributor($guard);
             $target->adminMessageContents()->save($message_content);
             DB::commit();
             return true;
@@ -36,8 +37,8 @@ trait AdminMessageFunctions
      * Store a message created by Kosei.
      */
 
-    public function setMessageContributor(String $guard)
+    public function setAdminMessageContributor(String $guard)
     {
-        return MessageContributor::getValue($guard);
+        return AdminMessageContributor::getValue($guard);
     }
 }
