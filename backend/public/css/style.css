@@ -2958,13 +2958,13 @@ margin: 20px 0;
     font-size: 1.4rem;
     font-weight: bold;
     background-color:#F7FDFF;
-    color:#00aebd;
     margin:10px 0px 0 0;
     padding:12px 10px;
 }
 .admin_chat_group_title {
     position: relative;
     display: block;
+    color:#00aebd;
     margin-block-start: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
@@ -3311,4 +3311,12 @@ display: flex; justify-content: center; align-items: center; height: 100px; }
 
 .funded_type_wrapper .tab_item:hover {
     cursor: pointer;
+}
+
+.chat_group_title_to_supporters {
+    color: #47ef45;
+}
+
+.chat_group_title_to_influencer {
+    color: #f8d32d;
 }
