@@ -5,11 +5,10 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-217549034-1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-217549034-1');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-217549034-1');
 </script>
 {{-- Microsoft Clarity --}}
 <script type="text/javascript">
@@ -94,8 +93,8 @@ axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
 	<div id="header_03">
         <x-user.header-chat-message />
         <input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
-        <label for="nav-tgl" class="open nav-tgl-btn"><span></span></label>
-        <label for="nav-tgl" class="close nav-tgl-btn"></label>
+        <label for="nav-tgl" class="nav-tgl_open nav-tgl-btn"><span></span></label>
+        <label for="nav-tgl" class="nav-tgl_close nav-tgl-btn"></label>
 	</div>
 </div>
 
