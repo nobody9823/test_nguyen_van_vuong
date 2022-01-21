@@ -2983,6 +2983,7 @@ background: #EFEFEF; height: 240px; border-radius: 9px; border-bottom: solid 3px
 border-radius: 9px; display: flex; justify-content: center; align-items: center; height: 80px; }
 .my_project_detail .fa-arrow-circle-right { position: relative; bottom: 55px; left: calc(100% - 60px); color: white; }
 .caution_box { background: #d7dbdb; border: dashed 2px #aaadad; border-radius: 8px; display: flex; justify-content: center; align-items: center; height: 80px; }
+.ps_caution_box { background: #ceeef8; border: dashed 2px #aaadad; border-radius: 8px; display: flex; justify-content: center; align-items: center; height: 190px; }
 .caution_box p { color: #707070; }
 @media screen and (max-width: 768px) {
     .my_project_detail .display_count_btn { height: 60px; }
@@ -2992,6 +2993,7 @@ border-radius: 9px; display: flex; justify-content: center; align-items: center;
     .my_project_detail .content_explanatory_text { height: 39px; }
     .my_project_detail .fa-arrow-circle-right { left: calc(100% - 40px); bottom: 40px; }
     .caution_box { height: 65px; margin-top: 2em; }
+    .ps_caution_box { height: 115px; margin-top: 2em; }
 }
 
 .display_release_status { text-align: center; padding-top: 7px; color: red; }

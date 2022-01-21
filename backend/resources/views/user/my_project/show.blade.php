@@ -202,6 +202,7 @@
                                 拡散した支援者に特別なリターンを送ることができます。
                             </p>
                         </div>
+                        @if ($project->release_status === ProjectReleaseStatus::getValue('Published'))
                         <a href="{{ route('user.project.support', ['project' => $project]) }}">
                             <div class="display_count_btn">
                                 <p>プロジェクトサポーター(PS)とは</p>
@@ -214,6 +215,16 @@
                             </div>
                             <i class="fas fa-arrow-circle-right"></i>
                         </a>
+                        @else
+                        <div class="ps_caution_box">
+                            <p>
+                                {{ $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
+                                    ? '掲載停止中の為、閲覧できません。'
+                                    : 'プロジェクトの審査を通過すると閲覧可能です'
+                                }}
+                            </p>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
