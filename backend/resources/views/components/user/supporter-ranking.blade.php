@@ -221,6 +221,14 @@
     </section>
     <!--/.section_base-->
 
+    @if ($project->user->id === Auth::id())
+    <x-common.label
+        text="あなたのプロジェクトを支援したユーザー向けのプロジェクトサポーターランキングページです。
+              ボタンのクリックはできません。"
+    />
+    <script src="{{ asset('/js/pointer-events.js') }}"></script>
+    @endif
+
     <script src="{{ asset('/js/blade-functions.js') }}"></script>
     <script type="text/javascript">
         window.addEventListener('DOMContentLoaded', () => {
