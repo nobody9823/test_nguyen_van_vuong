@@ -8,7 +8,6 @@ use App\Traits\UniqueToken;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Project;
-use App\Models\UserProjectSupported;
 use App\Models\Plan;
 use App\Models\Payment;
 use App\Models\PaymentToken;
