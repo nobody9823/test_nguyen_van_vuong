@@ -31,7 +31,7 @@ class AdminMessageContent extends Model
     {
         switch ($guard) {
             case "ユーザー":
-                return $query->whereIn('message_contributor', ['管理者'])->where('is_read', false);
+                return $query->where('message_contributor', '管理者')->where('is_read', false);
             case "管理者":
                 return $query->where('message_contributor', 'ユーザー')->where('is_read', false);
         }

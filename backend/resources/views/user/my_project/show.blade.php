@@ -19,7 +19,7 @@
                         <div class="su_pr_02_04 m_b_1510 my_project_dashboard">
                             <div class="my_project_dashboard_status">
                                 <span>あなたのプロジェクトは</span>
-                                <span style="border-bottom: 2px solid #555353">
+                                <span class="status_text">
                                     @switch($project->release_status)
                                     @case(ProjectReleaseStatus::getValue('Default'))
                                         申請前
@@ -40,22 +40,18 @@
                                 </span>
                                 <span>です。</span>
                             </div>
-                            <div class="def_btn">
-                                @if(
-                                    $project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack')
+                            @if(
+                                $project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack')
                                 )
-                                プロジェクトを編集する
-                                {{-- NOTICE: MyProjectController, edit action --}}
-                                <a class="cover_link" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
-                                @elseif(
-                                    $project->release_status === ProjectReleaseStatus::getValue('Pending') ||
-                                    $project->release_status === ProjectReleaseStatus::getValue('Published') ||
-                                    $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
-                                )
-                                {{ $project->release_status }}
-                                <a class="cover_link"></a>
-                                @endif
-                            </div>
+                                <div class="def_btn">
+                                    プロジェクトを編集する
+                                    {{-- NOTICE: MyProjectController, edit action --}}
+                                    <a
+                                        class="cover_link"
+                                        href="{{ route('user.my_project.project.edit', ['project' => $project]) }}">
+                                    </a>
+                                </div>
+                            @endif
                             @if(
                                 $project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack')
                             )
@@ -79,6 +75,14 @@
                                     <button type="button" class="cover_link disable-btn">
                                     </button>
                                 </form>
+                            </div>
+                            @else
+                            <div class="def_btn">
+                                <a
+                                    class="cover_link"
+                                    href="{{ route('user.project_preview', ['project' => $project] )}}">
+                                </a>
+                                <i class="fas fa-eye">　プレビュー</i>
                             </div>
                             @endif
                         </div>

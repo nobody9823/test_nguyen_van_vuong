@@ -218,7 +218,7 @@ class ProjectController extends Controller
         $validated_request = $request->validated_request;
         $unique_token = UniqueToken::getToken();
         $this->user->load(['profile', 'address']);
-        $inviter = !empty($validated_request['inviter_code']) ? User::getInviterFromInviterCode($validated_request['inviter_code'])->first() : null;
+        $inviter = !empty($validated_request['inviter_code']) ? User::getInviterFromInviterCode($validated_request['inviter_code'], $request->user())->first() : null;
         DB::beginTransaction();
         try {
             $plans = $this->plan->lockForUpdatePlansByIds(array_keys($validated_request['plans']))->get();
@@ -453,8 +453,8 @@ class ProjectController extends Controller
     public function projectPreview(Project $project)
     {
         if (!Auth::guard('admin')->check()) {
-            $this->authorize('checkOwnProjectAndAdmin', $project);
+            $this->authorize('checkOwnProject', $project);
         }
-        return view('user.project.preview', ['project' => $project]);
+        return view('user.project.preview', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice()]);
     }
 }

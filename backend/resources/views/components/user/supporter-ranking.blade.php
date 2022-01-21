@@ -223,7 +223,8 @@
 
     @if ($project->user->id === Auth::id())
     <x-common.label
-        text="あなたのプロジェクトを支援したユーザー向けのプロジェクトサポーターランキングページです。"
+        text="あなたのプロジェクトを支援したユーザー向けのプロジェクトサポーターランキングページです。
+              ボタンのクリックはできません。"
     />
     <script src="{{ asset('/js/pointer-events.js') }}"></script>
     @endif

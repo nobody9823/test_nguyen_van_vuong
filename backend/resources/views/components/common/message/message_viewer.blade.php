@@ -26,7 +26,7 @@
             @if ($selectedMessage->adminMessageContents->isNotEmpty())
                 @foreach ($selectedMessage->adminMessageContents as $messageContent)
                     @if($messageContent->message_contributor === 'ユーザー')
-                        <x-common.message.content_from_supporter :guard="$guard" :messageContent="$messageContent" />
+                        <x-common.message.content_from_user :guard="$guard" :messageContent="$messageContent" />
                     @elseif($messageContent->message_contributor === '管理者')
                         <x-common.message.content_from_admin :guard="$guard" :messageContent="$messageContent" />
                     @endif

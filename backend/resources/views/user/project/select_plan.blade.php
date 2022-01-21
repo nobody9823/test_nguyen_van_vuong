@@ -286,7 +286,7 @@
                                 <option value="select">選択</option>
                                 <option value="男性" {{ old('gender') === "男性" || optional($user->profile)->gender === "男性" ? 'selected' : '' }}>男性</option>
                                 <option value="女性" {{ old('gender') === "女性" || optional($user->profile)->gender === "女性" ? 'selected' : '' }}>女性</option>
-                                <option value="その他"　{{ old('gender') === "その他" || optional($user->profile)->gender === "その他" ? 'selected' : '' }}>その他</option>
+                                <option value="その他" {{ old('gender') === "その他" || optional($user->profile)->gender === "その他" ? 'selected' : '' }}>その他</option>
                             </select>
                         </div>
                     </div><!--/form_item_row-->
@@ -455,7 +455,12 @@ window.onload = function(){
     <script src="{{ asset('/js/stripe-create-card-token.js') }}"></script>
 @elseif(config('app.card_payment_api') === 'GMO')
     {{-- 以下テスト環境URL --}}
+    @env('production')
+    <script src="https://static.mul-pay.jp/ext/js/token.js"></script>
+    @endenv
+    @env(['staging', 'local'])
     <script src="https://stg.static.mul-pay.jp/ext/js/token.js"></script>
+    @endenv
     <script>
         Multipayment.init('{{ config("app.gmo_shop_id") }}');
     </script>
