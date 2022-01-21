@@ -1406,8 +1406,74 @@ input[name="tab_item"] {
 .pay_input_count { max-width: 120px; height: 47px; padding: 10px; border: solid 1px #DBDBDB; border-radius: 4px; font-size: 2.0rem; font-weight: bold; text-align: right;}
 .pay_input_count_en{font-size: 1.6rem; font-weight: bold; padding: 0 0 0 5px;}
 .pay_select_count{ padding: 12px 8px; border-radius: 5px; border: solid 1px #00AEBD; color: #00AEBD; margin: 0 0 0 8px; }
-.pay_minus_btn{ font-size: 2.5rem; font-weight: bold; color: #fff; background: #00AEBD; padding: 0 10px; border:none; border-radius: 50%; margin: 0 10px 0 0; touch-action: manipulation; }
-.pay_plus_btn{ font-size: 2.5rem; font-weight: bold; color: #fff; background: #00AEBD; padding: 0 7px; border:none; border-radius: 50%; margin: 0 0 0 10px; touch-action: manipulation; }
+.pay_minus_btn, .pay_plus_btn{
+    cursor: pointer;
+    touch-action: manipulation;
+    position: relative;
+    display:inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color:#3abec1;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    margin: 0 20px;
+}
+.pay_minus_btn::before {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    background-color: white;
+    width: 20px;
+    height: 4px;
+    transition: all 0.3s;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.pay_minus_btn::after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    background-color: white;
+    width: 20px;
+    height: 4px;
+    transition: all 0.3s;
+}
+.pay_plus_btn::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    background-color: white;
+    width: 20px;
+    height: 4px;
+    transition: all 0.3s;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.pay_plus_btn::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    background-color: white;
+    width: 20px;
+    height: 4px;
+    transition: all 0.3s;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
 
 .as_i_02{ margin-bottom: 50px;}
 .as_i_03{ margin-bottom: 50px;}
