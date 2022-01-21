@@ -4,12 +4,12 @@
     @if($project)
     <x-common.preview />
     @else
-    <x-common.sample />
+    <x-common.label text="サンプル表示中です。" />
     @endif
 
-    <x-user.supporter-ranking 
-        :project="$project" 
-        :usersRankedByTotalAmount="null" 
+    <x-user.supporter-ranking
+        :project="$project"
+        :usersRankedByTotalAmount="null"
         :usersRankedByTotalQuantity="null"
     />
 
