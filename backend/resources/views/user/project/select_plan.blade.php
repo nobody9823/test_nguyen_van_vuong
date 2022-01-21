@@ -426,7 +426,7 @@ window.onload = function(){
 
         for (var i = 0, len = check_box.length; i < len; i++){
             if (check_box[i].checked){
-                Plans.planIsChecked(check_box[i]);
+                Plans.changeSelectedPlan(check_box[i]);
             }
         }
     }
@@ -434,7 +434,7 @@ window.onload = function(){
 
     for (var i = 0, len = check_box.length; i < len; i++){
         if (check_box[i].checked){
-            Plans.planIsChecked(check_box[i]);
+            Plans.changeSelectedPlan(check_box[i]);
         }
     }
 }

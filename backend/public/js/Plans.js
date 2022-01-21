@@ -1,113 +1,87 @@
 const Plans = (() => {
-
-    const getPlanIds = () => {
-        return document.getElementsByClassName('plan_ids');
-    };
-
-    const getAmountById = (id) => {
-        return document.getElementById('plan_amount_' + id);
-    };
-
     const getTotalPrice = () => {
+        let totalPrice = 0;
+        let selectablePlans = document.getElementsByClassName('plan_ids');
 
-        let total_price = 0;
+        for (let $i = 0; $i < selectablePlans.length; $i ++){
+            if (selectablePlans[$i].checked){
+                let selectedPlanPrice = selectablePlans[$i].value;
 
-        let check_box = getPlanIds();
+                let selectedPlanQuantity = document.getElementById(`plan_quantity_${selectablePlans[$i].id}`).value;
 
-        for (let $i = 0; $i < check_box.length; $i ++){
-            if (check_box[$i].checked){
-
-                let price = check_box[$i].value;
-
-                let amount = getAmountById(check_box[$i].id);
-
-                total_price += (price * amount.value);
+                totalPrice += (selectedPlanPrice * selectedPlanQuantity);
             }
         }
-        return total_price;
-    };
 
-    const getTotalAmount = () => {
-        return document.getElementById('total_amount');
+        return totalPrice += Number(document.getElementById('display_added_price').value);
     };
 
     return {
-        planIsChecked: (el) => {
-            let selected_card = document.getElementById('plan_card_' + el.id)
+        changeSelectedPlan: (el) => {
+            let selectedPlanCard = document.getElementById('plan_card_' + el.id)
+            let totalAmountInputForm = document.getElementById('total_amount');
+            let selectedPlanQuantitySelectBox = document.getElementById(`plan_quantity_${el.id}`);
 
-            let total_amount = getTotalAmount();
-
-            let selected_amount = getAmountById(el.id);
-
-            if(selected_amount.disabled){
-                selected_card.classList.add('asr_current')
-                selected_amount.disabled = false;
+            if(selectedPlanQuantitySelectBox.disabled){
+                selectedPlanCard.classList.add('asr_current')
+                selectedPlanQuantitySelectBox.disabled = false;
             } else {
-                selected_card.classList.remove('asr_current')
-                selected_amount.disabled = true;
+                selectedPlanCard.classList.remove('asr_current')
+                selectedPlanQuantitySelectBox.disabled = true;
             }
-            total_amount.value = getTotalPrice();
-        },
-        planAmountIsChanged: () => {
 
-            let total_amount = getTotalAmount();
-
-            total_amount.value = getTotalPrice();
+            totalAmountInputForm.value = getTotalPrice();
         },
+
+        changePlanQuantity: () => {
+            let totalAmountInputForm = document.getElementById('total_amount');
+
+            totalAmountInputForm.value = getTotalPrice();
+        },
+
         addTotalAmount: () => {
-            let total_amount = getTotalAmount();
-
+            let totalAmountInputForm = document.getElementById('total_amount');
             let display_added_price = document.getElementById('display_added_price');
-
-            num = Number(total_amount.value);
-
+            num = Number(totalAmountInputForm.value);
             num += 500;
 
-            total_amount.value = num;
-
+            totalAmountInputForm.value = num;
             display_added_price.value = Number(display_added_price.value) + 500;
         },
+
         subTotalAmount: () => {
-
-            let total_amount = getTotalAmount();
-
-            let total_price = getTotalPrice();
-
+            let totalAmountInputForm = document.getElementById('total_amount');
             let display_added_price = document.getElementById('display_added_price');
 
-            if (total_amount.value === '' || Number(total_amount.value) <= total_price){
+            if (display_added_price.value === '' || Number(display_added_price.value) <= 0){
                 return ;
             } else {
-                num = Number(total_amount.value);
-
+                num = Number(totalAmountInputForm.value);
                 num -= 500;
 
-                total_amount.value = num;
-
+                totalAmountInputForm.value = num;
                 display_added_price.value = Number(display_added_price.value) - 500;
             }
         },
+
         searchCheckedPlans: () => {
-
-            let total_amount = getTotalAmount();
-
+            let totalAmountInputForm = document.getElementById('total_amount');
             let total_price = getTotalPrice();
+            let selectablePlans = document.getElementsByClassName('plan_ids');
+            let selectedPlans = [];
 
-            let checkboxElements = getPlanIds();
-
-            let checkedPlans = [];
-
-            for (var i = 0, len = checkboxElements.length; i < len; i++) {
-                if (checkboxElements[i].checked) {
-                    checkedPlans.push(checkboxElements[i]);
+            for (var i = 0, len = selectablePlans.length; i < len; i++) {
+                if (selectablePlans[i].checked) {
+                    selectedPlans.push(selectablePlans[i]);
                 }
             }
 
-            for($i = 0; $i < checkedPlans.length; $i++){
-                let selected_amount = getAmountById(checkedPlans[$i].id);
-                selected_amount.disabled = false;
+            for($i = 0; $i < selectedPlans.length; $i++){
+                let selectedPlanQuantitySelectBox = document.getElementById(`plan_quantity_${checkedPlans[$i].id}`);
+                selectedPlanQuantitySelectBox.disabled = false;
             };
-            total_amount.value = Number(total_price);
+
+            totalAmountInputForm.value = Number(total_price);
         },
     }
 })()
