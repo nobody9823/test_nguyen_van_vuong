@@ -428,9 +428,8 @@ class ProjectController extends Controller
 
     public function support(Project $project)
     {
-        $exist_data = UserProjectSupported::where('user_id', Auth::id())->where('project_id', $project->id)->exists();
-        if ((Auth::id() !== $project->user_id) && !$exist_data) {
-            Auth::user()->supportedProjects()->attach($project->id);
+        if (Auth::id() !== $project->user_id) {
+            Auth::user()->supportedProjects()->syncWithoutDetaching($project->id);
         }
 
         return view('user.project.support', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice()]);
