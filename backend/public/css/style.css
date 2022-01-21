@@ -2972,19 +2972,25 @@ margin: 20px 0;
 .apply_btn { width: 80%; color: #00aebd; border: 1px solid #00aebd; background-color: white; max-width: 400px;
 font-size: 1.8rem; font-weight: bold; text-align: center; padding: 14px; margin: 15px auto 15px auto; position: relative;
 border-radius: 6px;}
+.my_project_detail .content_explanatory {color: #00aebd;}
 .my_project_detail .content { font-size: 1.9rem; font-weight: bold; text-align: left; padding: 0.5em 1em; margin-top: 2em;
 background: #EFEFEF; height: 240px; border-radius: 9px; border-bottom: solid 3px #757474; }
+.my_project_detail .content_ps { font-size: 1.9rem; font-weight: bold; text-align: left; padding: 0.5em 1em; margin-top: 2em;
+ background-color: #F7FDFF; height: 350px; border: solid 2px; border-radius: 9px; border-color: #00aebd;
+ border-bottom: solid 4px #00aebd; }
 .my_project_detail .content_explanatory_text { height: 57px; margin-bottom: 2em; }
 .my_project_detail .display_count_btn { color: white; background: #00aebd; border-bottom: solid 6px #008996;
 border-radius: 9px; display: flex; justify-content: center; align-items: center; height: 80px; }
-.my_project_detail .fa-arrow-circle-right { position: relative; bottom: 57px; left: calc(100% - 60px); color: white; }
+.my_project_detail .fa-arrow-circle-right { position: relative; bottom: 55px; left: calc(100% - 60px); color: white; }
 .caution_box { background: #d7dbdb; border: dashed 2px #aaadad; border-radius: 8px; display: flex; justify-content: center; align-items: center; height: 80px; }
 .caution_box p { color: #707070; }
 @media screen and (max-width: 768px) {
     .my_project_detail .display_count_btn { height: 60px; }
     .my_project_detail .content { font-size: 1.3rem; height: 180px; }
+    .my_project_detail .content_ps { font-size: 1.1rem; height: 280px; }
+    .my_project_detail .content_explanatory { height: 120px; }
     .my_project_detail .content_explanatory_text { height: 39px; }
-    .my_project_detail .fa-arrow-circle-right { left: calc(100% - 40px); bottom: 42px; }
+    .my_project_detail .fa-arrow-circle-right { left: calc(100% - 40px); bottom: 40px; }
     .caution_box { height: 65px; margin-top: 2em; }
 }
 
