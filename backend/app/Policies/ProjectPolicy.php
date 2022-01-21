@@ -46,10 +46,4 @@ class ProjectPolicy
             return false;
         }
     }
-
-    public function checkIsFinishedPayment(User $user, Project $project)
-    {
-        $check_purchased = $project->payments->where('user_id', $user->id);
-        return $check_purchased->isNotEmpty() ? true : false;
-    }
 }

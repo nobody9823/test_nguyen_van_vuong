@@ -427,8 +427,9 @@ class ProjectController extends Controller
 
     public function support(Project $project)
     {
-        $this->authorize('checkIsFinishedPayment', $project);
-        Auth::user()->supportedProjects()->attach($project->id);
+        if (Auth::id() !== $project->user_id) {
+            Auth::user()->supportedProjects()->syncWithoutDetaching($project->id);
+        }
 
         return view('user.project.support', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice()]);
     }

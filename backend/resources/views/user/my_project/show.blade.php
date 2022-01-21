@@ -153,7 +153,7 @@
                         <a href="{{ route('user.comment.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
                                 @if ($project->comments_count > 0)
-                                <p>{{ $project->comments_count }}人からのコメントがあります</p>
+                                <p>{{ $project->comments_count }}件のコメントがあります</p>
                                 @else
                                 <p>現在支援者からのコメントはありません</p>
                                 @endif
@@ -193,6 +193,38 @@
                                 {{ $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
                                     ? '掲載停止中の為、投稿できません'
                                     : 'プロジェクトの審査を通過すると投稿可能です'
+                                }}
+                            </p>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="content_ps">
+                        <div class="sub_tit_L content_explanatory">
+                            <h2><i class="fas fa-gift fa-lg"></i>&ensp;このプロジェクトのPSリターン</h2>
+                            <p class="content_explanatory_text">
+                                支援者があなたのプロジェクトをSNSなどで拡散します。<br>
+                                拡散した支援者に特別なリターンを送ることができます。
+                            </p>
+                        </div>
+                        @if ($project->release_status === ProjectReleaseStatus::getValue('Published'))
+                        <a href="{{ route('user.project.support', ['project' => $project]) }}">
+                            <div class="display_count_btn">
+                                <p>プロジェクトサポーター(PS)とは</p>
+                            </div>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                        <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}">
+                            <div class="display_count_btn">
+                                <p>プロジェクトサポーター(PS)ランキングページ</p>
+                            </div>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                        @else
+                        <div class="ps_caution_box">
+                            <p>
+                                {{ $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
+                                    ? '掲載停止中の為、閲覧できません。'
+                                    : 'プロジェクトの審査を通過すると閲覧可能です'
                                 }}
                             </p>
                         </div>
