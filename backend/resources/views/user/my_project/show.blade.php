@@ -149,7 +149,7 @@
                         <a href="{{ route('user.comment.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
                                 @if ($project->comments_count > 0)
-                                <p>{{ $project->comments_count }}人からのコメントがあります</p>
+                                <p>{{ $project->comments_count }}件のコメントがあります</p>
                                 @else
                                 <p>現在支援者からのコメントはありません</p>
                                 @endif
