@@ -8,6 +8,7 @@ use App\Traits\UniqueToken;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\UserProjectSupported;
 use App\Models\Plan;
 use App\Models\Payment;
 use App\Models\PaymentToken;
@@ -427,8 +428,10 @@ class ProjectController extends Controller
 
     public function support(Project $project)
     {
-        $this->authorize('checkIsFinishedPayment', $project);
-        Auth::user()->supportedProjects()->attach($project->id);
+        $exist_data = UserProjectSupported::where('user_id', Auth::id())->where('project_id', $project->id)->exists();
+        if ((Auth::id() !== $project->user_id) && !$exist_data) {
+            Auth::user()->supportedProjects()->attach($project->id);
+        }
 
         return view('user.project.support', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice()]);
     }
