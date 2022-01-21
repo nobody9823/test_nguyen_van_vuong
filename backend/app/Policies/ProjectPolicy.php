@@ -46,9 +46,4 @@ class ProjectPolicy
             return false;
         }
     }
-
-    public function checkOwnProjectAndAdmin(?User $user, Project $project)
-    {
-        return $user->id === $project->user_id;
-    }
 }

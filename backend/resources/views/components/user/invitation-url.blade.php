@@ -30,14 +30,6 @@
 </div>
 @endif
 
-@if ($project->user->id === Auth::id())
-<x-common.label
-    text="あなたのプロジェクトを支援したユーザー向けのプロジェクトサポーター説明ページです。
-          ボタンのクリックはできません。"
-/>
-<script src="{{ asset('/js/pointer-events.js') }}"></script>
-@endif
-
 <script>
     $(function() {
       $('#js-copybtn').on('click', function(){
