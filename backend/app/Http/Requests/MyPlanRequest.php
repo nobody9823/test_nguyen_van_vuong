@@ -32,7 +32,7 @@ class MyPlanRequest extends FormRequest
             'price' => ['integer', 'min:0', 'max:10000000'],
             'address_is_required' => ['nullable', 'boolean'],
             'limit_of_supporters_is_required' => ['nullable', 'boolean'],
-            'limit_of_supporters' => ['integer', 'min:1', 'max:1000'],
+            'limit_of_supporters' => ['integer', 'min:1', 'max:2100000000'], /* NOTICE: データベースのint型の最大値2,147,483,647に合わせている */
             'delivery_date' => ['nullable', 'date_format:Y-m-d H:i:s', "after:{$this->route('project')->end_date->format('Y-m-d H:i')}"],
             'image_url' => ['nullable', 'image']
         ];
@@ -89,9 +89,9 @@ class MyPlanRequest extends FormRequest
                 : [$this->delivery_date['year'], $this->delivery_date['month']];
 
             $delivery_date = Carbon::createFromDate(
-                    $delivery_date_array[0],
-                    $delivery_date_array[1]
-                )->format('Y-m-t 23:59:59');
+                $delivery_date_array[0],
+                $delivery_date_array[1]
+            )->format('Y-m-t 23:59:59');
 
             $this->merge([
                 'delivery_date' => $delivery_date

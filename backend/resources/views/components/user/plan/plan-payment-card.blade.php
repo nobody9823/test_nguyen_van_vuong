@@ -36,7 +36,7 @@
                             </select>
                             @else
                             <select name="plans[{{$plan->id}}][quantity]" id="plan_amount_{{ $plan->id }}" onChange="Plans.planAmountIsChanged(this)" disabled>
-                                @for($i = 1; $i <= 1000; $i ++)
+                                @for($i = 1; $i <= 100; $i ++)
                                 <option value="{{ $i }}" {{ !empty(old('plans')) && isset(old('plans')[$plan->id]) && old('plans')[$plan->id]['quantity'] == $i ? 'selected' : ''}}>数量{{ $i }}</option>
                                 @endfor
                             </select>
