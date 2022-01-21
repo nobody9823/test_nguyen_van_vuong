@@ -56,7 +56,7 @@
 @section('side_bar_content')
 <ul class="nav flex-column">
     <li class="nav-item">
-        <a class="nav-link active" href="/admin/dashboard">
+        <a class="nav-link active" href="{{ route('admin.dashboard') }}">
             管理画面トップ
         </a>
     </li>
