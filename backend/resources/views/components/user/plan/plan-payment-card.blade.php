@@ -12,7 +12,7 @@
                 <div class="as_01">
                     <div class="as_check">
                         @if($plan->limit_of_supporters > 0)
-                        <input type="checkbox" name="plan_ids[]" class="plan_ids ac_list_checks checkbox-fan" onChange="Plans.planIsChecked(this)" id="{{ $plan->id }}" value="{{ $plan->price }}"
+                        <input type="checkbox" name="plan_ids[]" class="plan_ids ac_list_checks checkbox-fan" onChange="Plans.changeSelectedPlan(this)" id="{{ $plan->id }}" value="{{ $plan->price }}"
                             @if (old('plans') && in_array($plan->id, array_keys(old('plans'))))
                                 checked
                             @elseif($isSelected)
@@ -29,13 +29,13 @@
                     <div class="as_02">
                         <div class="cp_ipselect_02 cp_chb ">
                             @if($plan->limit_of_supporters_is_required)
-                            <select name="plans[{{$plan->id}}][quantity]" id="plan_amount_{{ $plan->id }}" onChange="Plans.planAmountIsChanged(this)" disabled>
+                            <select name="plans[{{$plan->id}}][quantity]" id="plan_quantity_{{ $plan->id }}" onChange="Plans.changePlanQuantity(this)" disabled>
                                 @for($i = 1; $i <= $plan->limit_of_supporters; $i ++)
                                 <option value="{{ $i }}" {{ !empty(old('plans')) && isset(old('plans')[$plan->id]) && old('plans')[$plan->id]['quantity'] == $i ? 'selected' : ''}}>数量{{ $i }}</option>
                                 @endfor
                             </select>
                             @else
-                            <select name="plans[{{$plan->id}}][quantity]" id="plan_amount_{{ $plan->id }}" onChange="Plans.planAmountIsChanged(this)" disabled>
+                            <select name="plans[{{$plan->id}}][quantity]" id="plan_quantity_{{ $plan->id }}" onChange="Plans.changePlanQuantity(this)" disabled>
                                 @for($i = 1; $i <= 100; $i ++)
                                 <option value="{{ $i }}" {{ !empty(old('plans')) && isset(old('plans')[$plan->id]) && old('plans')[$plan->id]['quantity'] == $i ? 'selected' : ''}}>数量{{ $i }}</option>
                                 @endfor
