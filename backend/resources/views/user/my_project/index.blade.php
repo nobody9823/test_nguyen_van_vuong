@@ -36,7 +36,17 @@
                                 pending_band
                                 @break
                             @case(ProjectReleaseStatus::getValue('Published'))
-                                published_band
+                                @switch($project->state_of_release_period)
+                                    @case('公開前')
+                                        published_band__before
+                                        @break
+                                    @case('公開中')
+                                        published_band__progress
+                                        @break
+                                    @case('公開終了')
+                                        published_band__after
+                                        @break
+                                @endswitch
                                 @break
                             @case(ProjectReleaseStatus::getValue('UnderSuspension'))
                                 under_suspension_band
