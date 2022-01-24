@@ -63,6 +63,7 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.message.index') }}">
             DM 一覧
+            <x-admin.header-chat-message-count />
         </a>
     </li>
     <li class="nav-item">

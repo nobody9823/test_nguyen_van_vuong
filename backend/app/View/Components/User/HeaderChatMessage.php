@@ -24,7 +24,11 @@ class HeaderChatMessage extends Component
                 Auth::user()->payments()->notGetUnderSuspensionProject()->withCountNotRead("支援者")->get();
             $chat_messages_by_executor =
                 Auth::user()->projects()->notGetUnderSuspensionProject()->withNotReadByExecutor()->get();
-            return $chat_messages_by_supporter->sum('message_contents_count') + $chat_messages_by_executor->sum('message_contents_count');
+            $chat_messages_to_admin =
+                Auth::user()->load('adminMessageContents')->loadCount(['adminMessageContents' => function ($query) {
+                    $query->notRead("ユーザー");
+                }]);
+            return $chat_messages_by_supporter->sum('message_contents_count') + $chat_messages_by_executor->sum('message_contents_count') + $chat_messages_to_admin->admin_message_contents_count;
         }
         return 0;
     }

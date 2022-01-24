@@ -1,5 +1,5 @@
 <span class="preview-message">
-    サンプル表示中です。
+    {{ $text }}
 </span>
 
 <style>
@@ -7,7 +7,6 @@
     span.preview-message {
         background-color: #dd5b34;
         color: #FFFFFF;
-        text-align: center;
         font-size: 18px;
         position: fixed;
         bottom: 10px;

@@ -5,11 +5,10 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-217549034-1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-217549034-1');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-217549034-1');
 </script>
 {{-- Microsoft Clarity --}}
 <script type="text/javascript">
@@ -56,7 +55,7 @@ axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
 <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" rel="stylesheet">
 <link rel='stylesheet' href={{ asset('css/toastr.min.css') }} />
 <link href="{{ asset('css/reset.css') }}" type="text/css" rel="stylesheet">
-<link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
+<link href="{{ asset('css/style.css') }}?20220124" type="text/css" rel="stylesheet">
 @yield('css')
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
@@ -94,8 +93,8 @@ axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
 	<div id="header_03">
         <x-user.header-chat-message />
         <input type="checkbox" id="nav-tgl_clone" name="nav-tgl_clone" style="display: none;">
-        <label for="nav-tgl" class="open nav-tgl-btn"><span></span></label>
-        <label for="nav-tgl" class="close nav-tgl-btn"></label>
+        <label for="nav-tgl" class="nav-tgl_open nav-tgl-btn"><span></span></label>
+        <label for="nav-tgl" class="nav-tgl_close nav-tgl-btn"></label>
 	</div>
 </div>
 

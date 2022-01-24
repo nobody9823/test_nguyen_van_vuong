@@ -19,7 +19,7 @@
                         <div class="su_pr_02_04 m_b_1510 my_project_dashboard">
                             <div class="my_project_dashboard_status">
                                 <span>あなたのプロジェクトは</span>
-                                <span style="border-bottom: 2px solid #555353">
+                                <span class="status_text">
                                     @switch($project->release_status)
                                     @case(ProjectReleaseStatus::getValue('Default'))
                                         申請前
@@ -40,22 +40,18 @@
                                 </span>
                                 <span>です。</span>
                             </div>
-                            <div class="def_btn">
-                                @if(
-                                    $project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack')
+                            @if(
+                                $project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack')
                                 )
-                                プロジェクトを編集する
-                                {{-- NOTICE: MyProjectController, edit action --}}
-                                <a class="cover_link" href="{{ route('user.my_project.project.edit', ['project' => $project]) }}"></a>
-                                @elseif(
-                                    $project->release_status === ProjectReleaseStatus::getValue('Pending') ||
-                                    $project->release_status === ProjectReleaseStatus::getValue('Published') ||
-                                    $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
-                                )
-                                {{ $project->release_status }}
-                                <a class="cover_link"></a>
-                                @endif
-                            </div>
+                                <div class="def_btn">
+                                    プロジェクトを編集する
+                                    {{-- NOTICE: MyProjectController, edit action --}}
+                                    <a
+                                        class="cover_link"
+                                        href="{{ route('user.my_project.project.edit', ['project' => $project]) }}">
+                                    </a>
+                                </div>
+                            @endif
                             @if(
                                 $project->release_status === ProjectReleaseStatus::getValue('Default') || $project->release_status === ProjectReleaseStatus::getValue('SendBack')
                             )
@@ -79,6 +75,14 @@
                                     <button type="button" class="cover_link disable-btn">
                                     </button>
                                 </form>
+                            </div>
+                            @else
+                            <div class="def_btn">
+                                <a
+                                    class="cover_link"
+                                    href="{{ route('user.project_preview', ['project' => $project] )}}">
+                                </a>
+                                <i class="fas fa-eye">　プレビュー</i>
                             </div>
                             @endif
                         </div>
@@ -149,7 +153,7 @@
                         <a href="{{ route('user.comment.index', ['project' => $project]) }}">
                             <div class="display_count_btn">
                                 @if ($project->comments_count > 0)
-                                <p>{{ $project->comments_count }}人からのコメントがあります</p>
+                                <p>{{ $project->comments_count }}件のコメントがあります</p>
                                 @else
                                 <p>現在支援者からのコメントはありません</p>
                                 @endif
@@ -189,6 +193,38 @@
                                 {{ $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
                                     ? '掲載停止中の為、投稿できません'
                                     : 'プロジェクトの審査を通過すると投稿可能です'
+                                }}
+                            </p>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="content_ps">
+                        <div class="sub_tit_L content_explanatory">
+                            <h2><i class="fas fa-gift fa-lg"></i>&ensp;このプロジェクトのPSリターン</h2>
+                            <p class="content_explanatory_text">
+                                支援者があなたのプロジェクトをSNSなどで拡散します。<br>
+                                拡散した支援者に特別なリターンを送ることができます。
+                            </p>
+                        </div>
+                        @if ($project->release_status === ProjectReleaseStatus::getValue('Published'))
+                        <a href="{{ route('user.project.support', ['project' => $project]) }}">
+                            <div class="display_count_btn">
+                                <p>プロジェクトサポーター(PS)とは</p>
+                            </div>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                        <a href="{{ route('user.project.supporter_ranking', ['project' => $project]) }}">
+                            <div class="display_count_btn">
+                                <p>プロジェクトサポーター(PS)ランキングページ</p>
+                            </div>
+                            <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                        @else
+                        <div class="ps_caution_box">
+                            <p>
+                                {{ $project->release_status === ProjectReleaseStatus::getValue('UnderSuspension')
+                                    ? '掲載停止中の為、閲覧できません。'
+                                    : 'プロジェクトの審査を通過すると閲覧可能です'
                                 }}
                             </p>
                         </div>

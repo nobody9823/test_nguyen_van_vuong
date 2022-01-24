@@ -427,8 +427,9 @@ class ProjectController extends Controller
 
     public function support(Project $project)
     {
-        $this->authorize('checkIsFinishedPayment', $project);
-        Auth::user()->supportedProjects()->attach($project->id);
+        if (Auth::id() !== $project->user_id) {
+            Auth::user()->supportedProjects()->syncWithoutDetaching($project->id);
+        }
 
         return view('user.project.support', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice()]);
     }
@@ -450,8 +451,8 @@ class ProjectController extends Controller
     public function projectPreview(Project $project)
     {
         if (!Auth::guard('admin')->check()) {
-            $this->authorize('checkOwnProjectAndAdmin', $project);
+            $this->authorize('checkOwnProject', $project);
         }
-        return view('user.project.preview', ['project' => $project]);
+        return view('user.project.preview', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice()]);
     }
 }
