@@ -42,7 +42,7 @@ const Plans = (() => {
         addTotalAmount: () => {
             let totalAmountInputForm = document.getElementById('total_amount');
             let display_added_price = document.getElementById('display_added_price');
-            num = Number(totalAmountInputForm.value);
+            let num = Number(totalAmountInputForm.value);
             num += 500;
 
             totalAmountInputForm.value = num;
@@ -56,7 +56,7 @@ const Plans = (() => {
             if (display_added_price.value === '' || Number(display_added_price.value) <= 0){
                 return ;
             } else {
-                num = Number(totalAmountInputForm.value);
+                let num = Number(totalAmountInputForm.value);
                 num -= 500;
 
                 totalAmountInputForm.value = num;
@@ -70,13 +70,13 @@ const Plans = (() => {
             let selectablePlans = document.getElementsByClassName('plan_ids');
             let selectedPlans = [];
 
-            for (var i = 0, len = selectablePlans.length; i < len; i++) {
+            for (let i = 0, len = selectablePlans.length; i < len; i++) {
                 if (selectablePlans[i].checked) {
                     selectedPlans.push(selectablePlans[i]);
                 }
             }
 
-            for($i = 0; $i < selectedPlans.length; $i++){
+            for(let $i = 0; $i < selectedPlans.length; $i++){
                 let selectedPlanQuantitySelectBox = document.getElementById(`plan_quantity_${checkedPlans[$i].id}`);
                 selectedPlanQuantitySelectBox.disabled = false;
             };
