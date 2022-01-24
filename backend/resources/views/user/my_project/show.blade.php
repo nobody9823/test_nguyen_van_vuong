@@ -28,7 +28,7 @@
                                         審査中
                                         @break
                                     @case(ProjectReleaseStatus::getValue('Published'))
-                                        公開中
+                                        {{ $project->state_of_release_period }}
                                         @break
                                     @case(ProjectReleaseStatus::getValue('UnderSuspension'))
                                         掲載停止中

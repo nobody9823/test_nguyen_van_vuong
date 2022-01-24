@@ -8,6 +8,7 @@ use App\Models\UserProjectLiked;
 use App\Traits\SearchFunctions;
 use App\Traits\SortBySelected;
 use App\Enums\ProjectReleaseStatus;
+use App\Services\Date\DateFormatFacade;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -343,6 +344,17 @@ class Project extends Model
             return round($this->payments_sum_price * 100 / $this->target_number);
         } else { // ゼロ除算対策
             return 100;
+        }
+    }
+
+    public function getStateOfReleasePeriodAttribute()
+    {
+        if (DateFormatFacade::checkDateIsFuture($this->start_date)) {
+            return '公開前';
+        } else if (DateFormatFacade::checkDateIsPast($this->end_date)) {
+            return '公開終了';
+        } else {
+            return '公開中';
         }
     }
 
