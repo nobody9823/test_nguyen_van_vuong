@@ -725,8 +725,12 @@ input[type=radio]:checked + .radio-fan::after {
 .default_band:before{ content: "下書き中"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
 .pending_band{ position: relative; overflow: hidden;}
 .pending_band:before{ content: "承認待ち"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
-.published_band{ position: relative; overflow: hidden;}
-.published_band:before{ content: "掲載中"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
+.published_band__before{ position: relative; overflow: hidden;}
+.published_band__before:before{ content: "公開前"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
+.published_band__progress{ position: relative; overflow: hidden;}
+.published_band__progress:before{ content: "公開中"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
+.published_band__after{ position: relative; overflow: hidden;}
+.published_band__after:before{ content: "公開終了"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #00AEBD; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
 .send_back_band{ position: relative; overflow: hidden;}
 .send_back_band:before{ content: "差し戻し"; font-weight: bold; font-size: 1.5rem; color: #fff; width: 150px; padding: 1px 10px; text-align: center; background: #01707a; position: absolute; top: 15px; left: -46px; transform: rotate(-45deg); z-index: 1; }
 .under_suspension_band{ position: relative; overflow: hidden;}
