@@ -110,7 +110,7 @@
                                     <div class="apply_btn">
                                         <form action="{{ route('user.my_project.message.index', ['project' => $project]) }}" method="GET">
                                             @csrf
-                                            支援者とのやりとり
+                                            支援者とのDM
                                             <button type="submit" class="cover_link disable-btn"></button>
                                         </form>
                                     </div>

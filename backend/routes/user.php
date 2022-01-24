@@ -32,8 +32,6 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{payment_without_globalscope}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
     Route::post('comment', [CommentController::class, 'store'])->name('comment.store')->middleware('project.released');
-    Route::get('support', [ProjectController::class, 'support'])->name('project.support');
-    Route::get('supporter_ranking', [ProjectController::class, 'supporterRanking'])->name('project.supporter_ranking');
 });
 
 //---------------------Mypage-----------------------------------------------
@@ -54,6 +52,8 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::post('reply/{comment}', [ReplyController::class, 'store'])->name('reply.store');
             Route::resource('reply', ReplyController::class)->only(['destroy']);
             Route::post('send_to_supporter', SendToSupporterController::class)->name('send_to_supporter');
+            Route::get('support', [ProjectController::class, 'support'])->name('project.support');
+            Route::get('supporter_ranking', [ProjectController::class, 'supporterRanking'])->name('project.supporter_ranking');
         });
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
