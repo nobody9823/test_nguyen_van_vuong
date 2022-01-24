@@ -238,7 +238,7 @@ class ProjectController extends Controller
                 $comment = $this->comment->fill(['project_id' =>  $project->id, 'content' => $validated_request['comments']]);
                 $this->user->comments()->save($comment);
             }
-            $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
+            // $qr_code = $this->pay_pay->createQrCode($unique_token, $validated_request['total_amount'], $project, $payment);
             $payment->paymentToken()->save(PaymentToken::make([
                 'order_id' => !empty($validated_request['payment_method_id']) ? $validated_request['payment_method_id'] : $unique_token,
             ]));
@@ -250,9 +250,10 @@ class ProjectController extends Controller
 
         if ($validated_request['payment_way'] === 'credit') {
             return redirect()->action([ProjectController::class, 'paymentForCredit'], ['project' => $project, 'payment_without_globalscope' => $payment]);
-        } elseif ($validated_request['payment_way'] === 'paypay') {
-            return redirect()->away($qr_code['data']['url']);
         }
+        /**elseif ($validated_request['payment_way'] === 'paypay') {
+            return redirect()->away($qr_code['data']['url']);
+        }**/
     }
 
     /**

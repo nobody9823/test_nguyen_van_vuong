@@ -154,22 +154,22 @@ class ProjectTest extends TestCase
         $response->assertRedirect(route('user.plan.payment_for_credit', ['project' => $this->project, 'payment_without_globalscope' => $this->user->payments()->withoutGlobalScopes()->first()]));
     }
 
-    public function testPrepareForPaymentForPayPay()
-    {
-        $this->withoutExceptionHandling();
-        $mock = \Mockery::mock(PayPay::class);
-        $mock->shouldReceive('createQrCode')
-            ->once()
-            ->andReturn($this->response_create_qr_code);
+    // public function testPrepareForPaymentForPayPay()
+    // {
+    //     $this->withoutExceptionHandling();
+    //     $mock = \Mockery::mock(PayPay::class);
+    //     $mock->shouldReceive('createQrCode')
+    //         ->once()
+    //         ->andReturn($this->response_create_qr_code);
 
-        $this->app->bind(PayPayInterface::class, function () use ($mock) {
-            return $mock;
-        });
-        $response = $this->actingAs($this->user)
-            ->get(route('user.plan.prepare_for_payment', array_merge(['project' => $this->project], $this->data_for_paypay)));
+    //     $this->app->bind(PayPayInterface::class, function () use ($mock) {
+    //         return $mock;
+    //     });
+    //     $response = $this->actingAs($this->user)
+    //         ->get(route('user.plan.prepare_for_payment', array_merge(['project' => $this->project], $this->data_for_paypay)));
 
-        $response->assertRedirect('https://qr-stg.sandbox.paypay.ne.jp/28180104c6BFhmBN9MGwhLaz');
-        $payments = $this->user->payments()->withoutGlobalScopes()->get();
-        $this->assertCount(1, $payments);
-    }
+    //     $response->assertRedirect('https://qr-stg.sandbox.paypay.ne.jp/28180104c6BFhmBN9MGwhLaz');
+    //     $payments = $this->user->payments()->withoutGlobalScopes()->get();
+    //     $this->assertCount(1, $payments);
+    // }
 }
