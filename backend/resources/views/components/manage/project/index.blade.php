@@ -206,7 +206,12 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+                                                @env('production')
+                                                <a href="https://remittance.gmopg.jp/admin/depositSearch" target="_blank">GMOのダッシュボードで確認</a>
+                                                @endenv
+                                                @env(['local', 'staging'])
                                                 <a href="https://test-remittance.gmopg.jp/admin/depositSearch" target="_blank">GMOのダッシュボードで確認</a>
+                                                @endenv
                                                 <p>
                                                     送金完了:
                                                     {{ number_format($project->succeed_sum_deposits_amount) }}円
