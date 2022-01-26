@@ -84,9 +84,9 @@
                         <div>
                             <div class="as_i_01_R_01">上乗せ支援で応援しよう！</div>
                             <div class="as_i_01_R_02 ">
-                                    <input type="button" onClick="Plans.subTotalAmount()" class="pay_minus_btn" value="-">
+                                    <span onClick="Plans.subTotalAmount()" class="pay_minus_btn"></span>
                                     <input type="number" name="display_added_price" id="display_added_price" readonly class="pay_input_count"><span class="pay_input_count_en">円</span>
-                                    <input type="button" onClick="Plans.addTotalAmount()" class="pay_plus_btn" value="+">
+                                    <span onClick="Plans.addTotalAmount()" class="pay_plus_btn"></span>
                                         {{-- <select name="pay_select_count" class=" pay_select_count" style="display: none;">
                                             <option value="100" selected>+100</option>
                                             <option value="1000">+1000</option>
@@ -426,7 +426,7 @@ window.onload = function(){
 
         for (var i = 0, len = check_box.length; i < len; i++){
             if (check_box[i].checked){
-                Plans.planIsChecked(check_box[i]);
+                Plans.changeSelectedPlan(check_box[i]);
             }
         }
     }
@@ -434,7 +434,7 @@ window.onload = function(){
 
     for (var i = 0, len = check_box.length; i < len; i++){
         if (check_box[i].checked){
-            Plans.planIsChecked(check_box[i]);
+            Plans.changeSelectedPlan(check_box[i]);
         }
     }
 }
