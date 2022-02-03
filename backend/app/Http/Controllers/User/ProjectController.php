@@ -25,6 +25,7 @@ use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
 use Exception;
 use App\Notifications\PaymentNotification;
+use App\Services\Date\DateFormatFacade;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -311,7 +312,7 @@ class ProjectController extends Controller
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
         }
         $exec_cvs_response = $this->card_payment
-            ->execTranCVS($request->cvs_code, $entry_cvs_response['AccessID'], $entry_cvs_response['AccessPass'], $request->order_id, Auth::user()->load('profile'));
+            ->execTranCVS($request->cvs_code, $entry_cvs_response['AccessID'], $entry_cvs_response['AccessPass'], $request->order_id, Auth::user()->load('profile'), DateFormatFacade::getPaymentTermDay($project->end_date));
         if (\Arr::has($exec_cvs_response, 'ErrCode')) {
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
         }
