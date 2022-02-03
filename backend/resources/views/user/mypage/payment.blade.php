@@ -27,6 +27,17 @@
                             <div>
                                 <span>オーダーID : </span>{{ $payment->paymentToken->order_id }}
                             </div>
+                            @if($payment->payment_way === 'cvs')
+                                <div>
+                                    <span>支払い先コンビニ : </span>{{ GMOCvsCode::fromValue($payment->convenience)->key }}
+                                </div>
+                                <div>
+                                    <span>受付番号 : </span>{{ $payment->receipt_no }}
+                                </div>
+                                <div>
+                                    <span>確認番号 : </span>{{ $payment->conf_no }}
+                                </div>
+                            @endif
                         </div>
                     </div>
 

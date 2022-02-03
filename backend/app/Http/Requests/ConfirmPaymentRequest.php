@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\GMOCvsCode;
 use App\Rules\Prefecture;
 use App\Models\Plan;
 use App\Rules\CheckPlanAmount;
@@ -35,6 +36,7 @@ class ConfirmPaymentRequest extends FormRequest
         return [
             'payment_way' => ['required', 'string'],
             'payment_method_id' => [Rule::requiredIf($request->payment_way === "credit")],
+            'cvs_code' => [Rule::requiredIf($request->payment_way === "cvs")],
             'plans' => ['required', new CheckPlanAmount($this)],
             'plans.*.quantity' => ['required', 'integer', 'max:2100000000'], /* NOTICE: データベースのint型の最大値2,147,483,647に合わせている */
             'total_amount' => ['required', 'integer'],
@@ -49,6 +51,7 @@ class ConfirmPaymentRequest extends FormRequest
             'prefecture' => ['required', 'string', new Prefecture()],
             'city' => ['required', 'string'],
             'block' => ['required', 'string'],
+            'block_number' => ['required', 'string'],
             'building' => ['nullable', 'string'],
             'birthday'  => ['required_with:birth_year,birth_month,birth_day', 'string', 'date_format:Y-m-d'],
             'birth_year'  => ['required_with:birth_month,birth_day', 'string'],

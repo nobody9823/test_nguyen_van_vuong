@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Actions\GMO\UpdatePaymentIsFinishedByCVS;
 use App\Actions\Notification\NotifyProjectFinished;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->call(new NotifyProjectFinished)->everyFifteenMinutes()->emailOutputOnFailure(config('mail.customer_support.address'));
+        $schedule->call(new UpdatePaymentIsFinishedByCVS)->daily()->emailOutputOnFailure(config('mail.customer_support.address'));
     }
 
     /**
