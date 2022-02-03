@@ -50,6 +50,8 @@ class RemittanceService
                     $response = $this->card_payment->searchTradeMulti($payment->paymentToken->order_id, 3);
                     if (!\Arr::has($response, 'ErrCode') && \Arr::has($response, 'Status')) {
                         $payment->setAttribute('gmo_job_cd', $response['Status']);
+                    } else {
+                        $payment->setAttribute('gmo_job_cd', 'DEFAULT');
                     }
                 }
             } else {
@@ -85,6 +87,8 @@ class RemittanceService
                     $response = $this->card_payment->searchTradeMulti($payment->paymentToken->order_id, 3);
                     if (!\Arr::has($response, 'ErrCode') && \Arr::has($response, 'Status')) {
                         $payment->setAttribute('gmo_job_cd', $response['Status']);
+                    } else {
+                        $payment->setAttribute('gmo_job_cd', 'DEFAULT');
                     }
                 }
             } else {
