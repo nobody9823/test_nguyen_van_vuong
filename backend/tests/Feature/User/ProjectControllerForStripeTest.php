@@ -83,7 +83,7 @@ class ProjectControllerForStripeTest extends TestCase
             'user_id' => $this->supporter->id,
             'price' => $this->plan->price,
             'message_status' => 'ステータスなし',
-            'payment_way' => 'Stripe',
+            'payment_api' => 'Stripe',
             'payment_is_finished' => false,
             'remarks' => 'test remarks'
         ])->create();
@@ -97,7 +97,7 @@ class ProjectControllerForStripeTest extends TestCase
             'user_id' => $this->supporter->id,
             'price' => $this->plan->price,
             'message_status' => 'ステータスなし',
-            'payment_way' => 'Stripe',
+            'payment_api' => 'Stripe',
             'payment_is_finished' => false,
             'remarks' => 'test remarks'
         ])->create();
