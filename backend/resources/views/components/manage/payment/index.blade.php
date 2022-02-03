@@ -137,17 +137,36 @@
                     @foreach($payments as $payment)
                     <tr>
                         <th scope="row">
+                            @if($payment->payment_way === 'credit')
                             <a href="{{ config('app.gmo_payment_detail_url') }}/{{ $payment->paymentToken->order_id }}/?page=1" target="_blank">
                                 {{ $payment->paymentToken->order_id }}
                             </a>
+                            @elseif($payment->payment_way === 'cvs')
+                            <a href="{{ config('app.gmo_cvs_payment_detail_url') }}/{{ $payment->paymentToken->order_id }}/?page=1" target="_blank">
+                                {{ $payment->paymentToken->order_id }}
+                            </a>
+                            @endif
                         </th>
                         <td>
                             <p class="text-nowrap
-                                {{ $payment->gmo_job_cd === 'AUTH' ? 'text-secondary' : '' }}
-                                {{ $payment->gmo_job_cd === 'SALES' ? 'text-success' : '' }}
-                                {{ ($payment->gmo_job_cd === 'VOID' || $payment->gmo_job_cd === 'RETURN' || $payment->gmo_job_cd === 'RETURNX' || $payment->gmo_job_cd === 'FAILED') ? 'text-danger' : '' }}
+                                {{ ($payment->gmo_job_cd === 'AUTH' || $payment->gmo_job_cd === 'REQSUCCESS') ? 'text-secondary' : '' }}
+                                {{ ($payment->gmo_job_cd === 'SALES' || ($payment->gmo_job_cd === 'PAYSUCCESS' && $payment->payment_is_finished)) ? 'text-success' : '' }}
+                                {{ ($payment->gmo_job_cd === 'VOID'
+                                    || $payment->gmo_job_cd === 'RETURN'
+                                    || $payment->gmo_job_cd === 'RETURNX'
+                                    || $payment->gmo_job_cd === 'FAILED'
+                                    || $payment->gmo_job_cd === 'EXPIRED'
+                                    || ($payment->gmo_job_cd === 'PAYSUCCESS' && !$payment->payment_is_finished)
+                                    || $payment->gmo_job_cd === 'CANCEL')
+                                        ? 'text-danger'
+                                        : ''
+                                }}
                             ">
-                                {{ PaymentJobCd::fromKey($payment->gmo_job_cd) }}
+                                @if($payment->payment_way === 'cvs' && $payment->gmo_job_cd === 'PAYSUCCESS' && !$payment->payment_is_finished)
+                                    メール送金で返金済み
+                                @else
+                                    {{ PaymentJobCd::fromKey($payment->gmo_job_cd) }}
+                                @endif
                             </p>
                         </td>
                         <td class="text-nowrap">
