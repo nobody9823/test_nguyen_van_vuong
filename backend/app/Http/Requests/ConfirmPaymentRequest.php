@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Enums\GMOCvsCode;
 use App\Rules\Prefecture;
 use App\Models\Plan;
+use App\Rules\CheckCVSTermDayIsBeforeToday;
 use App\Rules\CheckPlanAmount;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -34,7 +35,7 @@ class ConfirmPaymentRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
-            'payment_way' => ['required', 'string'],
+            'payment_way' => ['required', 'string', new CheckCVSTermDayIsBeforeToday($request->route()->parameter('project')->end_date)],
             'payment_method_id' => [Rule::requiredIf($request->payment_way === "credit")],
             'cvs_code' => [Rule::requiredIf($request->payment_way === "cvs")],
             'plans' => ['required', new CheckPlanAmount($this)],
