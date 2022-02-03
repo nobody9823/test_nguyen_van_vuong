@@ -101,7 +101,7 @@ class RemittanceService
         if ($payments->isNotEmpty()) {
             return [
                 'status' => true,
-                'message' => PaymentJobCd::getValues($condition) . '以外の決済が含まれています。',
+                'message' => PaymentJobCd::getValue($condition) . '以外の決済が含まれています。',
             ];
         }
         return [
