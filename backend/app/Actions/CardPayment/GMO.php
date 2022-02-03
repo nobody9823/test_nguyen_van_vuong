@@ -168,10 +168,11 @@ class GMO implements CardPaymentInterface
      * @param string
      * @param string
      * @param object
+     * @param int
      *
      * @return array
      */
-    public function execTranCVS(string $cvs_code, string $access_id, string $access_pass, string $order_id, object $user): array
+    public function execTranCVS(string $cvs_code, string $access_id, string $access_pass, string $order_id, object $user, int $cvs_term_day): array
     {
         $exec_response = Http::retry(5, 100)->asForm()->post(config('app.gmo_cvs_exec_payment_url'), [
             'AccessID' => $access_id,
@@ -181,6 +182,7 @@ class GMO implements CardPaymentInterface
             'CustomerName' => mb_convert_encoding($user->profile->last_name . $user->profile->first_name, "SJIS"),
             'CustomerKana' => mb_convert_encoding($user->profile->last_name_kana . $user->profile->first_name_kana, "SJIS"),
             'TelNo' => $user->profile->phone_number,
+            'PaymentTermDay' => $cvs_term_day,
             'MailAddress' => $user->email,
             'RegisterDisp1' => mb_convert_encoding('ファンリターン', "SJIS"),
             'ReceiptsDisp1' => mb_convert_encoding('ご利用ありがとうございました。', "SJIS"),

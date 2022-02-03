@@ -75,10 +75,11 @@ interface CardPaymentInterface
      * @param string
      * @param string
      * @param object
+     * @param int
      *
      * @return array
      */
-    public function execTranCVS(string $cvs_code, string $access_id, string $access_pass, string $order_id, object $user): array;
+    public function execTranCVS(string $cvs_code, string $access_id, string $access_pass, string $order_id, object $user, int $cvs_term_day): array;
 
     /**
      * Return result of refund convenience by GMO
