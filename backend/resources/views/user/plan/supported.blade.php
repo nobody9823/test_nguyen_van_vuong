@@ -96,6 +96,26 @@
                     {{ $payment->paymentToken->order_id }}<br>
                 </div>
             </div>
+            @if($payment->payment_way === 'cvs')
+            <div class="av_box">
+                <div class="av_tit">支払い先コンビニ</div>
+                <div class="av_txt">
+                    {{ GMOCvsCode::fromValue($exec_cvs_response['Convenience'])->key }}<br>
+                </div>
+            </div>
+            <div class="av_box">
+                <div class="av_tit">受付番号</div>
+                <div class="av_txt">
+                    {{ $exec_cvs_response['ReceiptNo'] }}<br>
+                </div>
+            </div>
+            <div class="av_box">
+                <div class="av_tit">確認番号</div>
+                <div class="av_txt">
+                    {{ $exec_cvs_response['ConfNo'] }}<br>
+                </div>
+            </div>
+            @endif
             <!--/av_box-->
 
 

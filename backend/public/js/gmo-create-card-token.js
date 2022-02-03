@@ -31,9 +31,14 @@ function execPurchase(response) {
 }
 
 function doPurchase() {
-    Multipayment.getToken({
-        cardno: cardno.value,
-        expire: `${expireyear.value}${expiremonth.value}`,
-        securitycode: securitycode.value,
-    }, execPurchase);
+    if (document.getElementById("tab1").checked) {
+        Multipayment.getToken({
+            cardno: cardno.value,
+            expire: `${expireyear.value}${expiremonth.value}`,
+            securitycode: securitycode.value,
+        }, execPurchase);
+    } else {
+        document.getElementById("payment_method_id").value = "";
+        document.getElementById("purchaseForm").submit();
+    }
 }

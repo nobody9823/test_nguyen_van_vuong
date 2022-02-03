@@ -19,15 +19,19 @@ class GMO implements CardPaymentInterface
      */
     public function entryTran(int $price, string $order_id): object
     {
-        $entry_response = Http::retry(5, 100)->post(config('app.gmo_entry_payment_url'), [
-            'shopID' => config('app.gmo_shop_id'),
-            'shopPass' => config('app.gmo_shop_pass'),
-            'orderID' => $order_id,
-            'jobCd' => 'AUTH',
-            'amount' => $price,
-        ]);
-
-        return $entry_response;
+        try {
+            $entry_response = Http::retry(5, 100)->post(config('app.gmo_entry_payment_url'), [
+                'shopID' => config('app.gmo_shop_id'),
+                'shopPass' => config('app.gmo_shop_pass'),
+                'orderID' => $order_id,
+                'jobCd' => 'AUTH',
+                'amount' => $price,
+            ]);
+            return $entry_response;
+        } catch (Exception $e) {
+            Log::alert($e->getMessage());
+            return response('決済処理に失敗しました。もう一度カード番号の入力とリターンを選択してください。', 400);
+        }
     }
 
     /**
@@ -65,16 +69,21 @@ class GMO implements CardPaymentInterface
      */
     public function refund(string $access_id, string $access_pass, int $price): object
     {
-        $response = Http::retry(5, 100)->post(config('app.gmo_alter_payment_url'), [
-            'shopID' => config('app.gmo_shop_id'),
-            'shopPass' => config('app.gmo_shop_pass'),
-            'accessID' => $access_id,
-            'accessPass' => $access_pass,
-            'jobCd' => 'CANCEL',
-            'amount' => $price,
-        ]);
+        try {
+            $response = Http::retry(5, 100)->post(config('app.gmo_alter_payment_url'), [
+                'shopID' => config('app.gmo_shop_id'),
+                'shopPass' => config('app.gmo_shop_pass'),
+                'accessID' => $access_id,
+                'accessPass' => $access_pass,
+                'jobCd' => 'CANCEL',
+                'amount' => $price,
+            ]);
 
-        return $response;
+            return $response;
+        } catch (Exception $e) {
+            Log::alert($e->getMessage());
+            return response('決済処理の取り消しに失敗しました。', 400);
+        }
     }
 
     /**
@@ -120,6 +129,135 @@ class GMO implements CardPaymentInterface
             Log::alert($e->getMessage());
             return response('決済検索に失敗しました。', 400);
         }
+    }
+
+    /**
+     * Return result of entryTran convenience by GMO
+     *
+     * @param int
+     * @param string
+     *
+     * @return array
+     */
+    public function entryTranCVS(int $price, string $order_id): array
+    {
+        $entry_response = Http::retry(5, 100)->asForm()->post(config('app.gmo_cvs_entry_payment_url'), [
+            'ShopID' => config('app.gmo_shop_id'),
+            'ShopPass' => config('app.gmo_shop_pass'),
+            'OrderID' => $order_id,
+            'Amount' => $price,
+        ]);
+
+        $processed_entry_response = collect(explode('&', $entry_response->body()))->mapWithKeys(function ($arr) {
+            $devided_arr = explode('=', $arr);
+            return [$devided_arr[0] => $devided_arr[1]];
+        })->toArray();
+
+        if (\Illuminate\Support\Arr::has($processed_entry_response, 'ErrCode')) {
+            Log::alert('コンビニ決済登録に失敗', $processed_entry_response);
+        }
+
+        return $processed_entry_response;
+    }
+
+    /**
+     * Return result of execTran convenience by GMO
+     *
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param object
+     *
+     * @return array
+     */
+    public function execTranCVS(string $cvs_code, string $access_id, string $access_pass, string $order_id, object $user): array
+    {
+        $exec_response = Http::retry(5, 100)->asForm()->post(config('app.gmo_cvs_exec_payment_url'), [
+            'AccessID' => $access_id,
+            'AccessPass' => $access_pass,
+            'OrderID' => $order_id,
+            'Convenience' => $cvs_code,
+            'CustomerName' => mb_convert_encoding($user->profile->last_name . $user->profile->first_name, "SJIS"),
+            'CustomerKana' => mb_convert_encoding($user->profile->last_name_kana . $user->profile->first_name_kana, "SJIS"),
+            'TelNo' => $user->profile->phone_number,
+            'MailAddress' => $user->email,
+            'RegisterDisp1' => mb_convert_encoding('ファンリターン', "SJIS"),
+            'ReceiptsDisp1' => mb_convert_encoding('ご利用ありがとうございました。', "SJIS"),
+            'ReceiptsDisp11' => mb_convert_encoding('株式会社ICH', "SJIS"),
+            'ReceiptsDisp12' => '03-3780-7194',
+            'ReceiptsDisp13' => '09:00-18:00',
+        ]);
+        $processed_exec_response = collect(explode('&', $exec_response->body()))->mapWithKeys(function ($arr) {
+            $devided_arr = explode('=', $arr);
+            return [$devided_arr[0] => $devided_arr[1]];
+        })->toArray();
+
+        if (\Illuminate\Support\Arr::has($processed_exec_response, 'ErrCode')) {
+            Log::alert('コンビニ決済実行に失敗', $processed_exec_response);
+        }
+
+        return $processed_exec_response;
+    }
+
+    /**
+     * Return result of refund convenience by GMO
+     *
+     * @param string
+     * @param string
+     * @param string
+     *
+     * @return array
+     */
+    public function refundCVS(string $access_id, string $access_pass, string $order_id): array
+    {
+        $refund_response = Http::retry(5, 100)->asForm()->post(config('app.gmo_cvs_refund_payment_url'), [
+            'ShopID' => config('app.gmo_shop_id'),
+            'ShopPass' => config('app.gmo_shop_pass'),
+            'AccessID' => $access_id,
+            'AccessPass' => $access_pass,
+            'OrderID' => $order_id,
+        ]);
+
+        $processed_refund_response = collect(explode('&', $refund_response->body()))->mapWithKeys(function ($arr) {
+            $devided_arr = explode('=', $arr);
+            return [$devided_arr[0] => $devided_arr[1]];
+        })->toArray();
+
+        if (\Illuminate\Support\Arr::has($processed_refund_response, 'ErrCode')) {
+            Log::alert('コンビニ決済支払い停止に失敗', $processed_refund_response);
+        }
+
+        return $processed_refund_response;
+    }
+
+    /**
+     * Return result of search multiPay trade by GMO
+     *
+     * @param string
+     * @param int
+     *
+     * @return array
+     */
+    public function searchTradeMulti(string $order_id, int $pay_type): array
+    {
+        $search_response = Http::retry(5, 100)->asForm()->post(config('app.gmo_multi_search_payment_url'), [
+            'ShopID' => config('app.gmo_shop_id'),
+            'ShopPass' => config('app.gmo_shop_pass'),
+            'OrderID' => $order_id,
+            'PayType' => $pay_type,
+        ]);
+
+        $processed_search_response = collect(explode('&', $search_response->body()))->mapWithKeys(function ($arr) {
+            $devided_arr = explode('=', $arr);
+            return [$devided_arr[0] => $devided_arr[1]];
+        })->toArray();
+
+        if (\Illuminate\Support\Arr::has($processed_search_response, 'ErrCode')) {
+            Log::alert('マルチペイメント決済検索に失敗', $processed_search_response);
+        }
+
+        return $processed_search_response;
     }
 
     /**
@@ -231,6 +369,64 @@ class GMO implements CardPaymentInterface
     public function searchRemittance(string $deposit_id): object
     {
         $response = Http::retry(5, 100)->post(config('app.gmo_search_remittance_url'), [
+            'Shop_ID' => config('app.gmo_pg_shop_id'),
+            'Shop_Pass' => config('app.gmo_pg_shop_pass'),
+            'Deposit_ID' => $deposit_id,
+        ]);
+
+        if (!\Illuminate\Support\Arr::has($response->json(), 'Deposit_ID')) {
+            Log::alert($response->body());
+            throw new Exception($response->body());
+        }
+
+        return $response;
+    }
+
+    /**
+     * mail remittance deposit as 'GMO'
+     *
+     * @param string
+     * @param string
+     * @param int
+     * @param int
+     * @param object
+     *
+     * @return object
+     */
+    public function mailRemittance(string $deposit_id, int $amount, int $method, object $user): object
+    {
+        $response = Http::retry(5, 100)->post(config('app.gmo_mail_remittance_deposit_url'), [
+            'Shop_ID' => config('app.gmo_pg_shop_id'),
+            'Shop_Pass' => config('app.gmo_pg_shop_pass'),
+            'Method' => $method,
+            'Deposit_ID' => $deposit_id,
+            'Amount' => $amount,
+            'Mail_Address' => $user->email,
+            'Expire' => 30,
+            'Auth_Code' => $user->profile->phone_number,
+            'Remit_Method_Bank' => 1,
+            'Remit_Method_Sevenatm' => 0,
+            'Remit_Method_Amazongift' => 0,
+        ]);
+
+        if (!\Illuminate\Support\Arr::has($response->json(), 'Deposit_ID')) {
+            Log::alert($response->body());
+            throw new Exception($response->body());
+        }
+
+        return $response;
+    }
+
+    /**
+     * mail search deposit as 'GMO'
+     *
+     * @param string
+     *
+     * @return object
+     */
+    public function mailSearchRemittance(string $deposit_id): object
+    {
+        $response = Http::retry(5, 100)->post(config('app.gmo_mail_search_remittance_url'), [
             'Shop_ID' => config('app.gmo_pg_shop_id'),
             'Shop_Pass' => config('app.gmo_pg_shop_pass'),
             'Deposit_ID' => $deposit_id,

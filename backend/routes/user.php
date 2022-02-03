@@ -29,6 +29,7 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::post('plan/confirmPayment', [ProjectController::class, 'confirmPayment'])->name('plan.confirmPayment');
     Route::get('plan/prepare_for_payment', [ProjectController::class, 'prepareForPayment'])->name('plan.prepare_for_payment');
     Route::get('plan/{payment_without_globalscope}/payment_for_credit', [ProjectController::class, 'paymentForCredit'])->name('plan.payment_for_credit');
+    Route::get('plan/{payment_without_globalscope}/payment_for_cvs', [ProjectController::class, 'paymentForCVS'])->name('plan.payment_for_cvs');
     Route::get('plan/{payment_without_globalscope}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
     Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
     Route::post('comment', [CommentController::class, 'store'])->name('comment.store')->middleware('project.released');
