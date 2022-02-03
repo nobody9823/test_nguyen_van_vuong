@@ -250,9 +250,9 @@ class ProjectController extends Controller
         }
 
         if ($validated_request['payment_way'] === 'credit') {
-            return redirect()->action([ProjectController::class, 'paymentForCredit'], ['project' => $project, 'payment_without_globalscope' => $payment]);
+            return redirect()->action([ProjectController::class, 'paymentForCredit'], ['project' => $project, 'payment_without_globalscope' => $payment, 'order_id' => UniqueToken::getToken()]);
         } else if ($validated_request['payment_way'] === 'cvs') {
-            return redirect()->action([ProjectController::class, 'paymentForCVS'], ['project' => $project, 'payment_without_globalscope' => $payment, 'cvs_code' => $validated_request['cvs_code']]);
+            return redirect()->action([ProjectController::class, 'paymentForCVS'], ['project' => $project, 'payment_without_globalscope' => $payment, 'cvs_code' => $validated_request['cvs_code'], 'order_id' => UniqueToken::getToken()]);
         }
         /**elseif ($validated_request['payment_way'] === 'paypay') {
             return redirect()->away($qr_code['data']['url']);
@@ -267,16 +267,15 @@ class ProjectController extends Controller
      *
      *@return \Illuminate\Http\Response
      */
-    public function paymentForCredit(Project $project, Payment $payment_without_globalscope)
+    public function paymentForCredit(Project $project, Payment $payment_without_globalscope, Request $request)
     {
-        $order_id = UniqueToken::getToken();
         $entry_response = $this->card_payment
-            ->entryTran($payment_without_globalscope->price, $order_id);
+            ->entryTran($payment_without_globalscope->price, $request->order_id);
         if ($entry_response->status() === 400) {
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors($entry_response->content());
         }
         $exec_response = $this->card_payment
-            ->execTran($payment_without_globalscope->paymentToken->order_id, $entry_response['accessID'], $entry_response['accessPass'], $order_id);
+            ->execTran($payment_without_globalscope->paymentToken->order_id, $entry_response['accessID'], $entry_response['accessPass'], $request->order_id);
         if ($exec_response->status() === 400) {
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors($exec_response->content());
         }
@@ -306,14 +305,13 @@ class ProjectController extends Controller
 
     public function paymentForCVS(Project $project, Payment $payment_without_globalscope, Request $request)
     {
-        $order_id = UniqueToken::getToken();
         $entry_cvs_response = $this->card_payment
-            ->entryTranCVS($payment_without_globalscope->price, $order_id);
+            ->entryTranCVS($payment_without_globalscope->price, $request->order_id);
         if (\Arr::has($entry_cvs_response, 'ErrCode')) {
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
         }
         $exec_cvs_response = $this->card_payment
-            ->execTranCVS($request->cvs_code, $entry_cvs_response['AccessID'], $entry_cvs_response['AccessPass'], $order_id, Auth::user()->load('profile'));
+            ->execTranCVS($request->cvs_code, $entry_cvs_response['AccessID'], $entry_cvs_response['AccessPass'], $request->order_id, Auth::user()->load('profile'));
         if (\Arr::has($exec_cvs_response, 'ErrCode')) {
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
         }
