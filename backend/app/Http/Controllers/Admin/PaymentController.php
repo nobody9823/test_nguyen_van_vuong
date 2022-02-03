@@ -81,6 +81,8 @@ class PaymentController extends Controller
                         $payment->setAttribute('convenience', $response['CvsCode']);
                         $payment->setAttribute('conf_no', $response['CvsConfNo']);
                         $payment->setAttribute('receipt_no', $response['CvsReceiptNo']);
+                    } else {
+                        $payment->setAttribute('gmo_job_cd', 'DEFAULT');
                     }
                 }
             } else {
