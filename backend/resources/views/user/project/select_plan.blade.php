@@ -492,7 +492,7 @@ window.onload = function(){
     <script>
         Multipayment.init('{{ config("app.gmo_shop_id") }}');
     </script>
-    <script src="{{ asset('/js/gmo-create-card-token.js') }}"></script>
+    <script src="{{ asset('/js/gmo-create-card-token.js') }}?20220203"></script>
 @endif
 
 @endsection
