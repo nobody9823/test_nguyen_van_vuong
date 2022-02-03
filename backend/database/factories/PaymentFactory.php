@@ -32,7 +32,7 @@ class PaymentFactory extends Factory
             'price' => $this->faker->numberBetween(100000, 500000),
             'message_status' => 'ステータスなし',
             'payment_api' => PaymentWay::getValues()[random_int(0, 2)],
-            'payment_way' => \Arr::random(['credit', 'cvs']),
+            'payment_way' => 'credit',
             'payment_is_finished' => $this->faker->boolean(50),
             'is_sent' => false,
             'remarks' => $this->faker->realText(100),
