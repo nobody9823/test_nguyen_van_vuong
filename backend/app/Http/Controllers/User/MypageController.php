@@ -42,7 +42,7 @@ class MypageController extends Controller
         $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project'])->paginate(1);
 
         $payments->map(function ($payment) {
-            if ($payment->payment_way === 'cvs') {
+            if ($payment->payment_api === 'GMO' && $payment->payment_way === 'cvs') {
                 $response = $this->card_payment->searchTradeMulti($payment->paymentToken->order_id, 3);
                 if (!\Arr::has($response, 'ErrCode')) {
                     $payment->setAttribute('convenience', $response['CvsCode']);
