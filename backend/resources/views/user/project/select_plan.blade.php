@@ -226,7 +226,7 @@
                                 </div>
                                 <div class="tab1_05">
                                     全国の主要なコンビニエンスストア（セブンイレブンを除く）でご利用いただけます。<br/>
-                                    <span style="color: red;">ご利用は、支援金額が30万円未満の場合で、支援日時が募集終了日の前日18時までに限られます。</span>
+                                    <span style="color: red;">ご利用は、支援金額が30万円未満の場合で、支援日時が募集終了日の2日前までに限られます。</span>
                                 </div>
                             </div><!--/tab_content-->
                             {{-- <div class="tab_content" id="tab3_content">
