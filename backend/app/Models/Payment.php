@@ -24,6 +24,7 @@ class Payment extends Model
         'price',
         'message_status',
         'payment_way',
+        'payment_api',
         'payment_is_finished',
         'is_sent',
         'remarks'
@@ -80,7 +81,7 @@ class Payment extends Model
     public function scopeNotGetUnderSuspensionProject($query)
     {
         return $query->whereIn('project_id', Project::select('id')
-                     ->where('release_status', '<>', ProjectReleaseStatus::getValue('UnderSuspension')));
+            ->where('release_status', '<>', ProjectReleaseStatus::getValue('UnderSuspension')));
     }
 
     public function scopeMessaging($query)

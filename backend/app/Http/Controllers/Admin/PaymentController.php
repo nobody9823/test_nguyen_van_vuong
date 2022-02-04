@@ -14,6 +14,7 @@ use DB;
 use Exception;
 use Illuminate\Support\Facades\Notification;
 use Log;
+use App\Traits\UniqueToken;
 
 class PaymentController extends Controller
 {
@@ -65,12 +66,24 @@ class PaymentController extends Controller
         }
 
         $payments->map(function ($payment) {
-            if ($payment->payment_way === 'GMO') {
-                $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
-                if ($response->status() === 200) {
-                    $payment->setAttribute('gmo_job_cd', $response['jobCd']);
-                } else {
-                    $payment->setAttribute('gmo_job_cd', 'FAILED');
+            if ($payment->payment_api === 'GMO') {
+                if ($payment->payment_way === 'credit') {
+                    $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
+                    if ($response->status() === 200) {
+                        $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+                    } else {
+                        $payment->setAttribute('gmo_job_cd', 'FAILED');
+                    }
+                } else if ($payment->payment_way === 'cvs') {
+                    $response = $this->card_payment->searchTradeMulti($payment->paymentToken->order_id, 3);
+                    if (!\Arr::has($response, 'ErrCode') && \Arr::has($response, 'Status')) {
+                        $payment->setAttribute('gmo_job_cd', $response['Status']);
+                        $payment->setAttribute('convenience', $response['CvsCode']);
+                        $payment->setAttribute('conf_no', $response['CvsConfNo']);
+                        $payment->setAttribute('receipt_no', $response['CvsReceiptNo']);
+                    } else {
+                        $payment->setAttribute('gmo_job_cd', 'DEFAULT');
+                    }
                 }
             } else {
                 $payment->setAttribute('gmo_job_cd', 'DEFAULT');
@@ -170,16 +183,27 @@ class PaymentController extends Controller
     public function alterCancel(AlterTranRequest $request)
     {
         $payments = Payment::find($request->payments);
-        $result = $this->remittance->IsExistsPaymentsJobCdConditions($payments, 'VOID');
+        $result = $this->remittance->IsExistsPaymentsJobCdConditions($payments, ['VOID', 'EXPIRED', 'CANCEL']);
         if ($result['status']) {
             return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
         }
         DB::beginTransaction();
         try {
             foreach ($payments as $payment) {
-                $payment->offsetUnset('gmo_job_cd');
-                $payment->update(['payment_is_finished' => false]);
-                $this->card_payment->refund($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
+                if ($payment->payment_way === 'credit') {
+                    $payment->offsetUnset('gmo_job_cd');
+                    $payment->update(['payment_is_finished' => false]);
+                    $this->card_payment->refund($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->price);
+                } else if ($payment->payment_way === 'cvs' && $payment->gmo_job_cd === 'PAYSUCCESS') {
+                    $payment->offsetUnset('gmo_job_cd');
+                    $payment->update(['payment_is_finished' => false]);
+                    $deposit_id = UniqueToken::getToken();
+                    $this->card_payment->mailRemittance($deposit_id, $payment->price, 1, $payment->user->load('profile'));
+                } else if ($payment->payment_way === 'cvs' && $payment->gmo_job_cd !== 'PAYSUCCESS') {
+                    $payment->offsetUnset('gmo_job_cd');
+                    $payment->update(['payment_is_finished' => false]);
+                    $this->card_payment->refundCVS($payment->paymentToken->access_id, $payment->paymentToken->access_pass, $payment->paymentToken->order_id);
+                }
             }
             DB::commit();
         } catch (Exception $e) {

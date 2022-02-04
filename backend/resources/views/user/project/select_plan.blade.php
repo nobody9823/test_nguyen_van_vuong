@@ -115,12 +115,12 @@
                     <div class="as_i_03_01">
 
                         <div class="tab_container">
-                            <input class="radio-fan" type="radio" id="tab1" name="payment_way" value="credit" checked>
-                            {{-- <input id="tab1" type="radio" name="tab_item" checked> --}}
+                            {{-- <input class="tab_item" type="radio" id="tab1" name="payment_way" value="credit" checked> --}}
+                            <input id="tab1" type="radio" name="payment_way" value="credit" checked>
                             <label class="tab_item" for="tab1">クレジットカード</label>
-                            {{-- <input id="tab2" type="radio" name="tab_item">
+                            <input id="tab2" type="radio" name="payment_way" value="cvs">
                             <label class="tab_item" for="tab2">コンビニ</label>
-                            <input id="tab3" type="radio" name="tab_item">
+                            {{-- <input id="tab3" type="radio" name="tab_item">
                             <label class="tab_item" for="tab3">銀行振込</label>
                             <input id="tab4" type="radio" name="tab_item">
                             <label class="tab_item" for="tab4">キャリア決済</label> --}}
@@ -201,12 +201,35 @@
                                 </div>
 
                             </div><!--/tab_content-->
-                            {{-- <div class="tab_content" id="tab2_content">
+
+                            {{-- コンビニ決済入力フォーム --}}
+                            <div class="tab_content" id="tab2_content">
                                 <div class="tab_content_description">
-                                <p class="c-txtsp">タブ2の内容</p>
+                                    <div class="tab1_01">
+                                        <div class="tab1_01_01">支払い先コンビニ名</div>
+                                        <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
+                                            <select name="cvs_code">
+                                                <option value="">ご利用するコンビニをお選びください</option>
+                                                <option value="10001">ローソン</option>
+                                                <option value="10002">ファミリーマート</option>
+                                                <option value="10005">ミニストップ</option>
+                                                <option value="10008">セイコーマート</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="creca_icon">
+                                    <img src="{{ asset('image/cvs-card_1.png') }}">
+                                    <img src="{{ asset('image/cvs-card_2.png') }}">
+                                    <img src="{{ asset('image/cvs-card_3.png') }}">
+                                    <img src="{{ asset('image/cvs-card_4.png') }}">
+                                </div>
+                                <div class="tab1_05">
+                                    全国の主要なコンビニエンスストア（セブンイレブンを除く）でご利用いただけます。<br/>
+                                    <span style="color: red;">ご利用は、支援金額が30万円未満の場合で、支援日時が募集終了日の前日18時までに限られます。</span>
                                 </div>
                             </div><!--/tab_content-->
-                            <div class="tab_content" id="tab3_content">
+                            {{-- <div class="tab_content" id="tab3_content">
                                 <div class="tab_content_description">
                                 <p class="c-txtsp">タブ3の内容</p>
                                 </div>
@@ -293,12 +316,12 @@
 
                     <div class="form_item_row">
                         <div class="form_item_tit">電話番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-                        <input type="number" name="phone_number" class="def_input_100p" value="{{ old('phone_number', optional($user->profile)->phone_number) }}">
+                        <input type="number" name="phone_number" class="def_input_100p" value="{{ old('phone_number', optional($user->profile)->phone_number) === '00000000000' ? '' : old('phone_number', optional($user->profile)->phone_number) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
                         <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('postal_code', optional($user->address)->postal_code) }}">
+                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('postal_code', optional($user->address)->postal_code) === '0' ? '' : old('postal_code', optional($user->address)->postal_code) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
@@ -319,8 +342,13 @@
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
-                        <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
+                        <div class="form_item_tit">町域<span class="hissu_txt">必須</span></div>
                         <input type="text" name="block" class="p-street-address def_input_100p"  value="{{ old('block', optional($user->address)->block) }}">
+                    </div><!--/form_item_row-->
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
+                        <input type="text" name="block_number" class="p-street-address def_input_100p"  value="{{ old('block_number', optional($user->address)->block_number) }}">
                     </div><!--/form_item_row-->
 
                     <div class="form_item_row">
@@ -464,18 +492,7 @@ window.onload = function(){
     <script>
         Multipayment.init('{{ config("app.gmo_shop_id") }}');
     </script>
-    <script src="{{ asset('/js/gmo-create-card-token.js') }}"></script>
+    <script src="{{ asset('/js/gmo-create-card-token.js') }}?20220203"></script>
 @endif
 
-<script>
-    const paypayIsChecked = () => {
-    let result = false;
-    document.getElementsByName('payment_way').forEach(function (e) {
-        if(e.value === 'paypay' && e.checked){
-            return result = true;
-        };
-    });
-    return result;
-}
-</script>
 @endsection

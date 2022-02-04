@@ -38,20 +38,33 @@ class RemittanceService
     public function IsExistsPaymentsJobCdConditions($payments, $condition)
     {
         $payments->map(function ($payment) {
-            if ($payment->payment_way === 'GMO') {
-                $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
-                $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+            if ($payment->payment_api === 'GMO') {
+                if ($payment->payment_way === 'credit') {
+                    $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
+                    if ($response->status() === 200) {
+                        $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+                    } else {
+                        $payment->setAttribute('gmo_job_cd', 'FAILED');
+                    }
+                } else if ($payment->payment_way === 'cvs') {
+                    $response = $this->card_payment->searchTradeMulti($payment->paymentToken->order_id, 3);
+                    if (!\Arr::has($response, 'ErrCode') && \Arr::has($response, 'Status')) {
+                        $payment->setAttribute('gmo_job_cd', $response['Status']);
+                    } else {
+                        $payment->setAttribute('gmo_job_cd', 'DEFAULT');
+                    }
+                }
             } else {
                 $payment->setAttribute('gmo_job_cd', 'DEFAULT');
             }
         });
         $payments = $payments->filter(function ($payment) use ($condition) {
-            return $payment->gmo_job_cd === $condition;
+            return \Str::contains($payment->gmo_job_cd, $condition);
         });
         if ($payments->isNotEmpty()) {
             return [
                 'status' => true,
-                'message' => PaymentJobCd::fromKey($condition) . '状態の決済が含まれています。',
+                'message' => PaymentJobCd::getValues($condition) . '状態の決済が含まれています。',
             ];
         }
         return [
@@ -62,20 +75,33 @@ class RemittanceService
     public function IsNotFilledPaymentsJobCdConditions($payments, $condition)
     {
         $payments->map(function ($payment) {
-            if ($payment->payment_way === 'GMO') {
-                $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
-                $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+            if ($payment->payment_api === 'GMO') {
+                if ($payment->payment_way === 'credit') {
+                    $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
+                    if ($response->status() === 200) {
+                        $payment->setAttribute('gmo_job_cd', $response['jobCd']);
+                    } else {
+                        $payment->setAttribute('gmo_job_cd', 'FAILED');
+                    }
+                } else if ($payment->payment_way === 'cvs') {
+                    $response = $this->card_payment->searchTradeMulti($payment->paymentToken->order_id, 3);
+                    if (!\Arr::has($response, 'ErrCode') && \Arr::has($response, 'Status')) {
+                        $payment->setAttribute('gmo_job_cd', $response['Status']);
+                    } else {
+                        $payment->setAttribute('gmo_job_cd', 'DEFAULT');
+                    }
+                }
             } else {
                 $payment->setAttribute('gmo_job_cd', 'DEFAULT');
             }
         });
         $payments = $payments->filter(function ($payment) use ($condition) {
-            return $payment->gmo_job_cd !== $condition;
+            return !\Str::contains($payment->gmo_job_cd, $condition);
         });
         if ($payments->isNotEmpty()) {
             return [
                 'status' => true,
-                'message' => PaymentJobCd::fromKey($condition) . '以外の決済が含まれています。',
+                'message' => PaymentJobCd::getValue($condition) . '以外の決済が含まれています。',
             ];
         }
         return [

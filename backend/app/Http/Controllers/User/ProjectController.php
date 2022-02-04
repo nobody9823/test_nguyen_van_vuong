@@ -25,6 +25,7 @@ use App\Models\ProjectTagTagging;
 use App\Models\UserProjectLiked;
 use Exception;
 use App\Notifications\PaymentNotification;
+use App\Services\Date\DateFormatFacade;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -227,7 +228,8 @@ class ProjectController extends Controller
                     'inviter_id' => !empty($validated_request['inviter_code']) && !empty($inviter) ? $inviter->id : null,
                     'price' => $validated_request['total_amount'],
                     'message_status' => "ステータスなし",
-                    'payment_way' => !empty($validated_request['payment_method_id']) ? $this->card_payment->getPaymentApiName() : 'PayPay',
+                    'payment_api' => $this->card_payment->getPaymentApiName(),
+                    'payment_way' => $validated_request['payment_way'],
                     'payment_is_finished' => false
                 ],
                 $request->all()
@@ -249,7 +251,9 @@ class ProjectController extends Controller
         }
 
         if ($validated_request['payment_way'] === 'credit') {
-            return redirect()->action([ProjectController::class, 'paymentForCredit'], ['project' => $project, 'payment_without_globalscope' => $payment]);
+            return redirect()->action([ProjectController::class, 'paymentForCredit'], ['project' => $project, 'payment_without_globalscope' => $payment, 'order_id' => UniqueToken::getToken()]);
+        } else if ($validated_request['payment_way'] === 'cvs') {
+            return redirect()->action([ProjectController::class, 'paymentForCVS'], ['project' => $project, 'payment_without_globalscope' => $payment, 'cvs_code' => $validated_request['cvs_code'], 'order_id' => UniqueToken::getToken()]);
         }
         /**elseif ($validated_request['payment_way'] === 'paypay') {
             return redirect()->away($qr_code['data']['url']);
@@ -264,13 +268,15 @@ class ProjectController extends Controller
      *
      *@return \Illuminate\Http\Response
      */
-    public function paymentForCredit(Project $project, Payment $payment_without_globalscope)
+    public function paymentForCredit(Project $project, Payment $payment_without_globalscope, Request $request)
     {
-        $order_id = UniqueToken::getToken();
         $entry_response = $this->card_payment
-            ->entryTran($payment_without_globalscope->price, $order_id);
+            ->entryTran($payment_without_globalscope->price, $request->order_id);
+        if ($entry_response->status() === 400) {
+            return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors($entry_response->content());
+        }
         $exec_response = $this->card_payment
-            ->execTran($payment_without_globalscope->paymentToken->order_id, $entry_response['accessID'], $entry_response['accessPass'], $order_id);
+            ->execTran($payment_without_globalscope->paymentToken->order_id, $entry_response['accessID'], $entry_response['accessPass'], $request->order_id);
         if ($exec_response->status() === 400) {
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors($exec_response->content());
         }
@@ -286,12 +292,50 @@ class ProjectController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            $this->card_payment->refund($entry_response['accessID'], $entry_response['accessPass'], $payment_without_globalscope->price);
-            throw $e;
+            Log::alert($e->getMessage());
+            $refund_response = $this->card_payment->refund($entry_response['accessID'], $entry_response['accessPass'], $payment_without_globalscope->price);
+            if ($refund_response->status() === 400) {
+                Log::alert($refund_response->content());
+            }
+            return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
         }
         $this->user->notify(new PaymentNotification($project, $payment_without_globalscope));
 
         return view('user.plan.supported', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice(), 'payment' => $payment_without_globalscope]);
+    }
+
+    public function paymentForCVS(Project $project, Payment $payment_without_globalscope, Request $request)
+    {
+        $entry_cvs_response = $this->card_payment
+            ->entryTranCVS($payment_without_globalscope->price, $request->order_id);
+        if (\Arr::has($entry_cvs_response, 'ErrCode')) {
+            return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
+        }
+        $exec_cvs_response = $this->card_payment
+            ->execTranCVS($request->cvs_code, $entry_cvs_response['AccessID'], $entry_cvs_response['AccessPass'], $request->order_id, Auth::user()->load('profile'), DateFormatFacade::getPaymentTermDay($project->end_date));
+        if (\Arr::has($exec_cvs_response, 'ErrCode')) {
+            return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
+        }
+        DB::beginTransaction();
+        try {
+            $payment_without_globalscope->decrementIncludedPlansQuantity();
+            $payment_without_globalscope->payment_is_finished = true;
+            $payment_without_globalscope->paymentToken->order_id = $exec_cvs_response['OrderID'];
+            $payment_without_globalscope->paymentToken->access_id = $entry_cvs_response['AccessID'];
+            $payment_without_globalscope->paymentToken->access_pass = $entry_cvs_response['AccessPass'];
+            $payment_without_globalscope->save();
+            $payment_without_globalscope->paymentToken->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::alert($e->getMessage());
+            $refund_response = $this->card_payment->refundCVS($entry_cvs_response['AccessID'], $entry_cvs_response['AccessPass'], $exec_cvs_response['OrderID']);
+            Log::alert($e->getMessage() . 'のrefund時の返却レスポンス', $refund_response);
+            return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
+        }
+        $this->user->notify(new PaymentNotification($project, $payment_without_globalscope));
+
+        return view('user.plan.supported', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice(), 'payment' => $payment_without_globalscope, 'exec_cvs_response' => $exec_cvs_response]);
     }
 
     public function paymentForPayPay(Project $project, Payment $payment_without_globalscope)

@@ -443,7 +443,7 @@ class ProjectController extends Controller
         if ($result['status']) {
             return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }
-        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($project->payments, 'SALES');
+        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($project->payments, ['SALES', 'PAYSUCCESS']);
         if ($result['status']) {
             return redirect()->action([ProjectController::class, 'index'], ['project' => $project->id])->withErrors($result['message']);
         }

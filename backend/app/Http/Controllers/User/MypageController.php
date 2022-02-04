@@ -41,6 +41,27 @@ class MypageController extends Controller
     {
         $payments = Auth::user()->payments->load(['includedPlans', 'includedPlans.project'])->paginate(1);
 
+        $payments->map(function ($payment) {
+            if ($payment->payment_api === 'GMO' && $payment->payment_way === 'cvs') {
+                $response = $this->card_payment->searchTradeMulti($payment->paymentToken->order_id, 3);
+                if (!\Arr::has($response, 'ErrCode')) {
+                    $payment->setAttribute('gmo_job_cd', $response['Status']);
+                    $payment->setAttribute('payment_term', $response['PaymentTerm']);
+                    $payment->setAttribute('finish_date', $response['FinishDate']);
+                    $payment->setAttribute('convenience', $response['CvsCode']);
+                    $payment->setAttribute('conf_no', $response['CvsConfNo']);
+                    $payment->setAttribute('receipt_no', $response['CvsReceiptNo']);
+                } else {
+                    $payment->setAttribute('gmo_job_cd', 'DEFAULT');
+                    $payment->setAttribute('payment_term', '---');
+                    $payment->setAttribute('finish_date', '---');
+                    $payment->setAttribute('convenience', 'Undefined');
+                    $payment->setAttribute('conf_no', '---');
+                    $payment->setAttribute('receipt_no', '---');
+                }
+            }
+        });
+
         $project = $payments->first() !== null ? $payments->first()->includedPlans()->first()->project->getLoadIncludedPaymentsCountAndSumPrice() : null;
         // FIXME 画面ができたら適用
         return view('user.mypage.payment', [

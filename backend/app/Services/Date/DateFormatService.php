@@ -17,7 +17,7 @@ class DateFormatService
     /**
      * check argument date is past
      *
-     * @param $date
+     * @param int $date
      *
      * @return boolean
      */
@@ -30,7 +30,7 @@ class DateFormatService
     /**
      * check argument date is feature
      *
-     * @param $date
+     * @param int $date
      *
      * @return boolean
      */
@@ -43,9 +43,9 @@ class DateFormatService
     /**
      * get diff compare with today
      *
-     * @param $date
+     * @param int $date
      *
-     * @return number
+     * @return string
      */
     public function getDiffCompareWithToday($date)
     {
@@ -53,11 +53,30 @@ class DateFormatService
         $diff = $this->today->diffInMinutes($date);
 
         if ($diff <= 60) {
-            return $this->today->diffInMinutes($date).'分';
+            return $this->today->diffInMinutes($date) . '分';
         } else if ($diff <= 1440) {
-            return $this->today->diffInHours($date).'時間';
+            return $this->today->diffInHours($date) . '時間';
         } else {
-            return $this->today->diffInDays($date).'日';
+            return $this->today->diffInDays($date) . '日';
+        }
+    }
+
+    /**
+     * get payment term day
+     *
+     * @param int $project_end_date
+     *
+     * @return int
+     */
+    public function getPaymentTermDay($project_end_date)
+    {
+        new Carbon($project_end_date);
+        $diff = $this->today->diffInDays($project_end_date);
+
+        if ($diff >= 30) {
+            return 30;
+        } else {
+            return $diff - 1;
         }
     }
 

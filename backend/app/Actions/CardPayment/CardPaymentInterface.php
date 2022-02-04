@@ -58,6 +58,51 @@ interface CardPaymentInterface
     public function searchTrade(string $order_id): object;
 
     /**
+     * Return result of entryTran convenience by GMO
+     *
+     * @param int
+     * @param string
+     *
+     * @return array
+     */
+    public function entryTranCVS(int $price, string $order_id): array;
+
+    /**
+     * Return result of execTran convenience by GMO
+     *
+     * @param string
+     * @param string
+     * @param string
+     * @param string
+     * @param object
+     * @param int
+     *
+     * @return array
+     */
+    public function execTranCVS(string $cvs_code, string $access_id, string $access_pass, string $order_id, object $user, int $cvs_term_day): array;
+
+    /**
+     * Return result of refund convenience by GMO
+     *
+     * @param string
+     * @param string
+     * @param string
+     *
+     * @return array
+     */
+    public function refundCVS(string $access_id, string $access_pass, string $order_id): array;
+
+    /**
+     * Return result of search multiPay trade by GMO
+     *
+     * @param string
+     * @param int
+     *
+     * @return array
+     */
+    public function searchTradeMulti(string $order_id, int $pay_type): array;
+
+    /**
      * Get bank account as 'GMO'
      *
      * @return string
@@ -116,4 +161,26 @@ interface CardPaymentInterface
      * @return object
      */
     public function searchRemittance(string $deposit_id): object;
+
+    /**
+     * mail remittance deposit as 'GMO'
+     *
+     * @param string
+     * @param string
+     * @param int
+     * @param int
+     * @param object
+     *
+     * @return object
+     */
+    public function mailRemittance(string $deposit_id, int $amount, int $method, object $user): object;
+
+    /**
+     * mail search deposit as 'GMO'
+     *
+     * @param string
+     *
+     * @return object
+     */
+    public function mailSearchRemittance(string $deposit_id): object;
 }
