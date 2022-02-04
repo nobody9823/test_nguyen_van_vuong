@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->call(new NotifyProjectFinished)->everyFifteenMinutes()->emailOutputOnFailure(config('mail.customer_support.address'));
-        $schedule->call(new UpdatePaymentIsFinishedByCVS)->dailyAt('12:00')->emailOutputOnFailure(config('mail.customer_support.address'));
+        $schedule->call(new UpdatePaymentIsFinishedByCVS)->everyMinute()->emailOutputOnFailure(config('mail.customer_support.address'));
     }
 
     /**
