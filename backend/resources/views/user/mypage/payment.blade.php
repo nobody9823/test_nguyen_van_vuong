@@ -27,7 +27,26 @@
                             <div>
                                 <span>オーダーID : </span>{{ $payment->paymentToken->order_id }}
                             </div>
-                            @if($payment->payment_way === 'cvs')
+                        </div>
+                    </div>
+                    @if($payment->payment_way === 'cvs')
+                        <div class="su_pr_02">
+                            @if($payment->gmo_job_cd === 'EXPIRED')
+                            <div class="su_pr_02_04 payment_history_expired_label">
+                                <div>
+                                    <span>※支払い期限までに支払いが行われなかったため、こちらの決済はキャンセルとなりました。</span>
+                                </div>
+                            </div>
+                            @endif
+                            <div class="su_pr_02_04 {{ $payment->gmo_job_cd === 'EXPIRED' ? 'payment_history_expired_label' : '' }}">
+                                <div>
+                                    <span>支払い期限 : </span>{{ new Carbon\Carbon($payment->payment_term) }}
+                                </div>
+                                <div>
+                                    <span>入金確定日 : </span>{{ $payment->finish_date ? new Carbon\Carbon($payment->finish_date) : '' }}
+                                </div>
+                            </div>
+                            <div class="su_pr_02_04 m_b_1510 {{ $payment->gmo_job_cd === 'EXPIRED' ? 'payment_history_expired_label' : '' }}">
                                 <div>
                                     <span>支払い先コンビニ : </span>{{ GMOCvsCode::fromValue($payment->convenience)->key }}
                                 </div>
@@ -37,9 +56,9 @@
                                 <div>
                                     <span>確認番号 : </span>{{ $payment->conf_no }}
                                 </div>
-                            @endif
+                            </div>
                         </div>
-                    </div>
+                        @endif
 
                     <div class="su_pr_02">
                         <div class="m_b_1510">
