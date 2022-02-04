@@ -3399,3 +3399,8 @@ border-radius: 9px; display: flex; justify-content: center; align-items: center;
 .chat_group_title_to_influencer {
     color: #f8d32d;
 }
+
+.payment_history_expired_label {
+    background: #e65d65;
+    color: #ddd;
+}

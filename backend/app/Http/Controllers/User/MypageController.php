@@ -45,9 +45,19 @@ class MypageController extends Controller
             if ($payment->payment_api === 'GMO' && $payment->payment_way === 'cvs') {
                 $response = $this->card_payment->searchTradeMulti($payment->paymentToken->order_id, 3);
                 if (!\Arr::has($response, 'ErrCode')) {
+                    $payment->setAttribute('gmo_job_cd', $response['Status']);
+                    $payment->setAttribute('payment_term', $response['PaymentTerm']);
+                    $payment->setAttribute('finish_date', $response['FinishDate']);
                     $payment->setAttribute('convenience', $response['CvsCode']);
                     $payment->setAttribute('conf_no', $response['CvsConfNo']);
                     $payment->setAttribute('receipt_no', $response['CvsReceiptNo']);
+                } else {
+                    $payment->setAttribute('gmo_job_cd', 'DEFAULT');
+                    $payment->setAttribute('payment_term', '---');
+                    $payment->setAttribute('finish_date', '---');
+                    $payment->setAttribute('convenience', 'Undefined');
+                    $payment->setAttribute('conf_no', '---');
+                    $payment->setAttribute('receipt_no', '---');
                 }
             }
         });

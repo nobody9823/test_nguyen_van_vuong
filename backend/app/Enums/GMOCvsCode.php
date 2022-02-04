@@ -11,6 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class GMOCvsCode extends Enum
 {
+    const Undefined = '---';
     const Lawson = '10001';
     const FamilyMart = '10002';
     const MiniStop = '10005';
