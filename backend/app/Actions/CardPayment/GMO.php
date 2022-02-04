@@ -406,6 +406,7 @@ class GMO implements CardPaymentInterface
             'Mail_Address' => $user->email,
             'Expire' => 30,
             'Auth_Code' => $user->profile->phone_number,
+            'Mail_Template_Number' => 1,
             'Remit_Method_Bank' => 1,
             'Remit_Method_Sevenatm' => 0,
             'Remit_Method_Amazongift' => 0,
