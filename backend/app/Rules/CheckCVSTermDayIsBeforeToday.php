@@ -28,6 +28,8 @@ class CheckCVSTermDayIsBeforeToday implements Rule
     {
         if ($value === 'cvs') {
             return DateFormatFacade::getPaymentTermDay($this->project_end_date) > 0;
+        } else {
+            return true;
         }
     }
 
