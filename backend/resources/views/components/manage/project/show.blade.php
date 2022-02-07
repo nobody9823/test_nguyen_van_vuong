@@ -132,7 +132,7 @@
                                         <h3 class="font-weight-bold mb-4">{{ $project->title }}</h3>
                                         <div class="row">
                                             <div class="col-sm-8">
-                                                <h3>掲載タレント : </h3>
+                                                <h3>掲載者 : </h3>
                                                 <h5 class="mb-3">{{ $project->user->name }}</h5>
                                                 <h3>自己紹介・挨拶(30文字) : </h3>
                                                 <h5 class="mb-3">{{ Str::limit($project->greeting_and_introduce) }}</h5>
@@ -146,7 +146,7 @@
                                             <div class="col-sm-4">
                                                 <h3>目標金額 : </h3>
                                                 <h5 class="mb-3">
-                                                    {{ number_format($project->target_number) }}人
+                                                    {{ number_format($project->target_number) }}円
                                                 </h5>
                                                 <h3>募集方式 : </h3>
                                                 <h5 class="mb-3">{{ $project->funded_type }}</h5>
@@ -208,7 +208,7 @@
                                                 </li>
                                                 <li class="list-group-item">
                                                     <h6 class="font-weight-bold mb-2">お返し予定日</h6>
-                                                    {{ $plan->estimated_return_date }}
+                                                    {{ $plan->delivery_date->format('Y年m月') }}末までにお届け予定
                                                 </li>
                                             </ul>
                                         </div>
