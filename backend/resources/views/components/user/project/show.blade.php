@@ -136,12 +136,16 @@
                             <div class="pds_sec01_R_btn01_wrapper">
                                 @if ($project->user->snsLink->twitter_url)
                                 <div class="project_sns_icon">
-                                    <a href="{{ $project->user->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
+                                    <a href="{{ $project->user->snsLink->twitter_url }}" id="unpreview">
+                                        <img src="{{ asset('image/twitter.png') }}" alt="">
+                                    </a>
                                 </div>
                                 @endif
                                 @if ($project->user->snsLink->instagram_url)
                                 <div class="project_sns_icon">
-                                    <a href="{{ $project->user->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
+                                    <a href="{{ $project->user->snsLink->instagram_url }}" id="unpreview">
+                                        <img src="{{ asset('image/instagram.png') }}" alt="">
+                                    </a>
                                 </div>
                                 @endif
                                 @if ($project->user->snsLink->youtube_url)
@@ -151,12 +155,16 @@
                                 @endif
                                 @if ($project->user->snsLink->tiktok_url)
                                 <div class="project_sns_icon">
-                                    <a href="{{ $project->user->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
+                                    <a href="{{ $project->user->snsLink->tiktok_url }}" id="unpreview">
+                                        <img src="{{ asset('image/tiktok.png') }}" alt="">
+                                    </a>
                                 </div>
                                 @endif
                                 @if ($project->user->snsLink->other_url)
                                 <div class="project_sns_icon">
-                                    <a href="{{ $project->user->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
+                                    <a href="{{ $project->user->snsLink->other_url }}" id="unpreview">
+                                        <img src="{{ asset('image/other_sns.png') }}" alt="">
+                                    </a>
                                 </div>
                                 @endif
                             </div>
