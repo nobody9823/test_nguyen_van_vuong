@@ -4,5 +4,5 @@ jQuery( function ($) {
     $('input').css('pointer-events', 'none');
     $('img').css('pointer-events', 'none');
     $('h2').css('pointer-events', 'none');
-    $('#ableToClick').css('pointer-events', 'auto');
+    $('.ableToClick').css('pointer-events', 'auto');
 });
