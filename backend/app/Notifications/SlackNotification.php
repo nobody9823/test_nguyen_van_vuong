@@ -48,15 +48,15 @@ class SlackNotification extends Notification
         $message = $this->message;
 
         $info = (new SlackMessage)
-                    ->from($this->name)
-                    ->to('z_guardian_notifications');
+            ->from($this->name)
+            ->to('通知専用');
 
-        if (!is_null($this->message) && is_string($this->message)){
-            $info->attachment(function(SlackAttachment $attachment) use ($message){
+        if (!is_null($this->message) && is_string($this->message)) {
+            $info->attachment(function (SlackAttachment $attachment) use ($message) {
                 $attachment->content($message);
             });
-        } elseif (!is_null($this->message) && ($this->message instanceof Throwable)){
-            $info->attachment(function(SlackAttachment $attachment) use ($message){
+        } elseif (!is_null($this->message) && ($this->message instanceof Throwable)) {
+            $info->attachment(function (SlackAttachment $attachment) use ($message) {
                 $attachment
                     ->title(get_class($message))
                     ->content($message->getMessage());
