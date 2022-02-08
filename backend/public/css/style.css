@@ -2035,9 +2035,14 @@ width: 100%;
 	}
 }
 .about__title {
-	font-size: 18px;
+	font-size: 28px;
 	font-weight: bold;
 	color: #00aebd;
+}
+@media screen and (min-width: 768px){
+	.about__title {
+        font-size: 30px;
+	}
 }
 
 .about__date {
@@ -2055,11 +2060,13 @@ width: 100%;
 }
 
 .about__img-wrapper {
+    display: flex;
+}
+.about__img-wrapper img {
 	width: 185px;
-	margin: 0 auto;
 }
 @media screen and (min-width: 768px){
-	.about__img-wrapper {
+	.about__img-wrapper img {
 		width: 270px;
 	}
 }
@@ -2091,6 +2098,105 @@ width: 100%;
 .about__text--url,
 .about__text--url a {
 	color: #1c81d8;
+}
+
+.about-item__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+@media screen and (min-width: 768px){
+	.about-item__wrapper {
+        align-items: center;
+        width: 80%;
+	}
+}
+
+.about-description__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.about-description__wrapper div {
+    width: 100%;
+    text-align: center;
+    margin: 15px;
+}
+
+.about-description__img-wrapper {
+    height: 200px;
+    text-align: center;
+}
+.about-description__img-wrapper img {
+    height: 100%;
+    object-fit: contain;
+}
+
+.about-expenses__wrapper {
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.about-expenses__img-wrapper {
+    width: 33%;
+}
+
+.about-expenses__img-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.about-publication__wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.about-publication__img-wrapper {
+    width: 100%;
+    margin: 15px 0;
+}
+
+.about-publication__img-wrapper img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+}
+
+@media screen and (min-width: 768px){
+    .about-publication__img-wrapper {
+        width: 50%;
+    }
+}
+
+.about-moneyflow {
+	margin-top: 30px;
+}
+@media screen and (min-width: 768px){
+	.about-moneyflow {
+		margin-top: 0;
+	}
+}
+
+.about-moneyflow__wrapper {
+    margin: 50px 0;
+}
+
+.about-lastmessage {
+    margin-top: 30px;
+}
+@media screen and (min-width: 768px){
+	.about-lastmessage {
+		margin-top: 0;
+	}
+}
+
+.abount-lastmessage__signature {
+    text-align: right;
 }
 
 .about-fanreturn__list {
@@ -2181,12 +2287,14 @@ width: 100%;
 	text-align: center;
 	margin: 30px 0 20px;
 }
-
+@media screen and (min-width: 376px){
+	.about__sub-title {
+		font-size: 22px;
+	}
+}
 @media screen and (min-width: 768px){
 	.about__sub-title {
-		line-height: 1.2;
-		text-align-last: left;
-		margin: 30px 0 50px;
+		font-size: 30px;
 	}
 }
 
