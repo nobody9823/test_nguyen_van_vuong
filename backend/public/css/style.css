@@ -40,6 +40,9 @@ input, select {
 	margin: 0 auto;
 	padding: 0 14px;
 }
+.js-question-sidebar__list {
+    display: none;
+}
 
 @media screen and (min-width: 768px){
 	.inner {
