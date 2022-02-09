@@ -57,87 +57,88 @@
     <main class="question-main">
 
         <section class="about">
-            <h2 class="about__title">FanReturnとは</h2>
-            <time class="about__date" datetime="2021-06-08">2021.6.8</time>
-            <p class="about__img-wrapper"><img src="{{ asset('image/logo-color.svg') }}" alt="FanReturn"></p>
-            <p class="about__text sp-text-center">イベントを開きたい…<br class="is-sp">オリジナルグッズを作りたい…<br>そんな“やりたい”を叶える<br class="is-sp">クラウドファンディングサービスです。</p>
-            <ul class="about-fanreturn__list">
-                <li class="about-fanreturn__item">
-                    <p class="about-fanreturn__item__text">オリジナルTシャツを<br>作りたい！</p>
-                    <img class="about-fanreturn__img" src="{{ asset('image/about-shirt.svg') }}" alt="オリジナルTシャツを作りたい！">
-                </li><!-- /.about-fanreturn__item -->
-                <li class="about-fanreturn__item">
-                    <p class="about-fanreturn__item__text">ファンイベントを<br>開きたい！</p>
-                    <img class="about-fanreturn__img" src="{{ asset('image/about-event.svg') }}" alt="ファンイベントを開きたい！">
-                </li><!-- /.about-fanreturn__item -->
-                <li class="about-fanreturn__item">
-                    <p class="about-fanreturn__item__text">写真集を<br>だしたい！</p>
-                    <img class="about-fanreturn__img is-pc" src="{{ asset('image/about-book.svg') }}" alt="写真集をだしたい！">
-                    <img class="about-fanreturn__img is-sp" src="{{ asset('image/about-book-sp.svg') }}" alt="写真集をだしたい！">
-                </li><!-- /.about-fanreturn__item -->
-                <li class="about-fanreturn__item">
-                    <p class="about-fanreturn__item__text">コンサートを<br>開きたい！</p>
-                    <img class="about-fanreturn__img is-pc" src="{{ asset('image/about-mike.svg') }}" alt="コンサートを開きたい！">
-                    <img class="about-fanreturn__img is-sp" src="{{ asset('image/about-mike-sp.svg') }}" alt="コンサートを開きたい！">
-                </li><!-- /.about-fanreturn__item -->
-                <li class="about-fanreturn__item">
-                    <p class="about-fanreturn__item__text">楽曲やMVの<br>制作をしたい！</p>
-                    <img class="about-fanreturn__img is-pc" src="{{ asset('image/about-music.svg') }}" alt="楽曲やMVの制作をしたい！">
-                    <img class="about-fanreturn__img is-sp" src="{{ asset('image/about-music-sp.svg') }}" alt="楽曲やMVの制作をしたい！">
-                </li><!-- /.about-fanreturn__item -->
-                <li class="about-fanreturn__item">
-                    <p class="about-fanreturn__item__text">マグカップを<br>作りたい！</p>
-                    <img class="about-fanreturn__img is-pc" src="{{ asset('image/about-teacup.svg') }}" alt="マグカップを作りたい！">
-                    <img class="about-fanreturn__img is-sp" src="{{ asset('image/about-teacup-sp.svg') }}" alt="マグカップを作りたい！">
-                </li><!-- /.about-fanreturn__item -->
-                <li class="about-fanreturn__item">
-                    <p class="about-fanreturn__item__text">オンライン教室<br>を開きたい！</p>
-                    <img class="about-fanreturn__img" src="{{ asset('image/about-smartPhone.svg') }}" alt="オンライン教室を開きたい！">
-                </li><!-- /.about-fanreturn__item -->
-                <li class="about-fanreturn__item">
-                    <p class="about-fanreturn__item__text">オリジナルブランド<br>を作りたい！</p>
-                    <img class="about-fanreturn__img" src="{{ asset('image/about-highHeels.svg') }}" alt="オリジナルブランドを作りたい！">
-                </li><!-- /.about-fanreturn__item -->
-            </ul><!-- /.about-fanreturn__list -->
-            <h3 class="about__sub-title">事前予約制のため、<br class="is-sp">リスクなく実施することが可能です。</h3>
-            <p class="about__text">また、FanReturnという名の通り、インフルエンサーがもっとも大事にするファンへの特別なリターンの仕組みを用意しています。それが「プロジェクトサポーター（PS）」です。</p>
-            <p class="about__text">インフルエンサーのプロジェクトをファンが拡散すればするほど、ファンはインフルエンサーから特別なリターンがもらえるというサービスです。</p>
-            <p class="about__text">インフルエンサーにとってもファンにとってもメリットのあるPSの仕組みは、より強固なWIN-WINの関係を築くことができます。PSは他のクラウドファンディングにはありません。<br>インフルエンサーに特化したFanReturnだからこそできるサービスです。</p>
-            <p class="about__text about__text--url"><a href="#ps_supporter_description"><i class="fas fa-link"></i> 詳しくは「プロジェクトサポーター（PS）とは」をご覧ください。</a></p>
-            <p class="about__text">「イベントを開きたい」「オリジナルグッズを作りたい」、でもどのくらい人が集まるか不安、金銭面が不安と悩んでいるインフルエンサーの皆さま、ぜひFanReturnをご活用ください。</p>
-            <p class="about__text about-with-fanreturn__title">FanReturnを使えば…</p>
-            <ul class="about-with-fanreturn__list">
-                <li class="about-with-fanreturn__item">
-                    <p class="about-with-fanreturn__text">夢への加速度UP！</p>
-                </li><!--/.about-with-fanreturn__item -->
-                <li class="about-with-fanreturn__item">
-                    <p class="about-with-fanreturn__text">ファンの満足度UP！</p>
-                </li><!--/.about-with-fanreturn__item -->
-                <li class="about-with-fanreturn__item">
-                    <p class="about-with-fanreturn__text">新規ファン獲得！</p>
-                </li><!--/.about-with-fanreturn__item -->
-                <li class="about-with-fanreturn__item">
-                    <p class="about-with-fanreturn__text">ファンと共にやりたいことを形にできる！</p>
-                </li><!--/.about-with-fanreturn__item -->
-                <li class="about-with-fanreturn__item">
-                    <p class="about-with-fanreturn__text">安定したインフルエンサー活動ができる！</p>
-                </li><!--/.about-with-fanreturn__item -->
-            </ul><!-- /.about-with-fanreturn__list -->
+            <h2 class="about-project__title">ABOUT</h2><!-- /.about-project__title -->
+            <h3 class="about-project__sub-title">FanReturnとは</h3>
+            <div class="about-item__wrapper">
+                <div class="about-description__wrapper">
+                    <div class="about-description__img-wrapper">
+                        <img src="{{ asset('image/description_2_1.png') }}" alt="芸能人やインフルエンサーと企業・メディア・クリエイターをマッチング">
+                    </div>
+                    <div class="ps_description_title">
+                        <p>芸能人やインフルエンサーと<br/>企業・メディア・クリエイターをマッチング</p>
+                    </div>
+                </div>
+                <span class="about-project__down-arrow"><i class="fas fa-caret-down"></i></span>
+                <div class="about-description__wrapper">
+                    <div class="about-description__img-wrapper">
+                        <img src="{{ asset('image/description_2_2.png') }}" alt="クラウドファンディングによってファンと共に夢を叶える">
+                    </div>
+                    <div class="ps_description_title">
+                        <p>クラウドファンディングによってファンと共に夢を叶える</p>
+                    </div>
+                </div>
+            </div>
+            <!-- /.about-fanreturn__list -->
+            <h3 class="about__sub-title">継続的かつ発展的な芸能活動を実現！</h3>
+            <div class="about-expenses__wrapper">
+                <div class="about-expenses__img-wrapper">
+                    <img src="{{ asset('image/description_3_1.png') }}" alt="マッチング費用無料">
+                </div>
+                <div class="about-expenses__img-wrapper">
+                    <img src="{{ asset('image/description_3_2.png') }}" alt="マッチング費用無料">
+                </div>
+                <div class="about-expenses__img-wrapper">
+                    <img src="{{ asset('image/description_3_3.png') }}" alt="マッチング費用無料">
+                </div>
+            </div>
+            <!-- /.about-with-fanreturn__list -->
         </section>
 
         <section class="about-project">
-            <h2 class="about-project__title">PROJECT</h2><!-- /.about-project__title -->
+            <h2 class="about-project__title">PROJECT FLOW</h2><!-- /.about-project__title -->
             <h3 class="about-project__sub-title">プロジェクト実施の流れ</h3>
-            <p class="about-project__txt"><span>01</span>プロジェクト内容の打ち合わせ</p>
-            <span class="about-project__down-arrow"><i class="fas fa-caret-down"></i></span>
-            <p class="about-project__txt"><span>02</span>プロジェクト内容&リターン内容の入力</p>
-            <span class="about-project__down-arrow"><i class="fas fa-caret-down"></i></span>
-            <p class="about-project__txt"><span>03</span>目標金額を設定</p>
-            <span class="about-project__down-arrow"><i class="fas fa-caret-down"></i></span>
-            <p class="about-project__txt"><span>04</span>プロジェクトをスタート</p>
-            <span class="about-project__down-arrow"><i class="fas fa-caret-down"></i></span>
-            <p class="about-project__txt"><span>05</span>プロジェクトリターンの実施</p>
+            <div class="about-publication__wrapper">
+                <div class="about-publication__img-wrapper">
+                    <img src="{{ asset('image/description_10_1.png') }}" alt="企業・メディア・クリエイターのエントリーページを作成">
+                </div>
+                <div class="about-publication__img-wrapper">
+                    <img src="{{ asset('image/description_10_2.png') }}" alt="芸能人・インフルエンサーがエントリー">
+                </div>
+                <div class="about-publication__img-wrapper">
+                    <img src="{{ asset('image/description_10_3.png') }}" alt="インフルエンサー選定後、FanReturn担当者を含めて打ち合わせクラウドファンディングを立ち上げる">
+                </div>
+                <div class="about-publication__img-wrapper">
+                    <img src="{{ asset('image/description_10_4.png') }}" alt="目標達成後、プロジェクトとファンへのリターン実施">
+                </div>
+            </div>
         </section><!-- /.about-project -->
+
+        <section class="abount-moneyflow">
+            <div class="about-moneyflow__wrapper">
+                <h2 class="about-project__title">AMOUNT FLOW</h2><!-- /.about-project__title -->
+                <h3 class="about-project__sub-title">お金の流れ</h3>
+                <img id="aboutMoneyFlowImage" src="" alt="">
+            </div>
+        </section><!-- /.about-moneyflow -->
+
+        <section class="abount-lastmessage">
+            <div class="about-moneyflow__wrapper">
+                <h2 class="about-project__title">LAST MESSAGE</h2><!-- /.about-project__title -->
+                <h3 class="about-project__sub-title">最後に</h3>
+                <div>
+                    <p class="about__text">
+                        人気になる前の過程の段階で、現実的な経済面の厳しさや、継続する環境がつくれない、発展的な活動が見い出せないという理由で、夢を諦めていくタレントを五万と見てきました。
+                    </p>
+                    <p class="about__text">
+                        売れるに正解はありません。しかし、売れないに正解はあります。それは途中で諦めてしまうことです。
+                    </p>
+                    <p class="about__text">
+                        FanReturnは、より多くの方に継続的かつ発展的な芸能活動の支援ができるよう精進してまいります。
+                    </p>
+                    <p class="about__text abount-lastmessage__signature">FanReturnスタッフ一同</p>
+                </div>
+            </div>
+        </section><!-- /.about-lastmessage -->
 
         <section id="ps_supporter_description" class="about-project-supporter">
             <h2 class="about-project-supporter__title">PROJECT SUPPORTER</h2><!-- /.about-project-supporter__title -->
@@ -153,6 +154,14 @@
 
 @section('script')
 <script>
+let wideAboutMoneyImage = "{{ asset('image/description_18_1.png') }}";
+let narrowAboutMoneyImage = "{{ asset('image/description_18_2.png') }}";
+let aboutMoneyFlowImage = document.getElementById('aboutMoneyFlowImage');
+if (window.innerWidth < 768) {
+    aboutMoneyFlowImage.src = narrowAboutMoneyImage;
+} else {
+    aboutMoneyFlowImage.src = wideAboutMoneyImage;
+}
 $(function(){
     $(".js-question-sidebar__title").on("click", function() {
         $(".js-question-sidebar__list").slideToggle();
