@@ -13,7 +13,7 @@
 
 <ol class="breadcrumb inner" itemscope itemtype="https://schema.org/BreadcrumbList">
     <li class="breadcrumb__list" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a class="breadcrumb__text" itemprop="item" href="ホームのURL">
+        <a class="breadcrumb__text" itemprop="item" href="#">
             <span itemprop="name">FanReturn ヘルプ</span>
         </a>
         <meta itemprop="position" content="1" />
