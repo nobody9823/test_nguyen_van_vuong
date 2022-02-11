@@ -38,7 +38,11 @@
                 </div><!--/pds_sec01_tag-->
 
                 <div class="pds_sec01_L">
-                    <div class="pds_sec01_slider {{ $project->projectFiles->count() === 1 ? 'slider-img-wrapper' : '' }}">
+                    <div class=
+                            "pds_sec01_slider
+                            ableToClick
+                            {{ $project->projectFiles->count() === 1 ? 'slider-img-wrapper' : '' }}"
+                    >
                         <ul id="slider">
                             @foreach($project->projectFiles as $project_file)
                                 @if($project_file->file_content_type === 'image_url')
