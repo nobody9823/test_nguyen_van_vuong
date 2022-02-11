@@ -38,7 +38,11 @@
                 </div><!--/pds_sec01_tag-->
 
                 <div class="pds_sec01_L">
-                    <div class="pds_sec01_slider {{ $project->projectFiles->count() === 1 ? 'slider-img-wrapper' : '' }}">
+                    <div class=
+                            "pds_sec01_slider
+                            able_to_click
+                            {{ $project->projectFiles->count() === 1 ? 'slider-img-wrapper' : '' }}"
+                    >
                         <ul id="slider">
                             @foreach($project->projectFiles as $project_file)
                                 @if($project_file->file_content_type === 'image_url')
@@ -46,7 +50,7 @@
                                     <img src="{{ asset(Storage::url($project_file->file_url)) }}" alt="画像">
                                 </li>
                                 @elseif($project_file->file_content_type === 'video_url')
-                                <li class="slide-item">
+                                <li class="slide-item able_to_click_children">
                                     {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
                                 </li>
                                 @endif
@@ -60,7 +64,7 @@
                                         <img src="{{ asset(Storage::url($project_file->file_url)) }}" alt="画像">
                                     </li>
                                     @elseif($project_file->file_content_type === 'video_url')
-                                    <li class="thumbnail-item">
+                                    <li class="thumbnail-item able_to_click_children">
                                         {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
                                     </li>
                                     @endif
@@ -136,27 +140,37 @@
                             <div class="pds_sec01_R_btn01_wrapper">
                                 @if ($project->user->snsLink->twitter_url)
                                 <div class="project_sns_icon">
-                                    <a href="{{ $project->user->snsLink->twitter_url }}"><img src="{{ asset('image/twitter.png') }}" alt=""></a>
+                                    <a href="{{ $project->user->snsLink->twitter_url }}" class="able_to_click">
+                                        <img src="{{ asset('image/twitter.png') }}" alt="">
+                                    </a>
                                 </div>
                                 @endif
                                 @if ($project->user->snsLink->instagram_url)
                                 <div class="project_sns_icon">
-                                    <a href="{{ $project->user->snsLink->instagram_url }}"><img src="{{ asset('image/instagram.png') }}" alt=""></a>
+                                    <a href="{{ $project->user->snsLink->instagram_url }}" class="able_to_click">
+                                        <img src="{{ asset('image/instagram.png') }}" alt="">
+                                    </a>
                                 </div>
                                 @endif
                                 @if ($project->user->snsLink->youtube_url)
                                 <div class="project_sns_icon">
-                                    <a href="{{ $project->user->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
+                                    <a href="{{ $project->user->snsLink->youtube_url }}" class="able_to_click">
+                                        <img src="{{ asset('image/youtube.png') }}" alt="">
+                                    </a>
                                 </div>
                                 @endif
                                 @if ($project->user->snsLink->tiktok_url)
                                 <div class="project_sns_icon">
-                                    <a href="{{ $project->user->snsLink->tiktok_url }}"><img src="{{ asset('image/tiktok.png') }}" alt=""></a>
+                                    <a href="{{ $project->user->snsLink->tiktok_url }}" class="able_to_click">
+                                        <img src="{{ asset('image/tiktok.png') }}" alt="">
+                                    </a>
                                 </div>
                                 @endif
                                 @if ($project->user->snsLink->other_url)
                                 <div class="project_sns_icon">
-                                    <a href="{{ $project->user->snsLink->other_url }}"><img src="{{ asset('image/other_sns.png') }}" alt=""></a>
+                                    <a href="{{ $project->user->snsLink->other_url }}" class="able_to_click">
+                                        <img src="{{ asset('image/other_sns.png') }}" alt="">
+                                    </a>
                                 </div>
                                 @endif
                             </div>
@@ -189,7 +203,7 @@
 
             </div><!--/pds_sec01-->
         </div>
-        <div class="project_switch_tabs">
+        <div class="project_switch_tabs able_to_click_children">
             <div class="project_show_select_tab selected_tab" onClick="switchTabs(this,'#project_content_section')">プロジェクト</div>
             <div class="project_show_select_tab" onClick="switchTabs(this,'#report_section')">活動レポート</div>
             <div class="project_show_select_tab" onClick="switchTabs(this,'#comment_section')">応援コメント</div>
@@ -203,7 +217,7 @@
 
 
                 <div class="wlr_64_L inner_item tab_contents" id='project_content_section'>
-                    <div class="pds_sec02_txt showmore_list">{!! $project->content !!}</div>
+                    <div class="pds_sec02_txt showmore_list able_to_click_children">{!! $project->content !!}</div>
                     <div class="row justify-content-center mb-5" style="margin-top: 5px;">
                         <div class="ps_rank_more_btn" id="showmore_button">
                             続きを表示 <i class="fas fa-chevron-down"></i>
