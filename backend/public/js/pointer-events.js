@@ -5,6 +5,6 @@ jQuery( function ($) {
     $('img').css('pointer-events', 'none');
     $('h2').css('pointer-events', 'none');
     $('div').css('pointer-events', 'none');
-    $('iframe').parent('div').css('pointer-events', 'auto');
-    $('.ableToClick').css('pointer-events', 'auto');
+    $('.able_to_click').css('pointer-events', 'auto');
+    $('.able_to_click_children').contents().css('pointer-events', 'auto');
 });
