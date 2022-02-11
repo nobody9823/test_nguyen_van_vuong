@@ -154,7 +154,9 @@
                                 @endif
                                 @if ($project->user->snsLink->youtube_url)
                                 <div class="project_sns_icon">
-                                    <a href="{{ $project->user->snsLink->youtube_url }}"><img src="{{ asset('image/youtube.png') }}" alt=""></a>
+                                    <a href="{{ $project->user->snsLink->youtube_url }}" class="able_to_click">
+                                        <img src="{{ asset('image/youtube.png') }}" alt="">
+                                    </a>
                                 </div>
                                 @endif
                                 @if ($project->user->snsLink->tiktok_url)
