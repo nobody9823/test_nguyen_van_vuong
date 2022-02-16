@@ -96,6 +96,22 @@
             <div class="supporters_info_item">
                 <p onclick="copyInnerText(this.nextElementSibling);displayToast('success','','コピーが完了しました。')">
                     <i class="fas fa-copy"></i>
+                    フリガナ
+                </p>
+                <span>
+                    {{ $payment->user->profile->last_name_kana }} {{ $payment->user->profile->first_name_kana }}
+                </span>
+                <p onclick="copyInnerText(this.nextElementSibling);displayToast('success','','コピーが完了しました。')">
+                    <i class="fas fa-copy"></i>
+                    本名
+                </p>
+                <span>
+                    {{ $payment->user->profile->last_name }} {{ $payment->user->profile->first_name }}
+                </span>
+            </div>
+            <div class="supporters_info_item">
+                <p onclick="copyInnerText(this.nextElementSibling);displayToast('success','','コピーが完了しました。')">
+                    <i class="fas fa-copy"></i>
                      電話番号
                 </p>
                 <span>
