@@ -1,6 +1,6 @@
 <div class="ps_description_wrapper">
     <div class="ps_description_title">
-        <p>①招待リンクを発行</p>
+        <p>①リターン購入後、招待リンクを発行</p>
         <span>あなた専用の招待リンク(URL)が発行されます。</span>
     </div>
     <div class="ps_description_items_wrapper">
