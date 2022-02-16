@@ -926,8 +926,8 @@ input[type=radio]:checked + .radio-fan::after {
 
 .prof_page_L{ width: 210px; }
 .prof_img_box{ width: 210px; margin: 0 auto;}
-.prof_img{ width: 100%; border-radius: 10px; overflow: hidden;}
-.prof_img img {height: 150px; object-fit: contain;}
+.prof_img{ width: 100%; border-radius: 10px; overflow: hidden; display: flex; justify-content: center;}
+.prof_img img {width: 150px; height: 150px; object-fit: cover; border-radius: 50%;}
 .prof_img_name{width: 100%; font-size: 1.6rem; color: #00AEBD; text-align: center; margin: 10px 0 0 0;}
 
 .prof_btn_box_base{ color: #00AEBD;}
