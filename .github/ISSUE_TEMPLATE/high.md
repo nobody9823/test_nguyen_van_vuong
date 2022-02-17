@@ -1,7 +1,7 @@
 ---
 name: high
 about: create issue for high
-title: タスクNo. /見積もり工数 h/タスクタイトル
+title: 【No. 】【h】
 labels: high
 ---
 

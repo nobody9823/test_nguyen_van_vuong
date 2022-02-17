@@ -1,7 +1,7 @@
 ---
 name: low
 about: create issue for low
-title: タスクNo. /見積もり工数 h/タスクタイトル
+title: 【No. 】【h】
 labels: low
 ---
 

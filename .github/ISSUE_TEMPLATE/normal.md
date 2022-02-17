@@ -1,7 +1,7 @@
 ---
 name: normal
 about: create issue for normal
-title: タスクNo. /見積もり工数 h/タスクタイトル
+title: 【No. 】【h】
 labels: normal
 ---
 

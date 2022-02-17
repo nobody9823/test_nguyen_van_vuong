@@ -1,7 +1,7 @@
 ---
 name: urgent
 about: create issue for urgent
-title: タスクNo. /見積もり工数 h/タスクタイトル
+title: 【No. 】【h】
 labels: urgent
 ---
 
