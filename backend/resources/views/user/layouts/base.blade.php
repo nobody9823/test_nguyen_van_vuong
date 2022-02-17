@@ -112,7 +112,7 @@ axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
 		<ul id="js-global-nav" class="p-global-nav main-menu menu_base taso_menu">
 
             <li class="menu-item nav_btn taso_li menuset_01">
-                <a href="{{ config('app.wp_baseURL').'/プロジェクト一覧' }}" class="top_menu-1 nav_btn_link">
+                <a href="{{ config('app.wp_baseURL').'/entry-list' }}" class="top_menu-1 nav_btn_link">
                     <p class="nav_btn_tit_L">エントリー一覧</p>
 				</a>
 			</li>
@@ -295,7 +295,7 @@ axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
 </header>
 </div>
 <div class="header_bottom">
-    <a href="{{ config('app.wp_baseURL').'/プロジェクト一覧' }}">
+    <a href="{{ config('app.wp_baseURL').'/entry-list' }}">
         エントリー一覧
     </a>
     <a href="{{ route('user.index') }}">
