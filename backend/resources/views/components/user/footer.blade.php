@@ -55,7 +55,7 @@
                 <img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
             </div>
             <ul class="footer_list">
-                <li><a class="footer_list_items" href="{{ config('app.wp_baseURL').'/プロジェクト一覧' }}">エントリー一覧</a></li>
+                <li><a class="footer_list_items" href="{{ config('app.wp_baseURL').'/entry-list' }}">エントリー一覧</a></li>
                 <li><a class="footer_list_items" href="{{ route('user.index') }}">プロジェクト一覧</a></li>
                 <li><a class="footer_list_items" href="{{ route('user.question') }}">ファンリターンとは</a></li>
 
