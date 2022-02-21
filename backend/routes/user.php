@@ -19,7 +19,7 @@ use App\Http\Controllers\User\SendToSupporterController;
 
 //---------------------wp-get-user-----------------------------------------------
 Route::get('/wp_get_user', function () {
-    return Auth::user();
+    return Auth::user()->name;
 });
 
 //---------------------projects-----------------------------------------------
