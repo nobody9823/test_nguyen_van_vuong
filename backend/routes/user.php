@@ -17,6 +17,11 @@ use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\SupporterController;
 use App\Http\Controllers\User\SendToSupporterController;
 
+//---------------------wp-get-user-----------------------------------------------
+Route::get('/wp_get_user', function () {
+    return Auth::user();
+});
+
 //---------------------projects-----------------------------------------------
 Route::get('/', [ProjectController::class, 'index'])->name('index');
 Route::get('/search', [ProjectController::class, 'search'])->name('search');
