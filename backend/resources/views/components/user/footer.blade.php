@@ -63,14 +63,14 @@
                 <li>
                     <div class="menuset_03 wm_login_btn">
                         <a href="{{ route('login') }}">
-                            ログイン
+                            クラファンにログイン
                         </a>
                     </div>
                 </li>
                 <li>
                     <div class="menuset_03 wm_signup_btn">
                         <a href="{{ route('user.pre_create') }}">
-                            新規登録
+                            クラファンに新規登録
                         </a>
                     </div>
                 </li>
