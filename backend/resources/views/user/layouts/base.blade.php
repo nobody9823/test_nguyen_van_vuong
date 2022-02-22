@@ -132,12 +132,12 @@ axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
             @guest('web')
             <li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">ログイン</p>
+					<p class="nav_btn_tit_L">クラファンにログイン</p>
 				</a>
 			</li>
             <li class="menu-item nav_btn taso_li menuset_06">
 				<a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
-					<p class="nav_btn_tit_L">新規登録</p>
+					<p class="nav_btn_tit_L">クラファンに新規登録</p>
 				</a>
 			</li>
             @endguest
@@ -181,12 +181,12 @@ axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
 			@guest('web')
 			<li class="menu-item nav_btn taso_li menuset_03 login_btn mobile_hide">
                 <a href="{{ route('login') }}" class="top_menu-1 nav_btn_link">
-                    <p class="nav_btn_tit_L">ログイン</p>
+                    <p class="nav_btn_tit_L">クラファンにログイン</p>
 				</a>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_03 signup_btn mobile_hide">
                 <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
-                    <p>新規登録</p>
+                    <p>クラファンに新規登録</p>
 				</a>
 			</li>
             @endguest
@@ -240,7 +240,7 @@ axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
             <li class="menu-item nav_btn taso_li menuset_06">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button class="top_menu-1 top_menu_logout">ログアウト</button>
+                    <button class="top_menu-1 top_menu_logout" type="button">クラファンからログアウト</button>
                 </form>
 			</li>
 			<li class="menu-item nav_btn taso_li menuset_06">
@@ -265,7 +265,7 @@ axios.defaults.baseURL = '{{ config("app.axios_baseURL") }}';
 			<li class="menu-item nav_btn taso_li menuset_03 signup_btn mobile_hide">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button class="top_menu-1 logout_btn">ログアウト</button>
+                    <button class="top_menu-1 logout_btn">クラファンからログアウト</button>
                 </form>
 			</li>
             @endauth
