@@ -188,7 +188,7 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 .h_logo_subtitle{color: #00AEBD;margin: 10px 0 0 10px;}
 .h_logo_css{width:224px;margin:2px 0 0 0;display:block;}
 .h_logo_css_sp{display:none;}
-#branding{display:flex;flex-wrap:wrap;justify-content:space-between; height:80px; padding:0 5px;line-height:1; width:225px;}
+#branding{display:flex;flex-wrap:wrap;justify-content:space-between; height:45px; padding:0 5px;line-height:1; width:225px;}
 #header_03{display:none;}
 #menu{display:flex;flex-wrap:wrap;align-items:center; background:#fff;}
 .navgation_inner{width:100%;}
@@ -199,10 +199,10 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 .nav_btn_link:hover{opacity:0.7;}
 .taso_menu > .taso_li > .taso_ul{top:65px;}
 
-.top_menu-1{ height:33px; border-radius:5px;padding:0 10px;}
+.top_menu-1{ height:45px; border-radius:5px;padding:0 10px;}
 #header_wrap{ width: 100%; min-height: 80px;}
 #header_banner{ width: 100%; min-height: 80px; background-color: #00aebd; padding: 10px;}
-#header{width:100%;max-width:1100px; min-height:80px; display: flex; flex-flow: wrap; justify-content:space-between;}
+#header{width:100%;max-width:1100px; min-height:45px; display: flex; flex-flow: wrap; justify-content:space-between;}
 /* #header_content{background:#fff;margin:0 auto; font-size: 1.3rem; font-weight: bold;width:80%;max-width:1000px;color: #00AEBD; display: flex; flex-flow: wrap; justify-content:flex-start;} */
 
 .header_banner_text {
@@ -229,9 +229,9 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
     height: 36px;
 }
 .header_bottom {display: none;}
-.wm_login_btn{ background: #fff; width: 157px; border: solid 1px #00AEBD; border-radius: 5px; margin: 0 0 0 0; padding: 10px 0 10px 0; display: flex; align-items: center; align-content: center; justify-content: center; }
+.wm_login_btn{ background: #fff; width: 113px; border: solid 1px #00AEBD; border-radius: 7px; margin: 0 0 0 0; padding: 5px 0 5px 0; display: flex; align-items: center; align-content: center; justify-content: center; text-align: center;}
 .wm_login_btn a { color: #00AEBD;}
-.wm_signup_btn{ background: #00AEBD; width: 157px; border-radius: 5px; margin: 0 30px 0 0; padding: 10px 0 10px 0; display: flex; align-items: center; align-content: center; justify-content: center;}
+.wm_signup_btn{ background: #00AEBD; width: 113px; border-radius: 7px; margin: 0 30px 0 0; padding: 5px 0 5px 0; display: flex; align-items: center; align-content: center; justify-content: center; text-align: center;}
 .wm_signup_btn a { color: #fff;}
 
 .ninki_tag_li div{ width: 96%; margin: 0 2% 10px 2%;}
@@ -344,8 +344,8 @@ footer a{ color: #707070;}
 .footer_sns_icon img{ width: 32px; margin-right: 10px;}
 .dis_f_wra_alc{display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content: space-around;}
 
-.footer_under{ background: #fff; padding: 30px 0; }
-.footer_under_inner{width:100%;max-width:1000px;margin:0 auto; display: flex; flex-direction: row;}
+.footer_under{ background: #fff; padding: 20px 0; }
+.footer_under_inner{width:100%;max-width:1000px;margin:0 auto; display: flex; flex-direction: row; align-items: center;}
 .footer_list { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; }
 .footer_list li {margin-right: 20px;}
 .footer_logo { margin: 0 25px 0 0;}
