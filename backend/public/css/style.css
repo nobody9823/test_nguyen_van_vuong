@@ -335,9 +335,9 @@ footer a{ color: #707070;}
 
 .footer_main{ padding: 50px 0; }
 .footer_main_inner{width:100%;max-width:1040px;margin:0 auto; padding: 0 20px; display: flex; flex-wrap: wrap;}
-.footer_main_01{ width: 50%; border-right: solid 1px #fff; padding:20px 0 20px 0;}
-.footer_main_02{ width: 25%; border-right: solid 1px #fff; padding:20px 0 20px 20px;}
-.footer_main_03{ width: 25%; padding:20px 0 20px 20px;}
+.footer_main_01{ width: 33%; border-right: solid 1px #fff; padding:20px 0 20px 0;}
+.footer_main_02{ width: 33%; border-right: solid 1px #fff; padding:20px 0 20px 20px;}
+.footer_main_03{ width: 33%; padding:20px 0 20px 20px;}
 .footer_tit{ width: 100%; font-size: 1.6rem; color:#00AEBD ; margin: 0 0 20px 0; }
 .footer_item{ margin: 0 0 15px 0;}
 .footer_sns_icon { display: flex;}
