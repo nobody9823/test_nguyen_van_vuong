@@ -97,7 +97,6 @@
                             <a href="{{ config('app.wp_baseURL') }}" title="FanReturn" rel="home">
                                 <div class="h_logo_wrapper">
                                     <img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
-                                    <p class="h_logo_subtitle">〜エンタメ業界の人脈をあなたのものに〜</p>
                                 </div>
                             </a>
                         </div>
