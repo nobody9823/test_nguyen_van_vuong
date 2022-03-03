@@ -392,12 +392,13 @@
                             </div>
                             {{-- メッセージモーダル --}}
                         </td>
+                        @if ($payment->is_sent)
+                        <td class="text-success">
+                            発送済
+                        @else
                         <td>
-                            @if ($payment->is_sent)
-                                発送済
-                            @else
-                                未発送
-                            @endif
+                            未発送
+                        @endif
                         </td>
                     </tr>
                     @endforeach
