@@ -406,7 +406,9 @@
                                     <a href="{{ route($role.'.project.show', ['project' => $project]) }}"
                                         class="btn btn-sm btn-primary mt-1">確認</a>
                                     <a href="{{ route('user.project_preview', ['project' => $project] )}}"
-                                        class="btn btn-sm btn-success mt-1" target="_blank">プレビュー表示</a>
+                                        class="btn btn-sm btn-success mt-1" target="_blank">プロジェクトプレビュー</a>
+                                    <a href="{{ route('user.my_project.reward_preview', ['project' => $project] )}}"
+                                        class="btn btn-sm btn-success mt-1" target="_blank">PSリターンプレビュー</a>
                                 </div>
                             </div>
                         </td>
