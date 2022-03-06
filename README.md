@@ -76,7 +76,7 @@ $ docker-compose down -v && docker-compose up
 Using ClickUp to manage project
 See more detail at valleyin wiki
 
-## 開発に使用するツール
+## 開発に使用するもの
 
 - ER図
 こちらにテーブルの説明やカラムの内容等を記載しています。
@@ -119,8 +119,15 @@ __【All or Nothing と All in方式】__<br>
 - All or Nothing<br>
 予め設定した期間内に目標金額を達成することで、プロジェクト実行者は期間終了日までに集まった支援額を獲得できます。<br>
 期限以内（50日以下）に目標金額に達成しなかった場合はプロジェクトは不成立となり、支援金はユーザーに返金されます。
+※現在は50日ですが、客先の要望で変わる可能性があります。（2022/3/5時点）
 - All in<br>
 目標金額に達成しなかったとしても、プロジェクト実行者は期間終了日までに集まった応援購入額を獲得できます。
+
+__【決済機能について】__<br>
+現在は決済機能としてGMO PAYMENTを実装しています。<br>
+GMO PAYMENTを採用している理由は、All or Nothing方式でクラファンプロジェクトが目標金額に達しなかった場合、手数料無料で返金できるからです。（最長60日まで）<br>
+GMO PAYMENTではクレジット決済日から最長60日まで「仮売上」として決済を計上できます。「仮売上」中は手数料無料で返金することができます。<br>
+ 「All or Nothing方式で目標金額に達成する」及び「All in方式」でプロジェクトが掲載終了となった場合にのみ、「本売上」として計上します。一度「本売上」にしてしまうと、決済を取り消す場合、手数料分は戻ってきません。
 
 ### サービスの仕様（ユーザー側）
 
@@ -172,7 +179,7 @@ https://resource-sharing.co.jp/ec-sites-credit-card-test-number/
   - 【差し戻し】<br>
     プロジェクトを申請したが、修正箇所がある為、再度編集と申請が必要。
   - 【公開前、公開中、公開終了】<br>
-    プロジェクトを申請後、掲載許可が降りた状態。掲載開始日になると自動で「公開中」となり、終了すると「公開終了」に切り替わる。
+    プロジェクトを申請後、掲載許可が降りた状態。掲載開始日になると自動で「公開中」となり、終了すると「公開終了」に切り替わる。<br>
     __※管理画面はこのステータスではなく、一律で「掲載中」のステータスとなっている。__
       __掲載開始日から終了日のプロジェクトのみ、TOP画面やプロジェクト検索画面に表示される。（2022/3/5時点）__
   - 【掲載停止中】<br>
@@ -210,22 +217,23 @@ __※概要のPSリターンで解説した通り、支援総額順のランキ�
 
 #### プロジェクト完了後の送金の流れ
 
+こちらを読む前に __概要__ の __決済機能について__ を参照願います。<br>
 
 __【All or Nothing方式で目標金額達成後 もしくは All in方式でプロジェクト期間終了後の送金処理】__
 1. プロジェクト終了→管理者に通知メール→通知メールのリンクをクリック→対象の「プロジェクト管理」画面に遷移する
    もしくは「プロジェクト管理」画面にて終了したプロジェクトを検索する<br>
-![Image](https://user-images.githubusercontent.com/66456130/156914492-9907a607-a831-454b-b0e2-e721b8b8baa8.png)
+![Image](https://user-images.githubusercontent.com/66456130/156914492-9907a607-a831-454b-b0e2-e721b8b8baa8.png)<br>
 2. 画面右端にある「支援者（ファン）一覧」ボタンから「支援者（ファン）管理」画面へ<br>
-![Image2](https://user-images.githubusercontent.com/66456130/156914493-c409090a-7315-4bb2-ae3a-c182dcfc8875.png)
+![Image2](https://user-images.githubusercontent.com/66456130/156914493-c409090a-7315-4bb2-ae3a-c182dcfc8875.png)<br>
 3. 上部にある「処理状況」のセレクトボックスを「仮売上」にすると、仮売上中の支払い状態で絞り込まれる
 4. 「実売上計上」ボタンをクリックし、支払いのステータスを「仮売上」→「実売上」に変化する<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156880532-e2bc3ac1-fc2d-4622-9b70-54ccf15eaccf.png)<br>
 ※プロジェクトが掲載期間が終了していないにも関わらず、実売上に変更した場合以下のエラーメッセージが表示されます。<br>
-![Image](https://user-images.githubusercontent.com/66456130/156914395-c73a49b6-f693-48fb-97e9-2a024e077a0f.png)
+![Image](https://user-images.githubusercontent.com/66456130/156914395-c73a49b6-f693-48fb-97e9-2a024e077a0f.png)<br>
 5. プロジェクトIDが記載されているボタンをクリックし、先程の「プロジェクト管理」画面に戻る<br>
-![Image](https://user-images.githubusercontent.com/66456130/156880867-3277fcf5-296e-46a9-a076-5ea5d6d5b396.png)
+![Image](https://user-images.githubusercontent.com/66456130/156880867-3277fcf5-296e-46a9-a076-5ea5d6d5b396.png)<br>
 6. 画面中央あたりに位置する「プロジェクト経費」を入力し、更新する<br>
-![Image](https://user-images.githubusercontent.com/66456130/156881193-d71512d6-5ae6-484f-aeed-c893a5420218.png)
+![Image](https://user-images.githubusercontent.com/66456130/156881193-d71512d6-5ae6-484f-aeed-c893a5420218.png)<br>
 7. 「送金実行する」ボタンにて、クラファンプロジェクト実行者に「プロジェクト経費」と「手数料(FR売上)」を差し引いた「合計支払い金額」が振り込まれる<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156881234-749853dc-2d67-4577-9e9a-6c3d7cec5365.png)<br>
 ※プロジェクト実行者が銀行口座情報を入力していない場合、以下の様に表示されます<br>
