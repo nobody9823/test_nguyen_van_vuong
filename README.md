@@ -78,15 +78,15 @@ See more detail at valleyin wiki
 
 ## 開発に使用するもの
 
-- ER図
-こちらにテーブルの説明やカラムの内容等を記載しています。
+- ER図<br>
+こちらにテーブルの説明やカラムの内容等を記載しています。<br>
 https://ondras.zarovi.cz/sql/demo/?keyword=fanreturn
 
-- メール
-ローカル環境でメールの動作を確認する際はこちらのURLでMailLogにアクセスしてください。
+- メール<br>
+ローカル環境でメールの動作を確認する際はこちらのURLでMailLogにアクセスしてください。<br>
 http://localhost:8025
 
-- クレジットカードのテスト番号
+- クレジットカードのテスト番号<br>
 https://resource-sharing.co.jp/ec-sites-credit-card-test-number/
 
 ## 仕様
@@ -226,7 +226,7 @@ __【All or Nothing方式で目標金額達成後 もしくは All in方式で�
 2. 画面右端にある「支援者（ファン）一覧」ボタンから「支援者（ファン）管理」画面へ<br>
 ![Image2](https://user-images.githubusercontent.com/66456130/156914493-c409090a-7315-4bb2-ae3a-c182dcfc8875.png)<br>
 3. 上部にある「処理状況」のセレクトボックスを「仮売上」にすると、仮売上中の支払い状態で絞り込まれる
-4. 「実売上計上」ボタンをクリックし、支払いのステータスを「仮売上」→「実売上」に変化する<br>
+4. 「実売上計上」ボタンをクリックすると、支払いのステータスが「仮売上」→「実売上」に変化する<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156880532-e2bc3ac1-fc2d-4622-9b70-54ccf15eaccf.png)<br>
 ※プロジェクトが掲載期間が終了していないにも関わらず、実売上に変更した場合以下のエラーメッセージが表示されます。<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156914395-c73a49b6-f693-48fb-97e9-2a024e077a0f.png)<br>
@@ -237,11 +237,11 @@ __【All or Nothing方式で目標金額達成後 もしくは All in方式で�
 7. 「送金実行する」ボタンにて、クラファンプロジェクト実行者に「プロジェクト経費」と「手数料(FR売上)」を差し引いた「合計支払い金額」が振り込まれる<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156881234-749853dc-2d67-4577-9e9a-6c3d7cec5365.png)<br>
 ※プロジェクト実行者が銀行口座情報を入力していない場合、以下の様に表示されます<br>
-![Image](https://user-images.githubusercontent.com/66456130/156914025-3d3a1f0f-bd2e-4cac-84c8-af4eae433fc6.png)
+![Image](https://user-images.githubusercontent.com/66456130/156914025-3d3a1f0f-bd2e-4cac-84c8-af4eae433fc6.png)<br>
 
 __【All or Nothing方式で目標金額未達成 もしくは 何らかの理由でプロジェクトを終了後の返金処理】__
 1. 上記の1〜3までは同様の流れ
-2. 「売上キャンセル」（画面右端）ボタンをクリックし、支払いのステータスを「仮売上」→「キャンセル」に変化する<br>
+2. 「売上キャンセル」（画面右端）ボタンをクリックすると、支払いのステータスが「仮売上」→「キャンセル」に変化する<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156913925-40b78a0a-8ba4-482c-9d3b-88d7136506e2.png)
 
 #### DM一覧画面
