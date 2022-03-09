@@ -22,7 +22,7 @@ Route::get('/', [ProjectController::class, 'index'])->name('index');
 Route::get('/search', [ProjectController::class, 'search'])->name('search');
 Route::post('/project/{project}/liked', [ProjectController::class, 'ProjectLiked'])->name('user.project.liked');
 Route::get('/project/{project}/project_preview', [ProjectController::class, 'projectPreview'])->name('project_preview');
-Route::get('/my_project/reward_preview/{project}', [MyProjectController::class, 'rewardPreview'])->name('reward_preview');
+Route::get('/my_project/reward_preview/{project}', [MyProjectController::class, 'rewardPreview'])->name('my_project.reward_preview');
 Route::resource('project', ProjectController::class)->only('show')->middleware('project.released');
 
 Route::prefix('project/{project}')->middleware('auth', 'project.released')->group(function () {
