@@ -219,10 +219,10 @@
                 <div class="wlr_64_L inner_item tab_contents" id='project_content_section'>
                     <div class="pds_sec02_txt showmore_list able_to_click_children">{!! $project->content !!}</div>
                     <div class="row justify-content-center mb-5" style="margin-top: 5px;">
-                        <div class="ps_rank_more_btn" id="showmore_button">
+                        <div class="ps_rank_more_btn able_to_click" id="showmore_button">
                             続きを表示 <i class="fas fa-chevron-down"></i>
                         </div>
-                        <div class="ps_rank_more_btn" id="hidemore_button">
+                        <div class="ps_rank_more_btn able_to_click" id="hidemore_button">
                             表示を少なくする <i class="fas fa-chevron-up"></i>
                         </div>
                     </div>
@@ -266,10 +266,10 @@
                         @endforeach
                     </div>
                     <div class="row justify-content-center mb-5" style="margin-top: 5px;">
-                        <div class="ps_rank_more_btn" id="comments_more_looking_button">
+                        <div class="ps_rank_more_btn able_to_click" id="comments_more_looking_button">
                             続きを表示 <i class="fas fa-chevron-down"></i>
                         </div>
-                        <div class="ps_rank_more_btn" id="comments_close_button">
+                        <div class="ps_rank_more_btn able_to_click" id="comments_close_button">
                             表示を少なくする <i class="fas fa-chevron-down"></i>
                         </div>
                     </div>

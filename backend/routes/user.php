@@ -22,6 +22,7 @@ Route::get('/', [ProjectController::class, 'index'])->name('index');
 Route::get('/search', [ProjectController::class, 'search'])->name('search');
 Route::post('/project/{project}/liked', [ProjectController::class, 'ProjectLiked'])->name('user.project.liked');
 Route::get('/project/{project}/project_preview', [ProjectController::class, 'projectPreview'])->name('project_preview');
+Route::get('/my_project/reward_preview/{project}', [MyProjectController::class, 'rewardPreview'])->name('my_project.reward_preview');
 Route::resource('project', ProjectController::class)->only('show')->middleware('project.released');
 
 Route::prefix('project/{project}')->middleware('auth', 'project.released')->group(function () {
@@ -59,7 +60,6 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
             Route::get('reward_sample', [MyProjectController::class, 'rewardSample'])->name('reward_sample');
-            Route::get('reward_preview/{project}', [MyProjectController::class, 'rewardPreview'])->name('reward_preview');
         });
         Route::delete('project/file/{project_file}', [MyProjectController::class, 'deleteFile'])->name('project_image.destroy');
         // Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');

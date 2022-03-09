@@ -60,7 +60,9 @@
                             </div>
                             <div class="text-right">
                                 <a href="{{ route('user.project_preview', compact('project')) }}"
-                                    class="btn btn-success">プレビュー</a>
+                                    class="btn btn-success">プロジェクトプレビュー</a>
+                                <a href="{{ route('user.my_project.reward_preview', compact('project')) }}"
+                                    class="btn btn-success">PSリターンプレビュー</a>
                                 @if ($project->release_status !== '掲載中' && $project->release_status !== '承認待ち' || $role
                                 === "admin")
                                 <a href="{{ route($role.'.project.edit', compact('project')) }}"
