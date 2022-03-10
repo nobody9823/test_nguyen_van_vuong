@@ -67,7 +67,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" rel="stylesheet">
     <link rel='stylesheet' href={{ asset('css/toastr.min.css') }} />
     <link href="{{ asset('css/reset.css') }}" type="text/css" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}?20220209" type="text/css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}?20220310" type="text/css" rel="stylesheet">
     @yield('css')
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
