@@ -1440,7 +1440,7 @@ input[name="payment_way"] {
     left: -75px;
 }
 .supporters_description2 {
-    width: 235px;
+    width: 300px;
 }
 .supporters_description3 {
     width: 105px;
@@ -1448,7 +1448,7 @@ input[name="payment_way"] {
 .supporters_tooltip1:hover .supporters_description2 {
     display: inline-block;
     bottom: 45px;
-    left: -102px;
+    left: -134px;
 }
 .supporters_tooltip1:hover .supporters_description3 {
     display: inline-block;
@@ -2988,7 +2988,7 @@ div.spinner-wrapper {
     font-size: 1rem;
     font-weight: bold;
     text-align: center;
-    padding: 10px;
+    padding: 7px;
     background: #00AEBD;
     position: relative;
     color: #fff;
