@@ -17,14 +17,6 @@
         <div class="prof_page_R">
             <form action="{{ route('user.send_to_supporter', ['project' => $project]) }}" method="POST">
                 @csrf
-                <div class="supporters_wrapper">
-                    <p class="disclaimer">
-                        ※リターンの発送に必要な支援者の情報が記載されています。リターンを発送後は「未発送」にチェックを入れ、「発送済にする」ボタンでステータスを「発送済」に変更してください
-                        <br/>
-                        <i class="fas fa-plus-square" style="color: #00AEBD; padding-left: 3px;font-size: 24px;"></i>
-                        を押すことで各支援者の詳細情報が確認できます
-                    </p>
-                </div>
                 <table class="supporters_table">
                     <thead>
                         <tr>
@@ -33,9 +25,43 @@
                                     発送済にする
                                     <button type="submit" class="cover_link disable-btn"></button>
                                 </div>
+                                <div class="supporters_tooltip1" ontouchstart="">
+                                    <p class="supporters_tooltip_icon">？</p>
+                                    <div class="supporters_description1">
+                                        各支援者の方へのリターンの発送状況のステータスとなります。
+                                        <br/>
+                                        <br/>
+                                        発送が完了次第ステータスを「発送済」へと変更してください。
+                                    </div>
+                                </div>
                             </th>
                             <th>
-                                支援者名
+                                <p>処理状況</p>
+                                <div class="supporters_tooltip1" ontouchstart="">
+                                    <p class="supporters_tooltip_icon">？</p>
+                                    <div class="supporters_description2">
+                                        各支援者の支払い処理状況のステータスとなります。
+                                        <br/>
+                                        <br/>
+                                        クレジット決済の場合は「仮売上」または「実売上」状態のステータスであれば決済が完了しております。
+                                        <br/>
+                                        <br/>
+                                        コンビニ決済の場合は支援者に振り込み依頼のメール送信完了で「要求成功」、支援者のコンビニでの振り込みが完了した状態で「決済完了」、振り込みがされずに支払い期限が過ぎてしまった状態で「期限切れ」となります。
+                                        <br/>
+                                        <br/>
+                                        <p class="supporters_tooltip_alert">※期限を超えた場合はキャンセルになるためリターン内容と支払い状況をご確認の上、発送の際にはご注意ください。</p>
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <p>支援者名</p>
+                                <div class="supporters_tooltip1" ontouchstart="">
+                                    <p class="supporters_tooltip_icon">？</p>
+                                    <div class="supporters_description3">
+                                        <i class="fas fa-plus-square" style="color: #00AEBD; background-color: #fff; font-size: 24px; line-height: inherit;"></i>
+                                        を押すことで各支援者の詳細情報が確認できます。
+                                    </div>
+                                </div>
                             </th>
                         </tr>
                     </thead>
@@ -55,6 +81,28 @@
                                         未発送
                                     </label>
                                 @endif
+                            </td>
+                            <td>
+                                <p style="
+                                    {{ ($payment->gmo_job_cd === 'AUTH' || $payment->gmo_job_cd === 'REQSUCCESS') ? 'color: #6c757d;' : '' }}
+                                    {{ ($payment->gmo_job_cd === 'SALES' || ($payment->gmo_job_cd === 'PAYSUCCESS' && $payment->payment_is_finished)) ? 'color: #38c172;' : '' }}
+                                    {{ ($payment->gmo_job_cd === 'VOID'
+                                        || $payment->gmo_job_cd === 'RETURN'
+                                        || $payment->gmo_job_cd === 'RETURNX'
+                                        || $payment->gmo_job_cd === 'FAILED'
+                                        || $payment->gmo_job_cd === 'EXPIRED'
+                                        || ($payment->gmo_job_cd === 'PAYSUCCESS' && !$payment->payment_is_finished)
+                                        || $payment->gmo_job_cd === 'CANCEL')
+                                            ? 'color: #38c172;'
+                                            : ''
+                                    }}
+                                ">
+                                    @if($payment->payment_way === 'cvs' && $payment->gmo_job_cd === 'PAYSUCCESS' && !$payment->payment_is_finished)
+                                        メール送金で返金済み
+                                    @else
+                                        {{ PaymentJobCd::fromKey($payment->gmo_job_cd) }}
+                                    @endif
+                                </p>
                             </td>
                             <td>
                                 <i class="fas fa-plus-square" style="color: #00AEBD; padding-right: 3px; cursor: pointer; font-size: 24px;" onclick="openSupporterModal({{ $payment->id }})"></i>
