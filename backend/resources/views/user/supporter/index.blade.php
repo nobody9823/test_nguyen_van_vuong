@@ -33,6 +33,40 @@
                                     発送済にする
                                     <button type="submit" class="cover_link disable-btn"></button>
                                 </div>
+<<<<<<< Updated upstream
+=======
+                                <div class="supporters_tooltip1" ontouchstart="">
+                                    <p class="supporters_tooltip_icon">？</p>
+                                    <div class="supporters_description1">
+                                        各支援者の方へのリターンの発送状況のステータスとなります。
+                                        <br/>
+                                        <br/>
+                                        発送が完了次第ステータスを「発送済」へと変更してください。
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <p>処理状況</p>
+                                <div class="supporters_tooltip1" ontouchstart="">
+                                    <p class="supporters_tooltip_icon">？</p>
+                                    <div class="supporters_description2">
+                                        各支援者の支払い処理状況のステータスとなります。
+                                        <br/>
+                                        <br/>
+                                        クレジット決済の場合は「仮売上」または「実売上」状態のステータスであれば決済が完了しております。
+                                        <br/>
+                                        <br/>
+                                        コンビニ決済の場合は支援者に振り込み依頼のメール送信完了で「要求成功」、支援者のコンビニでの振り込みが完了した状態で「決済完了」、振り込みがされずに支払い期限が過ぎてしまった状態で「期限切れ」となります。
+                                        <br/>
+                                        <br/>
+                                        <p class="supporters_tooltip_alert">
+                                            ※期限を超えた場合はキャンセルになるためリターン内容と支払い状況をご確認の上、発送の際にはご注意ください。
+                                            <br/>
+                                            また、達成金額についても「期限切れ」となってしまった場合は購入自体キャンセルとなり、達成金額が変わることにもご注意ください。
+                                        </p>
+                                    </div>
+                                </div>
+>>>>>>> Stashed changes
                             </th>
                             <th>
                                 支援者名
