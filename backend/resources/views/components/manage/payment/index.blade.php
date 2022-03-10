@@ -131,6 +131,7 @@
                         @endif
                         <th scope="col" width="10%" class="text-nowrap">購入リターン</th>
                         <th scope="col" width="10%" class="text-nowrap">メッセージ</th>
+                        <th scope="col" width="10%" class="text-nowrap">発送状況</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -390,6 +391,14 @@
                                 </div>
                             </div>
                             {{-- メッセージモーダル --}}
+                        </td>
+                        @if ($payment->is_sent)
+                        <td class="text-success">
+                            発送済
+                        @else
+                        <td>
+                            未発送
+                        @endif
                         </td>
                     </tr>
                     @endforeach
