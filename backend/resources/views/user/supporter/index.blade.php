@@ -25,11 +25,6 @@
                                     発送済にする
                                     <button type="submit" class="cover_link disable-btn"></button>
                                 </div>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> 83422e5680cab0b5243f586b15955ecc012aa5ce
                                 <div class="supporters_tooltip1" ontouchstart="">
                                     <p class="supporters_tooltip_icon">？</p>
                                     <div class="supporters_description1">
