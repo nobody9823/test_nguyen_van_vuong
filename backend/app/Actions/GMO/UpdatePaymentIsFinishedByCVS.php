@@ -9,7 +9,7 @@ class UpdatePaymentIsFinishedByCVS
 {
     public function __construct()
     {
-        $this->cvs_payments = Payment::where('payment_way', 'GMO')->where('payment_way', 'cvs')->get();
+        $this->cvs_payments = Payment::where('payment_api', 'GMO')->where('payment_way', 'cvs')->get();
         $this->card_payment = new GMO;
     }
 
