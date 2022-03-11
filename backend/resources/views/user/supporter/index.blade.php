@@ -185,7 +185,7 @@
                     住所
                 </p>
                 <span class="formatted_postal_code">
-                    {{ $payment->user->address->formatted_postal_code }}
+                    〒{{ $payment->user->address->formatted_postal_code }}
                     {{ $payment->user->address->full_address }}
                 </span>
             </div>
