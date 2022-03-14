@@ -200,7 +200,7 @@
                                             </li>
                                             <li class="menu-item nav_btn taso_li menuset_03 signup_btn mobile_hide">
                                                 <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
-                                                    <p>クラファンに<br />新規登録</p>
+                                                    <p>クラファンに<br />新規会員登録</p>
                                                 </a>
                                             </li>
                                         @endguest
