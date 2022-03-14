@@ -185,6 +185,7 @@ header{width:100%;z-index:50;background:#fff;margin:0 auto; font-size: 1.3rem; f
 .taso_menu > .taso_li > .taso_ul{width:100%;}
 #header_01{display:flex;flex-wrap:wrap;align-items:center;}
 .h_logo_wrapper{display:flex;width: max-content;align-items: center;}
+.h_logo_wrapper p {color: #00AEBD;}
 .h_logo_subtitle{color: #00AEBD;margin: 10px 0 0 10px;}
 .h_logo_css{width:224px;margin:2px 0 0 0;display:block;}
 .h_logo_css_sp{display:none;}
