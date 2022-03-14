@@ -97,6 +97,7 @@
                             <a href="{{ config('app.wp_baseURL') }}" title="FanReturn" rel="home">
                                 <div class="h_logo_wrapper">
                                     <img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
+                                    <p>β版</p>
                                 </div>
                             </a>
                         </div>
