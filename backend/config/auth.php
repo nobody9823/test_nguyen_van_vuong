@@ -46,16 +46,6 @@ return [
             'provider' => 'admins',
         ],
 
-        'talent' => [
-            'driver' => 'session',
-            'provider' => 'talents',
-        ],
-
-        'company' => [
-            'driver' => 'session',
-            'provider' => 'company',
-        ],
-
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
