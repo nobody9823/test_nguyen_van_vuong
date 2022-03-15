@@ -1,1 +1,0 @@
-<x-manage.plan.show role="company" :plan="$plan" />
