@@ -3,7 +3,6 @@
 </span>
 
 <style>
-    /* STAR社員、求人のプレビューメッセージのスタイル */
     span.preview-message {
         background-color: #0B6138;
         color: #FFFFFF;

@@ -1,4 +1,4 @@
-@extends($role.'.layouts.base')
+@extends('admin.layouts.base')
 
 @section('title', 'リターン一覧')
 
@@ -8,7 +8,7 @@
         リターン一覧
         <x-manage.display_index_count :props="$plans" />
     </div>
-    <form action="{{ route($role.'.plan.index') }}" class="form-inline pr-3" method="get" style="position: relative">
+    <form action="{{ route('admin.plan.index') }}" class="form-inline pr-3" method="get" style="position: relative">
         @csrf
         <x-common.add_hidden_query />
         <p>
@@ -68,9 +68,8 @@
             value="{{ Request::get('word') }}">
         <button class="btn btn-primary my-2 my-sm-0" type="submit">検索</button>
     </form>
-    @if ($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') || $role ===
-    "admin"))
-    <a href="{{ route($role.'.plan.create', ['project' => $project]) }}" class="btn btn-success">新規作成</a>
+    @if ($project !== null && ($project->release_status !== '掲載中' && $project->release_status !== '承認待ち'))
+    <a href="{{ route('admin.plan.create', ['project' => $project]) }}" class="btn btn-success">新規作成</a>
     @endif
 </div>
 <x-manage.search-terms role="admin" model='plan' />
@@ -83,9 +82,7 @@
                 <th style="width:25%">リターン内容</th>
                 <th style="width:8%">価格</th>
                 <th style="width:10%">リターン提供日</th>
-                <!-- <th style="width:10%">プレビュー</th> -->
-                @if($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') ||
-                $role === "admin"))
+                @if ($project !== null && ($project->release_status !== '掲載中' && $project->release_status !== '承認待ち'))
                 <th style="width:10%">編集</th>
                 <th style="width:10%">削除</th>
                 @else
@@ -106,19 +103,12 @@
                 <td>
                     {{ $plan->formatted_delivery_date }}
                 </td>
-                <!-- <td>
-                    <a href="{{ route($role.'.plan.preview', ['project' => $plan->project->id, 'plan' => $plan]) }}"
-                        class="btn btn-success">
-                        表示
-                    </a>
-                </td> -->
-                @if($project !== null && (($project->release_status !== '掲載中' && $project->release_status !== '承認待ち') ||
-                $role === "admin"))
+                @if ($project !== null && ($project->release_status !== '掲載中' && $project->release_status !== '承認待ち'))
                 <td>
                     <a class="btn btn-primary"
-                        href="{{ route($role.'.plan.edit', ['project' => $plan->project, 'plan' => $plan]) }}">編集</a>
+                        href="{{ route('admin.plan.edit', ['project' => $plan->project, 'plan' => $plan]) }}">編集</a>
                 </td>
-                <form action="{{ route($role.'.plan.destroy', ['project' => $project, 'plan' =>$plan]) }}"
+                <form action="{{ route('admin.plan.destroy', ['project' => $project, 'plan' =>$plan]) }}"
                     method="POST">
                     @csrf
                     @method('DELETE')
@@ -128,7 +118,7 @@
                 </form>
                 @else
                 <td>
-                    <a class="btn btn-primary" href="{{ route($role.'.plan.show', ['plan' => $plan]) }}">詳細</a>
+                    <a class="btn btn-primary" href="{{ route('admin.plan.show', ['plan' => $plan]) }}">詳細</a>
                 </td>
                 @endif
             </tr>

@@ -70,15 +70,6 @@ class MypageController extends Controller
         ]);
     }
 
-    // 投稿コメント一覧
-    public function contributionComments()
-    {
-        $comments = Comment::getOwnComments()->orderBy('created_at', 'DESC')->get();
-        return view('user.mypage.comment', [
-            'comments' => $comments,
-        ]);
-    }
-
     // お気に入りプロジェクト一覧
     public function likedProjects()
     {
