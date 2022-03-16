@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\MessageController;
-use App\Http\Controllers\User\PlanController;
 use App\Http\Controllers\User\ProjectController;
 use App\Http\Controllers\User\CommentController;
 use App\Http\Controllers\User\ReplyController;
@@ -32,7 +31,6 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{payment_without_globalscope}/payment_for_credit', [ProjectController::class, 'paymentForCredit'])->name('plan.payment_for_credit');
     Route::get('plan/{payment_without_globalscope}/payment_for_cvs', [ProjectController::class, 'paymentForCVS'])->name('plan.payment_for_cvs');
     Route::get('plan/{payment_without_globalscope}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
-    Route::get('plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
     Route::post('comment', [CommentController::class, 'store'])->name('comment.store')->middleware('project.released');
 });
 
