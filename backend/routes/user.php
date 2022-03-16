@@ -71,7 +71,6 @@ Route::group(['middleware' => ['auth:web']], function () {
     });
     Route::get('my_project/{project}/edit_my_project', [MyProjectController::class, 'editMyProject'])->name('my_project.target_number');
     Route::get('/payment_history', [MypageController::class, 'paymentHistory'])->name('payment_history');
-    Route::get('/contribution_comments', [MypageController::class, 'contributionComments'])->name('contribution_comments');
     Route::get('/purchased_projects', [MypageController::class, 'purchasedProjects'])->name('purchased_projects');
     Route::get('/liked_projects', [MypageController::class, 'likedProjects'])->name('liked_projects');
     Route::get('/profile', [MypageController::class, 'profile'])->name('profile');
