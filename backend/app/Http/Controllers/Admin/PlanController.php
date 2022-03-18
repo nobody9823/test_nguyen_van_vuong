@@ -26,9 +26,9 @@ class PlanController extends Controller
                                 ->searchWithPrice($request->min_price, $request->max_price)
                                 ->searchWithEstimatedReturnDate($request->from_date, $request->to_date)
                                 ->paginate(10);
-        
+
         $project = Project::find($request->project);
-        
+
         return view(
             'admin.plan.index',
             [
@@ -55,7 +55,7 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(PlanRequest $request, Project $project, Plan $plan)
-    { 
+    {
         DB::beginTransaction();
         try {
             $plan->project_id = $project->id;
@@ -139,17 +139,6 @@ class PlanController extends Controller
         $plan->delete();
         $plans = Plan::paginate(10);
         return redirect()->action([PlanController::class, 'index'], ['project' => $plan->project])->with('flash_message', 'リターン削除が成功しました。');
-    }
-
-    /**
-     * Display preview of the project
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function preview(Project $project, Plan $plan)
-    {
-        return view('admin.plan.preview', ['project' => $project, 'plan' => $plan]);
     }
 
     public function deleteImage(Plan $plan)

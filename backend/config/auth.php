@@ -46,16 +46,6 @@ return [
             'provider' => 'admins',
         ],
 
-        'talent' => [
-            'driver' => 'session',
-            'provider' => 'talents',
-        ],
-
-        'company' => [
-            'driver' => 'session',
-            'provider' => 'company',
-        ],
-
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -90,16 +80,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-
-        'talents' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Talent::class
-        ],
-
-        'company' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Company::class
-        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -136,20 +116,6 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-
-        'talent' => [
-            'provider' => 'talents',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-
-        'company' => [
-            'provider' => 'company',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ]
     ],
 
     /*

@@ -18,8 +18,6 @@
             リターン詳細
         </h5>
         <div>
-            <!-- <a href="{{ route($role.'.plan.preview', ['project' => $plan->project, 'plan' => $plan]) }}"
-                class="btn btn-success">プレビュー</a> -->
             @if($plan->project !== null && (($plan->project->release_status !== '掲載中' && $plan->project->release_status !== '承認待ち') || $role === "admin"))
             <a href="{{ route($role.'.plan.edit', ['project' => $plan->project, 'plan' => $plan]) }}"
                 class="btn btn-primary">編集</a>

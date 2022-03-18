@@ -1,1 +1,0 @@
-<x-manage.activity_report.index role="talent" :project="$project" :activity_reports="$activity_reports" />
