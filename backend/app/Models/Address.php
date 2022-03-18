@@ -19,6 +19,12 @@ class Address extends Model
         "block",
         "block_number",
         "building",
+        "first_name_kana",
+        "last_name_kana",
+        "first_name",
+        "last_name",
+        "phone_number",
+        "is_main",
     ];
 
     protected $dates = ['deleted_at'];
@@ -26,6 +32,11 @@ class Address extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function addressPayments()
+    {
+        return $this->hasMany('App\Models\AddressPayment');
     }
 
     public function getPrefNameAttribute()

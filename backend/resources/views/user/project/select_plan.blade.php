@@ -278,84 +278,88 @@
 
             </div><!--/.inner_item-->
 
-            <div class="def_outer_gray">
+            <div class="def_outer_gray select_plan">
                 <div class=" def_inner inner_item">
                     <input type="hidden" name="payment_method_id" id="payment_method_id" value="">
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="last_name" class="def_input_100p" value="{{ old('last_name', optional($user->profile)->last_name) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="first_name" class="def_input_100p" value="{{ old('first_name', optional($user->profile)->first_name) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">セイ（全角）<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="last_name_kana" class="def_input_100p" value="{{ old('last_name_kana', optional($user->profile)->last_name_kana) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">メイ（全角）<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="first_name_kana" class="def_input_100p" value="{{ old('first_name_kana', optional($user->profile)->first_name_kana) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">性別<span class="hissu_txt">必須</span></div>
-                        <div class="cp_ipselect cp_normal">
-                            <select name="gender">
-                                <option value="select">選択</option>
-                                <option value="男性" {{ old('gender') === "男性" || optional($user->profile)->gender === "男性" ? 'selected' : '' }}>男性</option>
-                                <option value="女性" {{ old('gender') === "女性" || optional($user->profile)->gender === "女性" ? 'selected' : '' }}>女性</option>
-                                <option value="その他" {{ old('gender') === "その他" || optional($user->profile)->gender === "その他" ? 'selected' : '' }}>その他</option>
-                            </select>
+                    <input type="hidden" name="address_id" id="address_id" value="">
+                    <input type="hidden" name="last_name" id="last_name" value="">
+                    <input type="hidden" name="first_name" id="first_name" value="">
+                    <input type="hidden" name="last_name_kana" id="last_name_kana" value="">
+                    <input type="hidden" name="first_name_kana" id="first_name_kana" value="">
+                    <input type="hidden" name="phone_number" id="phone_number" value="">
+                    <input type="hidden" name="postal_code" id="postal_code" value="">
+                    <input type="hidden" name="prefecture" id="prefecture" value="">
+                    <input type="hidden" name="city" id="city" value="">
+                    <input type="hidden" name="block" id="block" value="">
+                    <input type="hidden" name="block_number" id="block_number" value="">
+                    <input type="hidden" name="building" id="building" value="">
+                    <input type="hidden" name="gender" id="gender" value="{{ optional($user->profile)->gender }}">
+                    <input type="hidden" name="birth_year" id="birth_year" value="{{ $user->profile->getYearOfBirth() }}">
+                    <input type="hidden" name="birth_month" id="birth_month" value="{{ $user->profile->getMonthOfBirth() }}">
+                    <input type="hidden" name="birth_day" id="birth_day" value="{{ $user->profile->getDayOfBirth() }}">
+                    <div class="as_header_02">お届け先を選択してください</div>
+                    @foreach($user->address as $address)
+                    <div class="form_item_list">
+                        <input type="hidden" id="address" name="address[]" value="{{ $address->id }}">
+                        <div class="form_item_button">
+                            <div class="form_item_row">
+                                <div class="form_item_01">
+                                    <input type="radio" id="select_address_{{ $loop->index }}" name="select_address" class="form" value="{{ $loop->index }}" {{ optional($address)->is_main === 1 ?'checked':'' }}>
+                                    <label for="select_address_{{ $loop->index }}" class="radio-fan"></label>
+                                </div>
+                            </div>
                         </div>
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">電話番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-                        <input type="number" name="phone_number" class="def_input_100p" value="{{ old('phone_number', optional($user->profile)->phone_number) === '00000000000' ? '' : old('phone_number', optional($user->profile)->phone_number) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-                        <input type="number" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('postal_code', optional($user->address)->postal_code) === '0' ? '' : old('postal_code', optional($user->address)->postal_code) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">都道府県<span class="hissu_txt">必須</span></div>
-                        <div class="cp_ipselect cp_normal">
-                            <select name="prefecture" class="p-region">
-                                    <option value="non_selected">選択してください</option>
-                                @for($i = 1; $i <= 47; $i++)
-                                    <option value="{{ PrefectureHelper::getPrefectures()[$i] }}" {{ optional($user->address)->prefecture === PrefectureHelper::getPrefectures()[$i] || old('prefecture') === PrefectureHelper::getPrefectures()[$i] ? 'selected' : '' }}>{{ PrefectureHelper::getPrefectures()[$i] }}</option>
-                                @endfor
-                            </select>
+                        <div class="form_item_address">
+                            <div class="form_item_row">
+                                <div class="form_item_02">
+                                    <span name="last_name[]" value="{{ optional($address)->last_name }}">{{ optional($address)->last_name }}</span>&nbsp;
+                                    <span name="first_name[]" value="{{ optional($address)->first_name }}">{{ optional($address)->first_name }}</span>
+                                </div>
+                            </div><!--/form_item_row-->
+                            <div class="form_item_row">
+                                <div class="form_item_03">
+                                    <span name="last_name_kana[]" value="{{ optional($address)->last_name_kana }}">{{ optional($address)->last_name_kana }}</span>&nbsp;
+                                    <span name="first_name_kana[]" value="{{ optional($address)->first_name_kana }}">{{ optional($address)->first_name_kana }}</span>
+                                </div>
+                            </div><!--/form_item_row-->
+                            <div class="form_item_row">
+                                <div class="form_item_04">
+                                    <span name="phone_number[]" value="{{ optional($address)->phone_number }}">{{ optional($address)->phone_number }}</span>
+                                </div>
+                            </div><!--/form_item_row-->
+                            <div class="form_item_row">
+                                <div class="form_item_05">
+                                    <span name="postal_code[]" value="{{ optional($address)->postal_code }}">{{ optional($address)->postal_code }}</span>
+                                </div>
+                            </div><!--/form_item_row-->
+                            <div class="form_item_row">
+                                <div class="form_item_06">
+                                    <span name="prefecture[]" value="{{ optional($address)->prefecture }}">{{ optional($address)->prefecture }}</span>
+                                    <span name="city[]" value="{{ optional($address)->city }}">{{ optional($address)->city }}</span>
+                                    <span name="block[]" value="{{ optional($address)->block }}">{{ optional($address)->block }}</span>
+                                    <span name="block_number[]" value="{{ optional($address)->block_number }}">{{ optional($address)->block_number }}</span>&nbsp;
+                                    <span name="building[]" value="{{ optional($address)->building }}">{{ optional($address)->building }}</span>
+                                </div>
+                            </div><!--/form_item_row-->
+                            <div class="form_item_row">
+                                <div class="form_item_tit">
+                                    <button type="button" id="openModalEdit" class="btn edit_button" value="{{ $loop->index }}">編集</button>
+                                    @if ($plans instanceof \App\Models\Plan)
+                                    <a class="delete_button" href="{{ route('user.plan.deleteAddress', ['project' => $project, 'plan' => $plans, 'address_id' => $address->id, 'single_return' => true]) }}">削除</a>
+                                    @else
+                                    <a class="delete_button" href="{{ route('user.plan.deleteAddress', ['project' => $project, 'plan' => $plan, 'address_id' => $address->id, 'single_return' => false]) }}">削除</a>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                    </div><!--/form_item_row-->
+                    </div><!--/form_item_list-->
+                    @endforeach
 
-                    <div class="form_item_row">
-                        <div class="form_item_tit">市区町村<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="city" class="p-locality def_input_100p" value="{{ old('city', optional($user->address)->city) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">町域<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="block" class="p-street-address def_input_100p"  value="{{ old('block', optional($user->address)->block) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
-                        <input type="text" name="block_number" class="p-street-address def_input_100p"  value="{{ old('block_number', optional($user->address)->block_number) }}">
-                    </div><!--/form_item_row-->
-
-                    <div class="form_item_row">
-                        <div class="form_item_tit">建物名<span class="nini_txt">任意</span></div>
-                        <input type="text" name="building" class="p-extended-address def_input_100p"  value="{{ old('building', optional($user->address)->building) }}">
-                    </div><!--/form_item_row-->
-
+                    <div class="def_btn">
+                        <button type="button" id="openModal" class="disable-btn">
+                            <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">お届け先を追加する</p>
+                        </button>
+                    </div>
                     <div class="form_item_row">
                         <div class="form_item_tit">生年月日<span class="hissu_txt">必須</span></div>
                         <div class="cp_ipselect cp_normal" style="margin-right: 10px;">
@@ -380,7 +384,6 @@
                             <select id="birth_day" name="birth_day" data-old-value="{{ old('birth_day', $user->profile->getDayOfBirth()) }}"></select>
                         </div>
                     </div><!--/form_item_row-->
-
                     <div class="form_item_row">
                         <div class="form_item_tit">備考欄<span class="nini_txt">任意</span>　<span class="disclaimer">※300文字以内で入力してください</span></div>
                         <textarea name="remarks" class="def_textarea" rows="6">{{ old('remarks') }}</textarea>
@@ -392,7 +395,7 @@
                         <textarea name="comments" class="def_textarea" rows="6">{{ old('comments') }}</textarea>
                     </div><!--/form_item_row-->
                     <div class="def_btn">
-                        <button type="button" class="disable-btn" onclick="doPurchase()">
+                        <button type="button" id="confirm_button" class="disable-btn">
                             <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">確認画面へ</p>
                         </button>
                     </div>
@@ -403,8 +406,80 @@
         </div>
     </form>
 </div>
-@endsection
 
+<section id="modalArea" class="modalArea">
+    <div id="modalBg" class="modalBg"></div>
+    <div class="modalWrapper">
+        <form id="form1" action="" class="h-adr" method="post">
+            @csrf
+            <input type="hidden" name="address_id" id="address_id_modal" value="">
+            <input type="hidden" name="checked_id" id="checked_id" value="">
+            <div class="modalContents">
+                <div class="form_item_row">
+                    <div class="form_item_tit">姓名（全角）<span class="hissu_txt">必須</span></div>
+                    <input type="text" id="last_name_modal" name="last_name" class="def_input_50p" value="{{ old('last_name_model') }}">
+                    <input type="text" id="first_name_modal" name="first_name" class="def_input_50p" value="{{ old('first_name_model') }}">
+                </div><!--/form_item_row-->
+                <div class="form_item_row">
+                    <div class="form_item_tit">セイメイ（全角）<span class="hissu_txt">必須</span></div>
+                    <input type="text" id="last_name_kana_modal" name="last_name_kana" class="def_input_50p" value="{{ old('last_name_kana_model') }}">
+                    <input type="text" id="first_name_kana_modal" name="first_name_kana" class="def_input_50p" value="{{ old('first_name_kana_model') }}">
+                </div><!--/form_item_row-->
+                <div class="form_item_row">
+                    <div class="form_item_tit">電話番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
+                    <input type="number" id="phone_number_modal" name="phone_number" class="def_input_100p" value="{{ old('phone_number_model') === '00000000000' ? '' : old('phone_number_model') }}">
+                </div><!--/form_item_row-->
+
+                <div class="form_item_row">
+                    <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
+                    <input type="number" id="postal_code_modal" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('postal_code_model') === '0' ? '' : old('postal_code_model') }}">
+                </div><!--/form_item_row-->
+
+                <div class="form_item_row">
+                    <div class="form_item_tit">都道府県<span class="hissu_txt">必須</span></div>
+                    <div class="cp_ipselect cp_normal">
+                        <select id="prefecture_modal" name="prefecture" class="p-region">
+                                <option value="non_selected">選択してください</option>
+                            @for($i = 1; $i <= 47; $i++)
+                                <option value="{{ PrefectureHelper::getPrefectures()[$i] }}" {{ old('prefecture_model') === PrefectureHelper::getPrefectures()[$i] ? 'selected' : '' }}>{{ PrefectureHelper::getPrefectures()[$i] }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                </div><!--/form_item_row-->
+
+                <div class="form_item_row">
+                    <div class="form_item_tit">市区町村<span class="hissu_txt">必須</span></div>
+                    <input type="text" id="city_modal" name="city" class="p-locality def_input_100p" value="{{ old('city_model') }}">
+                </div><!--/form_item_row-->
+
+                <div class="form_item_row">
+                    <div class="form_item_tit">町域<span class="hissu_txt">必須</span></div>
+                    <input type="text" id="block_modal" name="block" class="p-street-address def_input_100p"  value="{{ old('block_model') }}">
+                </div><!--/form_item_row-->
+
+                <div class="form_item_row">
+                    <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
+                    <input type="text" id="block_number_modal" name="block_number" class="p-street-address def_input_100p"  value="{{ old('block_number_model') }}">
+                </div><!--/form_item_row-->
+
+                <div class="form_item_row">
+                    <div class="form_item_tit">建物名<span class="nini_txt">任意</span></div>
+                    <input type="text" id="building_modal" name="building" class="p-extended-address def_input_100p"  value="{{ old('building_model') }}">
+                </div><!--/form_item_row-->
+
+                <div class="def_btn">
+                    <button id="modal_button" type="button" class="disable-btn">
+                        <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存</p>
+                    </button>
+                </div>
+            </div>
+        </form>
+    <div id="closeModal" class="closeModal">
+      ×
+    </div>
+  </div>
+</section>
+@endsection
 @section('script')
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" type="text/javascript" charset="UTF-8"></script>
 
@@ -466,6 +541,74 @@ window.onload = function(){
         }
     }
 }
+$('#openModal, #openModalEdit').click(function(){
+    if ($(this).attr('id') == "openModalEdit") {
+        id = $(this).val()
+        
+        $('#last_name_modal').val($('span[name="last_name[]"').eq(id).text())
+        $('#first_name_modal').val($('span[name="first_name[]"').eq(id).text())
+        $('#last_name_kana_modal').val($('span[name="last_name_kana[]"').eq(id).text())
+        $('#first_name_kana_modal').val($('span[name="first_name_kana[]"').eq(id).text())
+        $('#phone_number_modal').val($('span[name="phone_number[]"').eq(id).text())
+        $('#postal_code_modal').val($('span[name="postal_code[]"').eq(id).text())
+        $('#prefecture_modal').val($('span[name="prefecture[]"').eq(id).text())
+        $('#city_modal').val($('span[name="city[]"').eq(id).text())
+        $('#block_modal').val($('span[name="block[]"').eq(id).text())
+        $('#block_number_modal').val($('span[name="block_number[]"').eq(id).text())
+        $('#building_modal').val($('span[name="building[]"').eq(id).text())
+        $('#address_id_modal').val($('input[name="address[]"').eq(id).val())
+    } else {
+        $('#last_name_modal').val("")
+        $('#first_name_modal').val("")
+        $('#last_name_kana_modal').val("")
+        $('#first_name_kana_modal').val("")
+        $('#phone_number_modal').val("")
+        $('#postal_code_modal').val("")
+        $('#prefecture_modal').val("")
+        $('#city_modal').val("")
+        $('#block_modal').val("")
+        $('#block_number_modal').val("")
+        $('#building_modal').val("")
+        $('#address_id_modal').val("")
+    }
+    $('#modalArea').fadeIn();
+});
+$('#closeModal , #modalBg').click(function(){
+    $('#modalArea').fadeOut();
+});
+$('#modal_button').click(function() {
+    var checked_id = []
+    @if ($plans instanceof \App\Models\Plan)
+        $('input[name="plan_ids[]"]:checked').each(function() {
+            checked_id.push($(this).attr('id'))
+        });
+    @endif
+    $('#checked_id').val(checked_id)
+    if ($('#address_id_modal').val() == "") {
+        $('#form1').attr('action', "{{ route('user.plan.registAddress', ['project' => $project, 'inviter_code' => $inviter_code ?? '']) }}")
+    } else {
+        $('#form1').attr('action', "{{ route('user.plan.editAddress', ['project' => $project, 'inviter_code' => $inviter_code ?? '']) }}")
+    }
+    $('#form1').submit()
+})
+
+$('#confirm_button').click(function() {
+    id = $('input:radio[name="select_address"]:checked').val()
+    $('#last_name').val($('span[name="last_name[]"').eq(id).text())
+    $('#first_name').val($('span[name="first_name[]"').eq(id).text())
+    $('#last_name_kana').val($('span[name="last_name_kana[]"').eq(id).text())
+    $('#first_name_kana').val($('span[name="first_name_kana[]"').eq(id).text())
+    $('#phone_number').val($('span[name="phone_number[]"').eq(id).text())
+    $('#postal_code').val($('span[name="postal_code[]"').eq(id).text())
+    $('#prefecture').val($('span[name="prefecture[]"').eq(id).text())
+    $('#city').val($('span[name="city[]"').eq(id).text())
+    $('#block').val($('span[name="block[]"').eq(id).text())
+    $('#block_number').val($('span[name="block_number[]"').eq(id).text())
+    $('#building').val($('span[name="building[]"').eq(id).text())
+    $('#address_id').val($('input[name="address[]"').eq(id).val())
+    doPurchase()
+})
+
 </script>
 <script src="{{ asset('/js/Plans.js') }}"></script>
 

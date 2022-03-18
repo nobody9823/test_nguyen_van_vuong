@@ -135,7 +135,7 @@ class User extends Authenticatable
 
     public function address()
     {
-        return $this->hasOne('App\Models\Address');
+        return $this->hasMany('App\Models\Address');
     }
 
     public function profile()
@@ -262,8 +262,10 @@ class User extends Authenticatable
 
     public function saveAddress(array $value): void
     {
-        if (isset($this->address)) {
-            $this->address()->save($this->address->fill($value));
+        if (isset($value['address_id'])) {
+            $this->address()->save(
+                $this->address->where('id', $value['address_id'])->first()->fill($value)
+            );
         } else {
             $address = new Address();
             $this->address()->save($address->fill($value));

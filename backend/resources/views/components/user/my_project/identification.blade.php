@@ -1,4 +1,4 @@
-<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr" enctype="multipart/form-data">
+<form action="{{ route('user.my_project.project.update', ['project' => $project, 'current_tab' => 'identification']) }}" method="post" class="h-adr my_project" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="ps_description">
@@ -8,89 +8,77 @@
         </ul>
     </div>
     <span class="p-country-name" style="display:none;">Japan</span>
-    <div class="form_item_row">
-        <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>
-        <input type="text" name="last_name" class="def_input_100p"
-            value="{{ old('last_name', optional($user->profile)->last_name) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="last_name" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
-        <input type="text" name="first_name" class="def_input_100p"
-            value="{{ old('first_name', optional($user->profile)->first_name) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="first_name" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">セイ（全角）<span class="hissu_txt">必須</span></div>
-        <input type="text" name="last_name_kana" class="def_input_100p"
-            value="{{ old('last_name_kana', optional($user->profile)->last_name_kana) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="last_name_kana" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">メイ（全角）<span class="hissu_txt">必須</span></div>
-        <input type="text" name="first_name_kana" class="def_input_100p"
-            value="{{ old('first_name_kana', optional($user->profile)->first_name_kana) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="first_name_kana" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">電話番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-        <input type="number" name="phone_number" class="def_input_100p"
-            value="{{ old('phone_number', optional($user->profile)->phone_number !== '00000000000' ? optional($user->profile)->phone_number : '') }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="phone_number" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-        <input type="number" id="postal_code" name="postal_code" class="p-postal-code def_input_100p"
-            value="{{ old('postal_code', optional($user->address)->postal_code) }}" onchange="updateMyProject.checkDateIsFilled(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="postal_code" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">都道府県<span class="hissu_txt">必須</span></div>
-        <div class="cp_ipselect cp_normal">
-            <select id="prefecture" name="prefecture" class="p-region" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-                    <option value="non_selected">選択してください</option>
-                @for($i = 1; $i <= 47; $i++)
-                    <option value="{{ PrefectureHelper::getPrefectures()[$i] }}" {{ optional($user->address)->prefecture === PrefectureHelper::getPrefectures()[$i] || old('prefecture') === PrefectureHelper::getPrefectures()[$i] ? 'selected' : '' }}>{{ PrefectureHelper::getPrefectures()[$i] }}</option>
-                @endfor
-            </select>
+    @foreach($user->address as $address)
+    <div class="form_item_list">
+        <input type="hidden" id="address" name="address[]" value="{{ $address->id }}">
+        <div class="form_item_button">
+            <div class="form_item_row">
+                <div class="form_item_01">
+                    <input 
+                        type="radio"
+                        id="select_address_{{ $loop->index }}"
+                        name="select_address"
+                        class="form"
+                        value="{{ $loop->index }}"
+                        onclick="updateMyProject.inputIsMain(this, {{ $address->id }})"
+                        {{ optional($address)->is_main === 1 ?'checked':'' }}
+                    >
+                    <label for="select_address_{{ $loop->index }}" class="radio-fan"></label>
+                    <div class="spinner-wrapper">
+                        <div class="spinner" id="spinner_select_address_{{ $loop->index }}"></div>
+                        <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_select_address_{{ $loop->index }}">メインアカウントに更新しました</p>
+                        <span id="errors_select_address_{{ $loop->index }}" style="color: red;"></span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form_item_tit">
-            <x-common.async-submit-message propName="prefecture" />
+        <div class="form_item_address">
+            <div class="form_item_row">
+                <div class="form_item_02">
+                    <span name="last_name[]" value="{{ optional($address)->last_name }}">{{ optional($address)->last_name }}</span>&nbsp;
+                    <span name="first_name[]" value="{{ optional($address)->first_name }}">{{ optional($address)->first_name }}</span>
+                </div>
+            </div><!--/form_item_row-->
+            <div class="form_item_row">
+                <div class="form_item_03">
+                    <span name="last_name_kana[]" value="{{ optional($address)->last_name_kana }}">{{ optional($address)->last_name_kana }}</span>&nbsp;
+                    <span name="first_name_kana[]" value="{{ optional($address)->first_name_kana }}">{{ optional($address)->first_name_kana }}</span>
+                </div>
+            </div><!--/form_item_row-->
+            <div class="form_item_row">
+                <div class="form_item_04">
+                    <span name="phone_number[]" value="{{ optional($address)->phone_number }}">{{ optional($address)->phone_number }}</span>
+                </div>
+            </div><!--/form_item_row-->
+            <div class="form_item_row">
+                <div class="form_item_05">
+                    <span name="postal_code[]" value="{{ optional($address)->postal_code }}">{{ optional($address)->postal_code }}</span>
+                </div>
+            </div><!--/form_item_row-->
+            <div class="form_item_row">
+                <div class="form_item_06">
+                    <span name="prefecture[]" value="{{ optional($address)->prefecture }}">{{ optional($address)->prefecture }}</span>
+                    <span name="city[]" value="{{ optional($address)->city }}">{{ optional($address)->city }}</span>
+                    <span name="block[]" value="{{ optional($address)->block }}">{{ optional($address)->block }}</span>
+                    <span name="block_number[]" value="{{ optional($address)->block_number }}">{{ optional($address)->block_number }}</span>&nbsp;
+                    <span name="building[]" value="{{ optional($address)->building }}">{{ optional($address)->building }}</span>
+                </div>
+            </div><!--/form_item_row-->
+            <div class="form_item_row">
+                <div class="form_item_tit">
+                    <button type="button" id="openModalEdit" class="btn btn-primary form-btn edit_button" value="{{ $loop->index }}">編集</button>
+                    <a class="delete_button" href="{{ route('user.my_project.delete_address', ['project' => $project, 'address_id' => $address->id]) }}">削除</a>
+                </div>
+            </div>
         </div>
     </div>
-
+    @endforeach
     <div class="form_item_row">
-        <div class="form_item_tit">市区町村<span class="hissu_txt">必須</span></div>
-        <input type="text" id="city" name="city" class="p-locality def_input_100p"
-            value="{{ old('city', optional($user->address)->city) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="city" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">町域<span class="hissu_txt">必須</span></div>
-        <input type="text" id="block" name="block" class="p-street-address def_input_100p"
-            value="{{ old('block', optional($user->address)->block) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="block" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
-        <input type="text" name="block_number" class="p-extended-address def_input_100p"
-            value="{{ old('block_number', optional($user->address)->block_number) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="block_number" />
-    </div>
-
-    <div class="form_item_row">
-        <div class="form_item_tit">建物名<span class="nini_txt">任意</span></div>
-        <input type="text" name="building" class="p-extended-address def_input_100p"
-            value="{{ old('building', optional($user->address)->building) }}" oninput="updateMyProject.textInput(this, {{ $project->id }})">
-        <x-common.async-submit-message propName="building" />
+        <div class="form_item_tit def_btn">
+            <button type="button" id="openModal" class="disable-btn">
+                <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">お届け先を追加する</p>
+            </button>
+        </div>
     </div>
 
     <div class="form_item_row">
@@ -177,3 +165,129 @@
 
     <x-common.navigating_page_buttons :project="$project" nextPageButton="unnecessary" />
 </form>
+
+<section id="modalArea" class="modalArea">
+    <div id="modalBg" class="modalBg"></div>
+    <div class="modalWrapper">
+        <form id="form1" action="" class="h-adr" method="post">
+            @csrf
+            <input type="hidden" name="address_id" id="address_id_modal" value="">
+            <input type="hidden" name="is_main" id="is_main_modal" value="">
+            <div class="form_item_row">
+                <div class="form_item_tit">姓（全角）<span class="hissu_txt">必須</span></div>
+                <input type="text" id="last_name_modal" name="last_name" class="def_input_100p">
+            </div>
+
+            <div class="form_item_row">
+                <div class="form_item_tit">名（全角）<span class="hissu_txt">必須</span></div>
+                <input type="text" id="first_name_modal" name="first_name" class="def_input_100p">
+            </div>
+
+            <div class="form_item_row">
+                <div class="form_item_tit">セイ（全角）<span class="hissu_txt">必須</span></div>
+                <input type="text" id="last_name_kana_modal" name="last_name_kana" class="def_input_100p">
+            </div>
+
+            <div class="form_item_row">
+                <div class="form_item_tit">メイ（全角）<span class="hissu_txt">必須</span></div>
+                <input type="text" id="first_name_kana_modal" name="first_name_kana" class="def_input_100p">
+            </div>
+
+            <div class="form_item_row">
+                <div class="form_item_tit">電話番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
+                <input type="number" id="phone_number_modal" name="phone_number" class="def_input_100p">
+            </div>
+
+            <div class="form_item_row">
+                <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
+                <input type="number" id="postal_code_modal" name="postal_code" class="p-postal-code def_input_100p">
+            </div>
+
+            <div class="form_item_row">
+                <div class="form_item_tit">都道府県<span class="hissu_txt">必須</span></div>
+                <div class="cp_ipselect cp_normal">
+                    <select id="prefecture_modal" name="prefecture" class="p-region">
+                            <option value="non_selected">選択してください</option>
+                        @for($i = 1; $i <= 47; $i++)
+                            <option value="{{ PrefectureHelper::getPrefectures()[$i] }}">{{ PrefectureHelper::getPrefectures()[$i] }}</option>
+                        @endfor
+                    </select>
+                </div>
+            </div>
+
+            <div class="form_item_row">
+                <div class="form_item_tit">市区町村<span class="hissu_txt">必須</span></div>
+                <input type="text" id="city_modal" name="city" class="p-locality def_input_100p">
+            </div>
+
+            <div class="form_item_row">
+                <div class="form_item_tit">町域<span class="hissu_txt">必須</span></div>
+                <input type="text" id="block_modal" name="block" class="p-street-address def_input_100p">
+            </div>
+
+            <div class="form_item_row">
+                <div class="form_item_tit">番地<span class="hissu_txt">必須</span></div>
+                <input type="text" id="block_number_modal" name="block_number" class="p-extended-address def_input_100p">
+            </div>
+
+            <div class="form_item_row">
+                <div class="form_item_tit">建物名<span class="nini_txt">任意</span></div>
+                <input type="text" id="building_modal" name="building" class="p-extended-address def_input_100p">
+            </div>
+            <div class="def_btn">
+                <button id="modal_button" type="button" class="disable-btn">
+                    <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">保存</p>
+                </button>
+            </div>
+        </form>
+    <div id="closeModal" class="closeModal">
+      ×
+    </div>
+  </div>
+</section>
+<script>
+$('#openModal, #openModalEdit').click(function() {
+    if ($(this).attr('id') == "openModalEdit") {
+        id = $(this).val()
+        $('#last_name_modal').val($('span[name="last_name[]"').eq(id).text())
+        $('#first_name_modal').val($('span[name="first_name[]"').eq(id).text())
+        $('#last_name_kana_modal').val($('span[name="last_name_kana[]"').eq(id).text())
+        $('#first_name_kana_modal').val($('span[name="first_name_kana[]"').eq(id).text())
+        $('#phone_number_modal').val($('span[name="phone_number[]"').eq(id).text())
+        $('#postal_code_modal').val($('span[name="postal_code[]"').eq(id).text())
+        $('#prefecture_modal').val($('span[name="prefecture[]"').eq(id).text())
+        $('#city_modal').val($('span[name="city[]"').eq(id).text())
+        $('#block_modal').val($('span[name="block[]"').eq(id).text())
+        $('#block_number_modal').val($('span[name="block_number[]"').eq(id).text())
+        $('#building_modal').val($('span[name="building[]"').eq(id).text())
+        $('#address_id_modal').val($('input[name="address[]"').eq(id).val())
+    } else {
+        $('#last_name_modal').val("")
+        $('#first_name_modal').val("")
+        $('#last_name_kana_modal').val("")
+        $('#first_name_kana_modal').val("")
+        $('#phone_number_modal').val("")
+        $('#postal_code_modal').val("")
+        $('#prefecture_modal').val("")
+        $('#city_modal').val("")
+        $('#block_modal').val("")
+        $('#block_number_modal').val("")
+        $('#building_modal').val("")
+        $('#address_id_modal').val("")
+    }
+    $('#modalArea').fadeIn();
+});
+$('#closeModal , #modalBg').click(function(){
+    $('#modalArea').fadeOut();
+});
+$('#modal_button').click(function() {
+    if ($('#address_id_modal').val() == "") {
+        $('#is_main_modal').val(1)
+        $('#form1').attr('action', "{{ route('user.my_project.regist_address', ['project' => $project]) }}")
+    } else {
+        $('#is_main_modal').val(1)
+        $('#form1').attr('action', "{{ route('user.my_project.edit_address', ['project' => $project]) }}")
+    }
+    $('#form1').submit()
+})
+</script>

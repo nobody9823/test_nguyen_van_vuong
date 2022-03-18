@@ -78,6 +78,11 @@ class Payment extends Model
         return $this->hasMany('App\Models\MessageContent');
     }
 
+    public function addressPayments()
+    {
+        return $this->hasMany('App\Models\AddressPayment');
+    }
+
     public function scopeNotGetUnderSuspensionProject($query)
     {
         return $query->whereIn('project_id', Project::select('id')

@@ -79,11 +79,11 @@
         <div class="av_box">
             <div class="av_tit">お届け先情報</div>
             <div class="av_txt">
-                〒{{ Auth::user()->address->postal_code }}<br>
-                {{ Auth::user()->address->prefecture }}
-                {{ Auth::user()->address->city }}
-                {{ Auth::user()->address->block }}
-                {{ Auth::user()->address->building }}<br>
+                〒{{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->postal_code }}<br>
+                {{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->prefecture }}
+                {{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->city }}
+                {{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->block }}
+                {{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->building }}<br>
             </div>
         </div><!--/av_box-->
 
