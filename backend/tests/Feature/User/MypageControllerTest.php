@@ -81,18 +81,6 @@ class MypageControllerTest extends TestCase
             ->assertViewHas(['payments', 'project']);
     }
 
-    public function testContributionComments()
-    {
-        $this->withoutExceptionHandling();
-
-        $response = $this->actingAs($this->user)
-            ->from(route('user.profile'))
-            ->get(route('user.contribution_comments'));
-        $response->assertOk()
-            ->assertViewIs('user.mypage.comment')
-            ->assertViewHas('comments');
-    }
-
     public function testLikedProjects()
     {
         $this->withoutExceptionHandling();

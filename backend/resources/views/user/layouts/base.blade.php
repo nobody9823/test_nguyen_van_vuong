@@ -67,7 +67,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" rel="stylesheet">
     <link rel='stylesheet' href={{ asset('css/toastr.min.css') }} />
     <link href="{{ asset('css/reset.css') }}" type="text/css" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}?{{ \Carbon\Carbon::now()}}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}?20220310" type="text/css" rel="stylesheet">
     @yield('css')
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
@@ -97,6 +97,7 @@
                             <a href="{{ config('app.wp_baseURL') }}" title="FanReturn" rel="home">
                                 <div class="h_logo_wrapper">
                                     <img class="h_logo_css" src="{{ asset('image/logo-color.svg') }}">
+                                    <p>β版</p>
                                 </div>
                             </a>
                         </div>
@@ -150,7 +151,7 @@
                                             </li>
                                             <li class="menu-item nav_btn taso_li menuset_06">
                                                 <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
-                                                    <p class="nav_btn_tit_L">クラファンに新規登録</p>
+                                                    <p class="nav_btn_tit_L">クラファンに新規会員登録</p>
                                                 </a>
                                             </li>
                                         @endguest
@@ -199,7 +200,7 @@
                                             </li>
                                             <li class="menu-item nav_btn taso_li menuset_03 signup_btn mobile_hide">
                                                 <a href="{{ route('user.pre_create') }}" class="top_menu-1 nav_btn_link">
-                                                    <p>クラファンに<br />新規登録</p>
+                                                    <p>クラファンに<br />新規会員登録</p>
                                                 </a>
                                             </li>
                                         @endguest

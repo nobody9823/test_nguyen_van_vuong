@@ -10,7 +10,6 @@ use App\Models\Plan;
 use App\Models\Project;
 use App\Models\Payment;
 use App\Policies\MessageContentPolicy;
-use App\Policies\OptionPolicy;
 use App\Policies\PaymentPolicy;
 use App\Policies\PlanPolicy;
 use App\Policies\ProjectPolicy;
@@ -28,7 +27,6 @@ class AuthServiceProvider extends ServiceProvider
         Plan::class => PlanPolicy::class,
         Payment::class => PaymentPolicy::class,
         MessageContent::class => MessageContentPolicy::class,
-        Option::class => OptionPolicy::class,
     ];
 
     /**

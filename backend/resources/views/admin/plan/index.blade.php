@@ -1,1 +1,1 @@
-<x-manage.plan.index role="admin" :project="$project" :plans="$plans" />
+<x-manage.plan.index :project="$project" :plans="$plans" />

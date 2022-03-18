@@ -20,7 +20,7 @@
     </a>
 </div>
 
-<!-- @if (isset($previewForPsReturn))
+@if (isset($previewForPsReturn))
 <div class="def_btn btn_margin_bottom">
     <a
         style="font-size: 1.8rem;font-weight: bold;color: #fff; display: block"
@@ -40,4 +40,4 @@
         プロジェクトプレビュー
     </a>
 </div>
-@endif -->
+@endif

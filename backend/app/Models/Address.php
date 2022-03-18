@@ -51,7 +51,7 @@ class Address extends Model
 
     public function getFullAddressAttribute()
     {
-        return $this->prefecture . $this->city . $this->block . $this->building;
+        return $this->prefecture . $this->city . $this->block . $this->block_number . $this->building;
     }
 
     public static function initialize()
