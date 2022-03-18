@@ -57,18 +57,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('web')
                 ->as('admin.')
                 ->group(base_path('routes/admin.php'));
-
-            //talent page
-            // Route::prefix('talent')
-            //     ->middleware('web')
-            //     ->as('talent.')
-            //     ->group(base_path('routes/talent.php'));
-
-            //company page
-            // Route::prefix('company')
-            //     ->middleware('web')
-            //     ->as('company.')
-            //     ->group(base_path('routes/company.php'));
         });
     }
 
