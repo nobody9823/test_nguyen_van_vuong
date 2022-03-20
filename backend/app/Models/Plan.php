@@ -25,7 +25,8 @@ class Plan extends Model
         'limit_of_supporters',
         'limit_of_supporters_is_required',
         'delivery_date',
-        'image_url'
+        'image_url',
+        'sort_no',
     ];
 
     protected $casts = [
@@ -154,7 +155,24 @@ class Plan extends Model
             'limit_of_supporters' => 1,
             'limit_of_supporters_is_required' => false,
             'delivery_date' => $project->end_date,
-            'image_url' => 'public/sampleImage/now_printing.png'
+            'image_url' => 'public/sampleImage/now_printing.png',
+            'sort_no' => $project->sort_no + 1,
         ]);
+    }
+
+    /**
+     * ソート順最大値取得
+     * getMaxSortNo
+     *
+     * プロジェクトIDに紐づくレコードのソート順の最大値を取得する
+     *
+     * @param int $project_id
+     *    プロジェクトID
+     * @return int
+     *    プロジェクトIDに紐づくレコードのソート順の最大値
+     */
+    public function getMaxSortNo($project_id)
+    {
+        return Plan::where('project_id', $project_id)->max('sort_no');
     }
 }
