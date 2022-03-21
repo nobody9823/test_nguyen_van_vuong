@@ -168,7 +168,7 @@ class PaymentController extends Controller
 
     public function alterSales(AlterTranRequest $request)
     {
-        $payments = Payment::find($request->payments);
+        $payments = Payment::withoutGlobalScopes()->find($request->payments);
         $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($payments, 'AUTH');
         if ($result['status']) {
             return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
@@ -182,7 +182,7 @@ class PaymentController extends Controller
 
     public function alterCancel(AlterTranRequest $request)
     {
-        $payments = Payment::find($request->payments);
+        $payments = Payment::withoutGlobalScopes()->find($request->payments);
         $result = $this->remittance->IsExistsPaymentsJobCdConditions($payments, ['VOID', 'EXPIRED', 'CANCEL']);
         if ($result['status']) {
             return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
