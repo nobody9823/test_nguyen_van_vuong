@@ -34,9 +34,9 @@ class Address extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function addressPayments()
+    public function includedPayments()
     {
-        return $this->hasMany('App\Models\AddressPayment');
+        return $this->belongsToMany('App\Models\Payment', 'App\Models\AddressPayment');
     }
 
     public function getPrefNameAttribute()

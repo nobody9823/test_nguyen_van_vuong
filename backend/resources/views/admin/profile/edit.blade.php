@@ -13,7 +13,7 @@
                         enctype="multipart/form-data" method="POST">
                         @method('PATCH')
                         @csrf
-                        <x-admin.profile.form :user="$user" />
+                        <x-admin.profile.form :user="$user" :address="$address" />
                     </form>
                 </div>
             </div>

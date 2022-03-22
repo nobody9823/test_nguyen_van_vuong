@@ -3738,3 +3738,7 @@ border-radius: 9px; display: flex; justify-content: center; align-items: center;
   vertical-align: top;
   height: 42px;
 }
+
+.identidication div.spinner-wrapper {
+	margin: 0;
+}

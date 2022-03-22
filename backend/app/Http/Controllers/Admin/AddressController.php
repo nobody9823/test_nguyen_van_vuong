@@ -8,6 +8,8 @@ use App\Models\Address;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use Illuminate\Validation\Rule;
+
 class AddressController extends Controller
 {
     /**
@@ -67,11 +69,13 @@ class AddressController extends Controller
      * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user, Request $request)
     {
-        if ($user->address) {
+        $address = $user->address->where('id', $request->address_id)->first();
+        if ($user && $address) {
             return view('admin.address.edit', [
-                'user' => $user
+                'user' => $user,
+                'address' => $address
             ]);
         } else {
             return redirect()->action([AddressController::class, 'create'], ['user'=>$user])->with('error', '住所が存在しないため、作成画面へ遷移しました。');
@@ -85,8 +89,14 @@ class AddressController extends Controller
      * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function update(AddressRequest $request, User $user, Address $address)
+    public function update(Request $request, User $user, Address $address)
     {
+        $request->validate([
+            'postal_code' => ['required', 'string', 'size:7'],
+            'city' => ['required', 'string'],
+            'block' => ['required', 'string'],
+            'building' => ['nullable', 'string'],
+        ]);
         $address->fill($request->all())->save();
         return redirect()->action([UserController::class,'index'])->with('flash_message', '住所の更新が完了しました。');
     }

@@ -293,10 +293,6 @@
                     <input type="hidden" name="block" id="block" value="">
                     <input type="hidden" name="block_number" id="block_number" value="">
                     <input type="hidden" name="building" id="building" value="">
-                    <input type="hidden" name="gender" id="gender" value="{{ optional($user->profile)->gender }}">
-                    <input type="hidden" name="birth_year" id="birth_year" value="{{ $user->profile->getYearOfBirth() }}">
-                    <input type="hidden" name="birth_month" id="birth_month" value="{{ $user->profile->getMonthOfBirth() }}">
-                    <input type="hidden" name="birth_day" id="birth_day" value="{{ $user->profile->getDayOfBirth() }}">
                     <div class="as_header_02">お届け先を選択してください</div>
                     @foreach($user->address as $address)
                     <div class="form_item_list">
@@ -360,6 +356,18 @@
                             <p style="font-size: 1.8rem;font-weight: bold;color: #fff;">お届け先を追加する</p>
                         </button>
                     </div>
+
+                    <div class="form_item_row">
+                        <div class="form_item_tit">性別<span class="hissu_txt">必須</span></div>
+                        <div class="cp_ipselect cp_normal">
+                            <select name="gender">
+                                <option value="select">選択</option>
+                                <option value="男性" {{ old('gender') === "男性" || optional($user->profile)->gender === "男性" ? 'selected' : '' }}>男性</option>
+                                <option value="女性" {{ old('gender') === "女性" || optional($user->profile)->gender === "女性" ? 'selected' : '' }}>女性</option>
+                                <option value="その他" {{ old('gender') === "その他" || optional($user->profile)->gender === "その他" ? 'selected' : '' }}>その他</option>
+                            </select>
+                        </div>
+                    </div><!--/form_item_row-->
                     <div class="form_item_row">
                         <div class="form_item_tit">生年月日<span class="hissu_txt">必須</span></div>
                         <div class="cp_ipselect cp_normal" style="margin-right: 10px;">

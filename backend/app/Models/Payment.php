@@ -53,6 +53,11 @@ class Payment extends Model
             ->withTimestamps();
     }
 
+    public function includedAddress()
+    {
+        return $this->belongsToMany('App\Models\Address', 'App\Models\AddressPayment');
+    }
+
     public function project()
     {
         return $this->belongsTo('App\Models\Project');
@@ -76,11 +81,6 @@ class Payment extends Model
     public function messageContents()
     {
         return $this->hasMany('App\Models\MessageContent');
-    }
-
-    public function addressPayments()
-    {
-        return $this->hasMany('App\Models\AddressPayment');
     }
 
     public function scopeNotGetUnderSuspensionProject($query)

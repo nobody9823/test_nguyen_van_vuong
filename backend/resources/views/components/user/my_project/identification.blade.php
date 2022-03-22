@@ -9,7 +9,7 @@
     </div>
     <span class="p-country-name" style="display:none;">Japan</span>
     @foreach($user->address as $address)
-    <div class="form_item_list">
+    <div class="form_item_list identidication">
         <input type="hidden" id="address" name="address[]" value="{{ $address->id }}">
         <div class="form_item_button">
             <div class="form_item_row">
@@ -24,15 +24,15 @@
                         {{ optional($address)->is_main === 1 ?'checked':'' }}
                     >
                     <label for="select_address_{{ $loop->index }}" class="radio-fan"></label>
-                    <div class="spinner-wrapper">
-                        <div class="spinner" id="spinner_select_address_{{ $loop->index }}"></div>
-                        <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_select_address_{{ $loop->index }}">メインアカウントに更新しました</p>
-                        <span id="errors_select_address_{{ $loop->index }}" style="color: red;"></span>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="form_item_address">
+            <div class="spinner-wrapper">
+                <div class="spinner" id="spinner_select_address_{{ $loop->index }}"></div>
+                <p class="saved_icon" aria-hidden="true" aria-hidden="true" style="display: none;" id="saved_select_address_{{ $loop->index }}">メインアカウントに更新しました</p>
+                <span id="errors_select_address_{{ $loop->index }}" style="color: red;"></span>
+            </div>
             <div class="form_item_row">
                 <div class="form_item_02">
                     <span name="last_name[]" value="{{ optional($address)->last_name }}">{{ optional($address)->last_name }}</span>&nbsp;
