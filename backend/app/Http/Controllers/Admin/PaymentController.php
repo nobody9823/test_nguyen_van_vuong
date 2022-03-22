@@ -169,7 +169,7 @@ class PaymentController extends Controller
     public function alterSales(AlterTranRequest $request)
     {
         $payments = Payment::withoutGlobalScopes()->find($request->payments);
-        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($payments, 'AUTH');
+        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($payments, ['AUTH']);
         if ($result['status']) {
             return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
         }
