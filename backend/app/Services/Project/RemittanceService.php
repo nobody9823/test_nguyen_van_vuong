@@ -62,9 +62,12 @@ class RemittanceService
             return \Str::contains($payment->gmo_job_cd, $condition);
         });
         if ($payments->isNotEmpty()) {
+            foreach ($condition as $cond) {
+                $transformedConditions[] = PaymentJobCd::getValue($cond);
+            }
             return [
                 'status' => true,
-                'message' => implode("、", PaymentJobCd::getValues($condition)) . '状態の決済が含まれています。',
+                'message' => implode("、", $transformedConditions) . '状態の決済が含まれています。',
             ];
         }
         return [
@@ -99,9 +102,12 @@ class RemittanceService
             return !\Str::contains($payment->gmo_job_cd, $condition);
         });
         if ($payments->isNotEmpty()) {
+            foreach ($condition as $cond) {
+                $transformedConditions[] = PaymentJobCd::getValue($cond);
+            }
             return [
                 'status' => true,
-                'message' => implode("、",PaymentJobCd::getValues($condition)) . '以外の決済が含まれています。',
+                'message' => implode("、",$transformedConditions) . '以外の決済ステータスが含まれています。',
             ];
         }
         return [
