@@ -285,9 +285,9 @@ __※概要のPSリターンで解説した通り、支援総額順のランキ�
 
 - プロジェクトの掲載ステータスによって扱える機能が異なります。<br>
 【掲載中】<br>
-<img width="405" src="https://user-images.githubusercontent.com/66456130/159873921-91592a04-c3eb-41c0-ba5c-b50859f5deed.png"><br>
-【下書き中、承認待ち、差し戻し、掲載停止中】<br>
 <img width="409" src="https://user-images.githubusercontent.com/66456130/159873969-68b78626-8534-468c-bd0b-81d7a61a54ac.png">
+【下書き中、承認待ち、差し戻し、掲載停止中】<br>
+<img width="405" src="https://user-images.githubusercontent.com/66456130/159873921-91592a04-c3eb-41c0-ba5c-b50859f5deed.png"><br>
 
 ***
 </details>
