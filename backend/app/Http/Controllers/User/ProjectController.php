@@ -320,7 +320,15 @@ class ProjectController extends Controller
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
         }
         $exec_cvs_response = $this->card_payment
-            ->execTranCVS($request->cvs_code, $entry_cvs_response['AccessID'], $entry_cvs_response['AccessPass'], $request->order_id, Auth::user()->load('profile'), DateFormatFacade::getPaymentTermDay($project->end_date));
+            ->execTranCVS(
+                $request->cvs_code,
+                $entry_cvs_response['AccessID'],
+                $entry_cvs_response['AccessPass'],
+                $request->order_id,
+                Auth::user(),
+                $payment_without_globalscope->includedAddress()->first(),
+                DateFormatFacade::getPaymentTermDay($project->end_date)
+            );
         if (\Arr::has($exec_cvs_response, 'ErrCode')) {
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
         }
@@ -533,7 +541,7 @@ class ProjectController extends Controller
         if (isset($request['checked_id'])) {
             $ret = $plan->where('id', $request['checked_id'])->first();
         }
-        
+
         DB::beginTransaction();
         try {
             $this->user->saveAddress($request->all());

@@ -199,7 +199,7 @@ class PaymentController extends Controller
                     $payment->offsetUnset('gmo_job_cd');
                     $payment->update(['payment_is_finished' => false]);
                     $deposit_id = UniqueToken::getToken();
-                    $this->card_payment->mailRemittance($deposit_id, $payment->price, 1, $payment->user->load('profile'));
+                    $this->card_payment->mailRemittance($deposit_id, $payment->price, 1, $payment->user, $payment->includedAddress()->first());
                 } else if ($payment->payment_way === 'cvs' && $payment->gmo_job_cd !== 'PAYSUCCESS') {
                     $payment->offsetUnset('gmo_job_cd');
                     $payment->update(['payment_is_finished' => false]);
