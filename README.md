@@ -92,7 +92,7 @@ https://ondras.zarovi.cz/sql/demo/?keyword=fanreturn
 <img width="387" src="https://user-images.githubusercontent.com/66456130/160050437-83e56341-eb5d-4456-9932-ff4bc6bbfc81.png"><br>
 3. 「OK」ボタンをクリック<br>
 <img width="445" src="https://user-images.githubusercontent.com/66456130/160050439-a207ff5c-4c9e-472f-a803-a518d789f260.png">
-<details>
+</details>
 
 
 - メール<br>
@@ -117,7 +117,7 @@ https://resource-sharing.co.jp/ec-sites-credit-card-test-number/
 【トークン仕様書】<br>
 gmo-create-card-token.jsファイルの決済に使用するトークン生成処理を修正する際に参照ください。
 [トークン決済サービス仕様書_1_33.pdf](https://github.com/valleyin-dev/fan-return-laravel/files/8347531/_1_33.pdf)<br>
-<details>
+</details>
 
 # 仕様
 
@@ -365,7 +365,13 @@ __※概要のPSリターンで解説した通り、支援総額順のランキ�
 
 こちらを読む前に __概要__ の __決済機能について__ を参照願います。<br>
 
+
+<details>
+
 __【All or Nothing方式で目標金額達成後 もしくは All in方式でプロジェクト期間終了後の送金処理】__
+
+<summary>本文を展開</summary>
+
 1. プロジェクト終了→管理者に通知メール→通知メールのリンクをクリック→対象の「プロジェクト管理」画面に遷移する
    もしくは「プロジェクト管理」画面にて終了したプロジェクトを検索する<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156914492-9907a607-a831-454b-b0e2-e721b8b8baa8.png)<br>
@@ -399,11 +405,21 @@ __【All or Nothing方式で目標金額達成後 もしくは All in方式で�
 ※2 「仮売上」の決済が残っている場合、以下のエラーが表示されます。<br>
 <img width="519" src="https://user-images.githubusercontent.com/66456130/160041984-6ca28467-d0d6-46e7-94e1-ac539a9368e8.png">
 
+</details>
+
+
+<details>
+
 __【All or Nothing方式で目標金額未達成 もしくは 何らかの理由でプロジェクトを終了後の返金処理】__
+
+<summary>本文を展開</summary>
+
 1. 上記の1〜3までは同様の流れ
 
 2. 「売上キャンセル」（画面右端）ボタンをクリックすると、支払いのステータスが「仮売上」→「キャンセル」に変化する<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156913925-40b78a0a-8ba4-482c-9d3b-88d7136506e2.png)
+
+</details>
 
 ### その他決済関連の仕様
 
