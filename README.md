@@ -79,17 +79,20 @@ See more detail at valleyin wiki
 ## 開発に使用するもの
 
 - ER図<br>
-こちらにテーブルの説明やカラムの内容等を記載しています。<br>
+こちらにテーブルの説明やカラムの内容等を記載しています。ER図の変更があれば下記の、更新方法を参考に更新してください。<br>
 https://ondras.zarovi.cz/sql/demo/?keyword=fanreturn
 <br>
-ER図の変更があれば、更新してください。<br>
-【更新方法】<br>
+
+<details>
+<summary>更新方法</summary>
+
 1. 画面右上の「SAVE / LOAD」をクリック<br>
 <img width="192" src="https://user-images.githubusercontent.com/66456130/160050433-f5d515a7-7fc0-40ac-8fe8-556c41cb59ac.png"><br>
 2. 下記画像の「SAVE」ボタンをクリック<br>
 <img width="387" src="https://user-images.githubusercontent.com/66456130/160050437-83e56341-eb5d-4456-9932-ff4bc6bbfc81.png"><br>
 3. 「OK」ボタンをクリック<br>
 <img width="445" src="https://user-images.githubusercontent.com/66456130/160050439-a207ff5c-4c9e-472f-a803-a518d789f260.png">
+<details>
 
 
 - メール<br>
@@ -100,6 +103,8 @@ http://localhost:8025
 https://resource-sharing.co.jp/ec-sites-credit-card-test-number/
 
 - GMO PAYMENTの決済と送金サービスの仕様書（実装の際に参照ください）<br>
+<details>
+<summary>各種仕様書</summary>
 
 【決済サービス】<br>
 決済機能の実装や修正の際に参照ください。OrderID、ShopID、JobCd等のパラメータの説明も記載されています。<br>
@@ -112,6 +117,7 @@ https://resource-sharing.co.jp/ec-sites-credit-card-test-number/
 【トークン仕様書】<br>
 gmo-create-card-token.jsファイルの決済に使用するトークン生成処理を修正する際に参照ください。
 [トークン決済サービス仕様書_1_33.pdf](https://github.com/valleyin-dev/fan-return-laravel/files/8347531/_1_33.pdf)<br>
+<details>
 
 # 仕様
 
