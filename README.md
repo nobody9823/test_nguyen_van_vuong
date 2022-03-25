@@ -98,6 +98,7 @@ __最終更新日 : 2022年3月5日__
 - [ユーザーの仕様](#ユーザーの仕様)
 - [インフルエンサーの仕様](#インフルエンサーの仕様)
 - [管理者の仕様](#管理者の仕様)
+- [メールの仕様](#メールの仕様)
 
 ## 概要
 
@@ -188,7 +189,9 @@ __※こちらはLaravelにて作成されており、フリーランスや業�
 ※プロジェクトを支援したユーザーのみプロジェクトの「活動報告」を閲覧できます。
 - 応援コメントはプロジェクト募集者に向けて応援メッセージを投稿する目的で使用します。<br>
 ※全てのユーザーが応援コメントを投稿出来ます。今後支援者しか投稿出来ないように仕様変更となる可能性もあります。
-- プロジェクト支援後にPS解説画面（PSになる画面）やPSランキング画面に遷移する為のボタンが表示されるようになります。
+- プロジェクト支援後にPS解説画面（PSになる画面）やPSランキング画面に遷移する為のボタンが表示されるようになります。<br>
+<img width="513" src="https://user-images.githubusercontent.com/66456130/160031551-efd62791-6ad4-481a-9994-52d04b7980c6.png"><br>
+<img width="531" src="https://user-images.githubusercontent.com/66456130/160031558-b54d7634-e9dd-424e-80c1-8d268279f580.png">
 
 ### プロジェクト決済画面
 
@@ -198,6 +201,9 @@ __※こちらはLaravelにて作成されており、フリーランスや業�
 __しかしその後、決済を仮売上からキャンセルできる期間が長い決済代行サービスに変更したいとの要望があり、最終的には「GMO PAYMENT」で実装しています。念の為、Pay.JP, PayPay, Stripeの処理は残しています。__
 - クレジットカードのテストを実施したい場合は以下のサイトを参考にしてください。<br>
 https://resource-sharing.co.jp/ec-sites-credit-card-test-number/
+- コンビニ決済は、決済後に表示される「受付番号」と「確認番号」を用いて、支払い期限内（5日間）に支払いを行います。<br>
+決済完了画面だけでなく、下記画像の通り購入履歴の画面からも確認できます。
+<img width="785" src="https://user-images.githubusercontent.com/66456130/160036554-f69e7d1f-e424-4bfb-90dd-daf4cb345bd1.png">
 
 ### PS解説画面（PSになる画面）
 
@@ -217,6 +223,13 @@ __※概要のPSリターンで解説した通り、支援総額順のランキ�
 
 - 購入したリターンの詳細が記載された履歴を確認できます。また「PSになる」、「PSランキングページ」へ遷移できます。
 - オーダーIDは管理画面の「支援者(ファン)管理」で検索すると、該当する購入履歴が参照できます。また、そのIDを用いてGMO PAYMENTのダッシュボードで購入履歴を確認できます。
+
+### DM画面
+
+- メッセージの送り先として、「ユーザーと運営」、「ユーザー → インフルエンサー（プロジェクト実行者）」、「インフルエンサー（プロジェクト実行者） → ユーザー」の3種類があります。
+- メッセージ未読件数が下記のように表示されます。
+<img width="888" src="https://user-images.githubusercontent.com/66456130/160033003-1b5c3c43-d050-456b-addd-de6eb52ad5ba.png">
+
 
 ***
 
@@ -322,25 +335,50 @@ __【All or Nothing方式で目標金額達成後 もしくは All in方式で�
 3. 上部にある「処理状況」のセレクトボックスを「仮売上」にすると、仮売上中の支払い状態で絞り込まれる
 4. 「実売上計上」ボタンをクリックすると、支払いのステータスが「仮売上」→「実売上」に変化する<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156880532-e2bc3ac1-fc2d-4622-9b70-54ccf15eaccf.png)<br>
-※プロジェクトが掲載期間が終了していないにも関わらず、実売上に変更した場合以下のエラーメッセージが表示されます。<br>
+※1 プロジェクトが掲載期間が終了していないにも関わらず、実売上に変更した場合以下のエラーメッセージが表示されます。<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156914395-c73a49b6-f693-48fb-97e9-2a024e077a0f.png)<br>
+※2 処理状況を「仮売上」に絞り込まずに「実売上計上」ボタンを押すと、下記のエラーが表示されます。<br>
+<img width="353" src="https://user-images.githubusercontent.com/66456130/160041533-66936eee-90ae-4320-b630-d964ea6fcee5.png">
+※3 目標金額に達していない場合、下記画像の通り「実売上計上」のボタンが表示されません。<br>
+<img width="1393" src="https://user-images.githubusercontent.com/66456130/160041343-b3f1fc91-d587-40dc-8eb5-8c4a23bc6ab9.png">
+
 5. プロジェクトIDが記載されているボタンをクリックし、先程の「プロジェクト管理」画面に戻る<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156880867-3277fcf5-296e-46a9-a076-5ea5d6d5b396.png)<br>
 6. 画面中央あたりに位置する「プロジェクト経費」を入力し、更新する<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156881193-d71512d6-5ae6-484f-aeed-c893a5420218.png)<br>
 7. 「送金実行する」ボタンにて、クラファンプロジェクト実行者に「プロジェクト経費」と「手数料(FR売上)」を差し引いた「合計支払い金額」が振り込まれる<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156881234-749853dc-2d67-4577-9e9a-6c3d7cec5365.png)<br>
-※プロジェクト実行者が銀行口座情報を入力していない場合、以下の様に表示されます<br>
+※1 プロジェクト実行者が銀行口座情報を入力していない場合、以下の様に表示されます<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156914025-3d3a1f0f-bd2e-4cac-84c8-af4eae433fc6.png)<br>
+※2 「仮売上」の決済が残っている場合、以下のエラーが表示されます。<br>
+<img width="519" src="https://user-images.githubusercontent.com/66456130/160041984-6ca28467-d0d6-46e7-94e1-ac539a9368e8.png">
 
 __【All or Nothing方式で目標金額未達成 もしくは 何らかの理由でプロジェクトを終了後の返金処理】__
 1. 上記の1〜3までは同様の流れ
 2. 「売上キャンセル」（画面右端）ボタンをクリックすると、支払いのステータスが「仮売上」→「キャンセル」に変化する<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156913925-40b78a0a-8ba4-482c-9d3b-88d7136506e2.png)
 
+### その他決済関連の仕様
+
+- GMO PAYMENTのダッシュボードで「仮売上」「実売上」「キャンセル（取消）」等に変更可能ですが、FanReturn側でエラーが起きるので、極力管理画面にて操作してください。
+- 「売上キャンセル」ボタンは「All-or-Nothing」で目標金額未達成時や何らかの理由でユーザーが決済をキャンセルしたい場合に用います。
+- 「仮売上」、「実売上」中に「キャンセル」する場合は決済日から180日以内まで可能です。<br>
+<img width="705" src="https://user-images.githubusercontent.com/66456130/160039499-ecb1056c-d20e-46df-a5bd-5bf6586702e1.png">
+
+- クレジットカードの打ち間違いや予審枠が足りなかった場合等に決済が失敗します。その際は下記画像の通り「支援者（ファン）管理」画面の「処理状況」で「決済失敗」のステータスとなります。<br>
+<img width="1200" src="https://user-images.githubusercontent.com/66456130/160040628-a699ac15-5df3-482e-820a-95a8ab9b3a52.png">
+
+### リターン管理、支援者（ファン）管理、活動報告管理、コメント管理画面
+- これら（下記画像参照）は全プロジェクトのリターンや活動報告等々が一括で閲覧できますが、基本的にあまり使用されません。<br>
+<img width="206" src="https://user-images.githubusercontent.com/66456130/160042664-8414a685-f65f-4e2a-8a2e-acd59deaf7af.png"><br>
+なるべくこれら（下記画像参照）の各プロジェクトからアクセスしてください。<br>
+<img width="130" src="https://user-images.githubusercontent.com/66456130/160042668-78fb7c35-c301-4683-a27c-244844fa25c6.png">
+
 ### DM一覧画面
 
 - ユーザーとのDMが可能です。
+- 未読のメッセージ件数が下記の通りに表示されます。<br>
+<img width="795" src="https://user-images.githubusercontent.com/66456130/160032994-a96ccc01-dad7-45ff-8e7e-5a72df008727.png">
 
 ### ユーザー管理画面
 
@@ -368,7 +406,15 @@ __【All or Nothing方式で目標金額未達成 もしくは 何らかの理�
 <details>
 <summary>本文を展開</summary>
 
-### 新規会員登録時
+<img width="1355" src="https://user-images.githubusercontent.com/66456130/160034911-15f8d6ee-92fc-4daf-9cd7-6ea607da9f6f.png">
+<img width="1364" src="https://user-images.githubusercontent.com/66456130/160035012-67257c49-d8d9-4218-af2b-91d5b0c812ee.png">
+<img width="1364" src="https://user-images.githubusercontent.com/66456130/160035109-bb5a7ed0-430c-45e7-9602-1a8bc5add32e.png">
+<img width="1362" src="https://user-images.githubusercontent.com/66456130/160035218-50b46845-5c21-48a6-8b2d-118742b228c2.png">
+<img width="1363" src="https://user-images.githubusercontent.com/66456130/160035329-35125b1e-e7fa-424b-8309-167bc2080d41.png">
+<img width="1364" src="https://user-images.githubusercontent.com/66456130/160035345-c10a4d64-4131-400d-8de6-f04d5f0d922c.png">
+<img width="1365" src="https://user-images.githubusercontent.com/66456130/160035354-76d64d8c-33c9-49f4-b607-402a25df7352.png">
+<img width="1365" src="https://user-images.githubusercontent.com/66456130/160035359-500ed17e-318c-4f24-9f59-8290b1d719e6.png">
+<img width="1361" src="https://user-images.githubusercontent.com/66456130/160035362-5b10e5f1-d22d-4405-9fe5-de082bb43360.png">
 
 ***
 </details>
