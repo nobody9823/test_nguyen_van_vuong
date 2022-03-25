@@ -81,8 +81,6 @@ See more detail at valleyin wiki
 - ER図<br>
 こちらにテーブルの説明やカラムの内容等を記載しています。ER図の変更があれば下記の、更新方法を参考に更新してください。<br>
 https://ondras.zarovi.cz/sql/demo/?keyword=fanreturn
-<br>
-
 <details>
 <summary>更新方法</summary>
 
@@ -367,10 +365,7 @@ __※概要のPSリターンで解説した通り、支援総額順のランキ�
 
 
 <details>
-
-__【All or Nothing方式で目標金額達成後 もしくは All in方式でプロジェクト期間終了後の送金処理】__
-
-<summary>本文を展開</summary>
+<summary>All or Nothing方式で目標金額達成後 もしくは All in方式でプロジェクト期間終了後の送金処理</summary>
 
 1. プロジェクト終了→管理者に通知メール→通知メールのリンクをクリック→対象の「プロジェクト管理」画面に遷移する
    もしくは「プロジェクト管理」画面にて終了したプロジェクトを検索する<br>
@@ -404,21 +399,16 @@ __【All or Nothing方式で目標金額達成後 もしくは All in方式で�
 ![Image](https://user-images.githubusercontent.com/66456130/156914025-3d3a1f0f-bd2e-4cac-84c8-af4eae433fc6.png)<br>
 ※2 「仮売上」の決済が残っている場合、以下のエラーが表示されます。<br>
 <img width="519" src="https://user-images.githubusercontent.com/66456130/160041984-6ca28467-d0d6-46e7-94e1-ac539a9368e8.png">
-
 </details>
 
 
 <details>
-
-__【All or Nothing方式で目標金額未達成 もしくは 何らかの理由でプロジェクトを終了後の返金処理】__
-
-<summary>本文を展開</summary>
+<summary>All or Nothing方式で目標金額未達成 もしくは 何らかの理由でプロジェクトを終了後の返金処理</summary>
 
 1. 上記の1〜3までは同様の流れ
 
 2. 「売上キャンセル」（画面右端）ボタンをクリックすると、支払いのステータスが「仮売上」→「キャンセル」に変化する<br>
 ![Image](https://user-images.githubusercontent.com/66456130/156913925-40b78a0a-8ba4-482c-9d3b-88d7136506e2.png)
-
 </details>
 
 ### その他決済関連の仕様
