@@ -1,3 +1,4 @@
+<input type="hidden" id="address_id" name="address_id" value="{{ $address->id }}">
 <div class="form-group">
     <label>招待コード</label>
     @if (optional($user->profile)->inviter_code)
@@ -10,25 +11,25 @@
 <div class="form-group">
     <label>姓</label>
     <input type="text" name="last_name" class="form-control"
-        value="{{ old('last_name', optional($user->profile)->last_name) }}" required>
+        value="{{ old('last_name', optional($address)->last_name) }}" required>
 </div>
 
 <div class="form-group">
     <label>名</label>
     <input type="text" name="first_name" class="form-control"
-        value="{{ old('first_name', optional($user->profile)->first_name) }}" required>
+        value="{{ old('first_name', optional($address)->first_name) }}" required>
 </div>
 
 <div class="form-group">
     <label>姓(カナ)</label>
     <input type="text" name="last_name_kana" class="form-control"
-        value="{{ old('last_name_kana', optional($user->profile)->last_name_kana) }}" required>
+        value="{{ old('last_name_kana', optional($address)->last_name_kana) }}" required>
 </div>
 
 <div class="form-group">
     <label>名(カナ)</label>
     <input type="text" name="first_name_kana" class="form-control"
-        value="{{ old('first_name_kana', optional($user->profile)->first_name_kana) }}" required>
+        value="{{ old('first_name_kana', optional($address)->first_name_kana) }}" required>
 </div>
 
 <div class="form-group">
@@ -70,7 +71,7 @@
 <div class="form-group">
     <label>電話番号</label>
     <input type="text" name="phone_number" class="form-control"
-        value="{{ old('phone_number', optional($user->profile)->phone_number) }}" required>
+        value="{{ old('phone_number', optional($address)->phone_number) }}" required>
 </div>
 
 {{-- <div class="form-group">

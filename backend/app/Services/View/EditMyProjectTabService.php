@@ -29,6 +29,15 @@ class EditMyProjectTabService
 
     protected $next_tag_order = null;
 
+    public function getCurrentTab($tab_name)
+    {
+        if ($tab_name !== null) {
+            $this->current_tag_order = array_search($tab_name, $this->my_project_tab);
+        }
+
+        return $this->my_project_tab[$this->current_tag_order];
+    }
+
     public function getNextTab($tab_name)
     {
         if ($tab_name !== null) {
@@ -85,8 +94,28 @@ class EditMyProjectTabService
 
     public function IdentificationTabIsFilled()
     {
-        if ($this->user->profile->first_name !== "" && $this->user->profile->last_name !== "" && $this->user->profile->first_name_kana !== "" && $this->user->profile->last_name_kana !== "" && $this->user->profile->phone_number !== "00000000000" && $this->user->address->postal_code !== '0' && $this->user->address->city !== "" && $this->user->address->block !== "" && !Carbon::minValue()->eq($this->user->profile->birthday) && $this->user->identification->bank_code !== "" && $this->user->identification->branch_code !== "" && $this->user->account_number !== "" && $this->user->account_name !== "" && $this->user->identify_image_1 !== 'public/sampleImage/now_printing.png' && $this->user->identify_image_2 !== 'public/sampleImage/now_printing.png') {
-            return true;
+        if (!empty($this->user->address) &&
+            !Carbon::minValue()->eq($this->user->profile->birthday) &&
+            $this->user->identification->bank_code !== "" &&
+            $this->user->identification->branch_code !== "" &&
+            $this->user->account_number !== "" &&
+            $this->user->account_name !== "" &&
+            $this->user->identify_image_1 !== 'public/sampleImage/now_printing.png' &&
+            $this->user->identify_image_2 !== 'public/sampleImage/now_printing.png'
+        ) {
+            foreach ($this->user->address as $address) {
+                if ($address->first_name !== "" && 
+                    $address->last_name !== "" &&
+                    $address->first_name_kana !== "" &&
+                    $address->last_name_kana !== "" &&
+                    $address->phone_number !== "00000000000" &&
+                    $address->postal_code !== '0' &&
+                    $address->city !== "" &&
+                    $address->block !== ""
+                ) {
+                    return true;
+                }
+            }
         }
         return false;
     }

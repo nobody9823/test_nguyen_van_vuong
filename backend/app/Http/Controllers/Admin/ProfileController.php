@@ -7,6 +7,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -68,11 +69,13 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user, Profile $profile)
+    public function edit(User $user, Profile $profile, Request $request)
     {
-        if ($user->profile) {
+        $address = $user->address->where('id', $request->address_id)->first();
+        if ($user->profile && $address) {
             return view('admin.profile.edit', [
-                'user' => $user
+                'user' => $user,
+                'address' => $address
             ]);
         } else {
             return redirect()->action([ProfileController::class, 'create'], ['user'=>$user])->with('error', 'プロフィールが存在しないため、作成画面へ遷移しました。');
@@ -90,6 +93,7 @@ class ProfileController extends Controller
     {
         // dd($request->all());
         $profile->fill($request->all())->save();
+        $user->saveAddress($request->all());
         return redirect()->action([UserController::class,'index'])->with('flash_message', 'プロフィールの更新が完了しました。');
     }
 
