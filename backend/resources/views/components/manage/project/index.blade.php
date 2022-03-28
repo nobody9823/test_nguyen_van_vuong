@@ -281,7 +281,7 @@
                                         <div class="modal-body">
                                             <p>電話番号:
                                                 <a href="tel:{{ optional($project->user->profile)->phone_number }}">
-                                                    {{ optional($project->user->profile)->phone_number }}
+                                                    {{ optional($project->user->address->where('is_main', 1)->first())->phone_number }}
                                                 </a>
                                             </p>
                                             <p>Email:<a href="mailto:{{ $project->user->email }}">{{ $project->user->email }}</a></p>
@@ -311,22 +311,22 @@
                                                     @endif
                                                 </div>
                                             </p>
-                                            <p>姓:{{ optional($project->user->profile)->last_name }}</p>
-                                            <p>名:{{ optional($project->user->profile)->first_name }}</p>
-                                            <p>姓(カナ):{{ optional($project->user->profile)->last_name_kana }}</p>
-                                            <p>名(カナ):{{ optional($project->user->profile)->first_name_kana }}</p>
+                                            <p>姓:{{ optional($project->user->address->where('is_main', 1)->first())->last_name }}</p>
+                                            <p>名:{{ optional($project->user->address->where('is_main', 1)->first())->first_name }}</p>
+                                            <p>姓(カナ):{{ optional($project->user->address->where('is_main', 1)->first())->last_name_kana }}</p>
+                                            <p>名(カナ):{{ optional($project->user->address->where('is_main', 1)->first())->first_name_kana }}</p>
                                             <p>生年月日:{{ optional($project->user->profile)->birthday }}</p>
                                             <p>公開状態:{{ optional($project->user->profile)->birthday_is_published ?'公開中':'非公開中' }}</p>
                                             <p>性別:{{ optional($project->user->profile)->gender }}</p>
                                             <p>公開状態:{{ optional($project->user->profile)->gender_is_published ?'公開中':'非公開中' }}</p>
                                             <p>紹介文:{{ optional($project->user->profile)->introduction }}</p>
                                             <p></p>
-                                            <p>郵便番号:{{ optional($project->user->address)->postal_code }}</p>
-                                            <p>都道府県:{{ optional($project->user->address)->prefecture }}</p>
-                                            <p>住所1(市町村など):{{ optional($project->user->address)->city }}</p>
-                                            <p>住所2(丁目など):{{ optional($project->user->address)->block }}</p>
-                                            <p>住所3(番地など):{{ optional($project->user->address)->block_number }}</p>
-                                            <p>住所4(建物番号など):{{ optional($project->user->address)->building }}</p>
+                                            <p>郵便番号:{{ optional($project->user->address->where('is_main', 1)->first())->postal_code }}</p>
+                                            <p>都道府県:{{ optional($project->user->address->where('is_main', 1)->first())->prefecture }}</p>
+                                            <p>住所1(市町村など):{{ optional($project->user->address->where('is_main', 1)->first())->city }}</p>
+                                            <p>住所2(丁目など):{{ optional($project->user->address->where('is_main', 1)->first())->block }}</p>
+                                            <p>住所3(番地など):{{ optional($project->user->address->where('is_main', 1)->first())->block_number }}</p>
+                                            <p>住所4(建物番号など):{{ optional($project->user->address->where('is_main', 1)->first())->building }}</p>
                                             <div class="card-header">本人確認項目</div>
                                             <p>金融機関コード:{{ optional($project->user->identification)->bank_code }}</p>
                                             <p>支店コード:{{ optional($project->user->identification)->branch_code }}</p>
