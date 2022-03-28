@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::factory()->valleyin()->create()->each(function ($user) {
-            $user->address()->save(Address::factory()->make());
+            $user->address()->saveMany(Address::factory(rand(2,5))->make());
             $user->identification()->save(Identification::factory()->make());
             $user->profile()->save(Profile::factory()->make());
             $user->snsLink()->save(SnsLink::factory()->make());
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
 
         User::insert(User::factory()->init(50));
         User::all()->each(function(User $user){
-            $user->address()->save(Address::factory()->make());
+            Address::factory(rand(2,5))->state(['user_id' => $user->id])->create();
             $user->identification()->save(Identification::factory()->make());
             $user->profile()->save(Profile::factory()->make());
             Comment::insert(Comment::factory()->init(rand(1, 10), $user->id));
