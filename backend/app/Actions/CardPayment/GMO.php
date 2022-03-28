@@ -168,20 +168,21 @@ class GMO implements CardPaymentInterface
      * @param string
      * @param string
      * @param object
+     * @param object
      * @param int
      *
      * @return array
      */
-    public function execTranCVS(string $cvs_code, string $access_id, string $access_pass, string $order_id, object $user, int $cvs_term_day): array
+    public function execTranCVS(string $cvs_code, string $access_id, string $access_pass, string $order_id, object $user, object $address, int $cvs_term_day): array
     {
         $exec_response = Http::retry(5, 100)->asForm()->post(config('app.gmo_cvs_exec_payment_url'), [
             'AccessID' => $access_id,
             'AccessPass' => $access_pass,
             'OrderID' => $order_id,
             'Convenience' => $cvs_code,
-            'CustomerName' => mb_convert_encoding($user->profile->last_name . $user->profile->first_name, "SJIS"),
-            'CustomerKana' => mb_convert_encoding($user->profile->last_name_kana . $user->profile->first_name_kana, "SJIS"),
-            'TelNo' => $user->profile->phone_number,
+            'CustomerName' => mb_convert_encoding($address->last_name . $address->first_name, "SJIS"),
+            'CustomerKana' => mb_convert_encoding($address->last_name_kana . $address->first_name_kana, "SJIS"),
+            'TelNo' => $address->phone_number,
             'PaymentTermDay' => $cvs_term_day,
             'MailAddress' => $user->email,
             'RegisterDisp1' => mb_convert_encoding('ファンリターン', "SJIS"),
@@ -392,10 +393,11 @@ class GMO implements CardPaymentInterface
      * @param int
      * @param int
      * @param object
+     * @param object
      *
      * @return object
      */
-    public function mailRemittance(string $deposit_id, int $amount, int $method, object $user): object
+    public function mailRemittance(string $deposit_id, int $amount, int $method, object $user, object $address): object
     {
         $response = Http::retry(5, 100)->post(config('app.gmo_mail_remittance_deposit_url'), [
             'Shop_ID' => config('app.gmo_pg_shop_id'),

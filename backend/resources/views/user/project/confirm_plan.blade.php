@@ -68,10 +68,10 @@
         <div class="av_box">
             <div class="av_tit">お客様情報</div>
             <div class="av_txt">
-                お名前(フリガナ)： {{ Auth::user()->profile->last_name_kana }}{{ Auth::user()->profile->first_name_kana }}<br>
-                お名前： {{ Auth::user()->profile->last_name }}{{ Auth::user()->profile->first_name }}<br>
+                お名前(フリガナ)： {{ $validated_request['last_name_kana'] }}{{ $validated_request['first_name_kana'] }}<br>
+                お名前： {{ $validated_request['last_name'] }}{{ $validated_request['first_name'] }}<br>
                 性別：{{ Auth::user()->profile->gender }}<br>
-                電話番号：{{ Auth::user()->profile->phone_number }}<br>
+                電話番号：{{ $validated_request['phone_number'] }}<br>
                 生年月日：{{ Auth::user()->profile->birthday }}<br>
             </div>
         </div><!--/av_box-->
@@ -79,11 +79,12 @@
         <div class="av_box">
             <div class="av_tit">お届け先情報</div>
             <div class="av_txt">
-                〒{{ Auth::user()->address->postal_code }}<br>
-                {{ Auth::user()->address->prefecture }}
-                {{ Auth::user()->address->city }}
-                {{ Auth::user()->address->block }}
-                {{ Auth::user()->address->building }}<br>
+                〒{{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->postal_code }}<br>
+                {{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->prefecture }}
+                {{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->city }}
+                {{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->block }}
+                {{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->block_number }}&nbsp
+                {{ Auth::user()->address->where('id', $validated_request['address_id'])->first()->building }}<br>
             </div>
         </div><!--/av_box-->
 
