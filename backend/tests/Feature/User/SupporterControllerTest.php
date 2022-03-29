@@ -56,6 +56,7 @@ class SupporterControllerTest extends TestCase
             $payment->includedPlans()->attach(
                 [Plan::whereIn('project_id', Project::where('id', $payment->project_id)->select('id'))->inRandomOrder()->first()->id => ['quantity' => random_int(1, 3)]]
             );
+            $payment->includedAddress()->attach($payment->user->address()->inRandomOrder()->first()->id);
         });
 
         $this->user = $this->users->first();

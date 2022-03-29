@@ -32,6 +32,9 @@ Route::prefix('project/{project}')->middleware('auth', 'project.released')->grou
     Route::get('plan/{payment_without_globalscope}/payment_for_cvs', [ProjectController::class, 'paymentForCVS'])->name('plan.payment_for_cvs');
     Route::get('plan/{payment_without_globalscope}/payment_for_pay_pay', [ProjectController::class, 'paymentForPayPay'])->name('plan.payment_for_pay_pay');
     Route::post('comment', [CommentController::class, 'store'])->name('comment.store')->middleware('project.released');
+    Route::post('plan/registAddress', [ProjectController::class, 'registAddress'])->name('plan.registAddress');
+    Route::post('plan/editAddress', [ProjectController::class, 'editAddress'])->name('plan.editAddress');
+    Route::get('plan/deleteAddress/{plan}', [ProjectController::class, 'deleteAddress'])->name('plan.deleteAddress');
 });
 
 //---------------------Mypage-----------------------------------------------
@@ -43,6 +46,7 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::post('project/{project}/uploadIdentifyImage/{identification}', [MyProjectController::class, 'uploadIdentifyImage'])->name('uploadIdentifyImage');
         Route::post('project/{project}/apply', [MyProjectController::class, 'apply'])->name('project.apply');
         Route::get('project/{project}/create_return', [MyPlanController::class, 'createReturn'])->name('project.create_return');
+        Route::post('uploadAddressMain', [MyProjectController::class, 'uploadAddressMain']);
         Route::prefix('project/{project}')->group(function () {
             Route::put('updatePlan/{plan}', [MyPlanController::class, 'updateReturn']);
             Route::delete('delete_plan/{plan}', [MyPlanController::class, 'deletePlan']);
@@ -58,6 +62,10 @@ Route::group(['middleware' => ['auth:web']], function () {
         Route::name('my_project.')->group(function () {
             Route::resource('project', MyProjectController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
             Route::get('reward_sample', [MyProjectController::class, 'rewardSample'])->name('reward_sample');
+            Route::get('reward_preview/{project}', [MyProjectController::class, 'rewardPreview'])->name('reward_preview');
+            Route::post('project/registAddress', [MyProjectController::class, 'registAddress'])->name('regist_address');
+            Route::post('editAddress', [MyProjectController::class, 'editAddress'])->name('edit_address');
+            Route::get('deleteAddress/{project}', [MyProjectController::class, 'deleteAddress'])->name('delete_address');
         });
         Route::delete('project/file/{project_file}', [MyProjectController::class, 'deleteFile'])->name('project_image.destroy');
         // Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');

@@ -20,17 +20,17 @@ class PaymentSeeder extends Seeder
     public function run()
     {
         User::inRandomOrder()->take(rand(50, 80))->each(function (User $user) {
-            $user->payments()->saveMany(
-                Payment::factory()->count(10)
-                    ->has(PaymentToken::factory())
-                    ->has(MessageContent::factory()->count(20))
-                    ->create()
-            );
+            Payment::factory()->count(10)
+                ->state(['user_id' => $user->id])
+                ->has(PaymentToken::factory())
+                ->has(MessageContent::factory()->count(20))
+                ->create();
         });
-        Payment::all()->each(function (Payment $payment) {
+        Payment::withoutGlobalScopes()->get()->each(function (Payment $payment) {
             $payment->includedPlans()->attach(
                 [Plan::whereIn('project_id', Project::where('id', $payment->project_id)->select('id'))->inRandomOrder()->first()->id => ['quantity' => random_int(1, 3)]]
             );
+            $payment->includedAddress()->attach($payment->user->address()->inRandomOrder()->first()->id);
         });
     }
 }
