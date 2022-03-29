@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\Prefecture;
 
 class AddressRequest extends FormRequest
 {
@@ -24,11 +25,17 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'postal_code' => ['required', 'string'],
-            'prefecture' => ['required', 'string'],
-            'city' => ['required', 'string', 'max:100'],
-            'block' => ['required', 'string', 'max:100'],
-            'building' => ['required', 'string'],
+            'first_name' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
+            'last_name' => ['required', 'string', 'regex:/^[ぁ-んァ-ヶ一-龥々]+$/u'],
+            'first_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
+            'last_name_kana' => ['required', 'string', 'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'],
+            'phone_number' => ['required', 'string', 'min:10', 'max:11'],
+            'postal_code' => ['required', 'string', 'size:7'],
+            'prefecture' => ['required', 'string', new Prefecture()],
+            'city' => ['required', 'string'],
+            'block' => ['required', 'string'],
+            'block_number' => ['required', 'string'],
+            'building' => ['nullable', 'string'],
         ];
     }
 
@@ -48,10 +55,10 @@ class AddressRequest extends FormRequest
             'prefecture.string' => "不正なアクセスが検知されました。管理会社へのお問い合わせをお願い致します。",
             'city.required' => "住所1(市区町村など)を入力してください。",
             'city.string' => "不正なアクセスが検知されました。管理会社へのお問い合わせをお願い致します。",
-            'block.required' => "住所2(番地など)を入力してください。",
+            'block.required' => "住所2(町域など)を入力してください。",
             'block.string' => "不正なアクセスが検知されました。管理会社へのお問い合わせをお願い致します。",
-            'building.required' => "住所3(建物番号など)を入力してください。",
-            'building.string' => "不正なアクセスが検知されました。管理会社へのお問い合わせをお願い致します。",
+            'block_number.required' => "住所3(番地など)を入力してください。",
+            'block_number.string' => "不正なアクセスが検知されました。管理会社へのお問い合わせをお願い致します。",
         ];
     }
 }

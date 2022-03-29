@@ -331,6 +331,7 @@
                                             <th>住所</th>
                                         </tr>
                                         {{--クソみたいな感じになってしまいました、誰か解決法を鯉沼に教えてください。宜しくお願い致します。--}}
+                                        <?php $cnt = 0; ?>
                                         @foreach($project->plans as $plan)
                                         @foreach($plan->getSupportedUsers() as $user)
                                         <tr>
@@ -346,8 +347,8 @@
                                             <td>{{ number_format($plan->price) }}円(税込)</td>
                                             <td>{{ date_format($user->created_at, "Y-m-d") }}</td>
                                             <td>{{ $plan->formatted_delivery_date }}</td>
-                                            <td>{{ $user->address->prefecture.$user->address->city.$user->address->block.$user->address->building }}
-                                            </td>
+                                            <td>{{ $outputAddress[$cnt] }}</td>
+                                            <?php $cnt++; ?>
                                         </tr>
                                         @endforeach
                                         @endforeach

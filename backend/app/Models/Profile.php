@@ -19,15 +19,10 @@ class Profile extends Model
         'user_id',
         'inviter_code',
         'image_url',
-        'first_name_kana',
-        'last_name_kana',
-        'first_name',
-        'last_name',
         'birth_place',
         'birthday',
         'gender',
         'introduction',
-        'phone_number',
         'birthday_is_published',
         'gender_is_published',
     ];
@@ -92,15 +87,10 @@ class Profile extends Model
     public static function initialize()
     {
         return self::make([
-            'first_name' => '',
-            'last_name' => '',
-            'first_name_kana' => '',
-            'last_name_kana' => '',
             'birth_place' => '',
             'birthday' => Carbon::minValue(),
             'gender' => 'その他',
             'introduction' => '',
-            'phone_number' => '00000000000',
             'birthday_is_published' => false,
             'gender_is_published' => false,
             'image_url' => 'public/sampleImage/my-page.svg',

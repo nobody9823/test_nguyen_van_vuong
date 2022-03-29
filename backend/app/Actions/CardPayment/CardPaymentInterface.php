@@ -75,11 +75,12 @@ interface CardPaymentInterface
      * @param string
      * @param string
      * @param object
+     * @param object
      * @param int
      *
      * @return array
      */
-    public function execTranCVS(string $cvs_code, string $access_id, string $access_pass, string $order_id, object $user, int $cvs_term_day): array;
+    public function execTranCVS(string $cvs_code, string $access_id, string $access_pass, string $order_id, object $user, object $address, int $cvs_term_day): array;
 
     /**
      * Return result of refund convenience by GMO
@@ -170,10 +171,11 @@ interface CardPaymentInterface
      * @param int
      * @param int
      * @param object
+     * @param object
      *
      * @return object
      */
-    public function mailRemittance(string $deposit_id, int $amount, int $method, object $user): object;
+    public function mailRemittance(string $deposit_id, int $amount, int $method, object $user, object $address): object;
 
     /**
      * mail search deposit as 'GMO'

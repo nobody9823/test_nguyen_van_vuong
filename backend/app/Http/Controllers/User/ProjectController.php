@@ -14,10 +14,12 @@ use App\Models\PaymentToken;
 use App\Models\Comment;
 use App\Models\Profile;
 use App\Models\Address;
+use App\Models\AddressPayment;
 use Carbon\Carbon;
 use App\Actions\CardPayment\CardPaymentInterface;
 use App\Actions\PayPay\PayPayInterface;
 use App\Http\Requests\ConfirmPaymentRequest;
+use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ConsultProjectSendRequest;
 use App\Mail\User\ConsultProject;
 use App\Models\PlanPaymentIncluded;
@@ -175,6 +177,7 @@ class ProjectController extends Controller
      */
     public function selectPlans(Request $request, Project $project, Plan $plan)
     {
+        \Log::debug($plan);
         return view(
             'user.project.select_plan',
             [
@@ -198,7 +201,6 @@ class ProjectController extends Controller
         try {
             $plans = $this->plan->getPlansByIds(array_keys($request->plans))->get();
             $this->user->saveProfile($request->except(['inviter_code']));
-            $this->user->saveAddress($request->all());
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -244,6 +246,12 @@ class ProjectController extends Controller
             $payment->paymentToken()->save(PaymentToken::make([
                 'order_id' => !empty($validated_request['payment_method_id']) ? $validated_request['payment_method_id'] : $unique_token,
             ]));
+            $address_payment = new AddressPayment();
+            $address_payment->address_id = $validated_request['address_id'];
+            $address_payment->payment_id = $payment->id;
+            $address_payment->save();
+            $this->user->address()->update(['is_main' => false]);
+            $this->user->address()->where('id', $validated_request['address_id'])->update(['is_main' => true]);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -312,7 +320,15 @@ class ProjectController extends Controller
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
         }
         $exec_cvs_response = $this->card_payment
-            ->execTranCVS($request->cvs_code, $entry_cvs_response['AccessID'], $entry_cvs_response['AccessPass'], $request->order_id, Auth::user()->load('profile'), DateFormatFacade::getPaymentTermDay($project->end_date));
+            ->execTranCVS(
+                $request->cvs_code,
+                $entry_cvs_response['AccessID'],
+                $entry_cvs_response['AccessPass'],
+                $request->order_id,
+                Auth::user(),
+                $payment_without_globalscope->includedAddress()->first(),
+                DateFormatFacade::getPaymentTermDay($project->end_date)
+            );
         if (\Arr::has($exec_cvs_response, 'ErrCode')) {
             return redirect()->route('user.plan.selectPlans', ['project' => $project])->withErrors('決済処理に失敗しました。もう一度入力してください。');
         }
@@ -499,5 +515,55 @@ class ProjectController extends Controller
             $this->authorize('checkOwnProject', $project);
         }
         return view('user.project.preview', ['project' => $project->getLoadIncludedPaymentsCountAndSumPrice()]);
+    }
+
+    public function registAddress(Project $project, AddressRequest $request, Plan $plan)
+    {
+        $ret = "";
+        if (isset($request['checked_id'])) {
+            $ret = $plan->where('id', $request['checked_id'])->first();
+        }
+
+        DB::beginTransaction();
+        try {
+            $this->user->saveAddress($request->all());
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return redirect()->action([ProjectController::class, 'selectPlans'], ['project' => $project, 'plan' => $ret ? $ret['id'] : NULL]);
+    }
+
+    public function editAddress(Project $project, AddressRequest $request, Plan $plan)
+    {
+        $ret = "";
+        if (isset($request['checked_id'])) {
+            $ret = $plan->where('id', $request['checked_id'])->first();
+        }
+
+        DB::beginTransaction();
+        try {
+            $this->user->saveAddress($request->all());
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return redirect()->action([ProjectController::class, 'selectPlans'], ['project' => $project, 'plan' => $ret ? $ret['id'] : NULL]);
+    }
+
+    public function deleteAddress(Request $request, Project $project, Plan $plan)
+    {
+        DB::beginTransaction();
+        try {
+            $address = new Address();
+            $address->find($request->address_id)->delete();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return redirect()->action([ProjectController::class, 'selectPlans'], ['project' => $project, 'plan' => $request['single_return'] ? $plan : NULL]);
     }
 }

@@ -43,10 +43,14 @@ class UserController extends Controller
         return redirect('/admin/user')->with('flash_message', '編集が成功しました。');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user, Request $request)
     {
-        $user->deleteImageIfSample();
-        $user->delete();
+        if (count($user->address) > 1) {
+            $user->address->find($request->address_id)->delete();
+        } else {
+            $user->deleteImageIfSample();
+            $user->delete();
+        }
         return redirect()->action([UserController::class, 'index'])->with('flash_message', '削除が成功しました。');
     }
 

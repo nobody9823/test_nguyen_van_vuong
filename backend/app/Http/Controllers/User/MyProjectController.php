@@ -14,8 +14,10 @@ use App\Models\Project;
 use App\Models\ProjectFile;
 use App\Models\Tag;
 use App\Models\Payment;
+use App\Models\Address;
 use App\Notifications\MyProjectAppliedMail;
 use App\Services\View\EditMyProjectTabService;
+use App\Http\Requests\AddressRequest;
 use Auth;
 use Exception;
 use Illuminate\Http\Request;
@@ -156,7 +158,7 @@ class MyProjectController extends Controller
 
             $this->user->profile->fill($request->all())->save();
 
-            $this->user->address->fill($request->all())->save();
+            // $this->user->address->fill($request->all())->save();
 
             $this->project_service->attachTags($project, $request);
 
@@ -243,7 +245,6 @@ class MyProjectController extends Controller
             $project->fill($request->all())->save();
             $this->user->identification->fill($request->all())->save();
             $this->user->profile->fill($request->all())->save();
-            $this->user->address->fill($request->all())->save();
             $this->project_service->attachTags($project, $request);
             $this->project_service->saveVideoUrl($project, $request);
             DB::commit();
@@ -287,6 +288,64 @@ class MyProjectController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
+        }
+    }
+
+    public function registAddress(AddressRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->user->address()->update(['is_main' => false]);
+            $this->user->saveAddress($request->all());
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $request->project, 'next_tab' => $this->my_project_tab_service->getCurrentTab('identification')]);
+    }
+
+    public function editAddress(AddressRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->user->address()->update(['is_main' => false]);
+            $this->user->saveAddress($request->all());
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $request->project, 'next_tab' => $this->my_project_tab_service->getCurrentTab('identification')]);
+    }
+
+    public function deleteAddress(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $address = new Address();
+            $address->find($request->address_id)->delete();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return redirect()->action([MyProjectController::class, 'edit'], ['project' => $request->project, 'next_tab' => $this->my_project_tab_service->getCurrentTab('identification')]);
+    }
+
+    public function uploadAddressMain(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $this->user->address()->update(['is_main' => false]);
+            $this->user->address()->where('id', $request->address_id)->update(['is_main' => true]);
+            DB::commit();
+            return response()->json(['result' => true]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+            return response()->json(['result' => false]);
         }
     }
 }

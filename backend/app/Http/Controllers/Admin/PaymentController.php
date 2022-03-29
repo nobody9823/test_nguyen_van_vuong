@@ -40,7 +40,8 @@ class PaymentController extends Controller
                 'user' => function ($query) {
                     $query->with(['profile', 'address']);
                 },
-                'inviter'
+                'inviter',
+                'includedAddress'
             ])
             ->sortBySelected($request->sort_type);
 
@@ -168,8 +169,8 @@ class PaymentController extends Controller
 
     public function alterSales(AlterTranRequest $request)
     {
-        $payments = Payment::find($request->payments);
-        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($payments, 'AUTH');
+        $payments = Payment::withoutGlobalScopes()->find($request->payments);
+        $result = $this->remittance->IsNotFilledPaymentsJobCdConditions($payments, ['AUTH']);
         if ($result['status']) {
             return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
         }
@@ -182,7 +183,7 @@ class PaymentController extends Controller
 
     public function alterCancel(AlterTranRequest $request)
     {
-        $payments = Payment::find($request->payments);
+        $payments = Payment::withoutGlobalScopes()->find($request->payments);
         $result = $this->remittance->IsExistsPaymentsJobCdConditions($payments, ['VOID', 'EXPIRED', 'CANCEL']);
         if ($result['status']) {
             return redirect()->route('admin.payment.index', ['project' => $request->project])->withErrors($result['message']);
@@ -198,7 +199,7 @@ class PaymentController extends Controller
                     $payment->offsetUnset('gmo_job_cd');
                     $payment->update(['payment_is_finished' => false]);
                     $deposit_id = UniqueToken::getToken();
-                    $this->card_payment->mailRemittance($deposit_id, $payment->price, 1, $payment->user->load('profile'));
+                    $this->card_payment->mailRemittance($deposit_id, $payment->price, 1, $payment->user, $payment->includedAddress()->first());
                 } else if ($payment->payment_way === 'cvs' && $payment->gmo_job_cd !== 'PAYSUCCESS') {
                     $payment->offsetUnset('gmo_job_cd');
                     $payment->update(['payment_is_finished' => false]);

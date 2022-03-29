@@ -1,1 +1,1 @@
-<x-manage.project.show role="admin" :project="$project" />
+<x-manage.project.show role="admin" :project="$project" :outputAddress="$outputAddress" />

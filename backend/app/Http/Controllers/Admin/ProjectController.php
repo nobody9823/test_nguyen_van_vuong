@@ -48,6 +48,11 @@ class ProjectController extends Controller
             ->searchWithReleasePeriod()
             ->getWithDepositsExistsAndDeposits()
             ->getWithPaymentsCountAndSumPrice()
+            ->whereHas('user', function ($query) {
+                $query->whereHas('address',  function ($query2) {
+                    $query2->where('is_main', "1");
+                });
+            })
             ->sortBySelected($request->sort_type);
 
         //リレーション先OrderBy
@@ -141,8 +146,25 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         $project = $project::where('projects.id', $project->id)->getWithPaymentsCountAndSumPrice()
-            ->with('projectFiles', 'plans', 'reports')->first();
-        return view('admin.project.show', ['project' => $project]);
+            ->with('projectFiles', 'plans', 'reports', 'payments')->first();
+
+        $outputAddress = array();
+        foreach ($project->plans as $plan) {
+            foreach($plan->includedPayments as $includedPayments) {
+                foreach($project->payments as $projectPayments) {
+                    foreach($projectPayments->includedAddress as $includedAddress) {
+                        if ($includedPayments->id == $includedAddress->pivot->payment_id) {
+                            $outputAddress[] = $includedAddress->prefecture. $includedAddress->city. $includedAddress->block. $includedAddress->prefecturebuilding;
+                        }
+                    }
+                }
+            }
+        }
+
+        return view('admin.project.show', [
+            'project' => $project,
+            'outputAddress' => $outputAddress,
+        ]);
     }
 
     /**

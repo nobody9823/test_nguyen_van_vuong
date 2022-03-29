@@ -115,6 +115,23 @@ const updateMyProject = (() => {
         });
     }
 
+    const updateAddressMain = (data) => {
+        document.getElementById('spinner_' + data.tag).style.display = 'block';
+        axios.post(`/my_project/uploadAddressMain`, data).then(res => {
+            if (res.data.result === true) {
+                document.getElementById('spinner_' + data.tag).style.display = 'none';
+                displayIcon(document.getElementById('saved_' + data.tag));
+            }
+        }).catch(err => {
+            if (err.response.status == 419) {
+              location.reload();
+            }
+            console.log(res);
+            document.getElementById('spinner_' + data.name).style.display = 'none';
+        });
+
+    }
+
     return {
         textInput: (el, projectId) => {
             data = {};
@@ -182,6 +199,13 @@ const updateMyProject = (() => {
                 }
             }
             setTimer(data, projectId, 'text');
+        },
+
+        inputIsMain: (el, addressId) => {
+            data = {};
+            data['tag'] = el.id;
+            data['address_id'] = addressId
+            updateAddressMain(data);
         }
     }
 })();
