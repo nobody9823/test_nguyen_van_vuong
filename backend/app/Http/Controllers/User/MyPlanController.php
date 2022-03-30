@@ -102,6 +102,10 @@ class MyPlanController extends Controller
 
     public function createReturn(Project $project)
     {
+        // 最新のソートNoを取得
+        $plan = new Plan();
+        $project['sort_no'] = $plan->getMaxSortNo($project->id);
+
         $project->plans()->save(Plan::initialize($project));
         return redirect()->route(
             'user.my_project.project.edit',
