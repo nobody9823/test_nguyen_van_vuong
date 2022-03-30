@@ -1,6 +1,22 @@
-<div class="my_project_container">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script>
+$(function() {
+	// リターンの並び替え
+	$('#sortable').sortable({
+		update: function(event,ui){
+            var result = $(this).sortable("toArray");
+            axios
+	            .post("/my_project/project/update_sort_no", result)
+	            .then((response) => {});
+		}
+	});
+});
+</script>
+<div class="my_project_container" id="sortable">
     @foreach($project->plans as $plan)
-    <div class="my_plan_img_box_wrapper">
+    <div class="my_plan_img_box_wrapper" id="return{{ '_'.$plan->id }}">
         <div>
             <div class="spinner" id="spinner_return{{ '_'.$plan->id }}"></div>
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return{{ '_'.$plan->id }}"></i>
