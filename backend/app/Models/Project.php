@@ -83,7 +83,7 @@ class Project extends Model
 
     public function plans()
     {
-        return $this->hasMany('App\Models\Plan');
+        return $this->hasMany('App\Models\Plan')->orderBy('sort_no', 'asc');
     }
 
     public function user()
