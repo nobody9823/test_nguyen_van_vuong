@@ -14,6 +14,7 @@ use App\Models\ProjectFile;
 use App\Models\Tag;
 use App\Models\Payment;
 use App\Models\Address;
+use App\Models\Plan;
 use App\Notifications\MyProjectAppliedMail;
 use App\Services\View\EditMyProjectTabService;
 use App\Http\Requests\AddressRequest;
@@ -324,5 +325,27 @@ class MyProjectController extends Controller
             throw $e;
             return response()->json(['result' => false]);
         }
+    }
+
+    public function copyReturn(Project $project, Request $request)
+    {
+        $PlanIds = $request->all();
+        DB::beginTransaction();
+        try {
+            foreach ($PlanIds as $planId) {
+                $checkedPlans = Plan::find($planId);
+                $newPlans = $checkedPlans->replicate();
+                $newPlans->save();
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        session()->flash('flash_message', 'リターンの複製が完了しました。');
+        return response()->json([
+            'status' => 200,
+            'redirect_url' => route('user.my_project.project.edit', ['project' => $project, 'next_tab' => 'return']),
+        ], 200);
     }
 }
