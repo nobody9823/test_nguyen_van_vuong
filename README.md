@@ -119,3 +119,5 @@ gmo-create-card-token.jsファイルの決済に使用するトークン生成�
 
 # 仕様
 
+仕様については以下のリンクをクリックしてください。<br>
+[https://github.com/valleyin-dev/fan-return-laravel/blob/develop/SPECIFICATION.md](url)
