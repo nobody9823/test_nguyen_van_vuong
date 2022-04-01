@@ -18,7 +18,7 @@
     @if(!empty($cardSize))
     <div class="ib01L_cate_tag">
         @foreach($project->tags as $tag)
-            <a href="{{ route('user.search', ['tag_id' => $tag->id]) }}" class="cate_tag_link">{{ $tag->name }}</a>
+            <a href="{{ route('user.search', ['tag_id' => $tag->id, 'sort_type' => '0']) }}" class="cate_tag_link">{{ $tag->name }}</a>
         @endforeach
     </div>
     @endif

@@ -5,7 +5,7 @@
             <div class="footer_main_01">
                 {{-- <h4 class="footer_tit">プロジェクトをさがす</h4>
                 @foreach ($tags as $tag)
-                    <p class="footer_item"><a href="{{ route('user.search', ['tag_id' => $tag->id]) }}">{{$tag->name}}</a></p>
+                    <p class="footer_item"><a href="{{ route('user.search', ['tag_id' => $tag->id, 'sort_type' => '0']) }}">{{$tag->name}}</a></p>
                 @endforeach --}}
                 <h4 class="footer_tit">エントリー一覧</h4>
                 <p class="footer_item"><a href="{{ config('app.wp_baseURL') . '/category/category1' }}">音楽制作</a></p>
