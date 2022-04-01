@@ -7,11 +7,9 @@
     <div class="tit_L_01 E-font">
         <h2>SUPPORTERS</h2>
         <div class="sub_tit_L">支援者一覧</div>
-        <div>
-            <font color="red" style="font-weight: normal">
-                ※「要求成功」ステータスでは購入は完了しておりません。<br>
-                「決済完了」ステータスとなった支援者の方にリターンを発送してください。
-            </font>
+        <div class="ps_description" style="margin-top: 20px">
+            <h5 style="color: #e65d65">※「要求成功」ステータスでは購入は完了しておりません。</h5>
+            <h5 style="color: #e65d65">「決済完了」ステータスのみリターンをご発送ください。</h5>
         </div>
     </div>
 
@@ -43,7 +41,7 @@
                                 </div>
                             </th>
                             <th>
-                                <p>ステータス</p>
+                                <p style="font-size: smaller">ステータス</p>
                                 <div class="supporters_tooltip1" ontouchstart="">
                                     <p class="supporters_tooltip_icon">？</p>
                                     <div class="supporters_description2">
