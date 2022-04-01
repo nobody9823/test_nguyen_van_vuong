@@ -33,7 +33,7 @@
                 <div class="pds_sec01_tit">{{ $project->title }}</div><!--/pds_sec01_tit-->
                 <div class="pds_sec01_tag">
                     @foreach($project->tags as $tag)
-                    <span><a href="{{ route('user.search', ['tag_id' => $tag->id]) }}">#{{ $tag->name }}</a></span>
+                    <span><a href="{{ route('user.search', ['tag_id' => $tag->id, 'sort_type' => '0']) }}">#{{ $tag->name }}</a></span>
                     @endforeach
                 </div><!--/pds_sec01_tag-->
 
