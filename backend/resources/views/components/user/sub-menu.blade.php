@@ -8,7 +8,7 @@
         </p>
         <ul>
             @foreach($tags() as $key => $tag)
-            <li><a href="{{ route('user.search', ['tag_id' => $key]) }}">{{ $tag }}</a></li>
+            <li><a href="{{ route('user.search', ['tag_id' => $key, 'sort_type' => '0']) }}">{{ $tag }}</a></li>
             @endforeach
         </ul>
         <a href="/search" class="f_b_02"><span>全てのプロジェクトを見る</span><i class="fas fa-caret-right"></i></a>

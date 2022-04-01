@@ -156,7 +156,7 @@
                                             </li>
                                         @endguest
                                         {{-- NOTICE: こちらは必要となったらコメントアウト解除、デザイン崩れる恐れあり --}}
-                                        {{-- <form method="get" action="{{ route('user.search') }}" name="word_search">
+                                        {{-- <form method="get" action="{{ route('user.search', ['sort_type' => '0']) }}" name="word_search">
                 <li class="menu-item nav_btn taso_li menuset_04 header_serch_box">
                     <i class="fas fa-search"></i><input type="text" name="word" placeholder="キーワードを検索" value="{{ Request::get('word') }}">
                     <a href="javascript:word_search.submit()" class="top_menu-1 nav_btn_link signup_btn" style="justify-content: center;">
