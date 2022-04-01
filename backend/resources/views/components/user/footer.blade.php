@@ -95,4 +95,40 @@
         <!--/.footer_inner-->
     </div>
     <!--/.footer_under-->
+
+    <!-- フッター固定 -->
+    @guest('web')
+        <div id="sp_footer_float">
+            <div class="sp_footer_float_close"><a href="javascript:void(0)" style=" color: #fff;"><i aria-hidden="true" class="fa fa-times"></i></a></div>
+                <div class="sff_01">
+                        <a href="{{ route('login') }}">
+                        <div class="sff_01_01 sff_flex_center" style=" color: #fff;"><img src="https://fanreturn.work/wp-content/themes/rumble_tcd058/img/login_white_24dp.svg">クラファンにログイン</div>
+                        </a>
+                </div>
+                <div class="sff_02">|</div>
+                <div class="sff_03">
+                    <a href="{{ route('user.pre_create') }}" class="sff_03_01">
+                    <div class="sff_flex_center" style=" color: #fff;"><img src="https://fanreturn.work/wp-content/themes/rumble_tcd058/img/person_add_white_24dp.svg">クラファンに新規会員登録</div>
+                    </a>
+                </div>
+        </div>
+    @endguest
+
+    @auth('web')
+    <div id="sp_footer_float">
+        <div class="sp_footer_float_close"><a href="javascript:void(0)" style=" color: #fff;"><i aria-hidden="true" class="fa fa-times"></i></a></div>
+            <div class="sff_01">
+                    <a href="{{ route('user.profile') }}">
+                    <div class="sff_01_01 sff_flex_center" style=" color: #fff;"><img src="https://fanreturn.work/wp-content/themes/rumble_tcd058/img/person_white_24dp.svg">プロフィール</div>
+                    </a>
+            </div>
+            <div class="sff_02">|</div>
+            <div class="sff_03">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="sff_flex_center sff_03_logout_form"><img src="https://fanreturn.work/wp-content/themes/rumble_tcd058/img/logout_white_24dp.svg">クラファンからログアウト</button>
+                </form>
+            </div>
+    </div>
+    @endauth
 </footer>
