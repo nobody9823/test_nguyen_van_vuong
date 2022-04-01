@@ -48,11 +48,7 @@ class ProjectController extends Controller
             ->searchWithReleasePeriod()
             ->getWithDepositsExistsAndDeposits()
             ->getWithPaymentsCountAndSumPrice()
-            ->whereHas('user', function ($query) {
-                $query->whereHas('address',  function ($query2) {
-                    $query2->where('is_main', "1");
-                });
-            })
+            ->with('user.address')
             ->sortBySelected($request->sort_type);
 
         //リレーション先OrderBy
