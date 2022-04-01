@@ -37,6 +37,7 @@ class AddressFactory extends Factory
             'block' => $this->faker->streetAddress,
             'block_number' => '1-1-1',
             'building' => $this->faker->buildingNumber,
+            'is_main' => random_int(0, 1),
         ];
     }
 }
