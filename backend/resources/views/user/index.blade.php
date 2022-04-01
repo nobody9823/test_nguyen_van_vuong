@@ -106,7 +106,7 @@ use Carbon\Carbon;
     <div class="more_btn_01">
         <div class="more_btn_01_01">もっと見る</div>
         <div class="more_btn_01_02"><i class="fas fa-arrow-right"></i></div>
-        <a href="{{ route('user.search', ['sort_type' => '4']) }}" class="cover_link"></a>
+        <a href="{{ route('user.search', ['sort_type' => '0']) }}" class="cover_link"></a>
     </div>
 
     </section>
