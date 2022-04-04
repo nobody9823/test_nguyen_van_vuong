@@ -64,6 +64,14 @@ class ProjectController extends Controller
             $projects = $projects->get()->sortByDesc(function ($project, $key) {
                 return $project->total_likes;
             });
+        } elseif ($request->sort_type === 'end_date_asc') {
+            $projects = $projects->get()->sortBy(function ($project, $key) {
+                return $project->end_date;
+            });
+        } elseif ($request->sort_type === 'end_date_desc') {
+            $projects = $projects->get()->sortByDesc(function ($project, $key) {
+                return $project->end_date;
+            });
         } else {
             $projects = $projects->get();
         }

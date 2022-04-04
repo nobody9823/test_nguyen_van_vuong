@@ -75,6 +75,7 @@
             'title' => 'タイトル',
             'user_name' => 'ユーザー名',
             'liked_users_count' => 'いいね数',
+            'end_date' => 'プロジェクト終了日',
         ]" />
         <input name="word" type="search" class="form-control mr-2" aria-lavel="Search" placeholder="キーワードで検索"
             value="{{ Request::get('word') }}">
