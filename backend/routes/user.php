@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth:web']], function () {
             Route::post('project/registAddress', [MyProjectController::class, 'registAddress'])->name('regist_address');
             Route::post('editAddress', [MyProjectController::class, 'editAddress'])->name('edit_address');
             Route::get('deleteAddress/{project}', [MyProjectController::class, 'deleteAddress'])->name('delete_address');
+            Route::post('copyReturn/{project}', [MyProjectController::class, 'copyReturn'])->name('copy_return');
         });
         Route::delete('project/file/{project_file}', [MyProjectController::class, 'deleteFile'])->name('project_image.destroy');
         // Route::delete('project/file/{project_file}', [ProjectController::class, 'deleteFile'])->name('project.delete.file');

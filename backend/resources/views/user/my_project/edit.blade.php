@@ -96,6 +96,7 @@
 <script src="{{ asset('js/select-edit-tag.js') }}"></script>
 <script src="{{ asset('js/get-decoded-uri.js') }}"></script>
 <script src={{ asset('/js/update-myPlan.js') }}></script>
+<script src={{ asset('/js/update-myReturn.js') }}></script>
 <script src={{ asset('/js/uploaded-image-handler.js') }}></script>
 <script src={{ asset('/js/plan-form-modal.js') }}></script>
 <script src={{ asset('/js/fade-element.js') }}></script>

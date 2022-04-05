@@ -3742,6 +3742,14 @@ border-radius: 9px; display: flex; justify-content: center; align-items: center;
 .identidication div.spinner-wrapper {
 	margin: 0;
 }
+
+.hidden_button {
+  display: none;
+}
+.my_plan_checkbox {
+  margin: auto 25px;
+  width: 90%;
+}
 /* sp_footer_float 固定 */
 @media screen and (min-width: 769px){
     #sp_footer_float{display: none;}
