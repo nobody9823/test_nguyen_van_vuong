@@ -1,4 +1,4 @@
-<form action={{route('user.search')}} name="searchProjectForm">
+<form action={{route('user.search', ['sort_type' => '0'])}} name="searchProjectForm">
     @csrf
     <div class="filter_wrapper">
         <div class="filter_tags_wrapper">

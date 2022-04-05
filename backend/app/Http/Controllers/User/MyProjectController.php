@@ -9,6 +9,7 @@ use App\Http\Requests\MyProjectRequest;
 use App\Http\Requests\AxiosUploadFileRequest;
 use App\Models\Identification;
 use Illuminate\Support\Facades\DB;
+use App\Models\Plan;
 use App\Models\Project;
 use App\Models\ProjectFile;
 use App\Models\Tag;
@@ -267,6 +268,28 @@ class MyProjectController extends Controller
             $this->authorize('checkOwnProject', $project);
         }
         return view('user.my_project.reward_sample', ['project' => $project]);
+    }
+
+    /**
+     * ソート順更新
+     * updateSortNo
+     *
+     * ソート順を更新する
+     */
+    public function updateSortNo(Request $request)
+    {
+        $plan = new Plan();
+        $sortChangedArr = $request->all();
+        DB::beginTransaction();
+        try {
+            foreach ($sortChangedArr as $key => $pid) {
+                $plan->updateSortNo(str_replace('return_', '', $pid), $key + 1);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
 
     public function registAddress(AddressRequest $request)
