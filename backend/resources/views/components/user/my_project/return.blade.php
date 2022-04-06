@@ -17,6 +17,10 @@ $(function() {
 <div class="my_project_container" id="sortable">
     @foreach($project->plans as $plan)
     <div class="my_plan_img_box_wrapper" id="return{{ '_'.$plan->id }}">
+        <div class="my_plan_checkbox">
+            <input type="checkbox" id="{{ $plan->id }}" name="returns" class="ac_list_checks" value="{{ $plan->id }}">
+            <label for="{{ $plan->id }}" value="{{ $plan->id }}" class="checkbox-fan"></label>
+        </div>
         <div>
             <div class="spinner" id="spinner_return{{ '_'.$plan->id }}"></div>
             <i class="fa fa-check-circle green" aria-hidden="true" id="saved_return{{ '_'.$plan->id }}"></i>
@@ -65,6 +69,11 @@ $(function() {
     <div class="footer-over_L_03"><i class="fas fa-chevron-right"></i></div>
 </a>
 
+<div id="copy_return" name="copy_return" class="def_btn btn_margin_bottom hidden_button">
+    選択したリターンを複製する
+    <a class="cover_link"></a>
+</div>
+
 <x-common.navigating_page_buttons :project="$project" nextPageButtonForReturn="necessary" />
 
 {{-- 「編集」ボタンを押したときに表示されるモーダル部 --}}
@@ -92,3 +101,21 @@ $(function() {
         </form>
     </div>
 </section>
+
+<script>
+    $(':checkbox[name="returns"]').click(function() {
+        var returns = $(':checkbox[name="returns"]:checked').val();
+        if (returns != null) {
+            $("#copy_return").removeClass("hidden_button");
+        } else {
+            $("#copy_return").addClass("hidden_button");
+        }
+    })
+    $('#copy_return').click(function() {
+        var checkedreturns = [];
+        $(':checkbox[name="returns"]:checked').each(function() {
+            checkedreturns.push(this.id)
+        })
+        updateMyReturn.copyReturns(this, "{{ $project->id }}", checkedreturns)
+    })
+</script>
