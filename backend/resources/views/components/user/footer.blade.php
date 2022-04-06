@@ -102,13 +102,13 @@
             <div class="sp_footer_float_close"><a href="javascript:void(0)" style=" color: #fff;"><i aria-hidden="true" class="fa fa-times"></i></a></div>
                 <div class="sff_01">
                         <a href="{{ route('login') }}">
-                        <div class="sff_01_01 sff_flex_center" style=" color: #fff;"><img src="{{ config('app.wp_baseURL') . '/backend/public/images/login_white_24dp.svg' }}">クラファンにログイン</div>
+                        <div class="sff_01_01 sff_flex_center" style=" color: #fff;"><img src="{{ asset('image/login_white_24dp.svg') }}">クラファンにログイン</div>
                         </a>
                 </div>
                 <div class="sff_02">|</div>
                 <div class="sff_03">
                     <a href="{{ route('user.pre_create') }}" class="sff_03_01">
-                    <div class="sff_flex_center" style=" color: #fff;"><img src="{{ config('app.wp_baseURL') . '/backend/public/images/person_add_white_24dp.svg' }}">クラファンに新規会員登録</div>
+                    <div class="sff_flex_center" style=" color: #fff;"><img src="{{ asset('image/person_add_white_24dp.svg') }}">クラファンに新規会員登録</div>
                     </a>
                 </div>
         </div>
@@ -119,14 +119,14 @@
         <div class="sp_footer_float_close"><a href="javascript:void(0)" style=" color: #fff;"><i aria-hidden="true" class="fa fa-times"></i></a></div>
             <div class="sff_01">
                     <a href="{{ route('user.profile') }}">
-                    <div class="sff_01_01 sff_flex_center" style=" color: #fff;"><img src="{{ config('app.wp_baseURL') . '/backend/public/images/person_white_24dp.svg' }}">プロフィール</div>
+                    <div class="sff_01_01 sff_flex_center" style=" color: #fff;"><img src="{{ asset('image/person_white_24dp.svg') }}">プロフィール</div>
                     </a>
             </div>
             <div class="sff_02">|</div>
             <div class="sff_03">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button class="sff_flex_center sff_03_logout_form"><img src="{{ config('app.wp_baseURL') . '/backend/public/images/logout_white_24dp.svg' }}">クラファンからログアウト</button>
+                    <button class="sff_flex_center sff_03_logout_form"><img src="{{ asset('image/logout_white_24dp.svg') }}">クラファンからログアウト</button>
                 </form>
             </div>
     </div>
