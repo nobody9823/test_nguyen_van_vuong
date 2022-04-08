@@ -51,6 +51,15 @@ class ProjectController extends Controller
             ->with('user.address')
             ->sortBySelected($request->sort_type);
 
+        // 掲載終了日付指定
+        if (isset($request->end_date_from) && isset($request->end_date_to) && $request->end_date_from <= $request->end_date_to) {
+            $projects = $projects->whereBetween('end_date', [$request->end_date_from, date('Y-m-d 23:59:59', strtotime($request->end_date_to))]);
+        } elseif (isset($request->end_date_from)) {
+            $projects = $projects->where('end_date', '>=', $request->end_date_from);
+        } elseif (isset($request->end_date_to)) {
+            $projects = $projects->where('end_date', '<=', date('Y-m-d 23:59:59', strtotime($request->end_date_to)));
+        }
+
         //リレーション先OrderBy
         if ($request->sort_type === 'user_name_asc') {
             $projects = $projects->get()->sortBy('user.name');
