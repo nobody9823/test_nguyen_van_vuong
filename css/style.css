@@ -1,0 +1,142 @@
+.mixin {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  color: #000000;
+  margin: 0;
+}
+
+ul li {
+  list-style: none;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.wrapper .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 100%;
+  background: #191718;
+}
+
+.wrapper .sidebar .sidebar-item {
+  padding: 14px 16px;
+  border-bottom: 1px solid #5C5C5C;
+}
+
+.wrapper .sidebar .sidebar-item .sidebar-link {
+  text-decoration: none;
+  color: #AAAAAA;
+}
+
+.wrapper .sidebar .sidebar-item .sidebar-link:hover {
+  color: white;
+}
+
+.wrapper .sidebar .sidebar-item:hover {
+  background: #5C5C5C;
+  color: white;
+}
+
+.wrapper .main {
+  margin-left: 150px;
+}
+
+.wrapper .main .main-content {
+  text-align: center;
+}
+
+.wrapper .main .main-content .logo {
+  padding: 20px 0 30px;
+  height: 122px;
+}
+
+.wrapper .main .main-content .content {
+  width: 100%;
+  padding: 38px 100px;
+  background: #EFEFEF;
+}
+
+.wrapper .main .main-content .content .title {
+  margin-bottom: 18px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.wrapper .main .box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 50px;
+  margin: 30px 0 100px;
+}
+
+.wrapper .main .box .box-content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.wrapper .main .box .box-content h2 {
+  margin-bottom: 18px;
+}
+
+.wrapper .main .box .box-content .box-image {
+  float: left;
+  margin: 0 16px 16px 0;
+}
+
+.wrapper .main .copy {
+  border-top: 1px solid #000000;
+  padding: 30px 100px;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper .main .main-content .content {
+    padding: 38px 30px;
+  }
+  .wrapper .main .box {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper .main .main-content .content {
+    padding: 38px 5px;
+  }
+  .mixin {
+    padding: 0 20px !important;
+  }
+}
+/*# sourceMappingURL=style.css.map */

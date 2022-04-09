@@ -1,0 +1,155 @@
+@import 'variables';
+
+
+*{ 
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    color: $textColor;
+    margin: 0;
+}
+
+ul li {
+    list-style: none;
+}
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 150px;
+        height: 100%;
+        background: $bgSidebar;
+
+        .sidebar-item {
+            padding: 14px 16px;
+            border-bottom: 1px solid $sidebarItem;
+
+            .sidebar-link {
+                text-decoration: none;
+                color: $sidebarLink;
+            }
+
+            .sidebar-link:hover {
+                color: $white;
+            }
+        }
+        .sidebar-item:hover{
+            background: $sidebarItem;
+            color: $white;
+        }
+    }
+
+    .main {
+        margin-left: 150px;
+
+        .main-content {
+            text-align: center;
+
+            .logo {
+                padding:20px 0 30px;
+                height: 122px;
+            }
+
+            .content {
+                width: 100%;
+                padding: 38px 100px;
+                background: $content;
+
+                .title {
+                    margin-bottom: 18px;
+                    font-weight: 700;
+                    font-size: 18px;
+                }
+            }
+        }
+
+        .box {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+            margin: 30px 0 100px;
+
+            .box-content {
+                flex: 1;
+
+                h2 {
+                    margin-bottom: 18px;
+                }
+
+                .box-image {
+                    float: left;
+                    margin: 0 16px 16px 0;
+                }
+            }
+        }
+
+        .copy {
+            border-top: 1px solid $textColor;
+            padding: 30px 100px;
+        }
+    }
+}
+@media screen and (max-width: 768px){
+    .wrapper {
+        .main {
+            .main-content {
+                .content {
+                    padding: 38px 30px;
+                }   
+            }
+            .box {
+                flex-direction: column;
+
+            }
+        }
+    }
+}
+@media screen and (max-width: 600px){
+    .wrapper {
+        .main {
+            .main-content {
+                .content {
+                    padding: 38px 5px;
+                }   
+            }
+        }
+    }
+    .mixin {
+        padding:0 20px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
