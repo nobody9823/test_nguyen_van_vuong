@@ -439,8 +439,8 @@
                 </div><!--/form_item_row-->
 
                 <div class="form_item_row">
-                    <div class="form_item_tit">郵便番号（ハイフンなし）<span class="hissu_txt">必須</span></div>
-                    <input type="number" id="postal_code_modal" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('postal_code_model') === '0' ? '' : old('postal_code_model') }}">
+                    <div class="form_item_tit">郵便番号<span class="hissu_txt">必須</span></div>
+                    <input type="text" id="postal_code_modal" name="postal_code" onKeyUp="AjaxZip2.zip2addr(this,'prefecture','address');" class="p-postal-code def_input_100p" value="{{ old('postal_code_model') === '0' ? '' : old('postal_code_model') }}">
                 </div><!--/form_item_row-->
 
                 <div class="form_item_row">

@@ -68,6 +68,16 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="card-header">掲載終了日</div>
+                <div class="card-body">
+                    <div>
+                        <input type="text" id="end_date_from" name="end_date_from" class="form-control">&emsp;から
+                    </div>
+                    <br>
+                    <div>
+                        <input type="text" id="end_date_to" name="end_date_to" class="form-control">&emsp;まで
+                    </div>
+                </div>
             </div>
         </div>
         <x-manage.sort_form :props_array="[
@@ -75,6 +85,7 @@
             'title' => 'タイトル',
             'user_name' => 'ユーザー名',
             'liked_users_count' => 'いいね数',
+            'end_date' => 'プロジェクト終了日',
         ]" />
         <input name="word" type="search" class="form-control mr-2" aria-lavel="Search" placeholder="キーワードで検索"
             value="{{ Request::get('word') }}">
@@ -537,5 +548,15 @@ function decrementLikes(projectId, decrementPoints){
         location.reload();
     });
 }
+$(function () {
+    $("#end_date_from").datetimepicker({
+        format: 'Y-m-d',
+        timepicker:false
+    });
+    $("#end_date_to").datetimepicker({
+        format: 'Y-m-d',
+        timepicker:false
+    });
+});
 </script>
 @endsection
