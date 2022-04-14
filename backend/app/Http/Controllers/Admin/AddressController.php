@@ -7,6 +7,7 @@ use App\Http\Requests\AddressRequest;
 use App\Models\Address;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Validation\Rule;
 
@@ -91,13 +92,36 @@ class AddressController extends Controller
      */
     public function update(Request $request, User $user, Address $address)
     {
-        $request->validate([
-            'postal_code' => ['required', 'string', 'size:7'],
+        $req = $request->all();
+        if (!empty($req['postal_code'])) {
+            $targetRegexs  = '/[\x{207B}\x{208B}\x{2010}\x{2012}\x{2013}\x{2014}\x{2015}\x{2212}\x{2500}\x{2501}\x{2796}\x{30FC}\x{3161}\x{FF0D}\x{FF70}]/u';
+            $resultRegex = '-';
+            $tmpPostalCode = $req['postal_code'];
+            $tmpPostalCode  = mb_convert_encoding($tmpPostalCode, 'UTF-8', 'auto');
+            // ハイフンを変換
+            $tmpPostalCode = preg_replace($targetRegexs, $resultRegex, $tmpPostalCode);
+            // 半角に変換
+            $tmpPostalCode = mb_convert_kana($tmpPostalCode, "a");
+            if (preg_match("/\A\d{3}-?\d{4}\z/", $tmpPostalCode)) {
+                // ハイフンを削除
+                $req['postal_code'] = str_replace('-', '', $tmpPostalCode);
+            }
+        }
+
+        $messages = [
+            'postal_code.size' => '正しい郵便番号を入力してください。',
+            'postal_code.regex' => '正しい郵便番号を入力してください。',
+        ];
+
+        $validator = Validator::make($req, [
+            'postal_code' => ['required', 'string', 'size:7', 'regex:/^[0-9]{3}-?[0-9]{4}+$/u'],
             'city' => ['required', 'string'],
             'block' => ['required', 'string'],
             'building' => ['nullable', 'string'],
-        ]);
-        $address->fill($request->all())->save();
+        ], $messages);
+
+        $validator->validate();
+        $address->fill($req)->save();
         return redirect()->action([UserController::class,'index'])->with('flash_message', '住所の更新が完了しました。');
     }
 
