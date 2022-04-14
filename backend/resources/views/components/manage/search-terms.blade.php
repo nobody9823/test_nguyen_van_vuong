@@ -66,5 +66,18 @@
         </div>
     </div>
     @endif
+    @if(Request::get('end_date_from') || Request::get('end_date_to'))
+    <div class="card-header d-flex align-items-center">
+        掲載終了日 :
+        <div class="flex-grow-1">
+            @if(Request::get('end_date_from'))
+            【{{ Request::get('end_date_from') }}】から
+            @endif
+            @if(Request::get('end_date_to'))
+            【{{ Request::get('end_date_to') }}】まで
+            @endif
+        </div>
+    </div>
+    @endif
 </div>
 @endif

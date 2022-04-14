@@ -71,11 +71,11 @@
                 <div class="card-header">掲載終了日</div>
                 <div class="card-body">
                     <div>
-                        <input type="text" id="end_date_from" name="end_date_from" class="form-control">&emsp;から
+                        <input type="text" id="end_date_from" name="end_date_from" class="form-control" value="{{ Request::get('end_date_from') }}">&emsp;から
                     </div>
                     <br>
                     <div>
-                        <input type="text" id="end_date_to" name="end_date_to" class="form-control">&emsp;まで
+                        <input type="text" id="end_date_to" name="end_date_to" class="form-control" value="{{ Request::get('end_date_to') }}">&emsp;まで
                     </div>
                 </div>
             </div>
