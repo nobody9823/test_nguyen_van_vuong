@@ -75,8 +75,8 @@ class MessageController extends Controller
     public function indexByExecutor(Project $project, Payment $selected_message = null)
     {
         $this->authorize('checkOwnProject', $project);
-        $chating_messages = Payment::where('project_id', $project->id)->messaging()->withCountNotRead("実行者")->orderBy('updated_at', 'desc')->get();
-        $not_chating_messages = Payment::where('project_id', $project->id)->notMessaging()->withCountNotRead("実行者")->orderBy('updated_at', 'desc')->get();
+        $chating_messages = Payment::where('project_id', $project->id)->messaging()->withCountNotRead("実行者")->groupBy('user_id')->orderBy('updated_at', 'desc')->get();
+        $not_chating_messages = Payment::where('project_id', $project->id)->notMessaging()->withCountNotRead("実行者")->groupBy('user_id')->orderBy('updated_at', 'desc')->get();
         return view('user.my_project.message.index', [
             'project' => $project,
             'chating_messages' => $chating_messages,
