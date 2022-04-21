@@ -45,7 +45,13 @@ const applySubmit = (
     const getRequiredFields = (fields, table) => {
         for (let key in fields) {
             let field = '・' + fields[key] + '\n';
-            table[key] === '' && requiredFields.push(field);
+            if (Array.isArray(table)){
+                table.every(item => {
+                    return item[key] === '';
+                }) && requiredFields.push(field);
+            } else {
+                table[key] === '' && requiredFields.push(field);
+            }
         }
     }
 
@@ -74,7 +80,7 @@ const applySubmit = (
         requiredFields.push('・タグを1つ以上設定してください\n');
 
     // プロフィール
-    getRequiredFields(profileFields, profile);
+    getRequiredFields(profileFields, address);
     if (profile['phone_number'] === '00000000000')
         requiredFields.push('・電話番号\n');
 
