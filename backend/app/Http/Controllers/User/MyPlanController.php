@@ -106,12 +106,12 @@ class MyPlanController extends Controller
         $plan = new Plan();
         $project['sort_no'] = $plan->getMaxSortNo($project->id);
 
-        $project->plans()->save(Plan::initialize($project));
+        $latestPlan = $project->plans()->save(Plan::initialize($project));
         return redirect()->route(
             'user.my_project.project.edit',
             [
                 'project' => $project, 'next_tab' => 'return',
-                'is_new_plan' => true, 'plan' => $project->plans()->latest()->first()
+                'is_new_plan' => true, 'plan' => $latestPlan
             ]
         );
     }
