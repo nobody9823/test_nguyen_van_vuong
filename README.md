@@ -96,6 +96,17 @@ https://ondras.zarovi.cz/sql/demo/?keyword=fanreturn
   ローカル環境でメールの動作を確認する際はこちらの URL で MailLog にアクセスしてください。<br>
   http://localhost:8025
 
+- GMO管理画面<br>
+  決済管理画面URL : [https://kt01.mul-pay.jp/mulpayconsole/shop/tshop00053321/](https://kt01.mul-pay.jp/mulpayconsole/shop/tshop00053321/)<br>
+  ログインID : ADMINISTRATOR<br>
+  ログインパスワード : 2022ICHfanR!02<br>
+  
+  送金管理画面URL : [https://test-remittance.gmopg.jp/admin/login?sp=rshop00000471](https://test-remittance.gmopg.jp/admin/login?sp=rshop00000471)<br>
+  ログインID : ADMINISTRATOR<br>
+  ログインパスワード : 2022ICHfanR03<br>
+  <br>
+  ※本番の管理画面を操作する必要がある場合にはSlackで宮島に連絡してください
+
 - クレジットカードのテスト番号<br>
   https://resource-sharing.co.jp/ec-sites-credit-card-test-number/
 

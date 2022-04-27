@@ -552,7 +552,7 @@ window.onload = function(){
 $('#openModal, #openModalEdit').click(function(){
     if ($(this).attr('id') == "openModalEdit") {
         id = $(this).val()
-        
+
         $('#last_name_modal').val($('span[name="last_name[]"').eq(id).text())
         $('#first_name_modal').val($('span[name="first_name[]"').eq(id).text())
         $('#last_name_kana_modal').val($('span[name="last_name_kana[]"').eq(id).text())
@@ -566,18 +566,18 @@ $('#openModal, #openModalEdit').click(function(){
         $('#building_modal').val($('span[name="building[]"').eq(id).text())
         $('#address_id_modal').val($('input[name="address[]"').eq(id).val())
     } else {
-        $('#last_name_modal').val("")
-        $('#first_name_modal').val("")
-        $('#last_name_kana_modal').val("")
-        $('#first_name_kana_modal').val("")
-        $('#phone_number_modal').val("")
-        $('#postal_code_modal').val("")
-        $('#prefecture_modal').val("")
-        $('#city_modal').val("")
-        $('#block_modal').val("")
-        $('#block_number_modal').val("")
-        $('#building_modal').val("")
-        $('#address_id_modal').val("")
+        $('#last_name_modal').val("{{ old('last_name') }}")
+        $('#first_name_modal').val("{{ old('first_name') }}")
+        $('#last_name_kana_modal').val("{{ old('last_name_kana') }}")
+        $('#first_name_kana_modal').val("{{  old('first_name_kana') }}")
+        $('#phone_number_modal').val("{{ old('phone_number') }}")
+        $('#postal_code_modal').val("{{ old('postal_code') }}")
+        $('#prefecture_modal').val("{{ old('prefecture') }}")
+        $('#city_modal').val("{{ old('city') }}")
+        $('#block_modal').val("{{ old('block') }}")
+        $('#block_number_modal').val("{{ old('block_number') }}")
+        $('#building_modal').val("{{ old('building') }}")
+        $('#address_id_modal').val("{{ old('address_id') }}")
     }
     $('#modalArea').fadeIn();
 });
