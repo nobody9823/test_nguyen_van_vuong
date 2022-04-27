@@ -8,17 +8,23 @@
         @endif
     </div>
 
-    <div class="pds_sec02_tit">
-        {{ $plan->title }}
-    </div>
+    @if(!empty($plan->title))
+        <div class="pds_sec02_tit">
+            {{ $plan->title }}
+        </div>
+    @endif
 
-    <div class="pds_sec02_img">
-        <img class="" src="{{ asset(Storage::url($plan->image_url)) }}">
-    </div>
+    @if(!empty($plan->image_url) && $plan->image_url != 'public/sampleImage/now_printing.png')
+        <div class="pds_sec02_img">
+            <img class="" src="{{ asset(Storage::url($plan->image_url)) }}">
+        </div>
+    @endif
 
-    <div class="pds_sec02_txt">
-        {{ $plan->content }}
-    </div>
+    @if(!empty($plan->content))
+        <div class="pds_sec02_txt">
+            {{ $plan->content }}
+        </div>
+    @endif
 
     @if ($project->end_date < now())
         <div class="pds_sec02_01_btn">
