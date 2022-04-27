@@ -8,10 +8,7 @@ const projectFields = {
     // NOTE: こちらは支援総額順のリターンを使用する際にコメントアウトを解除してください。
     // reward_by_total_amount : '支援総額順リターン内容',
 }
-const planFields = {
-    title: 'リターン名',
-    content: 'リターン詳細',
-}
+
 const profileFields = {
     last_name: '姓',
     first_name: '名',
@@ -65,14 +62,8 @@ const applySubmit = (
         requiredFields.push('・リターンを1つ以上作成してください\n');
 
     for (let i = 0; i < plans.length; i++) {
-        for (let key in planFields) {
-            let field = '・' + (i + 1) + '番目の' + planFields[key] + '\n';
-            plans[i][key] === '' && requiredFields.push(field);
-        }
         if (plans[i]['price'] < 1)
             requiredFields.push('・' + (i + 1) + '番目のリターン金額\n');
-        if (plans[i]['image_url'] === 'public/sampleImage/now_printing.png')
-            requiredFields.push('・' + (i + 1) + '番目のリターン画像\n');
     }
 
     // タグ

@@ -1138,7 +1138,7 @@ input[type=radio]:checked + .radio-fan::after {
 
 .wlr_64{display: flex; flex-wrap: wrap; justify-content:space-between;}
 .wlr_64_L{ width: calc(55% - 15px);}
-.wlr_64_R{ width: calc(45% - 15px); display: flex; flex-wrap: wrap; padding:0px;}
+.wlr_64_R{ width: calc(45% - 15px); padding:0px;}
 @media screen and (max-width: 768px){
 	.wlr_64_L{ width: 100%;}
 	.wlr_64_R{ width: 100%;}
