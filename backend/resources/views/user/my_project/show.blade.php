@@ -238,5 +238,5 @@
 
 @section('script')
 <script src="{{ asset('js/accordion.js') }}"></script>
-<script src={{ asset('/js/apply-submit.js') }}></script>
+<script src="{{ asset('/js/apply-submit.js') }}?20220428"></script>
 @endsection
