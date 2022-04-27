@@ -275,7 +275,7 @@
                         </td>
                         <td>
                             <a class="mt-1" data-toggle="modal" data-target="#user_index{{ $project->id }}">
-                                {{ optional($project->user->name) }}
+                                {{ optional($project->user)->name }}
                             </a>
                             <div class="modal fade" id="user_index{{ $project->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="user_content_modal" aria-hidden="true">
@@ -283,7 +283,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="user_content_modal">
-                                                {{ optional($project->user->name) }}
+                                                {{ optional($project->user)->name }}
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
