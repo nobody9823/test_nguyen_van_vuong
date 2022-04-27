@@ -31,15 +31,17 @@ services:
     build:
       context: .
       dockerfile: ./infra/docker/mysql/Dockerfile
+    platform: linux/x86_64
     ports:
       - ${DB_PORT:-3306}:3306
     volumes:
       - db-store:/var/lib/mysql
     environment:
-      - MYSQL_DATABASE=${DB_NAME:-jarvis}
-      - MYSQL_USER=${DB_USER:-valleyin}
-      - MYSQL_PASSWORD=${DB_PASS:-valleyin}
-      - MYSQL_ROOT_PASSWORD=${DB_PASS:-valleyin}
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: ${DB_NAME:-jarvis}
+      MYSQL_USER: ${DB_USER:-valleyin}
+      MYSQL_PASSWORD: ${DB_PASS:-valleyin}
+      MYSQL_ROOT_PASSWORD: ${DB_PASS:-valleyin}
     user: "1000:50"
     command: --innodb-use-native-aio=0
 
@@ -47,15 +49,17 @@ services:
     build:
       context: .
       dockerfile: ./infra/docker/mysql/Dockerfile
+    platform: linux/x86_64
     ports:
       - 3333:3306
     volumes:
       - db-testing-store:/var/lib/mysql
     environment:
-      - MYSQL_DATABASE=jarvis
-      - MYSQL_USER=valleyin
-      - MYSQL_PASSWORD=valleyin
-      - MYSQL_ROOT_PASSWORD=valleyin
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: ${DB_NAME:-jarvis}
+      MYSQL_USER: ${DB_USER:-valleyin}
+      MYSQL_PASSWORD: ${DB_PASS:-valleyin}
+      MYSQL_ROOT_PASSWORD: ${DB_PASS:-valleyin}
     user: "1000:50"
     command: --innodb-use-native-aio=0
 
