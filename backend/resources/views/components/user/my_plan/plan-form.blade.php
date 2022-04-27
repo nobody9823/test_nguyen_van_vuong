@@ -1,7 +1,7 @@
 <div class="form_item_row">
     <div class="form_item_tit">
         リターン名
-        <span class="hissu_txt">必須</span>
+        <span class="nini_txt">任意</span>
         <div class="disclaimer">※45文字以内で入力してください</div>
     </div>
     <input type="text" name="title" class="def_input_100p" value="{{ optional($plan)->title }}" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">
@@ -13,7 +13,7 @@
 <div class="form_item_row">
     <div class="form_item_tit">
         詳細
-        <span class="hissu_txt">必須</span>
+        <span class="nini_txt">任意</span>
         <div class="disclaimer">※2000文字以内で入力してください</div>
     </div>
     <textarea name="content" class="def_textarea" rows="6" oninput="updateMyPlan.textInput(this, {{ $project->id }}, {{ $plan === null ? '' : $plan->id }})">{{ optional($plan)->content }}</textarea>
@@ -112,7 +112,7 @@
 </div>
 
 <div class="form_item_row" style="display: flex; flex-direction: column">
-    <div class="form_item_tit">リターン画像<span class="hissu_txt">必須</span></div>
+    <div class="form_item_tit">リターン画像<span class="nini_txt">任意</span></div>
     <div class="plan_image_wrapper">
         @if ($plan !== null)
             <div id="image_url_{{ $plan->id }}" class="ib02_01 E-font my_project_img_wrapper">
