@@ -130,6 +130,7 @@
                             <th scope="col" width="10%" class="text-nowrap">プロジェクト名</th>
                         @endif
                         <th scope="col" width="10%" class="text-nowrap">購入リターン</th>
+                        <th scope="col" width="10%" class="text-nowrap">備考</th>
                         <th scope="col" width="10%" class="text-nowrap">メッセージ</th>
                         <th scope="col" width="10%" class="text-nowrap">発送状況</th>
                     </tr>
@@ -350,6 +351,32 @@
                                             @foreach ($payment->includedPlans as $plan)
                                                 {{ $plan->title }} <br/>個数 : {{ $plan->pivot->quantity }} 金額: {{ number_format($plan->price) }}円<br/><br/>
                                             @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            @if(!empty($payment->remarks))
+                                <button type="button" class="btn btn-primary btn-remark" data-toggle="modal"
+                                        data-target="#remarkModal{{ $loop->iteration }}">
+                                    有
+                                </button>
+                            @else
+                                <button type="button" class="btn btn-secondary btn-remark" disabled>無</button>
+                            @endif
+                            <div class="modal fade" id="remarkModal{{ $loop->iteration }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="remarkModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="remarkModalLabel">備考</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ $payment->remarks }}
                                         </div>
                                     </div>
                                 </div>
