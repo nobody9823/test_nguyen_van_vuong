@@ -232,7 +232,8 @@ class ProjectController extends Controller
                     'message_status' => "ステータスなし",
                     'payment_api' => $this->card_payment->getPaymentApiName(),
                     'payment_way' => $validated_request['payment_way'],
-                    'payment_is_finished' => false
+                    'payment_is_finished' => false,
+                    'remarks' => $validated_request['remarks'],
                 ],
                 $request->all()
             ));

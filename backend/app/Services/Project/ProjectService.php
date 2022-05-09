@@ -48,7 +48,7 @@ class ProjectService
 
     public function saveVideoUrl(Project $project, Request $request)
     {
-        if ($request->has('video_url') && $request->video_url !== null) {
+        if ($request->has('video_url')) {
             $current_video = $project->projectFiles()->where('file_content_type', 'video_url')->first();
             if ($current_video !== null) {
                 $current_video->file_url = $request->video_url;
