@@ -30,6 +30,7 @@ use App\Notifications\PaymentNotification;
 use App\Services\Date\DateFormatFacade;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -233,7 +234,7 @@ class ProjectController extends Controller
                     'payment_api' => $this->card_payment->getPaymentApiName(),
                     'payment_way' => $validated_request['payment_way'],
                     'payment_is_finished' => false,
-                    'remarks' => $validated_request['remarks'],
+                    'remarks' => Arr::exists($validated_request,'remarks') ? $validated_request['remarks'] : null,
                 ],
                 $request->all()
             ));
