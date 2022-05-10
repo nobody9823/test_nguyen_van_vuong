@@ -176,10 +176,10 @@
                         </td>
                         <td>
                             <a class="mt-1 text-nowrap" data-toggle="modal"
-                                        data-target="#support_user_index{{ $payment->user->id }}_{{ $payment->includedAddress()->first()->id }}">
+                                        data-target="#support_user_index{{ $payment->user->id }}_{{ optional($payment->includedAddress()->first())->id }}">
                                 {{ $payment->user->name }}
                             </a>
-                            <div class="modal fade" id="support_user_index{{ $payment->user->id }}_{{ $payment->includedAddress()->first()->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="support_user_index{{ $payment->user->id }}_{{ optional($payment->includedAddress()->first())->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="user_content_modal" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
