@@ -279,6 +279,19 @@
 
                 <div class="wlr_64_R">
                     <div class="pds_sec02_tit inner_item">
+                        プロジェクト 方式
+                    </div>
+                    @if($project->funded_type == \App\Enums\FundedType::AllIn)
+                        <div class="pds_sec02_cont inner_item">
+                            このプロジェクトはAll in方式です。目標金額の達成に関わらず、プロジェクト終了日の{{$project->getEndDate()}}までに支払いを完了した時点で、支援購入が成立します。
+                        </div>
+                    @else
+                        <div class="pds_sec02_cont inner_item">
+                            このプロジェクトはAll or Nothing方式です。プロジェクト成立のためにはプロジェクト終了日の{{$project->getEndDate()}}までに目標金額が達成となる必要があります。
+                        </div>
+                    @endif
+
+                    <div class="pds_sec02_tit inner_item">
                         リターンを選ぶ
                     </div>
                     @foreach($project->plans as $plan)
