@@ -23,7 +23,7 @@ class SupporterController extends Controller
     public function index(Project $project)
     {
         $this->authorize('checkOwnProject', $project);
-        $project->load(['payments', 'payments.user', 'payments.includedPlans', 'payments.user.address']);
+        $project->load(['payments', 'payments.user', 'payments.includedPlans', 'payments.user.address', 'comments']);
         $project->payments->map(function ($payment) {
             if ($payment->payment_api === 'GMO') {
                 if ($payment->payment_way === 'credit') {
