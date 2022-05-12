@@ -156,7 +156,7 @@
                     フリガナ
                 </p>
                 <span>
-                    {{ $payment->includedAddress()->first()->last_name_kan }} {{ $payment->includedAddress()->first()->first_name_kana }}
+                    {{ $payment->includedAddress()->first()->last_name_kana }} {{ $payment->includedAddress()->first()->first_name_kana }}
                     {{-- {{ $payment->user->profile->last_name_kana }} {{ $payment->user->profile->first_name_kana }} --}}
                 </span>
                 <p onclick="copyInnerText(this.nextElementSibling);displayToast('success','','コピーが完了しました。')">
@@ -174,7 +174,8 @@
                      電話番号
                 </p>
                 <span>
-                    {{ $payment->user->profile->phone_number }}
+                    {{ $payment->includedAddress()->first()->phone_number }}
+                    {{-- {{ $payment->user->profile->phone_number }} --}}
                 </span>
             </div>
             <div class="supporters_info_item">
