@@ -156,14 +156,16 @@
                     フリガナ
                 </p>
                 <span>
-                    {{ $payment->user->profile->last_name_kana }} {{ $payment->user->profile->first_name_kana }}
+                    {{ $payment->includedAddress()->first()->last_name_kan }} {{ $payment->includedAddress()->first()->first_name_kana }}
+                    {{-- {{ $payment->user->profile->last_name_kana }} {{ $payment->user->profile->first_name_kana }} --}}
                 </span>
                 <p onclick="copyInnerText(this.nextElementSibling);displayToast('success','','コピーが完了しました。')">
                     <i class="fas fa-copy"></i>
                     氏名
                 </p>
                 <span>
-                    {{ $payment->user->profile->last_name }} {{ $payment->user->profile->first_name }}
+                    {{ $payment->includedAddress()->first()->last_name }} {{ $payment->includedAddress()->first()->first_name }}
+                    {{-- {{ $payment->user->profile->last_name }} {{ $payment->user->profile->first_name }} --}}
                 </span>
             </div>
             <div class="supporters_info_item">
