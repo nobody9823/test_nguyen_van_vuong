@@ -156,14 +156,16 @@
                     フリガナ
                 </p>
                 <span>
-                    {{ $payment->user->profile->last_name_kana }} {{ $payment->user->profile->first_name_kana }}
+                    {{ $payment->includedAddress()->first()->last_name_kana }} {{ $payment->includedAddress()->first()->first_name_kana }}
+                    {{-- {{ $payment->user->profile->last_name_kana }} {{ $payment->user->profile->first_name_kana }} --}}
                 </span>
                 <p onclick="copyInnerText(this.nextElementSibling);displayToast('success','','コピーが完了しました。')">
                     <i class="fas fa-copy"></i>
-                    本名
+                    氏名
                 </p>
                 <span>
-                    {{ $payment->user->profile->last_name }} {{ $payment->user->profile->first_name }}
+                    {{ $payment->includedAddress()->first()->last_name }} {{ $payment->includedAddress()->first()->first_name }}
+                    {{-- {{ $payment->user->profile->last_name }} {{ $payment->user->profile->first_name }} --}}
                 </span>
             </div>
             <div class="supporters_info_item">
@@ -172,7 +174,8 @@
                      電話番号
                 </p>
                 <span>
-                    {{ $payment->user->profile->phone_number }}
+                    {{ $payment->includedAddress()->first()->phone_number }}
+                    {{-- {{ $payment->user->profile->phone_number }} --}}
                 </span>
             </div>
             <div class="supporters_info_item">
@@ -229,6 +232,30 @@
                     </div>
                     @endforeach
                 </div>
+            </div>
+            <div class="supporters_info_item">
+                <p onclick="copyInnerText(this.nextElementSibling);displayToast('success','','コピーが完了しました。')">
+                    <i class="fas fa-copy"></i>
+                    備考
+                </p>
+                <span>
+                    {{ $payment->remarks }}
+                </span>
+            </div>
+            <div class="supporters_info_item">
+                <p onclick="copyInnerText(this.nextElementSibling);displayToast('success','','コピーが完了しました。')">
+                    <i class="fas fa-copy"></i>
+                    応援コメント
+                </p>
+        @if($project->comments)
+            @foreach($project->comments as $comment)
+                @if($payment->user->id == $comment->user_id)
+                <span>
+                    {{ $comment->content }}
+                </span>
+                @endif
+            @endforeach
+        @endif
             </div>
         </div>
     </section>
