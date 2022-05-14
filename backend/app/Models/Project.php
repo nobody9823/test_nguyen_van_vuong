@@ -466,8 +466,11 @@ class Project extends Model
 
     public function saveProjectVideo($projectVideo)
     {
-        // ユーザーがURLを入力していないor更新する際にURLが変更されていない場合
-        if (optional($projectVideo)->file_url === null || optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === optional($projectVideo)->file_url) {
+        // 登録済のURLを削除
+        if (isset(optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url) && optional($projectVideo)->file_url === null) {
+            $this->projectFiles()->where('file_content_type', 'video_url')->first()->delete();
+            // ユーザーがURLを入力していないor更新する際にURLが変更されていない場合
+        } elseif (optional($projectVideo)->file_url === null || optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === optional($projectVideo)->file_url) {
             return false;
             // 新規作成の時or更新する際に動画のURLが存在しない場合
         } elseif (optional($this->projectFiles()->where('file_content_type', 'video_url')->first())->file_url === null && optional($projectVideo)->file_url !== null) {

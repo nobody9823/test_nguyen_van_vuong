@@ -51,8 +51,13 @@ class ProjectService
         if ($request->has('video_url')) {
             $current_video = $project->projectFiles()->where('file_content_type', 'video_url')->first();
             if ($current_video !== null) {
-                $current_video->file_url = $request->video_url;
-                $current_video->save();
+                // 登録済のURLを削除
+                if ($request->video_url === null) {
+                    $project->projectFiles()->where('file_content_type', 'video_url')->first()->delete();
+                } else {
+                    $current_video->file_url = $request->video_url;
+                    $current_video->save();
+                }
             } else {
                 $project->projectFiles()->save(
                     ProjectFile::make([
