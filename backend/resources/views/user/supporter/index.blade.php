@@ -75,8 +75,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @if($project->payments)
-                        @foreach($project->payments as $payment)
+                    @if($paymentPlans)
+                        @foreach($paymentPlans as $key => $payments)
+                        <tr style="display:block">
+                            <td style="width: 100%;">{{ $namePlans[$key] }}</td>
+                        </tr>
+                        @foreach($payments as $payment)
                         <tr class="edit_row">
                             <td>
                                 @if ($payment->is_sent)
@@ -118,6 +122,7 @@
                                 <p>{{ $payment->user->name }}</p>
                             </td>
                         </tr>
+                        @endforeach
                         @endforeach
                     @endif
                     </tbody>

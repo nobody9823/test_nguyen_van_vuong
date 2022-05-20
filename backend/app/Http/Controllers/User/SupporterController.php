@@ -24,7 +24,9 @@ class SupporterController extends Controller
     {
         $this->authorize('checkOwnProject', $project);
         $project->load(['payments', 'payments.user', 'payments.includedPlans', 'payments.user.address', 'comments']);
-        $project->payments->map(function ($payment) {
+        $paymentPlans = [];
+        $namePlans = [];
+        foreach ($project->payments as $payment) {
             if ($payment->payment_api === 'GMO') {
                 if ($payment->payment_way === 'credit') {
                     $response = $this->card_payment->searchTrade($payment->paymentToken->order_id);
@@ -47,8 +49,17 @@ class SupporterController extends Controller
             } else {
                 $payment->setAttribute('gmo_job_cd', 'DEFAULT');
             }
-        });
-        return view('user.supporter.index', ['project' => $project]);
+            if ($payment->includedPlans) {
+                foreach ($payment->includedPlans as $item) {
+                    $paymentPlans[$item->id][] = $payment;
+                }
+            }
+        }
+        $paymentPlans = collect($paymentPlans)->sortKeys()->all();
+        foreach($project->plans as $plan) {
+            $namePlans[$plan->id] = $plan->title;
+        };
+        return view('user.supporter.index', ['project' => $project, 'paymentPlans' => $paymentPlans, 'namePlans' => $namePlans]);
     }
 
     /**
