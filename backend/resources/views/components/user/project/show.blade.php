@@ -65,7 +65,7 @@
                                     </li>
                                     @elseif($project_file->file_content_type === 'video_url')
                                     <li class="thumbnail-item able_to_click_children">
-                                        {{ DisplayVideoHelper::getVideoAtManage($project_file->file_url) }}
+                                        <img src="{{ DisplayVideoHelper::getThumbnail($project_file->file_url) }}" alt="">
                                     </li>
                                     @endif
                                 @endforeach

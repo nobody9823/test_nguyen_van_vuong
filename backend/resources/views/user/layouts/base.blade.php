@@ -129,12 +129,7 @@
                                                 <p class="nav_btn_tit_L">ファンリターンとは</p>
                                             </a>
                                         </li>
-                                        <li class="menu-item nav_btn taso_li menuset_01">
-                                            <a href="{{ config('app.wp_baseURL') . '/entry-list' }}"
-                                                class="top_menu-1 nav_btn_link">
-                                                <p class="nav_btn_tit_L">エントリー一覧</p>
-                                            </a>
-                                        </li>
+                                        
                                         <li class="menu-item nav_btn taso_li menuset_01">
                                             <a href="{{ route('user.index') }}" class="top_menu-1 nav_btn_link">
                                                 <p class="nav_btn_tit_L">プロジェクト一覧</p>

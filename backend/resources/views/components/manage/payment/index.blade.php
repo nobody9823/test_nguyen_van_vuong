@@ -3,11 +3,17 @@
 @section('title', '支援者(ファン)管理')
 
 @section('content')
-
+@php 
+    $page = request()->get('page') ? request()->get('page') : 1;
+@endphp
 <div class="card-header d-flex flex-column">
     <div class="flex-grow-1">
         支援者(ファン)管理
-        <x-manage.display_index_count :props="$payments" />
+        @if ($total  > 10)
+            (全{{ $total }}件
+            {{  ($page -1) * 10 + 1}} - 
+            {{ (($page -1) * 10 + 1) + 9  }}件を表示)
+        @endif
     </div>
     <form action="{{ route('admin.payment.index') }}" class="form-inline pr-3" method="get" style="position: relative">
         @if(Request::get('project'))
@@ -107,6 +113,7 @@
             @if(Request::get('project'))
                 <form action="{{ route('admin.project.output_purchases_list_to_csv', ['project' => Request::get('project')]) }}" class="mr-4">
                     @csrf
+                    <input type="hidden" name="project" value="{{Request::get('project')}}" />
                     <button class="btn btn-secondary mb-4">CSV出力</button>
                 </form>
                 <div class="flex-fill d-flex justify-content-between">
@@ -432,7 +439,69 @@
                 </tbody>
             </table>
         </div>
-        {{ $payments->appends(request()->input())->links() }}
+        <?php 
+            $totalPage = ceil($total / 10);
+            $p = 2;
+            if($totalPage > 1):?>
+                <div class="pager E-font">
+                    <ul class="pagination">
+                        <li class="pager_pre {{(int)$page == 1 ? 'disable':'';}}">
+                            <a href="?page={{($page - 1);}}" rel="prev" aria-label="« 前"><span>‹</span></a>
+                        </li>
+                        <li>
+                            <a href="?page=1" class="{{$page == 1 ? 'pager_active' :''; }} ">   
+                                <span>1</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page=2" class="{{$page == 2 ? 'pager_active' :'';}} ">   
+                                <span>2</span>
+                            </a>
+                        </li> 
+                        <?php while ($p ++ < ($totalPage - 2)):?>
+                            <?php if ( $p < $page - 7 ):
+                                $p = $page - 3;
+                            ?>
+                                <li>
+                                    <a>
+                                        <span>...</span>
+                                    </a>
+                                </li>
+                            <?php elseif ( $p > $page + 3 ):
+                                $p = $totalPage;
+                            ?>
+                                <li>
+                                    <a>
+                                        <span>...</span>
+                                    </a>
+                                </li>
+                        
+                            <?php else :?>
+                                <li>
+                                    <a href="?page={{$p}}" class="{{$p == $page ? 'pager_active' :'';}}">
+                                        <span>{{$p}}</span>
+                                    </a>
+                                </li>
+                            
+                            <?php endif;?>
+                        <?php endwhile;?>
+                        <li>
+                            <a href="?page={{$totalPage -1}}" class="{{$page == ($totalPage -1) ? 'pager_active' :''}}">   
+                                <span>{{$totalPage -1}}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page={{$totalPage}}" class="{{$page == $totalPage ? 'pager_active' :''}}">   
+                                <span>{{$totalPage}}</span>
+                            </a>
+                        </li>
+                        <li class="pager_next {{(int)$page == (int)$totalPage ? 'disable':''}}">
+                            <a href="?page={{($page + 1)}}"><span>›</span></a>
+                        </li>
+                    </ul>
+                    <input type="hidden" name="current_page" id="current_page" class="current_page" value="{{$page}}"/>
+                </div>
+        <?php endif;?>
     @endif
 </div>
 @endsection

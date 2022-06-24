@@ -44,6 +44,11 @@ class PaymentController extends Controller
                 'includedAddress'
             ])
             ->sortBySelected($request->sort_type);
+            $countPayment = $payments->count();
+            $rq = $request->all();
+            $page_number = isset($rq['page']) && $rq['page'] ? $rq['page']: 1;
+            $page_size = 10;
+            $payments = $payments->offset(($page_number-1)*$page_size)->limit($page_size);
 
         //リレーション先OrderBy
         if ($request->sort_type === 'user_name_asc') {
@@ -96,9 +101,10 @@ class PaymentController extends Controller
             });
         }
 
-        return view('admin.payment.index', [
-            'payments' => $payments->paginate(10)
-        ]);
+        return view('admin.payment.index', ['data' => [
+            'payments' => $payments,
+            'countPayment' =>$countPayment
+        ]]);
     }
 
     /**
