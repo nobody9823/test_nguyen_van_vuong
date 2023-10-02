@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("./assets/icons/fontawesome.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  src: url('./assets/fonts/Roboto/Roboto-Regular.ttf');
+}
+
+:root {
+  --primary: #3fafd7;
+  --p—light: #7ae1ff;
+  --p—dark: #0080a5;
+  --secondary: #e0f7fa;
+  --s—light: #ffffff;
+  --s—dark: #aec4c7;
+  --p-text: #000000;
+  --s-text: #000000;
+}
+
+body {
+  background: linear-gradient(
+    218deg,
+    #35a1d9 8.72%,
+    #a5d4b0 53.82%,
+    #a5d4b0 87.05%
+  );
+  flex-shrink: 0;
+  font-size:16px;
+}
