@@ -9,6 +9,39 @@
   top: -420px;
   left: -275px;
 }
+.middle-title-phone {
+  color: #1a3966;
+  text-align: center;
+  font-family: SF Pro;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 142.857% */
+  @apply sm:text-[14px];
+}
+.title-1-phone {
+  color: var(--50-b-848, #50b848);
+  text-align: center;
+  font-family: Myriad Pro;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+
+  @apply sm:text-[36px];
+}
+.sub-1-phone {
+  color: var(--1-a-3966, #1a3966);
+  text-align: center;
+  font-family: Myriad Pro;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  @apply sm:text-[26.5px];
+}
 .box2 {
   width: 889px;
   height: 889px;
@@ -59,18 +92,32 @@
 .lastbg {
   bottom: 0;
   z-index: 100;
+  @apply xl:h-[430px]
 }
 
 .cloud-top-right {
   position: absolute;
-  right: 93px;
+  right: -100px;
   top: 97px;
+  @apply md:right-[93px] md:top-[97px];
+}
+
+.cloud-top-right-img {
+  width: 269px;
+  height: 107.419px;
+  @apply md:w-full md:h-full;
+}
+.cloud-top-left-img {
+  width: 271px;
+  height: 108.218px;
+  @apply md:w-full md:h-full;
 }
 
 .cloud-bot-left {
   position: absolute;
-  left: -275px;
-  bottom: -30px;
+  left: -100px;
+  bottom: 138px;
+  @apply md:left-[-275px] md:bottom-[-30px];
 }
 .copyright {
   position: absolute;

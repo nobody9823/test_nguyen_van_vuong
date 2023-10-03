@@ -1,12 +1,14 @@
 .btn-nav {
-  width: 429px;
-  height: 68px;
+  width: 343px;
+  height: 45px;
   flex-shrink: 0;
-  border-radius: 34px;
+  border-radius: 30px;
   background: linear-gradient(
     262deg,
     #00763d 13.75%,
     #1a3966 55.07%,
     #152551 93.16%
   );
+
+  @apply md:w-[429px] md:h-[68px] md:rounded-[34px];
 }
