@@ -28,7 +28,7 @@
   line-height: normal;
   text-transform: uppercase;
 
-  @apply text-2xl;
+  @apply text-xl;
   @apply sm:text-[36px];
 }
 .sub-1-phone {
@@ -39,7 +39,7 @@
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
-  @apply text-base;
+  @apply text-sm;
   @apply sm:text-[26.5px];
 }
 .box2 {
