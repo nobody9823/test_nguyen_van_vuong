@@ -150,21 +150,23 @@
   color: var(--50-b-848, #50b848);
   text-align: right;
   font-family: Myriad Pro;
-  font-size: 3rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  text-transform: uppercase;
-}
-.sub-1 {
-  color: var(--1-a-3966, #1a3966);
-  text-align: right;
-  font-family: Myriad Pro;
   font-size: 2rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
+  @apply xl:text-5xl
+}
+.sub-1 {
+  color: var(--1-a-3966, #1a3966);
+  text-align: right;
+  font-family: Myriad Pro;
+  font-size: 1.7rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  @apply xl:text-[2rem]
 }
 
 .actived {
