@@ -155,7 +155,7 @@
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
-  @apply xl:text-5xl
+  @apply xl:text-4xl
 }
 .sub-1 {
   color: var(--1-a-3966, #1a3966);
