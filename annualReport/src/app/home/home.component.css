@@ -117,7 +117,7 @@
   position: absolute;
   left: -100px;
   bottom: 138px;
-  @apply md:left-[-275px] md:bottom-[-30px];
+  @apply md:left-[-275px] md:bottom-[-30px] xl:bottom-[-140px] xl:left-[-350px];
 }
 .copyright {
   position: absolute;

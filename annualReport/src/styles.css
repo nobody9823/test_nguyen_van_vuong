@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: SF Pro, sans-serif;
-  src: url('./assets/fonts/SFPro/FontsFree-Net-SFProText-Regular.ttf');
+  font-family: SF Pro;
+  src: url('./assets/fonts/SFPro/SF-Pro-Text-Bold.otf');
 }
 @font-face {
   font-family: Myriad Pro;
