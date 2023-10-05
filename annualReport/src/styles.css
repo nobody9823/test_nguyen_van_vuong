@@ -5,8 +5,12 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  src: url('./assets/fonts/Roboto/Roboto-Regular.ttf');
+  font-family: SF Pro, sans-serif;
+  src: url('./assets/fonts/SFPro/FontsFree-Net-SFProText-Regular.ttf');
+}
+@font-face {
+  font-family: Myriad Pro;
+  src: url('./assets/fonts/MyriadPro/MyriadPro-Bold.otf');
 }
 
 :root {
