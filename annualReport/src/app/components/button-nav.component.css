@@ -7,3 +7,9 @@
 
   @apply md:w-[429px] md:h-[68px] md:rounded-[34px];
 }
+
+.btn-nav:hover .btn-icon{
+  background: #50B848;
+  border-color: #50B848;
+  transition: 0.5s;
+}
