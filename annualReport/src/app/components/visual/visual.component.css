@@ -13,6 +13,18 @@
 	        animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both;
 }
 
+#logo-1-digital-first{
+  animation: changeFill 3s ease-in-out 3s infinite;
+}
+#logo-1-digital-second{
+  animation: changeFill 3s ease-in-out 4s infinite;
+}
+#logo-1-digital-thirt{
+  animation: changeFill 3s ease-in-out 5s infinite;
+}
+#logo-3-digital-budd{
+  animation: changeFill 3s ease-in-out 6s infinite;
+}
 .sbt-logo{
   position: absolute;
   top: 4%;
@@ -52,7 +64,7 @@
 	        animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 1.2s both;
 }
 #logo1-path {
-  animation: rotatePath 4s linear infinite; /* Define the animation */
+  animation: rotatePath 10s linear infinite; /* Define the animation */
   transform-origin: center center; /* Set the transform origin to the center */
 }
 #logo2-rain-down1{
@@ -199,4 +211,16 @@
     -webkit-transform: scale(1);
             transform: scale(1);
   }
+}
+
+@keyframes changeFill {
+  0% {
+  }
+  100% {
+    fill: #50b848; /* Ending color */
+  }
+}
+
+.change-fill {
+  animation: changeFill 6s ease infinite;
 }
