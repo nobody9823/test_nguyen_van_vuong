@@ -6,6 +6,8 @@
   background: linear-gradient(262deg, #1D3A6C 13.75%, #1A3966 55.07%, #152551 93.16%);
 
   @apply md:w-[429px] md:h-[68px] md:rounded-[34px];
+  @apply lg:w-[343px] lg:h-[52px] lg:rounded-[34px];
+  @apply 2xl:w-[429px] 2xl:h-[68px] md:rounded-[34px];
 }
 
 .btn-nav:hover .btn-icon{

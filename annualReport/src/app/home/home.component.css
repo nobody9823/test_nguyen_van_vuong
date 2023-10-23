@@ -111,6 +111,8 @@
   right: -100px;
   top: 97px;
   @apply md:right-[93px] md:top-[97px];
+  @apply lg:right-[30px] lg:top-[47px];
+  @apply 2xl:right-[93px] 2xl:top-[97px];
 }
 
 .cloud-top-right-img {
@@ -146,6 +148,8 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  @apply md:text-lg;
+  @apply 2xl:text-[24px];
 }
 
 .toggle-languages {
@@ -166,7 +170,8 @@
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
-  @apply xl:text-[3rem];
+  @apply md:text-[2.45rem];
+  @apply 2xl:text-[3rem];
 }
 .sub-1 {
   color: var(--1-a-3966, #1a3966);
@@ -177,7 +182,8 @@
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
-  @apply xl:text-[2.2rem]
+  @apply md:text-[1.8rem];
+  @apply 2xl:text-[2.2rem];
 }
 
 .actived {
