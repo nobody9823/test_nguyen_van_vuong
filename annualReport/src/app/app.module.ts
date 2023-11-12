@@ -6,6 +6,9 @@ import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { ButtonNavComponent } from "./components/button-nav.component";
 import { VisualComponent } from "./components/visual/visual.component";
+import { ContentPagesComponent } from './content-pages/content-pages.component';
+import { DauAnNienDoComponent } from './content-pages/dau-an-nien-do/dau-an-nien-do.component';
+import { LanguagesToggleComponent } from './components/languages-toggle/languages-toggle.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +16,9 @@ import { VisualComponent } from "./components/visual/visual.component";
     HomeComponent,
     ButtonNavComponent,
     VisualComponent,
+    ContentPagesComponent,
+    DauAnNienDoComponent,
+    LanguagesToggleComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

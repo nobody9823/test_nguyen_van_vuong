@@ -1,0 +1,133 @@
+#info-1 {
+  background: url("../../../assets/images/dau-an-nien-do-info-1.png"),
+    lightgray 50% / cover no-repeat;
+}
+
+.info-1__title {
+  color: var(--50-b-848, #50b848);
+  font-family: UTM HelvetIns;
+  @apply text-7xl;
+  line-height: normal;
+}
+
+.info-1__subtitle {
+  color: var(--1-a-3966, #1a3966);
+  font-family: UTM HelvetIns;
+  /* font-size: 44px; */
+  @apply text-4xl;
+  /* line-height: normal; */
+}
+
+.info-1__description {
+  width: 480px;
+  text-align: justify;
+  font-family: SF Pro;
+  @apply text-sm;
+  font-style: normal;
+  font-weight: 510;
+  @apply mt-8;
+  background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.info-1__decoration {
+  width: 1.788px;
+  height: 175px;
+  flex-shrink: 0;
+  /* border-radius: 354px; */
+  border-radius: 50%;
+  background: var(--50-b-848, #50b848);
+  filter: blur(1px);
+}
+
+#info-2 {
+  height: 2912px;
+  flex-shrink: 0;
+  background: url("../../../assets/images/dau-an-nien-do-info-2.png"),
+    linear-gradient(71deg, #21375f 16.02%, #305b97 100.77%);
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  /* background-position: center; */
+}
+
+.info-2__title {
+  color: var(--ffffff, #fff);
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.info-2__subtitle {
+  color: var(--ffffff, #fff);
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.info-2__title2 {
+  /* color: #C7EAFB; */
+}
+
+.info-2__title2 .title2__text1 {
+  color: #c7eafb;
+  text-align: justify;
+  font-family: UTM Impact;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 112% */
+  @apply w-[182px];
+}
+
+.info-2__title2 .title2__text2 {
+  color: #c7eafb;
+  text-align: justify;
+  font-family: UTM Impact;
+  font-size: 114px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110px;
+  /* @apply w-[80px]; */
+  /* @apply h-[80px]; */
+}
+
+.info-2__title2 .title2__text3 {
+  color: #c7eafb;
+  text-align: justify;
+  font-family: UTM Impact;
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 54px; /* 51.429% */
+}
+
+.info-2__title2 .title2__text4 {
+  color: #c7eafb;
+  text-align: justify;
+  font-family: UTM Impact;
+  font-size: 29px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px; /* 103.448% */
+  @apply w-[217px];
+}
+
+@media only screen and (max-width: 1536px) {
+  .info-1__content {
+    width: 1000px;
+  }
+  ul.nav li {
+    font-size: 12px;
+  }
+}
+/*
+@media only screen and (min-width: 1537px) {
+  .content-header {
+  }
+} */

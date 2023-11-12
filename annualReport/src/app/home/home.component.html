@@ -89,10 +89,11 @@
         <div class="middle-title hidden md:block tracking-in-expand-1">
           BÁO CÁO THƯỜNG NIÊN TTC AGRIS NIÊN ĐỘ 2022-2023
         </div>
-        <div class="toggle-languages flex p-1">
+        <!-- <div class="toggle-languages flex p-1">
           <div class="w-[40px] text-center actived">VN</div>
           <div class="w-[40px] text-center">EN</div>
-        </div>
+        </div> -->
+        <app-languages-toggle></app-languages-toggle>
       </div>
       <div
         class="middle-title-phone mt-[6px] flex justify-center text-center w-full md:hidden"
@@ -117,7 +118,7 @@
             <div class="sub-1">NÂNG TẦM NÔNG NGHIỆP BỀN VỮNG</div>
           </div>
           <div class="mt-5 md:mt-20 2xl:mt-16 xl:mt-12 flex flex-col items-center md:items-end lg:items-end right-group">
-            <a href="#" class="my-1 md:my-3">
+            <a routerLink="content/dau-an-nien-do" class="my-1 md:my-3">
               <app-btn-nav>
                 <div class="icon">
                   <svg
