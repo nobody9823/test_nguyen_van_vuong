@@ -9,6 +9,10 @@
   src: url('./assets/fonts/SFPro/SF-Pro-Text-Bold.otf');
 }
 @font-face {
+  font-family: SF Pro Regular;
+  src: url('./assets/fonts/SFPro/SF-Pro-Text-Light.otf');
+}
+@font-face {
   font-family: Myriad Pro;
   src: url('./assets/fonts/MyriadPro/MyriadPro-Bold.otf');
 }
@@ -23,6 +27,10 @@
 @font-face {
   font-family: UTM Impact;
   src: url('./assets/fonts/UTMImpact/UTM-Impact.ttf');
+}
+@font-face {
+  font-family: Quicksand;
+  src: url('./assets/fonts/Quicksand/Quicksand-VariableFont_wght.ttf');
 }
 
 
@@ -46,4 +54,12 @@ body {
   );
   flex-shrink: 0;
   font-size:16px;
+}
+
+html {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+html::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
 }

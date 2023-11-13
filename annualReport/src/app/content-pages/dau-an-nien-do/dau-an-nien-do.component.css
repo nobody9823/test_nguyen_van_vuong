@@ -1,30 +1,43 @@
 #info-1 {
-  background: url("../../../assets/images/dau-an-nien-do-info-1.png"),
-    lightgray 50% / cover no-repeat;
+  /* background: url("../../../assets/images/dau-an-nien-do-info-1.png"),
+    lightgray 50% / contain no-repeat; */
+    background: url("../../../assets/images/dau-an-nien-do-info-1.png");
+    background-size: 100vw;
+    /* background-repeat: no-repeat; */
+    @apply w-full;
+    @apply before:content-[''];
+    @apply before:block;
+    @apply before:pb-[71%];
 }
 
 .info-1__title {
   color: var(--50-b-848, #50b848);
+  text-align: right;
   font-family: UTM HelvetIns;
-  @apply text-7xl;
+  font-size: 90px;
+  font-style: normal;
+  font-weight: 400;
   line-height: normal;
 }
 
 .info-1__subtitle {
   color: var(--1-a-3966, #1a3966);
+  text-align: right;
   font-family: UTM HelvetIns;
-  /* font-size: 44px; */
-  @apply text-4xl;
-  /* line-height: normal; */
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .info-1__description {
-  width: 480px;
+  width: 584px;
   text-align: justify;
-  font-family: SF Pro;
-  @apply text-sm;
+  font-family: SF Pro Regular;
+  font-size: 20px;
   font-style: normal;
   font-weight: 510;
+  line-height: 30px; /* 150% */
   @apply mt-8;
   background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
   background-clip: text;
@@ -33,23 +46,37 @@
 }
 
 .info-1__decoration {
-  width: 1.788px;
-  height: 175px;
-  flex-shrink: 0;
-  /* border-radius: 354px; */
-  border-radius: 50%;
-  background: var(--50-b-848, #50b848);
-  filter: blur(1px);
+  width: 3.388px;
+height: 354px;
+flex-shrink: 0;
+border-radius: 50%;
+background: var(--50-b-848, #50B848);
+filter: blur(1.5px);
 }
 
 #info-2 {
-  height: 2912px;
+  /* height: max-content; */
   flex-shrink: 0;
-  background: url("../../../assets/images/dau-an-nien-do-info-2.png"),
-    linear-gradient(71deg, #21375f 16.02%, #305b97 100.77%);
+  /* background: url("../../../assets/images/dau-an-nien-do-info-2.png"),
+    linear-gradient(71deg, #21375f 16.02%, #305b97 100.77%); */
+  background: linear-gradient(71deg, #21375f 16.02%, #305b97 100.77%);
   background-size: 100vw;
   background-repeat: no-repeat;
   /* background-position: center; */
+}
+
+.background-image {
+  background: url("../../../assets/images/dau-an-nien-do-info-2.png");
+  background-size: 100vw;
+  /* background-repeat: no-repeat; */
+  /* @apply h-[1691px]; */
+  /* @apply h-auto; */
+  /* aspect-ratio: 1691 / 1000; */
+  /* @apply h-fit; */
+  @apply w-full;
+  @apply before:content-[''];
+  @apply before:block;
+  @apply before:pb-[86%];
 }
 
 .info-2__title {
@@ -71,13 +98,10 @@
 }
 
 .info-2__title2 {
-  /* color: #C7EAFB; */
+  font-family: UTM Impact;
 }
 
 .info-2__title2 .title2__text1 {
-  color: #c7eafb;
-  text-align: justify;
-  font-family: UTM Impact;
   font-size: 25px;
   font-style: normal;
   font-weight: 400;
@@ -116,6 +140,364 @@
   font-weight: 400;
   line-height: 30px; /* 103.448% */
   @apply w-[217px];
+}
+
+.info-2__description1 {
+  width: 510px;
+  color: var(--ffffff, #fff);
+  text-align: justify;
+  font-family: SF Pro Regular;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 30px; /* 125% */
+}
+
+.info-2__description1 strong {
+  font-weight: 900;
+}
+
+.info-2__detail1 {
+  width: 461px;
+  color: var(--ffffff, #fff);
+  font-family: SF Pro Regular;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 274;
+  line-height: 22px;
+}
+
+.info-2__detail1 strong {
+  font-weight: 700;
+}
+
+.info-2__detail2 .rank__text {
+  color: var(--ffffff, #fff);
+  font-family: SF Pro Regular;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 38px; /* 137.5% */
+}
+
+.info-2__detail2 .rank__number {
+  color: #f4e696;
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 56px;
+}
+
+.info-2__detail2 .rank__detail {
+  width: 315px;
+  color: var(--ffffff, #fff);
+  font-family: SF Pro Regular;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 274;
+  line-height: 22px; /* 137.5% */
+}
+
+.info-2__detail2 .rank__detail strong {
+  font-weight: 700;
+}
+
+.info-2__description2 {
+  width: 962px;
+  color: var(--ffffff, #fff);
+  text-align: justify;
+  font-family: SF Pro Regular;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 274;
+  line-height: 30px; /* 150% */
+}
+
+.info-2__description2 strong {
+  font-weight: 860;
+}
+
+.background-image-2 {
+  background: url("../../../assets/images/dau-an-nien-do-info-3.png");
+  background-size: 75vw;
+  background-repeat: no-repeat;
+  /* @apply h-[1691px]; */
+  /* @apply h-auto; */
+  /* aspect-ratio: 1691 / 1000; */
+  /* @apply h-fit; */
+  /* @apply w-full; */
+  @apply before:content-[''];
+  @apply before:block;
+  @apply before:pb-[72%];
+}
+
+.characteristic {
+  color: #f4e696;
+  text-align: center;
+  font-family: SF Pro;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 860;
+  line-height: normal;
+}
+
+.info-2__description3 {
+  width: 627px;
+  color: var(--ffffff, #fff);
+  font-family: SF Pro Regular;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 59px; /* 137.209% */
+}
+
+.info-2__description3 strong {
+  font-weight: 860;
+  font-family: SF Pro;
+}
+
+.description3__title {
+  color: #f4e696;
+  text-align: justify;
+  font-family: SF Pro;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 860;
+  line-height: normal;
+}
+
+.description3__detail {
+  color: var(--ffffff, #fff);
+  text-align: justify;
+  font-family: SF Pro Regular;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 274;
+  line-height: 30px; /* 150% */
+  @apply mt-10;
+}
+
+.description3__detail strong {
+  font-weight: 860;
+  font-family: SF Pro;
+}
+
+.signature-group .signature__title {
+  color: var(--ffffff, #fff);
+  text-align: center;
+  font-family: SF Pro;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 142.857% */
+}
+
+.signature-group .signature {
+}
+
+.signature-group .signature__name {
+  color: var(--ffffff, #fff);
+  text-align: center;
+  font-family: SF Pro;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 860;
+  line-height: 20px; /* 142.857% */
+}
+
+#info-3 {
+  background: url("../../../assets/images/dau-an-nien-do-info-4.png");
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  @apply w-full;
+  @apply before:content-[''];
+  @apply before:block;
+  @apply before:pb-[70%];
+}
+
+.info-3__detail1 {
+  color: #fff;
+  text-align: center;
+  font-family: iCiel Samsung Sharp Sans;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.info-3__detail1 .detail1__number {
+  font-family: Quicksand;
+  font-style: normal;
+}
+
+#info-4 {
+  background: #fff;
+}
+
+#info-4 .header__text {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  background: var(
+    --Text-Gradient,
+    linear-gradient(90deg, #007534 -0.98%, #23923c 52.79%, #50b848 100.23%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#info-4 .box-1 {
+  background: url("../../../assets/images/dau-an-nien-do-box-1.png");
+  background-size: 100%;
+  /* background-repeat: no-repeat; */
+  @apply w-full;
+  @apply after:content-[''];
+  @apply after:block;
+  @apply after:pb-[34%];
+}
+
+#info-4 .box-1__decoration1 {
+  width: 170px;
+  height: 1px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 114, 188, 0) -1.32%,
+    #0072bc 97.86%
+  );
+}
+
+#info-4 .box-1__decoration2 {
+  background: url("../../../assets/images/box-1-decoration-2.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#info-4 .box-1__decoration3 {
+  width: 170px;
+  height: 1px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    270deg,
+    rgba(0, 114, 188, 0) -1.32%,
+    #0072bc 97.86%
+  );
+}
+
+#info-4 .box-2 {
+  background: url("../../../assets/images/dau-an-nien-do-box-2.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  @apply w-full;
+  @apply after:content-[''];
+  @apply after:block;
+  @apply after:pb-[34%];
+}
+
+#info-4 .box-2__decoration1 {
+  width: 370px;
+  height: 1px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    270deg,
+    #50b848 7.43%,
+    rgba(80, 184, 72, 0) 61.22%
+  );
+}
+
+#info-4 .box-2__decoration3 {
+  width: 370px;
+  height: 1px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    #50b848 7.43%,
+    rgba(80, 184, 72, 0) 61.22%
+  );
+}
+
+#info-4 .box-3 {
+  background: url("../../../assets/images/dau-an-nien-do-box-3.png");
+  background-size: 100%;
+  /* background-repeat: no-repeat; */
+  @apply w-full;
+  @apply before:content-[''];
+  @apply before:block;
+  @apply before:pb-[171%];
+}
+
+#info-4 .box__title {
+  text-align: center;
+  font-family: UTM HelvetIns;
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 34.48%,
+      #00425d 68.87%,
+      #007534 103.25%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#info-4 .box__description {
+  color: var(--1-a-3966, #1a3966);
+  text-align: center;
+  font-family: SF Pro Regular;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 29px; /* 145% */
+}
+
+#info-4 .box-2__decoration4 {
+  background: url("../../../assets/images/box-2-decoration-4.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.box-2 {
+  background-color: red;
+}
+
+.box-3__title {
+  color: #f4e696;
+  text-align: center;
+  font-family: UTM HelvetIns;
+  font-size: 46px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 68px; /* 132.857% */
+}
+
+#info-4 .box-4 {
+  background: url("../../../assets/images/dau-an-nien-do-box-4.png");
+  background-size: 100%;
+  /* background-repeat: no-repeat; */
+  @apply w-full;
+  @apply before:content-[''];
+  @apply before:block;
+  @apply before:pb-[206%];
+}
+
+#info-4 .box-5 {
+  background: url("../../../assets/images/dau-an-nien-do-box-5.png");
+  background-size: 100%;
+  /* background-repeat: no-repeat; */
+  @apply w-full;
+  @apply before:content-[''];
+  @apply before:block;
+  @apply before:pb-[209%];
 }
 
 @media only screen and (max-width: 1536px) {
