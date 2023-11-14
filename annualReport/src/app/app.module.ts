@@ -9,6 +9,7 @@ import { VisualComponent } from "./components/visual/visual.component";
 import { ContentPagesComponent } from './content-pages/content-pages.component';
 import { DauAnNienDoComponent } from './content-pages/dau-an-nien-do/dau-an-nien-do.component';
 import { LanguagesToggleComponent } from './components/languages-toggle/languages-toggle.component';
+import { TitleLogoComponent } from './components/vectors/title-logo/title-logo.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LanguagesToggleComponent } from './components/languages-toggle/language
     ContentPagesComponent,
     DauAnNienDoComponent,
     LanguagesToggleComponent,
+    TitleLogoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

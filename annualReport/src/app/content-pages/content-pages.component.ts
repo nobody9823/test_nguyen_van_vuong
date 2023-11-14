@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./content-pages.component.css']
 })
 export class ContentPagesComponent {
-
+  onClickNav(elementId: string) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+  }
 }

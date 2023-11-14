@@ -1,13 +1,13 @@
 #info-1 {
   /* background: url("../../../assets/images/dau-an-nien-do-info-1.png"),
     lightgray 50% / contain no-repeat; */
-    background: url("../../../assets/images/dau-an-nien-do-info-1.png");
-    background-size: 100vw;
-    /* background-repeat: no-repeat; */
-    @apply w-full;
-    @apply before:content-[''];
-    @apply before:block;
-    @apply before:pb-[71%];
+  background: url("../../../assets/images/dau-an-nien-do-info-1.png");
+  background-size: 100vw;
+  /* background-repeat: no-repeat; */
+  @apply w-full;
+  @apply before:content-[''];
+  @apply before:block;
+  @apply before:pb-[71%];
 }
 
 .info-1__title {
@@ -47,11 +47,11 @@
 
 .info-1__decoration {
   width: 3.388px;
-height: 354px;
-flex-shrink: 0;
-border-radius: 50%;
-background: var(--50-b-848, #50B848);
-filter: blur(1.5px);
+  height: 354px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--50-b-848, #50b848);
+  filter: blur(1.5px);
 }
 
 #info-2 {
@@ -498,6 +498,231 @@ filter: blur(1.5px);
   @apply before:content-[''];
   @apply before:block;
   @apply before:pb-[209%];
+}
+
+#info-5 {
+  background-color: #fff;
+}
+
+#info-5 .header__text {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+  background: var(
+    --Text-Gradient,
+    linear-gradient(90deg, #007534 -0.98%, #23923c 52.79%, #50b848 100.23%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#info-6 .content-text,
+#info-5 .content-text {
+  color: var(--292829, #292829);
+  text-align: justify;
+  font-family: SF Pro Regular;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 274;
+  line-height: 30px; /* 150% */
+}
+
+#info-6 .content-text__bold,
+#info-5 .content-text__bold {
+  font-weight: 700;
+  font-family: SF Pro;
+}
+
+#info-6 .content-text__highlight,
+#info-5 .content-text__highlight {
+  text-align: justify;
+  font-family: SF Pro;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 34px; /* 141.667% */
+  background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.content-block {
+  @apply flex;
+  @apply flex-col;
+  @apply items-end;
+}
+
+.content-label__highlight {
+  text-align: right;
+  font-family: Myriad Pro;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 34.48%,
+      #00425d 68.87%,
+      #007534 103.25%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.content-sublabel {
+  color: #58595b;
+  text-align: right;
+  font-family: Myriad Pro Light;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.content-numeric {
+  text-align: right;
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 80px;
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 34.48%,
+      #00425d 68.87%,
+      #007534 103.25%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.content-label {
+  color: var(--292829, #292829);
+  text-align: right;
+  font-family: Myriad Pro;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.horizontal-divider {
+  width: 1920px;
+  height: 1px;
+  flex-shrink: 0;
+  background: #d9d9d9;
+}
+
+.content-background {
+  background: linear-gradient(
+    90deg,
+    #f1f1f2 67.23%,
+    rgba(241, 241, 242, 0) 107.07%
+  );
+}
+
+.content-small {
+  color: var(--292829, #292829);
+  text-align: justify;
+  font-family: SF Pro Regular;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 274;
+  line-height: 24px; /* 133.333% */
+}
+
+.content-text strong {
+  font-weight: 700;
+  font-family: SF Pro;
+}
+
+.chairman-name {
+  color: #000;
+  text-align: center;
+  font-family: SF Pro Regular;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.chairman-name strong {
+  font-weight: 700;
+  font-family: SF Pro;
+}
+
+.chairman-title {
+  color: #000;
+  font-family: SF Pro Regular;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 276;
+  line-height: 20px;
+}
+
+.info-6-divider {
+  width: 1200px;
+  height: 1px;
+  flex-shrink: 0;
+  background: var(--50-b-848, #50b848);
+}
+
+#info-6 {
+  background-color: #fff;
+}
+
+#info-6 .header__text {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px;
+  background: var(
+    --Text-Gradient,
+    linear-gradient(90deg, #007534 -0.98%, #23923c 52.79%, #50b848 100.23%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.content-title {
+  font-family: UTM HelvetIns;
+  text-align: justify;
+  /* text-align: center; */
+  font-size: 59px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 34.48%,
+      #00425d 68.87%,
+      #007534 103.25%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @media only screen and (max-width: 1536px) {
