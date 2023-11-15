@@ -10,6 +10,8 @@ import { ContentPagesComponent } from './content-pages/content-pages.component';
 import { DauAnNienDoComponent } from './content-pages/dau-an-nien-do/dau-an-nien-do.component';
 import { LanguagesToggleComponent } from './components/languages-toggle/languages-toggle.component';
 import { TitleLogoComponent } from './components/vectors/title-logo/title-logo.component';
+import { NavPrefixIconComponent } from './components/vectors/nav-prefix-icon/nav-prefix-icon.component';
+import { MainLogoComponent } from './components/vectors/main-logo/main-logo.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { TitleLogoComponent } from './components/vectors/title-logo/title-logo.c
     DauAnNienDoComponent,
     LanguagesToggleComponent,
     TitleLogoComponent,
+    NavPrefixIconComponent,
+    MainLogoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
