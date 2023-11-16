@@ -46,14 +46,99 @@ ul.nav .subnav svg {
   @apply mr-2;
 }
 
+ul.nav li:hover > a {
+  cursor: pointer;
+  color: #007534;
+  transition: color 0.2s linear;
+}
 /* ul.nav li:nth-child(2):hover ul.nav li:nth-child(2) .subnav {
   @apply block;
 } */
-ul.nav li:nth-child(2):hover .subnav {
+
+/* ul.nav li:nth-child(2):hover .subnav {
+  top: 70px;
+  @apply visible;
+  @apply opacity-100;
+} */
+ul.nav li:nth-child(7):hover .subnav,
+ul.nav li:nth-child(6):hover .subnav,
+ul.nav li:nth-child(5):hover .subnav,
+ul.nav li:nth-child(4):hover .subnav,
+ul.nav li:nth-child(3):hover .subnav,
+  ul.nav li:nth-child(2):hover .subnav {
   top: 70px;
   @apply visible;
   @apply opacity-100;
 }
+
+ul.nav li:nth-child(7):hover .nav-decoration,
+ul.nav li:nth-child(6):hover .nav-decoration,
+ul.nav li:nth-child(5):hover .nav-decoration,
+ul.nav li:nth-child(4):hover .nav-decoration,
+ul.nav li:nth-child(3):hover .nav-decoration,
+ul.nav li:nth-child(2):hover .nav-decoration {
+  @apply visible;
+  @apply opacity-100;
+  @apply translate-x-0;
+  transition: transform 0.2s linear;
+}
+
+.mobile-nav {
+  background: url("../../assets/images/mobile-nav-bg.png");
+  @apply fixed;
+  z-index: 9999;
+  @apply top-[64px];
+  @apply w-[100vw];
+  /* height: 100vh; */
+  height: calc(100vh - 64px);
+  overflow: scroll;
+  @apply pt-8;
+  animation: slide-from-right 0.2s ease-in-out;
+}
+
+.mobile-nav.hidden {
+  animation: slide-to-right 0.2s ease-in-out;
+}
+
+.mobile-nav .nav-item {
+  color: var(--ffffff, #fff);
+  font-family: Myriad Pro;
+  @apply text-[20px];
+  @apply py-6;
+  @apply px-4;
+  @apply flex;
+  @apply justify-between;
+  @apply items-center;
+}
+
+.mobile-nav .subnav-item {
+  background: #e8f5fb;
+  @apply px-4;
+  @apply py-2;
+
+  @apply flex;
+  /* @apply justify-between; */
+  @apply items-center;
+  animation: slide-from-top 0.2s ease-in-out;
+}
+
+.nav-open {
+  overflow: hidden;
+}
+
+.nav-decoration {
+  @apply invisible;
+  @apply lg:h-[2px];
+  @apply lg:w-[170px];
+  @apply translate-x-3;
+  background: linear-gradient(
+    90deg,
+    #50b848 14.43%,
+    rgba(80, 184, 72, 0) 81.22%
+  );
+}
+
+
 
 @media only screen and (max-width: 1536px) {
   .content-header {
@@ -73,5 +158,33 @@ ul.nav li:nth-child(2):hover .subnav {
   }
   ul.nav {
     width: 1200px;
+  }
+}
+@keyframes slide-from-right {
+  0% {
+    opacity: 0.5;
+    left: 200px;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+@keyframes slide-to-right {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+    left: 200px;
+  }
+}
+@keyframes slide-from-top {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
   }
 }

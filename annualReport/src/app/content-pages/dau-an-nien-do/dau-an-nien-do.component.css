@@ -586,6 +586,7 @@
   background-color: #fff;
 }
 
+#info-6 .header__text,
 #info-5 .header__text {
   font-family: iCiel Samsung Sharp Sans;
   @apply text-[9.52px];
@@ -608,10 +609,12 @@
   color: var(--292829, #292829);
   text-align: justify;
   font-family: SF Pro Regular;
-  font-size: 20px;
+  @apply text-[5.6px];
+  @apply lg:text-[20px];
   font-style: normal;
   font-weight: 274;
-  line-height: 30px; /* 150% */
+  @apply leading-[8.12px];
+  @apply lg:leading-[30px];
 }
 
 #info-6 .content-text__bold,
@@ -624,10 +627,12 @@
 #info-5 .content-text__highlight {
   text-align: justify;
   font-family: SF Pro;
-  font-size: 24px;
+  @apply text-[6.72px];
+  @apply lg:text-[24px];
   font-style: normal;
   font-weight: 510;
-  line-height: 34px; /* 141.667% */
+  @apply leading-[9.52px];
+  @apply lg:leading-[34px];
   background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -643,10 +648,12 @@
 .content-label__highlight {
   text-align: right;
   font-family: Myriad Pro;
-  font-size: 20px;
+  @apply text-[5.6px];
+  @apply lg:text-[20px];
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  @apply leading-[8.6px];
+  @apply lg:leading-[normal];
   text-transform: uppercase;
   background: var(
     --Style,
@@ -667,20 +674,30 @@
   color: #58595b;
   text-align: right;
   font-family: Myriad Pro Light;
-  font-size: 20px;
+  @apply text-[5.6px];
+  @apply lg:text-[20px];
   font-style: normal;
   font-weight: 300;
-  line-height: normal;
+  @apply leading-[8.6px];
+  @apply lg:leading-[normal];
   text-transform: uppercase;
+  @apply mt-[-1px];
+  @apply lg:mt-0;
+  @apply mb-[-4px];
+  @apply lg:mb-0;
 }
 
 .content-numeric {
   text-align: right;
   font-family: iCiel Samsung Sharp Sans;
-  font-size: 80px;
+  @apply text-[22.4px];
+  @apply lg:text-[80px];
   font-style: normal;
   font-weight: 700;
-  line-height: 80px;
+  @apply leading-[26px];
+  @apply lg:leading-[80px];
+  @apply mb-[-4px];
+  @apply lg:mb-0;
   background: var(
     --Style,
     linear-gradient(
@@ -700,14 +717,17 @@
   color: var(--292829, #292829);
   text-align: right;
   font-family: Myriad Pro;
-  font-size: 18px;
+  @apply text-[5.04px];
+  @apply lg:text-[18px];
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
+  @apply leading-[normal];
+  @apply lg:leading-[normal];
+
 }
 
 .horizontal-divider {
-  width: 1920px;
+  width: 100%;
   height: 1px;
   flex-shrink: 0;
   background: #d9d9d9;
@@ -725,10 +745,12 @@
   color: var(--292829, #292829);
   text-align: justify;
   font-family: SF Pro Regular;
-  font-size: 18px;
+  @apply text-[5.04px];
+  @apply lg:text-[18px];
   font-style: normal;
   font-weight: 274;
-  line-height: 24px; /* 133.333% */
+  @apply leading-[6.72px];
+  @apply lg:leading-[24px];
 }
 
 .content-text strong {
@@ -740,10 +762,12 @@
   color: #000;
   text-align: center;
   font-family: SF Pro Regular;
-  font-size: 14px;
+  @apply text-[3.92px];
+  @apply lg:text-[14px];
   font-style: normal;
   font-weight: 400;
-  line-height: 20px; /* 142.857% */
+  @apply leading-[5.6px];
+  @apply lg:leading-[20px];
 }
 
 .chairman-name strong {
@@ -754,14 +778,17 @@
 .chairman-title {
   color: #000;
   font-family: SF Pro Regular;
-  font-size: 14px;
+  @apply text-[3.92px];
+  @apply lg:text-[14px];
   font-style: italic;
   font-weight: 276;
-  line-height: 20px;
+  @apply leading-[5.6px];
+  @apply lg:leading-[20px];
 }
 
 .info-6-divider {
-  width: 1200px;
+  @apply w-full;
+  @apply lg:w-[1200px];
   height: 1px;
   flex-shrink: 0;
   background: var(--50-b-848, #50b848);
@@ -771,26 +798,11 @@
   background-color: #fff;
 }
 
-#info-6 .header__text {
-  font-family: iCiel Samsung Sharp Sans;
-  font-size: 34px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 48px;
-  background: var(
-    --Text-Gradient,
-    linear-gradient(90deg, #007534 -0.98%, #23923c 52.79%, #50b848 100.23%)
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 .content-title {
   font-family: UTM HelvetIns;
   text-align: justify;
-  /* text-align: center; */
-  font-size: 59px;
+  @apply text-[16.8px];
+  @apply lg:text-[59px];
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -821,7 +833,7 @@
 
 @media only screen and (max-width: 1536px) {
   .info-1__content {
-    width: 1000px;
+    /* width: 1000px; */
   }
   ul.nav li {
     font-size: 12px;

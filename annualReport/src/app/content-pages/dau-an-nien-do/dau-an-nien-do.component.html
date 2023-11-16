@@ -1,5 +1,5 @@
 <div id="info-1" class="flex justify-center">
-  <div class="info-1__content lg:w-[1200px] relative">
+  <div class="info-1__content w-full lg:w-[1200px] relative">
     <div
       class="absolute w-full top-[3%] right-0 flex flex-col items-end px-4 lg:px-0"
     >
@@ -1049,7 +1049,7 @@
     <div class="w-[54%]">
       <div class="box-1 relative flex flex-col items-center">
         <div
-          class="box-1__decoration2 w-[92.2px] lg:w-[461px] h-[92.2px] lg:h-[461px] absolute top-0 mt-[-230px] scale-[0.2] lg:scale[1]"
+          class="box-1__decoration2 w-[461px] h-[461px] absolute top-0 mt-[-230px] scale-[0.2] lg:scale-[1]"
         ></div>
         <div class="absolute flex justify-center items-start">
           <div class="box-1__decoration1"></div>
@@ -1099,7 +1099,7 @@
           <div class="box-2__decoration3 ml-3 lg:ml-6"></div>
         </div>
         <div
-          class="absolute box-2__decoration4 w-[461px] h-[461px] bottom-0 mb-[-230px] scale-[0.2] lg:scale[1]"
+          class="absolute box-2__decoration4 w-[461px] h-[461px] bottom-0 mb-[-230px] scale-[0.2] lg:scale-[1]"
         ></div>
         <div class="flex flex-col items-center">
           <div class="box__title absolute top-[7%]">Sứ mệnh</div>
@@ -1138,20 +1138,22 @@
         <div>THÔNG ĐIỆP CỦA</div>
         <div>CHỦ TỊCH HỘI ĐỒNG QUẢN TRỊ</div>
       </div>
-      <div class="header__decoration absolute top-[-51px] lg:top-0 left-[-155px] lg:left-[-240px] scale-[0.334] lg:scale-[1]">
+      <div
+        class="header__decoration absolute top-[-51px] lg:top-0 left-[-155px] lg:left-[-240px] scale-[0.334] lg:scale-[1]"
+      >
         <app-title-logo [iconType]="IconTypes.TitleLogo2"></app-title-logo>
       </div>
     </div>
   </div>
   <div class="flex justify-center">
     <div class="info-5__content w-[100%] lg:w-[1200px] relative">
-      <div class="grid grid-cols-5 gap-10">
+      <div class="grid grid-cols-5 gap-4 lg:gap-10 px-4 lg:px-0">
         <div class="col-span-2">
-          <div class="content-text content-text__bold mt-8">
+          <div class="content-text content-text__bold mt-3 lg:mt-8">
             Kính gửi Quý Cổ đông, Nhà đầu tư, Doanh nông, Quý Khách hàng và các
             Đối tác,
           </div>
-          <div class="mb-16">
+          <div class="mb-3 lg:mb-16">
             <img src="../../../assets/images/info-5-logo.svg" alt="TTC Logo" />
           </div>
           <div class="content-text__highlight">
@@ -1160,26 +1162,53 @@
             sản lượng tiêu thụ Đường đạt mức trên 1 triệu tấn và tăng trưởng 26%
             so với cùng kỳ.
           </div>
-          <div class="flex flex-col justify-between items-end mt-4 h-[720px]">
+          <div
+            class="flex flex-col justify-between items-end mt-0 lg:mt-4 h-[210px] lg:h-[720px]"
+          >
             <div class="content-block">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="89"
-                height="75"
-                viewBox="0 0 89 75"
-                fill="none"
-              >
-                <path
-                  d="M59.3702 74.9326V71.1529C59.3702 63.5137 53.6442 61.6739 49.5343 61.6739H44.6064C40.4765 61.6739 34.7705 63.5137 34.7705 71.1529V74.9326M83.9899 74.9326V71.1529C83.9899 63.5137 78.2639 61.6739 74.154 61.6739H69.2261C65.0962 61.6739 59.3902 63.5137 59.3902 71.1529V74.9326M23.4183 54.0746V37.0163C23.4183 37.0163 32.8152 33.8366 34.7705 33.2166C38.2819 32.1167 40.4565 29.837 40.4565 25.6374H12.0661C5.28268 25.6374 0.713867 28.4971 0.713867 37.0163V54.0746M47.0803 46.4953C43.549 46.4953 40.4565 48.9951 40.4565 52.5547V55.5944C40.4565 59.1541 43.549 61.6539 47.0803 61.6539C50.6117 61.6539 53.7041 59.1541 53.7041 55.5944V52.5547C53.7041 48.9951 50.5917 46.4953 47.0803 46.4953ZM71.7 46.4953C68.1687 46.4953 65.0762 48.9951 65.0762 52.5547V55.5944C65.0762 59.1541 68.1886 61.6539 71.7 61.6539C75.2114 61.6539 78.3238 59.1541 78.3238 55.5944V52.5547C78.3238 48.9951 75.2114 46.4953 71.7 46.4953ZM13.9614 25.6374C18.2908 25.6374 21.5429 21.9977 21.5429 17.5182V14.8184C21.5429 10.3389 18.3108 6.69922 13.9614 6.69922C9.61207 6.69922 6.39994 10.3389 6.39994 14.8184V17.5182C6.39994 21.9977 9.63202 25.6374 13.9614 25.6374Z"
-                  stroke="#939598"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M46.0427 40.9161V33.3168H55.5195V40.9161V25.7176H64.9963V40.9161M64.9963 40.9161V16.2185M64.9963 40.9161V40.9361V16.2185M64.9963 16.2185H74.4731V40.9361M35.5085 52.315H30.8799V40.9161M30.8799 19.9981V1H87.7406V52.315H82.1743"
-                  stroke="#50B848"
-                  stroke-miterlimit="10"
-                />
-              </svg>
+              <div class="view-in-desktop">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="89"
+                  height="75"
+                  viewBox="0 0 89 75"
+                  fill="none"
+                >
+                  <path
+                    d="M59.3702 74.9326V71.1529C59.3702 63.5137 53.6442 61.6739 49.5343 61.6739H44.6064C40.4765 61.6739 34.7705 63.5137 34.7705 71.1529V74.9326M83.9899 74.9326V71.1529C83.9899 63.5137 78.2639 61.6739 74.154 61.6739H69.2261C65.0962 61.6739 59.3902 63.5137 59.3902 71.1529V74.9326M23.4183 54.0746V37.0163C23.4183 37.0163 32.8152 33.8366 34.7705 33.2166C38.2819 32.1167 40.4565 29.837 40.4565 25.6374H12.0661C5.28268 25.6374 0.713867 28.4971 0.713867 37.0163V54.0746M47.0803 46.4953C43.549 46.4953 40.4565 48.9951 40.4565 52.5547V55.5944C40.4565 59.1541 43.549 61.6539 47.0803 61.6539C50.6117 61.6539 53.7041 59.1541 53.7041 55.5944V52.5547C53.7041 48.9951 50.5917 46.4953 47.0803 46.4953ZM71.7 46.4953C68.1687 46.4953 65.0762 48.9951 65.0762 52.5547V55.5944C65.0762 59.1541 68.1886 61.6539 71.7 61.6539C75.2114 61.6539 78.3238 59.1541 78.3238 55.5944V52.5547C78.3238 48.9951 75.2114 46.4953 71.7 46.4953ZM13.9614 25.6374C18.2908 25.6374 21.5429 21.9977 21.5429 17.5182V14.8184C21.5429 10.3389 18.3108 6.69922 13.9614 6.69922C9.61207 6.69922 6.39994 10.3389 6.39994 14.8184V17.5182C6.39994 21.9977 9.63202 25.6374 13.9614 25.6374Z"
+                    stroke="#939598"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M46.0427 40.9161V33.3168H55.5195V40.9161V25.7176H64.9963V40.9161M64.9963 40.9161V16.2185M64.9963 40.9161V40.9361V16.2185M64.9963 16.2185H74.4731V40.9361M35.5085 52.315H30.8799V40.9161M30.8799 19.9981V1H87.7406V52.315H82.1743"
+                    stroke="#50B848"
+                    stroke-miterlimit="10"
+                  />
+                </svg>
+              </div>
+              <div class="view-in-mobile mb-[2px]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="22"
+                  viewBox="0 0 25 22"
+                  fill="none"
+                >
+                  <path
+                    d="M16.5836 21.4238V20.3655C16.5836 18.2265 14.9804 17.7114 13.8296 17.7114H12.4498C11.2934 17.7114 9.6957 18.2265 9.6957 20.3655V21.4238M23.4771 21.4238V20.3655C23.4771 18.2265 21.8739 17.7114 20.7231 17.7114H19.3433C18.1869 17.7114 16.5892 18.2265 16.5892 20.3655V21.4238M6.51708 15.5836V10.8073C6.51708 10.8073 9.14824 9.91694 9.6957 9.74336C10.6789 9.43539 11.2878 8.79705 11.2878 7.62116H3.33847C1.43912 7.62116 0.159851 8.42188 0.159851 10.8073V15.5836M13.1425 13.4614C12.1537 13.4614 11.2878 14.1613 11.2878 15.158V16.0091C11.2878 17.0058 12.1537 17.7058 13.1425 17.7058C14.1312 17.7058 14.9971 17.0058 14.9971 16.0091V15.158C14.9971 14.1613 14.1256 13.4614 13.1425 13.4614ZM20.036 13.4614C19.0472 13.4614 18.1813 14.1613 18.1813 15.158V16.0091C18.1813 17.0058 19.0528 17.7058 20.036 17.7058C21.0192 17.7058 21.8906 17.0058 21.8906 16.0091V15.158C21.8906 14.1613 21.0192 13.4614 20.036 13.4614ZM3.86917 7.62116C5.0814 7.62116 5.99197 6.60206 5.99197 5.34779V4.59186C5.99197 3.33758 5.08698 2.31848 3.86917 2.31848C2.65135 2.31848 1.75195 3.33758 1.75195 4.59186V5.34779C1.75195 6.60206 2.65694 7.62116 3.86917 7.62116Z"
+                    stroke="#939598"
+                    stroke-width="0.28"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M12.8519 11.8992V9.77137H15.5054V11.8992V7.64358H18.1589V11.8992M18.1589 11.8992V4.98384M18.1589 11.8992V11.9048V4.98384M18.1589 4.98384H20.8124V11.9048M9.90235 15.0909H8.60632V11.8992M8.60632 6.04214V0.722656H24.5273V15.0909H22.9687"
+                    stroke="#50B848"
+                    stroke-width="0.28"
+                    stroke-miterlimit="10"
+                  />
+                </svg>
+              </div>
+
               <div class="content-label__highlight">DOANH THU THUẦN</div>
               <div class="content-sublabel">(TỶ ĐỒNG)</div>
               <div class="content-numeric flex items-center">
@@ -1193,7 +1222,7 @@
             <div class="content-block">
               <div class="content-label__highlight">LỢI NHUẬN TRƯỚC THUẾ</div>
               <div class="content-sublabel">(TỶ ĐỒNG)</div>
-              <div class="content-numeric">719</div>
+              <div class="content-numeric flex items-center">719</div>
               <div class="content-label">GHI NHẬN SỰ BỀN VỮNG</div>
               <div class="content-label">TRONG VÙNG NHIỄU ĐỘNG</div>
             </div>
@@ -1203,7 +1232,7 @@
                 MÔ VỚI TỔNG TÀI<br />SẢN TẠI THỜI ĐIỂM 30/6/2023 ĐẠT GẦN
               </div>
               <div class="content-sublabel">(TỶ ĐỒNG)</div>
-              <div class="content-numeric">30.000</div>
+              <div class="content-numeric flex items-center">30.000</div>
               <div class="content-label">(~1,2 TỶ USD)</div>
               <div class="content-label">VÀ TĂNG 8% SO VỚI ĐẦU NIÊN ĐỘ</div>
             </div>
@@ -1216,7 +1245,7 @@
               alt="Chủ tịch Hội đồng Quản trị"
             />
           </div>
-          <div class="content-text mt-8">
+          <div class="content-text mt-3 lg:mt-8">
             <div>
               Trên cơ sở chiến lược kinh doanh đúng đắn, cùng sự nỗ lực không
               ngừng của đội ngũ Ban lãnh đạo và CBNV, TTC AgriS liên tiếp nhận
@@ -1242,7 +1271,7 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-10 mt-8">
+      <div class="grid grid-cols-2 gap-4 lg:gap-10 mt-3 lg:mt-8 px-4 lg:px-0">
         <div class="content-text">
           giai đoạn 2021-2025, TTC AgriS đã chủ động tăng cường hợp tác phát
           triển nông nghiệp thông minh với chính quyền bang Queensland, Úc, đặt
@@ -1259,12 +1288,12 @@
           lược trọng tâm trong niên độ mới bao gồm:
         </div>
       </div>
-      <div class="my-8">
-        <div class="flex justify-end my-12">
+      <div class="my-2 lg:my-8">
+        <div class="flex justify-end my-3 lg:my-12 px-4 lg:px-0">
           <div
-            class="content-background relative w-[1146px] h-[124px] flex justify-end items-center py-4 pr-12"
+            class="content-background relative w-[320.88px] lg:w-[1146px] h-[36.4px] lg:h-[124px] flex justify-end items-center py-1 lg:py-4 pr-6 lg:pr-12"
           >
-            <div class="content-small w-[980px]">
+            <div class="content-small w-[270px] lg:w-[980px]">
               Chuyển đổi hoạt động kinh doanh theo mô hình Commercial Center lấy
               Khách hàng là trung tâm, kinh doanh đa kênh, đa ngành hàng, đặc
               biệt tham gia sâu hơn vào lĩnh vực thực phẩm và nước giải khát.
@@ -1274,7 +1303,7 @@
               phẩm, đáp ứng nhu cầu thị trường.
             </div>
             <div
-              class="content-decoration-1 absolute top-[-24px] left-[-100px]"
+              class="content-decoration-1 absolute lg:top-[-24px] left-[-100px] scale-[0.27] lg:scale-[1]"
             >
               <img
                 src="../../../assets/images/info-5-content-decoration-1.svg"
@@ -1283,11 +1312,11 @@
             </div>
           </div>
         </div>
-        <div class="flex justify-end my-12">
+        <div class="flex justify-end my-3 lg:my-12 px-4 lg:px-0">
           <div
-            class="content-background relative w-[1146px] h-[124px] flex justify-end items-center py-4 pr-12"
+            class="content-background relative w-[320.88px] lg:w-[1146px] h-[36.4px] lg:h-[124px] flex justify-end items-center py-1 lg:py-4 pr-6 lg:pr-12"
           >
-            <div class="content-small w-[980px]">
+            <div class="content-small w-[270px] lg:w-[980px]">
               Tiếp tục áp dụng khoa học công nghệ trong mô hình kinh tế nông
               nghiệp thông minh tích hợp nhằm tối ưu hóa hoạt động sản xuất,
               quản lý tài nguyên và nâng cao hiệu quả kinh tế. Đặc biệt là cải
@@ -1295,7 +1324,7 @@
               tiềm năng của Công ty để nâng cao năng lực cạnh tranh.
             </div>
             <div
-              class="content-decoration-1 absolute top-[-24px] left-[-100px]"
+              class="content-decoration-1 absolute lg:top-[-24px] left-[-100px] scale-[0.27] lg:scale-[1]"
             >
               <img
                 src="../../../assets/images/info-5-content-decoration-2.svg"
@@ -1304,11 +1333,11 @@
             </div>
           </div>
         </div>
-        <div class="flex justify-end my-12">
+        <div class="flex justify-end my-3 lg:my-12 px-4 lg:px-0">
           <div
-            class="content-background relative w-[1146px] h-[124px] flex justify-end items-center py-4 pr-12"
+            class="content-background relative w-[320.88px] lg:w-[1146px] h-[36.4px] lg:h-[124px] flex justify-end items-center py-1 lg:py-4 pr-6 lg:pr-12"
           >
-            <div class="content-small w-[980px]">
+            <div class="content-small w-[270px] lg:w-[980px]">
               Đầu tư mạnh mẽ vào phát triển Nguồn nhân lực tại địa phương, xây
               dựng và củng cố mối quan hệ liên kết chặt chẽ giữa Nông dân - Sản
               xuất - Thương mại, trong đó TTC AgriS đóng vai trò mắt xích quan
@@ -1316,7 +1345,7 @@
               diện và bền vững.
             </div>
             <div
-              class="content-decoration-1 absolute top-[-24px] left-[-100px]"
+              class="content-decoration-1 absolute lg:top-[-24px] left-[-100px] scale-[0.27] lg:scale-[1]"
             >
               <img
                 src="../../../assets/images/info-5-content-decoration-3.svg"
@@ -1326,7 +1355,7 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-10">
+      <div class="grid grid-cols-2 gap-4 lg:gap-10 px-4 lg:px-0">
         <div class="content-text">
           Tiến tới niên độ 2023-2024, với mục tiêu cung cấp các giải pháp
           <strong
@@ -1348,14 +1377,16 @@
             phát triển vững mạnh, trở thành mũi nhọn đột phá thúc đẩy nền kinh
             tế nông nghiệp bền vững toàn cầu.
           </div>
-          <div class="flex flex-col items-center mt-8 mb-24">
-            <div>
+          <div
+            class="flex flex-col items-center mt-[-12px] lg:mt-8 mb-6 lg:mb-24"
+          >
+            <div class="scale-[0.333] lg:scale-[1]">
               <img
                 src="../../../assets/images/chairman-signature.svg"
                 alt="Chữ ký"
               />
             </div>
-            <div class="mt-4">
+            <div class="mt-[-16px] lg:mt-4">
               <div class="chairman-name">
                 Bà <strong>HUỲNH BÍCH NGỌC</strong>
               </div>
@@ -1375,39 +1406,54 @@
   </div>
   <div class="flex justify-center">
     <div
-      class="header__text h-[170px] flex flex-col justify-end items-center relative"
+      class="header__text h-[60px] lg:h-[170px] flex flex-col justify-end items-center relative"
     >
       <div>
         <div>THÔNG ĐIỆP CỦA</div>
         <div>PHÓ CHỦ TỊCH HỘI ĐỒNG QUẢN TRỊ</div>
       </div>
-      <div class="header__decoration absolute top-0 left-[-240px]">
-        <app-title-logo></app-title-logo>
+      <div
+        class="header__decoration absolute top-[-51px] lg:top-0 left-[-155px] lg:left-[-240px] scale-[0.334] lg:scale-[1]"
+      >
+        <app-title-logo [iconType]="IconTypes.TitleLogo2"></app-title-logo>
       </div>
     </div>
   </div>
   <div class="flex justify-center">
-    <div class="info-5__content w-[1200px] relative">
-      <div class="grid grid-cols-2 gap-10 mt-8">
+    <div class="info-5__content w-[100%] lg:w-[1200px] relative">
+      <div class="grid grid-cols-2 gap-4 lg:gap-10 mt-2 lg:mt-8 px-4 lg:px-0">
         <div>
-          <img src="../../../assets/images/info-6-graphic-3.svg" alt="" />
-          <div class="content-text content-text__bold mt-12 mb-8">
+          <div>
+            <img
+              src="../../../assets/images/info-6-graphic-3.svg"
+              alt="TTC Agris Logo"
+            />
+          </div>
+          <div
+            class="content-text content-text__bold mt-4 lg:mt-12 mb-2 lg:mb-8"
+          >
             Quý Cổ đông, Nhà đầu tư, Người nông dân, Quý Khách hàng và các Đối
             tác thân mến,
           </div>
-          <div class="content-text content-text__highlight w-[400px]">
+          <div
+            class="content-text content-text__highlight w-[111.72px] lg:w-[400px]"
+          >
             Niên độ 2022-2023, TTC AgriS dồn toàn lực phát triển
           </div>
         </div>
         <div class="flex">
-          <img src="../../../assets/images/info-6-graphic-1.svg" alt="" />
-          <img src="../../../assets/images/info-6-graphic-2.svg" alt="" />
+          <div>
+            <img src="../../../assets/images/info-6-graphic-1.svg" alt="" />
+          </div>
+          <div class="mt-2 lg:mt-7">
+            <img src="../../../assets/images/info-6-graphic-2.svg" alt="" />
+          </div>
         </div>
       </div>
-      <div class="content-title w-[1200px] mb-2">
+      <div class="content-title mb-1 lg:mb-2 px-4 lg:px-0">
         Mô hình kinh tế nông nghiệp thông minh tích hợp
       </div>
-      <div class="content-text__highlight">
+      <div class="content-text__highlight px-4 lg:px-0">
         nhằm định hướng thị trường, sản phẩm, thúc đẩy tư duy kinh tế nông
         nghiệp tuần hoàn vượt ra khỏi giá trị thuần túy của cây trồng mà khai
         thác giá trị gia tăng. TTC AgriS đặt sứ mệnh tiên phong củng cố nền nông
@@ -1416,7 +1462,7 @@
         Công nghệ - Bền vững là nền tảng cốt lõi và được phát triển theo mục
         tiêu chiến lược tại từng quốc gia.
       </div>
-      <div class="grid grid-cols-2 gap-10 mt-8">
+      <div class="grid grid-cols-2 gap-4 lg:gap-10 mt-2 lg:mt-8 px-4 lg:px-0">
         <div class="content-text">
           <div>
             Theo đó, <strong>chiến lược thị trường</strong> tại các nền kinh tế
@@ -1447,7 +1493,7 @@
           </div>
         </div>
         <div class="content-text">
-          Song song đó, TTC AgriS hiện
+          <div>Song song đó, TTC AgriS hiện
           <strong
             >thực hóa cam kết phát triển bền vững nhằm cân bằng hệ sinh thái và
             môi trường</strong
@@ -1464,7 +1510,7 @@
             >tham gia sâu hơn vào lĩnh vực chế biến thực phẩm - tiên phong đảm
             bảo uy tín dinh dưỡng, hướng đến mục tiêu Net Zero vào 2035</strong
           >, góp phần phát triển kinh tế, xã hội và chia sẻ thành quả với các
-          Bên liên quan.
+          Bên liên quan.</div><br/>
           <div>
             Một lần nữa, đại diện Hội đồng Quản trị, Tôi hy vọng sẽ tiếp tục
             nhận được sự ủng hộ, đồng hành của Quý Cổ đông, Nhà đầu tư, Người
@@ -1477,8 +1523,8 @@
               >Xin chúc Quý vị sức khoẻ, thịnh vượng và thành công.</strong
             >
           </div>
-          <div class="flex flex-col items-center mt-8 mb-16">
-            <div>
+          <div class="flex flex-col items-center mt-0 lg:mt-8 mb-4 lg:mb-16">
+            <div class="scale-[0.333] lg:scale-[1] my-[-20px] lg:my-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="226"
@@ -1503,7 +1549,7 @@
                 </defs>
               </svg>
             </div>
-            <div class="mt-4">
+            <div class="mt-0 lg:mt-4">
               <div class="chairman-name">
                 Bà <strong>ĐẶNG HUỲNH ỨC MY</strong>
               </div>
@@ -1514,8 +1560,8 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-center mb-20">
-        <div class="relative">
+      <div class="flex justify-center mb-6 lg:mb-20">
+        <div class="relative w-[212px] lg:w-auto">
           <img
             src="../../../assets/images/vice-chairman-image.png"
             alt="Phó chủ tịch Hội đồng Quản trị"
