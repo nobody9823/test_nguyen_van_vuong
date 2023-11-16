@@ -69,7 +69,7 @@
     <div class="info-2__detail2 absolute left-[56%] top-[49.4%] flex">
       <div class="flex flex-col mr-3 lg:mr-8">
         <div class="rank__text">TOP</div>
-        <div class="rank__number">05</div>
+        <div class="rank__number">0<span [countUp]="5" [duration]="1000">5</span></div>
       </div>
       <div class="rank__detail">
         Lần thứ 3 liên tiếp đạt<br />
@@ -87,7 +87,7 @@
     >
       <div class="flex flex-col mr-3 lg:mr-8">
         <div class="rank__text">TOP</div>
-        <div class="rank__number">10</div>
+        <div class="rank__number" [countUp]="10" [duration]="1000">10</div>
       </div>
       <div class="rank__detail">
         Lần thứ 2 liên tiếp được vinh danh <br />
@@ -103,7 +103,7 @@
     >
       <div class="flex flex-col mr-3 lg:mr-8">
         <div class="rank__text">TOP</div>
-        <div class="rank__number">50</div>
+        <div class="rank__number" [countUp]="50" [duration]="1000">50</div>
       </div>
       <div class="rank__detail">
         <strong>Công ty niêm yết tốt nhất năm 2023 </strong><br />do Forbes Việt
@@ -694,7 +694,7 @@
       </div>
     </div>
     <div class="text-[16px] text-[#50B848]">DOANH THU THUẦN</div>
-    <div class="text-[40px]">24.743</div>
+    <div class="text-[40px]" [countUp]="24743" [duration]="1000">24.743</div>
     <div class="text-[14px]">TỶ VND</div>
   </div>
   <div class="info-3__detail1 absolute top-[42.5%] right-[7.2%]">
@@ -976,7 +976,7 @@
   <div class="info-3__detail1 absolute top-[69.5%] right-[28.5%]">
     <div>
       <div class="flex justify-center items-end">
-        <div class="detail1__number text-[74px] leading-[76px]">46</div>
+        <div class="detail1__number text-[74px] leading-[76px]" [countUp]="46" [duration]="1000">46</div>
         <div class="text-[30px] mb-2">%</div>
       </div>
       <div class="text-[13px] text-[#50B848]">THỊ TRƯỜNG ĐƯỜNG</div>
@@ -1005,13 +1005,13 @@
         <div class="text-[37px] mb-2 text-left">TRIỆU<br />TẤN<br />ĐƯỜNG</div>
       </div>
     </div>
-    <div class="text-[29px] text-[#50B848]">4 NĂM LIÊN TIẾP</div>
+    <div class="text-[29px] text-[#50B848]"><span [countUp]="4" [duration]="1000">4</span> NĂM LIÊN TIẾP</div>
   </div>
 
   <div class="info-3__detail1 absolute bottom-[49%] left-[9.7%]">
     <div class="text-[20px] text-[#50B848]">VÙNG NGUYÊN LIỆU</div>
     <div class="flex mt-2 mb-4">
-      <div class="detail1__number text-[58px] leading-[50px]">71.000</div>
+      <div class="detail1__number text-[58px] leading-[50px]" [countUp]="71000" [duration]="1000">71.000</div>
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -1212,7 +1212,7 @@
               <div class="content-label__highlight">DOANH THU THUẦN</div>
               <div class="content-sublabel">(TỶ ĐỒNG)</div>
               <div class="content-numeric flex items-center">
-                <div>>24.743</div>
+                <div>><span [countUp]="24743" [duration]="1000">24.743</span></div>
               </div>
               <div class="content-label">
                 TĂNG TRƯỞNG ẤN TƯỢNG 35% SO VỚI CÙNG KỲ
@@ -1222,7 +1222,7 @@
             <div class="content-block">
               <div class="content-label__highlight">LỢI NHUẬN TRƯỚC THUẾ</div>
               <div class="content-sublabel">(TỶ ĐỒNG)</div>
-              <div class="content-numeric flex items-center">719</div>
+              <div class="content-numeric flex items-center" [countUp]="719" [duration]="1000">719</div>
               <div class="content-label">GHI NHẬN SỰ BỀN VỮNG</div>
               <div class="content-label">TRONG VÙNG NHIỄU ĐỘNG</div>
             </div>
@@ -1232,7 +1232,7 @@
                 MÔ VỚI TỔNG TÀI<br />SẢN TẠI THỜI ĐIỂM 30/6/2023 ĐẠT GẦN
               </div>
               <div class="content-sublabel">(TỶ ĐỒNG)</div>
-              <div class="content-numeric flex items-center">30.000</div>
+              <div class="content-numeric flex items-center" [countUp]="30000" [duration]="1000">30.000</div>
               <div class="content-label">(~1,2 TỶ USD)</div>
               <div class="content-label">VÀ TĂNG 8% SO VỚI ĐẦU NIÊN ĐỘ</div>
             </div>
