@@ -14,6 +14,7 @@ import { NavPrefixIconComponent } from './components/vectors/nav-prefix-icon/nav
 import { MainLogoComponent } from './components/vectors/main-logo/main-logo.component';
 //import { MobileNavComponent } from './components/mobile-nav/mobile-nav.component'; ?? error
 import { CountUpDirective } from './count-up.directive';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CountUpDirective } from './count-up.directive';
     MainLogoComponent,
     //MobileNavComponent,
     CountUpDirective,
+    SpinnerComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
