@@ -407,7 +407,9 @@
   @apply lg:text-[34px];
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
+  @apply leading-[16px];
+  @apply lg:leading-[48px];
+  @apply animation-winkling-light;
   background: var(
     --Text-Gradient,
     linear-gradient(90deg, #007534 -0.98%, #23923c 52.79%, #50b848 100.23%)
@@ -444,6 +446,9 @@
   background: url("../../../assets/images/box-1-decoration-2.png");
   background-size: 100%;
   background-repeat: no-repeat;
+  /* background-color: red;
+  border-radius: 50%; */
+  @apply animation-winkling-light;
 }
 
 #info-4 .box-1__decoration3 {
@@ -480,6 +485,11 @@
     #50b848 7.43%,
     rgba(80, 184, 72, 0) 61.22%
   );
+}
+
+#info-4 .box-2__decoration2:hover {
+  transform: scale(1.5);
+  transition: transform 0.2s linear;
 }
 
 #info-4 .box-2__decoration3 {
@@ -544,6 +554,7 @@
   background: url("../../../assets/images/box-2-decoration-4.png");
   background-size: 100%;
   background-repeat: no-repeat;
+  @apply animation-winkling-light;
 }
 
 .box-2 {
@@ -595,6 +606,7 @@
   font-weight: 700;
   @apply leading-[16px];
   @apply lg:leading-[48px];
+  @apply animation-winkling-light;
   background: var(
     --Text-Gradient,
     linear-gradient(90deg, #007534 -0.98%, #23923c 52.79%, #50b848 100.23%)
@@ -786,6 +798,10 @@
   @apply lg:leading-[20px];
 }
 
+.content-decoration-1 {
+  @apply animation-winkling-light;
+}
+
 .info-6-divider {
   @apply w-full;
   @apply lg:w-[1200px];
@@ -831,6 +847,29 @@
   @apply lg:hidden;
 }
 
+.animation-heartbeat {
+  animation: heartbeat 1s infinite alternate;
+}
+.animation-winkling-light {
+  animation: winkling-light 2s infinite;
+}
+
+.chairman-image {
+  @apply overflow-hidden;
+}
+
+.chairman-image img {
+  -webkit-transform: scale(1);
+	transform: scale(1);
+  -webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.chairman-image:hover img {
+  -webkit-transform: scale(1.13);
+	transform: scale(1.13);
+}
+
 @media only screen and (max-width: 1536px) {
   .info-1__content {
     /* width: 1000px; */
@@ -844,3 +883,17 @@
   .content-header {
   }
 } */
+@keyframes heartbeat {
+  to { transform: scale(1.1); }
+}
+@keyframes winkling-light {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
