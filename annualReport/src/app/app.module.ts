@@ -14,6 +14,7 @@ import { NavPrefixIconComponent } from './components/vectors/nav-prefix-icon/nav
 import { MainLogoComponent } from './components/vectors/main-logo/main-logo.component';
 //import { MobileNavComponent } from './components/mobile-nav/mobile-nav.component'; ?? error
 import { CountUpDirective } from './count-up.directive';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 import { Info3TitleComponent } from './components/vectors/info3-title/info3-title.component';
 import { TtcLogo2Component } from './components/vectors/ttc-logo2/ttc-logo2.component';
 
@@ -31,6 +32,7 @@ import { TtcLogo2Component } from './components/vectors/ttc-logo2/ttc-logo2.comp
     MainLogoComponent,
     //MobileNavComponent,
     CountUpDirective,
+    SpinnerComponent,
     Info3TitleComponent,
     TtcLogo2Component,
   ],
