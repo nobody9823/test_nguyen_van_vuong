@@ -409,7 +409,7 @@
   font-style: normal;
   font-weight: 700;
   @apply leading-[16px];
-  @apply lg:leading-[48px];
+  @apply lg:leading-[52px];
   @apply animation-winkling-light;
   background: var(
     --Text-Gradient,
@@ -423,7 +423,6 @@
 #info-4 .box-1 {
   background: url("../../../assets/images/dau-an-nien-do-box-1.png");
   background-size: 100%;
-  /* background-repeat: no-repeat; */
   @apply w-full;
   @apply after:content-[''];
   @apply after:block;
@@ -447,8 +446,6 @@
   background: url("../../../assets/images/box-1-decoration-2.png");
   background-size: 100%;
   background-repeat: no-repeat;
-  /* background-color: red;
-  border-radius: 50%; */
   @apply animation-winkling-light;
 }
 
@@ -520,7 +517,8 @@
   text-align: center;
   font-family: UTM HelvetIns;
   @apply text-[11.305px];
-  @apply lg:text-[70px];
+  @apply lg:text-[62px];
+  @apply 3xl:text-[70px];
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -544,11 +542,13 @@
   text-align: center;
   font-family: SF Pro Regular;
   @apply text-[4.266px];
-  @apply lg:text-[20px];
+  @apply lg:text-[18px];
+  @apply 3xl:text-[20px];
   font-style: normal;
   font-weight: 700;
   @apply leading-[5.439px];
-  @apply lg:leading-[29px];
+  @apply lg:leading-[24px];
+  @apply 3xl:leading-[29px];
 }
 
 #info-4 .box-2__decoration4 {
@@ -567,11 +567,13 @@
   text-align: center;
   font-family: UTM HelvetIns;
   @apply text-[10.305px];
-  @apply lg:text-[46px];
+  @apply lg:text-[38px];
+  @apply 3xl:text-[46px];
   font-style: normal;
   font-weight: 400;
   @apply leading-[14.932px];
-  @apply lg:leading-[68px];
+  @apply lg:leading-[60px];
+  @apply 3xl:leading-[68px];
 }
 
 #info-4 .box-4 {
