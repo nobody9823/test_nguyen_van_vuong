@@ -138,8 +138,6 @@ ul.nav li:nth-child(2):hover .nav-decoration {
   );
 }
 
-
-
 @media only screen and (max-width: 1536px) {
   .content-header {
     /* padding: 0 56px; */
@@ -188,3 +186,5 @@ ul.nav li:nth-child(2):hover .nav-decoration {
     opacity: 1;
   }
 }
+
+
