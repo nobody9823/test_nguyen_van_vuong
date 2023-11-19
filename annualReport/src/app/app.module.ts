@@ -13,7 +13,7 @@ import { TitleLogoComponent } from './components/vectors/title-logo/title-logo.c
 import { NavPrefixIconComponent } from './components/vectors/nav-prefix-icon/nav-prefix-icon.component';
 import { MainLogoComponent } from './components/vectors/main-logo/main-logo.component';
 //import { MobileNavComponent } from './components/mobile-nav/mobile-nav.component'; ?? error
-import { CountUpDirective } from './count-up.directive';
+import { CountUpDirective } from './directives/count-up.directive';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({

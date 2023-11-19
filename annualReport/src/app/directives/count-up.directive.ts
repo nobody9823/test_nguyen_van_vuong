@@ -11,7 +11,7 @@ import {
   distinctUntilChanged,
   takeUntil,
 } from 'rxjs';
-import { Destroy } from './destroy';
+import { Destroy } from '../destroy';
 
 /**
  * Quadratic Ease-Out Function: f(x) = x * (2 - x)
