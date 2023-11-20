@@ -12,7 +12,7 @@ import { LanguagesToggleComponent } from './components/languages-toggle/language
 import { TitleLogoComponent } from './components/vectors/title-logo/title-logo.component';
 import { NavPrefixIconComponent } from './components/vectors/nav-prefix-icon/nav-prefix-icon.component';
 import { MainLogoComponent } from './components/vectors/main-logo/main-logo.component';
-import { CountUpDirective } from './count-up.directive';
+import { CountUpDirective } from './directives/count-up.directive';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { Info3TitleComponent } from './components/vectors/info3-title/info3-title.component';
 import { TtcLogo2Component } from './components/vectors/ttc-logo2/ttc-logo2.component';
