@@ -25,7 +25,13 @@ const easeOutQuad = (x: number): number => x * (2 - x);
 export class CountUpDirective implements OnInit {
   private readonly count$ = new BehaviorSubject(0);
   private readonly duration$ = new BehaviorSubject(2000);
-  private running = false;
+  callback = (entries : any) => {
+    entries.forEach((entry : any) => {
+      if (entry.isIntersecting) {
+        this.displayCurrentCount();
+      }
+    });
+  };
 
   private readonly currentCount$ = combineLatest([
     this.count$,
@@ -64,15 +70,6 @@ export class CountUpDirective implements OnInit {
     this.duration$.next(duration);
   }
 
-  @HostListener('document:scroll') onScroll(){
-    const windowHeight = window.innerHeight;
-    const boundingRectFive = this.elementRef.nativeElement.getBoundingClientRect();
-    if (boundingRectFive.top >= 0 && boundingRectFive.top < windowHeight && !this.running) {
-      this.displayCurrentCount();
-    }
-
-  }
-
   constructor(
     private readonly elementRef: ElementRef,
     private readonly renderer: Renderer2,
@@ -80,11 +77,11 @@ export class CountUpDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.displayCurrentCount();
+    const IO = new IntersectionObserver( this.callback, { threshold: 1 } );
+    IO.observe( this.elementRef.nativeElement );
   }
 
   private displayCurrentCount(): void {
-    this.running = true;
     this.currentCount$
       .pipe(takeUntil(this.destroy$))
       .subscribe((currentCount) => {
@@ -95,8 +92,5 @@ export class CountUpDirective implements OnInit {
         );
       });
 
-      setTimeout(()=>{
-        this.running = false;
-      }, 5000);
   }
 }
