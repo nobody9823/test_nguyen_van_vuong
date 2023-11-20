@@ -1,4 +1,4 @@
-import { Component, HostListener, AfterViewInit  } from '@angular/core';
+import { Component, AfterViewInit  } from '@angular/core';
 
 @Component({
   selector: 'app-spinner',
@@ -9,6 +9,9 @@ export class SpinnerComponent implements AfterViewInit{
   public isLoading = true;
 
   ngAfterViewInit() {
-    this.isLoading = false;
+
+    setTimeout(()=>{
+      this.isLoading = false;
+    }, 0);
   }
 }
