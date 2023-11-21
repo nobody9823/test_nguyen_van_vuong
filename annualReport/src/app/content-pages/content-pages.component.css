@@ -150,6 +150,15 @@ ul.nav li:nth-child(2):hover .nav-decoration {
   }
 }
 
+@media only screen and (max-width: 1279px) {
+  ul.nav {
+    width: 800px;
+  }
+  ul.nav li {
+    font-size: 10px;
+  }
+}
+
 @media only screen and (min-width: 1537px) {
   .content-header {
     /* padding: 0 112px; */
