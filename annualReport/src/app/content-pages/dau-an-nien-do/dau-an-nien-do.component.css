@@ -21,7 +21,9 @@
   font-weight: 400;
   line-height: normal;
   @apply text-[25.2px];
-  @apply lg:text-[76px];
+  @apply md:text-[50px];
+  @apply lg:text-[61px];
+  @apply xl:text-[76px];
   @apply 3xl:text-[90px];
 }
 
@@ -33,27 +35,36 @@
   font-weight: 400;
   line-height: normal;
   @apply text-[12.32px];
-  @apply lg:text-[38px];
+  @apply md:text-[25px];
+  @apply lg:text-[30px];
+  @apply xl:text-[38px];
   @apply 3xl:text-[44px];
 }
 
 .info-1__description {
   @apply w-[181px];
-  @apply lg:w-[505px];
+  @apply md:w-[332px];
+  @apply lg:w-[399px];
+  @apply xl:w-[505px];
   @apply 3xl:w-[584px];
   text-align: justify;
   font-family: SF Pro Regular;
   @apply text-[5.6px];
-  @apply lg:text-[17px];
+  @apply md:text-[11.4px];
+  @apply lg:text-[13.7px];
+  @apply xl:text-[17px];
   @apply 3xl:text-[20px];
   font-style: normal;
   font-weight: 510;
   line-height: 30px;
   @apply leading-[8.4px];
-  @apply lg:leading-[24px];
+  @apply md:leading-[16px];
+  @apply lg:leading-[20px];
+  @apply xl:leading-[24px];
   @apply 3xl:leading-[30px];
   @apply mt-3;
-  @apply lg:mt-6;
+  @apply lg:mt-4;
+  @apply xl:mt-6;
   @apply 3xl:mt-8;
   background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
   background-clip: text;
@@ -63,17 +74,23 @@
 
 .info-1__decoration {
   @apply w-[1.048px];
-  @apply lg:w-[3px];
+  @apply md:w-[1.3px];
+  @apply lg:w-[2px];
+  @apply xl:w-[3px];
   @apply 3xl:w-[3.388px];
   @apply h-[109.54px];
-  @apply lg:h-[300px];
+  @apply md:h-[160px];
+  @apply lg:h-[250px];
+  @apply xl:h-[300px];
   @apply 3xl:h-[354px];
   flex-shrink: 0;
   border-radius: 50%;
   background: var(--50-b-848, #50b848);
   filter: blur(1.5px);
   @apply mt-14;
-  @apply lg:mt-32;
+  @apply md:mt-20;
+  @apply lg:mt-24;
+  @apply xl:mt-32;
   @apply 3xl:mt-36;
 }
 
@@ -113,7 +130,9 @@
   color: var(--ffffff, #fff);
   font-family: iCiel Samsung Sharp Sans;
   @apply text-[9.86px];
-  @apply lg:text-[34px];
+  @apply md:text-[20px];
+  @apply lg:text-[26px];
+  @apply xl:text-[34px];
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -123,7 +142,9 @@
   color: var(--ffffff, #fff);
   font-family: iCiel Samsung Sharp Sans;
   @apply text-[7.54px];
-  @apply lg:text-[26px];
+  @apply md:text-[15px];
+  @apply lg:text-[20px];
+  @apply xl:text-[26px];
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -135,17 +156,20 @@
 
 .info-2__title2 .title2__text1 {
   @apply text-[8.057px];
-  @apply lg:text-[17px];
+  @apply md:text-[14px];
+  @apply xl:text-[17px];
   @apply 2xl:text-[21px];
   @apply 3xl:text-[25px];
   font-weight: 400;
   @apply text-left;
   @apply leading-[9.024px];
-  @apply lg:leading-[20px];
+  @apply md:leading-[16px];
+  @apply xl:leading-[20px];
   @apply 2xl:leading-[24px];
   @apply 3xl:leading-[28px];
   @apply w-[59px];
-  @apply lg:w-[126px];
+  @apply md:w-[102px];
+  @apply xl:w-[126px];
   @apply 2xl:w-[158px];
   @apply 3xl:w-[182px];
 }
@@ -155,12 +179,14 @@
   text-align: justify;
   font-family: UTM Impact;
   @apply text-[36.741px];
-  @apply lg:text-[76px];
+  @apply md:text-[63px];
+  @apply xl:text-[76px];
   @apply 2xl:text-[94px];
   @apply 3xl:text-[114px];
   font-weight: 400;
   @apply leading-[35px];
-  @apply lg:leading-[70px];
+  @apply md:leading-[60px];
+  @apply xl:leading-[70px];
   @apply 2xl:leading-[90px];
   @apply 3xl:leading-[110px];
 }
@@ -170,13 +196,15 @@
   text-align: justify;
   font-family: UTM Impact;
   @apply text-[22.56px];
-  @apply lg:text-[46px];
+  @apply md:text-[38px];
+  @apply xl:text-[46px];
   @apply 2xl:text-[57px];
   @apply 3xl:text-[70px];
   font-style: normal;
   font-weight: 400;
   @apply leading-[17px];
-  @apply lg:leading-[38px];
+  @apply md:leading-[30px];
+  @apply xl:leading-[38px];
   @apply 2xl:leading-[48px];
   @apply 3xl:leading-[54px];
 }
@@ -186,17 +214,20 @@
   text-align: left;
   font-family: UTM Impact;
   @apply text-[9.346px];
-  @apply lg:text-[19px];
+  @apply md:text-[15.5px];
+  @apply xl:text-[19px];
   @apply 2xl:text-[23px];
   @apply 3xl:text-[29px];
   font-style: normal;
   font-weight: 400;
   @apply leading-[9.5px];
-  @apply lg:leading-[20px];
+  @apply md:leading-[16px];
+  @apply xl:leading-[20px];
   @apply 2xl:leading-[26px];
   @apply 3xl:leading-[30px];
   @apply w-[70px];
-  @apply lg:w-[144px];
+  @apply md:w-[120px];
+  @apply xl:w-[144px];
   @apply 2xl:w-[178px];
   @apply 3xl:w-[217px];
 }
@@ -206,11 +237,15 @@
   font-family: SF Pro Regular;
   font-weight: 274;
   @apply text-[5.157px];
-  @apply lg:text-[10px];
+  @apply md:text-[10px];
+  @apply lg:text-[8px];
+  @apply xl:text-[10px];
   @apply 2xl:text-[12px];
   @apply 3xl:text-[16px];
   @apply leading-[7.09px];
-  @apply lg:leading-[14px];
+  @apply md:leading-[14px];
+  @apply lg:leading-[12px];
+  @apply xl:leading-[14px];
   @apply 2xl:leading-[17px];
   @apply 3xl:leading-[22px];
 }
@@ -224,7 +259,8 @@
   @apply info-2__text1;
   text-align: justify;
   @apply leading-[9.669px];
-  @apply lg:leading-[20px];
+  @apply md:leading-[16px];
+  @apply xl:leading-[20px];
   @apply 2xl:leading-[26px];
   @apply 3xl:leading-[30px];
 }
@@ -233,10 +269,11 @@
   @apply info-2__text2;
   font-weight: 590;
   @apply text-[7.735px];
-  @apply lg:text-[16px];
+  @apply md:text-[13px];
+  @apply xl:text-[16px];
   @apply 2xl:text-[19px];
   @apply 3xl:text-[24px];
-  @apply w-[177.26px];
+  @apply w-[45%];
   @apply lg:w-[26.56%];
 }
 
@@ -247,7 +284,8 @@
 
 .info-2__detail1 {
   @apply info-2__text1;
-  @apply w-[148.576px];
+  /* @apply w-[148.576px]; */
+  @apply w-[38%];
   @apply lg:w-[24%];
 }
 
@@ -255,7 +293,9 @@
   @apply info-2__text1;
   font-weight: 700;
   @apply leading-[11px];
-  @apply lg:leading-[20px];
+  @apply md:leading-[20px];
+  @apply lg:leading-[16px];
+  @apply xl:leading-[20px];
   @apply 2xl:leading-[28px];
   @apply 3xl:leading-[38px];
 }
@@ -264,17 +304,23 @@
   color: #f4e696;
   font-family: iCiel Samsung Sharp Sans;
   @apply text-[19.337px];
-  @apply lg:text-[40px];
+  @apply md:text-[40px];
+  @apply lg:text-[32px];
+  @apply xl:text-[40px];
   @apply 2xl:text-[50px];
   @apply 3xl:text-[60px];
   font-style: normal;
   font-weight: 700;
   @apply leading-[22px];
-  @apply lg:leading-[44px];
+  @apply md:leading-[44px];
+  @apply lg:leading-[36px];
+  @apply xl:leading-[44px];
   @apply 2xl:leading-[52px];
   @apply 3xl:leading-[56px];
   @apply w-[21.83px];
-  @apply lg:w-[40px];
+  @apply md:w-[40px];
+  @apply lg:w-[28px];
+  @apply xl:w-[40px];
   @apply 2xl:w-[52px];
   @apply 3xl:w-[67.75px];
 }
@@ -282,7 +328,7 @@
 .info-2__detail2 .rank__detail {
   @apply info-2__text1;
   @apply w-[101.522px];
-  @apply lg:w-[230px];
+  @apply md:w-[230px];
   @apply 2xl:w-[280px];
   @apply 3xl:w-[315px];
 }
@@ -291,10 +337,13 @@
   @apply info-2__text2;
   font-weight: 274;
   @apply text-[6.446px];
-  @apply lg:text-[13px];
+  @apply md:text-[13px];
+  @apply lg:text-[10.7px];
+  @apply xl:text-[13px];
   @apply 2xl:text-[16px];
   @apply 3xl:text-[20px];
-  @apply w-[310.045px];
+  /* @apply w-[310.045px]; */
+  @apply w-[83%];
   @apply lg:w-[50.1%];
 }
 
@@ -323,7 +372,9 @@
   @apply info-2__text3;
   text-align: center;
   @apply text-[5.5px];
-  @apply lg:text-[20px];
+  @apply md:text-[12px];
+  @apply lg:text-[16px];
+  @apply xl:text-[20px];
   @apply 2xl:text-[24px];
   @apply 3xl:text-[30px];
 }
@@ -332,17 +383,23 @@
   @apply info-2__text1;
   font-weight: 400;
   @apply text-[12.47px];
-  @apply lg:text-[26px];
+  @apply md:text-[20px];
+  @apply lg:text-[22px];
+  @apply xl:text-[26px];
   @apply 2xl:text-[32px];
   @apply 3xl:text-[38px];
   @apply leading-[17.11px];
-  @apply lg:leading-[40px];
+  @apply md:leading-[28px];
+  @apply lg:leading-[32px];
+  @apply xl:leading-[40px];
   @apply 2xl:leading-[48px];
   @apply 3xl:leading-[59px];
-  @apply w-[181.83px];
+  @apply w-[53%];
   @apply lg:w-[627px];
   @apply mt-8;
-  @apply lg:mt-40;
+  @apply md:mt-24;
+  @apply lg:mt-36;
+  @apply xl:mt-40;
   @apply 2xl:mt-52;
   @apply 3xl:mt-60;
 }
@@ -356,7 +413,9 @@
   @apply info-2__text3;
   text-align: justify;
   @apply text-[6.96px];
-  @apply lg:text-[22px];
+  @apply md:text-[12px];
+  @apply lg:text-[18px];
+  @apply xl:text-[22px];
   @apply 3xl:text-[24px];
 }
 
@@ -364,11 +423,15 @@
   @apply info-2__text1;
   text-align: justify;
   @apply text-[5.8px];
-  @apply lg:text-[19px];
+  @apply md:text-[12px];
+  @apply lg:text-[14px];
+  @apply xl:text-[19px];
   @apply leading-[8.7px];
+  @apply md:leading-[18px];
   @apply lg:leading-[30px];
   @apply mt-2;
-  @apply lg:mt-8;
+  @apply lg:mt-4;
+  @apply xl:mt-8;
   @apply 3xl:mt-10;
 }
 
@@ -383,9 +446,13 @@
   text-align: center;
   font-weight: 700;
   @apply text-[4.06px];
-  @apply lg:text-[14px];
+  @apply md:text-[8px];
+  @apply lg:text-[10px];
+  @apply xl:text-[14px];
   @apply leading-[5.8px];
-  @apply lg:leading-[20px];
+  @apply md:leading-[10px];
+  @apply lg:leading-[14px];
+  @apply xl:leading-[20px];
 }
 
 .signature-group .signature__title {
@@ -429,11 +496,15 @@
 #info-4 .header__text {
   font-family: iCiel Samsung Sharp Sans;
   @apply text-[10.154px];
-  @apply lg:text-[34px];
+  @apply md:text-[18px];
+  @apply lg:text-[26px];
+  @apply xl:text-[34px];
   font-style: normal;
   font-weight: 700;
   @apply leading-[16px];
-  @apply lg:leading-[52px];
+  @apply md:leading-[32px];
+  @apply lg:leading-[42px];
+  @apply xl:leading-[52px];
   @apply animation-winkling-light;
   background: var(
     --Text-Gradient,
@@ -455,9 +526,10 @@
 
 #info-4 .box-1__decoration1 {
   @apply w-[37.984px];
+  @apply md:w-[100px];
   @apply lg:w-[170px];
   @apply h-[0.5px];
-  @apply lg:h-[1px];
+  @apply md:h-[1px];
   flex-shrink: 0;
   background: linear-gradient(
     90deg,
@@ -475,9 +547,10 @@
 
 #info-4 .box-1__decoration3 {
   @apply w-[37.984px];
+  @apply md:w-[100px];
   @apply lg:w-[170px];
   @apply h-[0.5px];
-  @apply lg:h-[1px];
+  @apply md:h-[1px];
   flex-shrink: 0;
   background: linear-gradient(
     270deg,
@@ -498,6 +571,7 @@
 
 #info-4 .box-2__decoration1 {
   @apply w-[82.669px];
+  @apply md:w-[200px];
   @apply lg:w-[370px];
   @apply h-[0.9px];
   @apply lg:h-[1px];
@@ -516,6 +590,7 @@
 
 #info-4 .box-2__decoration3 {
   @apply w-[82.669px];
+  @apply md:w-[200px];
   @apply lg:w-[370px];
   @apply h-[0.9px];
   @apply lg:h-[1px];
@@ -541,9 +616,10 @@
   text-align: center;
   font-family: UTM HelvetIns;
   @apply text-[11.305px];
-  @apply lg:text-[62px];
+  @apply md:text-[30px];
+  @apply lg:text-[42px];
+  @apply xl:text-[62px];
   @apply 3xl:text-[70px];
-  font-style: normal;
   font-weight: 400;
   line-height: normal;
   background: var(
@@ -566,12 +642,16 @@
   text-align: center;
   font-family: SF Pro Regular;
   @apply text-[4.266px];
-  @apply lg:text-[18px];
+  @apply md:text-[8px];
+  @apply lg:text-[11px];
+  @apply xl:text-[18px];
   @apply 3xl:text-[20px];
   font-style: normal;
   font-weight: 700;
   @apply leading-[5.439px];
-  @apply lg:leading-[24px];
+  @apply md:leading-[10px];
+  @apply lg:leading-[16px];
+  @apply xl:leading-[24px];
   @apply 3xl:leading-[29px];
 }
 
@@ -591,12 +671,16 @@
   text-align: center;
   font-family: UTM HelvetIns;
   @apply text-[10.305px];
-  @apply lg:text-[38px];
+  @apply md:text-[21px];
+  @apply lg:text-[27px];
+  @apply xl:text-[38px];
   @apply 3xl:text-[46px];
   font-style: normal;
   font-weight: 400;
   @apply leading-[14.932px];
-  @apply lg:leading-[60px];
+  @apply md:leading-[30px];
+  @apply lg:leading-[46px];
+  @apply xl:leading-[60px];
   @apply 3xl:leading-[68px];
 }
 
@@ -624,15 +708,18 @@
   background-color: #fff;
 }
 
-#info-6 .header__text,
-#info-5 .header__text {
+.header-text-sample {
   font-family: iCiel Samsung Sharp Sans;
   @apply text-[9.52px];
-  @apply lg:text-[34px];
+  @apply md:text-[18px];
+  @apply lg:text-[24px];
+  @apply xl:text-[34px];
   font-style: normal;
   font-weight: 700;
   @apply leading-[16px];
-  @apply lg:leading-[48px];
+  @apply md:leading-[28px];
+  @apply lg:leading-[38px];
+  @apply xl:leading-[48px];
   @apply animation-winkling-light;
   background: var(
     --Text-Gradient,
@@ -643,18 +730,27 @@
   -webkit-text-fill-color: transparent;
 }
 
+#info-6 .header__text,
+#info-5 .header__text {
+  @apply header-text-sample;
+}
+
 #info-6 .content-text,
 #info-5 .content-text {
   color: var(--292829, #292829);
   text-align: justify;
   font-family: SF Pro Regular;
   @apply text-[5.6px];
-  @apply lg:text-[16px];
+  @apply md:text-[11px];
+  @apply lg:text-[13px];
+  @apply xl:text-[16px];
   @apply 3xl:text-[20px];
   font-style: normal;
   font-weight: 274;
   @apply leading-[8.12px];
-  @apply lg:leading-[26px];
+  @apply md:leading-[16px];
+  @apply lg:leading-[22px];
+  @apply xl:leading-[26px];
   @apply 3xl:leading-[30px];
 }
 
@@ -669,12 +765,16 @@
   text-align: justify;
   font-family: SF Pro;
   @apply text-[6.72px];
-  @apply lg:text-[20px];
+  @apply md:text-[12px];
+  @apply lg:text-[16px];
+  @apply xl:text-[20px];
   @apply 3xl:text-[24px];
   font-style: normal;
   font-weight: 510;
   @apply leading-[9.52px];
-  @apply lg:leading-[30px];
+  @apply md:leading-[18px];
+  @apply lg:leading-[24px];
+  @apply xl:leading-[30px];
   @apply 3xl:leading-[36px];
   background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
   background-clip: text;
@@ -692,12 +792,16 @@
   text-align: right;
   font-family: Myriad Pro;
   @apply text-[5.6px];
-  @apply lg:text-[16px];
+  @apply md:text-[11px];
+  @apply lg:text-[12px];
+  @apply xl:text-[16px];
   @apply 3xl:text-[20px];
   font-style: normal;
   font-weight: 600;
   @apply leading-[8.6px];
-  @apply lg:leading-[22px];
+  @apply md:leading-[15px];
+  @apply lg:leading-[18px];
+  @apply xl:leading-[22px];
   @apply 3xl:leading-[28px];
   text-transform: uppercase;
   background: var(
@@ -720,12 +824,16 @@
   text-align: right;
   font-family: Myriad Pro Light;
   @apply text-[5.6px];
-  @apply lg:text-[16px];
+  @apply md:text-[11px];
+  @apply lg:text-[12px];
+  @apply xl:text-[16px];
   @apply 3xl:text-[20px];
   font-style: normal;
   font-weight: 300;
   @apply leading-[8.6px];
-  @apply lg:leading-[15px];
+  @apply md:leading-[10px];
+  @apply lg:leading-[10px];
+  @apply xl:leading-[15px];
   @apply 3xl:leading-[19px];
   text-transform: uppercase;
   @apply mt-[-1px];
@@ -738,12 +846,16 @@
   text-align: right;
   font-family: iCiel Samsung Sharp Sans;
   @apply text-[22.4px];
-  @apply lg:text-[64px];
+  @apply md:text-[40px];
+  @apply lg:text-[48px];
+  @apply xl:text-[64px];
   @apply 3xl:text-[80px];
   font-style: normal;
   font-weight: 700;
   @apply leading-[26px];
-  @apply lg:leading-[68px];
+  @apply md:leading-[48px];
+  @apply lg:leading-[52px];
+  @apply xl:leading-[68px];
   @apply 3xl:leading-[80px];
   @apply mb-[-4px];
   @apply lg:mb-0;
@@ -767,7 +879,9 @@
   text-align: right;
   font-family: Myriad Pro;
   @apply text-[5.04px];
-  @apply lg:text-[14px];
+  @apply md:text-[9px];
+  @apply lg:text-[10px];
+  @apply xl:text-[14px];
   @apply 3xl:text-[18px];
   font-style: normal;
   font-weight: 600;
@@ -790,9 +904,13 @@
   );
   @apply relative;
   @apply w-[320.88px];
-  @apply lg:w-[1146px];
+  @apply md:w-[650px];
+  @apply lg:w-[750px];
+  @apply xl:w-[1146px];
   @apply h-[36.4px];
-  @apply lg:h-[124px];
+  @apply md:h-[72px];
+  @apply lg:h-[104px];
+  @apply xl:h-[124px];
   @apply flex;
   @apply justify-end;
   @apply items-center;
@@ -808,13 +926,19 @@
   font-family: SF Pro Regular;
   font-weight: 274;
   @apply text-[5.04px];
-  @apply lg:text-[15px];
+  @apply md:text-[10px];
+  @apply lg:text-[11px];
+  @apply xl:text-[15px];
   @apply 3xl:text-[18px];
   @apply leading-[6.72px];
-  @apply lg:leading-[21px];
+  @apply md:leading-[14px];
+  @apply lg:leading-[18px];
+  @apply xl:leading-[21px];
   @apply 3xl:leading-[24px];
   @apply w-[270px];
-  @apply lg:w-[840px];
+  @apply md:w-[560px];
+  @apply lg:w-[610px];
+  @apply xl:w-[840px];
   @apply 3xl:w-[980px];
 }
 
@@ -828,11 +952,15 @@
   text-align: center;
   font-family: SF Pro Regular;
   @apply text-[3.92px];
-  @apply lg:text-[14px];
+  @apply md:text-[8px];
+  @apply lg:text-[12px];
+  @apply xl:text-[14px];
   font-style: normal;
   font-weight: 400;
   @apply leading-[5.6px];
-  @apply lg:leading-[20px];
+  @apply md:leading-[13px];
+  @apply lg:leading-[18px];
+  @apply xl:leading-[20px];
 }
 
 .chairman-name strong {
@@ -841,14 +969,9 @@
 }
 
 .chairman-title {
-  color: #000;
-  font-family: SF Pro Regular;
-  @apply text-[3.92px];
-  @apply lg:text-[14px];
+  @apply chairman-name;
   font-style: italic;
   font-weight: 276;
-  @apply leading-[5.6px];
-  @apply lg:leading-[20px];
 }
 
 .content-decoration-1 {
@@ -859,11 +982,13 @@
   @apply w-full;
   @apply lg:w-[1000px];
   @apply 3xl:w-[1200px];
-  height: 1px;
+  @apply h-[0.7px];
+  @apply lg:h-[1px];
   flex-shrink: 0;
   background: var(--50-b-848, #50b848);
 }
 
+#info-7,
 #info-6 {
   background-color: #fff;
 }
@@ -872,7 +997,9 @@
   font-family: UTM HelvetIns;
   text-align: justify;
   @apply text-[16.8px];
-  @apply lg:text-[49px];
+  @apply md:text-[35px];
+  @apply lg:text-[39px];
+  @apply xl:text-[49px];
   @apply 3xl:text-[59px];
   font-style: normal;
   font-weight: 400;
@@ -927,9 +1054,13 @@
 
 .chairman-name-2 {
   @apply chairman-name;
-  @apply lg:text-[12px];
+  @apply md:text-[7px];
+  @apply lg:text-[10px];
+  @apply xl:text-[12px];
   @apply 3xl:text-[14px];
-  @apply lg:leading-[18px];
+  @apply md:leading-[10px];
+  @apply lg:leading-[12px];
+  @apply xl:leading-[18px];
   @apply 3xl:leading-[20px];
 }
 
@@ -940,10 +1071,66 @@
 
 .chairman-title-2 {
   @apply chairman-title;
-  @apply lg:text-[12px];
+  @apply md:text-[7px];
+  @apply lg:text-[10px];
+  @apply xl:text-[12px];
   @apply 3xl:text-[14px];
+  @apply md:leading-[10px];
   @apply lg:leading-[18px];
   @apply 3xl:leading-[20px];
+}
+
+#info-7 .header__logo {
+  @apply mr-4;
+  @apply md:mr-4;
+  @apply lg:mr-4;
+  @apply xl:mr-4;
+  @apply 2xl:mr-4;
+  @apply 3xl:mr-4;
+}
+
+#info-7 .header__text {
+  @apply header-text-sample;
+  @apply leading-[16px];
+  @apply md:leading-[28px];
+  @apply lg:leading-[38px];
+  @apply xl:leading-[52px];
+}
+
+.info-7__decoration1 {
+  @apply relative;
+  @apply mt-4;
+  @apply md:mt-4;
+  @apply lg:mt-4;
+  @apply xl:mt-4;
+  @apply 2xl:mt-4;
+  @apply 3xl:mt-4;
+}
+
+.decoration1__text {
+  font-family: SF Pro;
+  font-weight: 860;
+  @apply absolute;
+  @apply top-[35%];
+  @apply left-[22%];
+  @apply text-[26px];
+  line-height: normal;
+  @apply leading-[200%];
+  background: var(
+    --Linear,
+    linear-gradient(
+      0deg,
+      #f4e696 -197.4%,
+      #e6c36c -146.29%,
+      #daa548 -92.49%,
+      #d69a3b -65.59%,
+      #dfb156 -19.86%,
+      #f4e696 71.6%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @media only screen and (max-width: 1536px) {
