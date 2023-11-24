@@ -995,6 +995,7 @@
   background: var(--50-b-848, #50b848);
 }
 
+#info-9,
 #info-7,
 #info-6 {
   background-color: #fff;
@@ -1096,6 +1097,14 @@
   @apply px-4;
   @apply md:px-8;
   @apply lg:px-0;
+}
+
+.info-content-sample2 {
+  @apply relative;
+  @apply w-[100%];
+  @apply px-4;
+  @apply md:px-8;
+  @apply lg:px-48;
 }
 
 #info-7 .header__text {
@@ -1429,6 +1438,136 @@
   @apply numeric8;
   @apply text-[79.013px];
   @apply leading-none;
+}
+
+.block9_1 {
+  @apply h-[30px];
+  @apply w-full;
+  @apply bg-white;
+}
+
+.block9_2 {
+  background: url("../../../assets/images/background9_1.png");
+  background-size: 100vw;
+  /* background-repeat: no-repeat; */
+  @apply w-full;
+  @apply before:content-[''];
+  @apply before:block;
+  @apply before:pb-[10.3%];
+  @apply relative;
+}
+
+.block9_3 {
+  @apply mt-12;
+}
+
+.text9_1 {
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 34.48%,
+      #00425d 68.87%,
+      #007534 103.25%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: UTM HelvetIns;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.text9_2 {
+  color: var(--007534, #007534);
+  font-family: SF Pro;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 860;
+  line-height: normal;
+}
+
+.text9_3 {
+  color: var(--292829, #292829);
+  text-align: justify;
+  font-size: 14px;
+  font-style: normal;
+  font-family: SF Pro Regular;
+  font-weight: 274;
+  line-height: 20px; /* 142.857% */
+}
+
+.text9_3 strong {
+  font-family: SF Pro;
+  font-weight: 700;
+}
+
+.text9_4 {
+  color: #00558f;
+  text-align: right;
+  font-family: SF Pro Regular;
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 276;
+  line-height: 15px;
+}
+
+.text9_4 strong {
+  font-family: SF Pro;
+  font-weight: 700;
+}
+
+.text9_5 {
+  background: var(
+    --Linear,
+    linear-gradient(
+      0deg,
+      #f4e696 -197.4%,
+      #e6c36c -146.29%,
+      #daa548 -92.49%,
+      #d69a3b -65.59%,
+      #dfb156 -19.86%,
+      #f4e696 71.6%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: justify;
+  font-family: SF Pro;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 860;
+  line-height: 20px; /* 100% */
+}
+
+.decoration9_sample1 {
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 34.48%,
+      #00425d 68.87%,
+      #007534 103.25%
+    )
+  );
+}
+
+.decoration9_1 {
+  @apply decoration9_sample1;
+  @apply h-[1.5%];
+  @apply w-[9%];
+}
+
+.decoration9_2 {
+  @apply decoration9_sample1;
+  @apply h-[1%];
+  @apply w-[12%];
 }
 
 @media only screen and (max-width: 1536px) {

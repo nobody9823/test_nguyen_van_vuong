@@ -18,6 +18,7 @@ import { Info3TitleComponent } from './components/vectors/info3-title/info3-titl
 import { TtcLogo2Component } from './components/vectors/ttc-logo2/ttc-logo2.component';
 import { CupIconComponent } from "./components/vectors/cup-icon/cup-icon.component";
 import { VietnamMapComponent } from './components/vectors/vietnam-map/vietnam-map.component';
+import { TtcLogo3Component } from './components/vectors/ttc-logo3/ttc-logo3.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { VietnamMapComponent } from './components/vectors/vietnam-map/vietnam-ma
     TtcLogo2Component,
     CupIconComponent,
     VietnamMapComponent,
+    TtcLogo3Component,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
