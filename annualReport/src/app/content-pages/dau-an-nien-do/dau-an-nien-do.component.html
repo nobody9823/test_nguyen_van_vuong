@@ -1465,9 +1465,9 @@
     <div class="header__logo">
       <app-title-logo></app-title-logo>
     </div>
-    <div class="header__text">
-      <div class="info-2__title">NHỮNG CON SỐ NỔI BẬT</div>
-      <div class="info-2__title">NIÊN ĐỘ 2022-2023</div>
+    <div class="header__text mb-2 lg:mb-0">
+      <div class="info-8__title">NHỮNG CON SỐ NỔI BẬT</div>
+      <div class="info-8__title">NIÊN ĐỘ 2022-2023</div>
     </div>
   </div>
   <div class="block8 block8_2 w-[44.5%] top-[9.3%]">
@@ -1488,7 +1488,10 @@
     <img class="w-full" src="../../../assets/images/decoration8_3.png" alt="" />
   </div>
   <div class="block8 block8_6 w-[33%] top-[10%] left-[65%]">
-    <div *ngFor="let item of block8Content1" class="grid grid-cols-5 gap-4">
+    <div
+      *ngFor="let item of block8Content1"
+      class="grid grid-cols-5 gap-1 md:gap-2 xl:gap-4"
+    >
       <div class="numeric8_3 col-span-1">{{ item?.rank }}</div>
       <div class="text8_2 col-span-4 flex flex-col justify-center">
         <div>{{ item?.content1 }}</div>
@@ -1519,8 +1522,8 @@
   </div>
   <div class="block8 block8_12 w-[13.82%] top-[46.5%] left-[72.3%]">
     <div class="text8_1">DÒNG SẢN PHẨM ĐƯỜNG</div>
-    <div class="flex items-end mt-1">
-      <div class="numeric8_6 mr-2">88</div>
+    <div class="flex items-end mt-[1px] md:mt-1">
+      <div class="numeric8_6 mr-[1px] md:mr-1 xl:mr-2">88</div>
       <div class="text8_4">
         <div>Trong đó có 6 sản phẩm</div>
         <div>Đường Organic đạt chuẩn</div>
@@ -1533,7 +1536,7 @@
       <div class="numeric8_4">>71.000</div>
       <div class="numeric8_5">HA</div>
     </div>
-    <div class="mt-[-4%]">
+    <div class="mt-[-4%] lg:mt-[-2%] xl:mt-[-4%]">
       <div class="text8_1">
         {{
           "Vùng nguyên liệu xuyên biên giới, trải dài tại 4 quốc gia"
@@ -1558,7 +1561,9 @@
   <div class="block8 block8_16 w-[91%] top-[51%] left-[4.2%]">
     <img class="w-full" src="../../../assets/images/decoration8_7.png" alt="" />
   </div>
-  <div class="block8 block8_17 w-[9.2%] top-[63.1%] left-[32.5%]">
+  <div
+    class="block8 block8_17 w-[9.2%] top-[63.1%] left-[32.5%] scale-[0.2] md:scale-[0.4] lg:scale-[0.5] xl:scale-[0.7] 2xl:scale-[1] origin-top-left"
+  >
     <app-vietnam-map></app-vietnam-map>
   </div>
   <div class="block8 block8_18 w-[13.2%] top-[71.6%] left-[10%]">
@@ -1621,10 +1626,10 @@
   </div>
   <div class="block8 block8_25 w-[18.8%] top-[83%] left-[72.5%]">
     <div class="flex items-end">
-      <div class="numeric8_6 mr-1">~115</div>
-      <div class="text8_1 mb-5">TRIỆU KWH</div>
+      <div class="numeric8_6 mr-[2px] md:mr-1">~115</div>
+      <div class="text8_1 mb-[2px] md:mb-2 lg:mb-3 3xl:mb-5">TRIỆU KWH</div>
     </div>
-    <div class="mt-[-4%]">
+    <div class="mt-[-2%] xl:mt-[-4%]">
       <div class="text8_1">
         {{ "Điện thương phẩm phát vào lưới điện quốc gia" | uppercase }}
       </div>
@@ -1646,34 +1651,37 @@
   <div class="block9 block9_1"></div>
   <div class="block9 block9_2">
     <div class="absolute top-0 left-0 flex items-end">
-      <div class="header__logo">
+      <div class="header__logo2">
         <app-title-logo></app-title-logo>
       </div>
       <div class="header__text">
-        <div class="info-2__title">NHỮNG SỰ KIỆN NỔI BẬT NIÊN ĐỘ 2022-2023</div>
-        <!-- <div class="info-2__title">NIÊN ĐỘ 2022-2023</div> -->
+        <div
+          class="info-8__title mb-4 md:mb-7 lg:mb-5 xl:mb-2 2xl:mb-0 ml-[-15%] lg:ml-[-7%] xl:ml-0"
+        >
+          NHỮNG SỰ KIỆN NỔI BẬT NIÊN ĐỘ 2022-2023
+        </div>
       </div>
     </div>
   </div>
   <div class="flex justify-center">
     <div class="info-content-sample2">
-      <div class="block9 block9_3 grid grid-cols-2 gap-4">
+      <div class="block9 block9_3">
         <div class="flex flex-col justify-between">
           <div class="relative">
             <img src="../../../assets/images/decoration9_1.png" alt="" />
-            <div class="absolute top-[3.4%] left-[13%]">
-              <div class="text9_5">THÁNG 7/2023</div>
+            <div class="absolute top-[2.4%] left-[13%]">
+              <div class="text9_5">THÁNG 7/2022</div>
             </div>
-            <div class="absolute top-[12%] left-[7%] w-[85%]">
-              <div class="grid grid-cols-3 gap-4">
+            <div class="content9_8">
+              <div class="grid grid-cols-3 xl:gap-3 2xl:gap-4">
                 <div class="col-span-2">
                   <div class="text9_1">TOP 20</div>
                   <div class="text9_2">DOANH NGHIỆP NIÊM YẾT THUỘC RỔ</div>
                   <div class="text9_2">
                     CHỈ SỐ PHÁT TRIỂN BỀN VỮNG VNSI - HOSE
                   </div>
-                  <div class="decoration9_1 my-4"></div>
-                  <div class="text9_3 w-[88%]">
+                  <div class="decoration9_1 my-1 md:my-2 xl:my-4"></div>
+                  <div class="text9_3 w-[85%]">
                     SBT tiếp tục được vinh danh trong
                     <strong
                       >“Top 20 cổ phiếu có điểm Phát triển bền vững tốt nhất thị
@@ -1688,7 +1696,7 @@
                 </div>
                 <div class="col-span-1 flex flex-col justify-end">
                   <img src="../../../assets/images/decoration9_5.png" alt="" />
-                  <div class="mt-6">
+                  <div class="mt-2 xl:mt-4 3xl:mt-6">
                     <div class="text9_4">
                       Top 20 Doanh nghiệp niêm yết thuộc rổ
                     </div>
@@ -1702,16 +1710,16 @@
           </div>
           <div class="relative">
             <img src="../../../assets/images/decoration9_2.png" alt="" />
-            <div class="absolute top-[5%] left-[10.5%]">
-              <div class="text9_5">THÁNG 7/2023</div>
+            <div class="absolute top-[4.1%] left-[10.5%]">
+              <div class="text9_5">THÁNG 7/2022</div>
             </div>
             <div class="absolute top-[12%] left-[7%] w-[85%]">
-              <div class="grid grid-cols-3 gap-6">
+              <div class="grid grid-cols-3 gap-2 md:gap-3 xl:gap-4 2xl:gap-6">
                 <div class="col-span-2">
                   <div class="text9_1">TOP 10</div>
                   <div class="text9_2">DOANH NGHIỆP PHÁT TRIỂN</div>
                   <div class="text9_2">KINH TẾ XANH BỀN VỮNG</div>
-                  <div class="decoration9_1 my-4"></div>
+                  <div class="decoration9_1 my-1 md:my-2 xl:my-4"></div>
                   <div class="text9_3">
                     Đây là năm thứ hai liên tiếp TTC AgriS có mặt trong danh
                     sách Top 10 Doanh nghiệp Phát triển Kinh tế Xanh bền vững
@@ -1727,7 +1735,7 @@
                 </div>
                 <div class="col-span-1 flex flex-col justify-end">
                   <img src="../../../assets/images/decoration9_6.png" alt="" />
-                  <div class="mt-6">
+                  <div class="mt-2 3xl:mt-4">
                     <div class="text9_4">
                       Ông <strong>Nguyễn Thanh Ngữ</strong> - Tổng Giám đốc TTC
                       AgriS đại diện nhận biểu dương năm thứ 2 liên tiếp là Top
@@ -1742,16 +1750,16 @@
         <div>
           <div class="relative">
             <img src="../../../assets/images/decoration9_4.png" alt="" />
-            <div class="absolute top-[1.7%] left-[12%]">
-              <div class="text9_5">THÁNG 7/2023</div>
+            <div class="absolute top-[1.1%] left-[12%]">
+              <div class="text9_5">THÁNG 8/2022</div>
             </div>
             <div class="absolute top-[9%] left-[7%] w-[85%]">
-              <div class="grid grid-cols-7 gap-6">
+              <div class="grid grid-cols-7 gap-2 md:gap-3 xl:gap-4 2xl:gap-6">
                 <div class="col-span-4">
                   <div>
                     <app-ttc-logo3></app-ttc-logo3>
                   </div>
-                  <div class="text9_2 text-right mt-4">
+                  <div class="text9_2 text-right mt-3 3xl:mt-4">
                     <div>VÀ CHÍNH QUYỀN QUEENSLAND</div>
                     <div>HỢP TÁC TOÀN DIỆN</div>
                     <div>TRONG PHÁT TRIỂN NÔNG NGHIỆP</div>
@@ -1759,14 +1767,14 @@
                   </div>
                 </div>
                 <div class="col-span-3">
-                  <div class="decoration9_2 mb-3"></div>
+                  <div class="decoration9_1 mb-1 md:mb-2 xl:mb-3"></div>
 
                   <div class="text9_3">
                     Ngày 25/8/2022, TTC AgriS chính thức ký kết Biên bản ghi nhớ
                     với Công ty tư vấn nông học Farmacist, Queensland, Úc dưới
                     sự chứng kiến của Bộ Nông nghiệp bang Queensland, Phòng
                     Thương mại và Đầu tư Queensland (TIQ) nhằm phát triển nền
-                    nông nghiệp hiện đại bền vững song phương Việt Nam - Úc.<br />
+                    nông nghiệp hiện đại bền vững song phương Việt Nam - Úc.<br /><br />
                     TTC AgriS là đối tác đầu tiên của dự án
                     <strong>“Taste of Queensland”</strong> do Bộ trưởng Phát
                     triển Nông nghiệp Queensland phát động nhằm mang lại lợi ích
@@ -1776,8 +1784,12 @@
                   </div>
                 </div>
               </div>
-              <div class="my-4">
-                <img src="../../../assets/images/decoration9_7.png" alt="" />
+              <div class="my-1 md:my-2 xl:my-4">
+                <img
+                  class="w-full"
+                  src="../../../assets/images/decoration9_7.png"
+                  alt=""
+                />
               </div>
               <div class="text9_4">
                 TTC AgriS và Farmacist ký kết Biên bản ghi nhớ dưới sự chứng
@@ -1790,7 +1802,949 @@
             </div>
           </div>
         </div>
-        <div class="block9 block9_4"></div>
+      </div>
+      <div class="block9 block9_4">
+        <div class="flex flex-col justify-between">
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_8.png" alt="" />
+            <div class="title9_8">
+              <div>THÁNG 8/2022</div>
+            </div>
+            <div class="content9_8 mt-1 lg:mt-3">
+              <div class="text9_2">
+                XÂY DỰNG NỀN TẢNG VỮNG VÀNG CHO HỆ SINH THÁI SỐ
+              </div>
+              <div class="text9_2">
+                - KỶ NIỆM 1 NĂM VẬN HÀNH HIỆU QUẢ HỆ THỐNG SỐ LÕI
+              </div>
+
+              <div class="grid grid-cols-7 gap-4">
+                <div class="col-span-4">
+                  <div class="text9_6">ORACLE CLOUD ERP</div>
+                  <div class="decoration9_1 my-[2px] md:my-2 3xl:my-4"></div>
+                  <div class="text9_3 w-full">
+                    TTC AgriS phối hợp với Công ty Cổ Phần MyMind (MsM) và Công
+                    ty KPMG Việt Nam (KPMG) đồng tổ chức sự kiện
+                    <strong
+                      >“The alpha year of SBT Ecosystem - Building a
+                      comprehensive foundation in turbulent time”</strong
+                    >
+                    - kỷ niệm 1 năm TTC AgriS chính thức golive và vận hành hiệu
+                    quả “hệ thống số lõi” Oracle Cloud ERP.
+                    <br />
+                    <br />
+                    Song song, TTC AgriS cũng vừa chính thức golive và đưa vào
+                    vận hành thêm hai hệ thống quan trọng gồm Hệ thống kế hoạch
+                    ngân sách - Planning Budgeting Cloud Service (PBCS) từ tháng
+                    5/2022 và Báo cáo thông minh - Oracle Analytics Cloud (OAC)
+                    từ tháng 8/2022.
+                  </div>
+                </div>
+                <div class="col-span-3 image_block9_2">
+                  <img
+                    class="w-full"
+                    src="../../../assets/images/decoration9_10.png"
+                    alt=""
+                  />
+                  <div class="mt-2 3xl:mt-4">
+                    <div class="text9_4">
+                      Bà <strong>Đặng Huỳnh Ức My</strong> - Phó Chủ tịch HĐQT
+                      TTC AgriS phát biểu khai mạc tại sự kiện, khẳng định vị
+                      thế Doanh nghiệp nông nghiệp công nghệ cao, cung cấp giải
+                      pháp sản phẩm Nông nghiệp có nguồn gốc và bền vững hàng
+                      đầu khu vực
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_9.png" alt="" />
+            <div class="title9_9">
+              <div>THÁNG 8/2022</div>
+            </div>
+            <div class="content9_9 mt-1 3xl:mt-4">
+              <div class="text9_2">NƠI LÀM VIỆC</div>
+              <div class="grid grid-cols-7 gap-2 md:gap-3 xl:gap-4 2xl:gap-6">
+                <div class="col-span-4">
+                  <div class="text9_6">TỐT NHẤT CHÂU Á</div>
+                  <div class="decoration9_1 my-1 md:my-2 xl:my-4"></div>
+                  <div class="text9_3">
+                    Ngày 11/08/2022, TTC AgriS vinh dự trở thành
+                    <strong
+                      >Công ty có môi trường làm việc tốt nhất Châu Á
+                      2022</strong
+                    >
+                    - Best Companies to Work for in Asia 2022 lần thứ 2 liên
+                    tiếp do HR Asia - Tạp chí Nhân sự uy tín nhất tại khu vực
+                    Châu Á vinh danh. <br /><br />
+                    Với đội ngũ nhân viên rộng khắp khu vực Việt Nam, Úc,
+                    Singapore, Lào, Campuchia, TTC AgriS không chỉ tập trung giữ
+                    vững các thành tích kinh doanh nổi trội mà còn luôn chú
+                    trọng xây dựng môi trường làm việc lý tưởng, đáp ứng các
+                    tiêu chí về thương hiệu nhà tuyển dụng quốc tế.
+                  </div>
+                </div>
+                <div class="col-span-3 flex flex-col justify-end">
+                  <img
+                    class="w-full"
+                    src="../../../assets/images/decoration9_11.png"
+                    alt=""
+                  />
+                  <div class="mt-2 3xl:mt-4">
+                    <div class="text9_4">
+                      Công ty có môi trường làm việc tốt nhất Châu Á 2022
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_27.png" alt="" />
+            <div class="title9_27">
+              <div>THÁNG 10/2022</div>
+            </div>
+            <div class="content9_27">
+              <div class="text9_2">
+                <div>TIẾP TỤC NHẬN VINH DANH KÉP TẠI GIẢI THƯỞNG</div>
+              </div>
+              <div class="text9_6">KINH DOANH XUẤT SẮC CHÂU Á 2022</div>
+              <div
+                class="grid grid-cols-7 gap-2 md:gap-3 xl:gap-4 2xl:gap-6 mt-1 md:mt-4"
+              >
+                <div class="col-span-3">
+                  <div class="decoration9_1 mb-1 md:mb-2 xl:mb-3"></div>
+                  <div class="text9_3">
+                    TTC AgriS tiếp tục vinh dự góp mặt trong danh sách các Doanh
+                    nghiệp xuất sắc châu Á tại Giải thưởng Doanh nghiệp Châu Á
+                    2022 - Asia Pacific Enterprise Awards 2022 (APEA). Đồng thời
+                    đây cũng là năm thứ hai liên tiếp Phó chủ tịch HĐQT TTC
+                    AgriS - Bà Đặng Huỳnh Ức My, được công nhận là Doanh nhân
+                    xuất sắc châu Á. Giải thưởng APEA một lần nữa khẳng định vị
+                    thế của TTC AgriS trong phát triển nông nghiệp hiện đại bền
+                    vững trên những giá trị xanh, tạo vị thế cạnh tranh và khẳng
+                    định tên tuổi trên bản đồ quốc tế.
+                  </div>
+                </div>
+                <div class="col-span-4">
+                  <div>
+                    <img
+                      class="w-full"
+                      src="../../../assets/images/decoration9_12.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="text9_4 my-1 md:my-2 3xl:my-4">
+                    TTC AgriS tiếp tục chiến thắng hạng mục Doanh nghiệp xuất
+                    sắc Châu Á tại giải APEA 2022 cho những thành tựu kinh tế
+                    tuyệt vời trong năm
+                  </div>
+                </div>
+              </div>
+              <div class="my-1 md:my-2 2xl:my-4">
+                <img
+                  class="w-full"
+                  src="../../../assets/images/decoration9_13.png"
+                  alt=""
+                />
+              </div>
+              <div class="text9_4">
+                Năm thứ 2 liên tiếp Phó chủ tịch HĐQT TTC AgriS, bà
+                <strong>Đặng Huỳnh Ức My</strong>, được vinh danh là Doanh nhân
+                xuất sắc Châu Á
+              </div>
+              <div class="text9_4">
+                với những đóng góp nổi bật cho doanh nghiệp và cộng đồng
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block9 block9_5">
+        <div class="flex flex-col justify-between">
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_8.png" alt="" />
+            <div class="title9_8">
+              <div>THÁNG 10/2022</div>
+            </div>
+            <div class="content9_8">
+              <div class="grid grid-cols-2 gap-4 h-[330px]">
+                <div class="col-span-1">
+                  <div class="text9_1">TOP 25</div>
+                  <div class="text9_2">THƯƠNG HIỆU F&B DẪN ĐẦU</div>
+                  <div class="text9_2">- FORBES VIỆT NAM</div>
+                  <div class="decoration9_1 my-1 md:my-2 xl:my-4"></div>
+                  <div class="text9_3">
+                    TTC AgriS được vinh danh trong Top 25 Thương hiệu F&B dẫn
+                    đầu năm 2022, khẳng định vị thế dẫn đầu của Doanh nghiệp
+                    nông nghiệp công nghệ cao, cung cấp sản phẩm mang lại nguồn
+                    năng lượng dinh dưỡng nguồn gốc tự nhiên. Thành tựu đánh dấu
+                    sự nỗ lực trong công cuộc chuyển đổi mô hình kinh doanh và
+                    quản trị mới của TTC AgriS để hướng đến cạnh tranh với thị
+                    trường quốc tế
+                  </div>
+                </div>
+                <div class="col-span-1 image_block9_2">
+                  <img
+                    class="w-full"
+                    src="../../../assets/images/decoration9_15.png"
+                    alt=""
+                  />
+                  <div class="mt-2 xl:mt-4">
+                    <div class="text9_4">
+                      Bà <strong>Đặng Huỳnh Ức My</strong> - Phó Chủ tịch HĐQT
+                      nhận kỷ niệm chương vinh danh Top 25 thương hiệu F&B dẫn
+                      đầu từ Forbes Việt Nam
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_14.png" alt="" />
+            <div class="absolute top-[2.5%] left-[11.4%]">
+              <div class="text9_5">THÁNG 11/2022</div>
+            </div>
+            <div class="absolute top-[9%] left-[7%] w-[85%]">
+              <div
+                class="grid grid-cols-7 gap-2 md:gap-3 xl:gap-4 2xl:gap-6 mt-2 xl:mt-4"
+              >
+                <div class="col-span-3">
+                  <div class="text9_2">
+                    <div>NHẬN CHỨNG NHẬN</div>
+                    <div>SẢN PHẨM ĐẠT</div>
+                  </div>
+                  <div class="text9_6">THƯƠNG HIỆU</div>
+                  <div class="flex items-end">
+                    <div class="text9_6">QUỐC GIA</div>
+                    <div class="text9_2 mb-[0.5px] md:mb-1 xl:mb-2 ml-1">VIỆT NAM</div>
+                  </div>
+                  <div class="decoration9_1 mt-1 xl:mt-2 mb-1 xl:mb-2 3xl:mb-3"></div>
+                  <div class="text9_3">
+                    TTC AgriS tiếp tục nhận chứng nhận sản phẩm đạt giải thương
+                    hiệu quốc gia Việt Nam 2022, vượt qua quá trình đánh giá
+                    khắt khe về định giá thương hiệu, sức khỏe tài chính và xếp
+                    hạng tín dụng. Các dòng sản phẩm của TTC AgriS chứng minh
+                    được giá trị cho việc đóng góp, xây dựng thương hiệu Việt
+                    trên thị trường quốc tế.
+                  </div>
+                </div>
+                <div class="col-span-4 image_block9_1">
+                  <div>
+                    <img
+                      class="w-full"
+                      src="../../../assets/images/decoration9_16.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="text9_4 my-1 md:my-2 3xl:my-4">
+                    Bà Huỳnh Bích Ngọc - Chủ tịch Hội đồng Quản trị TTC AgriS
+                    nhận chứng nhận Sản phẩm đạt Thương hiệu quốc gia Việt Nam
+                    năm 2022
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block9 block9_6">
+        <div class="relative">
+          <img src="../../../assets/images/decoration9_9.png" alt="" />
+          <div class="absolute top-[4.2%] left-[9.6%]">
+            <div class="text9_5">THÁNG 10/2022</div>
+          </div>
+          <div class="absolute top-[14%] left-[6%] w-[85%]">
+            <div class="text9_2">
+              TIẾP TỤC HỢP TÁC CHIẾN LƯỢC VỚI TECHCOMBANK VÀ HSBC
+            </div>
+            <div class="flex items-center">
+              <div class="text9_2">
+                <div>PHÁT TRIỂN MÔ HÌNH</div>
+                <div>QUY MÔ TOÀN CẦU</div>
+              </div>
+              <div class="text9_7">"COMMERCIAL VALUE CHAIN"</div>
+            </div>
+            <div class="grid grid-cols-7 gap-4">
+              <div class="col-span-3">
+                <div class="decoration9_1 my-1 md:my-2 xl:my-4"></div>
+                <div class="text9_3">
+                  Tiếp nối quan hệ hợp tác chiến lược trọng yếu với Techcombank
+                  và HSBC, TTC AgriS có thêm động lực thúc đẩy quá trình chuyển
+                  đổi và phát triển mô hình thương mại TTC AgriS Commercial
+                  Value Chain trên quy mô toàn cầu. Qua đó, HSBC, Techcombank và
+                  TTC AgriS tái thiết và củng cố mối quan hệ hợp tác sâu rộng
+                  hơn không chỉ ở Việt Nam, ở các lĩnh vực mới mà còn mở rộng
+                  lãnh thổ vượt qua phạm vi quốc tế ở các Quốc gia như
+                  Singapore, Úc,...
+                </div>
+              </div>
+              <div class="col-span-4 image_block9_1">
+                <img
+                  class="w-full"
+                  src="../../../assets/images/decoration9_17.png"
+                  alt=""
+                />
+                <div class="mt-2 3xl:mt-4">
+                  <div class="text9_4">
+                    TTC AgriS tiếp tục hợp tác toàn diện với HSBC và Techcombank
+                    để phát triển mô hình kinh doanh, tái thiết các giải pháp
+                    tài chính, công nghệ và giao dịch nhằm thúc đẩy hoạt động
+                    của các bên.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_9.png" alt="" />
+            <div class="absolute top-[4.2%] left-[9.6%]">
+              <div class="text9_5">THÁNG 12/2022</div>
+            </div>
+            <div class="absolute top-[14%] left-[6%] w-[85%]">
+              <div class="text9_2">
+                <div>TOP DOANH NGHIỆP CÓ ĐIỂM XẾP HẠNG TÍN NHIỆM</div>
+              </div>
+              <div class="text9_6">CAO NHẤT THỊ TRƯỜNG</div>
+              <div
+                class="grid grid-cols-11 gap-2 md:gap-3 xl:gap-3 2xl:gap-6 xl:mt-2"
+              >
+                <div class="col-span-4">
+                  <div class="decoration9_1 mt-1 md:mt-2 mb-1 md:mb-2 3xl:mb-4"></div>
+                  <div class="text9_3">
+                    TTC AgriS ghi nhận xếp hạng tín nhiệm dài hạn ở mức
+                    <strong>“vnA+”</strong> với Triển vọng
+                    <strong>“Ổn định”</strong>, theo Báo cáo xếp hạng tín nhiệm
+                    tháng 12/2022 do Saigon Ratings đánh giá - Tổ chức Xếp hạng
+                    tín nhiệm độc lập đầu tiên tại Việt Nam (Credit Rating
+                    Agency-CRA) được Bộ Tài chính cấp Giấy phép hoạt động. Mức
+                    xếp hạng tín nhiệm này có thể coi là chìa khóa bổ trợ cho
+                    TTC
+                  </div>
+                </div>
+                <div class="col-span-7 flex flex-col justify-end">
+                  <div>
+                    <img
+                      class="w-full"
+                      src="../../../assets/images/decoration9_18.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="text9_4 my-1 md:my-2 2xl:my-4">
+                    Xếp hạng tín nhiệm dài hạn ở mức “<strong>vnA+</strong>” với
+                    Triển vọng “Ổn định” của TTC AgriS
+                  </div>
+                </div>
+              </div>
+              <div class="text9_3">
+                AgriS trong quá trình khẳng định vị thế “Doanh nghiệp nông
+                nghiệp công nghệ cao”, tham gia sâu rộng vào chuỗi giá trị nông
+                nghiệp bền vững toàn cầu, mang lại lợi ích cho tất cả các bên
+                liên quan.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block9 block9_7">
+        <div class="relative">
+          <img src="../../../assets/images/decoration9_21.png" alt="" />
+          <div class="absolute top-[2.2%] left-[9.6%]">
+            <div class="text9_5">THÁNG 12/2022</div>
+          </div>
+          <div class="absolute top-[8%] left-[6%] w-[85%] mt-[3px] md:mt-0">
+            <div class="flex items-end">
+              <div class="text9_6">TOP 5</div>
+              <div class="text9_2 mb-1 3xl:mb-2 ml-1">
+                DOANH NGHIỆP QUẢN TRỊ TỐT NHẤT
+              </div>
+            </div>
+            <div class="text9_2">
+              VÀ BÁO CÁO PHÁT TRIỂN BỀN VỮNG TRÌNH BÀY TỐT NHẤT
+            </div>
+            <div class="decoration9_1 my-[2px] md:my-2 2xl:my-3"></div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="col-span-1">
+                <div class="text9_3">
+                  Đây là lần thứ 3 TTC AgriS được vinh danh trong Top 5 Doanh
+                  nghiệp Quản trị công ty tốt nhất 2022 trong nhóm vốn hóa lớn.
+                  Đặc biệt, TTC AgriS cũng lần đầu tiên nhận được giải thưởng
+                  Giải trình bày
+                </div>
+                <div class="mt-1">
+                  <img
+                    class="w-full"
+                    src="../../../assets/images/decoration9_19.png"
+                    alt=""
+                  />
+                </div>
+                <div class="text9_4 mt-1">
+                  TTC AgriS liên tục được vinh danh tại nhiều giải thưởng uy tín
+                  trong nước lẫn quốc tế về Quản trị công ty và Phát triển bền
+                  vững
+                </div>
+              </div>
+              <div class="col-span-1 flex flex-col justify-end">
+                <div class="text9_3">
+                  Tốt nhất cho Báo cáo Phát triển bền vững, khẳng định mục tiêu
+                  của trở thành một công ty nông nghiệp công nghệ cao, phát
+                  triển bền vững và hài hòa quyền lợi với các Bên liên quan.
+                </div>
+                <div class="mt-1">
+                  <img
+                    class="w-full"
+                    src="../../../assets/images/decoration9_20.png"
+                    alt=""
+                  />
+                </div>
+                <div class="mt-[3px] md:mt-2 2xl:mt-4">
+                  <div class="text9_4 mt-1">
+                    TTC AgriS - Top 5 Doanh nghiệp Quản trị công ty (QTCT) tốt
+                    nhất năm 2022 - Nhóm vốn hóa lớn
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_21.png" alt="" />
+            <div class="absolute top-[2.2%] left-[9.6%]">
+              <div class="text9_5">THÁNG 2/2023</div>
+            </div>
+            <div class="absolute top-[14%] left-[6%] w-[85%]">
+              <div class="text9_7">NƠI LÀM VIỆC XUẤT SẮC</div>
+              <div class="flex items-end">
+                <div class="decoration9_1 mb-1 mr-2"></div>
+                <div class="text9_2">GREAT PLACE TO WORK</div>
+              </div>
+              <div
+                class="grid grid-cols-7 gap-2 md:gap-3 xl:gap-4 2xl:gap-6 mt-2"
+              >
+                <div class="col-span-3">
+                  <div class="text9_3">
+                    Tháng 02/2023, TTC AgriS vinh dự nhận được chứng nhận
+                    <strong>Nơi làm việc xuất sắc</strong> năm thứ 2 liên tiếp
+                    sau khi vượt qua phần thẩm định và đánh giá của Great Place
+                    To Work - Cơ quan toàn cầu về văn hóa nơi làm việc tốt nhất
+                    trên thế giới với các chỉ số cao về môi trường làm việc.
+                  </div>
+                </div>
+                <div class="col-span-4 flex flex-col justify-end">
+                  <div>
+                    <img
+                      class="w-full"
+                      src="../../../assets/images/decoration9_22.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="text9_4 my-1 md:my-2 xl:my-4">
+                    Chứng nhận Nơi làm việc xuất sắc - Great Place To Work
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block9 block9_8">
+        <div class="relative">
+          <img src="../../../assets/images/decoration9_8.png" alt="" />
+          <div class="title9_8">
+            <div>THÁNG 2/2023</div>
+          </div>
+          <div class="content9_8">
+            <div class="flex items-center">
+              <div class="text9_6 mr-2">TOP 4</div>
+              <div class="mt-1">
+                <div class="text9_2">BÁO CÁO THƯỜNG NIÊN</div>
+                <div class="text9_2">XUẤT SẮC NHẤT THẾ GIỚI</div>
+              </div>
+            </div>
+            <div class="grid grid-cols-7 gap-4">
+              <div class="col-span-4">
+                <div class="decoration9_1 my-[2px] md:my-1 lg:my-2 xl:my-4"></div>
+                <div class="text9_3">
+                  Tại cuộc thi Báo cáo thường niên quốc tế “2021/2022 Vision
+                  Awards - Annual Report Competition” do Hiệp hội Truyền thông
+                  chuyên nghiệp Hoa Kỳ (League of American Communication
+                  Professional - LACP) tổ chức vào tháng 2/2023, TTC AgriS đã
+                  vượt qua nhiều đối thủ, xuất sắc được vinh danh
+                  <strong
+                    >Top 4 trong 100 Báo cáo thường niên tốt nhất thế
+                    giới.</strong
+                  >
+                  <br /><br />
+                  Tại giải thưởng năm nay, TTC AgriS tiếp tục được vinh danh
+                  hạng mục cao nhất với
+                  <strong>Giải Bạch kim - Platinum Winner Worldwide</strong>
+                  trong cả 2 hạng mục tham dự là Agribusiness và Consumer. Đồng
+                  thời, TTC AgriS cũng nhận được Giải thưởng phụ là
+                  <strong>Best Report Financials Worldwide</strong> - giải
+                  thưởng dành cho BCTC trình bày số liệu, thông tin tài chính
+                  tốt nhất toàn cầu.
+                </div>
+              </div>
+              <div class="col-span-3 flex flex-col justify-end">
+                <img
+                  class="w-full"
+                  src="../../../assets/images/decoration9_23.png"
+                  alt=""
+                />
+                <div class="mt-1 lg:mt-2 2xl:mt-4">
+                  <div class="text9_4">
+                    TTC AgriS được vinh danh trong Top 4 BCTN xuất sắc nhất thế
+                    giới – LACP
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_8.png" alt="" />
+            <div class="title9_8">
+              <div>THÁNG 3/2023</div>
+            </div>
+            <div class="content9_8">
+              <div class="grid grid-cols-11 gap-2 md:gap-4 mt-2 xl:mt-0">
+                <div class="col-span-6">
+                  <div class="text9_2">
+                    <div>CHỨNG NHẬN</div>
+                  </div>
+                  <div class="text9_6">HÀNG VIỆT NAM</div>
+                  <div class="text9_6">CHẤT LƯỢNG CAO</div>
+                  <div class="flex items-end mt-1 md:mt-2 3xl:mt-4 mb-1 md:mb-4 3xl:mb-6">
+                    <div class="decoration9_1 mr-[2px] md:mr-2"></div>
+                    <div class="text9_2">năm 2023</div>
+                  </div>
+                  <div class="text9_3">
+                    Tháng 3/2023, TTC AgriS nhận chứng nhận “Hàng Việt Nam chất
+                    lượng cao” do Người tiêu dùng bình chọn 2023, với danh mục
+                    gần 100 sản phẩm đa dạng, đảm bảo chất lượng về dinh dưỡng
+                    và sức khoẻ cho Người tiêu dùng trong và ngoài nước. Tháng
+                    3/2023: Chứng nhận Hàng Việt Nam chất lượng cao năm 2023.
+                  </div>
+                </div>
+                <div class="col-span-5 image_block9_1">
+                  <div class="flex justify-end">
+                    <img
+                      class="w-[75%]"
+                      src="../../../assets/images/decoration9_24.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="text9_4 my-1 md:my-2 xl:my-4">
+                    TTC AgriS đạt chứng nhận “Hàng Việt Nam chất lượng cao” do
+                    Người tiêu dùng bình chọn 2023
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block9 block9_9">
+        <div class="flex flex-col justify-between">
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_8.png" alt="" />
+            <div class="title9_8">
+              <div>THÁNG 3/2023</div>
+            </div>
+            <div class="content9_8 mt-1 md:mt-4">
+              <div class="grid grid-cols-7 gap-4">
+                <div class="col-span-3">
+                  <div class="text9_2">DOANH NGHIỆP VIỆT NAM</div>
+                  <div class="text9_2">ĐẦU TIÊN ĐẠT CHỨNG NHẬN</div>
+                  <div class="text9_6">BONSUCRO</div>
+                  <div class="decoration9_1 mt-1 lg:mt-2 2xl:mt-4 mb-1 lg:mb-2 xl:mb-3 2xl:mb-6"></div>
+                  <div class="text9_3">
+                    Nhà máy TTCS và Nông trường Tân Hưng, trực thuộc TTC AgriS
+                    vinh hạnh được Bonsucro chứng nhận đạt đủ các tiêu chuẩn về
+                    quy trình sản xuất, tiêu chuẩn nguồn gốc của sản phẩm. Đặc
+                    biệt, Nông trường mía Tân Hưng là đơn vị đầu tiên tại Việt
+                    Nam đạt được chứng nhận từ Bonsucro - tổ chức uy tín thế
+                    giới cung cấp hệ thống quy chuẩn quốc tế nhằm thúc đẩy sản
+                    xuất, chế biến và thương mại mía bền vững trên toàn cầu.
+                  </div>
+                </div>
+                <div class="col-span-4 image_block9_1">
+                  <img
+                    class="w-full"
+                    src="../../../assets/images/decoration9_25.png"
+                    alt=""
+                  />
+                  <div class="mt-1 xl:mt-2 2xl:mt-4">
+                    <div class="text9_4">
+                      TTC AgriS - Doanh nghiệp Việt Nam đầu tiên đạt chứng nhận
+                      Bonsucro
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_9.png" alt="" />
+            <div class="title9_9">
+              <div>THÁNG 4/2023</div>
+            </div>
+            <div class="content9_9">
+              <div class="text9_2">TĂNG CƯỜNG HỢP TÁC THÚC ĐẨY</div>
+              <div class="flex items-end">
+                <div class="text9_8 mr-1">CHUỖI GIÁ TRỊ NÔNG NGHIỆP</div>
+                <div class="text9_2">THÔNG MINH BỀN VỮNG TẠI AUSTRALIA</div>
+              </div>
+              <div
+                class="grid grid-cols-7 gap-2 md:gap-3 xl:gap-4 2xl:gap-6 mt-1 md:mt-4"
+              >
+                <div class="col-span-3">
+                  <div class="decoration9_1 my-1 md:my-2 xl:my-4"></div>
+                  <div class="text9_3">
+                    Ngày 17/4/2023, TTC AgriS tham dự Diễn đàn Đầu tư Australia
+                    - Việt Nam do Cơ quan Thương mại và Đầu tư Chính phủ
+                    Australia (Austrade) phối hợp với Cục Đầu tư Nước ngoài Việt
+                    Nam (FIA), Bộ Kế hoạch và Đầu tư. Là doanh nghiệp đang dẫn
+                    đầu xu hướng tuần hoàn trong chuỗi giá trị nông nghiệp tại
+                    Việt Nam, TTC AgriS tham gia trao đổi về những cơ hội và
+                    thách thức mới trong thương mại, đầu tư song phương giữa
+                    Việt Nam và Australia, đặc biệt trong lĩnh vực nông nghiệp
+                    công nghệ cao bền vững.
+                  </div>
+                </div>
+                <div class="col-span-4 image_block9_sample1">
+                  <img
+                    class="w-full"
+                    src="../../../assets/images/decoration9_26.png"
+                    alt=""
+                  />
+                  <div class="mt-1 md:mt-2 xl:mt-4">
+                    <div class="text9_4">
+                      Bà Đặng Huỳnh Ức My - Phó Chủ tịch HĐQT TTC AgriS - chia
+                      sẻ về tiềm năng hợp tác toàn diện trong phát triển nông
+                      nghiệp hiện đại bền vững song phương tại Diễn đàn Đầu tư
+                      Australia - Việt Nam
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_27.png" alt="" />
+            <div class="title9_27">
+              <div>THÁNG 4/2023</div>
+            </div>
+            <div class="content9_27">
+              <div class="text9_2">
+                <div>
+                  PHÓ CHỦ TỊCH HĐQT CHIA SẺ TẠI HỘI NGHỊ PHÁT TRIỂN BỀN VỮNG
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="text9_2 mr-1">2023 VỚI CHỦ ĐỀ</div>
+                <div class="flex items-end">
+                  <div class="text9_9">“CON ĐƯỜNG MÀU XANH”</div>
+                  <div class="text9_2">CỦA FORBES VIỆT NAM</div>
+                </div>
+              </div>
+              <div class="decoration9_1 mt-1 md:mt-2 xl:mt-4 mb-1 md:mb-3 xl:mb-6"></div>
+              <div class="text9_3">
+                TTC AgriS chia sẻ các thành tựu thúc đẩy chuỗi giá trị nông
+                nghiệp thông minh bền vững nhằm kích thích tăng trưởng kinh tế
+                xanh tuần hoàn tại Hội nghị Phát triển bền vững 2023 với chủ đề
+                “Con đường màu xanh” do Forbes Việt Nam tổ chức. Bà Đặng Huỳnh
+                Ức My - Phó Chủ tịch HĐQT TTC AgriS đã mang đến những góc nhìn
+                khách quan về tính cấp bách trong thúc đẩy giá trị kinh tế xanh
+                tuần hoàn, đặc biệt trong lĩnh vực nông nghiệp công nghệ cao bền
+                vững.
+              </div>
+              <div class="mt-3 md:mt-6">
+                <img
+                  class="w-full"
+                  src="../../../assets/images/decoration9_28.png"
+                  alt=""
+                />
+              </div>
+              <div class="text9_4 my-1 md:my-2 xl:my-4">
+                <div>
+                  Bà <strong>Đặng Huỳnh Ức My</strong> - Phó Chủ tịch TTC AgriS
+                  - khẳng định lợi thế cạnh tranh bền vững với chiến lược kinh
+                  doanh ‘xanh’
+                </div>
+                <div>
+                  làm cốt lõi của doanh nghiệp tại Hội nghị Phát triển bền vững
+                  do Forbes Việt Nam tổ chức
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block9 block9_10">
+        <div class="relative">
+          <img src="../../../assets/images/decoration9_27.png" alt="" />
+          <div class="title9_27">
+            <div>THÁNG 5/2023</div>
+          </div>
+          <div class="content9_27">
+            <div class="text9_2">
+              <div>TIẾP ĐÓN ĐOÀN TRƯỜNG ĐẠI HỌC TENNESSEE,</div>
+              <div>KNOXVILLE (HOA KỲ)</div>
+            </div>
+            <div class="decoration9_1 mt-1 md:mt-2 3xl:mt-4 mb-1 md:mb-3 3xl:mb-6"></div>
+            <div class="text9_3">
+              TTC AgriS chia sẻ các thành tựu thúc đẩy chuỗi giá Trường Đại học
+              Tennessee, Hoa Kỳ có chuyến tham quan Nhà máy TTCS và nông trường
+              Tân Hưng của TTC AgriS. Sau chuyến trải nghiệm thực tế, đoàn tham
+              quan bày tỏ sự ấn tượng với năng lực phát triển và cải tiến của
+              TTC AgriS trong ngành nông nghiệp, đặc biệt là về công nghệ và
+              phát triển bền vững.
+            </div>
+            <div class="grid grid-cols-2 gap-2 md:gap-3 xl:gap-4 2xl:gap-6">
+              <div class="col-span-1">
+                <img
+                  class="w-full"
+                  src="../../../assets/images/decoration9_29.png"
+                  alt=""
+                />
+              </div>
+              <div class="col-span-1">
+                <img
+                  class="w-full"
+                  src="../../../assets/images/decoration9_30.png"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="mt-2 md:mt-3 2xl:mt-6">
+              <img
+                class="w-full"
+                src="../../../assets/images/decoration9_31.png"
+                alt=""
+              />
+            </div>
+            <div class="text9_10 my-1 md:my-2 xl:my-4">
+              <div class="w-[80%]">
+                TTC AgriS giới thiệu đến đoàn tham quan về hành trình phát triển
+                và vị thế của doanh nghiệp trên thị trường cũng như quy trình
+                canh tác, sản xuất hiện đại của TTC AgriS trong chuyến trải
+                nghiệm thực tế tại nông trường, nhà máy kiểu mẫu của Công ty
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <img src="../../../assets/images/decoration9_27.png" alt="" />
+          <div class="title9_27">
+            <div>THÁNG 5/2023</div>
+          </div>
+          <div class="content9_27_2">
+            <div class="text9_7">TOP CÔNG NGHIỆP 4.0 VIỆT NAM</div>
+            <div class="text9_2">
+              KHẲNG ĐỊNH VỊ THẾ DOANH NGHIỆP NÔNG NGHIỆP CÔNG NGHỆ CAO
+            </div>
+            <div class="decoration9_1 mt-1 xl:mt-2 3xl:mt-4 mb-1 md:mb-2 xl:mb-3 3xl:mb-6"></div>
+            <div class="grid grid-cols-2 gap-2 md:gap-3 xl:gap-4 2xl:gap-6">
+              <div class="col-span-1">
+                <div class="text9_3">
+                  Năm 2023 là năm thứ hai liên tiếp TTC AgriS được vinh danh tại
+                  Giải thưởng Top Công nghiệp 4.0 Việt Nam (I4.0 Awards). Công
+                  ty được xếp hạng trong Top Doanh nghiệp 4.0 Việt Nam, và là
+                  doanh nghiệp nông nghiệp duy nhất thuộc Top Doanh nghiệp có
+                  sản phẩm số thông minh và giải pháp Công nghệ công nghiệp 4.0
+                  với giải pháp công nghệ số trong quy trình quản lý –
+                  DigiFactory, đáp ứng được nhu cầu quản trị phức tạp và mang
+                  đến lợi ích cao cho toàn bộ hệ thống vận hành nhà máy với khả
+                  năng Đo lường tự động, Bảo mật và Hiệu suất hiệu quả.
+                </div>
+              </div>
+              <div class="col-span-1">
+                <img
+                  class="w-full"
+                  src="../../../assets/images/decoration9_32.png"
+                  alt=""
+                />
+                <div class="text9_4 my-[2px] md:my-1">
+                  TTC AgriS nhận vinh danh kép tại giải thưởng Top Công nghiệp
+                  4.0 Việt Nam 2023 cho thành tích xuất sắc trong ứng dụng công
+                  nghệ thông tin, chuyển đổi số, đổi mới sáng tạo
+                </div>
+              </div>
+            </div>
+            <div class="md:mt-1">
+              <img
+                class="w-full"
+                src="../../../assets/images/decoration9_33.png"
+                alt=""
+              />
+            </div>
+            <div class="text9_10 my-1 md:my-2">
+              <div class="w-[80%]">
+                Đồng thời tại giải I4.0 Awards, TTC AgriS mang đến Giải pháp
+                DigiFactory cho Quản lý vận hành sản xuất & Kiểm soát chất lượng
+                sản phẩm của khách hàng doanh nghiệp
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="block9 block9_11">
+        <div class="flex flex-col justify-between">
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_8.png" alt="" />
+            <div class="title9_8">
+              <div>THÁNG 6/2023</div>
+            </div>
+            <div class="content9_8_2">
+              <div class="text9_7">TOP 50</div>
+              <div class="text9_2">
+                <div>CÔNG TY NIÊM YẾT TỐT NHẤT NĂM 2023</div>
+                <div>DO FORBES VIỆT NAM CÔNG BỐ</div>
+              </div>
+              <div class="grid grid-cols-7 gap-2 md:gap-3 xl:gap-4 2xl:gap-6">
+                <div class="col-span-3">
+                  <div class="decoration9_1 mt-2 md:mt-4 mb-3 md:mb-6"></div>
+                  <div class="text9_3">
+                    Đây là lần thứ 6 TTC AgriS đã được xếp vào
+                    <strong
+                      >"Danh sách 50 công ty niêm yết tốt nhất năm 2023"</strong
+                    >
+                    do Forbes Việt Nam và Chứng khoán SSI bầu chọn dựa trên các
+                    tiêu chí tài chính như lợi nhuận, doanh thu, vốn hóa tối
+                    thiểu và tỷ lệ tăng trưởng trong giai đoạn 2018-2022. Ngoài
+                    ra, TTC AgriS cũng được công nhận về mức độ phát triển bền
+                    vững, vị thế công ty, quản trị doanh nghiệp và triển vọng
+                    ngành.
+                  </div>
+                </div>
+                <div class="col-span-4 image_block9_1">
+                  <img
+                    class="w-full"
+                    src="../../../assets/images/decoration9_34.png"
+                    alt=""
+                  />
+                  <div class="mt-1 md:mt-2 2xl:mt-4">
+                    <div class="text9_4">
+                      Bà <strong>Huỳnh Bích Ngọc</strong> - Chủ tịch HĐQT TTC
+                      AgriS nhận giải thưởng Top 50 Công ty niêm yết tốt nhất
+                      năm 2023 - Forbes Việt Nam
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_8.png" alt="" />
+            <div class="title9_8">
+              <div>THÁNG 6/2023</div>
+            </div>
+            <div class="content9_8">
+              <div class="text9_2">NĂM ĐẦU TIÊN TỔ CHỨC THÀNH CÔNG SỰ KIỆN</div>
+              <div class="text9_7">TTC AgriS INNOVATION DAY</div>
+              <div
+                class="grid grid-cols-7 gap-2 md:gap-3 xl:gap-4 2xl:gap-6 2xl:mt-1"
+              >
+                <div class="col-span-3">
+                  <div class="text9_2">THƯỜNG NIÊN</div>
+                  <div class="decoration9_1 my-1 md:my-2 xl:my-4"></div>
+                  <div class="text9_3">
+                    TTC AgriS Innovation Day là sự kiện thường niên được TTC
+                    AgriS tổ chức lần đầu tiên từ năm 2023, vào ngày 16/6/2023.
+                    Với chủ đề
+                    <strong
+                      >"Serving the best natural nutrition for body
+                      needs"</strong
+                    >, TTC AgriS đóng góp nền tảng chung tích hợp xuyên suốt để
+                    mang đến các giải pháp khai thác các giá trị dinh dưỡng toàn
+                    diện thông qua việc thúc đẩy xu hướng thực phẩm Plantbased.
+                    Thông qua Sự kiện, TTC AgriS đặt kỳ vọng tăng cường nhận
+                    thức công chúng về tính bền vững và các giá trị của thực
+                    phẩm có nguồn gốc thực vật trên phạm vi toàn cầu.
+                  </div>
+                </div>
+                <div class="col-span-4 image_block9_2">
+                  <img
+                    class="w-full"
+                    src="../../../assets/images/decoration9_35.png"
+                    alt=""
+                  />
+                  <div class="mt-2 3xl:mt-4">
+                    <div class="text9_4">
+                      Sự kiện TTC AgriS Innovation Day 2023 với chủ đề "Serving
+                      the best natural nutrition for body needs", tạo ra sân
+                      chơi về khoa học công nghệ - kinh tế nông nghiệp, tập
+                      trung nhấn mạnh vào tính kinh tế trong phát triển nông
+                      nghiệp bền vững
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="relative">
+            <img src="../../../assets/images/decoration9_27.png" alt="" />
+            <div class="title9_27">
+              <div>THÁNG 6/2023</div>
+            </div>
+            <div class="content9_27">
+              <div class="flex items-center">
+                <div class="text9_6 mr-1">TTC AgriS</div>
+                <div class="text9_2 mt-1">
+                  <div>THIẾT LẬP MỐI QUAN HỆ CHIẾN LƯỢC</div>
+                  <div>VỚI IFC VÀ SMBC</div>
+                </div>
+              </div>
+              <div class="decoration9_1 mt-1 md:mt-2 3xl:mt-4 mb-1 md:mb-3 3xl:mb-6"></div>
+              <div class="text9_3">
+                Ngày 16/6/2023 TTC AgriS đã chính thức hoàn tất khâu ký kết cuối
+                cùng thỏa thuận tài trợ vốn thương mại với Công ty Tài chính
+                Quốc tế (IFC) và Ngân hàng Sumitomo Mitsui Banking Corporation
+                (SMBC). Theo đó, IFC và SMBC sẽ cùng tham gia tài trợ vốn thương
+                mại cho TTC AgriS, tổng mức tài trợ khoản vay vốn lưu động với
+                quy mô 40 triệu USD. Thỏa thuận tài trợ vốn thương mại cho TTC
+                AgriS nằm trong khuôn khổ Chương trình Tài trợ Kho hàng Toàn cầu
+                (GWFP) của IFC và đặc biệt giúp thúc đẩy thị trường tài trợ kho
+                hàng địa phương tại Việt Nam, TTC AgriS là doanh nghiệp đầu tiên
+                ở Việt Nam mà IFC quan tâm và ưu tiên hợp tác lâu dài trong
+                Chương trình Tài trợ này. Việc hợp tác giữa IFC, SMBC và TTC
+                AgriS đã chứng minh việc TTC AgriS đã đáp ứng đầy đủ các tiêu
+                chuẩn xét duyệt toàn diện khắt khe của 2 đối tác trên từ khung
+                quản trị công ty, phát triển bền vững cũng như chiến lược kinh
+                doanh tốt.
+              </div>
+              <div class="mt-1 md:mt-3 2xl:mt-6">
+                <img
+                  class="w-full"
+                  src="../../../assets/images/decoration9_36.png"
+                  alt=""
+                />
+              </div>
+              <div class="text9_10 my-1 md:my-2 xl:my-4">
+                <div class="w-[42%]">
+                  Ban Lãnh đạo TTC AgriS, IFC và SMBC ký kết thỏa thuận tài trợ
+                  vốn thương mại ngày 16/6/2023
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
