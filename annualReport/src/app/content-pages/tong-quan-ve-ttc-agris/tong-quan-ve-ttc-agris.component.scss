@@ -1,0 +1,845 @@
+#section-1 {
+	height: 71.094vw;
+	width: 100%;
+	background-image: url(../../../assets/images/TongQuan/banner.png);
+	background-size: cover;
+	img {
+		width: 100%;
+		height: 100%;
+	}
+	.image-1 {
+		position: absolute;
+		top: 46.615vw;
+		left: 15.469vw;
+		width: 5.729vw;
+		height: 5.729vw;
+	}
+	.image-2 {
+		position: absolute;
+		top: 52.031vw;
+		left: 5vw;
+		width: 5.365vw;
+		height: 5.365vw;
+	}
+	.image-3 {
+		position: absolute;
+		top: 26.563vw;
+		right: 7.604vw;
+		width: 6.146vw;
+		height: 6.146vw;
+	}
+	.image-4 {
+		position: absolute;
+		top: 17.344vw;
+		right: 11.094vw;
+		width: 5.990vw;
+		height: 5.990vw;
+	}
+	.image-5 {
+		position: absolute;
+		top: 22.500vw;
+		right: 22.135vw;
+		width: 4.844vw;
+		height: 4.844vw;
+	}
+	.image-6 {
+		position: absolute;
+		top: 30.990vw;
+		right: 18.125vw;
+		width: 6.042vw;
+		height: 6.042vw;
+	}
+	.image-7 {
+		position: absolute;
+		bottom: 2.500vw;
+		right: 21.823vw;
+		width: 5.156vw;
+		height: 5.156vw;
+	}
+	.image-8 {
+		position: absolute;
+		bottom: 8.906vw;
+		right: 30.573vw;
+		width: 4.479vw;
+		height: 4.635vw;
+	}
+	.image-9 {
+		position: absolute;
+		bottom: 15.313vw;
+		right: 19.063vw;
+		width: 4.427vw;
+		height: 4.531vw;
+	}
+	.image-10 {
+		position: absolute;
+		bottom: 15.990vw;
+		right: 26.667vw;
+		width: 3.854vw;
+		height: 3.958vw;
+	}
+}
+#section-2 {
+	height: 71.094vw;
+	width: 100%;
+	background-image: url(../../../assets/images/TongQuan/image-section-2.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	img {
+		width: 100%;
+	}
+	.item .m-auto {
+		@media(max-width: 768px) {
+			height: 100%;
+		}
+	}
+	.year-image.m-auto svg {
+		@media(max-width: 768px) {
+			height: 100%;
+			margin-bottom: 0.33vw;
+		}
+	}
+	.result {
+		height: 52.656vw;
+		width: 21.094vw;
+		background-image: url(../../../assets/images/TongQuan/ket-qua.png);
+		background-size: cover;
+		position: absolute;
+		top: 14.479vw;
+		left: 5vw;
+		.font-bold {
+			padding: 5vw 1.719vw 1.719vw;
+			color: #C7EAFB;
+			font-size: 1.302vw;
+			font-weight: 400;
+			line-height: 1.823vw;
+			font-family: "iCiel Silka";
+		}
+		.font-normal {
+			padding: 0 1.719vw 2.240vw;
+			color: #C7EAFB;
+			font-size: 0.885vw;
+			font-weight: 400;
+			line-height: 1.250vw;
+			font-family: "iCiel Silka";
+			span {
+				&:first-child {
+					display: block;
+					padding-bottom: 2.083vw;
+				}
+			}
+		}
+	}
+	.sbt-year {
+		text-align: center;
+		.text-desc {
+			color: #AA7B2C;
+			font-weight: 400;
+			font-size: 0.781vw;
+			font-family: Myriad Pro Light;
+			line-height: 0.990vw;
+		}
+        .list-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.381vw;
+			line-height: 0.990vw;
+            span {
+                display: block;
+                color: #AA7B2C;
+                font-weight: 400;
+                font-size: 0.781vw;
+                font-family: Myriad Pro Light;
+                text-align: center;
+                position: relative;
+                line-height: 0.990vw;
+                &:nth-child(2) {
+                    width: 8.073vw;
+                }
+                &:nth-child(3) {
+                    width: 6.073vw;
+                }
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0.256vw;
+                    left: -0.781vw;
+                    width: 0.260vw;
+                    height: 0.260vw;
+                    border-radius: 100%;
+                    background-color: #AA7B2C;
+                }
+            }
+        }
+	}
+    .sbt-list__year {
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0.281vw 0 ;
+            .text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 0.381vw;
+                span {
+                    display: block;
+                    color: #AA7B2C;
+                    font-weight: 400;
+                    font-size: 0.781vw;
+                    font-family: Myriad Pro Light;
+                    text-align: center;
+                    position: relative;
+                    line-height: 0.990vw !important;
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0.256vw;
+                        left: -0.781vw;
+                        width: 0.260vw;
+                        height: 0.260vw;
+                        border-radius: 100%;
+                        background-color: #AA7B2C;
+                    }
+                }
+            }
+        }
+    }
+	.year-image {
+		// margin-bottom: 0.523vw;
+		svg {
+			margin: 0 auto;
+		}
+	}
+    .year-2017 {
+        position: absolute;
+		top: 30.313vw;
+		right: 3.125vw;
+		width: 17.813vw;
+        .text-1 {
+            width: 9.635vw;
+            position: absolute;
+            top: -2.604vw;
+            right: 4.115vw;
+            text-align: center;
+            color: #0072BC;
+            font-weight: 400;
+            font-size: 1.354vw;
+            line-height: 1.785vw;
+            font-family: UTM HelvetIns;
+        }
+        .item-1 {
+            width: 0.521vw;
+            position: absolute;
+            top: 3vw;
+            right: 8.646vw;
+        }
+        .item-3 {
+            width: 0.521vw;
+            position: absolute;
+            bottom: 3vw;
+            right: 8.646vw;
+        }
+        .text-2 {
+            position: absolute;
+            width: 13.802vw;
+            bottom: -3.125vw;
+            left: 2.25vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            span {
+                display: block;
+                color: #0071BB;
+                font-weight: 400;
+                font-size: 0.781vw;
+                font-family: Myriad Pro Light;
+                text-align: center;
+                line-height: 0.885vw;
+                position: relative;
+                &:first-child {
+                    width: 12.240vw;
+                }
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0.256vw;
+                    left: -0.781vw;
+                    width: 0.260vw;
+                    height: 0.260vw;
+                    border-radius: 100%;
+                    background-color: #0071BB;
+                }
+            }
+        }
+    }
+	.bhs-list__item1 {
+		position: absolute;
+		top: 43.073vw;
+		left: 54.375vw;
+		width: 12.188vw;
+	}
+	.bhs-list__item2 {
+		position: absolute;
+		top: 43.073vw;
+		left: 67.188vw;
+		width: 13.438vw;
+	}
+	.bhs-list__item {
+		.item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0.281vw 0 ;
+            .text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 0.381vw;
+                span {
+                    display: block;
+                    color: #007534;
+                    font-weight: 400;
+                    font-size: 0.781vw;
+                    font-family: Myriad Pro Light;
+                    text-align: center;
+                    position: relative;
+                    line-height: 0.990vw !important;
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0.256vw;
+                        left: -0.781vw;
+                        width: 0.260vw;
+                        height: 0.260vw;
+                        border-radius: 100%;
+                        background-color: #007534;
+                    }
+                }
+            }
+			.text-decs {
+				color: #007534;
+				font-weight: 400;
+				font-size: 0.781vw;
+				font-family: Myriad Pro Light;
+				line-height: 0.990vw !important;
+				text-align: center
+			}
+        }
+	}
+}
+#section-3 {
+	height: 196.771vw;
+	width: 100%;
+	background-image: url(../../../assets/images/TongQuan/bg3.png);
+	background-size: cover;
+	img {
+		width: 100%;
+	}
+	.text-all {
+		.year {
+			color: #00558F;
+			font-family: Myriad Pro;
+			margin-bottom: 0.833vw;
+			font-weight: 900;
+			line-height: 1.719vw;
+			font-size: 1.250vw;
+		}
+		.ul-list {
+			list-style: disc;
+			margin-left: 1.042vw;
+			li {
+				color: #0072BC;
+				font-weight: 400;
+				font-family: Myriad Pro;
+				font-size: 0.902vw;
+				line-height: 1.719vw;
+			}
+		}
+	}
+	.text-2023 {
+		z-index: 1;
+		font-size: 3.750vw;
+		font-weight: 400;
+		line-height: 5.521vw;
+		font-family: UTM HelvetIns;
+		background: linear-gradient(90deg, #F4E696 0%, #E6C36C 17.13%, #DAA548 35.17%, #D69A3B 44.19%, #DFB156 59.52%, #F4E696 90.18%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.text-1 {
+		z-index: 1;
+		font-size: 2.396vw;
+		font-weight: 400;
+		line-height: 3.073vw;
+		font-family: UTM HelvetIns;
+		background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.text-2 {
+		.content {
+			font-family: SF Pro Regular;
+			span {
+				font-weight: 400;
+				font-size: 0.885vw;
+				color: rgba(51, 49, 50, 1);
+			}
+			.highligh-text {
+				font-family: iCiel Samsung Sharp Sans;
+				font-size: 1.927vw;
+				background: linear-gradient(90deg, #0083CA 0%, #005892 29%, #003767 55%, #00467B 66%, #006EAF 89%, #0083CA 100%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+			.text-gra-green {
+				background: linear-gradient(0deg, #007534, #007534), linear-gradient(0deg, #333132, #333132);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+			strong {
+				font-family: SF Pro;
+			}
+		}
+	}
+}
+#section-4 {
+	background: #FFFFFF;
+	z-index: 1;
+	img, svg {
+		width: 100%;
+	}
+	.title {
+		gap: 0.885vw;
+		span {
+			font-family: iCiel Samsung Sharp Sans;
+			font-size: 1.771vw;
+			font-weight: 700;
+			background: linear-gradient(90deg, #007534 -0.98%, #23923C 52.79%, #50B848 100.23%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+	.title-infor {
+		font-family: SF Pro;
+		font-weight: 700;
+		font-size: 1.771vw;
+		color: #FFFFFF;
+	}
+	.trading-name {
+		font-family: SF Pro;
+		font-weight: 700;
+		font-size: 0.938vw;
+		background: rgba(109, 207, 246, 1);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		p, span {
+			background: rgba(255, 255, 255, 1);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+	.name-company {
+		font-family: iCiel Silka;
+		font-weight: 400;
+		font-size: 3.333vw;
+		background: linear-gradient(360deg, #F4E696 10.39%, #E6C36C 25.13%, #DAA548 40.65%, #D69A3B 48.41%, #DFB156 61.6%, #F4E696 87.99%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.website-link {
+		font-family: SF Pro;
+		font-weight: 700;
+		font-size: 0.938vw;
+		color: #FFFFFF;
+	}
+	.website-name {
+		font-family: SF Pro;
+		font-weight: 700;
+		font-size: 0.938vw;
+		color: #FFFFFF;
+		background: linear-gradient(0deg, #F4E696 0%, #E6C36C 13.6%, #DAA548 27.92%, #D69A3B 35.08%, #DFB156 47.26%, #F4E696 71.6%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}
+#section-5 {
+	background: #FFFFFF;
+	img {
+		width: 100%;
+	}
+	.text-1 {
+		font-family: SF Pro;
+		font-size: 1.719vw;
+		font-weight: 700;
+		line-height: 2.031vw;
+		color: #FFFFFF;
+	}
+	.SBT-HSX {
+		font-family: SF Pro;
+		font-size: 0.885vw;
+		font-weight: 700;
+		line-height: 1.302vw;
+		color: #333132;
+	}
+	.list-text {
+		.item {
+			p {
+				font-family: SF Pro;
+				font-size: 0.885vw;
+				font-weight: 700;
+				line-height: 1.302vw;
+				color: #333132;
+				span {
+					font-family: SF Pro Regular;
+					font-size: 0.885vw;
+					font-weight: 400;
+					line-height: 1.302vw;
+				}
+			}
+			.highligh {
+				font-family: iCiel Samsung Sharp Sans;
+				font-size: 4.063vw;
+				font-weight: 700;
+				line-height: 5.052vw;
+				background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+		}
+	}
+}
+#section-6 {
+	background: #FFFFFF;
+	img, svg {
+		width: 100%;
+	}
+	.text-1 {
+		font-family: SF Pro;
+		font-size: 1.719vw;
+		font-weight: 700;
+		line-height: 2.031vw;
+		padding: 0 3.302vw;
+		color: #FFFFFF;
+	}
+	.item {
+		p {
+			font-family: Myriad Pro Light;
+			font-size: 1.146vw;
+			font-weight: 700;
+			line-height: 1.510vw;
+		}
+		span {
+			font-family: Myriad Pro Light;
+			font-size: 1.146vw;
+			font-weight: 400;
+			line-height: 1.510vw;
+			display: block;
+		}
+	}
+}
+#section-7 {
+	background: #FFFFFF;
+	z-index: 1;
+	img, svg {
+		width: 100%;
+	}
+	.title {
+		gap: 0.885vw;
+		span {
+			font-family: iCiel Samsung Sharp Sans;
+			font-size: 1.771vw;
+			font-weight: 700;
+			background: linear-gradient(90deg, #007534 -0.98%, #23923C 52.79%, #50B848 100.23%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+	.text-1 {
+		font-family: SF Pro;
+		font-size: 1.875vw;
+		font-weight: 700;
+		line-height: 2.240vw;
+		color: #1A3966;
+	}
+	.text-2 {
+		p {
+			font-family: Myriad Pro Light;
+			font-size: 1.198vw;
+			line-height: 1.458vw;
+			color: #58595B;
+		}
+		.highligh {
+			font-family: iCiel Samsung Sharp Sans;
+			font-size: 4.479vw;
+			font-weight: 700;
+			line-height: 5.573vw;
+			background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			span {
+				font-family: Myriad Pro;
+				font-size: 1.042vw;
+			}
+		}
+	}
+	.text-3 {
+		font-family: SF Pro Light;
+		font-size: 1.354vw;
+		line-height: 1.979vw;
+		font-weight: 600;
+		background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		text-align: justify;
+	}
+	.text-4 {
+		span {
+			display: block;
+			font-family: SF Pro Light;
+			font-size: 1.042vw;
+			line-height: 1.563vw;
+			text-align: justify;
+			color: rgba(41, 40, 41, 1);
+			width: 29.948vw;
+		}
+	}
+	.text-5 {
+		font-family: SF Pro Light;
+		font-size: 1.042vw;
+		font-weight: 700;
+		line-height: 1.458vw;
+		color: rgba(0, 85, 142, 1);
+	}
+	.country {
+		font-family: SF Pro;
+		font-size: 1.042vw;
+		font-weight: 700;
+		line-height: 1.458vw;
+		color: #FFFFFF;
+	}
+	.text-6 {
+		font-family: SF Pro Light;
+		font-size: 0.833vw;
+		font-style: italic;
+		font-weight: 276;
+		line-height: 1.458vw;
+		color: rgba(41, 40, 41, 1);
+	}
+	.text-7 {
+		font-family: SF Pro Light;
+		font-size: 0.990vw;
+		font-weight: 400;
+		line-height: 1.458vw;
+		color: rgba(41, 40, 41, 1);
+	}
+	.text-8 {
+		p {
+			font-family: SF Pro;
+			font-size: 1.042vw;
+			font-weight: 700;
+			line-height: 1.458vw;
+			color: rgba(88, 87, 91, 1);
+		}
+		.highligh {
+			font-family: iCiel Samsung Sharp Sans;
+			font-size: 4.479vw;
+			font-weight: 700;
+			line-height: 5.573vw;
+			background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+		span {
+			font-family: SF Pro;
+			font-size: 1.042vw;
+			font-weight: 700;
+			line-height: 1.458vw;
+			color: rgba(88, 87, 91, 1);
+		}
+	}
+	.text-9 {
+		p {
+			font-family: SF Pro;
+			font-size: 1.094vw;
+			font-weight: 274;
+			line-height: 1.458vw;
+			color: rgba(0, 117, 52, 1);
+		}
+		span {
+			font-family: SF Pro;
+			font-size: 1.094vw;
+			font-weight: 700;
+			line-height: 1.458vw;
+			color: rgba(41, 40, 41, 1);
+			display: block;
+		}
+	}
+}
+#section-8 {
+	background: #FFFFFF;
+	img {
+		width: 100%;
+	}
+	.title1 {
+		font-family: SF Pro;
+		font-size: 2.188vw;
+		font-weight: 700;
+		color: rgba(26, 57, 102, 1);
+		text-transform: uppercase;
+	}
+	.title2 {
+		font-family: UTM HelvetIns;
+		font-size: 3.490vw;
+		font-weight: 400;
+		background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		text-transform: uppercase;
+	}
+	.title3 {
+		font-family: SF Pro;
+		font-size: 2.083vw;
+		line-height: 2.500vw;
+		color: rgba(26, 57, 102, 1);
+		text-transform: uppercase;
+	}
+	.text1 {
+		font-family: SF Pro Light;
+		font-size: 1.719vw;
+		font-weight: 590;
+		line-height: 1.979vw;
+		text-align: justify;
+		background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.desc {
+		.desc1-1 {
+			font-family: SF Pro;
+			font-size: 1.198vw;
+			font-weight: 700;
+			color: rgba(41, 40, 41, 1);
+			gap: 0.75vw;
+		}
+		.desc1-2 {
+			padding-left: 5.469vw;
+			padding-top: 1.563vw;
+			padding-bottom: 2.760vw;
+			span {
+				text-align: justify;
+				font-family: SF Pro Light;
+				font-size: 1.042vw;
+				font-weight: 274;
+			}
+		}
+		.list-image {
+			p {
+				margin-top: 0.938vw;
+				font-family: SF Pro Light;
+				font-size: 0.833vw;
+				font-style: italic;
+				text-align: right;
+			}
+		}
+		.desc1-3 {
+			margin-top: 2.031vw;
+			font-family: SF Pro Light;
+			font-size: 1.042vw;
+			text-align: justifi;
+		}
+		.list-image1 {
+			margin-top: 2.031vw;
+		}
+		.desc1-4 {
+			margin-top: 2.969vw;
+			font-family: SF Pro;
+			font-size: 1.042vw;
+			font-weight: 700;
+			text-align: justify;
+		}
+		.list-image2 {
+			span {
+				font-family: SF Pro Light;
+				font-size: 0.833vw;
+				font-style: italic;
+				font-weight: 276;
+			}
+			> div {
+				margin-top: 1.146vw;
+			}
+			.text-left {
+				padding-left: 1.042vw;
+			}
+		}
+		.list-image3 {
+			margin-top: 8.490vw;
+			.text {
+				p {
+					font-family: SF Pro;
+					font-size: 1.042vw;
+					font-weight: 700;
+					text-align: justify;
+					color: rgba(41, 40, 41, 1);
+				}
+				span {
+					display: block;
+					margin-top: 1.823vw;
+					font-family: SF Pro Light;
+					font-size: 1.042vw;
+					font-style: italic;
+					font-weight: 276;
+					text-align: right;
+				}
+			}
+		}
+		.desc2-1 {
+			margin-top: 2.813vw;
+			font-family: SF Pro;
+			font-size: 1.198vw;
+			font-weight: 700;
+			color: rgba(41, 40, 41, 1);
+			gap: 0.75vw;
+		}
+		.desc2-2 {
+			padding-left: 4.948vw;
+			padding-top: 0.833vw;
+			span {
+				text-align: justify;
+				font-family: SF Pro Light;
+				font-size: 1.042vw;
+				font-weight: 274;
+			}
+		}
+		.list-image4 {
+			margin-top: 1.325vw;
+			p {
+				font-family: SF Pro Light;
+				font-size: 0.833vw;
+				font-style: italic;
+				font-weight: 276;
+				margin-top: 0.625vw;
+				text-align: right;
+			}
+			
+		}
+	}
+	.text-ip {
+		.div-text {
+			font-family: SF Pro;
+			font-size: 1.033vw;
+		}
+		p {
+			font-family: SF Pro Light;
+			font-size: 0.833vw;
+		}
+	}
+}

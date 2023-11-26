@@ -17,6 +17,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { Info3TitleComponent } from './components/vectors/info3-title/info3-title.component';
 import { TtcLogo2Component } from './components/vectors/ttc-logo2/ttc-logo2.component';
 import { CupIconComponent } from "./components/vectors/cup-icon/cup-icon.component";
+import { TongQuanVeTtcAgrisComponent } from './content-pages/tong-quan-ve-ttc-agris/tong-quan-ve-ttc-agris.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CupIconComponent } from "./components/vectors/cup-icon/cup-icon.compone
     Info3TitleComponent,
     TtcLogo2Component,
     CupIconComponent,
+    TongQuanVeTtcAgrisComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
