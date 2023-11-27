@@ -36,7 +36,14 @@
   font-family: Quicksand;
   src: url('./assets/fonts/Quicksand/Quicksand-VariableFont_wght.ttf');
 }
-
+@font-face {
+  font-family: iCiel Silka;
+  src: url('./assets/fonts/iCielSilka/silka-regular-webfont.eot');
+  src: url('./assets/fonts/iCielSilka/silka-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('./assets/fonts/iCielSilka/silka-regular-webfont.woff2') format('woff2'),
+       url('./assets/fonts/iCielSilka/silka-regular-webfont.woff') format('woff'),
+       url('./assets/fonts/iCielSilka/silka-regular-webfont.ttf') format('truetype');
+}
 
 :root {
   --primary: #3fafd7;
