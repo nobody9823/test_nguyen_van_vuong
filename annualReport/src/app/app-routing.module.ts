@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DauAnNienDoComponent } from './content-pages/dau-an-nien-do/dau-an-nien-do.component';
 import { ContentPagesComponent } from './content-pages/content-pages.component';
 import { HomeComponent } from './home/home.component';
+import { TongQuanVeTtcAgrisComponent } from './content-pages/tong-quan-ve-ttc-agris/tong-quan-ve-ttc-agris.component';
 
 const routes: Routes = [
   // {
@@ -26,6 +27,15 @@ const routes: Routes = [
       {
         path: 'dau-an-nien-do',
         component: DauAnNienDoComponent
+      },
+      {
+        path: '',
+        redirectTo: 'tong-quan-ve-ttc-agris',
+        pathMatch: 'full'
+      },
+      {
+        path: 'tong-quan-ve-ttc-agris',
+        component: TongQuanVeTtcAgrisComponent
       }
     ]
   },
@@ -33,7 +43,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: "enabled" })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

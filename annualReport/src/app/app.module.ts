@@ -19,6 +19,7 @@ import { TtcLogo2Component } from './components/vectors/ttc-logo2/ttc-logo2.comp
 import { CupIconComponent } from "./components/vectors/cup-icon/cup-icon.component";
 import { VietnamMapComponent } from './components/vectors/vietnam-map/vietnam-map.component';
 import { TtcLogo3Component } from './components/vectors/ttc-logo3/ttc-logo3.component';
+import { TongQuanVeTtcAgrisComponent } from './content-pages/tong-quan-ve-ttc-agris/tong-quan-ve-ttc-agris.component';
 import { TitleLogo2Component } from './components/vectors/title-logo2/title-logo2.component';
 import { DauAnSvg1Component } from "./components/vectors/dau-an-svg1/dau-an-svg1.component";
 import { DauAnSvg2Component } from './components/vectors/dau-an-svg2/dau-an-svg2.component';
@@ -44,6 +45,7 @@ import { DauAnSvg3Component } from './components/vectors/dau-an-svg3/dau-an-svg3
     CupIconComponent,
     VietnamMapComponent,
     TtcLogo3Component,
+    TongQuanVeTtcAgrisComponent,
     TitleLogo2Component,
     DauAnSvg1Component,
     DauAnSvg2Component,
