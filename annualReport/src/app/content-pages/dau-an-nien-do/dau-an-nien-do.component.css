@@ -995,6 +995,7 @@
   background: var(--50-b-848, #50b848);
 }
 
+#info-10,
 #info-9,
 #info-7,
 #info-6 {
@@ -1800,6 +1801,131 @@
   @apply 3xl:mt-5;
 }
 
+.block10_1 {
+  @apply info-content-sample2;
+  @apply absolute;
+  @apply w-[100%];
+  @apply left-0;
+  @apply top-0;
+}
+
+.block10_2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @apply pt-12;
+}
+
+.dau_an_svg1 {
+  position: absolute;
+  width: 60%;
+  top: 13%;
+}
+
+.text10_6 {
+  color: #f4e696;
+  text-align: justify;
+  font-family: SF Pro;
+  font-size: 32px;
+  font-weight: 700;
+  /* line-height: 45px; */
+  line-height: normal;
+}
+
+.description10_1 {
+  position: absolute;
+  width: 27%;
+  top: 48%;
+  left: 25%;
+}
+
+.block10_3 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(
+    180deg,
+    #c7eafb -50.48%,
+    #d3eefb -23.93%,
+    #e1f4fd -1.31%,
+    #eff9fe 47.87%
+  );
+}
+.dau_an_svg2 {
+  width: 55%;
+  z-index: 2;
+}
+.dau_an_svg2__addition {
+  position: absolute;
+  z-index: 2;
+}
+
+.dau_an_svg2__addition2 {
+  position: absolute;
+  z-index: 2;
+
+  /* left: 50%;
+  transform: translateX(-50%); */
+}
+.dau_an_svg2_content {
+  /* background: linear-gradient(
+    180deg,
+    #c7eafb -0.93%,
+    #d3eefb 26.14%,
+    rgba(225, 244, 253, 0.93) 49.2%,
+    rgba(239, 249, 254, 0.86) 99.32%
+  ); */
+  background: linear-gradient(
+    180deg,
+    #c7eafb -0.93%,
+    #d3eefb 26.14%,
+    rgba(225, 244, 253, 0.93) 49.2%,
+    rgba(239, 249, 254, 0.86) 99.32%
+  );
+  position: absolute;
+  top: 43%;
+  width: 50%;
+  /* width: 1920px; */
+  /* height: 1246.351px; */
+  flex-shrink: 0;
+  padding: 23% 3% 3% 3%;
+  z-index: 1;
+  border-radius: 15px;
+}
+
+.text10_1 {
+  color: var(--007534, #007534);
+  text-align: right;
+  font-family: SF Pro Regular;
+  font-style: italic;
+  font-weight: 276;
+  /* line-height: 20px; */
+  font-size: 16px;
+  width: 63%;
+  margin-bottom: 3%;
+}
+
+.text10_1 strong {
+  font-family: SF Pro;
+  font-weight: 700;
+}
+
+.text10_2 {
+  @apply content-text;
+}
+
+.text10_3 {
+  @apply text10_2;
+  color: var(--007534, #007534);
+}
+
+.text10_4 {
+  @apply content-text__highlight;
+}
+.block10_5 {
+  background-color: #fff;
+}
 @media only screen and (max-width: 1536px) {
   .info-1__content {
     /* width: 1000px; */
