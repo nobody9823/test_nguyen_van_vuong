@@ -24,6 +24,8 @@ import { TitleLogo2Component } from './components/vectors/title-logo2/title-logo
 import { DauAnSvg1Component } from "./components/vectors/dau-an-svg1/dau-an-svg1.component";
 import { DauAnSvg2Component } from './components/vectors/dau-an-svg2/dau-an-svg2.component';
 import { DauAnSvg3Component } from './components/vectors/dau-an-svg3/dau-an-svg3.component';
+import { DauAnSvg4Component } from './components/vectors/dau-an-svg4/dau-an-svg4.component';
+import { DauAnSvg5Component } from './components/vectors/dau-an-svg5/dau-an-svg5.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { DauAnSvg3Component } from './components/vectors/dau-an-svg3/dau-an-svg3
     TitleLogo2Component,
     DauAnSvg1Component,
     DauAnSvg2Component,
-    DauAnSvg3Component
+    DauAnSvg3Component,
+    DauAnSvg4Component,
+    DauAnSvg5Component
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

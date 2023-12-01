@@ -1927,7 +1927,7 @@
   @apply content-text;
   @apply ml-[15%] my-[3%];
 }
-.block10_7,
+/* .block10_7, */
 .block10_6,
 .block10_5 {
   background-color: #fff;
@@ -1999,15 +1999,106 @@
 }
 .text10_9 {
   @apply text10_sample3;
-  position: absolute;
-  top: 1%;
 }
 .text10_10 {
   @apply content-text;
   color: #fff;
-  position: absolute;
-  top: 1%;
+  width: 80%;
+  margin-top: 7%;
 }
+.text10_sample4 {
+  color: var(--007534, #007534);
+  font-family: SF Pro;
+  font-weight: 700;
+  line-height: normal;
+}
+.text10_11 {
+  @apply text10_sample4;
+  font-size: 1.3vw;
+  margin: 3% 0;
+}
+.text10_12 {
+  @apply text10_sample4;
+  font-size: 1.8vw;
+  margin: 2% 0;
+}
+
+.block7_content1 {
+  @apply info-content-sample;
+  @apply absolute;
+  top: 15%;
+}
+
+.text10_13 {
+  @apply text10_12;
+  margin-left: 6%;
+}
+
+.ul10_list1 {
+  list-style: inside;
+}
+
+.chairman-name-3 {
+  @apply chairman-name;
+  text-align: right;
+}
+
+.smart_zone_content {
+  position: absolute;
+  top: 0%;
+  padding: 2%;
+}
+.text10_14 {
+  color: #58595b;
+  text-align: justify;
+  font-family: SF Pro Regular;
+  font-weight: 510;
+  font-size: 1.3vw;
+}
+.smart_zone_content__text {
+  margin: 4%;
+}
+.smart_zone_content__highlight {
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 34.48%,
+      #00425d 68.87%,
+      #007534 103.25%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: UTM HelvetIns;
+  font-size: 4vw;
+  font-weight: 400;
+}
+.smart_zone_content__highlight2 {
+  @apply smart_zone_content__highlight;
+  font-size: 1.8vw;
+}
+
+.smart_zone_content__image {
+  position: absolute;
+  bottom: 0;
+  padding: 2%;
+}
+
+.background10_1 {
+  fill: linear-gradient(270deg, #f1f2f2 0%, rgba(241, 242, 242, 0) 97.26%);
+  display: flex;
+  align-items: center;
+}
+
+.smart_zone_content__highlight3 {
+  @apply smart_zone_content__highlight;
+  font-family: SF Pro;
+  font-size: 1.8vw;
+}
+
 @media only screen and (max-width: 1536px) {
   .info-1__content {
     /* width: 1000px; */
