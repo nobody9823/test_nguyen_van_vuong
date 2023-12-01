@@ -831,6 +831,84 @@
 			}
 			
 		}
+		.desc3-1 {
+			.title {
+				background: rgba(26, 57, 102, 1);
+				font-family: SF Pro;
+				font-size: 2.083vw;
+				font-weight: 700;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				text-transform: uppercase;
+			}
+			.desc3-2 {
+				.sub-title {
+					.text {
+						font-family: Myriad Pro Light;
+						font-size: 1.198vw;
+						font-weight: 600;
+						color: rgba(88, 89, 91, 1);
+						line-height: 1.406vw;
+						text-transform: uppercase;
+					}
+				}
+				.san-luong {
+					padding-left: 4.479vw;
+					.highligh {
+						font-family: iCiel Samsung Sharp Sans;
+						font-size: 4.844vw;
+						font-weight: 700;
+						line-height: 5.990vw;
+						background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+						-webkit-background-clip: text;
+						-webkit-text-fill-color: transparent;
+						text-transform: uppercase;
+					}
+					span {
+						font-family: Myriad Pro Light;
+						font-size: 1.198vw;
+						font-weight: 600;
+						line-height: 1.458vw;
+						color: rgba(88, 89, 91, 1);
+						position: relative;
+						top: 1.302vw;
+						left: 0.781vw;
+					}
+				}
+				.text-left {
+					display: block;
+					margin-top: 0.729vw;
+					font-family: SF Pro Light;
+					font-size: 0.833vw;
+					font-style: italic;
+					font-weight: 276;
+					text-align: right;
+					color: rgba(88, 89, 91, 1);
+				}
+			}
+			.desc3-3 {
+				font-family: SF Pro Light;
+				font-size: 1.042vw;
+				font-weight: 274;
+				line-height: 1.563vw;
+				text-align: justify;
+				color: rgba(41, 40, 41, 1);
+			}
+		}
+		.desc4-1 {
+			span {
+				display: block;
+				margin-top: 0.885vw;
+				font-family: SF Pro;
+				font-size: 1.509vw;
+				font-weight: 590;
+				line-height: 1.979vw;
+				text-align: justify;
+				background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+		}
 	}
 	.text-ip {
 		.div-text {
@@ -841,5 +919,376 @@
 			font-family: SF Pro Light;
 			font-size: 0.833vw;
 		}
+	}
+}
+#section-9 {
+	background-image: url(../../../assets/images/TongQuan/section9-1.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	.title {
+		font-family: SF Pro;
+		font-size: 2.083vw;
+		font-weight: 700;
+		color: #FFFFFF;
+	}
+	.text-1 {
+		z-index: 1;
+		font-family: SF Pro;
+		font-size: 2.083vw;
+		font-weight: 700;
+		color: #FFFFFF;
+	}
+	.text-2 {
+		font-family: SF Pro;
+		font-size: 1.198vw;
+		font-weight: 700;
+		color: rgba(26, 57, 102, 1);
+		text-align: right;
+	}
+	.highligh {
+		font-family: iCiel Samsung Sharp Sans;
+		font-size: 9.948vw;
+		font-weight: 700;
+		line-height: 12.344vw;
+		background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.text-3 {
+		font-family: SF Pro;
+		font-size: 1.198vw;
+		font-weight: 274;
+		color: rgba(26, 57, 102, 1);
+	}
+	.item1 {
+		.text {
+			font-family: SF Pro Light;
+			font-size: 1.094vw;
+			font-weight: 274;
+			line-height: 2.083vw;
+			.blue {
+				color: rgba(26, 57, 102, 1);
+				font-family: SF Pro;
+			}
+			.highligh-normal {
+				color: rgba(0, 117, 52, 1);
+				font-family: SF Pro;
+			}
+			.black {
+				color: rgba(0, 0, 0, 1);
+				font-family: SF Pro;
+			}
+		}
+	}
+	.text-4 {
+		font-size: 1.198vw;
+		.blue {
+			font-family: SF Pro;
+			font-weight: 700;
+			color: rgba(26, 57, 102, 1);
+		}
+		span {
+			font-family: SF Pro Light;
+			font-weight: 274;
+			color: rgba(26, 57, 102, 1);
+		}
+		ul {
+			margin-left: 1.146vw;
+			list-style: disc;
+			li {
+				font-family: SF Pro;
+				font-size: 1.198vw;
+				color: rgba(88, 88, 90, 1);
+			}
+		}
+	}
+	.text-5 {
+		font-family: SF Pro Light;
+		font-size: 1.042vw;
+		.blue {
+			font-family: SF Pro;
+			font-size: 1.094vw;
+			font-weight: 700;
+			color: rgba(26, 57, 102, 1);
+		}
+		.green {
+			font-family: SF Pro;
+			font-size: 1.510vw;
+			font-weight: 700;
+			color: rgba(0, 117, 52, 1);
+		}
+		span {
+			font-family: SF Pro;
+		}
+		ul {
+			list-style: disc;
+			margin-left: 1.846vw;
+		}
+	}
+}
+#section-10 {
+	background-image: url(../../../assets/images/TongQuan/section10-1.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	.title {
+		font-family: SF Pro;
+		font-size: 2.083vw;
+		font-weight: 700;
+		color: #FFFFFF;
+	}
+	.text1 {
+		z-index: 2;
+		font-family: SF Pro;
+		font-size: 1.458vw;
+		font-weight: 700;
+		line-height: 1.719vw;
+		color: #FFFFFF;
+	}
+	.item {
+		font-size: 1.042vw;
+		color: rgba(0, 117, 52, 1);
+		.green {
+			font-family: SF Pro;
+			span {
+				font-weight: 274;
+				font-family: SF Pro Light;
+			}
+		}
+		.green-number {
+			margin-top: -0.521vw;
+			font-family: iCiel Samsung Sharp Sans;
+			font-size: 2.448vw;
+			font-weight: 700;
+			background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+}
+#section-11 {
+	background-color: #FFFFFF;
+	.highligh {
+		font-family: iCiel Samsung Sharp Sans;
+		font-size: 6.250vw;
+		font-weight: 700;
+		line-height: 7.760vw;
+		background: linear-gradient(90deg, #F4E696 6.33%, #E6C36C 22.99%, #DAA548 40.52%, #D69A3B 49.29%, #DFB156 64.19%, #F4E696 94%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.text1 {
+		font-family: SF Pro;
+		font-size: 1.094vw;
+		font-weight: 700;
+		color: rgba(199, 234, 251, 1);
+		span {
+			display: block;
+			font-family: SF Pro Light;
+			font-weight: 274;
+		}
+	}
+}
+#section-11_2 {
+	background: #FFFFFF;
+	.line {
+		background-color: rgba(80, 184, 72, 1);
+	}
+	.text2 {
+		font-family: SF Pro;
+		font-size: 1.719vw;
+		font-weight: 700;
+		line-height: 2.031vw;
+		color: #C7EAFC;
+	}
+	.text3 {
+		font-family: SF Pro;
+		font-size: 5.156vw;
+		font-weight: 700;
+		line-height: 6.146vw;
+		color: #C7EAFC;
+	}
+	.list-text {
+		.list1 {
+			padding: 1.771vw;
+			background: rgba(243, 244, 244, 1);
+			font-family: SF Pro Light;
+			font-size: 1.719vw;
+			font-weight: 274;
+			line-height: 1.719vw;
+			.black {
+				font-family: SF Pro;
+				font-size: 1.458vw;
+				font-weight: 700;
+				line-height: 2.031vw;
+				color: rgba(41, 40, 41, 1);
+			}
+			.blue {
+				font-family: UTM HelvetIns;
+				font-size: 2.865vw;
+				font-weight: 400;
+				line-height: 3.385vw;
+				color: rgba(26, 57, 102, 1);
+			}
+		}
+	}
+	.list2 {
+		padding: 1.406vw 2.344vw 1.146vw;
+		// width: 35.208vw;
+		.item {
+			font-family: SF Pro Light;
+			font-size: 1.042vw;
+			font-weight: 274;
+			line-height: 1.563vw;
+			margin-bottom: 0.339vw;
+			p {
+				font-family: SF Pro;
+				font-weight: 700;
+			}
+			img {
+				display: inline-flex;
+			}
+		}
+	}
+	.text4 {
+		font-family: SF Pro;
+		font-size: 1.458vw;
+		font-weight: 700;
+		line-height: 1.719vw;
+		text-transform: uppercase;
+		color: rgba(199, 234, 252, 1);
+	}
+}
+#section-13 {
+	background: #FFFFFF;
+	.title {
+		font-family: SF Pro;
+		font-size: 2.083vw;
+		font-weight: 700;
+		line-height: 2.500vw;
+		color: rgba(26, 57, 102, 1);
+	}
+	.list2 {
+		padding: 1.406vw 2.344vw 1.146vw;
+		// width: 35.208vw;
+		.item {
+			font-family: SF Pro Light;
+			font-size: 1.042vw;
+			font-weight: 274;
+			line-height: 1.563vw;
+			margin-bottom: 0.339vw;
+			p {
+				font-family: SF Pro;
+				font-weight: 700;
+			}
+			img {
+				display: inline-flex;
+			}
+		}
+	}
+}
+#section-15 {
+	background: #FFFFFF;
+	.title {
+		font-family: SF Pro;
+		font-size: 2.083vw;
+		font-weight: 700;
+		line-height: 2.500vw;
+		color: rgba(26, 57, 102, 1);
+	}
+	.list2 {
+		padding: 1.406vw 2.344vw 1.146vw;
+		// width: 35.208vw;
+		.item {
+			font-family: SF Pro Light;
+			font-size: 1.042vw;
+			font-weight: 274;
+			line-height: 1.563vw;
+			margin-bottom: 0.339vw;
+			p {
+				font-family: SF Pro;
+				font-weight: 700;
+			}
+			img {
+				display: inline-flex;
+			}
+		}
+	}
+}
+#section-16 {
+	.text1 {
+		font-family: iCiel Silka;
+		font-size: 1.406vw;
+		font-weight: 400;
+		line-height: 1.667vw;
+		text-align: right;
+		background: linear-gradient(90deg, #0083CA 0%, #005892 29%, #003767 55%, #00467B 66%, #006EAF 89%, #0083CA 100%);		
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.text2 {
+		font-family: iCiel Silka;
+		font-size: 1.406vw;
+		font-weight: 400;
+		line-height: 1.667vw;
+		text-align: center;
+		background: linear-gradient(90deg, #0083CA 0%, #005892 29%, #003767 55%, #00467B 66%, #006EAF 89%, #0083CA 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.text3 {
+		font-family: SF Pro;
+		font-size: 26px;
+		font-weight: 860;
+		line-height: 31px;
+		letter-spacing: 0em;
+		text-align: left;
+		color: rgba(26, 57, 102, 1);
+	}
+	.text4 {
+		font-family: SF Pro Light;
+		font-size: 0.938vw;
+		font-weight: 590;
+		line-height: 1.354vw;
+		text-align: justify;
+		background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}
+#section-17 {
+	font-family: iCiel Silka;
+	font-size: 1.250vw;
+	font-weight: 400;
+	line-height: 1.510vw;
+	text-align: right;
+	color: rgba(26, 57, 102, 1);
+}
+#section-18 {
+	background: #FFFFFF;
+	.text1 {
+		font-family: SF Pro;
+		font-size: 1.354vw;
+		font-weight: 860;
+		line-height: 1.615vw;
+		color: rgba(26, 57, 102, 1);		
+	}
+	.text2 {
+		font-family: SF Pro;
+		font-size: 0.938vw;
+		font-weight: 590;
+		line-height: 1.354vw;
+		text-align: justify;
+		background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.text3 {
+		font-family: iCiel Silka;
+		font-size: 1.250vw;
+		font-weight: 400;
+		line-height: 1.510vw;
+		color: rgba(26, 57, 102, 1);
 	}
 }
