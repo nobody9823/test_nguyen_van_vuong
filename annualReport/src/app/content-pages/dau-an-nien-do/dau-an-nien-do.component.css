@@ -995,6 +995,7 @@
   background: var(--50-b-848, #50b848);
 }
 
+#info-11,
 #info-10,
 #info-9,
 #info-7,
@@ -2097,6 +2098,63 @@
   @apply smart_zone_content__highlight;
   font-family: SF Pro;
   font-size: 1.8vw;
+}
+
+.text10_15 {
+  color: var(--1-a-3966, #1a3966);
+  font-family: SF Pro;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  font-size: 2.396vw;
+}
+
+.text10_16 {
+  background: linear-gradient(
+    270deg,
+    #003767 1.83%,
+    #003767 34.22%,
+    #00425d 51.89%,
+    #006143 83.31%,
+    #007534 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: UTM HelvetIns;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+  font-size: 3.125vw;
+}
+
+.text10_17 {
+  background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: justify;
+  font-family: SF Pro;
+  font-style: normal;
+  font-weight: 510;
+  font-size: 1.354vw;
+}
+
+.block11_3 {
+  background: url("../../../assets/images/b11_img1.png");
+}
+
+#footer {
+  background: linear-gradient(270deg, #069745 0%, #186EA6 100%);
+  display: flex;
+  justify-content: center;
+}
+
+.footer__text {
+  @apply content-text;
+  color: #fff;
+  font-size: 0.729vw;
+  padding: 1% 0;
 }
 
 @media only screen and (max-width: 1536px) {
