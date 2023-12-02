@@ -65,7 +65,7 @@ ul.nav li:nth-child(6):hover .subnav,
 ul.nav li:nth-child(5):hover .subnav,
 ul.nav li:nth-child(4):hover .subnav,
 ul.nav li:nth-child(3):hover .subnav,
-  ul.nav li:nth-child(2):hover .subnav {
+ul.nav li:nth-child(2):hover .subnav {
   top: 70px;
   @apply visible;
   @apply opacity-100;
@@ -85,6 +85,9 @@ ul.nav li:nth-child(2):hover .nav-decoration {
 
 .mobile-nav {
   background: url("../../assets/images/mobile-nav-bg.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+
   @apply fixed;
   z-index: 9999;
   @apply top-[64px];
@@ -104,8 +107,10 @@ ul.nav li:nth-child(2):hover .nav-decoration {
   color: var(--ffffff, #fff);
   font-family: Myriad Pro;
   @apply text-[20px];
+  @apply md:text-[35px];
   @apply py-6;
   @apply px-4;
+  @apply md:px-8;
   @apply flex;
   @apply justify-between;
   @apply items-center;
@@ -113,9 +118,13 @@ ul.nav li:nth-child(2):hover .nav-decoration {
 
 .mobile-nav .subnav-item {
   background: #e8f5fb;
+  color: var(--292829, #292829);
+  font-family: SF Pro Regular;
+  font-weight: 510;
   @apply px-4;
   @apply py-2;
-
+  @apply text-[16px];
+  @apply md:text-[28px];
   @apply flex;
   /* @apply justify-between; */
   @apply items-center;
@@ -195,5 +204,3 @@ ul.nav li:nth-child(2):hover .nav-decoration {
     opacity: 1;
   }
 }
-
-

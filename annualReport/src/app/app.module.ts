@@ -28,6 +28,7 @@ import { DauAnSvg4Component } from './components/vectors/dau-an-svg4/dau-an-svg4
 import { DauAnSvg5Component } from './components/vectors/dau-an-svg5/dau-an-svg5.component';
 import { DiemNhanSvg1Component } from './components/vectors/diem-nhan-svg1/diem-nhan-svg1.component';
 import { DiemNhanSvg2Component } from './components/vectors/diem-nhan-svg2/diem-nhan-svg2.component';
+import { ExpandNavIconComponent } from './components/vectors/expand-nav-icon/expand-nav-icon.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { DiemNhanSvg2Component } from './components/vectors/diem-nhan-svg2/diem-
     DauAnSvg4Component,
     DauAnSvg5Component,
     DiemNhanSvg1Component,
-    DiemNhanSvg2Component
+    DiemNhanSvg2Component,
+    ExpandNavIconComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
