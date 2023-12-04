@@ -12,6 +12,6 @@ export class SpinnerComponent implements AfterViewInit{
 
     setTimeout(()=>{
       this.isLoading = false;
-    }, 0);
+    }, 800);
   }
 }
