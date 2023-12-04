@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { Router, RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import {
   takeUntil, Subject
@@ -16,7 +16,6 @@ export class AppComponent implements OnDestroy{
   loading = true;
 
   constructor(private router: Router) {
-    console.log('subscribing ...');
     this.router.events.pipe(takeUntil(this.unsubscribe))
       .subscribe((routerEvent) => {
         this.checkRouterEvent(routerEvent as RouterEvent);
@@ -26,19 +25,18 @@ export class AppComponent implements OnDestroy{
   checkRouterEvent(routerEvent: RouterEvent): void {
     if (routerEvent instanceof NavigationStart) {
       this.loading = true;
-      console.log('starting.');
     }
 
     if (routerEvent instanceof NavigationEnd ||
         routerEvent instanceof NavigationCancel ||
         routerEvent instanceof NavigationError) {
-        this.loading = false;
-        console.log('done.');
+        setTimeout(()=>{
+          this.loading = false;
+        }, 1000);
     }
   }
 
   ngOnDestroy(): void {
     this.unsubscribe.next();
   }
-
 }
