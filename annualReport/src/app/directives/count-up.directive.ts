@@ -1,23 +1,9 @@
 import { Directive, ElementRef, Input, OnInit, Renderer2, HostListener } from '@angular/core';
 import {
-  animationFrameScheduler,
-  BehaviorSubject,
-  combineLatest,
-  switchMap,
-  map,
-  interval,
-  takeWhile,
-  endWith,
-  distinctUntilChanged,
-  takeUntil,
+  BehaviorSubject
 } from 'rxjs';
 import { Destroy } from '../destroy';
 import {counterUp} from 'counterup2';
-
-/**
- * Quadratic Ease-Out Function: f(x) = x * (2 - x)
- */
-const easeOutQuad = (x: number): number => x * (2 - x);
 
 @Directive({
   selector: '[countUp]',
@@ -45,9 +31,7 @@ export class CountUpDirective implements OnInit {
   }
 
   constructor(
-    private readonly elementRef: ElementRef,
-    private readonly renderer: Renderer2,
-    private readonly destroy$: Destroy
+    private readonly elementRef: ElementRef
   ) {}
 
   ngOnInit(): void {
