@@ -1,0 +1,33 @@
+#quan_tri_cong_ty_container {
+  background-color: #fff;
+}
+
+.info-content-sample {
+  @apply relative;
+  @apply w-[100%];
+  @apply lg:w-[800px];
+  @apply xl:w-[1000px];
+  @apply 3xl:w-[1200px];
+  @apply px-4;
+  @apply md:px-8;
+  @apply lg:px-0;
+}
+.description__highlight {
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 34.48%,
+      #00425d 68.87%,
+      #007534 103.25%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: justify;
+  font-family: iCiel Silka;
+  font-weight: 400;
+  font-size: 1.510vw;
+}

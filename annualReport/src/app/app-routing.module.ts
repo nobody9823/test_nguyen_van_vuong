@@ -4,6 +4,7 @@ import { DauAnNienDoComponent } from './content-pages/dau-an-nien-do/dau-an-nien
 import { ContentPagesComponent } from './content-pages/content-pages.component';
 import { HomeComponent } from './home/home.component';
 import { TongQuanVeTtcAgrisComponent } from './content-pages/tong-quan-ve-ttc-agris/tong-quan-ve-ttc-agris.component';
+import { QuanTriCongTyComponent } from './content-pages/quan-tri-cong-ty/quan-tri-cong-ty.component';
 
 const routes: Routes = [
   // {
@@ -22,28 +23,29 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'dau-an-nien-do',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'dau-an-nien-do',
-        component: DauAnNienDoComponent
-      },
-      {
-        path: '',
-        redirectTo: 'tong-quan-ve-ttc-agris',
-        pathMatch: 'full'
+        component: DauAnNienDoComponent,
       },
       {
         path: 'tong-quan-ve-ttc-agris',
-        component: TongQuanVeTtcAgrisComponent
-      }
-    ]
+        component: TongQuanVeTtcAgrisComponent,
+      },
+      {
+        path: 'quan-tri-cong-ty',
+        component: QuanTriCongTyComponent,
+      },
+    ],
   },
   { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: "enabled" })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
