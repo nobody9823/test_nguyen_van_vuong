@@ -399,6 +399,16 @@
 #section-3 .text-2 .content strong {
   font-family: SF Pro;
 }
+@media (max-width: 768px) {
+  #section-3 .text-2 .contentsp span {
+    display: block;
+  }
+}
+@media (max-width: 768px) {
+  #section-3 .text-2 .contentsp1 span {
+    display: inline-block;
+  }
+}
 
 #section-4 {
   background: #FFFFFF;
@@ -577,7 +587,7 @@
   font-size: 1.042vw;
 }
 #section-7 .text-3 {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.354vw;
   line-height: 1.979vw;
   font-weight: 600;
@@ -588,7 +598,7 @@
 }
 #section-7 .text-4 span {
   display: block;
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
   line-height: 1.563vw;
   text-align: justify;
@@ -596,7 +606,7 @@
   width: 29.948vw;
 }
 #section-7 .text-5 {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
   font-weight: 700;
   line-height: 1.458vw;
@@ -610,7 +620,7 @@
   color: #FFFFFF;
 }
 #section-7 .text-6 {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 0.833vw;
   font-style: italic;
   font-weight: 276;
@@ -618,7 +628,7 @@
   color: rgb(41, 40, 41);
 }
 #section-7 .text-7 {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 0.99vw;
   font-weight: 400;
   line-height: 1.458vw;
@@ -693,7 +703,7 @@
   text-transform: uppercase;
 }
 #section-8 .text1 {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.719vw;
   font-weight: 590;
   line-height: 1.979vw;
@@ -716,20 +726,20 @@
 }
 #section-8 .desc .desc1-2 span {
   text-align: justify;
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
   font-weight: 274;
 }
 #section-8 .desc .list-image p {
   margin-top: 0.938vw;
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 0.833vw;
   font-style: italic;
   text-align: right;
 }
 #section-8 .desc .desc1-3 {
   margin-top: 2.031vw;
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
   text-align: justifi;
 }
@@ -744,7 +754,7 @@
   text-align: justify;
 }
 #section-8 .desc .list-image2 span {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 0.833vw;
   font-style: italic;
   font-weight: 276;
@@ -768,7 +778,7 @@
 #section-8 .desc .list-image3 .text span {
   display: block;
   margin-top: 1.823vw;
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
   font-style: italic;
   font-weight: 276;
@@ -788,7 +798,7 @@
 }
 #section-8 .desc .desc2-2 span {
   text-align: justify;
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
   font-weight: 274;
 }
@@ -796,7 +806,7 @@
   margin-top: 1.325vw;
 }
 #section-8 .desc .list-image4 p {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 0.833vw;
   font-style: italic;
   font-weight: 276;
@@ -846,7 +856,7 @@
 #section-8 .desc .desc3-1 .desc3-2 .text-left {
   display: block;
   margin-top: 0.729vw;
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 0.833vw;
   font-style: italic;
   font-weight: 276;
@@ -854,7 +864,7 @@
   color: rgb(88, 89, 91);
 }
 #section-8 .desc .desc3-1 .desc3-3 {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
   font-weight: 274;
   line-height: 1.563vw;
@@ -878,7 +888,7 @@
   font-size: 1.033vw;
 }
 #section-8 .text-ip p {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 0.833vw;
 }
 
@@ -924,7 +934,7 @@
   color: rgb(26, 57, 102);
 }
 #section-9 .item1 .text {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.094vw;
   font-weight: 274;
   line-height: 2.083vw;
@@ -950,7 +960,7 @@
   color: rgb(26, 57, 102);
 }
 #section-9 .text-4 span {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-weight: 274;
   color: rgb(26, 57, 102);
 }
@@ -964,7 +974,7 @@
   color: rgb(88, 88, 90);
 }
 #section-9 .text-5 {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
 }
 #section-9 .text-5 .blue {
@@ -1016,7 +1026,7 @@
 }
 #section-10 .item .green span {
   font-weight: 274;
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
 }
 #section-10 .item .green-number {
   margin-top: -0.521vw;
@@ -1048,7 +1058,7 @@
 }
 #section-11 .text1 span {
   display: block;
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-weight: 274;
 }
 
@@ -1075,7 +1085,7 @@
 #section-11_2 .list-text .list1 {
   padding: 1.771vw;
   background: rgb(243, 244, 244);
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.719vw;
   font-weight: 274;
   line-height: 1.719vw;
@@ -1098,7 +1108,7 @@
   padding: 1.406vw 2.344vw 1.146vw;
 }
 #section-11_2 .list2 .item {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
   font-weight: 274;
   line-height: 1.563vw;
@@ -1134,7 +1144,7 @@
   padding: 1.406vw 2.344vw 1.146vw;
 }
 #section-13 .list2 .item {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
   font-weight: 274;
   line-height: 1.563vw;
@@ -1162,7 +1172,7 @@
   padding: 1.406vw 2.344vw 1.146vw;
 }
 #section-15 .list2 .item {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 1.042vw;
   font-weight: 274;
   line-height: 1.563vw;
@@ -1198,15 +1208,13 @@
 }
 #section-16 .text3 {
   font-family: SF Pro;
-  font-size: 26px;
+  font-size: 1.354vw;
   font-weight: 860;
-  line-height: 31px;
-  letter-spacing: 0em;
-  text-align: left;
+  line-height: 1.615vw;
   color: rgb(26, 57, 102);
 }
 #section-16 .text4 {
-  font-family: SF Pro Light;
+  font-family: SF Pro Regular;
   font-size: 0.938vw;
   font-weight: 590;
   line-height: 1.354vw;
@@ -1251,4 +1259,642 @@
   font-weight: 400;
   line-height: 1.51vw;
   color: rgb(26, 57, 102);
+}
+
+#section-19 {
+  background-color: #FFFFFF;
+}
+#section-19 .text1 {
+  font-family: Myriad Pro Light;
+  font-size: 1.25vw;
+  font-weight: 700;
+  line-height: 1.51vw;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+}
+#section-19 .list-text p {
+  font-family: Myriad Pro Light;
+  font-size: 1.354vw;
+  font-weight: 400;
+  line-height: 1.615vw;
+  color: #292829;
+  margin-bottom: 0.938vw;
+}
+#section-19 .highligh {
+  font-family: Myriad Pro;
+  font-size: 1.25vw;
+  font-weight: 600;
+  line-height: 1.406vw;
+  background: #AA7B2C;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+}
+#section-19 .desc1 {
+  font-family: SF Pro;
+  font-size: 1.354vw;
+  font-weight: 510;
+  line-height: 1.875vw;
+  text-align: justify;
+  background: linear-gradient(90deg, #003767 0%, #007534 95.02%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19 .list-text1 p {
+  margin-bottom: 1.338vw;
+}
+
+#section-19_1 {
+  background-color: #FFFFFF;
+  padding: 0 18.75vw;
+}
+#section-19_1 .title span {
+  font-family: SF Pro;
+  font-size: 1.354vw;
+  font-weight: 860;
+  line-height: 1.615vw;
+  background: #1A3966;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_1 .item .highligh {
+  font-family: SF Pro;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  background: #F4E896;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_1 .item .list .special {
+  font-family: Myriad Pro Light;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 22.66%, #00425D 47.37%, #007534 77.46%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_1 .item .list span {
+  font-family: Myriad Pro Light;
+  font-size: 1.354vw;
+  font-weight: 600;
+  line-height: 1.615vw;
+  background: #007534;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  bottom: -0.469vw;
+}
+#section-19_1 .item .text ul {
+  list-style: disc;
+}
+#section-19_1 .item .text ul li {
+  font-family: Myriad Pro Light;
+  font-size: 1.25vw;
+  font-weight: 300;
+  line-height: 1.51vw;
+  color: #292829;
+  letter-spacing: -0.026vw;
+}
+#section-19_1 .item .special-nornal {
+  font-family: Myriad Pro Light;
+  font-size: 1.25vw;
+  font-weight: 700;
+  line-height: 1.458vw;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 22.66%, #00425D 47.37%, #007534 77.46%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: -moz-max-content;
+  width: max-content;
+}
+#section-19_1 .item-6 {
+  background-image: url(../../../assets/images/TongQuan/section19-1_6.png);
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: 100%;
+}
+#section-19_1 .item-7 {
+  background-image: url(../../../assets/images/TongQuan/section19-1_13.png);
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: 100%;
+}
+
+#section-19_2 {
+  background-color: #FFFFFF;
+}
+#section-19_2 .title span {
+  font-family: SF Pro;
+  font-size: 1.354vw;
+  font-weight: 860;
+  line-height: 1.615vw;
+  background: #1A3966;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_2 .item .highligh {
+  font-family: SF Pro;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  background: #F4E896;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_2 .item .list .special {
+  font-family: Myriad Pro Light;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 22.66%, #00425D 47.37%, #007534 77.46%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_2 .item .list span {
+  font-family: Myriad Pro Light;
+  font-size: 1.354vw;
+  font-weight: 600;
+  line-height: 1.615vw;
+  background: #007534;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  bottom: -0.469vw;
+}
+#section-19_2 .item .text ul {
+  list-style: disc;
+}
+#section-19_2 .item .text ul li {
+  font-family: Myriad Pro Light;
+  font-size: 1.25vw;
+  font-weight: 300;
+  line-height: 1.51vw;
+  color: #292829;
+  letter-spacing: -0.026vw;
+}
+#section-19_2 .item .special-nornal {
+  font-family: Myriad Pro Light;
+  font-size: 1.25vw;
+  font-weight: 700;
+  line-height: 1.458vw;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 22.66%, #00425D 47.37%, #007534 77.46%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+#section-19_3 {
+  background-color: #FFFFFF;
+}
+#section-19_3 .title span {
+  font-family: SF Pro;
+  font-size: 1.354vw;
+  font-weight: 860;
+  line-height: 1.615vw;
+  background: #1A3966;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_3 .item .highligh {
+  font-family: SF Pro;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  background: #F4E896;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_3 .item .list .special {
+  font-family: Myriad Pro Light;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 22.66%, #00425D 47.37%, #007534 77.46%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_3 .item .list span {
+  font-family: Myriad Pro Light;
+  font-size: 1.354vw;
+  font-weight: 600;
+  line-height: 1.615vw;
+  background: #007534;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  bottom: -0.469vw;
+}
+#section-19_3 .item .text ul {
+  list-style: disc;
+}
+#section-19_3 .item .text ul li {
+  font-family: Myriad Pro Light;
+  font-size: 1.25vw;
+  font-weight: 300;
+  line-height: 1.51vw;
+  color: #292829;
+  letter-spacing: -0.026vw;
+}
+#section-19_3 .item .special-nornal {
+  font-family: Myriad Pro Light;
+  font-size: 1.25vw;
+  font-weight: 700;
+  line-height: 1.458vw;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 22.66%, #00425D 47.37%, #007534 77.46%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: -moz-max-content;
+  width: max-content;
+}
+#section-19_3 .item-3 {
+  background-image: url(../../../assets/images/TongQuan/section19-3_4.png);
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: 100%;
+}
+#section-19_3 .item-4 {
+  background-image: url(../../../assets/images/TongQuan/section19-3_9.png);
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: 100%;
+}
+#section-19_3 .desc {
+  font-family: SF Pro;
+  font-size: 1.406vw;
+  font-weight: 510;
+  line-height: 1.979vw;
+  text-align: justify;
+  color: #58595B;
+}
+#section-19_3 .sub-title {
+  font-family: SF Pro;
+  font-size: 1.927vw;
+  font-weight: 860;
+  line-height: 2.604vw;
+  text-align: center;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_3 .desc1 {
+  font-family: SF Pro Regular;
+  font-size: 1.042vw;
+  font-weight: 274;
+  line-height: 1.563vw;
+  text-align: justify;
+}
+#section-19_3 .desc1 strong {
+  font-weight: 700;
+  font-family: SF Pro;
+}
+#section-19_3 .desc2 .desc-title span {
+  font-family: SF Pro;
+  font-size: 1.406vw;
+  font-weight: 510;
+  line-height: 1.979vw;
+  text-align: right;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_3 .desc2 .desc-hight {
+  font-family: UTM HelvetIns;
+  font-size: 1.563vw;
+  font-weight: 400;
+  line-height: 2.083vw;
+  text-align: center;
+  background: #F4E696;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_3 .desc2 .desc-title1 {
+  font-family: Myriad Pro;
+  font-size: 1.042vw;
+  font-weight: 700;
+  line-height: 1.25vw;
+  text-align: center;
+  background: #F4E696;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_3 .desc2 .list-text p {
+  font-family: Myriad Pro;
+  font-size: 1.042vw;
+  font-weight: 600;
+  line-height: 1.25vw;
+  background: #003767;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 3.413vw;
+  text-align: center;
+}
+#section-19_3 .desc2 .list-text4 p {
+  margin-bottom: 3.069vw;
+}
+
+#section-19_4, #section-19_5, #section-19_6 {
+  background-color: #FFFFFF;
+}
+#section-19_4 .title span, #section-19_5 .title span, #section-19_6 .title span {
+  font-family: SF Pro;
+  font-size: 1.354vw;
+  font-weight: 860;
+  line-height: 1.615vw;
+  background: #1A3966;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.052vw;
+}
+#section-19_4 .item .gray-text, #section-19_5 .item .gray-text, #section-19_6 .item .gray-text {
+  font-weight: 300 !important;
+  background: #292829 !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.052vw;
+}
+#section-19_4 .item .highligh, #section-19_5 .item .highligh, #section-19_6 .item .highligh {
+  font-family: SF Pro;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  background: #F4E896;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_4 .item .list .special, #section-19_5 .item .list .special, #section-19_6 .item .list .special {
+  font-family: Myriad Pro Light;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 22.66%, #00425D 47.37%, #007534 77.46%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section-19_4 .item .list span, #section-19_5 .item .list span, #section-19_6 .item .list span {
+  font-family: Myriad Pro Light;
+  font-size: 1.354vw;
+  font-weight: 600;
+  line-height: 1.615vw;
+  background: #007534;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  bottom: -0.469vw;
+}
+#section-19_4 .item .text ul, #section-19_5 .item .text ul, #section-19_6 .item .text ul {
+  list-style: disc;
+}
+#section-19_4 .item .text ul li, #section-19_5 .item .text ul li, #section-19_6 .item .text ul li {
+  font-family: Myriad Pro Light;
+  font-size: 1.25vw;
+  font-weight: 300;
+  line-height: 1.51vw;
+  color: #292829;
+  letter-spacing: -0.026vw;
+}
+#section-19_4 .item .special-nornal, #section-19_5 .item .special-nornal, #section-19_6 .item .special-nornal {
+  font-family: Myriad Pro Light;
+  font-size: 1.25vw;
+  font-weight: 700;
+  line-height: 1.458vw;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 22.66%, #00425D 47.37%, #007534 77.46%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+#section-20 {
+  background-color: #FFFFFF;
+}
+#section-20 .text .blue-normal {
+  font-family: UTM HelvetIns;
+  font-size: 2.083vw;
+  font-weight: 400;
+  line-height: 3.073vw;
+  color: #1A3966;
+}
+#section-20 .text .blue-big {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 8.073vw;
+  font-weight: 700;
+  line-height: 8vw;
+  color: #1A3966;
+}
+#section-20 .text .blue-small {
+  font-family: Myriad Pro;
+  font-size: 1.563vw;
+  font-weight: 700;
+  line-height: 1.875vw;
+  color: #1A3966;
+  margin-top: -0.954vw;
+}
+#section-20 .text span {
+  font-family: Myriad Pro Light;
+  font-size: 1.354vw;
+  font-weight: 400;
+  line-height: 1.615vw;
+  color: #58595B;
+  margin-top: -0.954vw;
+}
+#section-20 .text1 {
+  text-align: center;
+}
+#section-20 .text1 .highligh {
+  font-family: UTM HelvetIns;
+  font-size: 1.354vw;
+  font-weight: 400;
+  line-height: 1.51vw;
+  color: #F4E696;
+}
+#section-20 .text1 .number {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 4.115vw;
+  font-weight: 700;
+  line-height: 5.104vw;
+  color: #C7EAFC;
+}
+#section-20 .text1 .customer {
+  font-family: Myriad Pro;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  color: #C7EAFC;
+  margin-top: -0.525vw;
+}
+#section-20 .text2 .number {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 4.115vw;
+  font-weight: 700;
+  line-height: 3.04vw;
+  color: #00558F;
+}
+#section-20 .text2 span {
+  font-family: Myriad Pro;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  color: #58595B;
+}
+#section-20 .text3 .blue-normal {
+  font-family: UTM HelvetIns;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 59px;
+  color: #00558F;
+}
+#section-20 .text3 .blue-big {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 8.073vw;
+  font-weight: 700;
+  line-height: 8vw;
+  color: #00558F;
+}
+#section-20 .text3 .blue-big .fz-text {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 6.25vw;
+  color: #00558F;
+  line-height: 7.708vw;
+}
+#section-20 .text3 .blue-big .blue-small {
+  font-family: Myriad Pro Light;
+  font-size: 1.563vw;
+  font-weight: 700;
+  line-height: 1.875vw;
+  color: #00558F;
+}
+#section-20 .text3 span {
+  font-family: Myriad Pro;
+  font-size: 1.25vw;
+  font-weight: 700;
+  line-height: 1.51vw;
+  color: #58595B;
+  letter-spacing: -1px;
+  margin-top: -0.35vw;
+}
+
+#section-21 {
+  background-color: #FFFFFF;
+}
+#section-21 .text1 .use {
+  font-family: UTM HelvetIns;
+  font-size: 2.083vw;
+  font-weight: 400;
+  line-height: 3.073vw;
+  color: #007534;
+}
+#section-21 .text1 .number {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 4.688vw;
+  font-weight: 700;
+  line-height: 5.833vw;
+  color: #007534;
+}
+#section-21 .text1 .number span {
+  font-family: Myriad Pro;
+  font-size: 1.25vw;
+  font-weight: 700;
+  line-height: 1.51vw;
+  color: #007534;
+}
+#section-21 .text2 {
+  font-family: Myriad Pro;
+  font-size: 2.031vw;
+  font-weight: 700;
+  line-height: 2.448vw;
+  color: #58595B;
+  letter-spacing: -0.052vw;
+}
+#section-21 .list-text {
+  font-size: 1.25vw;
+  font-weight: 400;
+  line-height: 1.51vw;
+}
+#section-21 .list-text > div {
+  margin-bottom: 0.345vw;
+}
+#section-21 .list-text .green {
+  font-family: SF Pro;
+  color: #007534;
+}
+#section-21 .list-text .black {
+  font-family: Myriad Pro;
+  color: #292829;
+}
+#section-21 .list-text .black span {
+  font-family: Myriad Pro Light;
+  font-weight: 274;
+}
+#section-21 .list-text__cus .black {
+  font-family: SF Pro;
+}
+#section-21 .list-text__cus .black span {
+  font-family: SF Pro Regular;
+  font-weight: 274;
+  letter-spacing: -0.052vw;
+}
+#section-21 .text3 {
+  font-family: SF Pro Regular;
+  font-size: 0.833vw;
+  font-style: italic;
+  font-weight: 276;
+  line-height: 0.833vw;
+  color: #000000;
+}
+#section-21 .text4 {
+  font-family: UTM HelvetIns;
+  font-size: 43px;
+  font-weight: 400;
+  line-height: 64px;
+  color: #50B848;
+}
+#section-21 .text4 .number {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 8.229vw;
+  font-weight: 700;
+  line-height: 8.208vw;
+  color: #50B848;
+}
+#section-21 .text4 .number .country {
+  font-family: Myriad Pro;
+  font-size: 1.563vw;
+  font-weight: 700;
+  line-height: 1.875vw;
+  color: #50B848;
+}
+#section-21 .text4 span {
+  font-family: Myriad Pro Light;
+  font-size: 1.302vw;
+  font-weight: 700;
+  line-height: 1.563vw;
+  color: #58595B;
+}
+#section-21 .list-content .item {
+  margin-bottom: 1.345vw;
+}
+#section-21 .list-content .item .green {
+  font-family: Myriad Pro;
+  font-size: 1.354vw;
+  font-weight: 700;
+  line-height: 1.615vw;
+  color: #50B848;
+}
+#section-21 .list-content .item .desc {
+  font-family: SF Pro Regular;
+  font-size: 1.184vw;
+  font-weight: 400;
+  line-height: 1.615vw;
+  color: #58595B;
+  margin-top: 0.345vw;
 }/*# sourceMappingURL=tong-quan-ve-ttc-agris.component.css.map */

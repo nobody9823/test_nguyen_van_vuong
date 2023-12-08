@@ -118,7 +118,7 @@ export class ContentPagesComponent {
   onClickNav(elementId: string) {
     const element = document.getElementById(elementId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'instant' });
     }
   }
   onClickMobileNav(elementId: string) {
