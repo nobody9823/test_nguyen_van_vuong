@@ -13,7 +13,7 @@ export class AppComponent implements OnDestroy{
   title = 'BÁO CÁO THƯỜNG NIÊN TTC BIÊN HOÀ 2022-2023';
   unsubscribe = new Subject<void>();
 
-  loading = true;
+  loading = false;
 
   constructor(private router: Router) {
     this.router.events.pipe(takeUntil(this.unsubscribe))

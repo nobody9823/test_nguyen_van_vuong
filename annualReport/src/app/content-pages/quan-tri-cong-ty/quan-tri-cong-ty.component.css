@@ -29,5 +29,498 @@
   text-align: justify;
   font-family: iCiel Silka;
   font-weight: 400;
-  font-size: 1.510vw;
+  font-size: 1.51vw;
+  margin-top: 2%;
+}
+
+.rule_title {
+  color: var(--292829, #292829);
+  text-align: justify;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.198vw;
+  margin-top: 2%;
+  margin-bottom: 1%;
+}
+
+.rule_source {
+  color: #000;
+  text-align: right;
+  font-family: Myriad Pro Light;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.938vw;
+  margin-top: 2%;
+  margin-bottom: 1%;
+}
+
+.mechanism_title {
+  color: var(--1-a-3966, #1a3966);
+  font-family: iCiel Silka;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 2.083vw;
+  margin-top: 6%;
+}
+
+.mechanism_body {
+  background-image: url(../../../assets/images/QuanTri/mechanism_bg.png);
+  width: 100%;
+  height: 32.974vw;
+  background-size: 100%;
+}
+
+.mechanism_description {
+  @apply rule_title;
+  position: absolute;
+  width: 95%;
+  top: 1%;
+  left: 0;
+}
+
+.mechanism_detail {
+  color: var(--292829, #292829);
+  text-align: justify;
+  font-family: Myriad Pro Light;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.198vw;
+  position: absolute;
+  width: 84%;
+}
+
+.mechanism_detail1 {
+  top: 24%;
+  left: 13%;
+}
+
+.mechanism_detail2 {
+  top: 39%;
+  left: 13%;
+}
+
+.mechanism_detail3 {
+  top: 54.5%;
+  left: 13%;
+}
+
+.mechanism_detail4 {
+  top: 74%;
+  left: 13%;
+}
+
+.variety {
+  background-image: url(../../../assets/images/QuanTri/variety_bg.png);
+  width: 100%;
+  height: 55.359vw;
+  background-size: 100%;
+  margin-top: 4%;
+}
+
+.variety_title {
+  @apply mechanism_title;
+  position: absolute;
+  top: 3%;
+  width: 60%;
+}
+
+.variety_percent {
+  color: var(--f-4-e-696, #f4e696);
+  text-align: justify;
+  font-family: UTM HelvetIns;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.865vw;
+  text-align: center;
+}
+
+.variety_text {
+  color: var(--c-7-eafc, #c7eafc);
+  text-align: center;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.198vw;
+}
+
+.variety_detail {
+  position: absolute;
+}
+
+.variety_detail1 {
+  top: 10%;
+  left: 76%;
+  width: 18%;
+}
+
+.variety_detail2 {
+  width: 25%;
+  top: 40%;
+  left: 20%;
+}
+
+.variety_detail3 {
+  width: 15%;
+  top: 40%;
+  left: 60%;
+}
+
+.variety_detail4 {
+  width: 17%;
+  top: 71%;
+  left: 7%;
+}
+
+.variety_detail5 {
+  width: 16%;
+  top: 74%;
+  left: 42%;
+}
+
+.variety_detail6 {
+  width: 17%;
+  top: 74%;
+  left: 76%;
+}
+
+.equality_title {
+  @apply mechanism_title;
+  width: 59%;
+}
+
+.equality_img {
+  margin-bottom: 4%;
+}
+
+.equality_subtitle {
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 34.48%,
+      #00425d 68.87%,
+      #007534 103.25%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: right;
+  font-family: iCiel Silka;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1.563vw;
+}
+
+.equality_description {
+  color: var(--58595-b, #58595b);
+  text-align: center;
+  font-family: iCiel Silka;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.25vw;
+  margin: 1% 0;
+}
+
+.equality_detail {
+  background-image: url(../../../assets/images/QuanTri/equality_detail_bg.png);
+  width: 100%;
+  height: 53.972vw;
+  background-size: 100%;
+  margin-bottom: 11%;
+}
+
+.equality_percent {
+  @apply variety_percent;
+}
+
+.equality_text {
+  @apply variety_text;
+}
+
+.equality_detail1 {
+  position: absolute;
+  width: 15%;
+  top: 65%;
+  left: 10%;
+}
+
+.equality_detail2 {
+  position: absolute;
+  width: 18%;
+  top: 65%;
+  left: 74%;
+}
+
+.equality_content {
+  @apply mechanism_detail;
+  text-align: center;
+  position: absolute;
+  width: 25%;
+}
+
+.equality_content1 {
+  top: 101%;
+  left: 5%;
+}
+
+.equality_content2 {
+  top: 101%;
+  left: 70.5%;
+}
+
+.equality_footer {
+  background-image: url(../../../assets/images/QuanTri/equality_footer_bg.png);
+  width: 100%;
+  height: 5.596vw;
+  background-size: 100%;
+}
+
+.equality_conclude {
+  background: var(
+    --Linear,
+    linear-gradient(
+      0deg,
+      #f4e696 -197.4%,
+      #e6c36c -146.29%,
+      #daa548 -92.49%,
+      #d69a3b -65.59%,
+      #dfb156 -19.86%,
+      #f4e696 71.6%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.198vw;
+  position: absolute;
+  top: 27%;
+  left: 8%;
+  width: 85%;
+}
+
+.organizational_chart {
+  margin-top: 7%;
+}
+
+.organizational_chart_title {
+  @apply mechanism_title;
+}
+
+.organizational_chart_body {
+  background-image: url(../../../assets/images/QuanTri/organizational_chart_body_bg.png);
+  width: 100%;
+  height: 72.674vw;
+  background-size: 100%;
+}
+
+.chart_title {
+  position: absolute;
+}
+
+.chart_title1 {
+  color: var(--f-4-e-696, #f4e696);
+  text-align: center;
+  font-family: UTM HelvetIns;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+  font-size: 1.615vw;
+  width: 16%;
+}
+
+.chart_title2 {
+  color: var(--f-4-e-696, #f4e696);
+  text-align: center;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.198vw;
+}
+
+.chart_title3 {
+  color: var(--1-a-3966, #1a3966);
+  text-align: center;
+  font-family: Myriad Pro;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.036vw;
+  font-size: 1.198vw;
+}
+
+.chart_title4 {
+  @apply chart_title3;
+  letter-spacing: -0.086vw;
+  font-size: 1.108vw;
+}
+
+.chart_title5 {
+  @apply chart_title2;
+}
+
+.chart_title6 {
+  color: var(--007534, #007534);
+  text-align: center;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -1.15px;
+  text-transform: uppercase;
+  font-size: 1.198vw;
+}
+
+.chart_title7 {
+  color: var(--ffffff, #fff);
+  text-align: center;
+  font-family: Myriad Pro;
+  font-weight: 700;
+  line-height: 30px; /* 130.435% */
+  text-transform: uppercase;
+  font-size: 1.198vw;
+}
+
+.chart_detail1 {
+  top: 8%;
+  left: 45.4%;
+}
+
+.chart_detail2 {
+  top: 26%;
+  left: 44.4%;
+}
+
+.chart_detail3 {
+  top: 34.5%;
+  left: 20.4%;
+}
+
+.chart_detail4 {
+  top: 33.3%;
+  left: 49.2%;
+}
+
+.chart_detail5 {
+  top: 34.5%;
+  left: 77.2%;
+}
+
+.chart_detail6 {
+  top: 46.7%;
+  left: 21.2%;
+}
+
+.chart_detail7 {
+  top: 46.7%;
+  left: 77.3%;
+}
+
+.chart_detail8 {
+  top: 52%;
+  left: 46.4%;
+}
+
+.chart_detail9 {
+  top: 59.3%;
+  left: 21.4%;
+}
+
+.chart_detail10 {
+  top: 59.3%;
+  left: 62.5%;
+  letter-spacing: normal;
+}
+
+.chart_detail11 {
+  top: 72.5%;
+  left: 6.2%;
+  letter-spacing: -0.69px;
+}
+
+.chart_detail12 {
+  top: 72.5%;
+  left: 21.2%;
+  letter-spacing: -0.69px;
+}
+
+.chart_detail13 {
+  top: 72.5%;
+  left: 38.2%;
+}
+
+.chart_detail14 {
+  top: 72.5%;
+  left: 54.3%;
+}
+
+.chart_detail15 {
+  top: 72.5%;
+  left: 69.2%;
+}
+
+.chart_detail16 {
+  top: 72.5%;
+  left: 83.3%;
+}
+
+.orientation {
+  margin-top: 6%;
+}
+
+.orientation_title {
+  @apply equality_title;
+}
+
+.orientation_body {
+  background-image: url(../../../assets/images/QuanTri/orientation_body_bg.png);
+  width: 100%;
+  height: 85.677vw;
+  background-size: 100%;
+}
+
+.orientation_detail {
+  color: var(--292829, #292829);
+  text-align: justify;
+  font-family: Myriad Pro Regular;
+  font-weight: 300;
+  font-size: 1.198vw;
+  position: absolute;
+  width: 70%;
+}
+
+.orientation_detail strong {
+  font-family: Myriad Pro;
+}
+
+.orientation_detail1 {
+  top: 53%;
+    left: 17%;
+}
+
+.orientation_detail2 {
+  top: 60%;
+  left: 20%;
+}
+
+.orientation_detail3 {
+  top: 70%;
+  left: 20%;
+}
+
+.orientation_detail4 {
+  top: 80%;
+  left: 20%;
+}
+
+.orientation_detail5 {
+  top: 90%;
+  left: 20%;
 }

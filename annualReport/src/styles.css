@@ -21,6 +21,10 @@
   src: url('./assets/fonts/MyriadPro/MyriadPro-Cond.otf');
 }
 @font-face {
+  font-family: Myriad Pro Regular;
+  src: url('./assets/fonts/MyriadPro/MyriadPro-Regular.otf');
+}
+@font-face {
   font-family: UTM HelvetIns;
   src: url('./assets/fonts/UTMHelvetIns/UTM-HelvetIns.ttf');
 }
