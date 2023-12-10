@@ -44,6 +44,10 @@
        url('./assets/fonts/iCielSilka/silka-regular-webfont.woff') format('woff'),
        url('./assets/fonts/iCielSilka/silka-regular-webfont.ttf') format('truetype');
 }
+@font-face {
+  font-family: Inter;
+  src: url('./assets/fonts/Inter/Inter-Regular.otf');
+}
 
 :root {
   --primary: #3fafd7;
