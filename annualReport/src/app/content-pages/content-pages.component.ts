@@ -27,12 +27,12 @@ export class ContentPagesComponent {
       index: 2,
       title: 'Tổng quan về TTC AgriS',
       children: [
-        { title: 'Hành trình 54 năm thương hiệu TTC AgriS', navId: 'info-1' },
-        { title: 'Hồ sơ doanh nghiệp', navId: 'info-1' },
-        { title: 'Hệ thống mạng lưới của TTC AgriS', navId: 'info-1' },
-        { title: 'Toàn diện chuỗi giá trị cây trồng, kiến tạo nền nông nghiệp tuần hoàn bền vững', navId: 'info-1' },
-        { title: 'Danh mục sản phẩm đa dạng của TTC AgriS', navId: 'info-1' },
-        { title: 'Kênh phân phối chính', navId: 'info-1' },
+        { title: 'Hành trình 54 năm thương hiệu TTC AgriS', navId: 'section-2' },
+        { title: 'Hồ sơ doanh nghiệp', navId: 'section-4' },
+        { title: 'Hệ thống mạng lưới của TTC AgriS', navId: 'section-7' },
+        { title: 'Toàn diện chuỗi giá trị cây trồng, kiến tạo nền nông nghiệp tuần hoàn bền vững', navId: 'section-16' },
+        { title: 'Danh mục sản phẩm đa dạng của TTC AgriS', navId: 'section-19' },
+        { title: 'Kênh phân phối chính', navId: 'section-20' },
       ],
     },
     {
