@@ -286,24 +286,28 @@
   </div>
 </div>
 
-<div id="info-3" class="relative view-in-desktop">
+<div id="info-3" class="relative">
   <div
-    class="absolute top-[10%] left-[6%] lg:scale-[0.666] xl:scale-[1] origin-top-left"
+    class="absolute top-[10%] left-[6%] scale-[0.2] md:scale-[0.4] lg:scale-[0.666] xl:scale-[1] origin-top-left"
   >
     <app-info3-title></app-info3-title>
   </div>
-  <div class="info-3__logo absolute top-[42%] right-[22.4%]">
+  <div class="info-3__logo absolute top-[42%] right-[22.4%] w-[12%]">
     <app-ttc-logo2></app-ttc-logo2>
   </div>
-  <div class="info-3__detail absolute top-[5%] right-[24%]">
-    <div class="flex justify-center">
+  <div
+    class="info-3__detail absolute top-[4%] lg:top-[5%] right-[23.5%] lg:right-[24%]"
+  >
+    <div class="flex justify-center mr-[-76%] md:mr-0">
       <div
-        class="detail__number text-[110px] xl:text-[130px] 2xl:text-[160px] 3xl:text-[200px] leading-[100px] xl:leading-[116px] 2xl:leading-[140px] 3xl:leading-[180px]"
+        class="detail__number text-[11.068vw] lg:text-[110px] xl:text-[130px] 2xl:text-[160px] 3xl:text-[200px] leading-[10.417vw] lg:leading-[100px] xl:leading-[116px] 2xl:leading-[140px] 3xl:leading-[180px]"
       >
         1
       </div>
       <div class="flex flex-col justify-between">
-        <div class="mt-2 3xl:mt-8 lg:scale-[0.7] 2xl:scale-[1] origin-top-left">
+        <div
+          class="mt-1 md:mt-2 3xl:mt-8 scale-[0.25] md:scale-[0.5] lg:scale-[0.7] 2xl:scale-[1] origin-top-left"
+        >
           <svg
             width="36"
             height="36"
@@ -318,33 +322,37 @@
           </svg>
         </div>
         <div
-          class="lg:text-[20px] xl:text-[24px] 2xl:text-[28px] 3xl:text-[34px] heading-[50px] xl:heading-[100] mb-1 3xl:mb-2"
+          class="text-left lg:text-center text-[1.693vw] lg:text-[20px] xl:text-[24px] 2xl:text-[28px] 3xl:text-[34px] heading-[50px] xl:heading-[100] mb-1 3xl:mb-2 mt-[-55%] md:mt-0"
         >
           TỶ<br />ĐÔ
         </div>
       </div>
     </div>
-    <div
-      class="text-[9px] xl:text-[11.5px] 2xl:text-[14px] 3xl:text-[16px] text-[#50B848]"
-    >
-      DOANH THU THUẦN
-    </div>
-    <div
-      class="text-[18px] xl:text-[26px] 2xl:text-[32px] 3xl:text-[40px]"
-      [countUp]="24743"
-      [duration]="1000"
-    >
-      24.743
-    </div>
-    <div class="text-[9px] xl:text-[11px] 2xl:text-[13px] 3xl:text-[14px]">
-      TỶ VND
+    <div class="mr-[-34%] md:mr-0 mt-[-6%] md:mt-0">
+      <div
+        class="text-[0.846vw] lg:text-[9px] xl:text-[11.5px] 2xl:text-[14px] 3xl:text-[16px] text-[#50B848]"
+      >
+        DOANH THU THUẦN
+      </div>
+      <div
+        class="text-[1.953vw] lg:text-[18px] xl:text-[26px] 2xl:text-[32px] 3xl:text-[40px]"
+        [countUp]="24743"
+        [duration]="1000"
+      >
+        24.743
+      </div>
+      <div
+        class="text-[0.781vw] lg:text-[9px] xl:text-[11px] 2xl:text-[13px] 3xl:text-[14px]"
+      >
+        TỶ VND
+      </div>
     </div>
   </div>
   <div
-    class="info-3__detail absolute lg:top-[38%] 2xl:top-[39.8%] 2xl:top-[41.5%] 3xl:top-[42.5%] lg:right-[4.8%] xl:right-[5.9%] 2xl:right-[6.5%] 3xl:right-[7.2%]"
+    class="info-3__detail absolute top-[42.5%] right-[7.2%]"
   >
     <div
-      class="cup-icon relative lg:scale-[0.55] xl:scale-[0.7] 2xl:scale-[0.8] 3xl:scale-[1]"
+      class="cup-icon relative origin-top-right scale-[0.2] md:scale-[0.4] lg:scale-[0.55] xl:scale-[0.7] 2xl:scale-[0.8] 3xl:scale-[1]"
     >
       <div>
         <app-cup-icon></app-cup-icon>
@@ -360,25 +368,25 @@
     <div>
       <div class="flex justify-center items-end">
         <div
-          class="detail__number lg:text-[44px] xl:text-[54px] 2xl:text-[64px] 3xl:text-[74px] lg:leading-[40px] xl:leading-[53px] 2xl:leading-[62px] 3xl:leading-[76px]"
+          class="detail__number text-[4.167vw] lg:text-[44px] xl:text-[54px] 2xl:text-[64px] 3xl:text-[74px] leading-[3.5vw] md:leading-[3.385vw] lg:leading-[40px] xl:leading-[53px] 2xl:leading-[62px] 3xl:leading-[76px]"
           [countUp]="46"
           [duration]="1000"
         >
           46
         </div>
         <div
-          class="lg:text-[16px] xl:text-[20px] 2xl:text-[26px] 3xl:text-[30px] lg:mb-1 xl:mb-2"
+          class="text-[1.628vw] lg:text-[16px] xl:text-[20px] 2xl:text-[26px] 3xl:text-[30px] lg:mb-1 xl:mb-2"
         >
           %
         </div>
       </div>
       <div
-        class="lg:text-[7.4px] xl:text-[9.2px] 2xl:text-[11px] 3xl:text-[13px] text-[#50B848]"
+        class="text-[0.716vw] lg:text-[7.4px] xl:text-[9.2px] 2xl:text-[11px] 3xl:text-[13px] text-[#50B848]"
       >
         THỊ TRƯỜNG ĐƯỜNG
       </div>
       <div
-        class="lg:text-[7.4px] xl:text-[9.2px] 2xl:text-[11px] 3xl:text-[13px] text-[#50B848]"
+        class="text-[0.716vw] lg:text-[7.4px] xl:text-[9.2px] 2xl:text-[11px] 3xl:text-[13px] text-[#50B848]"
       >
         VIỆT NAM
       </div>
@@ -387,13 +395,13 @@
   <div class="info-3__detail absolute bottom-[15%] left-[25.3%]">
     <div class="flex">
       <div
-        class="detail__number lg:text-[120px] xl:text-[170px] 2xl:text-[220px] 3xl:text-[270px] lg:leading-[120px] xl:leading-[160px] 2xl:leading-[200px] 3xl:leading-[240px]"
+        class="detail__number text-[14.323vw] lg:text-[120px] xl:text-[170px] 2xl:text-[220px] 3xl:text-[270px] leading-[13.021vw] lg:leading-[120px] xl:leading-[160px] 2xl:leading-[200px] 3xl:leading-[240px]"
       >
         1
       </div>
       <div class="flex flex-col justify-between">
         <div
-          class="lg:mt-2 3xl:mt-6 lg:scale-[0.5] xl:scale-[0.7] 2xl:scale-[1] origin-top-left lg:mb-[-50px] xl:mb-0"
+          class="mt-2 3xl:mt-6 scale-[0.2] md:scale-[0.4] lg:scale-[0.5] xl:scale-[0.7] 2xl:scale-[1] origin-top-left mb-[-60px] lg:mb-[-50px] xl:mb-0 w-[28px] md:w-auto"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -409,14 +417,14 @@
           </svg>
         </div>
         <div
-          class="lg:text-[18px] xl:text-[24px] 2xl:text-[30px] 3xl:text-[37px] mb-2 text-left"
+          class="text-[1.693vw] lg:text-[18px] xl:text-[24px] 2xl:text-[30px] 3xl:text-[37px] mb-1 lg:mb-2 text-left"
         >
           TRIỆU<br />TẤN<br />ĐƯỜNG
         </div>
       </div>
     </div>
     <div
-      class="lg:text-[18px] xl:text-[22px] 2xl:text-[24px] 3xl:text-[29px] text-[#50B848]"
+      class="text-[1.563vw] lg:text-[18px] xl:text-[22px] 2xl:text-[24px] 3xl:text-[29px] text-[#50B848]"
     >
       <span [countUp]="4" [duration]="1000">4</span> NĂM LIÊN TIẾP
     </div>
@@ -424,19 +432,19 @@
 
   <div class="info-3__detail absolute bottom-[49%] left-[9.7%]">
     <div
-      class="lg:text-[10px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[20px] text-[#50B848]"
+      class="text-[1.172vw] lg:text-[10px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[20px] text-[#50B848] mr-[8%] lg:mr-0 mb-[-8%] md:mb-0"
     >
       VÙNG NGUYÊN LIỆU
     </div>
-    <div class="flex mt-2 lg:mb-1 xl:mb-2 2xl:mb-4">
+    <div class="flex lg:mt-2 lg:mb-1 xl:mb-2 2xl:mb-4">
       <div
-        class="detail__number lg:text-[25px] xl:text-[34px] 2xl:text-[44px] 3xl:text-[58px] lg:leading-[26px] 2xl:leading-[36px] 3xl:leading-[50px]"
+        class="detail__number text-[2.9vw] lg:text-[25px] xl:text-[34px] 2xl:text-[44px] 3xl:text-[58px] leading-[5.067vw] lg:leading-[26px] 2xl:leading-[36px] 3xl:leading-[50px]"
         [countUp]="71000"
         [duration]="1000"
       >
         71.000
       </div>
-      <div>
+      <div class="origin-top-left scale-[0.25] md:scale-[0.5] lg:scale-[1] mt-1 lg:mt-0 w-[8px] md:w-auto">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -450,12 +458,14 @@
           />
         </svg>
       </div>
-      <div class="lg:text-[24px] xl:text-[28px] 2xl:text-[31px] flex items-end">
+      <div
+        class="text-[1.823vw] lg:text-[24px] xl:text-[28px] 2xl:text-[31px] flex items-end ml-[-8%] lg:ml-0 mb-1 md:mb-0"
+      >
         HA
       </div>
     </div>
     <div
-      class="lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[20px] text-[#50B848]"
+      class="text-[1.302vw] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[20px] text-[#50B848] mr-[8%] lg:mr-0"
     >
       Ở 4 QUỐC GIA
     </div>
@@ -3497,7 +3507,11 @@
         Nguồn: BCTC hợp nhất kiểm toán NĐ 2018-2019 đến 2022-2023
       </div>
       <div class="flex justify-center">
-        <a href="https://ttcagris.com.vn/media/Dinh%20duong%20thien%20nhien%20-%20Nang%20tam%20nong%20nghiep%20ben%20vung.pdf" target="_blank" class="my-1 md:my-3">
+        <a
+          href="https://ttcagris.com.vn/media/Dinh%20duong%20thien%20nhien%20-%20Nang%20tam%20nong%20nghiep%20ben%20vung.pdf"
+          target="_blank"
+          class="my-1 md:my-3"
+        >
           <app-btn-nav>
             <div class="icon">
               <svg
