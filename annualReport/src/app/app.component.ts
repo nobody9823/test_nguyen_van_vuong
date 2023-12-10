@@ -10,7 +10,7 @@ import {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnDestroy{
-  title = 'annualReport';
+  title = 'BÁO CÁO THƯỜNG NIÊN TTC BIÊN HOÀ 2022-2023';
   unsubscribe = new Subject<void>();
 
   loading = true;

@@ -1506,7 +1506,7 @@
       *ngFor="let item of block8Content1"
       class="grid grid-cols-5 gap-1 md:gap-2 xl:gap-4"
     >
-      <div class="numeric8_3 col-span-1">{{ item?.rank }}</div>
+      <div class="numeric8_3 col-span-1" [countUp]="1">{{ item?.rank }}</div>
       <div class="text8_2 col-span-4 flex flex-col justify-center">
         <div>{{ item?.content1 }}</div>
         <div>{{ item?.content2 }}</div>
@@ -1521,7 +1521,7 @@
     <div class="text8_1">Năm thứ 4 liên tiếp đạt mức</div>
   </div>
   <div class="block8 block8_9 w-[24%] top-[35%] left-[65.6%]">
-    <div class="numeric8_1">>1.000.000</div>
+    <div class="numeric8_1" [countUp]="1">>1.000.000</div>
   </div>
   <div class="block8 block8_9 w-[1.45%] top-[39.5%] left-[90%]">
     <div class="text8_1">TẤN</div>
@@ -1547,7 +1547,7 @@
   </div>
   <div class="block8 block8_13 w-[23.3%] top-[49%] left-[4.1%]">
     <div class="flex items-end">
-      <div class="numeric8_4">>71.000</div>
+      <div class="numeric8_4" [countUp]="1">>71.000</div>
       <div class="numeric8_5">HA</div>
     </div>
     <div class="mt-[-4%] lg:mt-[-2%] xl:mt-[-4%]">
@@ -1563,7 +1563,7 @@
     </div>
   </div>
   <div class="block8 block8_14 w-[12.9%] top-[51.5%] left-[32.5%]">
-    <div class="numeric8_6">24.743</div>
+    <div class="numeric8_6" [countUp]="1">24.743</div>
     <div class="mt-[-4%]">
       <div class="text8_1">TĂNG 35% SO VỚI CÙNG KỲ,</div>
       <div class="text8_1">HOÀN THÀNH 145% KẾ HOẠCH NĂM</div>
