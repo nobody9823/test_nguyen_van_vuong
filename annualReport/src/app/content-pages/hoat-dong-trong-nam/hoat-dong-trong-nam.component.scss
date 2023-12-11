@@ -1,3 +1,31 @@
+.desc-normal {
+    font-family: SF Pro Regular;
+    font-size: 1.042vw;
+    font-weight: 300;
+    line-height: 1.563vw;
+    text-align: justify;
+    background: #292829;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.04vw;
+    @media(max-width: 768px) {
+        font-size: 1.242vw;
+        letter-spacing: -0.042vw;
+    }
+}
+.text-right {
+    font-family: SF Pro Regular;
+    font-size: 0.938vw;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.458vw;
+    text-align: right;
+    color: #58595B;
+    letter-spacing: -0.025vw;
+}
+.fz-18 {
+    font-size: 0.938vw;
+}
 #section1 {
     background-image: url(../../../assets/images/HoatDong/section1.png);
     background-repeat: no-repeat;
@@ -462,6 +490,213 @@
             line-height: 1.354vw;
             text-align: center;
             color: #C7EAFC;
+        }
+    }
+}
+#section4_1 {
+    .text-image {
+        span {
+            font-family: Myriad Pro;
+            font-size: 1.042vw;
+            font-weight: 700;
+            line-height: 1.563vw;
+            color: #F4E696;
+        }
+    }
+    .list-item {
+        font-family: Myriad Pro Light;
+        font-size: 1.146vw;
+        font-weight: 300;
+        line-height: 1.563vw;
+        text-align: justify;
+        color: #292829;
+        margin-left: 1.146vw;
+    }
+}
+#section4_2 {
+    background: #FFFFFF;
+    .text-image {
+        span {
+            font-family: Myriad Pro;
+            font-size: 1.042vw;
+            font-weight: 700;
+            line-height: 1.563vw;
+            color: #F4E696;
+        }
+        strong {
+            font-family: Myriad Pro;
+            font-size: 1.146vw;
+            letter-spacing: -0.021vw;
+        }
+    }
+    .sub-title {
+        font-family: Inter;
+        font-size: 1.458vw;
+        font-weight: 700;
+        line-height: 1.771vw;
+        color: #007534;
+        text-transform: uppercase;
+    }
+    .desc-normal {
+        font-family: SF Pro Regular;
+        font-size: 1.042vw;
+        font-weight: 300;
+        line-height: 1.563vw;
+        text-align: justify;
+        background: #292829;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.04vw;
+        @media(max-width: 768px) {
+            font-size: 1.242vw;
+            letter-spacing: -0.042vw;
+        }
+    }
+    .text-right {
+        font-family: SF Pro Regular;
+        font-size: 0.938vw;
+        font-style: italic;
+        font-weight: 300;
+        line-height: 1.458vw;
+        text-align: right;
+        color: #58595B;
+        letter-spacing: -0.025vw;
+    }
+    .left {
+        strong {
+            font-family: Myriad Pro Light;
+            font-size: 1.146vw;
+            font-weight: 700;
+            line-height: 1.563vw;
+            color: #292829;
+        }
+    }
+    .box {
+        display: flex;
+        flex-direction: column;
+        span {
+            font-family: SF Pro Regular;
+            font-size: 1.198vw;
+            font-weight: 600;
+            line-height: 1.458vw;
+            text-transform: uppercase;
+            background: #58595B;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.052vw;
+        }
+        .number {
+            font-family: iCiel Samsung Sharp Sans;
+            font-size: 7.656vw;
+            font-weight: 700;
+            line-height: 8.031vw;
+            background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .special {
+            font-family: iCiel Samsung Sharp Sans;
+            font-size: 7.760vw;
+            font-weight: 700;
+            line-height: 7.635vw;
+            background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            top: 1.302vw;
+        }
+    }
+    .box1 {
+        .green {
+            font-family: Myriad Pro Light;
+            font-size: 1.250vw;
+            font-weight: 600;
+            line-height: 1.667vw;
+            color: #007534;            
+        }
+        .number {
+            font-family: iCiel Samsung Sharp Sans;
+            font-size: 2.604vw;
+            font-weight: 700;
+            line-height: 3.229vw;
+            background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .desc {
+            font-family: Myriad Pro Light;
+            font-size: 1.198vw;
+            font-weight: 400;
+            line-height: 1.458vw;
+            color: #58595B;            
+        }
+        span {
+            font-family: Myriad Pro;
+            font-size: 1.198vw;
+            font-weight: 600;
+            line-height: 1.458vw;
+            color: #007534;            
+        }
+    }
+}
+#section5 {
+    .desc {
+        font-family: Inter;
+        font-size: 1.510vw;
+        font-weight: 400;
+        line-height: 2.344vw;
+        text-align: center;
+        background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .title {
+        font-family: UTM HelvetIns;
+        font-size: 2.083vw;
+        font-weight: 400;
+        line-height: 3.073vw;
+        text-align: center;
+        background: linear-gradient(90.07deg, #003767 0.93%, #003767 33.61%, #00425D 51.43%, #006143 83.11%, #007534 99.94%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+#section6 {
+    background: #FFFFFF;
+    .desc {
+        font-family: Inter;
+        font-size: 1.510vw;
+        font-weight: 400;
+        line-height: 2.344vw;
+        text-align: justify;
+        background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .title {
+        font-family: Inter;
+        font-size: 1.927vw;
+        font-weight: 700;
+        line-height: 2.708vw;
+        color: #1A3966;
+        text-transform: uppercase;
+    }
+    .text-image {
+        span {
+            font-family: SF Pro Regular;
+            font-size: 1.146vw;
+            font-weight: 300;
+            line-height: 1.563vw;
+            text-align: justify;
+            padding: 0.521vw;
+            letter-spacing: -0.04vw;
+            @media(max-width: 768px) {
+                font-size: 1.242vw;
+                letter-spacing: -0.042vw;
+            }
+        }
+        strong {
+            font-weight: 700;
         }
     }
 }
