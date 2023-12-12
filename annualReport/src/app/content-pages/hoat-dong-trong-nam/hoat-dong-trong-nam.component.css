@@ -24,7 +24,7 @@
   line-height: 1.458vw;
   text-align: right;
   color: #58595B;
-  letter-spacing: -0.025vw;
+  letter-spacing: -0.045vw;
 }
 
 .fz-18 {
@@ -655,4 +655,104 @@
 }
 #section6 .text-image strong {
   font-weight: 700;
+}
+#section6 .image-text1 {
+  font-size: 1.354vw;
+  line-height: 1.615vw;
+  color: #F4E696;
+}
+#section6 .image-text1 .text-highligh {
+  font-weight: 700;
+  font-family: iCiel Samsung Sharp Sans;
+  text-transform: uppercase;
+}
+#section6 .image-text1 span {
+  font-family: Inter;
+  font-weight: 400;
+}
+#section6 .text-blue {
+  font-family: Myriad Pro Light;
+  font-size: 1.198vw;
+  font-weight: 700;
+  line-height: 1.563vw;
+  text-align: justify;
+  color: #00558F;
+}
+#section6 .list-item {
+  font-family: Myriad Pro Light;
+  font-size: 0.99vw;
+  font-weight: 300;
+  line-height: 1.563vw;
+  text-align: justify;
+  color: #292829;
+  margin-left: 1.146vw;
+}
+#section6 .box {
+  display: flex;
+  flex-direction: column;
+}
+#section6 .box span {
+  font-family: Myriad Pro Light;
+  font-size: 1.198vw;
+  font-weight: 600;
+  line-height: 1.458vw;
+  text-transform: uppercase;
+  background: #58595B;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#section6 .box .number {
+  font-family: iCiel Samsung Sharp Sans;
+  font-size: 2.604vw;
+  font-weight: 700;
+  line-height: 2.632vw;
+  background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#section6_1,
+#section6_2 {
+  background: #FFFFFF;
+}
+#section6_1 .name,
+#section6_2 .name {
+  font-family: Inter;
+  font-size: 1.927vw;
+  font-weight: 700;
+  line-height: 2.708vw;
+  color: #1A3966;
+  text-transform: uppercase;
+}
+#section6_1 .office,
+#section6_2 .office {
+  font-family: Myriad Pro Light;
+  font-size: 1.198vw;
+  font-weight: 300;
+  line-height: 1.563vw;
+  text-align: center;
+  color: #58595B;
+}
+#section6_1 .list-item,
+#section6_2 .list-item {
+  font-family: Myriad Pro Light;
+  font-size: 0.99vw;
+  font-weight: 300;
+  line-height: 1.563vw;
+  text-align: justify;
+  color: #292829;
+  margin-left: 1.146vw;
+}
+#section6_1 .box-item .text,
+#section6_2 .box-item .text {
+  font-family: Myriad Pro Light;
+  font-size: 0.938vw;
+  font-weight: 700;
+  line-height: 1.563vw;
+  color: #00558F;
+}
+#section6_1 strong,
+#section6_2 strong {
+  font-family: "Myriad Pro Light";
+  font-size: 0.99vw;
 }/*# sourceMappingURL=hoat-dong-trong-nam.component.css.map */
