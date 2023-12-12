@@ -1897,4 +1897,57 @@
   line-height: 1.615vw;
   color: #58595B;
   margin-top: 0.345vw;
+}
+
+.slide-in-top {
+  animation: slide-in-top 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animation-winkling-light {
+  animation: winkling-light 2s infinite;
+}
+
+@keyframes winkling-light {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.text-focus-in {
+  animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+@keyframes text-focus-in {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+.rotate-360-cw {
+  animation: rotate-360-cw 10s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s infinite both;
+}
+@keyframes rotate-360-cw {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }/*# sourceMappingURL=tong-quan-ve-ttc-agris.component.css.map */
