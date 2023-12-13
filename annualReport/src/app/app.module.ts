@@ -64,7 +64,7 @@ import { Section2TitleComponent } from './components/vectors/quan-tri/section2-t
     DiemNhanSvg2Component,
     ExpandNavIconComponent,
     QuanTriCongTyComponent,
-    HoatDongTrongNamComponent
+    HoatDongTrongNamComponent,
     Section2TitleComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
