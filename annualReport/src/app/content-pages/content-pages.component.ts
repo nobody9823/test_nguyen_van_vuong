@@ -1,4 +1,6 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-content-pages',
@@ -6,12 +8,15 @@ import { Component, ElementRef, Renderer2 } from '@angular/core';
   styleUrls: ['./content-pages.component.css'],
 })
 export class ContentPagesComponent {
+  router: Router;
+
   isOpenNav: boolean = false;
   expandingNav: number = 0;
   navList = [
     {
       index: 1,
       title: 'TTC AgriS - Dấu ấn niên độ',
+      link: '/content/dau-an-nien-do',
       children: [
         { title: 'Tầm nhìn - Sứ mệnh - Giá trị cốt lõi', navId: 'info-4' },
         { title: 'Thông điệp Chủ tịch Hội đồng Quản trị', navId: 'info-5' },
@@ -26,18 +31,20 @@ export class ContentPagesComponent {
     {
       index: 2,
       title: 'Tổng quan về TTC AgriS',
+      link: '/content/tong-quan-ve-ttc-agris',
       children: [
-        { title: 'Hành trình 54 năm thương hiệu TTC AgriS', navId: 'info-1' },
-        { title: 'Hồ sơ doanh nghiệp', navId: 'info-1' },
-        { title: 'Hệ thống mạng lưới của TTC AgriS', navId: 'info-1' },
-        { title: 'Toàn diện chuỗi giá trị cây trồng, kiến tạo nền nông nghiệp tuần hoàn bền vững', navId: 'info-1' },
-        { title: 'Danh mục sản phẩm đa dạng của TTC AgriS', navId: 'info-1' },
-        { title: 'Kênh phân phối chính', navId: 'info-1' },
+        { title: 'Hành trình 54 năm thương hiệu TTC AgriS', navId: 'section-2' },
+        { title: 'Hồ sơ doanh nghiệp', navId: 'section-4' },
+        { title: 'Hệ thống mạng lưới của TTC AgriS', navId: 'section-7' },
+        { title: 'Toàn diện chuỗi giá trị cây trồng, kiến tạo nền nông nghiệp tuần hoàn bền vững', navId: 'section-16' },
+        { title: 'Danh mục sản phẩm đa dạng của TTC AgriS', navId: 'section-19' },
+        { title: 'Kênh phân phối chính', navId: 'section-20' },
       ],
     },
     {
       index: 3,
       title: 'Quản trị Công ty',
+      link: '/content/quan-tri-cong-ty',
       children: [
         { title: 'Quy chế Quản trị Công ty thông lệ quốc tế', navId: 'info-1' },
         { title: 'Giới thiệu Hội đồng Quản trị', navId: 'info-1' },
@@ -55,6 +62,7 @@ export class ContentPagesComponent {
     {
       index: 4,
       title: 'Tình hình hoạt động trong năm',
+      link: '/content/hoat-dong-trong-nam',
       children: [
         // { title: 'Triển vọng Đường thế giới', navId: 'info-1' },
         // { title: 'Triển vọng Đường Việt Nam', navId: 'info-1' },
@@ -96,6 +104,7 @@ export class ContentPagesComponent {
     {
       index: 5,
       title: 'Báo cáo phát triển bền vững',
+      link: '',
       children: [
         { title: 'Cam kết Phát triển bền vững từ Hội đồng Quản trị', navId: 'info-1' },
         { title: '17 tiêu chí phát triển bền vững của Liên Hợp Quốc', navId: 'info-1' },
@@ -108,22 +117,31 @@ export class ContentPagesComponent {
     {
       index: 6,
       title: 'Báo cáo tài chính',
+      link: '',
       children: [
         { title: 'Báo cáo tài chính kiểm toán hợp nhất 22/23 (VAS)', navId: 'info-1' },
         { title: 'Báo cáo tài chính kiểm toán riêng 22/23 (VAS)', navId: 'info-1' },
       ],
     },
   ];
-  constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
-  onClickNav(elementId: string) {
+  constructor(private renderer: Renderer2, private elementRef: ElementRef, router: Router) {
+    this.router = router;
+  }
+
+  onClickNav(elementId: string, navLink: string) {
     const element = document.getElementById(elementId);
     if (element) {
       element.scrollIntoView({ behavior: 'instant' });
+    }else{
+      this.router.navigateByUrl(navLink).then(() =>{
+        const elementNext = document.getElementById(elementId);
+        elementNext?.scrollIntoView({ behavior: 'instant' });
+      });
     }
   }
-  onClickMobileNav(elementId: string) {
+  onClickMobileNav(elementId: string, navLink: string) {
     this.isOpenNav = !this.isOpenNav;
-    this.onClickNav(elementId);
+    this.onClickNav(elementId, navLink);
   }
 
   toggleNav() {

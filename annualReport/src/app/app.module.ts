@@ -30,6 +30,7 @@ import { DiemNhanSvg1Component } from './components/vectors/diem-nhan-svg1/diem-
 import { DiemNhanSvg2Component } from './components/vectors/diem-nhan-svg2/diem-nhan-svg2.component';
 import { ExpandNavIconComponent } from './components/vectors/expand-nav-icon/expand-nav-icon.component';
 import { QuanTriCongTyComponent } from './content-pages/quan-tri-cong-ty/quan-tri-cong-ty.component';
+import { HoatDongTrongNamComponent } from './content-pages/hoat-dong-trong-nam/hoat-dong-trong-nam.component';
 import { Section2TitleComponent } from './components/vectors/quan-tri/section2-title/section2-title.component';
 
 @NgModule({
@@ -63,6 +64,7 @@ import { Section2TitleComponent } from './components/vectors/quan-tri/section2-t
     DiemNhanSvg2Component,
     ExpandNavIconComponent,
     QuanTriCongTyComponent,
+    HoatDongTrongNamComponent
     Section2TitleComponent
   ],
   imports: [BrowserModule, AppRoutingModule],

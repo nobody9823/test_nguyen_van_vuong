@@ -5,6 +5,7 @@ import { ContentPagesComponent } from './content-pages/content-pages.component';
 import { HomeComponent } from './home/home.component';
 import { TongQuanVeTtcAgrisComponent } from './content-pages/tong-quan-ve-ttc-agris/tong-quan-ve-ttc-agris.component';
 import { QuanTriCongTyComponent } from './content-pages/quan-tri-cong-ty/quan-tri-cong-ty.component';
+import { HoatDongTrongNamComponent } from './content-pages/hoat-dong-trong-nam/hoat-dong-trong-nam.component';
 
 const routes: Routes = [
   // {
@@ -37,6 +38,10 @@ const routes: Routes = [
         path: 'quan-tri-cong-ty',
         component: QuanTriCongTyComponent,
       },
+      {
+        path: 'hoat-dong-trong-nam',
+        component: HoatDongTrongNamComponent,
+      },
     ],
   },
   { path: '**', redirectTo: '' },
@@ -44,7 +49,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled' }),
   ],
   exports: [RouterModule],
 })
