@@ -1,0 +1,30 @@
+#footer {
+  background: linear-gradient(270deg, #069745 0%, #186ea6 100%);
+  display: flex;
+  justify-content: center;
+}
+
+.footer__text {
+  @apply content-text;
+  color: #fff;
+  font-size: 0.729vw;
+  padding: 1% 0;
+}
+
+.content-text {
+  color: var(--292829, #292829);
+  text-align: justify;
+  font-family: SF Pro Regular;
+  @apply text-[5.6px];
+  @apply md:text-[11px];
+  @apply lg:text-[13px];
+  @apply xl:text-[16px];
+  @apply 3xl:text-[20px];
+  font-style: normal;
+  font-weight: 274;
+  @apply leading-[8.12px];
+  @apply md:leading-[16px];
+  @apply lg:leading-[22px];
+  @apply xl:leading-[26px];
+  @apply 3xl:leading-[30px];
+}

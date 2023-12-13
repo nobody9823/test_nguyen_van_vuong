@@ -32,6 +32,7 @@ import { ExpandNavIconComponent } from './components/vectors/expand-nav-icon/exp
 import { QuanTriCongTyComponent } from './content-pages/quan-tri-cong-ty/quan-tri-cong-ty.component';
 import { HoatDongTrongNamComponent } from './content-pages/hoat-dong-trong-nam/hoat-dong-trong-nam.component';
 import { Section2TitleComponent } from './components/vectors/quan-tri/section2-title/section2-title.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { Section2TitleComponent } from './components/vectors/quan-tri/section2-t
     ExpandNavIconComponent,
     QuanTriCongTyComponent,
     HoatDongTrongNamComponent,
-    Section2TitleComponent
+    Section2TitleComponent,
+    FooterComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
