@@ -30,6 +30,7 @@ import { DiemNhanSvg1Component } from './components/vectors/diem-nhan-svg1/diem-
 import { DiemNhanSvg2Component } from './components/vectors/diem-nhan-svg2/diem-nhan-svg2.component';
 import { ExpandNavIconComponent } from './components/vectors/expand-nav-icon/expand-nav-icon.component';
 import { QuanTriCongTyComponent } from './content-pages/quan-tri-cong-ty/quan-tri-cong-ty.component';
+import { Section2TitleComponent } from './components/vectors/quan-tri/section2-title/section2-title.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { QuanTriCongTyComponent } from './content-pages/quan-tri-cong-ty/quan-tr
     DiemNhanSvg1Component,
     DiemNhanSvg2Component,
     ExpandNavIconComponent,
-    QuanTriCongTyComponent
+    QuanTriCongTyComponent,
+    Section2TitleComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

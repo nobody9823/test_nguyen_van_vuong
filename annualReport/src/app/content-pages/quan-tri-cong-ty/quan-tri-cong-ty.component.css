@@ -502,25 +502,170 @@
 
 .orientation_detail1 {
   top: 53%;
-    left: 17%;
+  left: 17%;
 }
 
-.orientation_detail2 {
-  top: 60%;
-  left: 20%;
+.director_header {
+  margin-top: 3%;
+  margin-bottom: 5%;
+  /* height: 100vw; */
 }
 
-.orientation_detail3 {
-  top: 70%;
-  left: 20%;
+.director_header_bg {
+  background: linear-gradient(
+    90deg,
+    #c7eafc 0.99%,
+    rgba(199, 234, 252, 0) 97.76%
+  );
+  width: 100%;
+  height: 26.563vw;
+  flex-shrink: 0;
 }
 
-.orientation_detail4 {
-  top: 80%;
-  left: 20%;
+.director_avatar {
+  background-image: url(../../../assets/images/QuanTri/director1_avatar.png);
+  width: 100%;
+  height: 51.302vw;
+  background-size: 100%;
+  margin-top: -6%;
 }
 
-.orientation_detail5 {
-  top: 90%;
-  left: 20%;
+.director2_avatar {
+  @apply director_avatar;
+  background-image: url(../../../assets/images/QuanTri/director2_avatar.png);
+}
+
+.director3_avatar {
+  @apply director_avatar;
+  background-image: url(../../../assets/images/QuanTri/director3_avatar.png);
+  height: 34.159vw;
+  margin-top: 6%;
+}
+
+/* .director4_avatar {
+  @apply director_avatar;
+  background-image: url(../../../assets/images/QuanTri/director4_avatar.png);
+  height: 28.426vw;
+  margin-top: 6%;
+} */
+.director4_avatar {
+  @apply director_avatar;
+  background-image: url(../../../assets/images/QuanTri/director4_avatar.png);
+  height: 32.500vw;
+  margin-top: 6%;
+  width: 114.333%;
+  background-size: 100%;
+  transform: translateX(-7.166%);
+}
+
+.director_name {
+  color: var(--f-4-e-696, #f4e696);
+  font-family: Myriad Pro Regular;
+  font-weight: 400;
+  font-size: 1.354vw;
+  position: absolute;
+  top: 34vw;
+  left: 5%;
+}
+
+.director_name strong {
+  font-family: Myriad Pro;
+}
+
+.director_name2 {
+  font-family: Myriad Pro;
+  font-weight: 400;
+  color: var(--1-a-3966, #1a3966);
+  text-align: center;
+  font-size: 1.354vw;
+}
+
+.director_body {
+  margin-top: -11%;
+}
+
+.director_body2 {
+  margin-top: -8%;
+}
+
+.director_body3 {
+  margin-top: -6%;
+}
+
+.director_title {
+  color: var(--f-4-e-696, #f4e696);
+  text-align: justify;
+  font-family: Myriad Pro Light;
+  font-weight: 300;
+  font-size: 1.198vw;
+}
+
+.director_title2 {
+  color: var(--58595-b, #58595b);
+  text-align: center;
+  font-family: Myriad Pro Light;
+  font-weight: 400;
+  font-size: 1.198vw;
+}
+
+.director_detail {
+  color: var(--292829, #292829);
+  font-family: Myriad Pro Light;
+  font-weight: 300;
+  font-size: 1.198vw;
+}
+
+.director_detail2 {
+  @apply director_detail;
+  font-size: 0.99vw;
+}
+
+.director_detail2 strong,
+.director_detail strong {
+  font-family: Myriad Pro;
+}
+
+.director_divider {
+  background: linear-gradient(
+    90deg,
+    #0083ca 0.09%,
+    #fff 103.22%,
+    #003767 103.23%,
+    #fff 103.24%
+  );
+  width: 18.125vw;
+  height: 0.104vw;
+  flex-shrink: 0;
+}
+
+.director_divider2 {
+  @apply director_divider;
+  width: 31.25vw;
+}
+
+.director_divider3 {
+  @apply director_divider;
+  flex-grow: 1;
+  width: auto;
+}
+
+.label_divider {
+  display: flex;
+}
+
+.director_label {
+  color: var(--00558-f, #00558f);
+  text-align: justify;
+  font-family: Myriad Pro;
+  font-weight: 700;
+  font-size: 1.198vw;
+}
+
+.director_label2 {
+  @apply director_label;
+  font-size: 0.99vw;
+}
+
+.director_detail ul {
+  list-style: inside;
 }

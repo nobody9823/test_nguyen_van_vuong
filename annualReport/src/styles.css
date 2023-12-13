@@ -21,6 +21,10 @@
   src: url('./assets/fonts/MyriadPro/MyriadPro-Cond.otf');
 }
 @font-face {
+  font-family: Myriad Pro Super Light;
+  src: url('./assets/fonts/MyriadPro/MyriadPro-Light.otf');
+}
+@font-face {
   font-family: Myriad Pro Regular;
   src: url('./assets/fonts/MyriadPro/MyriadPro-Regular.otf');
 }
