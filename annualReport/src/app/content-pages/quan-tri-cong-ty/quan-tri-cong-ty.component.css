@@ -57,7 +57,7 @@
 
 .mechanism_title {
   color: var(--1-a-3966, #1a3966);
-  font-family: iCiel Silka;
+  font-family: Myriad Pro;
   font-style: normal;
   font-weight: 400;
   text-transform: uppercase;
@@ -922,4 +922,162 @@
   display: flex;
   justify-content: end;
   margin-top: 0;
+}
+
+.attendance_content {
+  margin-top: 3%;
+}
+
+.attendance_description2_bg {
+  background-image: url(../../../assets/images/QuanTri/attendance_description2_bg.png);
+  width: 100%;
+  height: 23.854vw;
+  background-size: 100%;
+  margin-top: 5%;
+}
+
+.attendance_description2 {
+  @apply rule_title;
+  font-family: Myriad Pro Light;
+  margin-top: 0;
+  position: absolute;
+  width: 60%;
+}
+
+.attendance_description2_detail1 {
+  @apply attendance_description2;
+  font-family: Myriad Pro;
+  top: 70%;
+  left: 2%;
+}
+
+.attendance_description2_detail2 {
+  @apply attendance_description2;
+  top: 87%;
+  left: 2%;
+  display: flex;
+  align-items: center;
+}
+
+.attendance_description2_detail2_icon {
+  margin-right: 1%;
+  margin-left: 3%;
+  width: 2%;
+}
+
+.attendance_source {
+  @apply rule_source;
+  margin-top: 0;
+}
+
+.quantity_title {
+  @apply rule_title;
+  margin-top: 4%;
+}
+
+.quantity_note {
+  display: flex;
+  align-items: center;
+}
+
+.quantity_note_icon {
+  margin-left: 2%;
+  width: 2%;
+}
+.quantity_diagram {
+  margin-top: 4%;
+}
+.quantity_source {
+  @apply rule_source;
+}
+.general_assessment_title {
+  @apply mechanism_title;
+}
+.general_assessment_description {
+  @apply director_description;
+}
+.general_assessment_detail1 {
+  display: flex;
+  justify-content: space-around;
+}
+.general_assessment_detail1 {
+  color: var(--007534, #007534);
+  text-align: center;
+  font-family: Myriad Pro Regular;
+  font-weight: 600;
+  letter-spacing: -0.037vw;
+  font-size: 1.042vw;
+}
+
+.general_assessment_img {
+  margin: 1% 0;
+}
+
+.general_assessment_detail2 {
+  @apply general_assessment_detail1;
+  margin: 0 15%;
+}
+.evaluate_header {
+  display: flex;
+  /* align-items: center; */
+}
+.evaluate_icon {
+  margin-right: 2%;
+}
+.evaluate_title {
+  color: var(--007534, #007534);
+  font-family: Myriad Pro Regular;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1.458vw;
+  margin-top: 0.208vw;
+}
+.evaluate {
+  margin-top: 5%;
+}
+.evaluate_source {
+  @apply rule_source;
+}
+.evaluate1_img {
+  margin-top: 3%;
+}
+.evaluate_decoration {
+  width: 39.427vw;
+  margin-top: 2%;
+}
+.evaluate_description {
+  @apply director_description;
+}
+.evaluate_detail {
+  @apply rule_title;
+  font-family: Myriad Pro Regular;
+}
+ul {
+  list-style: inside;
+}
+.evaluate_detail__bold {
+  @apply rule_title;
+}
+.evaluate2 {
+  margin-top: -3%;
+}
+.evaluate_img4 {
+  background-image: url(../../../assets/images/QuanTri/evaluate_img4.png);
+  width: 100%;
+  height: 30.565vw;
+  background-size: 100%;
+  position: relative;
+  transform: translateX(-18%);
+}
+
+.evaluate_detail2 {
+  @apply evaluate_detail;
+  margin-top: 0;
+  width: 85%;
+  position: absolute;
+  left: 11%;
+}
+.evaluate_table {
+  position: absolute;
+  top: 60%;
 }
