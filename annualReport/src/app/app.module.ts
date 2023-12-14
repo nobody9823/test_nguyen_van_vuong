@@ -34,6 +34,7 @@ import { HoatDongTrongNamComponent } from './content-pages/hoat-dong-trong-nam/h
 import { Section2TitleComponent } from './components/vectors/quan-tri/section2-title/section2-title.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SectionContent1Component } from './components/vectors/quan-tri/section-content1/section-content1.component';
+import { Section2Logo1Component } from './components/vectors/quan-tri/section2-logo1/section2-logo1.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { SectionContent1Component } from './components/vectors/quan-tri/section-
     HoatDongTrongNamComponent,
     Section2TitleComponent,
     FooterComponent,
-    SectionContent1Component
+    SectionContent1Component,
+    Section2Logo1Component
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

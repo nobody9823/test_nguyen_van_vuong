@@ -903,7 +903,23 @@
   margin-top: 5%;
 }
 
+.attendance {
+  margin-top: 6%;
+}
+
 .attendance_header {
   @apply director_detail;
   font-family: Myriad Pro;
+}
+
+.attendance_decoration {
+  margin-top: 2%;
+}
+
+.attendance_description {
+  @apply rule_title;
+  font-family: Myriad Pro Light;
+  display: flex;
+  justify-content: end;
+  margin-top: 0;
 }
