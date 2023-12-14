@@ -35,6 +35,7 @@ import { Section2TitleComponent } from './components/vectors/quan-tri/section2-t
 import { FooterComponent } from './components/footer/footer.component';
 import { SectionContent1Component } from './components/vectors/quan-tri/section-content1/section-content1.component';
 import { Section2Logo1Component } from './components/vectors/quan-tri/section2-logo1/section2-logo1.component';
+import { BackToTopComponent } from './components/back-to-top/back-to-top.component';
 import { Section2Content2Component } from './components/vectors/quan-tri/section2-content2/section2-content2.component';
 import { TtcLogo4Component } from './components/vectors/ttc-logo4/ttc-logo4.component';
 
@@ -74,6 +75,7 @@ import { TtcLogo4Component } from './components/vectors/ttc-logo4/ttc-logo4.comp
     FooterComponent,
     SectionContent1Component,
     Section2Logo1Component,
+    BackToTopComponent
     Section2Content2Component,
     TtcLogo4Component
   ],
