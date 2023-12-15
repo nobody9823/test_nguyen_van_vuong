@@ -1081,3 +1081,121 @@ ul {
   position: absolute;
   top: 60%;
 }
+
+.section_logo {
+  width: 56%;
+}
+.business_model_title {
+  background-image: url(../../../assets/images/QuanTri/business_model_title_bg.svg);
+  width: 100%;
+  height: 58.49vw;
+  background-size: 100%;
+  @apply mechanism_title;
+}
+.business_model_block {
+  margin-top: 4%;
+}
+.business_model_icon {
+  position: absolute;
+  left: -5%;
+}
+.business_model_highlight {
+  background: linear-gradient(
+    90deg,
+    #003767 0.93%,
+    #003767 33.61%,
+    #00425d 51.43%,
+    #006143 83.11%,
+    #007534 99.94%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: UTM HelvetIns;
+  font-weight: 400;
+  text-align: left;
+  text-transform: uppercase;
+  width: fit-content;
+  font-size: 3.906vw;
+}
+.bm_title {
+  @apply evaluate_title;
+  font-family: Myriad Pro;
+  padding-top: 0.5%;
+}
+.bm_title2 {
+  @apply bm_title;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+}
+.mission_header {
+  display: flex;
+  align-items: center;
+}
+.mission_title {
+  @apply evaluate_detail;
+  font-size: 1.302vw;
+  text-transform: uppercase;
+  margin-bottom: 2%;
+  margin-right: 2%;
+}
+
+.mission_decoration {
+  background: linear-gradient(
+    90deg,
+    #aaa9aa 22.52%,
+    rgba(170, 169, 170, 0) 100%
+  );
+  height: 0.052vw;
+  flex-grow: 1;
+}
+.mission_list {
+  background-image: url(../../../assets/images/QuanTri/mission_list_bg.png);
+  /* width: 7.583%; */
+  width: 100%;
+  height: 59.583vw;
+  background-size: 7.583%;
+  background-repeat: no-repeat;
+}
+
+.mission_detail {
+  @apply rule_title;
+  font-family: Myriad Pro Regular;
+  font-weight: 100;
+  line-height: 1.667vw;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: absolute;
+}
+
+.mission_detail strong {
+  font-weight: 800;
+}
+
+.mission_footer {
+  @apply rule_title;
+  font-family: Myriad Pro Regular;
+  font-weight: 500;
+}
+
+.mission1 {
+  top: 4%;
+  left: 10%;
+}
+.mission2 {
+  top: 19.5%;
+  left: 10%;
+}
+.mission3 {
+  top: 31.7%;
+  left: 10%;
+}
+.mission4 {
+  top: 49.7%;
+  left: 10%;
+}
+.mission5 {
+  top: 64.7%;
+  left: 10%;
+}
