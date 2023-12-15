@@ -1,11 +1,11 @@
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { HomeComponent } from "./home/home.component";
-import { ButtonNavComponent } from "./components/button-nav.component";
-import { VisualComponent } from "./components/visual/visual.component";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { ButtonNavComponent } from './components/button-nav.component';
+import { VisualComponent } from './components/visual/visual.component';
 import { ContentPagesComponent } from './content-pages/content-pages.component';
 import { DauAnNienDoComponent } from './content-pages/dau-an-nien-do/dau-an-nien-do.component';
 import { LanguagesToggleComponent } from './components/languages-toggle/languages-toggle.component';
@@ -16,12 +16,12 @@ import { CountUpDirective } from './directives/count-up.directive';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { Info3TitleComponent } from './components/vectors/info3-title/info3-title.component';
 import { TtcLogo2Component } from './components/vectors/ttc-logo2/ttc-logo2.component';
-import { CupIconComponent } from "./components/vectors/cup-icon/cup-icon.component";
+import { CupIconComponent } from './components/vectors/cup-icon/cup-icon.component';
 import { VietnamMapComponent } from './components/vectors/vietnam-map/vietnam-map.component';
 import { TtcLogo3Component } from './components/vectors/ttc-logo3/ttc-logo3.component';
 import { TongQuanVeTtcAgrisComponent } from './content-pages/tong-quan-ve-ttc-agris/tong-quan-ve-ttc-agris.component';
 import { TitleLogo2Component } from './components/vectors/title-logo2/title-logo2.component';
-import { DauAnSvg1Component } from "./components/vectors/dau-an-svg1/dau-an-svg1.component";
+import { DauAnSvg1Component } from './components/vectors/dau-an-svg1/dau-an-svg1.component';
 import { DauAnSvg2Component } from './components/vectors/dau-an-svg2/dau-an-svg2.component';
 import { DauAnSvg3Component } from './components/vectors/dau-an-svg3/dau-an-svg3.component';
 import { DauAnSvg4Component } from './components/vectors/dau-an-svg4/dau-an-svg4.component';
@@ -75,9 +75,9 @@ import { TtcLogo4Component } from './components/vectors/ttc-logo4/ttc-logo4.comp
     FooterComponent,
     SectionContent1Component,
     Section2Logo1Component,
-    BackToTopComponent
+    BackToTopComponent,
     Section2Content2Component,
-    TtcLogo4Component
+    TtcLogo4Component,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
