@@ -1082,7 +1082,7 @@ ul {
   top: 60%;
 }
 
-.section_logo {
+.section3_logo {
   width: 56%;
 }
 .business_model_title {
@@ -1198,4 +1198,102 @@ ul {
 .mission5 {
   top: 64.7%;
   left: 10%;
+}
+
+.section4_logo {
+  width: 76%;
+}
+.report_detail {
+  @apply rule_title;
+  font-family: Myriad Pro Regular;
+  font-weight: 100;
+  line-height: 1.667vw;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.mission_detail strong {
+  font-weight: 800;
+}
+
+.council_member {
+  background-image: url(../../../assets/images/QuanTri/council_member_bg.png);
+  width: 100%;
+  height: 36.161vw;
+  background-size: 100%;
+}
+.member_info {
+  @apply mission_detail;
+  text-align: center;
+  position: absolute;
+  width: 26.9%;
+  top: 60%;
+}
+.member_info1 {
+  left: 6%;
+}
+.member_info2 {
+  left: 36.4%;
+}
+.member_info3 {
+  left: 67%;
+}
+.sample_text {
+  color: var(--292829, #292829);
+  text-align: justify;
+  font-family: Myriad Pro Regular;
+  font-weight: 100;
+  font-size: 1.198vw;
+}
+
+.sample_text strong {
+  font-weight: 700;
+}
+
+.sample_text_small {
+  font-size: 0.833vw;
+}
+
+.sample_text_highlight {
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 34.48%,
+      #00425d 68.87%,
+      #007534 103.25%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: justify;
+  font-family: Myriad Pro Regular;
+  font-weight: 400;
+  font-size: 1.510vw;
+  width: fit-content;
+}
+
+.council_detail {
+  background-image: url(../../../assets/images/QuanTri/council_detail_bg.png);
+  width: 100%;
+  height: 30.154vw;
+  background-size: 100%;
+}
+
+.council_detail2 {
+  background-image: url(../../../assets/images/QuanTri/council_detail2_bg.png);
+  width: 100%;
+  height: 51.442vw;
+  background-size: 100%;
+}
+.council_decoration {
+  background: #1a3966;
+  width: 0.313vw;
+  height: 15.208vw;
+}
+.council_title {
+  @apply mechanism_title;
+  margin-top: 0;
 }
