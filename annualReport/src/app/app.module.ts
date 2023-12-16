@@ -40,6 +40,7 @@ import { Section2Content2Component } from './components/vectors/quan-tri/section
 import { TtcLogo4Component } from './components/vectors/ttc-logo4/ttc-logo4.component';
 import { Section3TitleComponent } from './components/vectors/quan-tri/section3-title/section3-title.component';
 import { Section4TitleComponent } from './components/vectors/quan-tri/section4-title/section4-title.component';
+import { Section5TitleComponent } from './components/vectors/quan-tri/section5-title/section5-title.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { Section4TitleComponent } from './components/vectors/quan-tri/section4-t
     TtcLogo4Component,
     Section3TitleComponent,
     Section4TitleComponent,
+    Section5TitleComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
