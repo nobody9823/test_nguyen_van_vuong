@@ -1271,7 +1271,7 @@ ul {
   text-align: justify;
   font-family: Myriad Pro Regular;
   font-weight: 400;
-  font-size: 1.510vw;
+  font-size: 1.51vw;
   width: fit-content;
 }
 
@@ -1288,6 +1288,16 @@ ul {
   font-weight: 400;
   text-transform: uppercase;
   font-size: 2.083vw;
+}
+
+.sample_heading_yellow {
+  color: var(--f-4-e-696, #f4e696);
+  text-align: justify;
+  font-family: UTM HelvetIns;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1.979vw;
 }
 
 .council_detail {
@@ -1319,7 +1329,7 @@ ul {
 .audit_mission {
   background-image: url(../../../assets/images/QuanTri/audit_mission_bg.png);
   width: 100%;
-  height: 37.240vw;
+  height: 37.24vw;
   background-size: 100%;
 }
 
@@ -1400,4 +1410,151 @@ ul {
   color: white;
 }
 
+.section6_logo {
+  width: 76.17%;
+  margin-top: 6%;
+}
 
+.committee_description {
+  background-image: url(../../../assets/images/QuanTri/committee_description_bg.png);
+  width: 100%;
+  height: 42.752vw;
+  background-size: 100%;
+  margin-top: -10%;
+}
+.committee_detail {
+  @apply sample_heading_yellow;
+  text-align: center;
+  position: absolute;
+  top: 43%;
+}
+
+.committee_detail1 {
+  left: 7.6%;
+}
+.committee_detail2 {
+  left: 75.7%;
+}
+
+.committee_description2 {
+  background-image: url(../../../assets/images/QuanTri/committee_description2_bg.png);
+  width: 100%;
+  height: 19.646vw;
+  background-size: 100%;
+  margin-top: 3%;
+}
+
+.committee_description3 {
+  background-image: url(../../../assets/images/QuanTri/committee_description3_bg.png);
+  width: 100%;
+  height: 40.208vw;
+  background-size: 100%;
+  margin-top: 7%;
+}
+
+.committee_description3_text {
+  @apply sample_text;
+  position: absolute;
+  font-size: 1.146vw;
+  line-height: 1.406vw;
+  width: 40%;
+}
+
+.committee_description3_text2 {
+  @apply committee_description3_text;
+  width: 38%;
+}
+
+.committee_table2 {
+  background-image: url(../../../assets/images/QuanTri/committee_table2_bg.png);
+  width: 100%;
+  height: 41.366vw;
+  background-size: 100%;
+  margin-top: 2%;
+}
+
+.committee_table2_label {
+  color: var(--58595-b, #58595b);
+  text-align: center;
+  font-family: Myriad Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.146vw;
+}
+.committee_table2_decoration {
+  background: #58595b;
+  width: 1.023vw;
+  height: 0.052vw;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.committee_table2_content {
+  @apply committee_table2_label;
+  color: var(--292829, #292829);
+  text-align: justify;
+  font-family: Myriad Pro Light;
+  width: 78%;
+  position: absolute;
+}
+.committee_description5 {
+  background-image: url(../../../assets/images/QuanTri/committee_description5_bg.png);
+  width: 100%;
+  height: 27.865vw;
+  background-size: 100%;
+  margin-top: 7%;
+}
+.committee_description6 {
+  background-image: url(../../../assets/images/QuanTri/committee_description6_bg.png);
+  width: 100%;
+  height: 19.646vw;
+  background-size: 100%;
+  margin-top: 6%;
+}
+.committee_description7 {
+  background-image: url(../../../assets/images/QuanTri/committee_description7_bg.png);
+  width: 100%;
+  height: 44.136vw;
+  background-size: 100%;
+  margin-top: 7%;
+}
+.committee_description7_text {
+  @apply committee_description3_text;
+  width: 90%;
+}
+
+.committee_description8 {
+  background-image: url(../../../assets/images/QuanTri/committee_description8_bg.png);
+  width: 100%;
+  height: 34.479vw;
+  background-size: 100%;
+  margin-top: 7%;
+}
+.committee_table4 {
+  background-image: url(../../../assets/images/QuanTri/committee_table4_bg.png);
+  width: 100%;
+  height: 40.015vw;
+  background-size: 100%;
+  margin-top: 2%;
+}
+.committee_table4_decoration {
+  background: #58595b;
+  width: 1.623vw;
+  height: 0.052vw;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.committee_table4_content {
+  @apply committee_table2_label;
+  color: var(--292829, #292829);
+  text-align: justify;
+  font-family: Myriad Pro Light;
+  width: 73%;
+  position: absolute;
+}
+.committee_description10 {
+  background-image: url(../../../assets/images/QuanTri/committee_description10_bg.png);
+  width: 100%;
+  height: 87.292vw;
+  background-size: 100%;
+  margin-top: 7%;
+}
