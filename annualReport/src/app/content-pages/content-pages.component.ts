@@ -1,6 +1,5 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-content-pages',
@@ -9,14 +8,14 @@ import { timeout } from 'rxjs';
 })
 export class ContentPagesComponent {
   router: Router;
-
+  rootPath: string = '/2022-2023/vi';
   isOpenNav: boolean = false;
   expandingNav: number = 0;
   navList = [
     {
       index: 1,
       title: 'TTC AgriS - Dấu ấn niên độ',
-      link: '/content/dau-an-nien-do',
+      link: this.rootPath + '/dau-an-nien-do',
       children: [
         { title: 'Tầm nhìn - Sứ mệnh - Giá trị cốt lõi', navId: 'info-4' },
         { title: 'Thông điệp Chủ tịch Hội đồng Quản trị', navId: 'info-5' },
@@ -31,7 +30,7 @@ export class ContentPagesComponent {
     {
       index: 2,
       title: 'Tổng quan về TTC AgriS',
-      link: '/content/tong-quan-ve-ttc-agris',
+      link: this.rootPath + '/tong-quan-ve-ttc-agris',
       children: [
         { title: 'Hành trình 54 năm thương hiệu TTC AgriS', navId: 'section-2' },
         { title: 'Hồ sơ doanh nghiệp', navId: 'section-4' },
@@ -44,7 +43,7 @@ export class ContentPagesComponent {
     {
       index: 3,
       title: 'Quản trị Công ty',
-      link: '/content/quan-tri-cong-ty',
+      link: this.rootPath + '/quan-tri-cong-ty',
       children: [
         { title: 'Quy chế Quản trị Công ty thông lệ quốc tế', navId: 'info-1' },
         { title: 'Giới thiệu Hội đồng Quản trị', navId: 'info-1' },
@@ -62,7 +61,7 @@ export class ContentPagesComponent {
     {
       index: 4,
       title: 'Tình hình hoạt động trong năm',
-      link: '/content/hoat-dong-trong-nam',
+      link: this.rootPath + '/hoat-dong-trong-nam',
       children: [
         // { title: 'Triển vọng Đường thế giới', navId: 'info-1' },
         // { title: 'Triển vọng Đường Việt Nam', navId: 'info-1' },
@@ -104,7 +103,7 @@ export class ContentPagesComponent {
     {
       index: 5,
       title: 'Báo cáo phát triển bền vững',
-      link: '',
+      link: this.rootPath + '/phat-trien-ben-vung',
       children: [
         { title: 'Cam kết Phát triển bền vững từ Hội đồng Quản trị', navId: 'info-1' },
         { title: '17 tiêu chí phát triển bền vững của Liên Hợp Quốc', navId: 'info-1' },
@@ -117,7 +116,7 @@ export class ContentPagesComponent {
     {
       index: 6,
       title: 'Báo cáo tài chính',
-      link: '',
+      link: this.rootPath + '',
       children: [
         { title: 'Báo cáo tài chính kiểm toán hợp nhất 22/23 (VAS)', navId: 'info-1' },
         { title: 'Báo cáo tài chính kiểm toán riêng 22/23 (VAS)', navId: 'info-1' },
