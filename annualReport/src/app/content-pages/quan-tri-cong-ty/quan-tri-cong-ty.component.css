@@ -1254,6 +1254,11 @@ ul {
   font-size: 0.833vw;
 }
 
+.sample_text_22px {
+  @apply sample_text;
+  font-size: 1.146vw;
+}
+
 .sample_text_highlight {
   background: var(
     --Style,
@@ -1557,4 +1562,203 @@ ul {
   height: 87.292vw;
   background-size: 100%;
   margin-top: 7%;
+}
+.section7_logo {
+  width: 58%;
+  margin-top: 6%;
+}
+.regulation_description {
+  background-image: url(../../../assets/images/QuanTri/regulation_description_bg.png);
+  width: 130%;
+  height: 59.583vw;
+  background-size: 100%;
+}
+.regulation_description_label {
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 26.42%,
+      #00425d 61.34%,
+      #007534 101.64%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  font-family: UTM HelvetIns;
+  font-weight: 400;
+  font-size: 1.979vw;
+}
+.regulation_description2 {
+  background-image: url(../../../assets/images/QuanTri/regulation_description2_bg.png);
+  width: 100%;
+  height: 35.625vw;
+  background-size: 100%;
+}
+.regulation_description2_text {
+  color: var(--f-4-e-696, #f4e696);
+  text-align: justify;
+  font-family: Myriad Pro Regular;
+  font-weight: 400;
+  font-size: 1.354vw;
+}
+.regulation_description4 {
+  background-image: url(../../../assets/images/QuanTri/regulation_description4_bg.png);
+  width: 100%;
+  height: 66.493vw;
+  background-size: 100%;
+}
+.regulation_description5 {
+  background-image: url(../../../assets/images/QuanTri/regulation_description5_bg.png);
+  width: 100%;
+  height: 27.24vw;
+  background-size: 100%;
+}
+.regulation_description5_text1 {
+  background: var(
+    --Style,
+    linear-gradient(
+      90deg,
+      #003767 0.09%,
+      #003767 26.42%,
+      #00425d 61.34%,
+      #007534 101.64%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: fit-content;
+}
+.regulation_description5_text2 {
+  color: var(--1-a-3966, #1a3966);
+}
+.regulation_description5_text3 {
+  background: linear-gradient(
+    270deg,
+    #0083ca 7.14%,
+    #005892 54.33%,
+    #003767 96.64%,
+    #00467b 114.54%,
+    #006eaf 151.96%,
+    #0083ca 169.86%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: fit-content;
+}
+.regulation_description5_text4 {
+  color: #0072bc;
+}
+
+.regulation_description5_text5 {
+  background: var(
+    --Text-Gradient,
+    linear-gradient(90deg, #007534 -0.98%, #23923c 52.79%, #50b848 100.23%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: fit-content;
+}
+
+.regulation_description5_text6 {
+  color: var(--007534, #007534);
+}
+
+.regulation_description5_text7 {
+  color: var(--50-b-848, #50b848);
+}
+.regulation_description6 {
+  background-image: url(../../../assets/images/QuanTri/regulation_description6_bg.png);
+  width: 100%;
+  height: 77.031vw;
+  background-size: 100%;
+}
+.regulation_description7 {
+  background-image: url(../../../assets/images/QuanTri/regulation_description7_bg.png);
+  width: 100%;
+  height: 12.572vw;
+  background-size: 100%;
+}
+.regulation_description8 {
+  background-image: url(../../../assets/images/QuanTri/regulation_description8_bg.png);
+  width: 100%;
+  height: 88.433vw;
+  background-size: 100%;
+}
+.regulation_description9 {
+  background-image: url(../../../assets/images/QuanTri/regulation_description9_bg.png);
+  width: 100%;
+  height: 35.26vw;
+  background-size: 100%;
+}
+.risk_title1 {
+  color: var(--f-4-e-696, #f4e696);
+  font-family: Myriad Pro Regular;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1.719vw;
+}
+.risk1_title {
+  background-image: url(../../../assets/images/QuanTri/risk1_bg.png);
+  width: 100%;
+  height: 6.396vw;
+  background-size: 100%;
+}
+.risk2_title {
+  @apply risk1_title;
+  background-image: url(../../../assets/images/QuanTri/risk2_bg.png);
+}
+.risk3_title {
+  @apply risk1_title;
+  background-image: url(../../../assets/images/QuanTri/risk3_bg.png);
+}
+.risk4_title {
+  @apply risk1_title;
+  background-image: url(../../../assets/images/QuanTri/risk4_bg.png);
+}
+.risk5_title {
+  @apply risk1_title;
+  background-image: url(../../../assets/images/QuanTri/risk5_bg.png);
+}
+.risk6_title {
+  @apply risk1_title;
+  background-image: url(../../../assets/images/QuanTri/risk6_bg.png);
+}
+.risk7_title {
+  @apply risk1_title;
+  background-image: url(../../../assets/images/QuanTri/risk7_bg.png);
+}
+.risk8_title {
+  @apply risk1_title;
+  background-image: url(../../../assets/images/QuanTri/risk8_bg.png);
+}
+.risk9_title {
+  @apply risk1_title;
+  background-image: url(../../../assets/images/QuanTri/risk9_bg.png);
+}
+.risk10_title {
+  @apply risk1_title;
+  background-image: url(../../../assets/images/QuanTri/risk10_bg.png);
+}
+.risk_decoration {
+  width: 8.698vw;
+}
+.risk_description {
+  background-image: url(../../../assets/images/QuanTri/risk_description_bg.png);
+  width: 100%;
+  height: 58.333vw;
+  background-size: 100%;
+}
+.risk_description_text {
+  color: var(--c-7-eafc, #c7eafc);
+  text-align: justify;
+  font-family: Myriad Pro Regular;
+  font-weight: 400;
+  font-size: 1.354vw;
 }

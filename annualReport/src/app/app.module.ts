@@ -42,6 +42,11 @@ import { Section3TitleComponent } from './components/vectors/quan-tri/section3-t
 import { Section4TitleComponent } from './components/vectors/quan-tri/section4-title/section4-title.component';
 import { Section5TitleComponent } from './components/vectors/quan-tri/section5-title/section5-title.component';
 import { Section6TitleComponent } from './components/vectors/quan-tri/section6-title/section6-title.component';
+import { Section7TitleComponent } from './components/vectors/quan-tri/section7-title/section7-title.component';
+import { RegulartionDescription4ContentComponent } from './components/vectors/quan-tri/regulartion-description4-content/regulartion-description4-content.component';
+import { RegulartionDescription6ContentComponent } from './components/vectors/quan-tri/regulartion-description6-content/regulartion-description6-content.component';
+import { RegulartionDescription8ContentComponent } from './components/vectors/quan-tri/regulartion-description8-content/regulartion-description8-content.component';
+import { RegulartionDescription9ContentComponent } from './components/vectors/quan-tri/regulartion-description9-content/regulartion-description9-content.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +91,11 @@ import { Section6TitleComponent } from './components/vectors/quan-tri/section6-t
     Section4TitleComponent,
     Section5TitleComponent,
     Section6TitleComponent,
+    Section7TitleComponent,
+    RegulartionDescription4ContentComponent,
+    RegulartionDescription6ContentComponent,
+    RegulartionDescription8ContentComponent,
+    RegulartionDescription9ContentComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
