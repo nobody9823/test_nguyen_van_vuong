@@ -40,6 +40,7 @@ import { Section2Content2Component } from './components/vectors/quan-tri/section
 import { TtcLogo4Component } from './components/vectors/ttc-logo4/ttc-logo4.component';
 import { Section3TitleComponent } from './components/vectors/quan-tri/section3-title/section3-title.component';
 import { Section4TitleComponent } from './components/vectors/quan-tri/section4-title/section4-title.component';
+import { PhatTrienBenVungComponent } from './content-pages/phat-trien-ben-vung/phat-trien-ben-vung.component';
 import { Section5TitleComponent } from './components/vectors/quan-tri/section5-title/section5-title.component';
 import { Section6TitleComponent } from './components/vectors/quan-tri/section6-title/section6-title.component';
 import { Section7TitleComponent } from './components/vectors/quan-tri/section7-title/section7-title.component';
@@ -89,6 +90,7 @@ import { RegulartionDescription9ContentComponent } from './components/vectors/qu
     TtcLogo4Component,
     Section3TitleComponent,
     Section4TitleComponent,
+    PhatTrienBenVungComponent,
     Section5TitleComponent,
     Section6TitleComponent,
     Section7TitleComponent,

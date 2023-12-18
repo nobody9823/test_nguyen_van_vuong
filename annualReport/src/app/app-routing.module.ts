@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { TongQuanVeTtcAgrisComponent } from './content-pages/tong-quan-ve-ttc-agris/tong-quan-ve-ttc-agris.component';
 import { QuanTriCongTyComponent } from './content-pages/quan-tri-cong-ty/quan-tri-cong-ty.component';
 import { HoatDongTrongNamComponent } from './content-pages/hoat-dong-trong-nam/hoat-dong-trong-nam.component';
+import { PhatTrienBenVungComponent } from './content-pages/phat-trien-ben-vung/phat-trien-ben-vung.component';
 
 const routes: Routes = [
   // {
@@ -42,6 +43,10 @@ const routes: Routes = [
         path: 'hoat-dong-trong-nam',
         component: HoatDongTrongNamComponent,
       },
+      {
+        path: 'phat-trien-ben-vung',
+        component: PhatTrienBenVungComponent
+      }
     ],
   },
   { path: '**', redirectTo: '' },
