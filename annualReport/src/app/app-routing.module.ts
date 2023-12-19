@@ -8,18 +8,15 @@ import { QuanTriCongTyComponent } from './content-pages/quan-tri-cong-ty/quan-tr
 import { HoatDongTrongNamComponent } from './content-pages/hoat-dong-trong-nam/hoat-dong-trong-nam.component';
 import { PhatTrienBenVungComponent } from './content-pages/phat-trien-ben-vung/phat-trien-ben-vung.component';
 
+const rootPath = '2022-2023';
+
 const routes: Routes = [
-  // {
-  //   path: 'dau-an-nien-do',
-  //   // loadChildren: () => import('./content-pages/content-pages.module').then(m => m.ContentPagesModule)
-  //   component: DauAnNienDoComponent
-  // }
   {
-    path: '',
+    path: rootPath,
     component: HomeComponent,
   },
   {
-    path: 'content',
+    path: rootPath+ '/vi',
     component: ContentPagesComponent,
     children: [
       {
@@ -49,7 +46,7 @@ const routes: Routes = [
       }
     ],
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: rootPath },
 ];
 
 @NgModule({
