@@ -1812,6 +1812,27 @@ ul {
 .law_description3 {
   background: linear-gradient(180deg, #fff 0%, #c7eafb 100%);
   width: 100%;
-  height: 51.510vw;
+  height: 51.51vw;
   flex-shrink: 0;
+}
+.relation_decoration {
+  background: var(
+    --Text-Gradient,
+    linear-gradient(90deg, #007534 -0.98%, #23923c 52.79%, #50b848 100.23%)
+  );
+  width: 100%;
+  height: 0.104vw;
+}
+.relation_table {
+  background-image: url(../../../assets/images/QuanTri/relation_table_bg.png);
+  width: 100%;
+  height: 86.721vw;
+  background-size: 100%;
+}
+
+.relation_description2 {
+  background-image: url(../../../assets/images/QuanTri/relation_description2_bg.png);
+  width: 100%;
+  height: 85.707vw;
+  background-size: 100%;
 }
