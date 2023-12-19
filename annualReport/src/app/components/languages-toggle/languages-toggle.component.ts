@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import {
-  takeUntil, Subject
-} from 'rxjs';
+import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-languages-toggle',
   templateUrl: './languages-toggle.component.html',
@@ -17,8 +15,7 @@ export class LanguagesToggleComponent {
 
   constructor(router: Router) {
     this.router = router;
-    this.router.events.pipe(takeUntil(this.unsubscribe))
-    .subscribe((routerEvent) => {
+    this.router.events.subscribe((routerEvent) => {
       this.checkRouterEvent(routerEvent as RouterEvent);
     });
   }
