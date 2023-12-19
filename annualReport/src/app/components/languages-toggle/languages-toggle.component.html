@@ -1,4 +1,4 @@
 <div class="toggle-languages flex p-1">
-  <div class="w-[40px] text-center actived">VN</div>
-  <div class="w-[40px] text-center">EN</div>
+  <a [routerLink]="vietnamUrl" class="w-[40px] text-center" [ngClass]="inEnglish == false ?'actived':''">VN</a>
+  <a [routerLink]="englishUrl" class="w-[40px] text-center" [ngClass]="inEnglish == true? 'actived':''">EN</a>
 </div>
