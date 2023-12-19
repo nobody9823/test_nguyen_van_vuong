@@ -48,6 +48,7 @@ import { RegulartionDescription4ContentComponent } from './components/vectors/qu
 import { RegulartionDescription6ContentComponent } from './components/vectors/quan-tri/regulartion-description6-content/regulartion-description6-content.component';
 import { RegulartionDescription8ContentComponent } from './components/vectors/quan-tri/regulartion-description8-content/regulartion-description8-content.component';
 import { RegulartionDescription9ContentComponent } from './components/vectors/quan-tri/regulartion-description9-content/regulartion-description9-content.component';
+import { Section8TitleComponent } from './components/vectors/quan-tri/section8-title/section8-title.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { RegulartionDescription9ContentComponent } from './components/vectors/qu
     RegulartionDescription6ContentComponent,
     RegulartionDescription8ContentComponent,
     RegulartionDescription9ContentComponent,
+    Section8TitleComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
