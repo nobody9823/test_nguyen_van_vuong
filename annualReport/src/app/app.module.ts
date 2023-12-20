@@ -54,6 +54,25 @@ import { Section9TitleComponent } from './components/vectors/quan-tri/section9-t
 import { RelationDescriptionComponent } from './components/vectors/quan-tri/relation-description/relation-description.component';
 import { RelationTableComponent } from './components/vectors/quan-tri/relation-table/relation-table.component';
 import { RelationDescription2Component } from './components/vectors/quan-tri/relation-description2/relation-description2.component';
+import { ReportDescription2Component } from './components/vectors/quan-tri/report-description2/report-description2.component';
+import { ReportDescription3Component } from './components/vectors/quan-tri/report-description3/report-description3.component';
+import { ReportDescription4Component } from './components/vectors/quan-tri/report-description4/report-description4.component';
+import { ReportDescription5Component } from './components/vectors/quan-tri/report-description5/report-description5.component';
+import { ReportDescription6Component } from './components/vectors/quan-tri/report-description6/report-description6.component';
+import { ReportDescription7Component } from './components/vectors/quan-tri/report-description7/report-description7.component';
+import { ReportDescription8Component } from './components/vectors/quan-tri/report-description8/report-description8.component';
+import { ReportDescription9Component } from './components/vectors/quan-tri/report-description9/report-description9.component';
+import { ReportDescription10Component } from './components/vectors/quan-tri/report-description10/report-description10.component';
+import { ReportDescription11Component } from './components/vectors/quan-tri/report-description11/report-description11.component';
+import { ReportDescription12Component } from './components/vectors/quan-tri/report-description12/report-description12.component';
+import { ReportDescription13Component } from './components/vectors/quan-tri/report-description13/report-description13.component';
+import { ReportDescription14Component } from './components/vectors/quan-tri/report-description14/report-description14.component';
+import { ReportDescription15Component } from './components/vectors/quan-tri/report-description15/report-description15.component';
+import { ReportDescription16Component } from './components/vectors/quan-tri/report-description16/report-description16.component';
+import { ReportDescription17Component } from './components/vectors/quan-tri/report-description17/report-description17.component';
+import { ReportDescription18Component } from './components/vectors/quan-tri/report-description18/report-description18.component';
+import { ReportDescription19Component } from './components/vectors/quan-tri/report-description19/report-description19.component';
+import { ReportDescription20Component } from './components/vectors/quan-tri/report-description20/report-description20.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +129,25 @@ import { RelationDescription2Component } from './components/vectors/quan-tri/rel
     RelationDescriptionComponent,
     RelationTableComponent,
     RelationDescription2Component,
+    ReportDescription2Component,
+    ReportDescription3Component,
+    ReportDescription4Component,
+    ReportDescription5Component,
+    ReportDescription6Component,
+    ReportDescription7Component,
+    ReportDescription8Component,
+    ReportDescription9Component,
+    ReportDescription10Component,
+    ReportDescription11Component,
+    ReportDescription12Component,
+    ReportDescription13Component,
+    ReportDescription14Component,
+    ReportDescription15Component,
+    ReportDescription16Component,
+    ReportDescription17Component,
+    ReportDescription18Component,
+    ReportDescription19Component,
+    ReportDescription20Component,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
