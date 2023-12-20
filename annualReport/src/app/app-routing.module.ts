@@ -8,7 +8,7 @@ import { QuanTriCongTyComponent } from './content-pages/quan-tri-cong-ty/quan-tr
 import { HoatDongTrongNamComponent } from './content-pages/hoat-dong-trong-nam/hoat-dong-trong-nam.component';
 import { PhatTrienBenVungComponent } from './content-pages/phat-trien-ben-vung/phat-trien-ben-vung.component';
 
-const rootPath = '2022-2023';
+const rootPath = '2022-2023/vi';
 
 const routes: Routes = [
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: rootPath+ '/vi',
+    path: rootPath,
     component: ContentPagesComponent,
     children: [
       {
