@@ -116,6 +116,13 @@ strong {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.desc-29-color-292829 {
+    font-family: Inter;
+    font-size: 1.510vw;
+    font-weight: 600;
+    line-height: 2.344vw;
+    color: #292829;    
+}
 .desc-29-color-C7EAFC {
     font-family: Inter;
     font-size: 1.510vw;
@@ -312,6 +319,29 @@ strong {
     font-weight: 600;
     line-height: 1.563vw;
     color: #007534;
+}
+.text-green-22-light {
+    font-family: Myriad Pro;
+    font-size: 1.146vw;
+    font-weight: 600;
+    line-height: 1.563vw;
+    color: #007534;
+}
+.text-gray-22-light {
+    font-family: Myriad Pro Light;
+    font-size: 1.146vw;
+    font-weight: 300;
+    line-height: 1.563vw;
+    color: #292829;
+    letter-spacing: -0.042vw;
+}
+.text-blue-22 {
+    font-family: Myriad Pro;
+    text-transform: uppercase;
+    font-size: 1.042vw;
+    font-weight: 600;
+    line-height: 1.250vw;
+    color: #1A3966;
 }
 .text-yellow-38 {
     font-family: UTM HelvetIns;
@@ -2031,7 +2061,59 @@ strong {
         }
     }
 }
-#section21_1,
+#section21_1 {
+    background: #FFFFFF;
+}
 #section21_2 {
     background: #FFFFFF;
+    .list-item {
+        margin-left: 1.146vw;
+    }
+    .box {
+        display: flex;
+        flex-direction: column;
+        span {
+            font-family: Myriad Pro Light;
+            font-size: 1.198vw;
+            font-weight: 600;
+            line-height: 1.458vw;
+            text-transform: uppercase;
+            background: #58595B;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .number {
+            font-family: iCiel Samsung Sharp Sans;
+            font-size: 4.583vw;
+            font-weight: 700;
+            line-height: normal;
+            background: linear-gradient(90deg, #003767 0.09%, #003767 34.48%, #00425D 68.87%, #007534 103.25%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+}
+#section22 {
+    .desc-normal {
+        font-family: Myriad Pro !important;
+    }
+}
+.animation-winkling-light {
+	animation: winkling-light 2s infinite;
+}
+@keyframes winkling-light {
+	0% {
+	  opacity: 1;
+	}
+	50% {
+	  opacity: 0.7;
+	}
+	100% {
+	  opacity: 1;
+	}
+}
+@media(max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+    }
 }

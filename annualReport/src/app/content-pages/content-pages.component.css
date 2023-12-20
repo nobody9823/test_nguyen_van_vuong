@@ -13,17 +13,20 @@
 }
 
 .nav-item:nth-child(5) > ul {
-  display: grid;
-  grid-template-columns: auto auto auto;
+  display: flex;
+  flex-direction: column;
+  height: 18.125vw;
+  flex-wrap: wrap;
   left: -32.708vw;
   padding-right: 0.875rem;
-  gap: 0.156vw;
+  gap: 0.456vw;
   width: 62.500vw !important;
 }
 
 .nav-item:nth-child(5) > ul > li {
   height: unset !important;
   align-items: unset !important;
+  width: 30%;
 }
 
 .nav-item > a {
