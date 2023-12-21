@@ -12,6 +12,23 @@
   position: relative;
 }
 
+.nav-item:nth-child(5) > ul {
+  display: flex;
+  flex-direction: column;
+  height: 18.125vw;
+  flex-wrap: wrap;
+  left: -32.708vw;
+  padding-right: 0.875rem;
+  gap: 0.456vw;
+  width: 62.500vw !important;
+}
+
+.nav-item:nth-child(5) > ul > li {
+  height: unset !important;
+  align-items: unset !important;
+  width: 30%;
+}
+
 .nav-item > a {
   @apply leading-[80px];
 }
@@ -39,7 +56,6 @@ ul.nav .subnav li {
 ul.nav .subnav a {
   @apply w-full;
   @apply flex;
-  @apply items-center;
 }
 
 ul.nav .subnav svg {

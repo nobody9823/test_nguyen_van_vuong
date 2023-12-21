@@ -45,12 +45,12 @@
         <div class="flex1 flex justify-between">
             <div class="flex-item pl-[2.083vw]">
                 <span>chiếm hơn</span>
-                <span class="number">38</span><span class="percent">%</span>
+                <span class="number" [countUp]="71000" [duration]="38">38</span><span class="percent">%</span>
                 <span class="w-[12.240vw] inline-block">sản lượng xuất khẩu toàn cầu</span>
             </div>
             <div class="flex-item pl-[3.802vw]">
                 <span>chiếm</span>
-                <span class="number">16</span><span class="percent">%</span>
+                <span class="number" [countUp]="71000" [duration]="16">16</span><span class="percent">%</span>
                 <span class="w-[12.240vw] inline-block">sản lượng xuất khẩu toàn cầu</span>
             </div>
         </div>
@@ -127,12 +127,12 @@
         <div class="flex1 flex justify-between">
             <div class="flex-item pl-[4.083vw]">
                 <span>chiếm</span>
-                <span class="number">10</span><span class="percent">%</span>
+                <span class="number" [countUp]="10" [duration]="1000">10</span><span class="percent">%</span>
                 <span class="w-[12.240vw] inline-block">sản lượng xuất khẩu toàn cầu</span>
             </div>
             <div class="flex-item pl-[6.802vw]">
                 <span>chiếm</span>
-                <span class="number">4</span><span class="percent">%</span>
+                <span class="number" [countUp]="4" [duration]="1000">4</span><span class="percent">%</span>
                 <span class="w-[12.240vw] inline-block">sản lượng xuất khẩu toàn cầu</span>
             </div>
         </div>
@@ -269,11 +269,11 @@
                 <p>Sản xuất</p>
             </div>
             <div class="right text-infor__normal flex w-[40.521vw] pl-[3.333vw]">
-                <span class="mr-[3.619vw] inline-block">172.534</span>
-                <span class="mr-[3.542vw] inline-block">185.690</span>
-                <span class="mr-[5.948vw] inline-block">189.963</span>
-                <span class="mr-[3.948vw] inline-block">184.272</span>
-                <span>189.084</span>
+                <span class="mr-[3.619vw] inline-block" [countUp]="172534" [duration]="1000">172.534</span>
+                <span class="mr-[3.542vw] inline-block" [countUp]="185690" [duration]="1000">185.690</span>
+                <span class="mr-[5.948vw] inline-block" [countUp]="189963" [duration]="1000">189.963</span>
+                <span class="mr-[3.948vw] inline-block" [countUp]="184272" [duration]="1000">184.272</span>
+                <span [countUp]="189084" [duration]="1000">189.084</span>
             </div>
         </div>
         <div class="table-body flex justify-between w-[59.365vw] absolute top-[7.604vw] left-[1.198vw]">
@@ -281,11 +281,11 @@
                 <p>Tiêu thụ</p>
             </div>
             <div class="right text-infor__normal flex w-[40.521vw] pl-[3.333vw]">
-                <span class="mr-[3.619vw] inline-block">185.542</span>
-                <span class="mr-[3.542vw] inline-block">184.427</span>
-                <span class="mr-[5.948vw] inline-block">188.273</span>
-                <span class="mr-[4.48vw] inline-block">190.169</span>
-                <span>192.411</span>
+                <span class="mr-[3.619vw] inline-block" [countUp]="185542" [duration]="1000">185.542</span>
+                <span class="mr-[3.542vw] inline-block" [countUp]="184427" [duration]="1000">184.427</span>
+                <span class="mr-[5.948vw] inline-block" [countUp]="188273" [duration]="1000">188.273</span>
+                <span class="mr-[4.48vw] inline-block" [countUp]="190169" [duration]="1000">190.169</span>
+                <span [countUp]="192411" [duration]="1000">192.411</span>
             </div>
         </div>
         <div class="table-body flex justify-between w-[59.365vw] absolute top-[10.104vw] left-[1.198vw]">
@@ -293,11 +293,11 @@
                 <p>Thâm hụt/thặng dư trước điều chỉnh</p>
             </div>
             <div class="right text-infor__normal flex w-[40.521vw] pl-[3.333vw]">
-                <span class="mr-[5.019vw] inline-block">-13.008</span>
-                <span class="mr-[4.642vw] inline-block">1.264</span>
-                <span class="mr-[6.48vw] inline-block">1.689</span>
-                <span class="mr-[4.48vw] inline-block">-5.897</span>
-                <span>-3.327</span>
+                <span class="mr-[5.019vw] inline-block" [countUp]="13008" [duration]="1000">-13.008</span>
+                <span class="mr-[4.642vw] inline-block" [countUp]="1264" [duration]="1000">1.264</span>
+                <span class="mr-[6.48vw] inline-block" [countUp]="1689" [duration]="1000">1.689</span>
+                <span class="mr-[4.48vw] inline-block" [countUp]="5897" [duration]="1000">-5.897</span>
+                <span [countUp]="3327" [duration]="1000">-3.327</span>
             </div>
         </div>
         <div class="table-body flex justify-between w-[59.365vw] absolute top-[12.504vw] left-[1.198vw]">
@@ -305,11 +305,11 @@
                 <p>Thâm hụt/thặng dư sau điều chỉnh</p>
             </div>
             <div class="right text-infor__normal flex w-[40.521vw] pl-[3.333vw]">
-                <span class="mr-[5.619vw] inline-block">-13.220</span>
-                <span class="mr-[5.342vw] inline-block">948</span>
-                <span class="mr-[6.748vw] inline-block">689</span>
-                <span class="mr-[4.48vw] inline-block">-6.897</span>
-                <span>-4.327</span>
+                <span class="mr-[5.619vw] inline-block" [countUp]="13220" [duration]="1000">-13.220</span>
+                <span class="mr-[5.342vw] inline-block" [countUp]="948" [duration]="1000">948</span>
+                <span class="mr-[6.748vw] inline-block" [countUp]="689" [duration]="1000">689</span>
+                <span class="mr-[4.48vw] inline-block" [countUp]="6897" [duration]="1000">-6.897</span>
+                <span [countUp]="4327" [duration]="1000">-4.327</span>
             </div>
         </div>
     </div>
@@ -411,14 +411,14 @@
         <div class="left">
             <div class="box">
                 <span>Ngành Đường Việt Nam đã hoàn thành vụ ép mía với sản lượng ghi nhận</span>
-                <span class="number">9,6</span>
+                <span class="number" [countUp]="96" [duration]="1000">9,6</span>
                 <span class="mt-[-0.32vw]">triệu tấn mía <br>
                     tăng 28% so với niên vụ trước
                 </span>
             </div>
             <div class="box mt-[6.250vw]">
                 <span>sản xuất</span>
-                <div><span class="special">~</span><span class="number">935</span></div>
+                <div><span class="special">~</span><span class="number" [countUp]="935" [duration]="1000">935</span></div>
                 <span class="mt-[-0.32vw]">nghìn tấn Đường các loại <br>
                     tăng 25% so với niên vụ trước
                 </span>
@@ -609,12 +609,12 @@
         <div class="right w-[19.167vw]">
             <div class="box">
                 <span>Năm 2023, thị phần đồ uống không cồn dự kiến đạt</span>
-                <span class="number">109,1</span>
+                <span class="number" [countUp]="109" [duration]="1000">109,1</span>
                 <span class="mt-[-0.32vw] mt-[-0.990vw]">tỷ USD <br>
                     và đến năm 2027, <br>
                     thị phần dự kiến đạt
                 </span>
-                <span class="number">188,6</span>
+                <span class="number" [countUp]="1886" [duration]="1000">188,6</span>
                 <span class="mt-[-0.32vw]">tỶ USD, tăng 73%, <br>
                     tốc độ tăng trưởng <br>
                     hàng năm (CAGR) là 13,2%
@@ -683,7 +683,7 @@
         <div class="box w-[17.344vw]">
             <span>doanh thu ngành F&B <br>
                 tại Việt Nam</span>
-            <span class="number">610</span>
+            <span class="number" [countUp]="610" [duration]="1000">610</span>
             <span class="mt-[-0.32vw] mt-[-0.990vw]">nghìn tỷ VNĐ <br>
                 dự báo tăng trưởng 18%
             </span>
@@ -819,7 +819,7 @@
             <div class="desc mt-[1.302vw]">
                 Doanh thu ngành bánh kẹo ở Việt Nam đã <br> tăng nhanh, đạt
             </div>
-            <span class="number inline-block mt-[0.32vw]">7,81</span><span>tỷ USD vào năm 2022</span>
+            <span class="number inline-block mt-[0.32vw]" [countUp]="781" [duration]="1000">7,81</span><span>tỷ USD vào năm 2022</span>
         </div>
         <div class="box1 absolute top-[0.781vw] left-[40.625vw]">
             <div class="green pl-[1.458vw]">
@@ -828,7 +828,7 @@
             <div class="desc mt-[1.302vw]">
                 Dự kiến thị trường sẽ tăng trưởng hàng năm với <br> tỷ lệ
             </div>
-            <span class="number inline-block mt-[0.32vw]">11,2</span><span>% từ 2023-2027</span>
+            <span class="number inline-block mt-[0.32vw]" [countUp]="112" [duration]="1000">11,2</span><span>% từ 2023-2027</span>
         </div>
         <div class="box1 absolute top-[13.646vw] left-[8.542vw]">
             <div class="green pl-[1.458vw]">
@@ -839,7 +839,7 @@
                 doanh thu hàng năm đạt 8% và dự kiến tăng trưởng <br> 
                 sản lượng hàng năm với tỷ lệ
             </div>
-            <span class="number inline-block mt-[0.32vw]">10,78</span><span>%</span>
+            <span class="number inline-block mt-[0.32vw]" [countUp]="1078" [duration]="1000">10,78</span><span>%</span>
         </div>
         <div class="box1 absolute top-[13.646vw] left-[40.625vw]">
             <div class="green pl-[1.458vw]">
@@ -849,7 +849,7 @@
                 Năm 2019, Việt Nam nhập khẩu <br>
                 sản phẩm bánh kẹo
             </div>
-            <span class="number inline-block mt-[0.32vw]">360,6</span><span>triệu USD</span>
+            <span class="number inline-block mt-[0.32vw]" [countUp]="3606" [duration]="1000">360,6</span><span>triệu USD</span>
         </div>
     </div>
     <div class="flex gap-[2.604vw] mt-[9.375vw]">
@@ -959,7 +959,7 @@
     <div class="box absolute top-[137.058vw] left-[37.34vw] z-[2]">
         <span>Sở hữu lợi thế <br>
             vùng nguyên liệu hơn </span>
-        <div class="flex items-end"><span class="number">71.000</span><span class="special relative top-[-0.417vw]">HA</span></div>
+        <div class="flex items-end"><span class="number" [countUp]="71000" [duration]="1000">71.000</span><span class="special relative top-[-0.417vw]">HA</span></div>
         <span class="">
             ở 4 nước Việt Nam, Lào, Campuchia và Úc,
         </span>
@@ -970,11 +970,11 @@
         <span>Trong chiến lược phát triển bền vững giai đoạn <br>
             2021-2025 của mình, TTC AgriS đặt mục tiêu <br>
             mở rộng vùng nguyên liệu tại Úc lên đến </span>
-        <div class="flex items-end"><span class="number">20.000</span><span class="special relative top-[-0.417vw]">HA</span></div>
+        <div class="flex items-end"><span class="number" [countUp]="20000" [duration]="1000">20.000</span><span class="special relative top-[-0.417vw]">HA</span></div>
     </div>
     <div class="box absolute top-[145.074vw] left-[63.048vw] z-[2]">
         <span>Nâng tổng diện tích vùng nguyên liệu toàn cầu <br> đạt gần</span>
-        <div class="flex items-end"><span class="number">90.000</span><span class="special relative top-[-0.417vw]">HA</span></div>
+        <div class="flex items-end"><span class="number" [countUp]="90000" [duration]="1000">90.000</span><span class="special relative top-[-0.417vw]">HA</span></div>
     </div>
     <div class="relative mt-[1.250vw] h-[19.688vw]"></div>
     <div class="flex justify-between gap-[2.865vw]">
@@ -994,7 +994,7 @@
     <div class="desc mt-[1.667vw]">
         Tất cả yếu tố trên được xem là lợi thế cạnh tranh và là bệ phóng cho công cuộc triển khai chiến lược trở thành Nhà cung cấp giải pháp nông nghiệp toàn diện. Qua đó, đẩy mạnh và nâng cao vị thế của Công ty không chỉ trong ngành nông nghiệp Việt Nam mà còn ở thị trường quốc tế.
     </div>
-    <div class="image-text1 relative mt-[1.45vw] h-[38.281vw]">
+    <div id="header-nav-6" class="image-text1 relative mt-[1.45vw] h-[38.281vw]">
         <img class="w-[41.563vw] relative z-[1]" src="../../../assets/images/HoatDong/section6-7.png" alt="">
         <img class="w-[100vw] absolute top-[0] left-[0]" src="../../../assets/images/HoatDong/section6-8.png" alt="">
         <div class="text-highligh absolute top-[18.573vw] left-[6.198vw] z-[2]">Ông NGUYỄN THANH NGỮ</div>
@@ -1612,14 +1612,15 @@
         </div>
     </div>
     <img class="w-[100vw] mt-[2.813vw]" src="../../../assets/images/HoatDong/section6_2-2.png" alt="">
-    <img class="w-[100vw] mt-[1.354vw]" src="../../../assets/images/HoatDong/section6_2-3.png" alt="">
+    <img id="header-nav-6-2" class="w-[43.594vw] mt-[2.813vw]" src="../../../assets/images/HoatDong/section6_3-0.png" alt="">
+    <img class="w-[100vw] mt-[-2.354vw]" src="../../../assets/images/HoatDong/section6_2-3.png" alt="">
 </div>
 <div id="section6_3" class="relative px-[18.750vw] pt-[11.427vw]">
     <div class="title-image flex justify-between items-center absolute top-[0] left-[12.344vw]">
         <img class="w-[35.677vw]" src="../../../assets/images/HoatDong/section6_3.png" alt="">
         <div class="box z-[2] mt-[2.083vw]">
             <span>Doanh thu thuần hợp nhất</span>
-            <div class="flex items-end"><span class="number">24.743</span></div>
+            <div class="flex items-end"><span class="number" [countUp]="24743" [duration]="1000">24.743</span></div>
         </div>
         <div class="box image-text relative top-[-1.563vw]">
             <span class="special absolute bottom-[0] left-[0]">tỷ đồng</span>
@@ -1637,7 +1638,7 @@
     <div class="flex items-end gap-[4.896vw]">
         <div class="box w-[18.229vw]">
             <span>lợi nhuận trước thuế</span>
-            <div class="flex items-center gap-[0.32vw]"><span class="number">719</span><span class="special relative top-[-0.417vw]">tỷ đồng</span></div>
+            <div class="flex items-center gap-[0.32vw]"><span class="number" [countUp]="719" [duration]="1000">719</span><span class="special relative top-[-0.417vw]">tỷ đồng</span></div>
             <span class="inline-block">duy trì tăng trưởng bền vững <br> trước những biến động của <br> kinh tế thế giới và Việt Nam</span>
         </div>
         <div class="desc-normal w-[40.781vw]">
@@ -1651,14 +1652,14 @@
                 mảng Đường vẫn đóng vai trò <br>
                 chủ lực trong cơ cấu <br>
                 doanh thu khi ghi nhận</span>
-            <div class="flex items-end"><span class="number !text-[4.167vw]">22.891</span><span class="special relative top-[-1.217vw]">tỷ đồng</span></div>
+            <div class="flex items-end"><span class="number !text-[4.167vw]" [countUp]="22891" [duration]="1000">22.891</span><span class="special relative top-[-1.217vw]">tỷ đồng</span></div>
             <span class="mt-[0.990vw] inline-block">
                 tăng hơn 36% so với cùng kỳ, <br>
                 chiếm 93% Doanh thu thuần. <br>
                 Sản lượng tiêu thụ Đường <br>
                 năm thứ 4 liên tiếp đạt hơn
             </span>
-            <div class="flex items-end"><span class="number !text-[3.125vw]">1.000.000</span><span class="special relative top-[-0.7vw]">Tấn</span></div>
+            <div class="flex items-end"><span class="number !text-[3.125vw]" [countUp]="1000000" [duration]="1000">1.000.000</span><span class="special relative top-[-0.7vw]">Tấn</span></div>
         </div>
         <div class="desc-normal w-[40.781vw] mt-[2.056vw]">
             Trong đó ghi nhận:
@@ -1750,7 +1751,7 @@
                 <img class="w-[100vw]" src="../../../assets/images/HoatDong/section6_5-1.png" alt="">
                 <div class="box absolute top-[8.258vw] left-[0]">
                     <span>Tổng tài sản của Công ty đạt</span>
-                    <div class="flex items-end"><span class="number">29.934</span><span class="special relative top-[-1.517vw] left-[0.43vw]">tỷ đồng</span></div>
+                    <div class="flex items-end"><span class="number" [countUp]="29934" [duration]="1000">29.934</span><span class="special relative top-[-1.517vw] left-[0.43vw]">tỷ đồng</span></div>
                     <span class="mt-[-0.833vw] inline-block">
                         tăng 8%, tương đương với gần 2.200 tỷ đồng <br> 
                         so với thời điểm đầu niên độ.
@@ -1758,11 +1759,11 @@
                 </div>
                 <div class="box absolute top-[22.813vw] left-[0]">
                     <span>Quy mô tài sản tăng trong khi nợ vay <br> tăng ít hơn, chỉ tăng 5%</span>
-                    <div class="flex items-end"><span>tương đương</span><span class="number">506</span><span class="special relative top-[-2.317vw]">tỷ đồng</span></div>
+                    <div class="flex items-end"><span class="relative top-[-1.979vw]">tương đương</span><span class="number" [countUp]="506" [duration]="1000">506</span><span class="special relative top-[-2.317vw]">tỷ đồng</span></div>
                 </div>
                 <div class="box absolute top-[35.469vw] left-[0]">
                     <span>Vốn chủ sở hữu ghi nhận tăng 9%</span>
-                    <div class="flex items-end"><span class="relative top-[-2.552vw]">tương đương</span><span class="number">>835</span><span class="special relative top-[-2.517vw] left-[0.721vw]">tỷ đồng</span></div>
+                    <div class="flex items-end"><span class="relative top-[-2.552vw]">tương đương</span><span class="number" [countUp]="835" [duration]="1000">>835</span><span class="special relative top-[-2.517vw] left-[0.721vw]">tỷ đồng</span></div>
                 </div>
             </div>
             <div class="desc-normal mt-[5.823vw]">
@@ -1851,7 +1852,7 @@
     <div class="text-right">Nguồn: TTC AgriS</div>
     <div class="flex items-end box3 mt-[3.021vw]">
         <span>Đáng chú ý, cuối niên độ 2022-2023, <br> TTC AgriS đã huy động thành công</span>
-        <div class="number">140.000.000</div>
+        <div class="number" [countUp]="140000000" [duration]="1000">140.000.000</div>
         <div class="USD">USD</div>
     </div>
     <div class="flex gap-[3.385vw] mt-[0.56vw]">
@@ -1903,6 +1904,7 @@
     </div>
 </div>
 <div id="section7" class="relative px-[18.750vw] pt-[4.323vw]">
+    <img class="w-[43.594vw]" src="../../../assets/images/HoatDong/section7-0.png" alt="">
     <div class="title">
         Tình hình cơ cấu Cổ đông và giao dịch <br>
         của Người nội bộ và Người có liên quan của SBT
@@ -1925,7 +1927,7 @@
             <div class="desc mt-[0.32vw]">
                 nắm giữ
             </div>
-            <span class="number inline-block mt-[-0.32vw]">197.761.844</span>
+            <span class="number inline-block mt-[-0.32vw]" [countUp]="197761844" [duration]="1000">197.761.844</span>
             <div class="desc">
                 cổ phiếu, chiếm 25,95%
             </div>
@@ -1937,7 +1939,7 @@
             <div class="desc mt-[0.32vw]">
                 nắm giữ
             </div>
-            <span class="number inline-block mt-[-0.32vw]">52.160.033</span>
+            <span class="number inline-block mt-[-0.32vw]" [countUp]="52160033" [duration]="1000">52.160.033</span>
             <div class="desc">
                 cổ phiếu, chiếm 6,84%
             </div>
@@ -1950,7 +1952,7 @@
             <div class="desc mt-[0.32vw]">
                 nắm giữ
             </div>
-            <span class="number inline-block mt-[-0.32vw]">123.361.825</span>
+            <span class="number inline-block mt-[-0.32vw]" [countUp]="123361825" [duration]="1000">123.361.825</span>
             <div class="desc">
                 cổ phiếu, chiếm 16,19%
             </div>
@@ -1963,7 +1965,7 @@
             <div class="desc mt-[0.32vw]">
                 nắm giữ
             </div>
-            <span class="number inline-block mt-[-0.32vw]">84.265.703</span>
+            <span class="number inline-block mt-[-0.32vw]" [countUp]="84265703" [duration]="1000">84.265.703</span>
             <div class="desc">
                 cổ phiếu, chiếm 11,06%
             </div>
@@ -2002,55 +2004,55 @@
         </div>
         <div class="column1 column-right absolute top-[1.510vw] left-[32.3vw]">
             <div class="green-bold mb-[2.079vw]">Số lượng cổ phần</div>
-            <strong>457.549.405</strong> <br>
-            <p>405.389.372</p>
-            <p>52.160.033</p>
-            <strong>97.774.266</strong> <br>
-            <p>46.922.582</p>
-            <p>50.851.684</p>
-            <strong>206.788.655</strong> <br>
-            <p>190.945.651</p>
-            <p>15.843.004</p>
-            <div class="green">762.112.326</div>
+            <strong [countUp]="17100" [duration]="1000">457.549.405</strong> <br>
+            <p [countUp]="17100" [duration]="1000">405.389.372</p>
+            <p [countUp]="17100" [duration]="1000">52.160.033</p>
+            <strong [countUp]="17100" [duration]="1000">97.774.266</strong> <br>
+            <p [countUp]="17100" [duration]="1000">46.922.582</p>
+            <p [countUp]="17100" [duration]="1000">50.851.684</p>
+            <strong [countUp]="17100" [duration]="1000">206.788.655</strong> <br>
+            <p [countUp]="17100" [duration]="1000">190.945.651</p>
+            <p [countUp]="17100" [duration]="1000">15.843.004</p>
+            <div [countUp]="17100" [duration]="1000" class="green">762.112.326</div>
         </div>
         <div class="column1 column-right absolute top-[1.510vw] left-[41vw]">
             <div class="green-bold mb-[2.079vw]">Tỷ lệ sở hữu</div>
-            <strong>60,03%</strong> <br>
-            <p>53,19%</p>
-            <p>6,84%</p>
-            <strong>12,83%</strong> <br>
-            <p>6,16%</p>
-            <p>6,67%</p>
-            <strong>27,14%</strong> <br>
-            <p>25,06%</p>
-            <p>2,08%</p>
-            <div class="green">100%</div>
+            <strong [countUp]="17100" [duration]="1000">60,03%</strong> <br>
+            <p [countUp]="17100" [duration]="1000">53,19%</p>
+            <p [countUp]="17100" [duration]="1000">6,84%</p>
+            <strong [countUp]="17100" [duration]="1000">12,83%</strong> <br>
+            <p [countUp]="17100" [duration]="1000">6,16%</p>
+            <p [countUp]="17100" [duration]="1000">6,67%</p>
+            <strong [countUp]="17100" [duration]="1000">27,14%</strong> <br>
+            <p [countUp]="17100" [duration]="1000">25,06%</p>
+            <p [countUp]="17100" [duration]="1000">2,08%</p>
+            <div [countUp]="17100" [duration]="1000" class="green">100%</div>
         </div>
         <div class="column1 text-center absolute top-[0.610vw] left-[48.469vw]">
             <div class="green-bold mb-[1.379vw]">Số lượng Cổ đông <br> Cá nhân</div>
-            <strong>2</strong> <br>
-            <p>2</p>
+            <strong [countUp]="17100" [duration]="1000">2</strong> <br>
+            <p [countUp]="17100" [duration]="1000">2</p>
             <p>-</p>
-            <strong>4</strong> <br>
-            <p>4</p>
-            <p>0</p>
-            <strong>19.942</strong> <br>
-            <p>19.618</p>
-            <p>324</p>
-            <div class="green">19.948</div>
+            <strong [countUp]="17100" [duration]="1000">4</strong> <br>
+            <p [countUp]="17100" [duration]="1000">4</p>
+            <p [countUp]="17100" [duration]="1000">0</p>
+            <strong [countUp]="17100" [duration]="1000">19.942</strong> <br>
+            <p [countUp]="17100" [duration]="1000">19.618</p>
+            <p [countUp]="17100" [duration]="1000">324</p>
+            <div [countUp]="17100" [duration]="1000" class="green">19.948</div>
         </div>
         <div class="column1 column-right absolute top-[2.510vw] left-[57.469vw]">
             <div class="green-bold mb-[1.079vw]">Tổ chức</div>
-            <strong>2</strong> <br>
-            <p>1</p>
-            <p>1</p>
-            <strong>4</strong> <br>
-            <p>1</p>
-            <p>3</p>
-            <strong>114</strong> <br>
-            <p>71</p>
-            <p>43</p>
-            <div class="green">120</div>
+            <strong [countUp]="17100" [duration]="1000">2</strong> <br>
+            <p [countUp]="17100" [duration]="1000">1</p>
+            <p [countUp]="17100" [duration]="1000">1</p>
+            <strong [countUp]="17100" [duration]="1000">4</strong> <br>
+            <p [countUp]="17100" [duration]="1000">1</p>
+            <p [countUp]="17100" [duration]="1000">3</p>
+            <strong [countUp]="17100" [duration]="1000">114</strong> <br>
+            <p [countUp]="17100" [duration]="1000">71</p>
+            <p [countUp]="17100" [duration]="1000">43</p>
+            <div [countUp]="17100" [duration]="1000" class="green">120</div>
         </div>
     </div>
     <div class="box7 relative mt-[1.458vw]">
@@ -2188,50 +2190,50 @@
         <div class="column1 column-right absolute top-[3.02vw] left-[22.869vw]">
             <div class="green-bold mb-[1.279vw] column-right">Số cổ phiếu</div>
             <strong></strong> <br>
-            <p>30.977.862</p>
+            <p [countUp]="17100" [duration]="1000">30.977.862</p>
             <strong></strong> <br>
-            <p>69.724.473</p>
-            <p>100.137.492</p>
-            <p class="mt-[0.781vw]">1.575.000</p>
-            <p class="mt-[0.781vw]">358.928</p>
+            <p [countUp]="17100" [duration]="1000">69.724.473</p>
+            <p [countUp]="17100" [duration]="1000">100.137.492</p>
+            <p [countUp]="17100" [duration]="1000" class="mt-[0.781vw]">1.575.000</p>
+            <p [countUp]="17100" [duration]="1000" class="mt-[0.781vw]">358.928</p>
             <strong></strong> <br>
-            <div class="green">202.773.755</div>
+            <div [countUp]="17100" [duration]="1000" class="green">202.773.755</div>
         </div>
         <div class="column1 column-right absolute top-[3.02vw] left-[30.69vw]">
             <div class="green-bold mb-[1.279vw] column-right">Tỷ lệ</div>
             <strong></strong> <br>
-            <p>30.977.862</p>
+            <p [countUp]="309778621" [duration]="1000">30.977.862</p>
             <strong></strong> <br>
-            <p>69.724.473</p>
-            <p>100.137.492</p>
-            <p class="mt-[0.781vw]">1.575.000</p>
-            <p class="mt-[0.781vw]">358.928</p>
+            <p [countUp]="69724473" [duration]="1000">69.724.473</p>
+            <p [countUp]="100137492" [duration]="1000">100.137.492</p>
+            <p [countUp]="1575" [duration]="1000" class="mt-[0.781vw]">1.575.000</p>
+            <p [countUp]="358928" [duration]="1000" class="mt-[0.781vw]">358.928</p>
             <strong></strong> <br>
-            <div class="green">31,16%</div>
+            <div [countUp]="3116" [duration]="1000" class="green">31,16%</div>
         </div>
         <div class="column1 column-right absolute top-[3.02vw] left-[35.469vw]">
             <div class="green-bold mb-[1.279vw] column-right">Số cổ phiếu</div>
             <strong></strong> <br>
-            <p>52.160.033</p>
+            <p [countUp]="52160033" [duration]="1000">52.160.033</p>
             <strong></strong> <br>
-            <p>84.265.703</p>
-            <p>123.361.825</p>
-            <p class="mt-[0.781vw]">2.733.555</p>
-            <p class="mt-[0.781vw]">357.667</p>
+            <p [countUp]="84265703" [duration]="1000">84.265.703</p>
+            <p [countUp]="12233616825" [duration]="1000">123.361.825</p>
+            <p [countUp]="273355" [duration]="1000" class="mt-[0.781vw]">2.733.555</p>
+            <p [countUp]="357667" [duration]="1000" class="mt-[0.781vw]">357.667</p>
             <strong></strong> <br>
-            <div class="green">262.878.783</div>
+            <div [countUp]="17100" [duration]="1000" class="green">262.878.783</div>
         </div>
         <div class="column1 column-right absolute top-[3.02vw] left-[44.169vw]">
             <div class="green-bold mb-[1.279vw] column-right">Tỷ lệ</div>
             <strong></strong> <br>
-            <p>6,84%</p>
+            <p [countUp]="684" [duration]="1000">6,84%</p>
             <strong></strong> <br>
-            <p>11,06%</p>
-            <p>16,19%</p>
-            <p class="mt-[0.781vw]">0,36%</p>
-            <p class="mt-[0.781vw]">0,05%</p>
+            <p [countUp]="1106" [duration]="1000">11,06%</p>
+            <p [countUp]="1619" [duration]="1000">16,19%</p>
+            <p [countUp]="36" [duration]="1000" class="mt-[0.781vw]">0,36%</p>
+            <p [countUp]="5" [duration]="1000" class="mt-[0.781vw]">0,05%</p>
             <strong></strong> <br>
-            <div class="green">34,5%</div>
+            <div [countUp]="345" [duration]="1000" class="green">34,5%</div>
         </div>
         <div class="column1 text-center absolute top-[2vw] left-[48.669vw]">
             <div class="green-bold mb-[2.159vw] pb-[0.33vw]">Lý do tăng, giảm</div>
@@ -2274,13 +2276,13 @@
             <div class="desc-custom mt-[0.833vw]">
                 Năm 2022 số lượng tài khoản chứng khoán mở mới cũng ghi nhận sự tăng trưởng khi nhà đầu tư cá nhân trong nước đã mở mới gần
             </div>
-            <div class="number">
+            <div class="number" [countUp]="2600000000" [duration]="1000">
                 2.600.000.000
             </div>
             <div class="desc-custom">
                 tài khoản chứng khoán, đạt kỷ lục trong 22 năm hoạt động và nâng tổng số tài khoản nhà đầu tư cá nhân trong nước vượt
             </div>
-            <div class="number">
+            <div class="number" [countUp]="6800000000" [duration]="1000">
                 6.800.000.000
             </div>
             <div class="desc-custom">
@@ -2298,7 +2300,7 @@
             <div class="desc-custom relative top-[-1.302vw] t-right">
                 Sau giai đoạn giảm điểm mạnh nhất thế giới, tính đến 30/6/2023, <br> VN-Index đạt
             </div>
-            <div class="number-142">
+            <div class="number-142" [countUp]="1120" [duration]="1000">
                 1.120
             </div>
             <div class="desc-custom relative top-[-1.098vw] t-left">
@@ -2420,31 +2422,31 @@
             <div class="absolute top-[19.85vw] left-[5.573vw] w-[11.563vw]">
                 <div class="item-number">
                     <span class="block">Giá cổ phiếu</span>
-                    <div class="number">15.150</div>
+                    <div class="number" [countUp]="15150" [duration]="1000">15.150</div>
                     <span class="block">đồng</span>
                 </div>
                 <div class="item-number mt-[2.083vw]">
                     <span class="block">Vốn hóa thị trường</span>
-                    <div class="number">11.219</div>
+                    <div class="number" [countUp]="11219" [duration]="1000">11.219</div>
                     <span class="block">tỷ đồng</span>
                 </div>
                 <div class="item-number mt-[2.083vw]">
                     <span class="block">Số lượng niêm yết</span>
-                    <div class="number">740.500.993</div>
+                    <div class="number" [countUp]="740500993" [duration]="1000">740.500.993</div>
                     <span class="block">cổ phiếu</span>
                 </div>
                 <div class="item-number mt-[2.083vw]">
                     <span class="block">Số lượng lưu hành</span>
-                    <div class="number">762.112.326</div>
+                    <div class="number" [countUp]="762112326" [duration]="1000">762.112.326</div>
                     <span class="block">cổ phiếu</span>
                 </div>
                 <div class="item-number mt-[2.83vw]">
                     <span class="block">Giá cổ phiếu</span>
-                    <div class="number">100%</div>
+                    <div class="number" [countUp]="100" [duration]="1000">100%</div>
                 </div>
                 <div class="item-number mt-[3.83vw]">
                     <span class="block">Tỷ lệ free-float</span>
-                    <div class="number">45%</div>
+                    <div class="number" [countUp]="45" [duration]="1000">45%</div>
                 </div>
             </div>
         </div>
@@ -2468,39 +2470,39 @@
                         1 tháng <br>
                         gần nhất
                     </div>
-                    <p>3.384.305</p>
-                    <p class="mt-[2.3vw]">55,75</p>
+                    <p [countUp]="3384305" [duration]="1000">3.384.305</p>
+                    <p [countUp]="5575" [duration]="1000" class="mt-[2.3vw]">55,75</p>
                     <strong class="block mt-[0.625vw]"></strong><br>
-                    <p class="mt-[1.35vw]">17.100</p>
-                    <p class="mt-[0.425vw]">15.150</p>
-                    <p class="mt-[0.525vw]">16.245</p>
+                    <p [countUp]="17100" [duration]="1000" class="mt-[1.35vw]">17.100</p>
+                    <p [countUp]="15150" [duration]="1000" class="mt-[0.425vw]">15.150</p>
+                    <p [countUp]="16245" [duration]="1000" class="mt-[0.525vw]">16.245</p>
                 </div>
                 <div class="column1 column-right absolute top-[1.51vw] left-[26.373vw] t-right">
                     <div class="green-bold mb-[3.02vw]">3 tháng</div>
-                    <p>3.649.108</p>
-                    <p class="mt-[2.3vw]">59,45</p>
+                    <p [countUp]="3649108" [duration]="1000">3.649.108</p>
+                    <p [countUp]="5945" [duration]="1000" class="mt-[2.3vw]">59,45</p>
                     <strong class="block mt-[0.625vw]"></strong> <br>
-                    <p class="mt-[1.35vw]">17.450</p>
-                    <p class="mt-[0.425vw]">14.650</p>
-                    <p class="mt-[0.525vw]">16.136</p>
+                    <p [countUp]="17450" [duration]="1000" class="mt-[1.35vw]">17.450</p>
+                    <p [countUp]="14650" [duration]="1000" class="mt-[0.425vw]">14.650</p>
+                    <p [countUp]="16136" [duration]="1000" class="mt-[0.525vw]">16.136</p>
                 </div>
                 <div class="column1 column-right absolute top-[1.51vw] left-[31.8vw] t-right">
                     <div class="green-bold mb-[3.02vw]">6 tháng</div>
-                    <p>3.035.793</p>
-                    <p class="mt-[2.3vw]">47,59</p>
+                    <p [countUp]="3035793" [duration]="1000">3.035.793</p>
+                    <p [countUp]="4759" [duration]="1000" class="mt-[2.3vw]">47,59</p>
                     <strong></strong> <br>
-                    <p class="mt-[1.35vw]">17.450</p>
-                    <p class="mt-[0.425vw]">13.500</p>
-                    <p class="mt-[0.525vw]">15.331</p>
+                    <p [countUp]="17450" [duration]="1000" class="mt-[1.35vw]">17.450</p>
+                    <p [countUp]="13500" [duration]="1000" class="mt-[0.425vw]">13.500</p>
+                    <p [countUp]="15331" [duration]="1000" class="mt-[0.525vw]">15.331</p>
                 </div>
                 <div class="column1 text-center absolute top-[1.51vw] left-[36.469vw] t-right">
                     <div class="green-bold mb-[3.02vw]">12 tháng</div>
-                    <p>2.945.238</p>
-                    <p class="mt-[2.3vw]">45,13</p>
+                    <p [countUp]="2945238" [duration]="1000">2.945.238</p>
+                    <p [countUp]="4513" [duration]="1000" class="mt-[2.3vw]">45,13</p>
                     <strong></strong> <br>
-                    <p class="mt-[1.35vw]">19.150</p>
-                    <p class="mt-[0.425vw]">10.650</p>
-                    <p class="mt-[0.525vw]">15.432</p>
+                    <p [countUp]="19150" [duration]="1000" class="mt-[1.35vw]">19.150</p>
+                    <p [countUp]="10650" [duration]="1000" class="mt-[0.425vw]">10.650</p>
+                    <p [countUp]="15432" [duration]="1000" class="mt-[0.525vw]">15.432</p>
                 </div>
             </div>
             <div class="text-right mt-[0.75vw]">Nguồn: TTC AgriS tổng hợp</div>
@@ -2538,6 +2540,8 @@
     <img class="w-[100vw]" src="../../../assets/images/HoatDong/section8-5.png" alt="">
     <div class="text-right mt-[1.563vw]">(*) Theo Nghị quyết HĐQT số 118a/2023/NQ-ĐHĐCĐ ngày 22/6/2023, Công ty đã thông qua kết quả phát hành cổ phiếu để trả cổ tức niên độ <br> 2021-2022 và niên độ 2019-2020 với tỷ lệ 10%.</div>
     <div class="text-right mt-[2.345vw]">Nguồn: TTC AgriS tổng hợp</div>
+    <img id="header-nav-8_2" class="pt-[0.45vw] w-[43.594vw]" src="../../../assets/images/HoatDong/section8-5_0.png" alt="">
+    <img class="pt-[0.45vw] w-[100vw]" src="../../../assets/images/HoatDong/section8-5_1.png" alt="">
     <div class="desc-29 mt-[5vw]">
         Niên độ 2022-2023, thị trường vốn trải qua nhiều biến động cùng với nhiều thông tin bất lợi liên tục xuất hiện khiến các doanh nghiệp gặp khó khăn trong việc huy động vốn trung và dài hạn. Kiên định với chiến lược kinh doanh “xanh”, TTC AgriS duy trì phát triển bền vững trong vùng nhiễu động, trở thành điểm đến của các định chế tài chính hàng đầu khu vực, liên tục thu hút và huy động được nhiều dòng vốn ngoại.
     </div>
@@ -2638,7 +2642,7 @@
             Trong niên độ vừa qua, TTC AgriS tăng cường vào việc đầu tư vào các Công ty con, Công ty liên kết. Giá trị của khoản mục này trong niên độ 2022-2023 được ghi nhận tăng 1,2 lần so với niên độ trước. Cụ thể, trong Quý 1, TTC AgriS đã hoàn tất việc mua thêm 36,79 triệu cổ phần của CTCP Toàn Hải Vân (THV) nâng tổng tỷ lệ sở hữu lên gần 37%. THV sở hữu nhiều dự án lớn, và chuyên cung cấp dịch vụ kho bãi, có tiềm năng tăng trưởng trong tương lai khi tọa lạc tại vị trí chiến lược của Phú Quốc. Việc đầu tư vào THV giúp TTC AgriS đa dạng hóa danh mục đầu tư, hỗ trợ nhiều cho hoạt động kho bãi (logistics), việc ưu tiên đầu tư vào bất động sản kho bãi được xem là bước chuẩn bị phù hợp trong tình hình nhiễu động hiện nay, góp phần cho sự phát triển trong dài hạn của Công ty.
         </div>
     </div>
-    <img class="w-[49.688vw] mt-[4.948vw]" src="../../../assets/images/HoatDong/section8-11.png" alt="">
+    <img id="header-nav-8" class="w-[49.688vw] mt-[4.948vw]" src="../../../assets/images/HoatDong/section8-11.png" alt="">
     <div class="mt-[3.125vw] relative h-[64.635vw]">
         <img class="w-[100vw] mt-[4.948vw]" src="../../../assets/images/HoatDong/section8-12.png" alt="">
         <span class="desc-27 absolute top-[5.885vw] left-[7.083vw]">
@@ -2676,7 +2680,7 @@
             </div>
             <div class="text-strong-22">Tổng mức đầu tư:</div>
             <div class="flex items-end">
-                <span class="number-142 relative top-[2.240vw]">~ </span><span class="number-142">456</span>
+                <span class="number-142 relative top-[2.240vw]">~ </span><span class="number-142" [countUp]="456" [duration]="1000">456</span>
                 <span class="text-green-22 relative left-[0.365vw] top-[-1.354vw]">Tỷ đồng</span>
             </div>
             <div class="flex items-end">
@@ -2719,7 +2723,7 @@
             <img class="w-[0.083vw] absolute top-[5.365vw] right-[0]" src="../../../assets/images/HoatDong/section8-18.png" alt="">
             <div class="text-strong-22">Tổng mức đầu tư:</div>
             <div class="flex items-end">
-                <span class="number-142 relative top-[2.240vw]">~ </span><span class="number-142">27</span><br>
+                <span class="number-142 relative top-[2.240vw]">~ </span><span class="number-142" [countUp]="27" [duration]="1000">27</span><br>
             </div>
             <div class="text-green-22 text-center">Tỷ đồng</div>
         </div>
@@ -2772,7 +2776,7 @@
             <img class="w-[0.083vw] absolute top-[5.365vw] right-[0]" src="../../../assets/images/HoatDong/section8-18.png" alt="">
             <div class="text-strong-22">Tổng mức đầu tư:</div>
             <div class="flex items-end">
-                <span class="number-142 relative top-[2.240vw]">~ </span><span class="number-142">14</span><br>
+                <span class="number-142 relative top-[2.240vw]">~ </span><span class="number-142" [countUp]="14" [duration]="1000">14</span><br>
             </div>
             <div class="text-green-22 text-center">Tỷ đồng</div>
         </div>
@@ -2797,7 +2801,7 @@
             </div>
         </div>
     </div>
-    <div class="model-image relative mt-[2.969vw] h-[48.802vw]">
+    <div id="header-nav-8_1" class="model-image relative mt-[2.969vw] h-[48.802vw]">
         <img class="w-[50.417vw] absolute top-[-2.345vw] left-[0]" src="../../../assets/images/HoatDong/section8-21.png" alt="">
         <img class="w-[100vw]" src="../../../assets/images/HoatDong/section8-22.png" alt="">
         <div class="text-white-23 absolute top-[13.229vw] left-[4.063vw]">
@@ -3233,7 +3237,7 @@
                 Đảm bảo nguồn cung cho hoạt động
                 sản xuất, kinh doanh
             </div>
-            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section12-2.png" alt="">
+            <img class="w-[100vw] animation-winkling-light" src="../../../assets/images/HoatDong/section12-2.png" alt="">
         </div>
         <div class="w-[40.521vw]">
             <div class="text-strong-22-fw-600">
@@ -3266,7 +3270,7 @@
                 Triển khai các hoạt động kho vận hướng tới
                 phát triển bền vững
             </div>
-            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section12-4.png" alt="">
+            <img class="w-[100vw] animation-winkling-light" src="../../../assets/images/HoatDong/section12-4.png" alt="">
         </div>
         <div class="w-[40.521vw]">
             <div class="list-item desc-normal">
@@ -3307,7 +3311,7 @@
                 hoạt động của chuỗi
                 cung ứng
             </div>
-            <img class="w-[11.719vw] float-right mt-[-2.448vw]" src="../../../assets/images/HoatDong/section12-6.png" alt="">
+            <img class="w-[11.719vw] float-right mt-[-2.448vw]  animation-winkling-light" src="../../../assets/images/HoatDong/section12-6.png" alt="">
         </div>
         <div class="w-[40.521vw]">
             <div class="desc-normal">
@@ -3321,7 +3325,7 @@
             <div class="title-green-32 mt-[1.042vw]">
                 Quản lý chuyển đổi
             </div>
-            <img class="w-[11.719vw]" src="../../../assets/images/HoatDong/section12-8.png" alt="">
+            <img class="w-[100vw] animation-winkling-light" src="../../../assets/images/HoatDong/section12-8.png" alt="">
         </div>
         <div class="w-[40.521vw]">
             <div class="desc-normal">
@@ -3359,7 +3363,7 @@
             <div class="title-green-32 mt-[1.042vw]">
                 Xây dựng quan hệ với đối tác chiến lược
             </div>
-            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section12-10.png" alt="">
+            <img class="w-[100vw] animation-winkling-light" src="../../../assets/images/HoatDong/section12-10.png" alt="">
         </div>
         <div class="w-[40.521vw]">
             <div class="desc-normal">
@@ -3388,7 +3392,7 @@
             <div class="title-green-32 mt-[1.042vw]">
                 Phát triển đội ngũ và tổ chức
             </div>
-            <img class="w-[17.917vw] mt-[-2.448vw]" src="../../../assets/images/HoatDong/section12-12.png" alt="">
+            <img class="w-[17.917vw] mt-[-2.448vw] animation-winkling-light" src="../../../assets/images/HoatDong/section12-12.png" alt="">
         </div>
         <div class="w-[40.521vw]">
             <div class="title-21">
@@ -3600,7 +3604,7 @@
         Mô hình chức năng của Trung tâm Đổi mới Phục vụ Khách hàng (CIC) được TTC AgriS triển khai trong niên độ mới
     </div>
     <div class="relative mt-[2.448vw]">
-        <img class="w-[100vw]" src="../../../assets/images/HoatDong/section14-1.png" alt="">
+        <img class="w-[100vw] animation-winkling-light" src="../../../assets/images/HoatDong/section14-1.png" alt="">
         <div class="text-yellow-22 text-center absolute w-[11.198vw] top-[7.344vw] left-[13.635vw]">
             Kết nối sản phẩm <br>
             với Khách hàng
@@ -3663,7 +3667,7 @@
     <svg class="mt-[5.208vw] w-[62.500vw]" width="1200" height="1" viewBox="0 0 1200 1" fill="none" xmlns="http://www.w3.org/2000/svg">
         <line y1="0.5" x2="1200" y2="0.5" stroke="#50B848"/>
     </svg>
-    <img class="w-[100vw]" src="../../../assets/images/HoatDong/section14-2.png" alt="">
+    <img class="w-[100vw] animation-winkling-light" src="../../../assets/images/HoatDong/section14-2.png" alt="">
     <div class="!text-center text-right !fz-18">
         Bà Huỳnh Bích Ngọc - Chủ tịch HĐQT và Bà Đặng Huỳnh Ức My - Phó Chủ tịch HĐQT tiếp đón khách mời <br> tại sự kiện TTC AgriS Innovation Day 2023
     </div>
@@ -3794,27 +3798,27 @@
     </div>
 </div> 
  <div id="section15" class="pt-[3.906vw]">
-    <img class="pl-[18.750vw] w-[57.083vw]" src="../../../assets/images/HoatDong/section15.png" alt="">
+    <img class="pl-[18.750vw] pr-[20.56vw] w-[100vw]" src="../../../assets/images/HoatDong/section15.png" alt="">
     <div class="pl-[12.292vw] relative">
         <img class="w-[80.990vw]" src="../../../assets/images/HoatDong/section15-1.png" alt="">
         <div class="desc-23-58595B absolute top-[4.010vw] left-[43.740vw]">
             Tại ngày 30/6/2023, TTC AgriS sở hữu
         </div>
-        <div class="number-88 absolute top-[5.469vw] left-[41.688vw]">
+        <div class="number-88 absolute top-[5.469vw] left-[41.688vw]" [countUp]="18" [duration]="1000">
             18
         </div>
         <div class="desc-23-58595B absolute top-[6.146vw] left-[47.063vw]">
             Công ty con <br>
             trực tiếp
         </div>
-        <div class="number-88 absolute top-[5.469vw] left-[56.229vw]">
+        <div class="number-88 absolute top-[5.469vw] left-[56.229vw]" [countUp]="12" [duration]="1000">
             12
         </div>
         <div class="desc-23-58595B absolute top-[6.146vw] left-[60.667vw]">
             Công ty con <br>
             gián tiếp
         </div>
-        <div class="number-88 absolute top-[5.469vw] left-[70.429vw]">
+        <div class="number-88 absolute top-[5.469vw] left-[70.429vw]" [countUp]="4" [duration]="1000">
             4
         </div>
         <div class="desc-23-58595B absolute top-[6.146vw] left-[73.667vw]">
@@ -5016,7 +5020,7 @@
                 Từ năm 2013 đến nay, <br>
                 TTC ARI đã thực hiện nhập nội
             </div>
-            <div class="number-88">
+            <div class="number-88" [countUp]="115" [duration]="1000">
                 115
             </div>
             <div class="desc-23-58595B">
@@ -5058,7 +5062,7 @@
                 Hiện nay chương trình này đang được người trồng mía trên VNL mía TTC AgriS hưởng ứng mạnh mẽ. Từ niên độ 2022-2023, tổng diện tích áp dụng luân canh đạt trên
             </div>
             <div class="flex items-end mt-[-1.298vw]">
-                <div class="number-91 relative top-[1.298vw]">
+                <div class="number-91 relative top-[1.298vw]" [countUp]="2500" [duration]="1000">
                     2.500
                 </div>
                 <div class="desc-23-58595B relative top-[0.298vw]">
@@ -5103,7 +5107,7 @@
         <svg class="w-[62.500vw]" width="1200" height="1" viewBox="0 0 1200 1" fill="none" xmlns="http://www.w3.org/2000/svg">
             <line y1="0.5" x2="1200" y2="0.5" stroke="#50B848"/>
         </svg>
-        <img class="w-[100vw]" src="../../../assets/images/HoatDong/section18-10.png" alt="">
+        <img class="w-[100vw] animation-winkling-light" src="../../../assets/images/HoatDong/section18-10.png" alt="">
         <div class="text-right !text-center !fz-18 absolute bottom-[2.32vw] left-[6.458vw]">Đại diện của TTC AgriS cùng đại diện Farmacist ký kết Biên bản ghi nhớ thỏa thuận hợp tác toàn diện với Công ty tư vấn nông học Farmacist</div>
     </div>
     <div class="title-40 mt-[2.531vw]">
@@ -5201,7 +5205,7 @@
     </div>
 </div>
 <div id="section19" class="relative pt-[3.45vw]">
-    <img class="w-[57.083vw] pl-[18.750vw] relative z-[1]" src="../../../assets/images/HoatDong/section19.png" alt="">
+    <img class="w-[100vw] px-[18.750vw] relative z-[1]" src="../../../assets/images/HoatDong/section19.png" alt="">
     <div class="relative w-[100vw] h-[55.052vw] mt-[-8.813vw]">
         <img class="w-[55.052vw] absolute top-[0.45vw] left-[8.073vw]" src="../../../assets/images/HoatDong/section19-1.png" alt="">
         <div class="desc-27 desc-27-color w-[23.958vw] text-justify absolute top-[12.240vw] left-[56vw]">
@@ -5355,7 +5359,7 @@
         <div class="desc-27 desc-27-color mt-[1.56vw]">
             Nhờ sự hỗ trợ đầu tư xuyên suốt và toàn diện từ TTC AgriS, ngày càng có nhiều Khách hàng doanh nông sở hữu quy mô canh tác hàng chục đến hàng ngàn ha, quản lý các máy móc thiết bị nông nghiệp có giá trị lớn. Quy mô lớn hơn đòi hỏi Khách hàng doanh nông cần tích lũy kinh nghiệm và học hỏi những điều mới để quản lý hiệu quả, nâng tầm năng lực và kỹ năng để trở thành các Doanh nông thế hệ mới.
         </div>
-        <div class="flex gap-[2.604vw]">
+        <div class="flex gap-[2.604vw] mt-[1.23vw]">
             <div class="w-[40.781vw] desc-normal">
                 Những phương pháp thủ công trước đây dần phải được thay thế bởi các kiến thức, kĩ năng mới như hoạch định, tổ chức, lãnh đạo, kiểm tra giám sát làm cơ sở cho việc ra quyết định. Đây là bước tiến mà các Doanh nông cần đạt được, để chuyển hóa và phát triển ngành Nông nghiệp nói chung và ngành Mía Đường nước nhà nói riêng ngang tầm với các quốc gia phát triển như Úc, Brazil… Tại Úc, với diện tích lên đến hàng ngàn ha, mỗi hộ trồng mía quản lý, tổ chức, sắp xếp một nguồn lực rất lớn, tối ưu hóa vận hành dựa trên tỉ lệ cơ giới hóa rất cao ở mọi hạng mục canh tác. Bên cạnh khâu thực thi, Doanh nông Úc còn biết chủ động tìm hiểu thông tin thị trường, đánh giá biến động giá Đường thô giao dịch trên thị trường để đưa ra các quyết định canh tác, mua bán phù hợp.
                 <img class="w-[26.204vw] mt-[0.532vw]" src="../../../assets/images/HoatDong/section19-10.png" alt="">
@@ -5573,6 +5577,769 @@
         <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-3.png" alt="">
         <div class="absolute top-[1.823vw] left-[2.813vw] text-blue-27 w-[56.927vw] text-justify">
             Kết quả này là sự ghi nhận cho những nỗ lực của Công ty trong việc xây dựng một môi trường làm việc chuyên nghiệp, công bằng và thân thiện, thu hút và giữ chân những con người tài năng. Giải thưởng một lần nữa khẳng định uy tín, vị thế của TTC AgriS trên thị trường lao động Việt Nam và khu vực.
+        </div>
+    </div>
+    <div class="image-text relative h-[25.229vw] mt-[1.32vw]">
+        <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-4.png" alt="">
+        <div class="list-text absolute top-[0.898vw] left-[5.604vw]">
+            <p>Hoàn thiện quy trình tuyển dụng và đào tạo hội nhập cho nhân sự mới;</p>
+            <p>Đảm bảo công bằng và hợp lý trong chi trả lương cho Người lao động, tạo tính cạnh tranh trong việc thu hút nguồn <br> lực bên ngoài và giữ chân nguồn lực bên trong;</p>
+            <p>Cải thiện môi trường làm việc, đảm bảo tính văn minh và chuyên nghiệp cao;</p>
+            <p class="mt-[2.500vw]">Tiến hành đánh giá năng lực định kỳ của mỗi CBNV để lên kế hoạch đánh giá thi đua khen thưởng;</p>
+            <p class="mt-[2.246vw]">Sắp xếp và ổn định nhân sự, đảm bảo bố trí nhân sự đúng người, đúng việc;</p>
+            <p class="mt-[2.256vw]">Cải tiến phương thức làm việc, giảm thiểu các công đoạn không làm tăng giá trị cho Công ty.</p>
+        </div>
+    </div>
+    <div class="title-image relative">
+        <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-5.png" alt="">
+        <div class="box z-[2] absolute top-[1.01vw] left-[27.748vw]">
+            <span>
+                Niên độ 2022-2023, <br>
+                Doanh thu thuần của <br>
+                TTC AgriS đạt
+            </span>
+            <div class="flex items-end"><span class="number" [countUp]="24743" [duration]="1000">24.743</span></div>
+        </div>
+        <div class="box image-text">
+            <span class="special absolute top-[7.917vw] left-[42.188vw]">tỷ đồng</span>
+            <span class="absolute top-[3.646vw] right-[3.385vw]">
+                tăng hơn 35% <br>
+                so với cùng kỳ <br>
+                và hoàn thành <br>
+                145% kế hoạch năm
+            </span>
+        </div>
+    </div>
+    <div class="relative mt-[1.32vw]">
+        <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-6.png" alt="">
+        <div class="w-[50.104vw] absolute top-[3.438vw] left-[5.990vw] desc-29-color-C7EAFC text-unset">
+            Để đạt được kết quả kinh doanh này trong bối cảnh ngành
+            Nông nghiệp hiện tại còn nhiều khó khăn là cả một sự nỗ lực,
+            cố gắng không ngừng nghỉ của tập thể BLĐ và CBNV của Công ty. Tính tới thời điểm 30/6/2023, với
+        </div>
+        <div class="absolute top-[29.896vw] left-[11.927vw] desc-29-color-C7EAFC t-right">
+            Mỗi nhân sự đã tạo ra <span class="number-93" [countUp]="1009" [duration]="1000">>10,09</span> tỷ đồng doanh thu. <br>
+            Đặc biệt con số này đều tăng trưởng qua từng năm thể <br>
+            hiện sự cải thiện trong chất lượng nhân sự của Công ty.
+        </div>
+        <div class="absolute top-[44.125vw] left-[30.500vw] text-24-color-6DCFF6 t-right">
+            Số tiền trung bình một lao động tạo ra trong 3 niên độ gần nhất: <br>
+            <span>Niên độ 2020-2021:</span> 5,5 tỷ <br>
+            <span>Niên độ 2021-2022:</span> 6,95 tỷ <br>
+            <span>Niên độ 2022-2023:</span> 10,09 tỷ
+        </div>
+    </div>
+    <div class="text-right mt-[0.565vw]">Nguồn: TTC AgriS</div>
+    <div class="flex gap-[2.813vw] mt-[0.105vw]">
+        <div class="w-[19.167vw] desc-normal">
+            Là công ty hoạt động trong lĩnh vực Nông nghiệp và đặc biệt là tiên phong trong việc ứng dụng Công nghệ - Kỹ thuật vào sản xuất và canh tác, nên việc chọn lọc nguồn lực phù hợp là tiêu chí được Lãnh đạo TTC AgriS đặt lên hàng đầu, so với cùng kỳ năm ngoái tỷ lệ lao động thuộc nhóm Nhân viên nghiệp vụ/ Công nhân kỹ thuật giảm 7%, đồng nghĩa với việc TTC AgriS đang đầu tư trang thiết bị, hệ thống từng bước nâng cao trình độ đối với lực lượng lao động, tập trung vào nhóm có chuyên môn.
+        </div>
+        <div class="relative w-[40.573vw]">
+            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-7.png" alt="">
+            <div class="text-strong-22 absolute top-[4.271vw] left-[1.563vw]">
+                Cơ cấu Nhân sự theo cấp bậc <br> trong NĐ 2022-2023
+            </div>
+            <div class="absolute top-[8.542vw] left-[2.760vw]">
+                <div class="desc-normal">
+                    Quản lý cấp cao
+                </div>
+                <div class="desc-normal mt-[0.13vw]">
+                    Quản lý cấp trung
+                </div>
+                <div class="desc-normal">
+                    Quản lý sơ cấp
+                </div>
+                <div class="desc-normal">
+                    Chuyên viên
+                </div>
+                <div class="desc-normal">
+                    Nhân viên nghiệp vụ/ Công nhân kỹ thuật
+                </div>
+                <div class="desc-normal">
+                    Nhân viên phục vụ/ Công nhân
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right mt-[0.565vw]">Nguồn: TTC AgriS</div>
+</div>
+<div id="section21_1" class="pl-[18.750vw]">
+    <div class="relative">
+        <img class="w-[70.781vw]" src="../../../assets/images/HoatDong/section21-8.png" alt="">
+        <div class="w-[19.167vw] desc-normal absolute top-[3.802vw] left-[0]">
+            Với đặc thù công ty hoạt động trong lĩnh vực Nông nghiệp, vận hành thiết bị cơ giới, kỹ thuật canh tác,… phần nào ảnh hưởng đến tỷ lệ lao động Nam - Nữ, tuy nhiên tỷ lệ hiện nay đã có sự cải thiện so với niên độ trước, tỷ lệ nam chiếm 77%, tỉ lệ lao động nữ 23%.
+        </div>
+        <div class="text-strong-22 absolute top-[1.244vw] left-[21.638vw]">
+            Cơ cấu Nhân sự theo giới <br> tính 3 niên độ gần nhất
+        </div>
+        <div class="flex gap-[1.354vw] absolute top-[4.744vw] left-[22.638vw]">
+            <div class="desc-normal">
+                Nam
+            </div>
+            <div class="desc-normal">
+                Nữ
+            </div>
+        </div>
+        <div class="flex gap-[4.219vw] absolute top-[7.724vw] left-[22.638vw]">
+            <div class="text-green-22 pl-[0.781vw] mr-[3.224vw]">
+                Niên độ
+            </div>
+            <div class="text-green-22">
+                Nam
+            </div>
+            <div class="text-green-22">
+                Nữ
+            </div>
+        </div>
+    </div>
+    <div class="text-right mt-[0.565vw] pr-[18.750vw]">Nguồn: TTC AgriS</div>
+</div>
+<div id="section21_2" class="px-[18.750vw] pb-[3.45vw]">
+    <div class="flex items-center relative gap-[2.813vw]">
+        <div class="w-[19.167vw] desc-normal top-[3.802vw]">
+            Lực lượng lao động của TTC AgriS chủ yếu là lực lượng lao động trẻ nằm trong độ tuổi từ 18 đến dưới 35 tuổi, chiếm 42% trên tổng số nhân sự. TTC AgriS xem đây là nguồn nhân sự nhiều nhiệt huyết, có chuyên môn cao, khả năng tiếp cận và thích ứng nhanh với công nghệ mới, đáp ứng tốt các yêu cầu của đội ngũ kế thừa.
+        </div>
+        <div class="relative w-[40.573vw]">
+            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-9.png" alt="">
+            <div class="text-strong-22 absolute top-[4.271vw] left-[1.563vw]">
+                Cơ cấu Nhân sự theo cấp bậc <br> trong NĐ 2022-2023
+            </div>
+            <div class="absolute top-[7.942vw] left-[2.760vw]">
+                <div class="desc-normal">
+                    Từ 18 tuổi đến dưới 25 tuổi
+                </div>
+                <div class="desc-normal mt-[0.13vw]">
+                    Từ 25 tuổi đến 35 tuổi
+                </div>
+                <div class="desc-normal">
+                    Từ 35 tuổi đến dưới 45 tuổi
+                </div>
+                <div class="desc-normal">
+                    Từ 45 tuổi trở lên
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right mt-[0.565vw]">Nguồn: TTC AgriS</div>
+    <div class="desc-normal mt-[1.565vw]">
+        Lực lượng lao động có trình độ từ trên Đại học - Cao đẳng trở lên chiếm 47% trên tổng số nhân sự, việc đảm bảo chất lượng tuyển dụng đầu vào của tất cả CBNV được TTC AgriS đặc biệt chú trọng ưu tiên trong công tác quản lý nguồn lực. Lao động phổ thông phục vụ cho hoạt động sản xuất hiện đang chiếm 30% tổng số nhân sự do tính đặc thù của ngành và con số này cũng được Công ty cải thiện qua các năm, đặc biệt là cải thiện chất lượng lao động.
+    </div>
+    <div class="flex gap-[2.813vw] mt-[1.105vw]">
+        <img class="w-[19.167vw]" src="../../../assets/images/HoatDong/section21-10.png" alt="">
+        <div class="relative w-[40.573vw]">
+            <div class="w-[41.146vw]">
+                <div class="text-strong-22">
+                    Cơ cấu Nhân sự theo trình độ 3 niên độ gần nhất
+                </div>
+                <div class="relative">
+                    <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-11.png" alt="">
+                    <div class="flex absolute top-[0.875vw] left-[1.250vw]">
+                        <div class="text-green-22 mt-[0.677vw] mr-[4.250vw]">
+                            STT
+                        </div>
+                        <div class="text-green-22 mt-[0.677vw] mr-[9.250vw]">
+                            Trình độ
+                        </div>
+                        <div class="text-green-22 text-center mr-[3.250vw]">
+                            Tỷ lệ (%) <br>
+                            NĐ 2020-2021
+                        </div>
+                        <div class="text-green-22 text-center mr-[2.550vw]">
+                            Tỷ lệ (%) <br>
+                            NĐ 2021-2022
+                        </div>
+                        <div class="text-white-22-700-pro text-center">
+                            Tỷ lệ (%) <br>
+                            NĐ 2022-2023
+                        </div>
+                    </div>
+                    <div class="absolute top-[5.521vw] left-[5.781vw]">
+                        <div class="desc-normal mr-[4.688vw]">
+                            Trên Đại học
+                        </div>
+                        <div class="desc-normal mt-[0.13vw]">
+                            Đại học
+                        </div>
+                        <div class="desc-normal mt-[0.365vw]">
+                            Cao đẳng
+                        </div>
+                        <div class="desc-normal mt-[0.365vw]">
+                            Trung cấp
+                        </div>
+                        <div class="desc-normal mt-[0.165vw]">
+                            Sơ cấp
+                        </div>
+                        <div class="desc-normal mt-[0.265vw]">
+                            Lao động phổ thông
+                        </div>
+                    </div>
+                    <div class="text-strong-22 absolute bottom-[0.121vw] left-[4.581vw]">
+                        Tổng
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right mt-[2.565vw]">Nguồn: TTC AgriS</div>
+    <div class="flex items-center gap-[0.32vw] mt-[4.56vw]">
+        <div class="title-40 uppercase title-1 t-right relative top-[0.832vw]">
+            Đào tạo <br>
+            và phát triển
+        </div>
+        <div class="title-121">
+            nguồn nhân lực
+        </div>
+    </div>
+    <img class="w-[100vw] mt-[2.89vw]" src="../../../assets/images/HoatDong/section21-12.png" alt="">
+    <div class="text-right mt-[0.54vw]">
+        TTC AgriS đã chính thức go-live hệ thống Quản lý học tập trực tuyến (LMS) tại 5 quốc gia là Việt Nam, Lào, <br> 
+        Campuchia, Singapore, Úc vào ngày 25/2/2023 vừa qua.
+    </div>
+    <div class="title-image relative">
+        <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-13.png" alt="">
+        <div class="box z-[2] absolute top-[2.601vw] left-[25.748vw]">
+            <span>
+                Trong NĐ 2022-2023, <br>
+                Công ty đã đầu tư
+            </span>
+            <div class="flex items-end"><span class="number" [countUp]="129" [duration]="1000">12,9</span></div>
+            <span class="mt-[-0.54vw]">
+                cho chi phí đào tạo với hơn 712 khóa học, <br>
+                tăng 10% so với NĐ trước
+            </span>
+        </div>
+        <div class="box image-text">
+            <span class="special absolute top-[7.917vw] left-[34.188vw]">tỷ đồng</span>
+        </div>
+        <div class="box z-[2] absolute top-[3.801vw] left-[42.948vw]">
+            <span>
+                với hơn
+            </span>
+            <div class="flex items-end"><span class="number" [countUp]="15192" [duration]="1000">15.192</span></div>
+        </div>
+        <div class="box image-text">
+            <span class="special absolute top-[7.917vw] left-[55.588vw]">lượt học</span>
+        </div>
+    </div>
+    <div class="flex gap-[4.064vw] mt-[2.604vw]">
+        <div class="desc-normal w-[19.167vw]">
+            Việt Nam đang hội nhập quốc tế sâu rộng và toàn diện, tạo ra nhiều cơ hội và thách thức đan xen. Việc xây dựng và tổ chức chương trình đào tạo nhằm nâng cao năng lực cho CBNV các cấp là một sứ mệnh mà TTC AgriS luôn nỗ lực thực hiện nhằm góp phần nâng cao năng lực đội ngũ CBNV.
+        </div>
+        <div class="desc-normal w-[40.781vw]">
+            Đồng thời, niên độ 2022-2023 là năm đầu tiên TTC AgriS áp dụng giải pháp học tập trực tuyến LMS - Learning Management System vào hoạt động quản trị đào tạo và phát triển nguồn nhân lực tại 5 quốc gia là Việt Nam, Lào, Campuchia, Singapore, Úc. Thông qua đó đảm bảo kiến thức theo nghiệp vụ chuyên môn đào tạo được bám sát thực tế và phù hợp với yêu cầu tiêu chuẩn công việc. Trong NĐ 2022-2023, Công ty đã đầu tư 12,9 tỷ đồng cho chi phí đào tạo với hơn 712 khóa học, tăng 10% so với NĐ trước với hơn 15.192 lượt học.
+        </div>
+    </div>
+    <div class="desc-29 mt-[2.604vw]">
+        Với bộ máy kiện toàn, nguồn nhân lực tinh nhuệ, vững chuyên môn, giàu nhiệt huyết, đây sẽ là nền tảng để Công ty tự tin bức phá trên chặng đường hội nhập toàn cầu hóa và khẳng định thương hiệu TTC AgriS.
+    </div>
+    <div class="desc-29-color-292829 !uppercase mt-[2.604vw]">
+        Chương trình đào tạo thực hiện trong Niên độ 2022-2023
+    </div>
+    <div class="mt-[2.708vw]">
+        <div class="relative">
+            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-14.png" alt="">
+            <div class="desc-29-color-292829 !uppercase absolute top-[2.552vw] left-[10.156vw]">
+                Đào tạo kỹ năng quản lý, lãnh đạo
+            </div>
+            <div class="absolute top-[8.646vw] left-[7.969vw]">
+                <div class="flex gap-[2.604vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Mục đích đào tạo</div>
+                    <div class="desc-normal list-item">
+                        Bồi dưỡng kiến thức và phát triển kỹ năng <br> quản lý, lãnh đạo cho các cấp quản lý.
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[1.565vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Chủ đề đào tạo</div>
+                    <div class="box-text">
+                        <div class="desc-normal list-item">
+                            Phương pháp quản lý dự án mô hình Agile;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Chương trình “Chân dung CEO” 2022;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Bồi dưỡng năng lực quản trị cho đối tượng Quản lý cấp trung;
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[1.865vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Đối tượng</div>
+                    <div class="desc-normal list-item">
+                        Cấp bậc Quản lý/ Trưởng Bộ phận/ Chuyên viên cấp trung.
+                    </div>
+                </div>
+            </div>
+            <div class="section21-number absolute top-[4.271vw] left-[51.125vw]">
+                <div class="number-93" [countUp]="6" [duration]="1000">
+                    6
+                </div>
+                <div class="text-white-22-600">KHÓA HỌC</div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-[4.708vw]">
+        <div class="relative">
+            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-15.png" alt="">
+            <div class="desc-29-color-292829 !text-[#008FD2] !uppercase absolute top-[2.552vw] left-[10.156vw]">
+                Đào tạo kỹ năng mềm
+            </div>
+            <div class="absolute top-[8.646vw] left-[7.969vw]">
+                <div class="flex gap-[2.604vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Mục đích đào tạo</div>
+                    <div class="desc-normal list-item">
+                        Bồi dưỡng kiến thức và phát triển kỹ năng mềm, <br> 
+                        nâng cao hiệu quả công việc cá nhân.
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[1.565vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Chủ đề đào tạo</div>
+                    <div class="box-text">
+                        <div class="desc-normal list-item">
+                            Bí mật của sự hiệu quả;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Bí quyết xây dựng đội ngũ;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Chương trình chia sẻ "Hiểu mình, Hiểu nhau, Đồng tâm vững tiến;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo bí mật cuộc sống;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo hướng dẫn thiết lập KPI;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo sử dụng Hệ Thống LMS;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Hướng dẫn sử dụng Onedrive;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Phát triển Giảng viên nội bộ (Internal Trainer);
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kỹ năng Đàm phán thương lượng;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kỹ năng dẫn giảng;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kỹ năng tạo động lực làm việc;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kỹ năng thuyết trình hiệu quả;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kỹ năng trình bày, thuyết trình;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kỹ năng xử lý than phiền của Khách hàng;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Nâng cao kỹ năng sử dụng Excel;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Nhận thức và phương pháp thực hành KAIZEN;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kiến thức về tiêu chuẩn Fair Choice;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Tinh gọn sản xuất - Lean Manufacturing;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Workshop “Chia sẻ kinh nghiệm Quản trị và Điều hành doanh nghiệp trên đường đua mới”.
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[1.265vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Đối tượng</div>
+                    <div class="desc-normal list-item">
+                        Toàn thể CBNV.
+                    </div>
+                </div>
+            </div>
+            <div class="section21-number absolute top-[4.471vw] left-[50.825vw] text-center">
+                <div class="number-93" [countUp]="144" [duration]="1000">
+                    144
+                </div>
+                <div class="text-white-22-600">KHÓA HỌC</div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-[4.708vw]">
+        <div class="relative">
+            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-16.png" alt="">
+            <div class="desc-29-color-292829 !uppercase absolute top-[2.552vw] left-[10.156vw]">
+                Chuyên môn/ nghiệp vụ
+            </div>
+            <div class="absolute top-[8.646vw] left-[7.969vw]">
+                <div class="flex gap-[2.604vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Mục đích đào tạo</div>
+                    <div class="desc-normal list-item">
+                        Cung cấp kiến thức, cải thiện kỹ năng có liên <br> 
+                        quan trực tiếp đến công việc/ chuyên môn.
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[1.565vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Chủ đề đào tạo</div>
+                    <div class="box-text w-[43.385vw]">
+                        <div class="text-blue-22">
+                            Kỹ thuật sản xuất
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo vận hành máy móc - thiết bị sản xuất;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo Đánh giá viên nội bộ Tiêu chuẩn Bonsucro (gồm đào tạo các kỹ năng đánh giá sản phẩm, dịch vụ dựa trên Tiêu chuẩn
+                            Bonsucro và cấp chứng nhận cho các học viên hoàn thành khóa đào tạo);
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo nguồn dự trù (lực lượng kế thừa cho các vị trí quản lý) - Khối Sản xuất;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Diễn tập quy trình tiếp nhận mía;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Hướng dẫn xác định tỷ lệ xơ trong mía và xác định hiệu suất trích;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Hướng dẫn sử dụng thiết bị và phần mềm xác định, kiểm nghiệm chữ đường và ước lượng độ không đảm bảo độ đường;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kiến thức về tiêu chuẩn Halal ISO 9001: 2015, ISO 14001:2015 FSSC;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kiến thức SSOP về kiểm soát nhiễm chéo và vệ sinh cá nhân;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kiến thức chung bắt đầu niên vụ mới về tiêu chuẩn ISO, An toàn vệ sinh thực phẩm, Halal, 5S và Môi trường;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Quản lý phòng thí nghiệm theo tiêu chuẩn ISO/IEC 17025:2017;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Quy tắc ra quyết định theo tiêu chuẩn ISO/IEC 17025:2017.
+                        </div>
+                        <div class="text-blue-22">
+                            Kinh doanh
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo chào bán sản phẩm Momcooks và Cocoxim;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo chính sách bán hàng sản phẩm Bio Product;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo kiến thức sản phẩm, kỹ năng đàm phán trong mua hàng, ký kết và thực hiện hợp đồng, thu nợ và chính sách thưởng cho <br> Đội ngũ Nhân viên kinh doanh;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo về kiến thức sản phẩm, chính sách bán hàng và giải pháp bán hàng thuốc bảo vệ thực vật sinh học.
+                        </div>
+                        <div class="text-blue-22">
+                            Kinh doanh
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kiến thức về Luật Kinh doanh;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Cập nhật, hướng dẫn các quy định liên quan đến Giao dịch liên kết;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Chuẩn mực lập BCTC quốc tế CertIFR (Certificate in International Financial Reporting);
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo nội bộ kỹ năng hoàn thiện báo cáo kiểm toán nội bộ;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Xây dựng thương hiệu Nhà tuyển dụng và chiến lược tuyển dụng (Employer Branding & Hiring);
+                        </div>
+                        <div class="desc-normal list-item">
+                            Phân tích Nhu cầu đào tạo (Training Needs Analysis);
+                        </div>
+                        <div class="desc-normal list-item">
+                            Pháp luật về tiền lương và chấm dứt Hợp đồng lao động;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Chương trình Webinar chủ đề "Nhân sự số - Năng lực nào thúc đẩy doanh nghiệp?.
+                        </div>
+                        <div class="text-blue-22">
+                            Nông nghiệp
+                        </div>
+                        <div class="desc-normal list-item">
+                            Chính sách đầu tư vụ trồng 2022-2023 và tập huấn kiến thức cây mía;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Chuyên ngành Bảo vệ thực vật và Khoa học cây trồng;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo nhận thức tiêu chuẩn Organic;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo nhận thức về tác hại của Khí thải nhà kính;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kiểm soát động vật gây hại;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Diễn tập vận hành phần mềm Agro App - SBT farmer;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kiến thức về côn trùng và các biện pháp phòng ngừa;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Kỹ thuật nuôi cấy mô và tế bào thực vật.
+                        </div>
+                        <div class="text-blue-22">
+                            Cung ứng
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo kiểm soát kế hoạch HACCP;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Định hướng phát triển và những thay đổi chủ chốt của FSSC 22000 phiên bản 6.0;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Hướng dẫn sử dụng phần mềm cân xe và xử lý sai số khi cân xe;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Chia sẻ về chủ đề Hoạch địch chiến lược (Strategic Planning Sharing);
+                        </div>
+                        <div class="desc-normal list-item">
+                            Quy chế đầu tư thu mua và phát triển nguyên liệu.
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Đối tượng</div>
+                    <div class="desc-normal list-item">
+                        Chuyên viên/ Nhân viên nghiệp vụ/ Công nhân,…
+                    </div>
+                </div>
+            </div>
+            <div class="section21-number absolute top-[4.271vw] left-[50.825vw] text-center">
+                <div class="number-93" [countUp]="386" [duration]="1000">
+                   386
+                </div>
+                <div class="text-white-22-600">KHÓA HỌC</div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-[4.708vw]">
+        <div class="relative">
+            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-17.png" alt="">
+            <div class="desc-29-color-292829 !text-[#008FD2] !uppercase absolute top-[2.552vw] left-[10.156vw]">
+                Đào tạo kỹ năng mềm
+            </div>
+            <div class="absolute top-[8.646vw] left-[7.969vw]">
+                <div class="flex gap-[2.604vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Mục đích đào tạo</div>
+                    <div class="desc-normal list-item">
+                        Nâng cấp trình độ ngoại ngữ cho nhóm đối tượng <br>
+                        Quản lý cấp trung và Chuyên viên, chuẩn bị cho giai <br>
+                        đoạn toàn cầu hóa trong niên độ tiếp theo.
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[1.565vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Chủ đề đào tạo</div>
+                    <div class="box-text">
+                        <div class="desc-normal list-item">
+                            Chương trình Đào tạo tiếng Anh dành cho cấp Quản lý.
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[1.865vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Đối tượng</div>
+                    <div class="desc-normal list-item">
+                        Trưởng Bộ phận/ Chuyên viên cấp trung/ Chuyên viên.
+                    </div>
+                </div>
+            </div>
+            <div class="section21-number absolute top-[4.271vw] left-[50.825vw] text-center">
+                <div class="number-93" [countUp]="10" [duration]="1000">
+                    10
+                </div>
+                <div class="text-white-22-600">KHÓA HỌC</div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-[4.708vw]">
+        <div class="relative">
+            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-18.png" alt="">
+            <div class="desc-29-color-292829 !uppercase absolute top-[2.552vw] left-[10.156vw]">
+                Đào tạo Hội nhập
+            </div>
+            <div class="absolute top-[8.646vw] left-[7.969vw]">
+                <div class="flex gap-[2.604vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Mục đích đào tạo</div>
+                    <div class="desc-normal list-item">
+                        Hỗ trợ CBNV mới dễ dàng hội nhập văn hóa và nắm bắt <br> 
+                        thông tin Công ty.
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[1.565vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Chủ đề đào tạo</div>
+                    <div class="box-text">
+                        <div class="desc-normal list-item">
+                            Chương trình Đào tạo tiếng Anh dành cho cấp Quản lý.
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[1.865vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Đối tượng</div>
+                    <div class="desc-normal list-item">
+                        CBNV mới gia nhập Công ty.
+                    </div>
+                </div>
+            </div>
+            <div class="section21-number absolute top-[4.271vw] left-[52.025vw] text-center">
+                <div class="number-93" [countUp]="38" [duration]="1000">
+                    38
+                </div>
+                <div class="text-white-22-600">KHÓA HỌC</div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-[4.708vw]">
+        <div class="relative">
+            <img class="w-[100vw]" src="../../../assets/images/HoatDong/section21-19.png" alt="">
+            <div class="desc-29-color-292829 !uppercase absolute top-[2.552vw] left-[10.156vw]">
+                Đào tạo Hội nhập
+            </div>
+            <div class="absolute top-[8.646vw] left-[7.969vw]">
+                <div class="flex gap-[2.604vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Mục đích đào tạo</div>
+                    <div class="box-text">
+                        <div class="desc-normal list-item">
+                            Trang bị kiến thức an toàn lao động;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đáp ứng yêu cầu của pháp luật về tiêu chuẩn trình độ <br> 
+                            cũng như kiến thức cần thiết.
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[2.565vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Chủ đề đào tạo</div>
+                    <div class="box-text">
+                        <div class="desc-normal list-item">
+                            Các nguyên tắc bảo mật an toàn thông tin;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Chương trình huấn luyện An toàn, vệ sinh lao động;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Chương trình tập huấn An toàn thực phẩm 2022;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Đào tạo An toàn, vệ sinh viên;
+                        </div>
+                        <div class="desc-normal list-item">
+                            Hệ thống An toàn, Sức khỏe và Môi trường (ISO 45001 & 14001);
+                        </div>
+                        <div class="desc-normal list-item">
+                            Huấn luyện Sơ cấp cứu định kỳ;
+                        </div>
+                        <div class="desc-normal list-item">
+                            An toàn Phòng thí nghiệm, an toàn sử dụng hóa chất với Material Safety Data Sheet - <br> 
+                            MSDS.
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-[2.604vw] mt-[2.865vw]">
+                    <div class="text-strong-22 w-[9.490vw]">Đối tượng</div>
+                    <div class="desc-normal list-item">
+                        Toàn thể CBNV theo quy định của Nhà nước.
+                    </div>
+                </div>
+            </div>
+            <div class="section21-number absolute top-[4.271vw] left-[51.025vw] text-center">
+                <div class="number-93" [countUp]="128" [duration]="1000">
+                    128
+                </div>
+                <div class="text-white-22-600">KHÓA HỌC</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="section22" class="relative px-[18.750vw] pb-[3.45vw]">
+    <img class="absolute top-[0] left-[0]" src="../../../assets/images/HoatDong/section22.png" alt="">
+    <img class="relative z-[1]" src="../../../assets/images/HoatDong/section22-1.png" alt="">
+    <div class="relative z-[1] mt-[-1.32vw]">
+        <img src="../../../assets/images/HoatDong/section22-2.png" alt="">
+        <div class="text-gray-22-light w-[28.125vw] absolute top-[15.625vw] left-[5.417vw]">
+            Với 30 năm gắn bó với TTC AgriS, tôi cảm thấy vô cùng tự hào khi được may mắn chứng kiến một phần hành trình hình thành và phát triển của Công ty. Tôi và những người đồng nghiệp gắn bó lâu năm với Công ty đã cùng đồng lòng vượt qua vô vàn thách thức, dưới sự định hướng của Ban lãnh đạo, chúng tôi đã biến niềm đam mê trở thành sức mạnh hữu hình khi xây dựng thành công thương hiệu “Đường Biên Hòa” vững mạnh như ngày hôm nay.
+            <br>
+            Có những kỉ niệm mà tôi và các đồng nghiệp khó có thể quên, những lúc miệt mài với niềm đam mê phải hy sinh rất nhiều công việc cá nhân, phải đánh đổi rất nhiều mồ hôi, sức lực, và có nhiều lần bị các cạnh hạt Đường phèn sắc bén cắt chảy cả máu trong lúc nghiên cứu sản phẩm mới. Tất cả những kỉ niệm đó thực sự là một hành trình trải nghiệm khó quên và là một dấu ấn của cuộc đời tôi.
+        </div>
+        <div class="absolute top-[19.583vw] left-[37.658vw] text-center">
+            <span class="text-gray-22-light">Chia sẻ của chị </span> <span class="text-green-22-light">Trần Phi Nga</span><br>
+            <strong class="text-gray-22-light">
+                Trưởng phòng Kỹ thuật Công nghệ - CTCP Hàng tiêu dùng <br>
+                Biên Hòa (BHC - Công ty con của TTC AgriS) <br>
+                Thâm niên: 30 năm
+            </strong>
+        </div>
+        <div class="desc-22 t-right w-[21.448vw] absolute bottom-[4.969vw] right-[3.229vw]">
+            "Và với sự phát triển nhanh chóng và bền vững của BHC nói riêng và TTC AgriS nói chung, đã tạo thêm cho tôi nguồn năng lượng tích cực để tiếp tục đồng hành cùng Công ty trong những chặng đường tiếp theo".
+        </div>
+    </div>
+    <div class="relative z-[1] mt-[3.32vw]">
+        <img src="../../../assets/images/HoatDong/section22-3.png" alt="">
+        <div class="text-gray-22-light w-[28.125vw] absolute top-[12.625vw] left-[5.417vw]">
+            Là người gắn bó với Nhà máy TTCS từ những ngày đầu, tôi có rất nhiều cột mốc đáng nhớ cũng như cảm thấy thật nhiều cảm xúc và tự hào mà khi nhắc đến. Tôi còn nhớ như in “cột mốc quan trọng trong cuộc đời tôi chính là ngày tôi bước bước chân vô nhà máy 11/06/1996 khi mới vừa tốt nghiệp Đại học, và được gia nhập vào đội ngũ là những người đầu tiên trong giai đoạn triển khai dự án nhà máy đường 8.000 tấn mía/ngày”, tôi cảm thấy thật hãnh diện và tự hào khi làm việc trong một nhà máy hiện đại và lớn nhất Việt Nam lúc bấy giờ.
+            <br>
+            Chính môi trường mới đầy năng động đã giúp cho tôi và những người cùng thế hệ thay đổi hoàn toàn tư duy cầu tiến, luôn mong muốn được phát triển bản thân trong môi trường chuyên nghiệp. Chính trải qua những khó khăn đó nên tôi cảm nhận được giá trị rất lớn của những thành quả đạt được.
+            <br>
+            Và điều làm tôi muốn gắn bó lâu dài với nhà máy chính là văn hóa doanh nghiệp, nhà máy TTCS như là một ngôi nhà chung - ngôi nhà thứ hai của tôi. Ở đây, mỗi cá nhân được tôn trọng, được quan tâm, được cống hiến hết mình trong công việc để đạt được kết quả tốt nhất cho Công ty và cũng chính là những giá trị nhất định mang lại cho bản thân”. Và tôi hiểu rằng, “ĐOÀN KẾT - NHÂN HÒA” sẽ tạo nên sức mạnh tập thể, thúc đẩy cho sự phát triển của doanh nghiệp.
+        </div>
+        <div class="absolute top-[19.583vw] left-[38.658vw] text-center">
+            <span class="text-gray-22-light">Chia sẻ của chị </span> <span class="text-green-22-light">Nguyễn Thị Thủy Tiên</span><br>
+            <strong class="text-gray-22-light">
+                Phó Giám đốc Nhà máy TTCS ở Tây Ninh <br>
+                Thâm niên: 27 năm 
+            </strong>
+        </div>
+        <div class="desc-22 t-right w-[21.448vw] absolute bottom-[4.969vw] right-[3.229vw]">
+            “Là nhân viên của nhà máy TTCS nói riêng và TTC AgriS nói chung, chắc chắn ai cũng tự hào khi là thành viên của một công ty nông nghiệp đa quốc gia hàng đầu Việt Nam đã và đang vươn tầm ra thế giới”.
+        </div>
+    </div>
+    <div class="relative z-[1] mt-[3.32vw]">
+        <img src="../../../assets/images/HoatDong/section22-4.png" alt="">
+        <div class="text-gray-22-light w-[28.125vw] absolute top-[15.625vw] left-[5.417vw]">
+            Cảm xúc lớn nhất của tôi giờ đây chính là hạnh phúc và tự hào là một thành viên của TTC AgriS, gắn bó và cùng trải qua một hành trình dài hình thành và phát triển của Công ty với những thăng trầm của ngành mía đường Việt Nam nói chung và TTC AgriS nói riêng, tôi càng cảm thấy mình vinh hạnh khi là một thành viên của TTC AgriS.
+            <br>
+            Nhớ lại ngày đầu bước chân vào nhà máy, khi đó là năm 2001 mình vừa tốt nghiệp Đại học, chân ướt chân ráo đến một vùng đất Tây Nguyên xa xôi, đầy nắng gió, không người quen thân thích và còn rất nhiều bỡ ngỡ trong môi trường làm việc mà đến 90% là nam giới.
+            <br>
+            Mình được sắp xếp làm việc trong lĩnh vực nông nghiệp, bắt đầu từ vị trí Trạm trưởng trạm nông vụ, mình không ngừng nỗ lực đem những kiến thức học được cùng với đồng nghiệp hỗ trợ cho người dân phát triển cây mía, phát triển vùng nguyên liệu cho nhà máy hoạt động. Năm 2011, nhà máy TTC Gia Lai đã nâng công suất hoạt động từ 1.500 tấn mía/ngày lên 3.200 tấn mía/ngày, chính thức mở rộng quy mô hoạt động và góp phần khẳng định cho sự phát triển của TTC AgriS.
+            <br>
+            Tin tưởng vào chiến lược của TTC AgriS, Lan càng nỗ lực làm việc để cống hiến cho sự phát triển của Công ty. Được giao vị trí người “thuyền trưởng” của “con tàu” TTC Gia Lai, Lan càng cố gắng lèo lái “con tàu” đi đúng hướng để cập bến thành công.
+        </div>
+        <div class="absolute top-[19.583vw] left-[38.658vw] text-center">
+            <span class="text-gray-22-light">Chia sẻ của chị </span> <span class="text-green-22-light">Vũ Thị Lan</span><br>
+            <strong class="text-gray-22-light">
+                Giám đốc Công ty TNHH MTV Thành Thành Công Gia Lai <br> 
+                (TTC Gia Lai - Công ty con của TTC AgriS) <br>
+                Thâm niên: 22 năm
+            </strong>
+        </div>
+        <div class="desc-22 t-right w-[21.448vw] absolute bottom-[4.969vw] right-[3.229vw]">
+            “Gắn bó hơn 22 năm với TTC Gia Lai với những thăng trầm của Mía đường, bản thân Lan càng cảm và hiểu, càng tin tưởng với tầm nhìn - những quyết sách - chiến lược của Ban lãnh đạo sẽ giúp TTC AgriS vững vàng và vươn xa.
+            TTC AgriS mãi luôn là niềm tự hào và mãi luôn ở trong tim mình”.
+        </div>
+    </div>
+    <div class="relative z-[1] mt-[3.32vw]">
+        <img src="../../../assets/images/HoatDong/section22-5.png" alt="">
+        <div class="text-gray-22-light w-[28.125vw] absolute top-[10.625vw] left-[5.417vw]">
+            Đã đồng hành cùng các anh chị đồng nghiệp tại TTC AgriS trong năm vừa rồi, tôi có cơ hội để phát triển và hoàn thiện chuyên môn và bản thân mình vượt ngoài mong đợi. Với sự giúp đỡ nhiệt tình từ đồng nghiệp, tôi có thể tự tin hoàn thành công việc của bản thân và đồng thời đóng góp vào chiến lược chung của TTC AgriS trong niên độ vừa qua và các niên độ trong tương lai. Tôi ấn tượng sâu sắc với triết lý “Con người phù hợp là tài sản quý giá nhất của doanh nghiệp”, TTC AgriS đã tạo điều kiện để các CBNV có nhiều cơ hội thăng tiến nghề nghiệp thông qua các chính sách và lộ trình phát triển rõ ràng. Ngoài ra, với môi trường làm việc năng động, Công ty thúc đẩy sự sáng tạo trong cách giải quyết vấn đề thực tế. Điều này tạo điều kiện để các CBNV có thể tìm hiểu sâu về ngành nông nghiệp và tạo ra các ý tưởng mới phù hợp với định hướng của Công ty.
+        </div>
+        <div class="absolute top-[19.583vw] left-[38.658vw] text-center">
+            <span class="text-gray-22-light">Chia sẻ của anh </span> <span class="text-green-22-light">Huỳnh Nguyễn</span><br>
+            <strong class="text-gray-22-light">
+                Chuyên viên Tài chính - Phòng Tài chính Kế hoạch - TTC <br> 
+                AgriS Thâm niên: hơn 1 năm
+            </strong>
         </div>
     </div>
 </div>
