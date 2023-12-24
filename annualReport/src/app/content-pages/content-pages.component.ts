@@ -89,9 +89,9 @@ export class ContentPagesComponent {
       title: 'Báo cáo phát triển bền vững',
       link: this.rootPath + '/phat-trien-ben-vung',
       children: [
-        { title: 'Cam kết Phát triển bền vững từ Hội đồng Quản trị', navId: 'info-1' },
-        { title: '17 tiêu chí phát triển bền vững của Liên Hợp Quốc', navId: 'info-1' },
-        { title: 'Sự tham gia của các Bên liên quan', navId: 'info-1' },
+        { title: 'Cam kết Phát triển bền vững từ Hội đồng Quản trị', navId: 'section3' },
+        { title: '17 tiêu chí phát triển bền vững của Liên Hợp Quốc', navId: 'section5' },
+        { title: 'Sự tham gia của các Bên liên quan', navId: 'section7' },
         { title: 'Chủ đề Kinh tế', navId: 'info-1' },
         { title: 'Chủ đề Môi trường', navId: 'info-1' },
         { title: 'Chủ đề Xã hội', navId: 'info-1' },
