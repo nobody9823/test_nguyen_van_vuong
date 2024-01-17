@@ -668,14 +668,14 @@ strong {
   z-index: 2;
 }
 #section2 .item1 .list-text p {
-  font-family: Myriad Pro Light;
+  font-family: 'SF Pro Regular';
   font-size: 1.042vw;
   font-weight: 300;
   line-height: 1.563vw;
   text-align: justify;
   margin-bottom: 1.563vw;
   color: #292829;
-  letter-spacing: 0.052vw;
+  letter-spacing: -0.07vw;
 }
 #section2 .item1 .list-text p strong {
   font-weight: 600;
@@ -1326,7 +1326,15 @@ strong {
   font-family: "Myriad Pro Light";
   font-size: 0.99vw;
 }
-
+.fix-font__size span,
+#section6_1 span,
+#section6_2 span {
+  font-family: "Myriad Pro Light";
+  font-size: 0.99vw;
+}
+.fix-font__span {
+  font-size: 1.025vw;
+}
 #section6_3 {
   background: #FFFFFF;
 }
@@ -1612,32 +1620,49 @@ strong {
   -webkit-text-fill-color: transparent;
 }
 #section7 .column1 .green-bold {
-  font-family: Myriad Pro;
+  font-family: Myriad Pro Light;
   font-size: 1.042vw;
   font-weight: 700;
-  line-height: 1.667vw;
+  line-height: normal;
   color: #004C29;
+  letter-spacing: 0.052vw;
 }
 #section7 .column1 strong {
   font-family: Myriad Pro;
   font-size: 1.146vw;
   font-weight: 600;
-  line-height: 1.875vw;
+  line-height: normal;
   color: #292829;
 }
 #section7 .column1 p {
   font-family: Myriad Pro Light;
   font-size: 1.146vw;
   font-weight: 300;
-  line-height: 1.875vw;
+  line-height: normal;
   color: #292829;
+  margin: 0.46vw 0;
 }
 #section7 .column1 .green {
   font-family: Myriad Pro;
   font-size: 1.146vw;
   font-weight: 600;
-  line-height: 1.875vw;
+  line-height: normal;
   color: #007534;
+}
+@media(min-width: 1400px) {
+  #section7 .column1 .green-bold {
+    line-height: 1.667vw;
+  }
+  #section7 .column1 strong {
+    line-height: 1.575vw;
+  }
+  #section7 .column1 p {
+    line-height: 1.32vw;
+  }
+  #section7 .column1 .green {
+    font-family: Myriad Pro;
+    line-height: 1.875vw;
+  }
 }
 #section7 .column-right {
   text-align: right;
@@ -1661,7 +1686,12 @@ strong {
   line-height: 1.458vw;
   color: #292829;
 }
-
+#section7 .item-box span {
+  font-size: 1.025vw;
+  color: #767676;
+  font-family: Myriad Pro Light;
+  line-height: normal;
+}
 #section8 {
   background: #FFFFFF;
 }

@@ -115,7 +115,7 @@
   font-size: 1.302vw;
   font-weight: 400;
   line-height: 1.823vw;
-  font-family: "iCiel Silka";
+  font-family: "Inter";
 }
 #section-2 .result .font-normal {
   padding: 0 1.719vw 2.24vw;
@@ -123,7 +123,7 @@
   font-size: 0.885vw;
   font-weight: 400;
   line-height: 1.25vw;
-  font-family: "iCiel Silka";
+  font-family: "Inter";
 }
 #section-2 .result .font-normal span:first-child {
   display: block;
@@ -448,7 +448,7 @@
   -webkit-text-fill-color: transparent;
 }
 #section-4 .name-company {
-  font-family: iCiel Silka;
+  font-family: Inter;
   font-weight: 400;
   font-size: 3.333vw;
   background: linear-gradient(360deg, #F4E696 10.39%, #E6C36C 25.13%, #DAA548 40.65%, #D69A3B 48.41%, #DFB156 61.6%, #F4E696 87.99%);
@@ -994,7 +994,7 @@
 }
 #section-9 .text-5 ul {
   list-style: disc;
-  margin-left: 1.846vw;
+  margin-left: 1.146vw;
 }
 
 #section-10 {
@@ -1187,9 +1187,9 @@
 }
 
 #section-16 .text1 {
-  font-family: iCiel Silka;
+  font-family: Inter;
   font-size: 1.406vw;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.667vw;
   text-align: right;
   background: linear-gradient(90deg, #0083CA 0%, #005892 29%, #003767 55%, #00467B 66%, #006EAF 89%, #0083CA 100%);
@@ -1197,7 +1197,7 @@
   -webkit-text-fill-color: transparent;
 }
 #section-16 .text2 {
-  font-family: iCiel Silka;
+  font-family: Inter;
   font-size: 1.406vw;
   font-weight: 400;
   line-height: 1.667vw;
@@ -1225,9 +1225,9 @@
 }
 
 #section-17 {
-  font-family: iCiel Silka;
+  font-family: Inter;
   font-size: 1.25vw;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.51vw;
   text-align: right;
   color: rgb(26, 57, 102);
@@ -1254,9 +1254,9 @@
   -webkit-text-fill-color: transparent;
 }
 #section-18 .text3 {
-  font-family: iCiel Silka;
+  font-family: Inter;
   font-size: 1.25vw;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.51vw;
   color: rgb(26, 57, 102);
 }
@@ -1282,10 +1282,10 @@
   margin-bottom: 0.938vw;
 }
 #section-19 .highligh {
-  font-family: Myriad Pro;
+  font-family: Myriad Pro Light;
   font-size: 1.25vw;
   font-weight: 600;
-  line-height: 1.406vw;
+  line-height: 1.606vw;
   background: #AA7B2C;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1391,7 +1391,7 @@
   font-family: SF Pro;
   font-size: 1.354vw;
   font-weight: 860;
-  line-height: 1.615vw;
+  line-height: 1.915vw;
   background: #1A3966;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1897,6 +1897,58 @@
   line-height: 1.615vw;
   color: #58595B;
   margin-top: 0.345vw;
+}
+.image-section17__radar {
+  width: 32.500vw;
+  height: 32.500vw;
+  background-image: conic-gradient(from var(--border-angle), transparent 10%, #87edff 99%, #87edff 99.5%);
+  background-size: cover, cover, cover, cover, cover, 25% 25%, 50% 50%, 75% 75%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  -webkit-animation: bg-spin 3s linear infinite;
+          animation: bg-spin 3s linear infinite;
+  position: relative;
+  z-index: 999;
+}
+@-webkit-keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+@keyframes bg-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+.image-section17__radar::before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+
+  -webkit-animation: scale 3s linear infinite;
+          animation: scale 3s linear infinite;
+}
+@-webkit-keyframes scale {
+  from {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
 }
 
 .slide-in-top {
